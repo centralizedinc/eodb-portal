@@ -9,9 +9,7 @@ require('dotenv').config();
 //application server
 const app = express()
 
-console.log('process.env.VUE_APP_GOOGLE_MAP_KEY ::: ',process.env.VUE_APP_GOOGLE_MAP_KEY)
-console.log('process.env.VUE_APP_BASE_API_URI ::: ',process.env.VUE_APP_BASE_API_URI)
-console.log('process.env.VUE_APP_HOME_URI ::: ',process.env.VUE_APP_HOME_URI)
+console.log('process.env ::: ',process.env)
 
 
 app.use(cors())
