@@ -12,7 +12,7 @@ export default {
       this.$store.commit("GOOGLE_LOGIN", JSON.parse(data));
     }
     
-    window.opener.location.href = `${process.env.VUE_APP_HOME_URI}/#/app`
+    window.opener.location.href = `${process.env.VUE_APP_HOME_URI}app`
     window.opener.location.reload()
     window.close();
   }

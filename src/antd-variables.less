@@ -3,58 +3,55 @@ Write your variables here. All available variables can be
 found in https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less.
 */
 
-@import '~ant-design-vue/dist/antd.less';
+@import "~ant-design-vue/dist/antd.less";
 
 // Here are the variables to cover, such as:
-@primary-color: #1A1693;
+@primary-color: #1a1693;
 
 .header {
-    position: fixed; 
-    z-index: 1000;
-    width: 100%;
-    color:#ffffff; 
-    background: linear-gradient(to right, #0575e6, #021b79);
-  }
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  color: #ffffff;
+}
 
 .content {
-    min-height:100vh;
-    
-    }
+  min-height: 100vh;
+}
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    /* margin-top:300px; */
-    /* background-color: red; */
-    color:#ffffff; 
-    background-color: linear-gradient(to right, #373b44, #4286f4);;
-    z-index: 10;
-    text-align: center;
-    height: 5vh;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* margin-top:300px; */
+  /* background-color: red; */
+  color: #ffffff;
+  z-index: 10;
+  text-align: center;
+  height: 5vh;
 }
 
-.emergency_btn:hover{
-    background: linear-gradient(to bottom, #0575e6, #021b79);
-    transform: scale(0.95);
-  }
+.emergency_btn:hover {
+  // background: linear-gradient(to bottom, #0575e6, #021b79);
+  transform: scale(0.95);
+  cursor: pointer;
+}
 
-.card_btn{
+.card_btn {
   background: linear-gradient(to right, #0575e6, #021b79);
 }
 
-.card_btn:hover{
+.card_btn:hover {
   cursor: pointer;
   background: linear-gradient(to bottom, #0575e6, #021b79);
   transform: scale(0.95);
 }
 
-.payment_card{
+.payment_card {
   cursor: pointer;
   background: linear-gradient(to right, #0575e6, #021b79);
 }
-.payment_card:hover{
+.payment_card:hover {
   background: linear-gradient(to bottom, #0575e6, #021b79);
   transform: scale(0.95);
-
 }

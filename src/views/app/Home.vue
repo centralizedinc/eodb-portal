@@ -6,7 +6,7 @@
         <a-tab-pane key="0">
           <template slot="tab">
             <span>
-              <a-avatar :src="constant_helper.client_details.avatar"></a-avatar>Mayor's Corner
+              <a-avatar :src="constant_helper.client_details.avatar" style="margin-right: 1vh" />{{constant_helper.client_details.title}}'s Corner
             </span>
           </template>
         </a-tab-pane>

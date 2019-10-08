@@ -1,5 +1,6 @@
 export default {
     client_details: {
+        title: process.env.VUE_APP_CLIENT_TITLE,
         name: process.env.VUE_APP_CLIENT_NAME || "User",
         avatar: process.env.VUE_APP_CLIENT_AVATAR || 'https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg',
         cover: process.env.VUE_APP_CLIENT_COVER || 'https://www.larutadelsorigens.cat/wallpic/full/73-737840_amazing-nature-wallpaper-desktop-mobile-background-full-hd.jpg',
@@ -21,6 +22,12 @@ export default {
         appId: process.env.VUE_APP_CHATBOT_APP_ID,
         page_id: process.env.VUE_APP_CHATBOT_PAGE_ID,
         theme_color: process.env.VUE_APP_CHATBOT_THEME_COLOR
+    },
+    theme: {
+        default: process.env.VUE_APP_GRADIENT_FROM && process.env.VUE_APP_GRADIENT_TO ?
+            `background: linear-gradient(to right, ${process.env.VUE_APP_GRADIENT_FROM}, ${process.env.VUE_APP_GRADIENT_TO});` : '',
+        background: process.env.VUE_APP_BACKGROUND,
+        button: process.env.VUE_APP_BUTTON_COLOR ? `background: ${process.env.VUE_APP_BUTTON_COLOR};` : ''
     },
     name_display: process.env.VUE_APP_APP_NAME || 'Application Name',
     login_background: process.env.VUE_APP_LOGIN_BACKGROUND
