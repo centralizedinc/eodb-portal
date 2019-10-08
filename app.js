@@ -9,7 +9,8 @@ require('dotenv').config();
 //application server
 const app = express()
 
-console.log('process.env ::: ', JSON.stringify(process.env))
+const process_vue_apps = process.env.filter(v => v.indexOf('VUE_APP') > -1);
+console.log('Process Environments :', JSON.stringify(process_vue_apps));
 
 
 app.use(cors())
