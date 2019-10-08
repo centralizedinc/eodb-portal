@@ -2,6 +2,7 @@ export default {
     client_details: {
         name: process.env.CLIENT_NAME || "User",
         avatar: process.env.CLIENT_AVATAR || 'https://icon-library.net/images/my-profile-icon-png/my-profile-icon-png-3.jpg',
+        cover: process.env.CLIENT_COVER || 'https://www.larutadelsorigens.cat/wallpic/full/73-737840_amazing-nature-wallpaper-desktop-mobile-background-full-hd.jpg',
         website: {
             url: process.env.CLIENT_WEBSITE_URL,
             label: process.env.CLIENT_WEBSITE
