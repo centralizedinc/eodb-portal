@@ -10,7 +10,7 @@
       :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
     <div
-      :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+      :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;
   background-size: cover`"
     >
       <a-row style="height:100vh" type="flex" justify="start">

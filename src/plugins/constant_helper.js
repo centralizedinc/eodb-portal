@@ -23,5 +23,5 @@ export default {
         theme_color: process.env.VUE_APP_CHATBOT_THEME_COLOR
     },
     name_display: process.env.VUE_APP_APP_NAME || 'Application Name',
-    login_background: process.env.VUE_APP_LOGIN_BACKGROUND || 'https://www.larutadelsorigens.cat/wallpic/full/73-737840_amazing-nature-wallpaper-desktop-mobile-background-full-hd.jpg'
+    login_background: process.env.VUE_APP_LOGIN_BACKGROUND
 }
