@@ -60,6 +60,16 @@ export default new Router({
       path: '/chatbot/reports/:type',
       name: 'Map Reports',
       component: () => import('./views/chatbot/SendReports.vue'),
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import(/* webpackChunkName: "news" */ './views/admin/Login.vue'),
+    },
+    {
+      path: '/admin/app',
+      name: 'Dashboard',
+      component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue')
     }
   ],
   scrollBehavior(to, from, savedPosition) {
