@@ -10,7 +10,7 @@ require('dotenv').config();
 const app = express()
 
 Object.keys(process.env).forEach(key => {
-    console.log(`${key} :`, process.env[key]);
+    if (key.indexOf('VUE_APP') > -1) console.log(`${key} :`, process.env[key]);
 })
 
 
