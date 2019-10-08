@@ -19,6 +19,7 @@ Vue.prototype.$http = axios
 
 console.log(' process.env.VUE_APP_GOOGLE_MAP_KEY ::: ', process.env.VUE_APP_GOOGLE_MAP_KEY)
 console.log(' process.env.VUE_APP_BASE_API_URI ::: ', process.env.VUE_APP_BASE_API_URI)
+console.log('process.env.VUE_APP_CLIENT_AVATAR :', process.env.VUE_APP_CLIENT_AVATAR);
 
 Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {

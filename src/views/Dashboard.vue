@@ -5,7 +5,7 @@
         <a-icon type="up"></a-icon>
       </a-avatar>
     </a-back-top>
-    <a-layout-header class="header">
+    <a-layout-header class="header" :style="constant_helper.theme.default">
       <a-row justify="start" :gutter="24">
         <a-col :span="1">
           <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
@@ -27,11 +27,11 @@
         </a-col>
       </a-row>
     </a-layout-header>
-    <a-layout-content class="content" style="margin-top:10vh">
+    <a-layout-content class="content" :style="`${constant_helper.theme.background} margin-top:10vh`">
       <a-row type="flex" justify="center">
         <a-col :span="4" style="margin-right:1vw">
           <a-card
-            style="margin-top:10vh; margin-bottom:2vh; background: linear-gradient(to right, #0575e6, #021b79);"
+            :style="`margin-top:10vh; margin-bottom:2vh; ${constant_helper.theme.default}`"
           >
             <a-row type="flex" justify="center">
               <a-col :span="8">
@@ -89,7 +89,7 @@
                   <a-tooltip>
                     <span slot="title">Fire</span>
                     <a-card
-                      style="background-color:#1A1693; cursor:pointer"
+                      :style="constant_helper.theme.button"
                       class="emergency_btn"
                       @click="report(1)"
                     >
@@ -105,7 +105,7 @@
                   <a-tooltip>
                     <span slot="title">Civil Disturbance</span>
                     <a-card
-                      style="background-color:#1A1693; cursor:pointer"
+                      :style="constant_helper.theme.button"
                       class="emergency_btn"
                       @click="report(2)"
                     >
@@ -121,7 +121,7 @@
                   <a-tooltip>
                     <span slot="title">Flood</span>
                     <a-card
-                      style="background-color:#1A1693; cursor:pointer"
+                      :style="constant_helper.theme.button"
                       class="emergency_btn"
                       @click="report(3)"
                     >
@@ -137,7 +137,7 @@
                   <a-tooltip>
                     <span slot="title">Crime</span>
                     <a-card
-                      style="background-color:#1A1693; cursor:pointer"
+                      :style="constant_helper.theme.button"
                       class="emergency_btn"
                       @click="report(4)"
                     >
@@ -159,7 +159,7 @@
       </a-row>
     </a-layout-content>
     <a-layout-footer
-      style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff"
+      :style="`${constant_helper.theme.default} color: #ffffff`"
     >{{constant_helper.home_header.label}}</a-layout-footer>
 
     <a-modal
@@ -388,11 +388,6 @@ export default {
 </script>
 
 <style>
-.emergency_btn:hover {
-  background: linear-gradient(to bottom, #0575e6, #021b79);
-  transform: scale(0.95);
-}
-
 .report-modal .ant-modal-body {
   padding: 0px;
 }

@@ -1,12 +1,12 @@
 <template>
   <div style="margin-top:10vh">
-    <img style="width: 100%;" :src="cover_image" />
+    <img style="width: 100%;" :src="constant_helper.client_details.cover" />
     <a-affix :offsetTop="60">
       <a-tabs style="background-color:#FFFFFF; z-index:1000" @change="changeView">
         <a-tab-pane key="0">
           <template slot="tab">
             <span>
-              <a-avatar :src="constant_helper.client_details.avatar"></a-avatar>Mayor's Corner
+              <a-avatar :src="constant_helper.client_details.avatar" style="margin-right: 1vh" />{{constant_helper.client_details.title}}'s Corner
             </span>
           </template>
         </a-tab-pane>

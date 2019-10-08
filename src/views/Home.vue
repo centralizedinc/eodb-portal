@@ -78,7 +78,7 @@
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
-    <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
+    <a-layout-footer :style="`${constant_helper.theme.default} color: #ffffff`">
       <a-row>
         <a-col :span="24">
           <h1 style="color:#ffffff">Get in touch</h1>
@@ -195,7 +195,7 @@
       <a-row type="flex" align="center" :gutter="16">
         <a-col :span="6">
           <a-card
-            style="background-color:#1A1693; cursor:pointer"
+            :style="constant_helper.theme.button"
             @click="report_type='1'"
             class="emergency_btn"
           >
@@ -211,7 +211,7 @@
         </a-col>
         <a-col :span="6">
           <a-card
-            style="background-color:#1A1693; cursor:pointer"
+            :style="constant_helper.theme.button"
             @click="report_type='2'"
             class="emergency_btn"
           >
@@ -228,7 +228,7 @@
         </a-col>
         <a-col :span="6">
           <a-card
-            style="background-color:#1A1693; cursor:pointer"
+            :style="constant_helper.theme.button"
             @click="report_type='3'"
             class="emergency_btn"
           >
@@ -244,7 +244,7 @@
         </a-col>
         <a-col :span="6">
           <a-card
-            style="background-color:#1A1693; cursor:pointer"
+            :style="constant_helper.theme.button"
             @click="report_type='4'"
             class="emergency_btn"
           >
@@ -447,7 +447,7 @@ export default {
       if (this.topLocation < 50) {
         return "background: transparent";
       } else {
-        return "background: linear-gradient(to right, #0575e6, #021b79)";
+        return this.constant_helper.theme.default;
       }
     }
   }

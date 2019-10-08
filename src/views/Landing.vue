@@ -10,7 +10,7 @@
       :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
     <div
-      :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+      :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;
   background-size: cover`"
     >
       <a-row style="height:100vh" type="flex" justify="start">
@@ -208,23 +208,25 @@ export default {
     };
   },
   created() {
-    (function(d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
+    if (this.constant_helper.chatbot && this.constant_helper.chatbot.appId) {
+      (function(d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
 
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: constant_helper.chatbot.appId,
-        xfbml: true,
-        version: "v4.0"
-      });
-    };
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: this.constant_helper.chatbot.appId,
+          xfbml: true,
+          version: "v4.0"
+        });
+      };
+    }
   },
   methods: {
     registerFacebook() {
