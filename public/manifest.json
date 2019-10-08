@@ -1,6 +1,6 @@
 {
-  "name": "lucena-app",
-  "short_name": "lucena-app",
+  "name": "eodb-portal",
+  "short_name": "eodb-portal",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

@@ -1,4 +1,4 @@
-# lucena-app
+# eodb-portal
 
 ## Project setup
 ```

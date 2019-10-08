@@ -15,12 +15,12 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   plugins: [
     createPersistedState({
-      key: 'lucena-app-reference',
+      key: 'app-reference',
       paths: local_store
     }),
     //store user session in cookiess
     createPersistedState({
-      key: 'lucena-app-session',
+      key: 'app-session',
       paths: cookies_store,
       storage: {
         getItem: key => Cookies.get(key),

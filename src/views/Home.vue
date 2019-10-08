@@ -90,15 +90,15 @@
             <a-icon type="global"></a-icon>Website:
             <a
               style="color:#ffffff"
-              :href="constant_helper.mayor_details.website.label"
-            >{{constant_helper.mayor_details.website.label}}</a>
+              :href="constant_helper.client_details.website.label"
+            >{{constant_helper.client_details.website.label}}</a>
           </p>
           <p>
             <a-icon type="facebook"></a-icon>Facebook:
             <a
               style="color:#ffffff"
-              :href="constant_helper.mayor_details.facebook.label"
-            >{{constant_helper.mayor_details.facebook.label}}</a>
+              :href="constant_helper.client_details.facebook.label"
+            >{{constant_helper.client_details.facebook.label}}</a>
           </p>
           <a-divider></a-divider>
         </a-col>

@@ -4,10 +4,10 @@
     <div
       class="fb-customerchat"
       attribution="setup_tool"
-      page_id="109048890468083"
-      theme_color="#0084ff"
-      logged_in_greeting="Hi! I'm Mayor Alcala, How can I help you?"
-      logged_out_greeting="Hi! I'm Mayor Alcala, How can I help you?"
+      :page_id="constant_helper.chatbot.page_id"
+      :theme_color="constant_helper.chatbot.theme_color"
+      :logged_in_greeting="constant_helper.chatbot.greetings"
+      :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
     <div
       :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
@@ -207,6 +207,25 @@ export default {
       reveal: false
     };
   },
+  created() {
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: constant_helper.chatbot.appId,
+        xfbml: true,
+        version: "v4.0"
+      });
+    };
+  },
   methods: {
     registerFacebook() {
       window.open(
@@ -229,23 +248,6 @@ export default {
       this.$router.push("/app");
     }
   }
-};
-(function(d, s, id) {
-  var js,
-    fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-  fjs.parentNode.insertBefore(js, fjs);
-})(document, "script", "facebook-jssdk");
-
-window.fbAsyncInit = function() {
-  FB.init({
-    appId: "314648529334246",
-    xfbml: true,
-    version: "v4.0"
-  });
 };
 </script>
 <style>
