@@ -9,7 +9,7 @@ require('dotenv').config();
 //application server
 const app = express()
 
-console.log('process.env ::: ',process.env)
+console.log('process.env ::: ', JSON.stringify(process.env))
 
 
 app.use(cors())
@@ -20,9 +20,9 @@ app.use('/auth', require('./api/routes/auth'))
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_66cb3ndj:3uakod32bsvvfek6e1cv4e8839@ds217678.mlab.com:17678/heroku_66cb3ndj"
 mongoose.connect(MONGODB_URI, {
-        promiseLibrary: require('bluebird'),
-        useNewUrlParser: true
-    })
+    promiseLibrary: require('bluebird'),
+    useNewUrlParser: true
+})
     .then(() => {
         console.log(`Database connection established.`)
     })

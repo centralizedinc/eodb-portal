@@ -208,23 +208,25 @@ export default {
     };
   },
   created() {
-    (function(d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
+    if (this.constant_helper.chatbot && this.constant_helper.chatbot.appId) {
+      (function(d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
 
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId: constant_helper.chatbot.appId,
-        xfbml: true,
-        version: "v4.0"
-      });
-    };
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId: this.constant_helper.chatbot.appId,
+          xfbml: true,
+          version: "v4.0"
+        });
+      };
+    }
   },
   methods: {
     registerFacebook() {
