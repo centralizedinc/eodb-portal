@@ -1,7 +1,7 @@
 <template>
 <a-layout>
   <a-layout-sider style="margin-top:10vh; ">
-      <a-menu >
+      <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
         <a-menu-item key="/app">
                 <a-icon type="layout" />
                 <span>Dashboard</span>
@@ -163,6 +163,15 @@ export default {
     return {
       coordinates: { lat: 13.9413957, lng: 121.6234471 },
     }
+  },
+  methods:{
+    nav(e) {
+      if (e.key === "logout") {
+        this.logout();
+      } else {
+        this.$router.push(e.key);
+      }
+    },
   }
 }
 </script>
