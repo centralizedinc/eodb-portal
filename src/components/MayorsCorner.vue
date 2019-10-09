@@ -11,7 +11,12 @@
       </template>
 
       <template v-else>
-        <a-card style="margin-bottom: 2vh" v-for="(item, index) in posts" :key="index">
+        <a-card
+          bodyStyle="background-color:#e2e2e2"
+          style="margin-bottom: 2vh;"
+          v-for="(item, index) in posts"
+          :key="index"
+        >
           <a-comment>
             <template slot="actions">
               <span>
@@ -35,11 +40,10 @@
                 <span style="padding-left: '8px';cursor: 'auto'">{{item.dislikes}}</span>
               </span>
             </template>
-            <a slot="author">{{constant_helper.client_details.title}} {{constant_helper.client_details.name}}</a>
-            <a-avatar
-              :src="constant_helper.client_details.avatar"
-              slot="avatar"
-            />
+            <a
+              slot="author"
+            >{{constant_helper.client_details.title}} {{constant_helper.client_details.name}}</a>
+            <a-avatar :src="constant_helper.client_details.avatar" slot="avatar" />
             <span slot="content">
               <p>{{item.message}}</p>
               <a-row type="flex" justify="start" :gutter="8">
@@ -62,7 +66,7 @@
             </a-tooltip>
           </a-comment>
         </a-card>
-<!-- 
+        <!-- 
         <a-card style="margin-bottom: 2vh">
           <a-comment>
             <template slot="actions">
@@ -211,7 +215,7 @@
               <span>{{moment().fromNow()}}</span>
             </a-tooltip>
           </a-comment>
-        </a-card> -->
+        </a-card>-->
       </template>
     </a-col>
   </a-row>
@@ -234,8 +238,8 @@ export default {
     this.init();
   },
   computed: {
-    posts(){
-      return this.deepCopy(this.$store.state.mayor_corner.posts)
+    posts() {
+      return this.deepCopy(this.$store.state.mayor_corner.posts);
     }
   },
   methods: {

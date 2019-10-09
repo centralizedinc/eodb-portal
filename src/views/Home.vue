@@ -14,7 +14,7 @@
             :src="constant_helper.home_header.logo"
             :size="50"
           ></a-avatar>
-        </a-col> 
+        </a-col>
         <a-col :xs="0" :sm="0" :md="0" :lg="4">
           <h3
             style="color:white; margin-left: -6vh; cursor:pointer"
@@ -42,38 +42,38 @@
         </a-col>
       </a-row>
       <a-drawer
-      placement="left"
-      :visible="visible_menu"
-      @close="visible_menu=false"
-      :closable="false"
-    >
-     <a-menu :defaultSelectedKeys="['/app']" mode="inline" >
-              <a-menu-item key="/app" @click="$router.push('/news')">
-                <a-icon type="layout" />
-                <span>News</span>
-              </a-menu-item>
-              <a-menu-item key="/app/permits" @click="report">
-                <a-icon type="file-exclamation" />
-                <span>Emergency</span>
-              </a-menu-item>
-              <a-menu-item key="/app/taxes" @click="$router.push('/taxes')">
-                <a-icon type="file-protect" />
-                <span>Local Taxes</span>
-              </a-menu-item>
-              <a-menu-item key="/app/account" @click="$router.push('/permits')">
-                <a-icon type="user-add" />
-                <span>Permits</span>
-              </a-menu-item>
-              <a-menu-item key="login" @click="login_visible=true">
-                <a-icon type="login" />
-                <span>Login</span>
-              </a-menu-item>
-              <a-menu-item key="logout" @click="signup_visible=true">
-                <a-icon type="logout" />
-                <span>Sign-up</span>
-              </a-menu-item>
-            </a-menu>
-    </a-drawer>
+        placement="left"
+        :visible="visible_menu"
+        @close="visible_menu=false"
+        :closable="false"
+      >
+        <a-menu :defaultSelectedKeys="['/app']" mode="inline">
+          <a-menu-item key="/app" @click="$router.push('/news')">
+            <a-icon type="layout" />
+            <span>News</span>
+          </a-menu-item>
+          <a-menu-item key="/app/permits" @click="report">
+            <a-icon type="file-exclamation" />
+            <span>Emergency</span>
+          </a-menu-item>
+          <a-menu-item key="/app/taxes" @click="$router.push('/taxes')">
+            <a-icon type="file-protect" />
+            <span>Local Taxes</span>
+          </a-menu-item>
+          <a-menu-item key="/app/account" @click="$router.push('/permits')">
+            <a-icon type="user-add" />
+            <span>Permits</span>
+          </a-menu-item>
+          <a-menu-item key="login" @click="login_visible=true">
+            <a-icon type="login" />
+            <span>Login</span>
+          </a-menu-item>
+          <a-menu-item key="logout" @click="signup_visible=true">
+            <a-icon type="logout" />
+            <span>Sign-up</span>
+          </a-menu-item>
+        </a-menu>
+      </a-drawer>
     </a-layout-header>
     <a-layout-content>
       <router-view></router-view>
@@ -84,17 +84,17 @@
           <h1 style="color:#ffffff">Get in touch</h1>
           <!-- <a-divider></a-divider> -->
           <p>
-            <a-icon type="phone"></a-icon>Hotline: 123-3456
+            <a-icon style="margin-right: 5px" type="phone"></a-icon>Hotline: 123-3456
           </p>
           <p>
-            <a-icon type="global"></a-icon>Website:
+            <a-icon style="margin-right: 5px" type="global"></a-icon>Website:
             <a
               style="color:#ffffff"
               :href="constant_helper.client_details.website.label"
             >{{constant_helper.client_details.website.label}}</a>
           </p>
           <p>
-            <a-icon type="facebook"></a-icon>Facebook:
+            <a-icon style="margin-right: 5px" type="facebook"></a-icon>Facebook:
             <a
               style="color:#ffffff"
               :href="constant_helper.client_details.facebook.label"
@@ -307,53 +307,52 @@
 
     <a-modal v-modal="login_visible">
       <a-card style="background: rgba(59, 79, 99, 0.62)">
-            <template slot="title">
-              <div style="color:#ffffff">Enter Credentials</div>
-            </template>
-            <a-form>
-              <a-form-item>
-                <a-input size="large" placeholder="Email">
-                  <a-icon slot="prefix" type="mail" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
-                  <a-icon slot="prefix" type="lock" />
-                  <a-icon
-                    slot="suffix"
-                    :type="reveal?'eye':'eye-invisible'"
-                    @click="reveal=!reveal"
-                    style="cursor:pointer"
-                  />
-                </a-input>
-              </a-form-item>
-              <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
-              <a-divider></a-divider>
-              <p style="color:white">Login using facebook or google accounts</p>
-              <a-row type="flex" :gutter="16">
-                <a-col :span="12">
-                  <a-button
-                    block
-                    style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
-                    @click="registerFacebook"
-                  >
-                    <a-icon type="facebook"></a-icon>Facebook
-                  </a-button>
-                </a-col>
-                <a-col :span="12">
-                  <a-button
-                    block
-                    @click="registerGoogle"
-                    style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
-                  >
-                    <a-icon type="google"></a-icon>Google
-                  </a-button>
-                </a-col>
-              </a-row>
-            </a-form>
-          </a-card>
+        <template slot="title">
+          <div style="color:#ffffff">Enter Credentials</div>
+        </template>
+        <a-form>
+          <a-form-item>
+            <a-input size="large" placeholder="Email">
+              <a-icon slot="prefix" type="mail" />
+            </a-input>
+          </a-form-item>
+          <a-form-item>
+            <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
+              <a-icon slot="prefix" type="lock" />
+              <a-icon
+                slot="suffix"
+                :type="reveal?'eye':'eye-invisible'"
+                @click="reveal=!reveal"
+                style="cursor:pointer"
+              />
+            </a-input>
+          </a-form-item>
+          <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
+          <a-divider></a-divider>
+          <p style="color:white">Login using facebook or google accounts</p>
+          <a-row type="flex" :gutter="16">
+            <a-col :span="12">
+              <a-button
+                block
+                style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
+                @click="registerFacebook"
+              >
+                <a-icon type="facebook"></a-icon>Facebook
+              </a-button>
+            </a-col>
+            <a-col :span="12">
+              <a-button
+                block
+                @click="registerGoogle"
+                style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
+              >
+                <a-icon type="google"></a-icon>Google
+              </a-button>
+            </a-col>
+          </a-row>
+        </a-form>
+      </a-card>
     </a-modal>
-
   </a-layout>
 </template>
 
@@ -361,10 +360,10 @@
 export default {
   data() {
     return {
-      visible_menu:false,
+      visible_menu: false,
       guest_visible: false,
       signup_visible: false,
-      login_visible:false,
+      login_visible: false,
       visible_report: false,
       visible: false,
       topLocation: 0,

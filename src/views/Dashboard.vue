@@ -27,12 +27,13 @@
         </a-col>
       </a-row>
     </a-layout-header>
-    <a-layout-content class="content" :style="`${constant_helper.theme.background} margin-top:10vh`">
+    <a-layout-content
+      class="content"
+      :style="`${constant_helper.theme.background} margin-top:10vh`"
+    >
       <a-row type="flex" justify="center">
         <a-col :span="4" style="margin-right:1vw">
-          <a-card
-            :style="`margin-top:10vh; margin-bottom:2vh; ${constant_helper.theme.default}`"
-          >
+          <a-card :style="`margin-top:10vh; margin-bottom:2vh; ${constant_helper.theme.default}`">
             <a-row type="flex" justify="center">
               <a-col :span="8">
                 <a-avatar
@@ -44,9 +45,7 @@
               <a-col :span="24">
                 <a-row type="flex" justify="center">
                   <a-col :span="24" style="text-align: center">
-                    <h3 style="color:#FFFFFF">
-                      {{user.fname}} {{user.lname}}
-                    </h3>
+                    <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
                   </a-col>
                 </a-row>
               </a-col>
@@ -82,7 +81,12 @@
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
           <a-affix :offsetTop="40">
-            <a-card title="Citizen Report" style="margin-top: 10vh">
+            <a-card
+              bodyStyle="background-color:#e2e2e2"
+              headStyle="background-color:#afadad"
+              title="Citizen Report"
+              style="margin-top: 10vh"
+            >
               <p>Emergency Hotline</p>
               <a-row>
                 <a-col :span="12">

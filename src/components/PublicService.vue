@@ -18,7 +18,11 @@
         </a-card>
     </a-col>-->
     <a-col :span="24">
-      <a-card title="Contributors">
+      <a-card
+        title="Contributors"
+        bodyStyle="background-color:#e2e2e2"
+        headStyle="background-color: #e2e2e2"
+      >
         <a-row type="flex" :gutter="8">
           <div v-if="loading">
             <a-col :span="1" v-for="i in 20" :key="i">
@@ -67,6 +71,7 @@
       </template>
       <template v-else>
         <a-card
+          bodyStyle="background-color:#e2e2e2"
           v-for="(sub,indx) in subscribers_post"
           :key="`message${indx}`"
           style="margin-bottom: 2vh"
