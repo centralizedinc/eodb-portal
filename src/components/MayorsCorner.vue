@@ -12,8 +12,7 @@
 
       <template v-else>
         <a-card
-          bodyStyle="background-color:#e2e2e2"
-          style="margin-bottom: 2vh;"
+          style="margin-bottom: 2vh; box-shadow: 0px 0px 10px 2px #88888847"
           v-for="(item, index) in posts"
           :key="index"
         >
@@ -47,7 +46,12 @@
             <span slot="content">
               <p>{{item.message}}</p>
               <a-row type="flex" justify="start">
-                <a-col :span="8" v-for="(image, index) in item.attachments" :key="index" style="margin-bottom: 3px;">
+                <a-col
+                  :span="8"
+                  v-for="(image, index) in item.attachments"
+                  :key="index"
+                  style="margin-bottom: 3px;"
+                >
                   <img :src="image" width="200vw" />
                 </a-col>
               </a-row>

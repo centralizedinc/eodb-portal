@@ -1,10 +1,10 @@
 <template>
   <a-row type="flex" :gutter="8">
-    <h4>Pay Local Taxes</h4>
+    <h3 style="font-weight: 700">Pay Local Taxes</h3>
     <a-divider style="margin-top:-1vh"></a-divider>
 
     <a-col :span="6">
-      <a-card data-aos="fade-up">
+      <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
             <a-avatar
@@ -17,14 +17,14 @@
             </a-avatar>
           </a-col>
           <a-col :span="16">
-            <span style="font-size:12px">Real Estate Tax</span>
+            <span style="font-size:12px; font-weight: 700">Real Estate Tax</span>
           </a-col>
         </a-row>
       </a-card>
     </a-col>
 
     <a-col :span="6">
-      <a-card data-aos="fade-up">
+      <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
             <a-avatar
@@ -37,14 +37,14 @@
             </a-avatar>
           </a-col>
           <a-col :span="16">
-            <span style="font-size:12px">Community Tax</span>
+            <span style="font-size:12px; font-weight: 700">Community Tax</span>
           </a-col>
         </a-row>
       </a-card>
     </a-col>
 
     <a-col :span="6">
-      <a-card data-aos="fade-up">
+      <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
             <a-avatar
@@ -57,14 +57,14 @@
             </a-avatar>
           </a-col>
           <a-col :span="16">
-            <span style="font-size:12px">Occupancy Permit</span>
+            <span style="font-size:12px; font-weight: 700">Occupancy Permit</span>
           </a-col>
         </a-row>
       </a-card>
     </a-col>
 
     <a-col :span="6">
-      <a-card data-aos="fade-up">
+      <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
         <a-row type="flex" align="middle" justify="center">
           <a-col :span="8">
             <a-avatar
@@ -77,13 +77,13 @@
             </a-avatar>
           </a-col>
           <a-col :span="16">
-            <span style="font-size:12px">Barangay Clearance</span>
+            <span style="font-size:12px; font-weight: 700">Barangay Clearance</span>
           </a-col>
         </a-row>
       </a-card>
     </a-col>
 
-    <h4 style="margin-top:2vh">Payment History</h4>
+    <h3 style="margin-top:2vh ; font-weight: 700">Payment History</h3>
     <a-divider style="margin-top:-1vh"></a-divider>
     <a-col :span="24">
       <transactions></transactions>

@@ -1,5 +1,5 @@
 <template>
-  <a-card data-aos="fade-up">
+  <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
       <a-col :span="22">
         <a-input-search placeholder="Search" @search="onSearch" />
@@ -37,7 +37,8 @@
           <div align="center">
             <p>
               Republic of the Philippines
-              <br />{{constant_helper.name_display}}
+              <br />
+              {{constant_helper.name_display}}
               <br />OFFICE OF THE CITY MAYOR
               <br />
               {{form.application.permit_type}} and Licensing Office

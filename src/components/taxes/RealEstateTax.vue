@@ -10,7 +10,7 @@
         <a-divider></a-divider>
       </a-col>
       <a-col :span="24">
-        <a-form>
+        <a-form :layout="formLayout">
           <template v-if="curr_step == 0">
             <a-form-item label="TCT/OCT No." :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
               <a-input placeholder="Enter Number" v-model="estate_tax.title_no"></a-input>
@@ -67,18 +67,17 @@ export default {
   components: {
     Payment
   },
-  created(){
-    this.$store.commit('SET_PAYMENT', 
-      {
-           application_fee: '5,500.00',
-           insurance:'0.00',
-           convenience_fee: '50.00',
-            total:'5,550.00'
-       }
-    )
+  created() {
+    this.$store.commit("SET_PAYMENT", {
+      application_fee: "5,500.00",
+      insurance: "0.00",
+      convenience_fee: "50.00",
+      total: "5,550.00"
+    });
   },
   data() {
     return {
+      formLayout: "vertical",
       curr_step: 0,
       estate_tax: {
         tax_type: "Real Estate Tax",

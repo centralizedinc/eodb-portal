@@ -1,5 +1,5 @@
 <template>
-  <a-card title="Business Permit">
+  <a-card title="Business Permit" style="box-shadow: 0px 0px 10px 2px #88888847">
     <a-row>
       <a-col :span="24">
         <a-steps size="small" :current="step_curr">
@@ -346,7 +346,7 @@
 
           <template v-if="step_curr==3">
             <a-row :gutter="8" style="margin-bottom:50px">
-              <a-col :span="12">
+              <a-col :span="9">
                 <a-button class="insuranceButtons" block @click="insured(1)">AIG</a-button>
                 <a-button class="insuranceButtons" block @click="insured(2)">AXA Philippines</a-button>
                 <a-button class="insuranceButtons" block @click="insured(3)">Malayan</a-button>
@@ -372,30 +372,33 @@
                   </a-card-grid>
                 </a-card>-->
               </a-col>
-              <a-col :span="12">
-                <a-card title="Payment Details">
-                  <a-card-grid style="width:50%;textAlign:left">Application Fee</a-card-grid>
-                  <a-card-grid
-                    style="width:50%;textAlign:'center'"
-                  >₱{{numberWithCommas(form.business_insurance.app_fee)}}</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">LRF(Legal Research Fee)</a-card-grid>
-                  <a-card-grid
-                    style="width:50%;textAlign:'center'"
-                  >₱{{numberWithCommas(form.business_insurance.lrf)}}</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">Interest</a-card-grid>
-                  <a-card-grid
-                    style="width:50%;textAlign:'center'"
-                  >₱{{numberWithCommas(form.business_insurance.interest)}}</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">Surcharge</a-card-grid>
-                  <a-card-grid
-                    style="width:50%;textAlign:'center'"
-                  >₱{{numberWithCommas(form.business_insurance.surcharge)}}</a-card-grid>
-                  <a-card-grid style="width:50%;textAlign:'center'">Total</a-card-grid>
-                  <a-card-grid
-                    style="width:50%;textAlign:'center'"
-                  >₱{{numberWithCommas(form.business_insurance.total)}}</a-card-grid>
-                </a-card>
-              </a-col>
+              <a-row>
+                <a-col :span="15">
+                  <a-card title="Payment Details">
+                    <a-card-grid style="width:50%;textAlign:left">Application Fee</a-card-grid>
+                    <a-card-grid
+                      style="width:50%;textAlign:'center'"
+                    >₱{{numberWithCommas(form.business_insurance.app_fee)}}</a-card-grid>
+                    <a-card-grid style="width:50%;textAlign:'center'">Processing Fee</a-card-grid>
+                    <a-card-grid
+                      style="width:50%;textAlign:'center'"
+                    >₱{{numberWithCommas(form.business_insurance.lrf)}}</a-card-grid>
+
+                    <a-card-grid style="width:50%;textAlign:'center'">Taxes</a-card-grid>
+                    <a-card-grid
+                      style="width:50%;textAlign:'center'"
+                    >₱{{numberWithCommas(form.business_insurance.interest)}}</a-card-grid>
+                    <a-card-grid style="width:50%;textAlign:'center'">Surcharge</a-card-grid>
+                    <a-card-grid
+                      style="width:50%;textAlign:'center'"
+                    >₱{{numberWithCommas(form.business_insurance.surcharge)}}</a-card-grid>
+                    <a-card-grid style="width:50%;textAlign:'center'">Total</a-card-grid>
+                    <a-card-grid
+                      style="width:50%;textAlign:'center'"
+                    >₱{{numberWithCommas(form.business_insurance.total)}}</a-card-grid>
+                  </a-card>
+                </a-col>
+              </a-row>
             </a-row>
           </template>
 
@@ -846,7 +849,7 @@ export default {
 
 <style>
 .insuranceButtons {
-  height: 103px;
+  height: 13vh;
   margin-bottom: 20px;
   background-color: #f7ef9b;
 }

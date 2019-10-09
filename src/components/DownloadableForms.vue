@@ -16,7 +16,7 @@
         </a-row>
       </a-card>-->
       <!-- downloads -->
-      <a-collapse accordion>
+      <a-collapse accordion style="box-shadow: 0px 0px 10px 2px #88888847">
         <a-collapse-panel header="Civil Registry Forms" key="1">
           <a-row>
             <a-col :span="24">

@@ -52,7 +52,12 @@
             </a-row>
           </a-card>
           <a-affix :offsetTop="100">
-            <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+            <a-menu
+              :defaultSelectedKeys="['/app']"
+              mode="inline"
+              @click="nav"
+              style="background-color: #e6e6e6"
+            >
               <a-menu-item key="/app">
                 <a-icon type="layout" />
                 <span>Home</span>
@@ -82,8 +87,8 @@
         <a-col :span="4" style="margin-left:1vw">
           <a-affix :offsetTop="40">
             <a-card
-              bodyStyle="background-color:#e2e2e2"
-              headStyle="background-color:#afadad"
+              :bodyStyle="{'background-color':'#e6e6e6'}"
+              :headStyle="{'background-color':'#afadad'}"
               title="Citizen Report"
               style="margin-top: 10vh"
             >

@@ -20,8 +20,8 @@
     <a-col :span="24">
       <a-card
         title="Contributors"
-        bodyStyle="background-color:#e2e2e2"
-        headStyle="background-color: #e2e2e2"
+        style="box-shadow: 0px 0px 10px 2px #88888847"
+        :headStyle="{'background-color': 'e6e6e6'}"
       >
         <a-row type="flex" :gutter="8">
           <div v-if="loading">
@@ -71,10 +71,9 @@
       </template>
       <template v-else>
         <a-card
-          bodyStyle="background-color:#e2e2e2"
           v-for="(sub,indx) in subscribers_post"
           :key="`message${indx}`"
-          style="margin-bottom: 2vh"
+          style="margin-bottom: 2vh; box-shadow: 0px 0px 10px 2px #88888847"
           data-aos="fade-up"
         >
           <a-comment>

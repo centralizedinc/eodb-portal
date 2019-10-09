@@ -1,22 +1,21 @@
 <template>
-  <a-card data-aos="fade-up">
+  <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
       <a-col :span="22">
-         <a-input-search
-            placeholder="Search"
-            @search="onSearch"
-          />
+        <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
       <a-col :span="2">
-        <a-button type="primary" ><a-icon type="plus"></a-icon></a-button>
+        <a-button type="primary">
+          <a-icon type="plus"></a-icon>
+        </a-button>
       </a-col>
     </a-row>
-    <a-divider></a-divider> 
+    <a-divider></a-divider>
     <a-table :columns="cols" :dataSource="transactions" :loading="loading">
       <!-- <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
         <a slot="action" slot-scope="text" href="javascript:;" @click="view_data">View</a>
-      </template> -->
+      </template>-->
       <!-- <template slot="application.app_type" slot-scope="text, record">
         <p v-if="text == 1">New</p>
         <p v-else>Renewal</p>
@@ -25,7 +24,7 @@
         <div>
           <a @click="() => view_data(record)">View</a>
         </div>
-      </template> 
+      </template>
     </a-table>
   </a-card>
 </template>
@@ -37,8 +36,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      loading:false,
-      transactions:[],
+      loading: false,
+      transactions: [],
       cols: [
         {
           title: "Tax Type",
@@ -69,16 +68,15 @@ export default {
       draw_show: false
     };
   },
-  created() {    
+  created() {
     this.loading = true;
     var _self = this;
-    setTimeout(function(){
+    setTimeout(function() {
       _self.transactions = _self.$store.state.taxes.records;
       _self.loading = false;
     }, 1000);
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 <style>
