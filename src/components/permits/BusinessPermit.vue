@@ -346,12 +346,7 @@
 
           <template v-if="step_curr==3">
             <a-row :gutter="8" style="margin-bottom:50px">
-              <a-col :span="9">
-                <a-button class="insuranceButtons" block @click="insured(1)">AIG</a-button>
-                <a-button class="insuranceButtons" block @click="insured(2)">AXA Philippines</a-button>
-                <a-button class="insuranceButtons" block @click="insured(3)">Malayan</a-button>
-                <a-button class="insuranceButtons" block @click="insured(4)">MAPRE Philippines</a-button>
-                <!-- <a-card title="Card Title" :style="{ marginTop: '16px' }">
+              <!-- <a-card title="Card Title" :style="{ marginTop: '16px' }">
                   <a-card-grid style="width:50%;textAlign:left">
                     <p>
                       Lorem ipsum
@@ -370,8 +365,7 @@
                       At vero eos et accusam
                     </p>
                   </a-card-grid>
-                </a-card>-->
-              </a-col>
+              </a-card>-->
               <a-row>
                 <a-col :span="15">
                   <a-card title="Payment Details">
@@ -397,6 +391,12 @@
                       style="width:50%;textAlign:'center'"
                     >₱{{numberWithCommas(form.business_insurance.total)}}</a-card-grid>
                   </a-card>
+                </a-col>
+                <a-col :span="9">
+                  <a-button class="insuranceButtons" block @click="insured(1)">AIG</a-button>
+                  <a-button class="insuranceButtons" block @click="insured(2)">AXA Philippines</a-button>
+                  <a-button class="insuranceButtons" block @click="insured(3)">Malayan</a-button>
+                  <a-button class="insuranceButtons" block @click="insured(4)">MAPRE Philippines</a-button>
                 </a-col>
               </a-row>
             </a-row>
@@ -653,6 +653,7 @@ export default {
       }
     },
     insured(key) {
+      console.log("insured key value: " + key);
       var product = [
         {
           name: "",
