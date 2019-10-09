@@ -42,18 +42,9 @@
             />
             <span slot="content">
               <p>{{item.message}}</p>
-              <a-row type="flex" justify="start" :gutter="8">
-                <a-col :span="8">
-                  <img
-                    src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/68884204_2402329830086417_5705499891048906752_n.jpg?_nc_cat=103&_nc_eui2=AeFWytHMYWs9zuKVSc66Uz4Vzxg5Fa29apiz6GRPbvDohFtrWnZSmJNQh7yRh9lXN8vJ70zZcgSgIats1MEQGjUq3E5gCFVUe0iLMyNjwEYzNw&_nc_oc=AQlhm_Ata0vUbn2X4lBylqa7US5UVX1_R0jPJglrMgZ_P_n_NMHEHPkTbako7qARnwI&_nc_ht=scontent.fmnl4-1.fna&oh=dfdb597ffcc9803311c6ee9595137e38&oe=5E0B2330"
-                    width="200vw"
-                  />
-                </a-col>
-                <a-col :span="8">
-                  <img
-                    src="https://scontent.fmnl4-1.fna.fbcdn.net/v/t1.0-9/69328402_2402330370086363_5505522112053379072_n.jpg?_nc_cat=104&_nc_eui2=AeGxNBzkgXSgg5qIiVqLY1NEpKyT_tTkR37ksGgeoILMALw5WvfDNzXaWwkYZkq1XM9XdXGr110D0N0mPkMnUSkM2KviNV3JJ0lmG5dAuziRfg&_nc_oc=AQkDxwmp8bmZljizqeHvaM2tcuRak12oFLQQkfQDT3AbvWxIxvZhvr1iwFZCrAF1wm0&_nc_ht=scontent.fmnl4-1.fna&oh=8cb72f822d8666af514b9e815f2a9d99&oe=5E05A32B"
-                    width="200vw"
-                  />
+              <a-row type="flex" justify="start">
+                <a-col :span="8" v-for="(image, index) in item.attachments" :key="index" style="margin-bottom: 3px;">
+                  <img :src="image" width="200vw" />
                 </a-col>
               </a-row>
             </span>
