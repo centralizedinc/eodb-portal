@@ -39,7 +39,7 @@
               Republic of the Philippines
               <br />
               {{constant_helper.name_display}}
-              <br />OFFICE OF THE CITY MAYOR
+              <br />OFFICE OF THE PROVINCIAL GOVERNOR
               <br />
               {{form.application.permit_type}} and Licensing Office
               <br />Telephone no. +63 42 710-8892

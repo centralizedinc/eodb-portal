@@ -32,17 +32,17 @@ function initialState() {
         }],
         messages: [{
             date_created: new Date(),
-            message: 'Keep up the good work and more power . God bless . Thank you very much Gov!!',
+            message: 'Keep up the good work and more power . God bless . Thank you very much Governor Joy Bernos !',
             likes: 421,
             id: 1
         }, {
             date_created: new Date(),
-            message: 'Maraming salamat po Governor Joy sa pagpapagawa nyo tricycle application para sa Abra. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Mayor Dondon Alcala !',
+            message: 'Maraming salamat po Governor Joy Bernos sa pagpapagawa nyo tricycle application para sa Abra. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Governor Joy Bernos !',
             likes: 532,
             id: 2
         }, {
             date_created: new Date(),
-            message: 'Thank po Gov for doing a great job in Abra. Godbless you ! ',
+            message: 'Thank po Governor Joy Bernos for doing a great job in Abra. Godbless you ! ',
             likes: 831,
             id: 3
         }, {
