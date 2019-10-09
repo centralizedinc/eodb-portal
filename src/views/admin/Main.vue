@@ -1,17 +1,30 @@
 <template>
-<a-layout>
-  <a-layout-sider style="margin-top:10vh; ">
-      <a-menu style="height:100vh">
+  <a-layout>
+    <a-layout-sider style="margin-top:10vh; ">
+      <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
         <a-menu-item key="/app">
-                <a-icon type="layout" />
-                <span>Dashboard</span>
-              </a-menu-item>
-        <a-sub-menu>
-          <a-menu-item></a-menu-item>
-        </a-sub-menu>
+          <a-icon type="layout" />
+          <span>Dashboard</span>
+        </a-menu-item>
+        <a-menu-item key="/permits">
+          <a-icon type="form" />
+          <span>Permits</span>
+        </a-menu-item>
+        <a-menu-item key="/taxes">
+          <a-icon type="form" />
+          <span>Local Taxes</span>
+        </a-menu-item>
+        <a-menu-item key="/reports">
+          <a-icon type="form" />
+          <span>Incident Reports</span>
+        </a-menu-item>
+        <a-menu-item key="/logout">
+          <a-icon type="logout" />
+          <span>Logout</span>
+        </a-menu-item>
       </a-menu>
-  </a-layout-sider>
-  <a-layout-header class="header">
+    </a-layout-sider>
+    <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
         <a-col :span="1">
           <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
@@ -32,15 +45,13 @@
           <a-icon type="logout" style="color:#ffffff; cursor:pointer" @click="logout"></a-icon>
         </a-col>
       </a-row>
-  </a-layout-header>
-  <a-layout-content  style="margin-left:1vw; margin-right: 1vw; margin-top:15vh; height: 100vh">
+    </a-layout-header>
+    <a-layout-content style="margin-left:1vw; margin-right: 1vw; margin-top:15vh">
       <h2>{{$route.name}}</h2>
-        <a-divider></a-divider>
-      <a-card title="Incident Map">
-          
-      </a-card>
-  </a-layout-content>
-  <!-- <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
+      <a-divider></a-divider>
+      <router-view />
+    </a-layout-content>
+    <!-- <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
       <a-row>
         <a-col :span="18">
           <p>© Copyright 2019 CCCI Inc. - All Rights Reserved</p>
@@ -79,16 +90,28 @@
           </a-avatar>
         </a-col>
       </a-row>
-    </a-layout-footer> -->
-</a-layout>
+    </a-layout-footer>-->
+  </a-layout>
 </template>
 
 <script>
 export default {
-
-}
+  data() {
+    return {
+      coordinates: { lat: 13.9413957, lng: 121.6234471 }
+    };
+  },
+  methods: {
+    nav(e) {
+      if (e.key === "logout") {
+        this.logout();
+      } else {
+        this.$router.push(e.key);
+      }
+    }
+  }
+};
 </script>
 
 <style>
-
 </style>
