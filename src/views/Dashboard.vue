@@ -43,7 +43,7 @@
               </a-col>
               <a-col :span="24">
                 <a-row type="flex" justify="center">
-                  <a-col :span="12">
+                  <a-col :span="24" style="text-align: center">
                     <h3 style="color:#FFFFFF">
                       {{user.fname}} {{user.lname}}
                     </h3>
