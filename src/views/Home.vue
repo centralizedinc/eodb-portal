@@ -42,7 +42,7 @@
         </a-col>
       </a-row>
       <a-drawer
-      :placement="left"
+      placement="left"
       :visible="visible_menu"
       @close="visible_menu=false"
       :closable="false"

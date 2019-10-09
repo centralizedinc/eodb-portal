@@ -218,10 +218,11 @@ export default {
         js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
         fjs.parentNode.insertBefore(js, fjs);
       })(document, "script", "facebook-jssdk");
-
+      console.log('this.constant_helper.chatbot :', this.constant_helper.chatbot);
+      const appId = this.constant_helper.chatbot.appId;
       window.fbAsyncInit = function() {
         FB.init({
-          appId: this.constant_helper.chatbot.appId,
+          appId: appId,
           xfbml: true,
           version: "v4.0"
         });

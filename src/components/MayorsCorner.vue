@@ -11,7 +11,7 @@
       </template>
 
       <template v-else>
-        <a-card style="margin-bottom: 2vh">
+        <a-card style="margin-bottom: 2vh" v-for="(item, index) in posts" :key="index">
           <a-comment>
             <template slot="actions">
               <span>
@@ -22,7 +22,7 @@
                     @click="like"
                   />
                 </a-tooltip>
-                <span style="padding-left: '8px';cursor: 'auto'">{{likes}}</span>
+                <span style="padding-left: '8px';cursor: 'auto'">{{item.likes}}</span>
               </span>
               <span>
                 <a-tooltip title="Dislike">
@@ -32,7 +32,7 @@
                     @click="dislike"
                   />
                 </a-tooltip>
-                <span style="padding-left: '8px';cursor: 'auto'">{{dislikes}}</span>
+                <span style="padding-left: '8px';cursor: 'auto'">{{item.dislikes}}</span>
               </span>
             </template>
             <a slot="author">{{constant_helper.client_details.title}} {{constant_helper.client_details.name}}</a>
@@ -41,11 +41,7 @@
               slot="avatar"
             />
             <span slot="content">
-              Narito po tayo ngayon sa Bangkok, Thailand para makilahok sa 5th ASEAN MAYORS FORUM (AMF) na may temang: Driving Local Actions for Sustainable and Inclusive Growth
-              <br />
-              <br />Bilang isang lider po mula sa ating Lungsod ng Lucena, importante po na dumalo rito dahil ang 5th AMF ay magsisilbing isang platform para sa talakayan ng mga ASEAN’s local political leaders, policy makers, international development partners at iba pang mga experts,upang mabatid kung papaanong ang mga lungsod at lokal na pamahalaan ay makatutulong sa prayoridad ng UN Sustainabe Development Goals (SDGs), New Urban Agenda (NUA), Paris Agreement on Climate Change at ang Sendai Framework for Disaster Risk Reduction (SFDRR).
-              <br />Sa ilalim po ng liderato ng inyong lingkod, ang Lokal na Pamahalaan ng Lungsog ng Lucena ay niyayakap ang lahat ng mga benepisyo ng urbanisasyon; subalit, ganoon pa man, kailangan pa rin ng ating liderato ang matibay na suporta at pakikipag-ugnayan sa lahat ng antas.
-              <br />Kaya naman, abala po tayo ngayon rito sa labas ng bansa mula August 26-28, 2019 para sa mas lalo pang ikabubuti ng ating mahal na Lungsod ng Lucena.
+              <p>{{item.message}}</p>
               <a-row type="flex" justify="start" :gutter="8">
                 <a-col :span="8">
                   <img
@@ -61,12 +57,12 @@
                 </a-col>
               </a-row>
             </span>
-            <a-tooltip slot="datetime" :title="moment().format('YYYY-MM-DD HH:mm:ss')">
-              <span>{{moment().fromNow()}}</span>
+            <a-tooltip slot="datetime" :title="formatDate(moment(item.date))">
+              <span>{{moment(item.date).fromNow()}}</span>
             </a-tooltip>
           </a-comment>
         </a-card>
-
+<!-- 
         <a-card style="margin-bottom: 2vh">
           <a-comment>
             <template slot="actions">
@@ -215,7 +211,7 @@
               <span>{{moment().fromNow()}}</span>
             </a-tooltip>
           </a-comment>
-        </a-card>
+        </a-card> -->
       </template>
     </a-col>
   </a-row>
@@ -236,6 +232,11 @@ export default {
   },
   created() {
     this.init();
+  },
+  computed: {
+    posts(){
+      return this.deepCopy(this.$store.state.mayor_corner.posts)
+    }
   },
   methods: {
     init() {
