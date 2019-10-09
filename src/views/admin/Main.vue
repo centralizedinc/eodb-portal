@@ -111,6 +111,9 @@ export default {
     };
   },
   methods: {
+    onSearch(){
+        return null;
+      },
     nav(e) {
       if (e.key === "logout") {
         this.logout();

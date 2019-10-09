@@ -65,7 +65,7 @@
           :zoom="16"
           map-type-id="terrain"
           draggable="true"
-          style="width: 100%; height: 800px; margin-top:5vh"
+          style="width: 100%; height: 100vh; margin-top:5vh"
           :options="{
               zoomControl: true,
               mapTypeControl: false,
@@ -121,18 +121,80 @@
             :animation="animation"
           />
         </GmapMap>
+        <a-row type="flex" align="middle" justify="end" style="margin-top:-90vh"> 
+          <a-col :span="3">
+            <a-card style="background: rgba(236, 7, 7, 0.48);">
+              <a-row type="flex" align="middle">
+              <a-col :span="4">
+                <a-icon type="fire" style="color:#ffffff;font-size:42px"></a-icon>
+              </a-col>
+              <a-col :span="18">
+                <h3 style="margin-bottom:0px; color:#ffffff;text-align:right">Fire</h3>
+                <h3 style="margin-bottom:0px; color:#ffffff;width:100%;text-align:right;font-size:32px">{{fire_coordinates.length}}</h3>
+              </a-col>
+            </a-row>
+            </a-card>
+
+          </a-col>
+          <a-col :span="24"></a-col>
+          <a-col :span="3">
+            <a-card style="background: rgba(13, 111, 30, 0.51);">
+              <a-row type="flex" align="middle">
+              <a-col :span="4">
+                <a-icon type="alert" style="color:#ffffff;font-size:42px"></a-icon>
+              </a-col>
+              <a-col :span="18">
+                <h3 style="margin-bottom:0px; color:#ffffff;text-align:right">Flood</h3>
+                <h3 style="margin-bottom:0px; color:#ffffff;width:100%;text-align:right;font-size:32px">{{flood_coordinates.length}}</h3>
+              </a-col>
+            </a-row>
+            </a-card>
+
+          </a-col>
+          <a-col :span="24"></a-col>
+          <a-col :span="3">
+            <a-card style="background: rgba(107, 109, 7, 0.51)">
+              <a-row type="flex" align="middle">
+              <a-col :span="4">
+                <a-icon type="safety" style="color:#ffffff;font-size:42px"></a-icon>
+              </a-col>
+              <a-col :span="18">
+                <h3 style="margin-bottom:0px; color:#ffffff;text-align:right">Crime</h3>
+                <h3 style="margin-bottom:0px; color:#ffffff;width:100%;text-align:right;font-size:32px">{{crime_coordinates.length}}</h3>
+              </a-col>
+            </a-row>
+            </a-card>
+
+          </a-col>
+          <a-col :span="24"></a-col>
+        </a-row>
     </div>
       <!-- </a-card> -->
 </template>
 
 <script>
+import fire_icon from "@/assets/fire_icon_20.png";
+import civil_disturbance_icon from "@/assets/civil_disturbance_icon_20.png";
+import flood_icon from "@/assets/flood_icon_20.png";
+import crime_icon from "@/assets/crime_icon_20.png";
+
 export default {
     data() {
         return {
+          fire_icon,
+      civil_disturbance_icon,
+      flood_icon,
+      crime_icon,
             coordinates: { lat: 13.9413957, lng: 121.6234471 }
         }
     },
+    methods:{
+      
+    },
     computed:{
+      /**
+       * for testing purposes only
+       */
       random_user(){
         return (Math.floor(Math.random()*100))+5
       },
@@ -144,6 +206,24 @@ export default {
       },
       random_reports(){
         return (Math.floor(Math.random()*100))+5
+      },
+      /**
+       * ########################
+       */
+      fire_coordinates() {
+        return this.reports.filter(v => v.report_type === 1)
+      },
+      civil_disturbance_coordinates() {
+        return this.reports.filter(v => v.report_type === 2);
+      },
+      flood_coordinates() {
+        return this.reports.filter(v => v.report_type === 3);
+      },
+      crime_coordinates() {
+        return this.reports.filter(v => v.report_type === 4);
+      },
+      reports() {
+        return this.deepCopy(this.$store.state.reports.reports);
       }
     }
 }
