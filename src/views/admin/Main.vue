@@ -1,14 +1,27 @@
 <template>
 <a-layout>
   <a-layout-sider style="margin-top:10vh; ">
-      <a-menu style="height:100vh">
+      <a-menu >
         <a-menu-item key="/app">
                 <a-icon type="layout" />
                 <span>Dashboard</span>
-              </a-menu-item>
-        <a-sub-menu>
-          <a-menu-item></a-menu-item>
-        </a-sub-menu>
+        </a-menu-item>
+        <a-menu-item key="/permits">
+                <a-icon type="form" />
+                <span>Permits</span>
+        </a-menu-item>
+        <a-menu-item key="/taxes">
+                <a-icon type="form" />
+                <span>Local Taxes</span>
+        </a-menu-item>
+        <a-menu-item key="/reports">
+                <a-icon type="form" />
+                <span> Incident Reports</span>
+        </a-menu-item>
+        <a-menu-item key="/logout">
+                <a-icon type="logout" />
+                <span>Logout</span>
+        </a-menu-item>
       </a-menu>
   </a-layout-sider>
   <a-layout-header class="header">
@@ -33,11 +46,72 @@
         </a-col>
       </a-row>
   </a-layout-header>
-  <a-layout-content  style="margin-left:1vw; margin-right: 1vw; margin-top:15vh; height: 100vh">
+  <a-layout-content  style="margin-left:1vw; margin-right: 1vw; margin-top:15vh">
       <h2>{{$route.name}}</h2>
         <a-divider></a-divider>
       <a-card title="Incident Map">
-          
+          <GmapMap
+        id="map"
+        ref="map"
+        :center="{lat:coordinates.lat, lng:coordinates.lng}"
+        :zoom="16"
+        map-type-id="terrain"
+        draggable="true"
+        style="width: 100%; height: 300px; margin-top:5vh"
+      >
+        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
+        <!-- Current Location -->
+        <GmapMarker
+          :draggable="true"
+          @dragend="setCoordinate"
+          :position="coordinates"
+          :animation="animation"
+        />
+
+        <!-- Fire -->
+        <GmapMarker
+          v-for="(coordinate, index) in fire_coordinates"
+          :key="`fire${index}`"
+          :title="`Fire incident: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="fire_icon"
+          :position="coordinate.coordinates"
+          :animation="animation"
+        />
+
+        <!-- Civil Disturbance -->
+        <GmapMarker
+          v-for="(coordinate, index) in civil_disturbance_coordinates"
+          :key="`civil${index}`"
+          :title="`Civil Disturbance: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="civil_disturbance_icon"
+          :position="coordinate.coordinates"
+          :animation="animation"
+        />
+
+        <!-- Flood -->
+        <GmapMarker
+          v-for="(coordinate, index) in flood_coordinates"
+          :key="`flood${index}`"
+          :title="`Flood Incident: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="flood_icon"
+          :position="coordinate.coordinates"
+          :animation="animation"
+        />
+
+        <!-- Crime -->
+        <GmapMarker
+          v-for="(coordinate, index) in crime_coordinates"
+          :key="`crime${index}`"
+          :title="`Crime Incident: Reported as of ${formatDate(coordinate.date_created)}`"
+          :draggable="false"
+          :icon="crime_icon"
+          :position="coordinate.coordinates"
+          :animation="animation"
+        />
+      </GmapMap>
       </a-card>
   </a-layout-content>
   <!-- <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
@@ -85,7 +159,11 @@
 
 <script>
 export default {
-
+  data(){
+    return {
+      coordinates: { lat: 13.9413957, lng: 121.6234471 },
+    }
+  }
 }
 </script>
 
