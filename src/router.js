@@ -74,6 +74,16 @@ export default new Router({
         path: '',
         name: 'Dashboard',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
+      },
+      {
+        path: 'permits',
+        name: 'Permits',
+        component: () => import(/* webpackChunkName: "news" */ './views/admin/Permits.vue'),
+      },
+      {
+        path: 'taxes',
+        name: 'Local Taxes',
+        component: () => import(/* webpackChunkName: "news" */ './views/admin/Taxes.vue'),
       }]
     }
   ],
