@@ -2,23 +2,23 @@
 <a-layout>
   <a-layout-sider style="margin-top:10vh; ">
       <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
-        <a-menu-item key="/app">
+        <a-menu-item key="/admin/app">
                 <a-icon type="layout" />
                 <span>Dashboard</span>
         </a-menu-item>
-        <a-menu-item key="/permits">
+        <a-menu-item key="/admin/app/permits">
                 <a-icon type="form" />
                 <span>Permits</span>
         </a-menu-item>
-        <a-menu-item key="/taxes">
+        <a-menu-item key="/admin/app/taxes">
                 <a-icon type="form" />
                 <span>Local Taxes</span>
         </a-menu-item>
-        <a-menu-item key="/reports">
+        <a-menu-item key="/admin/app/reports">
                 <a-icon type="form" />
                 <span> Incident Reports</span>
         </a-menu-item>
-        <a-menu-item key="/logout">
+        <a-menu-item key="logout">
                 <a-icon type="logout" />
                 <span>Logout</span>
         </a-menu-item>
