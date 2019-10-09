@@ -1,16 +1,16 @@
 <template>
     <a-card>
-  <a-tabs>
+  <a-tabs tabPosition="left">
     <a-tab-pane key="0" tab="For Approval">   
-        <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:2vh">
+        <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:5vh">
         </a-table>     
     </a-tab-pane>
     <a-tab-pane key="1" tab="Approved">  
-        <a-table :dataSource="for_approval" :columns="col_approval">
+        <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:5vh">
         </a-table>       
     </a-tab-pane>
     <a-tab-pane key="2" tab="Disapproved">   
-        <a-table :dataSource="for_approval" :columns="col_approval">
+        <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:5vh">
         </a-table>      
     </a-tab-pane>
   </a-tabs>

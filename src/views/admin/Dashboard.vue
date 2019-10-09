@@ -58,6 +58,7 @@
           </a-card>
         </a-col>
       </a-row>
+      <a-divider></a-divider>
         <GmapMap
           id="map"
           ref="map"
@@ -65,7 +66,7 @@
           :zoom="16"
           map-type-id="terrain"
           draggable="true"
-          style="width: 100%; height: 100vh; margin-top:5vh"
+          style="width: 100%; height: 100vh;"
           :options="{
               zoomControl: true,
               mapTypeControl: false,
@@ -121,7 +122,7 @@
             :animation="animation"
           />
         </GmapMap>
-        <a-row type="flex" align="middle" justify="end" style="margin-top:-90vh"> 
+        <a-row type="flex" align="middle" justify="end" style="margin-top:-90vh; margin-right:1vw"> 
           <a-col :span="3">
             <a-card style="background: rgba(236, 7, 7, 0.48);">
               <a-row type="flex" align="middle">
@@ -134,7 +135,6 @@
               </a-col>
             </a-row>
             </a-card>
-
           </a-col>
           <a-col :span="24"></a-col>
           <a-col :span="3">
