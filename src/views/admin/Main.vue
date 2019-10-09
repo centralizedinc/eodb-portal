@@ -1,20 +1,20 @@
 <template>
   <a-layout>
-    <a-layout-sider style="margin-top:10vh; ">
+    <!-- <a-layout-sider style="margin-top:10vh; ">
       <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
-        <a-menu-item key="/admin/app">
+        <a-menu-item key="app">
                 <a-icon type="layout" />
                 <span>Dashboard</span>
         </a-menu-item>
-        <a-menu-item key="/admin/app/permits">
+        <a-menu-item key="app/permits">
                 <a-icon type="form" />
                 <span>Permits</span>
         </a-menu-item>
-        <a-menu-item key="/admin/app/taxes">
+        <a-menu-item key="app/taxes">
                 <a-icon type="form" />
                 <span>Local Taxes</span>
         </a-menu-item>
-        <a-menu-item key="/admin/app/reports">
+        <a-menu-item key="app/reports">
                 <a-icon type="form" />
                 <span> Incident Reports</span>
         </a-menu-item>
@@ -23,9 +23,12 @@
                 <span>Logout</span>
         </a-menu-item>
       </a-menu>
-    </a-layout-sider>
+    </a-layout-sider> -->
     <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
+        <!-- <a-col :span="1">
+          <a-icon type="menu" style="color:#ffffff; cursor:pointer"></a-icon>
+        </a-col> -->
         <a-col :span="1">
           <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
         </a-col>
@@ -47,8 +50,14 @@
       </a-row>
     </a-layout-header>
     <a-layout-content style="margin-left:1vw; margin-right: 1vw; margin-top:15vh">
+      <a-tabs>
+        <a-tab-pane key="0" tab="Dashboard"></a-tab-pane>
+        <a-tab-pane key="1" tab="Permits"></a-tab-pane>
+        <a-tab-pane key="2" tab="Local Taxes"></a-tab-pane>
+        <a-tab-pane key="3" tab="Incident Reports"></a-tab-pane>
+      </a-tabs>
       <h2>{{$route.name}}</h2>
-      <a-divider></a-divider>
+      <!-- <a-divider></a-divider> -->
       <router-view />
     </a-layout-content>
     <!-- <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
@@ -106,8 +115,11 @@ export default {
       if (e.key === "logout") {
         this.logout();
       } else {
-        this.$router.push(e.key);
+        // this.$router.push(e.key);
       }
+    },
+    logout(){
+
     }
   }
 };

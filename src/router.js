@@ -62,7 +62,7 @@ export default new Router({
       component: () => import('./views/chatbot/SendReports.vue'),
     },
     {
-      path: '/admin',
+      path: '/admin/main',
       name: 'admin',
       component: () => import(/* webpackChunkName: "news" */ './views/admin/Login.vue'),
     },
@@ -72,17 +72,17 @@ export default new Router({
       component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue'),
       children: [{
         path: '',
-        name: 'Dashboard',
+        name: 'Admin Dashboard',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
       },
       {
         path: 'permits',
-        name: 'Permits',
+        name: 'Permit Applications',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Permits.vue'),
       },
       {
         path: 'taxes',
-        name: 'Local Taxes',
+        name: 'Local Taxes Applications',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Taxes.vue'),
       }]
     }
