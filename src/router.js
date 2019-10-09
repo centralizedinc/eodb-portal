@@ -68,8 +68,13 @@ export default new Router({
     },
     {
       path: '/admin/app',
-      name: 'Dashboard',
-      component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue')
+      name: 'Main',
+      component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue'),
+      children: [{
+        path: '',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
+      }]
     }
   ],
   scrollBehavior(to, from, savedPosition) {

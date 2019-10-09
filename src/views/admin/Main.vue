@@ -1,6 +1,6 @@
 <template>
-<a-layout>
-  <a-layout-sider style="margin-top:10vh; ">
+  <a-layout>
+    <a-layout-sider style="margin-top:10vh; ">
       <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
         <a-menu-item key="/admin/app">
                 <a-icon type="layout" />
@@ -23,8 +23,8 @@
                 <span>Logout</span>
         </a-menu-item>
       </a-menu>
-  </a-layout-sider>
-  <a-layout-header class="header">
+    </a-layout-sider>
+    <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
         <a-col :span="1">
           <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
@@ -45,76 +45,13 @@
           <a-icon type="logout" style="color:#ffffff; cursor:pointer" @click="logout"></a-icon>
         </a-col>
       </a-row>
-  </a-layout-header>
-  <a-layout-content  style="margin-left:1vw; margin-right: 1vw; margin-top:15vh">
+    </a-layout-header>
+    <a-layout-content style="margin-left:1vw; margin-right: 1vw; margin-top:15vh">
       <h2>{{$route.name}}</h2>
-        <a-divider></a-divider>
-      <a-card title="Incident Map">
-          <GmapMap
-        id="map"
-        ref="map"
-        :center="{lat:coordinates.lat, lng:coordinates.lng}"
-        :zoom="16"
-        map-type-id="terrain"
-        draggable="true"
-        style="width: 100%; height: 300px; margin-top:5vh"
-      >
-        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
-        <!-- Current Location -->
-        <GmapMarker
-          :draggable="true"
-          @dragend="setCoordinate"
-          :position="coordinates"
-          :animation="animation"
-        />
-
-        <!-- Fire -->
-        <GmapMarker
-          v-for="(coordinate, index) in fire_coordinates"
-          :key="`fire${index}`"
-          :title="`Fire incident: Reported as of ${formatDate(coordinate.date_created)}`"
-          :draggable="false"
-          :icon="fire_icon"
-          :position="coordinate.coordinates"
-          :animation="animation"
-        />
-
-        <!-- Civil Disturbance -->
-        <GmapMarker
-          v-for="(coordinate, index) in civil_disturbance_coordinates"
-          :key="`civil${index}`"
-          :title="`Civil Disturbance: Reported as of ${formatDate(coordinate.date_created)}`"
-          :draggable="false"
-          :icon="civil_disturbance_icon"
-          :position="coordinate.coordinates"
-          :animation="animation"
-        />
-
-        <!-- Flood -->
-        <GmapMarker
-          v-for="(coordinate, index) in flood_coordinates"
-          :key="`flood${index}`"
-          :title="`Flood Incident: Reported as of ${formatDate(coordinate.date_created)}`"
-          :draggable="false"
-          :icon="flood_icon"
-          :position="coordinate.coordinates"
-          :animation="animation"
-        />
-
-        <!-- Crime -->
-        <GmapMarker
-          v-for="(coordinate, index) in crime_coordinates"
-          :key="`crime${index}`"
-          :title="`Crime Incident: Reported as of ${formatDate(coordinate.date_created)}`"
-          :draggable="false"
-          :icon="crime_icon"
-          :position="coordinate.coordinates"
-          :animation="animation"
-        />
-      </GmapMap>
-      </a-card>
-  </a-layout-content>
-  <!-- <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
+      <a-divider></a-divider>
+      <router-view />
+    </a-layout-content>
+    <!-- <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
       <a-row>
         <a-col :span="18">
           <p>© Copyright 2019 CCCI Inc. - All Rights Reserved</p>
@@ -153,29 +90,28 @@
           </a-avatar>
         </a-col>
       </a-row>
-    </a-layout-footer> -->
-</a-layout>
+    </a-layout-footer>-->
+  </a-layout>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      coordinates: { lat: 13.9413957, lng: 121.6234471 },
-    }
+      coordinates: { lat: 13.9413957, lng: 121.6234471 }
+    };
   },
-  methods:{
+  methods: {
     nav(e) {
       if (e.key === "logout") {
         this.logout();
       } else {
         this.$router.push(e.key);
       }
-    },
+    }
   }
-}
+};
 </script>
 
 <style>
-
 </style>
