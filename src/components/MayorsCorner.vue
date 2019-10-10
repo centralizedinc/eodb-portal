@@ -234,8 +234,7 @@ export default {
   },
   computed: {
     posts() {
-      //order by date desc
-      return this.$store.state.mayor_corner.posts.sort((a, b) => new Date(b.date) - new Date(a.date))
+      return this.$store.state.mayor_corner.apps[this.constant_helper.app_index].posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
   },
   methods: {

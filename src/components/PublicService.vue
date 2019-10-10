@@ -150,7 +150,7 @@ export default {
       return this.$store.state.user_session.user;
     },
     subscribers_post() {
-      const post = this.deepCopy(this.$store.state.public_service.messages);
+      const post = this.deepCopy(this.$store.state.public_service.apps[this.constant_helper.app_index].messages);
       const post_data = post.sort(
         (a, b) =>
           new Date(b.date_created).getTime() -
@@ -196,6 +196,7 @@ export default {
     },
     postMessage() {
       this.$store.commit("POST_MESSAGE", {
+        app_index: this.constant_helper.app_index,
         details: {
           id: this.active_user.email,
           name: {
