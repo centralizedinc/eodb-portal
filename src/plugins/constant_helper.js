@@ -11,7 +11,8 @@ export default {
         facebook: {
             url: process.env.VUE_APP_CLIENT_FACEBOOK_URL,
             label: process.env.VUE_APP_CLIENT_FACEBOOK
-        }
+        },
+        transaction_label: process.env.VUE_APP_TRANSACTION_LABEL || ''
     },
     home_header: {
         logo: process.env.VUE_APP_HOME_LOGO || 'https://i.stack.imgur.com/7JLVA.png',
@@ -29,6 +30,7 @@ export default {
         background: process.env.VUE_APP_BACKGROUND,
         button: process.env.VUE_APP_BUTTON_COLOR ? `background: ${process.env.VUE_APP_BUTTON_COLOR};` : ''
     },
+    app_index: process.env.VUE_APP_APP_INDEX || 0,
     name_display: process.env.VUE_APP_APP_NAME || 'Application Name',
     login_background: process.env.VUE_APP_LOGIN_BACKGROUND
 }

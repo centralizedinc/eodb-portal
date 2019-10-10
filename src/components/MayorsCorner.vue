@@ -234,7 +234,7 @@ export default {
   },
   computed: {
     posts() {
-      return this.deepCopy(this.$store.state.mayor_corner.posts);
+      return this.deepCopy(this.$store.state.mayor_corner.apps[this.constant_helper.app_index].posts);
     }
   },
   methods: {
