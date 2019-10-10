@@ -2,8 +2,9 @@
     <a-card>
   <a-tabs tabPosition="left">
     <a-tab-pane key="0" tab="For Approval">   
-        <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:5vh">
-        </a-table>     
+        <!-- <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:5vh">
+        </a-table>      -->
+        <approval :admin="true"/>
     </a-tab-pane>
     <a-tab-pane key="1" tab="Approved">  
         <a-table :dataSource="for_approval" :columns="col_approval" style="margin-top:5vh">
@@ -18,7 +19,11 @@
 </template>
 
 <script>
+import Approval from '@/components/permits/Transactions'
 export default {
+    components:{
+        Approval
+    },
     data(){
         return{
             for_approval:[],

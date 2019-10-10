@@ -1,11 +1,16 @@
 <template>
   <a-card>
-      <a-table :columns="cols" :dataSource="taxes"></a-table>
+      <!-- <a-table :columns="cols" :dataSource="taxes"></a-table> -->
+      <taxes/>
   </a-card>
 </template>
 
 <script>
+import Taxes from '@/components/taxes/Transactions'
 export default {
+    components:{
+        Taxes
+    },
     data(){
         return {
             cols:[{

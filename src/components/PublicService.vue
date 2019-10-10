@@ -76,6 +76,10 @@
           style="margin-bottom: 2vh; box-shadow: 0px 0px 10px 2px #88888847"
           data-aos="fade-up"
         >
+        <template slot="extra" v-if="admin">
+          <a-button icon="check" ghost type="primary">Approve</a-button>
+          <a-button icon="close" ghost type="danger">Remove</a-button>
+        </template>
           <a-comment>
             <template slot="actions">
               <span>
@@ -120,6 +124,9 @@
 <script>
 import moment from "moment";
 export default {
+  props:[
+    'admin'
+  ],
   data() {
     return {
       loading: false,

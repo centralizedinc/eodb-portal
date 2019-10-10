@@ -73,8 +73,8 @@ var initialState = {
                 contact: "123456798"
             },
             progress: {
-                status: "FOR PAYMENT",
-                current_task: "FOR PAYMENT",
+                status: "FOR APPROVAL",
+                current_task: "FOR APPROVAL",
                 previous_task: ""
             }
         },
@@ -166,6 +166,20 @@ const state = JSON.parse(JSON.stringify(initialState))
 const mutations = {
     SAVE_PERMIT(state, permit) {
         state.permit.push(permit)
+    },
+    APPROVE_PERMIT(state, reference_no){
+        state.permit.forEach(element => {
+            if(element.reference_no === reference_no){
+                element.progress.status = 'APPROVED'
+            }
+        });
+    },
+    DECLINE_PERMIT(state, permit){
+        state.permit.forEach(element => {
+            if(element.reference_no === reference_no){
+                element.progress.status = 'DECLINE'
+            }
+        });
     }
 }
 

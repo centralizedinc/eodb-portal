@@ -234,7 +234,8 @@ export default {
   },
   computed: {
     posts() {
-      return this.deepCopy(this.$store.state.mayor_corner.posts);
+      //order by date desc
+      return this.$store.state.mayor_corner.posts.sort((a, b) => new Date(b.date) - new Date(a.date))
     }
   },
   methods: {

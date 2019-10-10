@@ -1,5 +1,5 @@
 <template>
-  <a-card data-aos="fade-up" style="box-shadow: 0px 0px 10px 2px #88888847">
+  <a-card style="box-shadow: 0px 0px 10px 2px #88888847">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
       <a-col :span="22">
         <a-input-search placeholder="Search" @search="onSearch" />
@@ -31,6 +31,8 @@
         <a-menu-item key="permit">Permit</a-menu-item>
         <a-menu-item key="insurance">Insurance</a-menu-item>
         <a-menu-item key="payment">Payment</a-menu-item>
+        <a-menu-item key="documents">Attachments</a-menu-item>
+        <a-menu-item key="approval" v-if="admin">Approval</a-menu-item>
       </a-menu>
       <a-card style="textAlign:'center'" v-show="current =='permit'">
         <a-row>
@@ -301,6 +303,22 @@
           </a-card>
         </div>
       </a-card>
+      <a-card v-show="current =='document'"></a-card>
+      <a-card v-show="current =='approval'">
+        <a-row type="flex" :gutter="16" justify="center">
+          <a-col :span="24">
+            <a-textarea rows="10" placeholder="Write remarks here..." v-model="remarks"></a-textarea>            
+            <a-divider></a-divider>
+          </a-col>
+
+          <a-col :span="12">
+            <a-button type="primary" ghost block icon="check" @click="approve">Approve</a-button>
+          </a-col>
+          <a-col :span="12">
+            <a-button type="danger" ghost block icon="close">Decline</a-button>
+          </a-col>
+        </a-row>
+      </a-card>
     </a-drawer>
   </a-card>
 </template>
@@ -310,8 +328,10 @@ import { stringify } from "querystring";
 import axios from "axios";
 
 export default {
+  props:['admin'],
   data() {
     return {
+      remarks:'',
       searching: null,
       loading: false,
       store_handler: [],
@@ -409,7 +429,7 @@ export default {
           scopedSlots: { customRender: "receipts" }
         }
       ],
-      transac: [],
+      // transac: [],
       cols: [
         {
           title: "Permit",
@@ -445,26 +465,31 @@ export default {
     //   this.transac = results.data;
     // });
 
-    this.transac = JSON.parse(JSON.stringify(this.$store.state.permit.permit));
+    // this.transac = JSON.parse(JSON.stringify(this.$store.state.permit.permit));
     this.store_handler = this.$store.state.permit.permit;
     console.log("transac data: " + JSON.stringify(this.transac));
+  },
+  computed:{
+    transac(){
+      return JSON.parse(JSON.stringify(this.$store.state.permit.permit));
+    }
   },
   methods: {
     onSearch(value) {
       console.log("on search data value: " + JSON.stringify(value));
       console.log("on search data transac: " + JSON.stringify(this.transac));
-      this.transac.splice(0, this.transac.length);
+      // this.transac.splice(0, this.transac.length);
       // if (this.searching === null && this.searching === "") {
       //   this.transac.pop(this.transac);
       // } else {
-      this.store_handler.forEach(element => {
-        console.log("element data: " + JSON.stringify(element));
-        console.log("value data: " + JSON.stringify(value));
-        if (element.reference_no === value) {
-          console.log("element meron: " + JSON.stringify(element));
-          this.transac.push(element);
-        }
-      });
+      // this.store_handler.forEach(element => {
+      //   console.log("element data: " + JSON.stringify(element));
+      //   console.log("value data: " + JSON.stringify(value));
+      //   if (element.reference_no === value) {
+      //     console.log("element meron: " + JSON.stringify(element));
+      //     this.transac.push(element);
+      //   }
+      // });
       // }
     },
     view_data(data) {
@@ -474,6 +499,15 @@ export default {
     },
     onClose() {
       this.draw_show = false;
+    },
+    approve(){
+      this.$notification.success({
+        message: 'Success',
+        description:`Application ${this.form.reference_no} is approved.`
+      })
+      this.$store.commit('APPROVE_PERMIT', this.form.reference_no)
+      this.draw_show = false;
+      this.remarks = ''
     }
   }
 };

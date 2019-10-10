@@ -8,7 +8,7 @@ function initialState() {
 const state = initialState()
 
 const mutations = {
-    SEND_REPORTS(state, payload) {
+    SEND_REPORTS(state, payload) {       
         state.reports.push(payload)
     }
 }

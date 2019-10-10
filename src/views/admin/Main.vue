@@ -23,15 +23,37 @@
       </a-row>
     </a-layout-header>
     <a-layout-content style="margin-left:1vw; margin-right: 1vw; margin-top:12vh">
-      <a-affix :offsetTop="20">
+      <a-affix :offsetTop="40">
+        <a-card>
       <a-tabs @change="changeView">
-        <a-tab-pane key="0" tab="Dashboard"></a-tab-pane>
-        <a-tab-pane key="1" tab="Permits"></a-tab-pane>
-        <a-tab-pane key="2" tab="Local Taxes"></a-tab-pane>
-        <a-tab-pane key="3" tab="Incident Reports"></a-tab-pane>
-        <a-tab-pane key="4" tab="Posts"></a-tab-pane>
-        <a-tab-pane key="5" tab="Chatbot"></a-tab-pane>
+        <a-tab-pane key="0">
+          <template slot="tab">            
+            <span><a-icon type="layout"></a-icon> Dashboard</span>
+          </template>
+        </a-tab-pane>
+        <a-tab-pane key="1" >
+          <template slot="tab">            
+            <span><a-icon type="form"></a-icon> Permits</span>
+          </template>
+        </a-tab-pane>
+        <a-tab-pane key="2">
+          <template slot="tab">            
+            <span><a-icon type="file-exclamation"></a-icon> Local Taxes</span>
+          </template>
+        </a-tab-pane>
+        <a-tab-pane key="3">
+          <template slot="tab">            
+            <span><a-icon type="alert"></a-icon> Emergency Reports</span>
+          </template>
+        </a-tab-pane>
+        <a-tab-pane key="4">
+          <template slot="tab">            
+            <span><a-icon type="idcard"></a-icon> Posts</span>
+          </template>
+        </a-tab-pane>
+        <!-- <a-tab-pane key="5" tab="Chatbot"></a-tab-pane> -->
       </a-tabs>
+      </a-card>
       </a-affix>
       <!-- <h2>{{$route.name}}</h2> -->
       <!-- <router-view /> -->
@@ -45,18 +67,20 @@ import Dashboard from '@/views/admin/Dashboard'
 import Permits from '@/views/admin/Permits'
 import Taxes from '@/views/admin/Taxes'
 import Reports from '@/views/admin/IncidentReports'
+import Posts from '@/views/admin/Posts'
 export default {
   components:{
     Dashboard,
     Permits,
     Taxes,
-    Reports
+    Reports,
+    Posts
   },
   data() {
     return {
       coordinates: { lat: 13.9413957, lng: 121.6234471 },
       current_view: 'Dashboard',
-      views:['Dashboard','Permits','Taxes','Reports',]
+      views:['Dashboard','Permits','Taxes','Reports', 'Posts']
     };
   },
   methods: {

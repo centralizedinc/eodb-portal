@@ -367,6 +367,9 @@ export default {
     submitReport() {
       this.visible = false;
       this.$store.commit("SEND_REPORTS", {
+        status:'Unconfirmed',
+        date:new Date(),
+        user:`${this.user.lname}, ${this.user.fname}`,
         report_type: this.report_mode,
         coordinates: this.coordinates
       });

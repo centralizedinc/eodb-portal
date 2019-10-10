@@ -32,7 +32,9 @@ function initialState() {
 const state = initialState();
 
 const mutations = {
-
+    POST_MAYOR_CORNER(state, payload){
+        state.posts.push(payload)
+    }
 }
 
 const actions = {
