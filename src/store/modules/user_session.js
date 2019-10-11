@@ -13,7 +13,7 @@ const state = initialState()
 
 const mutations = {
     LOGIN(state, payload){
-        state.user = payload
+        state.user = payload;
     },
     FB_LOGIN(state, payload){
         state.user.fname = payload.profile.name.givenName

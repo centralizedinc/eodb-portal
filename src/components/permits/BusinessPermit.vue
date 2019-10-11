@@ -20,9 +20,9 @@
           <!-- application details -->
           <template v-if="step_curr==0">
             <a-form-item label="Application" :label-col="{ span: 8}" :wrapper-col="{ span: 16 }">
-              <a-radio-group v-model="form.application.app_type">
-                <a-radio :value="1">New</a-radio>
-                <a-radio :value="2">Renewal</a-radio>
+              <a-radio-group buttonStyle="solid" v-model="form.application.app_type">
+                <a-radio-button :value="1">New</a-radio-button>
+                <a-radio-button :value="2">Renewal</a-radio-button>
               </a-radio-group>
             </a-form-item>
             <a-form-item
@@ -69,10 +69,10 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              <a-radio-group v-model="form.business.ownership">
-                <a-radio :value="1">Sole Proprietorship</a-radio>
-                <a-radio :value="2">Partnership</a-radio>
-                <a-radio :value="3">Corporation</a-radio>
+              <a-radio-group buttonStyle="solid" v-model="form.business.ownership">
+                <a-radio-button :value="1">Sole Proprietorship</a-radio-button>
+                <a-radio-button :value="2">Partnership</a-radio-button>
+                <a-radio-button :value="3">Corporation</a-radio-button>
               </a-radio-group>
             </a-form-item>
             <a-form-item label="TIN" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
@@ -185,9 +185,9 @@
               />Non-Professional
             </a-form-item>
             <a-form-item label="Rented/Owned" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
-              <a-radio-group v-model="form.business.business_type">
-                <a-radio :value="1">Rented</a-radio>
-                <a-radio :value="2">Owned</a-radio>
+              <a-radio-group buttonStyle="solid" v-model="form.business.business_type">
+                <a-radio-button :value="1">Rented</a-radio-button>
+                <a-radio-button :value="2">Owned</a-radio-button>
               </a-radio-group>
             </a-form-item>
             <a-form-item
@@ -310,11 +310,11 @@
               :label-col="{ span: 8 }"
               :wrapper-col="{ span: 16 }"
             >
-              <a-radio-group v-model="form.business.payment.mode">
-                <a-radio :value="1">Annual/Full</a-radio>
-                <a-radio :value="2">Quarterly</a-radio>
+              <a-radio-group buttonStyle="solid" v-model="form.business.payment.mode">
+                <a-radio-button :value="1">Annual/Full</a-radio-button>
+                <a-radio-button :value="2">Quarterly</a-radio-button>
               </a-radio-group>
-              <a-input-number
+              <a-input-number style="margin-left: 1vw;"
                 v-if="form.business.payment.mode == 2"
                 size="small"
                 :min="1"
