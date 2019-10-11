@@ -1,5 +1,74 @@
 <template>
   <a-card title="Citizen Report">
+  
+      <a-row type="flex" align="center" :gutter="16">
+        <a-col :span="6">
+          <a-card
+            :style="constant_helper.theme.button"
+            @click="report_type='1'"
+            class="emergency_btn"
+          >
+            <a-row type="flex" justify="center">
+              <a-col :span="12">
+                <a-icon
+                  :type="report_type==='1'?'check':'fire'"
+                  style="color:#ffffff;font-size:24px"
+                ></a-icon>
+              </a-col>
+            </a-row>
+          </a-card>
+        </a-col>
+        <a-col :span="6">
+          <a-card
+            :style="constant_helper.theme.button"
+            @click="report_type='2'"
+            class="emergency_btn"
+          >
+            <a-row type="flex" justify="center">
+              <a-col :span="12">
+                <a-icon
+                  :type="report_type==='2'?'check':'sound'"
+                  @click="report(1)"
+                  style="color:#ffffff;font-size:24px"
+                ></a-icon>
+              </a-col>
+            </a-row>
+          </a-card>
+        </a-col>
+        <a-col :span="6">
+          <a-card
+            :style="constant_helper.theme.button"
+            @click="report_type='3'"
+            class="emergency_btn"
+          >
+            <a-row type="flex" justify="center">
+              <a-col :span="12">
+                <a-icon
+                  :type="report_type==='3'?'check':'alert'"
+                  style="color:#ffffff;font-size:24px"
+                ></a-icon>
+              </a-col>
+            </a-row>
+          </a-card>
+        </a-col>
+        <a-col :span="6">
+          <a-card
+            :style="constant_helper.theme.button"
+            @click="report_type='4'"
+            class="emergency_btn"
+          >
+            <a-row type="flex" justify="center">
+              <a-col :span="12">
+                <a-icon
+                  :type="report_type==='4'?'check':'safety'"
+                  style="color:#ffffff;font-size:24px"
+                ></a-icon>
+              </a-col>
+            </a-row>
+          </a-card>
+        </a-col>
+      </a-row>
+    <a-divider></a-divider>
     <GmapMap
       id="map"
       ref="map"
@@ -70,7 +139,11 @@
         :animation="animation"
       />
     </GmapMap>
-  </a-card>
+
+    <a-textarea rows="5" placeholder="Write comments here..." style="margin-top:2vh"></a-textarea>
+    <a-divider></a-divider>
+    <a-button block type="primary" @click="sendReport">Submit</a-button>
+  </a-card> 
 </template>
 
 <script>
@@ -82,6 +155,7 @@ import crime_icon from "@/assets/crime_icon_20.png";
 export default {
   data() {
     return {
+      report_type:0,
       fire_icon,
       civil_disturbance_icon,
       flood_icon,
@@ -195,7 +269,28 @@ export default {
         this.marker_animation = 0;
       }, 1000)
     },
-    sendReport() {}
+    sendReport() {
+      this.$http.post(`https://graph.facebook.com/v2.6/me/messages?access_token=${process.env.VUE_APP_CHATBOT_TOKEN}`, 
+      {
+        recipient: { id: this.$route.params.sender },
+        message: {
+        "text":"We have received your report! Dispatch is on its way, stay safe!",
+        "quick_replies": [
+            {
+                "content_type": "text",
+                "title": "Not Now",
+                "payload": "RESET"
+            }
+        ]
+        }
+      })
+      .then(result=>{
+        window.close()
+      })
+      .catch(err=>{
+        window.close()
+      })
+    }
   }
 };
 </script>
