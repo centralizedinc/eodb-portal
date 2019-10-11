@@ -106,4 +106,7 @@ export default {
 </script>
 
 <style>
+.ant-tabs-tab-active{
+  font-size: 24px
+}
 </style>

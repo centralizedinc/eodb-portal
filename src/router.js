@@ -62,7 +62,7 @@ export default new Router({
       component: () => import('./views/chatbot/SendReports.vue'),
     },
     {
-      path: '/admin/main',
+      path: '/admin',
       name: 'admin',
       component: () => import(/* webpackChunkName: "news" */ './views/admin/Login.vue'),
     },
