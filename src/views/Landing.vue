@@ -61,13 +61,18 @@
               <div style="color:#ffffff">Enter Credentials</div>
             </template>
             <a-form>
-              <a-form-item>
-                <a-input size="large" placeholder="Email">
+              <a-form-item :validate-status="error_login ? 'error': ''" >
+                <a-input size="large" v-model="account.email" placeholder="Email">
                   <a-icon slot="prefix" type="mail" />
                 </a-input>
               </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
+              <a-form-item :validate-status="error_login ? 'error': ''">
+                <a-input
+                  size="large"
+                  v-model="account.password"
+                  placeholder="Password"
+                  :type="reveal?'text':'password'"
+                >
                   <a-icon slot="prefix" type="lock" />
                   <a-icon
                     slot="suffix"
@@ -77,7 +82,8 @@
                   />
                 </a-input>
               </a-form-item>
-              <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
+              <a-form-item :validate-status="error_login ? 'error': ''" :help="error_login ? 'Invalid Email or Password' : ''"></a-form-item>
+              <a-button size="large" block ghost @click="login">Login</a-button>
               <a-divider></a-divider>
               <p style="color:white">Login using facebook or google accounts</p>
               <a-row type="flex" :gutter="16">
@@ -204,7 +210,12 @@ export default {
   data() {
     return {
       loading: false,
-      reveal: false
+      reveal: false,
+      account: {
+        email: "",
+        password: ""
+      },
+      error_login: false
     };
   },
   created() {
@@ -218,7 +229,10 @@ export default {
         js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
         fjs.parentNode.insertBefore(js, fjs);
       })(document, "script", "facebook-jssdk");
-      console.log('this.constant_helper.chatbot :', this.constant_helper.chatbot);
+      console.log(
+        "this.constant_helper.chatbot :",
+        this.constant_helper.chatbot
+      );
       const appId = this.constant_helper.chatbot.appId;
       window.fbAsyncInit = function() {
         FB.init({
@@ -246,9 +260,20 @@ export default {
       );
       this.signup_visible = false;
     },
-    submit() {
+    login() {
       console.log("login");
-      this.$router.push("/app");
+      this.error_login = false;
+      if (this.account.email && this.account.password) {
+        this.$store.commit("LOGIN", {
+          fname: "Mark",
+          lname: "Bautista",
+          email: "mquijom@centralizedinc.com",
+          avatar: "https://mdbootstrap.com/img/Photos/Avatars/img%20%289%29.jpg"
+        });
+        this.$router.push("/app");
+      } else {
+        this.error_login = true;
+      }
     }
   }
 };

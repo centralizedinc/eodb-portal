@@ -73,10 +73,10 @@
           <a-col :span="14" style="margin-top:-15px">
             <p class="inset">
               Kind of Ownership:
-              <a-radio-group v-model="form.business.ownership" disabled="true">
-                <a-radio :value="1">Sole Proprietorship</a-radio>
-                <a-radio :value="2">Partnership</a-radio>
-                <a-radio :value="3">Corporation</a-radio>
+              <a-radio-group buttonStyle="solid" v-model="form.business.ownership" disabled="true">
+                <a-radio-button :value="1">Sole Proprietorship</a-radio-button >
+                <a-radio-button :value="2">Partnership</a-radio-button >
+                <a-radio-button :value="3">Corporation</a-radio-button >
               </a-radio-group>
             </p>
           </a-col>
@@ -137,9 +137,9 @@
         <a-row>
           <a-col :span="24" style="margin-top:-15px">
             <p class="inset">
-              <a-radio-group v-model="form.business.business_type" disabled="true">
-                <a-radio :value="1">Rented</a-radio>
-                <a-radio :value="2">Owned</a-radio>
+              <a-radio-group buttonStyle="solid" v-model="form.business.business_type" disabled="true">
+                <a-radio-button :value="1">Rented</a-radio-button >
+                <a-radio-button :value="2">Owned</a-radio-button >
               </a-radio-group>If place of business is RENTED, please identify the following
             </p>
           </a-col>
@@ -206,11 +206,11 @@
           <a-col :span="24" style="margin-top: -15px">
             <p class="inset">
               Mode of Payment:
-              <a-radio-group v-model="form.business.payment.mode" disabled="true">
-                <a-radio :value="1">Annual/Full</a-radio>
-                <a-radio :value="2">Quarterly</a-radio>
-              </a-radio-group>No. of Quarters
-              <u>{{form.business.payment.qrtly}}</u>
+              <a-radio-group buttonStyle="solid" v-model="form.business.payment.mode" disabled="true">
+                <a-radio-button :value="1">Annual/Full</a-radio-button >
+                <a-radio-button :value="2">Quarterly</a-radio-button >
+              </a-radio-group>
+              <span style="margin-left: 1vw;">No. of Quarters <u>{{form.business.payment.qrtly}}</u></span>
             </p>
           </a-col>
         </a-row>
