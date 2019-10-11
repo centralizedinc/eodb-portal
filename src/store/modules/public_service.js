@@ -42,7 +42,7 @@ function initialState() {
                     id: 1
                 }, {
                     date_created: new Date(),
-                    message: 'Maraming salamat po sa pagpapagawa nyo tricycle application para sa Abra. Malaking tulong po ito para sa mga driver at pasahero. Godbless po !',
+                    message: 'Maraming salamat po sa pagpapagawa nyo tricycle application. Malaking tulong po ito para sa mga driver at pasahero. Godbless po !',
                     likes: 532,
                     id: 2
                 }, {
