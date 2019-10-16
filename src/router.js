@@ -57,12 +57,12 @@ export default new Router({
       ]
     },
     {
-      path: '/chatbot/reports/:type',
+      path: '/chatbot/reports/:sender',
       name: 'Map Reports',
       component: () => import('./views/chatbot/SendReports.vue'),
     },
     {
-      path: '/admin/main',
+      path: '/admin',
       name: 'admin',
       component: () => import(/* webpackChunkName: "news" */ './views/admin/Login.vue'),
     },

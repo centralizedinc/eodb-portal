@@ -362,7 +362,7 @@ export default {
       visible: false,
       topLocation: 0,
       reveal: false,
-      coordinates: { lat: 13.9413957, lng: 121.6234471 },
+      coordinates: { lat: 15.667300, lng: 120.734993 },
       animation: {},
       report_type: ""
     };

@@ -72,7 +72,7 @@ export default {
             civil_disturbance_icon,
             flood_icon,
             crime_icon,
-            coordinates: { lat: 13.9413957, lng: 121.6234471 },
+            coordinates: { lat: 15.667300, lng: 120.734993 },
             cols:[{
                 title:'Category',
                 dataIndex:'report_type',

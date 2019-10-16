@@ -43,6 +43,7 @@
     "@vue/cli-service": "^3.11.0",
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
+    "string-replace-loader": "^2.2.0",
     "vue-cli-plugin-antv": "^1.1.1",
     "vue-template-compiler": "^2.6.10"
   }
