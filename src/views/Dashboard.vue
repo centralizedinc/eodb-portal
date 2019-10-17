@@ -275,8 +275,8 @@ export default {
       collapsed: false,
       user: {},
       visible: false,
-      center: { lat: 15.667300, lng: 120.734993 },
-      coordinates: { lat: 15.667300, lng: 120.734993 },
+      center: { lat: 13.960837, lng: 121.591532 },
+      coordinates: { lat: 13.960837, lng: 121.591532 },
       animation: {}
     };
   },
