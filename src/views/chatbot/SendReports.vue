@@ -285,10 +285,24 @@ export default {
         }
       })
       .then(result=>{
-        window.close()
+        MessengerExtensions.requestCloseBrowser(
+        function success() {
+          window.close();
+        },
+        function error(err) {
+          window.close();
+        }
+      );
       })
       .catch(err=>{
-        window.close()
+        MessengerExtensions.requestCloseBrowser(
+        function success() {
+          window.close();
+        },
+        function error(err) {
+          window.close();
+        }
+      );
       })
     }
   }
