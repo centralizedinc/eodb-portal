@@ -17,6 +17,7 @@ Object.keys(process.env).forEach(key => {
 app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(serveStatic(__dirname + "/dist"));
 app.use('/auth', require('./api/routes/auth'))
 

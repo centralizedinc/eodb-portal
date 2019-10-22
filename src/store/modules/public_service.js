@@ -32,57 +32,86 @@ function initialState() {
                 id: 4
             }
         ],
-        apps: [{
-            app: "Default",
-            messages: [
-                {
-                    date_created: new Date(),
-                    message: 'Keep up the good work and more power . God bless . Thank you very much !',
-                    likes: 421,
-                    id: 1
-                }, {
-                    date_created: new Date(),
-                    message: 'Maraming salamat po sa pagpapagawa nyo tricycle application. Malaking tulong po ito para sa mga driver at pasahero. Godbless po !',
-                    likes: 532,
-                    id: 2
-                }, {
-                    date_created: new Date(),
-                    message: 'Thank po for doing a great job. Godbless you ! ',
-                    likes: 831,
-                    id: 3
-                }, {
-                    date_created: new Date(),
-                    message: 'GO GO GO,in everything you do, I am for you. Will continue praying for your well being. 🙏🙏🙏',
-                    likes: 719,
-                    id: 4
-                }
-            ]
-        }, {
-            app: "Abra",
-            messages: [
-                {
-                    date_created: new Date(),
-                    message: 'Keep up the good work and more power . God bless . Thank you very much Governor Joy Bernos !',
-                    likes: 421,
-                    id: 1
-                }, {
-                    date_created: new Date(),
-                    message: 'Maraming salamat po Governor Joy Bernos sa pagpapagawa nyo tricycle application para sa Abra. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Governor Joy Bernos !',
-                    likes: 532,
-                    id: 2
-                }, {
-                    date_created: new Date(),
-                    message: 'Thank po Governor Joy Bernos for doing a great job in Abra. Godbless you ! ',
-                    likes: 831,
-                    id: 3
-                }, {
-                    date_created: new Date(),
-                    message: 'GO GOVERNOR JOY,in everything you do,I am for you.Will continue praying for your well being.🙏🙏🙏',
-                    likes: 719,
-                    id: 4
-                }
-            ]
-        }]
+        apps: [
+            {
+                app: "Default",
+                messages: [
+                    {
+                        date_created: new Date(),
+                        message: 'Keep up the good work and more power . God bless . Thank you very much !',
+                        likes: 421,
+                        id: 1
+                    }, {
+                        date_created: new Date(),
+                        message: 'Maraming salamat po sa pagpapagawa nyo tricycle application. Malaking tulong po ito para sa mga driver at pasahero. Godbless po !',
+                        likes: 532,
+                        id: 2
+                    }, {
+                        date_created: new Date(),
+                        message: 'Thank po for doing a great job. Godbless you ! ',
+                        likes: 831,
+                        id: 3
+                    }, {
+                        date_created: new Date(),
+                        message: 'GO GO GO,in everything you do, I am for you. Will continue praying for your well being. 🙏🙏🙏',
+                        likes: 719,
+                        id: 4
+                    }
+                ]
+            }, {
+                app: "Abra",
+                messages: [
+                    {
+                        date_created: new Date(),
+                        message: 'Keep up the good work and more power . God bless . Thank you very much Governor Joy Bernos !',
+                        likes: 421,
+                        id: 1
+                    }, {
+                        date_created: new Date(),
+                        message: 'Maraming salamat po Governor Joy Bernos sa pagpapagawa nyo tricycle application para sa Abra. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Governor Joy Bernos !',
+                        likes: 532,
+                        id: 2
+                    }, {
+                        date_created: new Date(),
+                        message: 'Thank po Governor Joy Bernos for doing a great job in Abra. Godbless you ! ',
+                        likes: 831,
+                        id: 3
+                    }, {
+                        date_created: new Date(),
+                        message: 'GO GOVERNOR JOY,in everything you do,I am for you.Will continue praying for your well being.🙏🙏🙏',
+                        likes: 719,
+                        id: 4
+                    }
+                ]
+            }, {
+                app: "Nueva Ecija",
+                messages: []
+            }, {
+                app: "San Antonio - Quezon",
+                messages: [
+                    {
+                        date_created: new Date(),
+                        message: 'Keep up the good work and more power . God bless . Thank you very much Mayor Erick Wagan !',
+                        likes: 421,
+                        id: 1
+                    }, {
+                        date_created: new Date(),
+                        message: 'Maraming salamat po Mayor sa pagpapagawa nyo tricycle application para sa San Antonio, Quezon. Malaking tulong po ito para sa mga driver at pasahero. Godbless po Mayor Erick Wagan  !',
+                        likes: 532,
+                        id: 2
+                    }, {
+                        date_created: new Date(),
+                        message: 'Thank po Mayor Erick Wagan for doing a great job in San Antonio, Quezon. Godbless you ! ',
+                        likes: 831,
+                        id: 3
+                    }, {
+                        date_created: new Date(),
+                        message: 'GO MAYOR ERICK WAGAN,in everything you do,I am for you.Will continue praying for your well being.🙏🙏🙏',
+                        likes: 719,
+                        id: 4
+                    }
+                ]
+            }]
     }
 }
 

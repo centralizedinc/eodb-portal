@@ -65,7 +65,29 @@ function initialState() {
                 ],
                 likes: 231
             }]
-        }]
+        },
+        {
+            app: "San Antonio - Quezon",
+            posts: [{
+                date: new Date(),
+                message: "INGAT PO TAYO AT MAGING ALERTO: NDRRMC (4:30PM, 13Sept2019). Isang MLv5.5 Magnitude na lindol ang naganap sa Burdeos, Quezon kaninang 4:28PM. Damages at aftershocks ay inaasahan. Maging handa at siguraduhin ligtas ang sarili at pamilya.",
+                likes: 414,
+                attachments: ["https://i.postimg.cc/8PGxP99m/Screen-Shot-2019-09-19-at-12-25-23-PM.png"]
+            },{
+                date: new Date(),
+                message: "Paalala sa lahat: Habang hinihihintay ng lokal na pamahalaan ang resulta ng pagsusuri ng BFAR kaugnay ng nangyaring fish kill, pinagbabawalan ang lahat na manghuli at kumain ng anumang uri ng isda mula sa Iyam river. Pinapayuhan din ang lahat na huwag munang maligo at magsagawa ng anumang gawain na makakaapekto sa kalusugan ng tao at lahat ng may buhay. Maraming salamat po!",
+                likes: 414,
+                attachments: [
+                    "https://cdn.pixabay.com/photo/2015/10/18/19/11/fish-995050_960_720.png",
+                    "https://image.flaticon.com/icons/svg/1661/1661940.svg"
+                ]
+            },{
+                date: new Date(),
+                message: 'INGAT PO TAYO AT MAGING ALERTO: NDRRMC (4:30PM, 13Sept2019). Isang MLv5.5 Magnitude na lindol ang naganap sa Burdeos, Quezon kaninang 4:28PM. Damages at aftershocks ay inaasahan. Maging handa at siguraduhin ligtas ang sarili at pamilya.',
+                likes: 414
+            }]
+        }
+    ]
     }
 }
 

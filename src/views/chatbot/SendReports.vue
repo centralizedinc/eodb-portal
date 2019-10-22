@@ -1,73 +1,69 @@
 <template>
   <a-card title="Citizen Report">
-  
-      <a-row type="flex" align="center" :gutter="16">
-        <a-col :span="6">
-          <a-card
-            :style="constant_helper.theme.button"
-            @click="report_type='1'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='1'?'check':'fire'"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-        <a-col :span="6">
-          <a-card
-            :style="constant_helper.theme.button"
-            @click="report_type='2'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='2'?'check':'sound'"
-                  @click="report(1)"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-        <a-col :span="6">
-          <a-card
-            :style="constant_helper.theme.button"
-            @click="report_type='3'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='3'?'check':'alert'"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-        <a-col :span="6">
-          <a-card
-            :style="constant_helper.theme.button"
-            @click="report_type='4'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='4'?'check':'safety'"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-      </a-row>
+    <a-row type="flex" align="center" :gutter="16">
+      <a-col :span="6">
+        <a-card
+          :style="constant_helper.theme.button"
+          @click="report_type='1'"
+          class="emergency_btn"
+        >
+          <a-row type="flex" justify="center">
+            <a-col :span="12">
+              <a-icon :type="report_type==='1'?'check':'fire'" style="color:#ffffff;font-size:24px"></a-icon>
+            </a-col>
+          </a-row>
+        </a-card>
+      </a-col>
+      <a-col :span="6">
+        <a-card
+          :style="constant_helper.theme.button"
+          @click="report_type='2'"
+          class="emergency_btn"
+        >
+          <a-row type="flex" justify="center">
+            <a-col :span="12">
+              <a-icon
+                :type="report_type==='2'?'check':'sound'"
+                @click="report(1)"
+                style="color:#ffffff;font-size:24px"
+              ></a-icon>
+            </a-col>
+          </a-row>
+        </a-card>
+      </a-col>
+      <a-col :span="6">
+        <a-card
+          :style="constant_helper.theme.button"
+          @click="report_type='3'"
+          class="emergency_btn"
+        >
+          <a-row type="flex" justify="center">
+            <a-col :span="12">
+              <a-icon
+                :type="report_type==='3'?'check':'alert'"
+                style="color:#ffffff;font-size:24px"
+              ></a-icon>
+            </a-col>
+          </a-row>
+        </a-card>
+      </a-col>
+      <a-col :span="6">
+        <a-card
+          :style="constant_helper.theme.button"
+          @click="report_type='4'"
+          class="emergency_btn"
+        >
+          <a-row type="flex" justify="center">
+            <a-col :span="12">
+              <a-icon
+                :type="report_type==='4'?'check':'safety'"
+                style="color:#ffffff;font-size:24px"
+              ></a-icon>
+            </a-col>
+          </a-row>
+        </a-card>
+      </a-col>
+    </a-row>
     <a-divider></a-divider>
     <GmapMap
       id="map"
@@ -143,10 +139,26 @@
     <a-textarea rows="5" placeholder="Write comments here..." style="margin-top:2vh"></a-textarea>
     <a-divider></a-divider>
     <a-button block type="primary" @click="sendReport">Submit</a-button>
-  </a-card> 
+  </a-card>
 </template>
 
 <script>
+(function(d, s, id) {
+  var js,
+    fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {
+    return;
+  }
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+  fjs.parentNode.insertBefore(js, fjs);
+})(document, "script", "Messenger");
+window.extAsyncInit = function() {
+  // the Messenger Extensions JS SDK is done loading
+  console.log("Done loading messenger extension");
+};
+
 import fire_icon from "@/assets/fire_icon_20.png";
 import civil_disturbance_icon from "@/assets/civil_disturbance_icon_20.png";
 import flood_icon from "@/assets/flood_icon_20.png";
@@ -155,13 +167,13 @@ import crime_icon from "@/assets/crime_icon_20.png";
 export default {
   data() {
     return {
-      report_type:0,
+      report_type: 0,
       fire_icon,
       civil_disturbance_icon,
       flood_icon,
       crime_icon,
-      center: { lat: 15.667300, lng: 120.734993 },
-      coordinates: { lat: 15.667300, lng: 120.734993 },
+      center: { lat: 13.960837, lng: 121.591532 },
+      coordinates: { lat: 13.960837, lng: 121.591532 },
       marker_animation: 0,
       animation: 0,
       fire_coordinates: [],
@@ -265,31 +277,49 @@ export default {
       this.marker_animation = google.maps.Animation.DROP;
     },
     resetAnimation(e) {
-      setTimeout(function (params) {
+      setTimeout(function(params) {
         this.marker_animation = 0;
-      }, 1000)
+      }, 1000);
     },
     sendReport() {
-      this.$http.post(`https://graph.facebook.com/v2.6/me/messages?access_token=${process.env.VUE_APP_CHATBOT_TOKEN}`, 
-      {
-        recipient: { id: this.$route.params.sender },
-        message: {
-        "text":"We have received your report! Dispatch is on its way, stay safe!",
-        "quick_replies": [
-            {
-                "content_type": "text",
-                "title": "Not Now",
-                "payload": "RESET"
+      this.$http
+        .post(
+          `https://graph.facebook.com/v2.6/me/messages?access_token=${process.env.VUE_APP_CHATBOT_TOKEN}`,
+          {
+            recipient: { id: this.$route.params.sender },
+            message: {
+              text:
+                "We have received your report! Dispatch is on its way, stay safe!",
+              quick_replies: [
+                {
+                  content_type: "text",
+                  title: "Not Now",
+                  payload: "RESET"
+                }
+              ]
             }
-        ]
-        }
-      })
-      .then(result=>{
-        window.close()
-      })
-      .catch(err=>{
-        window.close()
-      })
+          }
+        )
+        .then(result => {
+          MessengerExtensions.requestCloseBrowser(
+            function success() {
+              window.close();
+            },
+            function error(err) {
+              window.close();
+            }
+          );
+        })
+        .catch(err => {
+          MessengerExtensions.requestCloseBrowser(
+            function success() {
+              window.close();
+            },
+            function error(err) {
+              window.close();
+            }
+          );
+        });
     }
   }
 };
