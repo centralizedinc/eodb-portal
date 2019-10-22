@@ -20,7 +20,11 @@ var PermitModelSchema = new mongoose.Schema({
         },
         registration_no: {
             type: Number
-        }
+        },
+        date_created: {
+            type: Date,
+            default: new Date()
+        },
     },
     business: {
         ownership: {
@@ -169,9 +173,17 @@ var PermitModelSchema = new mongoose.Schema({
     progress: {
         status: {
             type: String
+            //  Approve
+            //  Expired
+            // Pending
+            // Reject
         },
         current_task: {
             type: String
+        },
+        date_modified: {
+            type: Date,
+            default: new Date()
         },
         previous_task: {
             type: String
