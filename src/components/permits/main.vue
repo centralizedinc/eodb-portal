@@ -1,6 +1,6 @@
 <template>
   <a-row type="flex" :gutter="24" justify="center">
-    <a-col :span="18">
+    <a-col :xs="22" :sm="22" :md="18" :lg="18" :xl="18">
       <a-card>
         <h3>Check the status of your application:</h3>
         <a-input-search
@@ -12,10 +12,10 @@
       </a-card>
     </a-col>
 
-    <a-col :span="18" style="margin-top:2vh">
+    <a-col :xs="22" :sm="22" :md="18" :lg="18" :xl="18" style="margin-top:2vh">
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
-          <a-col :span="4">
+          <a-col :xs="6" :sm="6" :md="6" :lg="4" :xl="4">
             <a-avatar
               shape="square"
               :size="80"
@@ -25,7 +25,7 @@
               <a-icon type="shop" style="font-size:36px"></a-icon>
             </a-avatar>
           </a-col>
-          <a-col :span="18">
+          <a-col :xs="24" :sm="24" :md="16" :lg="18" :xl="18" style="margin-top:2vh">
             <h3>Apply for Mayor's Permit (Business Permit)</h3>
             <a-divider style="margin-top:-1vh"></a-divider>
             <p>Business licenses are permits issued by government agencies that allow individuals or companies to conduct business within the government's geographical jurisdiction.</p>
@@ -34,10 +34,10 @@
       </a-card>
     </a-col>
 
-    <a-col :span="18" style="margin-top:2vh">
+    <a-col :xs="22" :sm="22" :md="18" :lg="18" :xl="18" style="margin-top:2vh">
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
-          <a-col :span="4">
+          <a-col :xs="6" :sm="6" :md="6" :lg="4" :xl="4">
             <a-avatar
               shape="square"
               :size="80"
@@ -47,7 +47,7 @@
               <a-icon type="snippets" style="font-size:36px"></a-icon>
             </a-avatar>
           </a-col>
-          <a-col :span="18">
+          <a-col :xs="24" :sm="24" :md="16" :lg="18" :xl="18" style="margin-top:2vh">
             <h3>Apply for Occupancy Permit</h3>
             <a-divider style="margin-top:-1vh"></a-divider>
             <p>An Occupancy Permit is a document issued by Department of Building Official that serves as a proof that the structure built completed all the building work and suitable for occupation.</p>
@@ -56,10 +56,10 @@
       </a-card>
     </a-col>
 
-    <a-col :span="18" style="margin-top:2vh">
+    <a-col :xs="22" :sm="22" :md="18" :lg="18" :xl="18" style="margin-top:2vh">
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
-          <a-col :span="4">
+          <a-col :xs="6" :sm="6" :md="6" :lg="4" :xl="4">
             <a-avatar
               shape="square"
               :size="80"
@@ -69,7 +69,7 @@
               <a-icon type="tool" style="font-size:36px"></a-icon>
             </a-avatar>
           </a-col>
-          <a-col :span="18">
+          <a-col :xs="24" :sm="24" :md="16" :lg="18" :xl="18" style="margin-top:2vh">
             <h3>Apply for Building Permit</h3>
             <a-divider style="margin-top:-1vh"></a-divider>
             <p>A Building Permit is a document issued by the Building Official to an. owner/applicant to proceed with the construction, installation, addition, alteration, renovation, conversion, repair, moving, demolition or other work.</p>
@@ -78,10 +78,10 @@
       </a-card>
     </a-col>
 
-    <a-col :span="18" style="margin-top:2vh">
+    <a-col :xs="22" :sm="22" :md="18" :lg="18" :xl="18" style="margin-top:2vh">
       <a-card data-aos="fade-up">
         <a-row type="flex" align="middle" justify="center">
-          <a-col :span="4">
+          <a-col :xs="6" :sm="6" :md="6" :lg="4" :xl="4">
             <a-avatar
               shape="square"
               :size="80"
@@ -91,7 +91,7 @@
               <a-icon type="exception" style="font-size:36px"></a-icon>
             </a-avatar>
           </a-col>
-          <a-col :span="18">
+          <a-col :xs="24" :sm="24" :md="16" :lg="18" :xl="18" style="margin-top:2vh">
             <h3>Apply for Sanitary Permit</h3>
             <a-divider style="margin-top:-1vh"></a-divider>
             <p>Food and Non-food business establishments are required to secure sanitary permit to make sure they observe the standard of the Sanitary Code of the Philippines</p>
