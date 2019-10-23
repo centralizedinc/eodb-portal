@@ -5,8 +5,8 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 passport.use(new FacebookStrategy({
-    clientID: process.env.VUE_APP_FACEBOOK_CLIENT_ID,
-    clientSecret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRET,
+    clientID: process.env.VUE_APP_FACEBOOK_CLIENT_ID || '698051237370260',
+    clientSecret: process.env.VUE_APP_FACEBOOK_CLIENT_SECRET || 'e19575d956bdf952cd04351e8c7c3bce',
     callbackURL: `${process.env.VUE_APP_BASE_API_URI}/auth/facebook/callback`,
     enableProof: true,
     profileFields: ['id', 'displayName', 'photos', 'email', 'gender', 'first_name', 'last_name', 'middle_name']
