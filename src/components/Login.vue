@@ -93,7 +93,7 @@ export default {
           fname: "Juan",
           lname: "Dela Cruz",
           email: "juan@yahoo.com",
-          avatar: "https://thepodcaste.files.wordpress.com/2016/03/juan_dela_cruz_by_rosel_d-d8dfr4w.png"
+          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqFfakUP8kC6iKzxMLSQd-HaOJiC47T_gPz_S_UspSIX5BVYX5KQ&s"
         });
         this.$router.push("/app");
       } else {
