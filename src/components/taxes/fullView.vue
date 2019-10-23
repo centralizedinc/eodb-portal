@@ -1,6 +1,6 @@
 <template>
   <a-row type="flex" :gutter="8">
-    <h3 style="font-weight: 700">Pay Local Taxes</h3>
+    <h3 style="font-weight: 700; color:#FFFFFF">Pay Local Taxes</h3>
     <a-divider style="margin-top:-1vh"></a-divider>
 
     <a-col :xl="6" :lg="6" :md="12" :sm="12" :xs="24">
@@ -87,7 +87,7 @@
       </a-card>
     </a-col>
 
-    <h3 style="margin-top:2vh ; font-weight: 700">Payment History</h3>
+    <h3 style="margin-top:2vh ; font-weight: 700; color:#FFFFFF">Payment History</h3>
     <a-divider style="margin-top:-1vh"></a-divider>
     <a-col :span="24">
       <transactions></transactions>
