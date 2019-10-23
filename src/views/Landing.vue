@@ -29,12 +29,13 @@
        <!-- mobile version -->
       <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
         <a-row  type="flex" justify="center" align="center" style="100vh">
-          <a-col data-aos="fade-up" :xs="22" :sm="22" style="margin-top:15vh">
-            <title-component/>
-          </a-col>
-          <a-col :xs="22" :sm="18" style="margin-top:5vh; margin-bottom: 20vh">
+          <a-col :xs="22" :sm="18" style="margin-top:20vh">
             <login/>
           </a-col>
+          <a-col :xs="22" :sm="22" style="margin-top:5vh">
+            <title-component/>
+          </a-col>
+          
         </a-row>   
       </div>   
     

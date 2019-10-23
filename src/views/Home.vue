@@ -57,7 +57,9 @@
         <a-col :span="1">
           <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
         </a-col> 
+        <a-divider style="margin-top: -1vh" v-show="topLocation<50"></a-divider>
       </a-row>
+      
       <a-drawer
         placement="left"
         :visible="visible_menu"
