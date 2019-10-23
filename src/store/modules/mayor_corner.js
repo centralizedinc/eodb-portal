@@ -1,7 +1,7 @@
 
 function initialState() {
     return {
-        apps: [{
+        apps: [{ // index 0 
             app: "Default",
             posts: [{
                 date: new Date("10/08/2019"),

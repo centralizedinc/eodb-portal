@@ -12,7 +12,7 @@
           <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
         </a-col>
         <a-col :span="10">
-          <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
+          <h3 style="color:#ffffff;margin-left:10px;">{{constant_helper.home_header.label}}</h3>
         </a-col>
         <a-col :span="10">
           <a-input-search placeholder="Search" @search="onSearch" />

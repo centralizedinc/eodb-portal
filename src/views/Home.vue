@@ -15,26 +15,26 @@
             :size="50"
           ></a-avatar>
         </a-col>
-        <a-col :span="4">
+        <a-col :xs="0" :sm="0" :md="0" :lg="12">
           <h2
             style="color:white; margin-left: -4vh; cursor:pointer"
             @click="$router.push('/')"
           >{{constant_helper.home_header.label}}</h2>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="$router.push('/news')">News</a-button>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="report()">Emergency</a-button>
         </a-col>
 
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="$router.push('/taxes')">Local Taxes</a-button>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="$router.push('/permits')">Permits</a-button>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block @click="signup_visible=true">SIGN-UP</a-button>
         </a-col>
         <!-- <a-col :md="2" :lg="0" :push="22">
