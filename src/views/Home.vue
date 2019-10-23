@@ -16,10 +16,10 @@
           ></a-avatar>
         </a-col>
         <a-col :span="4">
-          <h3
-            style="color:white; margin-left: -3vh; cursor:pointer"
+          <h2
+            style="color:white; margin-left: -4vh; cursor:pointer"
             @click="$router.push('/')"
-          >{{constant_helper.home_header.label}}</h3>
+          >{{constant_helper.home_header.label}}</h2>
         </a-col>
         <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
           <a-button ghost block type="link" @click="$router.push('/news')">News</a-button>
@@ -40,6 +40,7 @@
         <!-- <a-col :md="2" :lg="0" :push="22">
           <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
         </a-col> -->
+        <a-divider style="margin-top: -1vh" v-show="topLocation<50"></a-divider>
       </a-row>
       <a-row v-else type="flex" justify="start">
         <a-col :xs="6" :sm="3" :md="2">
