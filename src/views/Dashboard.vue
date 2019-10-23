@@ -6,7 +6,8 @@
       </a-avatar>
     </a-back-top>
     <a-layout-header class="header" :style="constant_helper.theme.default">
-      <a-row justify="start" :gutter="24">
+      <!-- desktop site -->
+      <a-row justify="start" :gutter="24" v-if="$breakpoint.lgAndUp">
         <a-col :span="1">
           <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
         </a-col>
@@ -26,13 +27,68 @@
           <a-icon type="logout" style="color:#ffffff; cursor:pointer" @click="logout"></a-icon>
         </a-col>
       </a-row>
+      <!-- mobile site -->
+      <a-row v-else type="flex" justify="start">
+        <a-col :xs="3" :sm="2" :md="2">
+          <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>          
+        </a-col>
+        <a-col :xs="20" :sm="21" :md="21">
+            <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
+          </a-col>
+        <a-col :span="1">
+          <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
+        </a-col> 
+      </a-row>
+      <a-drawer
+        placement="left"
+        :visible="visible_menu"
+        @close="visible_menu=false"
+        :closable="false"
+      >
+      <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
+        <a-col :xs="6" :sm="6" :md="6">
+          <a-avatar :src="user.avatar" :size="54" shape="square" style="border: 2px solid #ffffff" ></a-avatar>
+        </a-col>
+        <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
+          <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
+        </a-col>
+       
+      </a-row>
+       <a-divider></a-divider>
+        <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+        <a-menu-item key="/app">
+            <a-icon type="layout" />
+            <span>Home</span>
+          </a-menu-item>
+          <a-menu-item key="report">
+            <a-icon type="alert" />
+            <span>Emergency</span>
+          </a-menu-item>
+          <a-menu-item key="/app/permits">
+            <a-icon type="file-exclamation" />
+            <span>My Permits</span>
+          </a-menu-item>
+          <a-menu-item key="/app/taxes">
+            <a-icon type="file-protect" />
+            <span>My Taxes</span>
+          </a-menu-item>
+          <a-menu-item key="/app/accounts">
+            <a-icon type="user-add" />
+            <span>My Account</span>
+          </a-menu-item>
+          <a-menu-item key="logout">
+            <a-icon type="logout" />
+            <span>Logout</span>
+          </a-menu-item>
+        </a-menu>
+      </a-drawer>
     </a-layout-header>
     <a-layout-content
       class="content"
       :style="`${constant_helper.theme.background} margin-top:10vh`"
     >
-      <a-row type="flex" justify="center">
-        <a-col :span="4" style="margin-right:1vw">
+      <a-row type="flex" justify="center" >
+        <a-col :span="4" style="margin-right:1vw" v-if="$breakpoint.lgAndUp">
           <a-card :style="`margin-top:10vh; margin-bottom:2vh; ${constant_helper.theme.default}`">
             <a-row type="flex" justify="center">
               <a-col :span="8">
@@ -81,10 +137,10 @@
             </a-menu>
           </a-affix>
         </a-col>
-        <a-col :span="14" style="margin-right:1vw; margin-left:1vw">
+        <a-col  :xs="22" :sm="22" :md="22" :lg="14" :xl="14" style="margin-right:1vw; margin-left:1vw">
           <router-view></router-view>
         </a-col>
-        <a-col :span="4" style="margin-left:1vw">
+        <a-col :span="4" style="margin-left:1vw" v-if="$breakpoint.lgAndUp">
           <a-affix :offsetTop="40">
             <a-card
               :bodyStyle="{'background-color':'#e6e6e6'}"
@@ -165,6 +221,7 @@
             </a-card>
           </a-affix>
         </a-col>
+        <report-modal ref="report_modal" v-else :visible_report="visible_report" @close="visible_report=false"/>
       </a-row>
     </a-layout-content>
     <a-layout-footer
@@ -263,9 +320,16 @@ import civil_disturbance_icon from "@/assets/civil_disturbance_icon_20.png";
 import flood_icon from "@/assets/flood_icon_20.png";
 import crime_icon from "@/assets/crime_icon_20.png";
 
+import ReportModal from '@/components/ReportModal'
+
 export default {
+  components:{
+    ReportModal
+  },
   data() {
     return {
+      visible_report:false,
+      visible_menu:false,
       fire_icon,
       civil_disturbance_icon,
       flood_icon,
@@ -324,7 +388,10 @@ export default {
     nav(e) {
       if (e.key === "logout") {
         this.logout();
-      } else {
+      } else if(e.key === "report") {
+        this.$refs.report_modal.report()
+        this.visible_report =true
+      }else {
         this.$router.push(e.key);
       }
     },
@@ -395,6 +462,11 @@ export default {
       });
     },
     onSearch() {}
+  },
+  computed:{
+    menuStyle(){
+      return this.constant_helper.theme.default;
+    }
   }
 };
 </script>

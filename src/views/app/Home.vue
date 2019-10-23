@@ -66,7 +66,7 @@ export default {
     changeView(key) {
       console.log("key:::", key);
       this.currentView = this.tabView[key];
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
     }
   }
 };

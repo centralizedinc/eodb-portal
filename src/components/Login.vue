@@ -90,10 +90,10 @@ export default {
       this.error_login = false;
       if (this.account.email && this.account.password) {
         this.$store.commit("LOGIN", {
-          fname: "Mark",
-          lname: "Bautista",
-          email: "mquijom@centralizedinc.com",
-          avatar: "https://mdbootstrap.com/img/Photos/Avatars/img%20%289%29.jpg"
+          fname: "Juan",
+          lname: "Dela Cruz",
+          email: "juan@yahoo.com",
+          avatar: "https://thepodcaste.files.wordpress.com/2016/03/juan_dela_cruz_by_rosel_d-d8dfr4w.png"
         });
         this.$router.push("/app");
       } else {

@@ -1,17 +1,17 @@
 <template>
   <a-card style="box-shadow: 0px 0px 10px 2px #88888847">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
-      <a-col :span="22">
+      <a-col  :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
         <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
-      <a-col :span="2">
-        <a-button type="primary">
+      <a-col :xs="6" :sm="4" :md="2" :lg="2" :xl="2" :xxl="2">
+        <a-button :style="constant_helper.theme.button" block>
           <a-icon type="plus"></a-icon>
         </a-button>
       </a-col>
     </a-row>
     <a-divider></a-divider>
-    <a-table :columns="cols" :dataSource="transac" :loading="loading">
+    <a-table :columns="cols" :dataSource="transac" :loading="loading" v-if="$breakpoint.mdAndUp">
       <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
         <a slot="action" href="javascript:;" @click="view_data">View</a>
@@ -26,6 +26,17 @@
         </div>
       </template>
     </a-table>
+    <div v-else >
+    <a-card v-for="item in transac" :key="item" style="margin-top: 1vh">
+      <a-card-meta :title="item.application.permit_type" :description="item.progress.current_task">
+    </a-card-meta>
+      <template slot="actions">
+        <div>
+          <a @click="() => view_data(item)">View</a>
+        </div>
+      </template>
+    </a-card>
+    </div>
     <a-drawer width="75%" placement="right" :closable="false" @close="onClose" :visible="draw_show">
       <a-menu v-model="current" mode="horizontal">
         <a-menu-item key="permit">Permit</a-menu-item>
@@ -458,7 +469,6 @@ export default {
     };
   },
   created() {
-    console.log();
     // this.loading = true;
     // axios.get("permit/apply").then(results => {
     //   this.loading = false;

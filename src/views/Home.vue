@@ -42,7 +42,7 @@
         </a-col> -->
       </a-row>
       <a-row v-else type="flex" justify="start">
-        <a-col :xs="6" :sm="6" :md="2">
+        <a-col :xs="6" :sm="3" :md="2">
           <a-avatar
             style="cursor:pointer"
             @click="$router.push('/')"
@@ -50,7 +50,7 @@
             :size="50"
           ></a-avatar>
         </a-col>
-        <a-col :xs="17" :sm="17" :md="21" style="text-align:left">
+        <a-col :xs="17" :sm="20" :md="21" style="text-align:left">
           <h3 style="color:white; cursor:pointer" @click="$router.push('/')">{{constant_helper.home_header.label}}</h3>
         </a-col>
         <a-col :span="1">
@@ -80,7 +80,7 @@
        <a-divider></a-divider>
         <a-menu :defaultSelectedKeys="['/']" mode="inline">
         <a-menu-item key="/" @click="$router.push('/')">
-            <a-icon type="home" />
+            <a-icon type="dashboard" />
             <span>Home</span>
           </a-menu-item>
           <a-menu-item key="/app/news" @click="$router.push('/news')">

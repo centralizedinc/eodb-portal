@@ -145,7 +145,6 @@ export default {
     }
   },
   created() {
-    alert(this.$breakpoint.is +' ::: '+this.$breakpoint.mdAndUp)
     if (this.constant_helper.chatbot && this.constant_helper.chatbot.appId) {
       (function(d, s, id) {
         var js,
