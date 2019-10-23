@@ -9,10 +9,10 @@
       :logged_in_greeting="constant_helper.chatbot.greetings"
       :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
-    <div :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
+    <div  v-if="$breakpoint.lgAndUp" :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
       
       <!-- desktop version -->
-      <a-row v-if="$breakpoint.lgAndUp" style="height:100vh" type="flex" justify="end" align="center" :gutter="16">        
+      <a-row style="height:100vh" type="flex" justify="end" align="center" :gutter="16">        
         <a-col
           :lg="8"
           :xl="8"
@@ -25,16 +25,19 @@
           <login />
         </a-col>
       </a-row>
+      </div>
        <!-- mobile version -->
-      <a-row v-else type="flex" justify="center" align="center" style="100vh">
-        <a-col data-aos="fade-up" :xs="22" :sm="22" style="margin-top:15vh">
-          <title-component/>
-        </a-col>
-        <a-col :xs="22" :sm="22" style="margin-top:2vh; margin-bottom: 20vh">
-          <login/>
-        </a-col>
-      </a-row>      
-    </div>
+      <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
+        <a-row  type="flex" justify="center" align="center" style="100vh">
+          <a-col data-aos="fade-up" :xs="22" :sm="22" style="margin-top:15vh">
+            <title-component/>
+          </a-col>
+          <a-col :xs="22" :sm="18" style="margin-top:5vh; margin-bottom: 20vh">
+            <login/>
+          </a-col>
+        </a-row>   
+      </div>   
+    
    
     <a-row
       :gutter="16"

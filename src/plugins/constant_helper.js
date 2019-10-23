@@ -32,5 +32,6 @@ export default {
     },
     app_index: process.env.VUE_APP_APP_INDEX || 0,
     name_display: process.env.VUE_APP_APP_NAME || 'Application Name',
-    login_background: process.env.VUE_APP_LOGIN_BACKGROUND
+    login_background: process.env.VUE_APP_LOGIN_BACKGROUND,
+    login_background_mobile: process.env.VUE_APP_LOGIN_BACKGROUND_MOBILE || process.env.VUE_APP_LOGIN_BACKGROUND
 }
