@@ -45,14 +45,23 @@
             <a-avatar :src="constant_helper.client_details.avatar" slot="avatar" />
             <span slot="content">
               <p>{{item.message}}</p>
-              <a-row type="flex" justify="start">
+              <a-row type="flex" justify="center" :gutter="16">
                 <a-col
                   :span="8"
                   v-for="(image, index) in item.attachments"
                   :key="index"
-                  style="margin-bottom: 3px;"
+                  style="border: 1px solid #00000010; margin-right:1vw; margin-left: 1vw"
                 >
-                  <img :src="image" width="200vw" />
+                  <img :src="image" width="100%" margin/>
+                </a-col>
+                 <a-col
+                  :span="18"
+                  v-for="(link, index) in item.videos"
+                  :key="index"
+                >
+                  <!-- <video width="100%"> -->
+                    <iframe width="100%" height="315" :src="link" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <!-- </video> -->
                 </a-col>
               </a-row>
             </span>

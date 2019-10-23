@@ -86,6 +86,38 @@ function initialState() {
                 message: 'INGAT PO TAYO AT MAGING ALERTO: NDRRMC (4:30PM, 13Sept2019). Isang MLv5.5 Magnitude na lindol ang naganap sa Burdeos, Quezon kaninang 4:28PM. Damages at aftershocks ay inaasahan. Maging handa at siguraduhin ligtas ang sarili at pamilya.',
                 likes: 414
             }]
+        },
+        {
+            app: "Nueva Ecija",
+            posts: [
+                {
+                    date: new Date(),
+                    message: "Mga programa ni Governor Umali, suportado ng mga kaparian ng Nueva Ecija. Hiniling ni Governor Aurelio Umali ang suporta ng mga kaparian ng Diyosesis ng Longsod ng San Jose sa dayalogo nila kahapon, October 14, 2019 na ginanap sa St. Joseph the Worker Cathedral sa naturang lungsod.",
+                    likes: 111,                   
+                    videos:["https://www.youtube.com/embed/t88CPuuiMQA"]
+                },
+                
+                {
+                    date: new Date(),
+                    message: "Malaking tulong umano para sa mga benepisyaryong magsasaka ang pagbili ng Provincial Food Council sa kanilang mga aning palay sa mas mataas na halaga kumpara sa umiiral na presyo ng palay sa bukid.",
+                    likes: 191,                   
+                    videos:["https://www.youtube.com/embed/6ivEgN7pj1s"]
+                }, 
+            {
+                date: new Date(),
+                message: "#WalangPasok: Palace suspends classes in ALL LEVELS (public and private) and government work including agencies under executive branch and state-run firms for tomorrow, October 17, 2017, NATIONWIDE due to the transport strike and to safeguard public welfare. http://bit.ly/2yNxHyP | via Christina Mendez",
+                likes: 50,
+                attachments: ["https://scontent.fmnl8-1.fna.fbcdn.net/v/t1.0-9/72630464_707543556390255_8251147163669626880_n.jpg?_nc_cat=103&_nc_oc=AQk4z-otQ3mqIZ1d9tTgRTqoPKFHZrvASa04GeX6SruIp0dnWZYEDN8dEIJzUJ3YYeQ&_nc_ht=scontent.fmnl8-1.fna&oh=bd3947c309b1aafd7ab2abe52df7049f&oe=5E5B59FC"]
+            },
+            {
+                date: new Date(),
+                message: "Ayon sa DILG Memorandum Circular 2007-01 ay BAWAL na talaga dapat noon pa sa Highway ang mga TRICYCLE 👍🏻",
+                likes: 414,
+                attachments: [
+                    "https://scontent.fmnl4-5.fna.fbcdn.net/v/t1.0-9/67892905_660197267791551_6773778551008133120_n.jpg?_nc_cat=111&_nc_oc=AQm0t6AJVqj2-SHWVHcXbGJEBWl2Jm21NvGtnw-Nn-2wVN-W2Uul-R6k543Ido7903g&_nc_ht=scontent.fmnl4-5.fna&oh=026bd97828ffaa30afc640e5432f616a&oe=5E177B0E",
+                    "https://scontent.fmnl4-3.fna.fbcdn.net/v/t1.0-9/67509033_660197271124884_422502955179048960_n.jpg?_nc_cat=110&_nc_oc=AQmKfkdour66NxvKUwNBthhex2Ppnm4qMT30Az3N_hGPQvxZA-DamfB2TLM1J4eL3IM&_nc_ht=scontent.fmnl4-3.fna&oh=82e9abb1bc6925507fd5cd3d7093a132&oe=5E19AD06"
+                ]
+            }]
         }
     ]
     }

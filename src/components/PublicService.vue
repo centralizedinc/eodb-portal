@@ -97,6 +97,16 @@
             <a-avatar :src="getUser(sub.id).avatar" alt="Han Solo" slot="avatar" />
             <p slot="content">
               {{sub.message}}
+               <a-row type="flex" justify="center" :gutter="16">
+                <a-col
+                  :span="10"
+                  v-for="(image, index) in sub.attachments"
+                  :key="index"
+                  style="border: 1px solid #00000010; margin-left: 1vw; margin-bottom: 1vh"
+                >
+                  <img :src="image" width="100%" margin/>
+                </a-col>
+               </a-row>
               <!-- <p v-if="sub.message">{{sub.message}}</p>
               <p v-else>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
