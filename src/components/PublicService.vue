@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="16" data-aos="fade-left">
+  <a-row type="flex" :gutter="16">
     <!-- <a-col :span="12">
         <a-card title="Create Post">
             <a-row type="flex" :gutter="8">

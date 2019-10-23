@@ -18,7 +18,7 @@
           :xl="8"
           style="margin-top:40vh"
         >
-        <title-component/>
+        <title-component data-aos="fade-up"/>
         </a-col>
         <a-col :lg="8"
           :xl="8" style="margin-top:20vh; margin-right:5vh">
@@ -42,26 +42,48 @@
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
-      <a-col :md="24" :lg="8" data-aos="fade-up" data-aos-duration="30000">
+      <a-col :md="24" :lg="8" >
         <a-card title=" Report Emergency/Calamity">
           To protect our community, emergency management has to keep our response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, we can optimize response times and help protect first responders in the field.
           <a-divider></a-divider>
           <a-button type="primary">Report</a-button>
         </a-card>
       </a-col>
-      <a-col :md="24" :lg="8" data-aos="fade-up" data-aos-duration="30000">
+      <a-col :md="24" :lg="8">
         <a-card title="News/Announcements">
           <p>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</p>
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/news')">Read More</a-button>
         </a-card>
       </a-col>
-      <a-col :md="24" :lg="8" data-aos="fade-up" data-aos-duration="30000">
+      <a-col :md="24" :lg="8">
         <a-card title="Permits and Certificates">
           In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/permits')">Apply Now</a-button>
         </a-card>
+      </a-col>
+    </a-row>
+    
+    <a-row
+      :gutter="16"
+      type="flex"
+      align="middle"
+      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
+    >
+      <a-col :span="24" data-aos="fade-up">
+        <h1>Permits and Certificates</h1>
+        <a-divider></a-divider>
+      </a-col>
+      <a-col :span="8" data-aos="fade-up">
+        <img
+          width="100%"
+          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
+          alt
+        />
+      </a-col>
+      <a-col :span="14" data-aos="fade-up">
+        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
       </a-col>
     </a-row>
     <a-row
@@ -83,27 +105,6 @@
           width="100%"
           alt
         />
-      </a-col>
-    </a-row>
-    <a-row
-      :gutter="16"
-      type="flex"
-      align="middle"
-      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
-    >
-      <a-col :span="24" data-aos="fade-up">
-        <h1>Permits and Certificates</h1>
-        <a-divider></a-divider>
-      </a-col>
-      <a-col :span="8" data-aos="fade-up">
-        <img
-          width="100%"
-          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
-          alt
-        />
-      </a-col>
-      <a-col :span="14" data-aos="fade-up">
-        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
       </a-col>
     </a-row>
     <a-row
