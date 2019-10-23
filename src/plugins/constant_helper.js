@@ -26,9 +26,9 @@ export default {
     },
     theme: {
         default: process.env.VUE_APP_GRADIENT_FROM && process.env.VUE_APP_GRADIENT_TO ?
-            `background: linear-gradient(to right, ${process.env.VUE_APP_GRADIENT_FROM}, ${process.env.VUE_APP_GRADIENT_TO});` : '',
+            `background: linear-gradient(to right, ${process.env.VUE_APP_GRADIENT_FROM}, ${process.env.VUE_APP_GRADIENT_TO});` : '',        
         background: process.env.VUE_APP_BACKGROUND,
-        button: process.env.VUE_APP_BUTTON_COLOR ? `background: ${process.env.VUE_APP_BUTTON_COLOR};` : ''
+        button: process.env.VUE_APP_BUTTON_COLOR ? `background: ${process.env.VUE_APP_BUTTON_COLOR}; color:#FFFFFF` : ''
     },
     app_index: process.env.VUE_APP_APP_INDEX || 0,
     name_display: process.env.VUE_APP_APP_NAME || 'Application Name',

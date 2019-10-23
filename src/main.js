@@ -7,6 +7,8 @@ import './plugins/ant-design-vue.js'
 import aos from 'aos'
 import 'aos/dist/aos.css';
 
+import breakpoint from './plugins/breakpoints'
+
 import axios from 'axios';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import VueGeolocation from 'vue-browser-geolocation';
@@ -16,6 +18,10 @@ Vue.config.productionTip = false
 Vue.use(mixins);
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URI
 Vue.prototype.$http = axios
+
+Vue.prototype.$breakpoint = breakpoint
+
+
 
 console.log(' process.env.VUE_APP_GOOGLE_MAP_KEY ::: ', process.env.VUE_APP_GOOGLE_MAP_KEY)
 console.log(' process.env.VUE_APP_BASE_API_URI ::: ', process.env.VUE_APP_BASE_API_URI)

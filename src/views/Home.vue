@@ -6,8 +6,8 @@
       </a-avatar>
     </a-back-top>
     <a-layout-header class="header" :style="headerStyle">
-      <a-row type="flex" justify="start" :gutter="8">
-        <a-col :md="2">
+      <a-row type="flex" justify="start" :gutter="8" v-if="$breakpoint.lgAndUp">
+        <a-col :span="2">
           <a-avatar
             style="cursor:pointer"
             @click="$router.push('/')"
@@ -15,31 +15,48 @@
             :size="50"
           ></a-avatar>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="14">
-          <h3
-            style="color:white; margin-left: -6vh; cursor:pointer"
+        <a-col :xs="0" :sm="0" :md="0" :lg="12">
+          <h2
+            style="color:white; margin-left: -4vh; cursor:pointer"
             @click="$router.push('/')"
-          >{{constant_helper.home_header.label}}</h3>
+          >{{constant_helper.home_header.label}}</h2>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="$router.push('/news')">News</a-button>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="report()">Emergency</a-button>
         </a-col>
 
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="$router.push('/taxes')">Local Taxes</a-button>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block type="link" @click="$router.push('/permits')">Permits</a-button>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2" :push="8">
+        <a-col :xs="0" :sm="0" :md="0" :lg="2">
           <a-button ghost block @click="signup_visible=true">SIGN-UP</a-button>
         </a-col>
-        <a-col :md="2" :lg="0" :push="22">
+        <!-- <a-col :md="2" :lg="0" :push="22">
           <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
+        </a-col> -->
+        <a-divider style="margin-top: -1vh" v-show="topLocation<50"></a-divider>
+      </a-row>
+      <a-row v-else type="flex" justify="start">
+        <a-col :xs="6" :sm="3" :md="2">
+          <a-avatar
+            style="cursor:pointer"
+            @click="$router.push('/')"
+            :src="constant_helper.home_header.logo"
+            :size="50"
+          ></a-avatar>
         </a-col>
+        <a-col :xs="17" :sm="20" :md="21" style="text-align:left">
+          <h3 style="color:white; cursor:pointer" @click="$router.push('/')">{{constant_helper.home_header.label}}</h3>
+        </a-col>
+        <a-col :span="1">
+          <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
+        </a-col> 
       </a-row>
       <a-drawer
         placement="left"
@@ -47,8 +64,27 @@
         @close="visible_menu=false"
         :closable="false"
       >
-        <a-menu :defaultSelectedKeys="['/app']" mode="inline">
-          <a-menu-item key="/app" @click="$router.push('/news')">
+      <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
+        <a-col :xs="6" :sm="6" :md="6">
+          <a-avatar
+            style="cursor:pointer"
+            @click="$router.push('/')"
+            :src="constant_helper.home_header.logo"
+            :size="50"
+          ></a-avatar>
+        </a-col>
+        <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
+          <h3 style="color:#FFFFFF" >{{constant_helper.home_header.label}}</h3>
+        </a-col>
+       
+      </a-row>
+       <a-divider></a-divider>
+        <a-menu :defaultSelectedKeys="['/']" mode="inline">
+        <a-menu-item key="/" @click="$router.push('/')">
+            <a-icon type="dashboard" />
+            <span>Home</span>
+          </a-menu-item>
+          <a-menu-item key="/app/news" @click="$router.push('/news')">
             <a-icon type="layout" />
             <span>News</span>
           </a-menu-item>
@@ -63,10 +99,6 @@
           <a-menu-item key="/app/account" @click="$router.push('/permits')">
             <a-icon type="user-add" />
             <span>Permits</span>
-          </a-menu-item>
-          <a-menu-item key="login" @click="login_visible=true">
-            <a-icon type="login" />
-            <span>Login</span>
           </a-menu-item>
           <a-menu-item key="logout" @click="signup_visible=true">
             <a-icon type="logout" />
@@ -435,6 +467,7 @@ export default {
     }
   },
   created() {
+    
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
@@ -448,6 +481,9 @@ export default {
       } else {
         return this.constant_helper.theme.default;
       }
+    },
+    menuStyle(){
+      return this.constant_helper.theme.default;
     }
   }
 };

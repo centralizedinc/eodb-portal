@@ -9,134 +9,81 @@
       :logged_in_greeting="constant_helper.chatbot.greetings"
       :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
-    <div
-      :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;
-  background-size: cover`"
-    >
-      <a-row style="height:100vh" type="flex" justify="start">
+    <div :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
+      
+      <!-- desktop version -->
+      <a-row v-if="$breakpoint.lgAndUp" style="height:100vh" type="flex" justify="end" align="center" :gutter="16">        
         <a-col
-          data-aos="fade-up"
-          data-aos-duration="50000"
-          :push="2"
-          :md="12"
-          :lg="0"
-          style="margin-top:20vh; margin-left:52vh"
+          :lg="8"
+          :xl="8"
+          style="margin-top:40vh"
         >
-          <div
-            class="textShadow"
-            style="font-size: 20px; color:#fbf49d; "
-          >Ease of Doing Business Portal</div>
-          <span
-            style="margin-top:2vh ; color:#e4e2e2 "
-            class="textShadow"
-          >Ease of Doing Business Portal of {{constant_helper.home_header.label}} is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.</span>
+        <title-component data-aos="fade-up"/>
         </a-col>
-        <a-col
-          data-aos="fade-up"
-          data-aos-duration="50000"
-          :push="1"
-          :sm="0"
-          :md="0"
-          :lg="7"
-          style="margin-top:20vh; margin-left:52vh"
-        >
-          <div
-            class="textShadow"
-            style="font-size: 50px; color:#fbf49d; "
-          >Ease of Doing Business Portal</div>
-          <div
-            style="font-size: 20px; color:#0ba4de; letter-spacing: 1em; text-shadow: -5px 2px 2px #00000"
-          >{{constant_helper.home_header.label}}</div>
-          <br />
-          <span style="margin-top:2vh ; color:#e4e2e2 " class="textShadow">
-            Ease of Doing Business Portal of {{constant_helper.home_header.label}} is an online system that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
-            <br />
-            <br />
-            {{constant_helper.home_header.label}} created a unified business application form to make it easier for all our constituents to put up or renew businesses. It also features a zero-contact policy for complete transparency.
-          </span>
-        </a-col>
-        <a-col :push="2" :md="0" :lg="8" style="margin-top:20vh;">
-          <a-card style="background: rgba(59, 79, 99, 0.62)">
-            <template slot="title">
-              <div style="color:#ffffff">Enter Credentials</div>
-            </template>
-            <a-form>
-              <a-form-item :validate-status="error_login ? 'error': ''" >
-                <a-input size="large" v-model="account.email" placeholder="Email">
-                  <a-icon slot="prefix" type="mail" />
-                </a-input>
-              </a-form-item>
-              <a-form-item :validate-status="error_login ? 'error': ''">
-                <a-input
-                  size="large"
-                  v-model="account.password"
-                  placeholder="Password"
-                  :type="reveal?'text':'password'"
-                >
-                  <a-icon slot="prefix" type="lock" />
-                  <a-icon
-                    slot="suffix"
-                    :type="reveal?'eye':'eye-invisible'"
-                    @click="reveal=!reveal"
-                    style="cursor:pointer"
-                  />
-                </a-input>
-              </a-form-item>
-              <a-form-item :validate-status="error_login ? 'error': ''" :help="error_login ? 'Invalid Email or Password' : ''"></a-form-item>
-              <a-button size="large" block ghost @click="login">Login</a-button>
-              <a-divider></a-divider>
-              <p style="color:white">Login using facebook or google accounts</p>
-              <a-row type="flex" :gutter="16">
-                <a-col :span="12">
-                  <a-button
-                    block
-                    style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
-                    @click="registerFacebook"
-                  >
-                    <a-icon type="facebook"></a-icon>Facebook
-                  </a-button>
-                </a-col>
-                <a-col :span="12">
-                  <a-button
-                    block
-                    @click="registerGoogle"
-                    style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
-                  >
-                    <a-icon type="google"></a-icon>Google
-                  </a-button>
-                </a-col>
-              </a-row>
-            </a-form>
-          </a-card>
+        <a-col :lg="8"
+          :xl="8" style="margin-top:20vh; margin-right:5vh">
+          <login />
         </a-col>
       </a-row>
+       <!-- mobile version -->
+      <a-row v-else type="flex" justify="center" align="center" style="100vh">
+        <a-col data-aos="fade-up" :xs="22" :sm="22" style="margin-top:15vh">
+          <title-component/>
+        </a-col>
+        <a-col :xs="22" :sm="22" style="margin-top:2vh; margin-bottom: 20vh">
+          <login/>
+        </a-col>
+      </a-row>      
     </div>
+   
     <a-row
       :gutter="16"
       type="flex"
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
-      <a-col :md="24" :lg="8" data-aos="fade-up" data-aos-duration="30000">
+      <a-col :md="24" :lg="8" >
         <a-card title=" Report Emergency/Calamity">
           To protect our community, emergency management has to keep our response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, we can optimize response times and help protect first responders in the field.
           <a-divider></a-divider>
           <a-button type="primary">Report</a-button>
         </a-card>
       </a-col>
-      <a-col :md="24" :lg="8" data-aos="fade-up" data-aos-duration="30000">
+      <a-col :md="24" :lg="8">
         <a-card title="News/Announcements">
           <p>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</p>
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/news')">Read More</a-button>
         </a-card>
       </a-col>
-      <a-col :md="24" :lg="8" data-aos="fade-up" data-aos-duration="30000">
+      <a-col :md="24" :lg="8">
         <a-card title="Permits and Certificates">
           In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.
           <a-divider></a-divider>
           <a-button type="primary" @click="$router.push('/permits')">Apply Now</a-button>
         </a-card>
+      </a-col>
+    </a-row>
+    
+    <a-row
+      :gutter="16"
+      type="flex"
+      align="middle"
+      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
+    >
+      <a-col :span="24" data-aos="fade-up">
+        <h1>Permits and Certificates</h1>
+        <a-divider></a-divider>
+      </a-col>
+      <a-col :span="8" data-aos="fade-up">
+        <img
+          width="100%"
+          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
+          alt
+        />
+      </a-col>
+      <a-col :span="14" data-aos="fade-up">
+        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
       </a-col>
     </a-row>
     <a-row
@@ -164,27 +111,6 @@
       :gutter="16"
       type="flex"
       align="middle"
-      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
-    >
-      <a-col :span="24" data-aos="fade-up">
-        <h1>Permits and Certificates</h1>
-        <a-divider></a-divider>
-      </a-col>
-      <a-col :span="8" data-aos="fade-up">
-        <img
-          width="100%"
-          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
-          alt
-        />
-      </a-col>
-      <a-col :span="14" data-aos="fade-up">
-        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
-      </a-col>
-    </a-row>
-    <a-row
-      :gutter="16"
-      type="flex"
-      align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh; margin-bottom:10vh"
     >
       <a-col :span="24" data-aos="fade-up">
@@ -206,17 +132,18 @@
 </template>
 
 <script>
+import breakpoint from '@/plugins/breakpoints'
+import Login from '@/components/Login'
+import TitleComponent from '@/components/Title'
 export default {
+  components:{
+    Login,
+    TitleComponent
+  },
   data() {
     return {
       loading: false,
-      reveal: false,
-      account: {
-        email: "",
-        password: ""
-      },
-      error_login: false
-    };
+    }
   },
   created() {
     if (this.constant_helper.chatbot && this.constant_helper.chatbot.appId) {
@@ -244,37 +171,7 @@ export default {
     }
   },
   methods: {
-    registerFacebook() {
-      window.open(
-        `${process.env.VUE_APP_BASE_API_URI}/auth/facebook`,
-        "",
-        "width=500,height=450"
-      );
-      this.signup_visible = false;
-    },
-    registerGoogle() {
-      window.open(
-        `${process.env.VUE_APP_BASE_API_URI}/auth/google`,
-        "",
-        "width=500,height=450"
-      );
-      this.signup_visible = false;
-    },
-    login() {
-      console.log("login");
-      this.error_login = false;
-      if (this.account.email && this.account.password) {
-        this.$store.commit("LOGIN", {
-          fname: "Mark",
-          lname: "Bautista",
-          email: "mquijom@centralizedinc.com",
-          avatar: "https://mdbootstrap.com/img/Photos/Avatars/img%20%289%29.jpg"
-        });
-        this.$router.push("/app");
-      } else {
-        this.error_login = true;
-      }
-    }
+    
   }
 };
 </script>

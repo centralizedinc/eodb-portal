@@ -1,5 +1,5 @@
 <template>
-  <a-row type="flex" :gutter="16" data-aos="fade-left">
+  <a-row type="flex" :gutter="16">
     <!-- <a-col :span="12">
         <a-card title="Create Post">
             <a-row type="flex" :gutter="8">
@@ -25,18 +25,18 @@
       >
         <a-row type="flex" :gutter="8">
           <div v-if="loading">
-            <a-col :span="1" v-for="i in 20" :key="i">
+            <a-col :xs="2" :sm="2" :md="1" :lg="1" :xl="1" :xxl="1" v-for="i in 20" :key="i">
               <a-skeleton active avatar :paragraph="{rows: 0}" :title="{width:0}" />
             </a-col>
           </div>
-          <a-col :span="1" v-for="(sub, i) in subscribers" :key="`subscribers${i}`" v-else>
+          <a-col :xs="2" :sm="2" :md="1" :lg="1" :xl="1" :xxl="1" v-for="(sub, i) in subscribers" :key="`subscribers${i}`" v-else>
             <a-tooltip placement="top" :title="`${sub.name.first} ${sub.name.last}`">
               <a-badge status="success">
                 <a-avatar :src="sub.avatar"></a-avatar>
               </a-badge>
             </a-tooltip>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" >
             <a-divider></a-divider>
             <p>Contribute to the community</p>
             <a-textarea
@@ -47,21 +47,21 @@
             ></a-textarea>
           </a-col>
         </a-row>
-        <a-row type="flex" :gutter="8" justify="end" style="margin-top:2vh">
-          <a-col :span="6">
-            <a-button block>
-              <a-icon type="picture" theme="twoTone"></a-icon>Photos/Videos
-            </a-button>
-          </a-col>
-          <a-col :span="4">
-            <a-button block type="primary" @click="postMessage">
-              <a-icon type="upload"></a-icon>Post
-            </a-button>
+        <a-row type="flex" :gutter="8" justify="start" style="margin-top:2vh">
+          <a-col :span="20">
+            <a-button-group>
+              <a-button >
+                <a-icon type="picture" theme="twoTone"></a-icon>Photos/Videos
+              </a-button>
+              <a-button type="primary" @click="postMessage">
+                <a-icon type="upload"></a-icon>Post
+              </a-button>
+            </a-button-group>
           </a-col>
         </a-row>
       </a-card>
     </a-col>
-    <a-col :span="24">
+    <a-col :span="24" style="margin-top: 1vh">
       <!-- <a-card> -->
       <template v-if="loading">
         <div v-for="i in 4" :key="i">
@@ -73,7 +73,7 @@
         <a-card
           v-for="(sub,indx) in subscribers_post"
           :key="`message${indx}`"
-          style="margin-bottom: 2vh; box-shadow: 0px 0px 10px 2px #88888847"
+          style="margin-bottom: 1vh; box-shadow: 0px 0px 10px 2px #88888847"
           data-aos="fade-up"
         >
         <template slot="extra" v-if="admin">
