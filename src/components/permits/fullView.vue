@@ -88,8 +88,8 @@
     </a-col>
 
     <h3 style="margin-top:2vh ; font-weight: 700; color:#FFFFFF">My Permits</h3>
-    <a-divider style="margin-top:-1vh"></a-divider>
-    <a-col :span="24">
+    <a-divider style="margin-top:-1vh; "></a-divider>
+    <a-col :span="24" style="margin-top: -10vh">
       <transactions></transactions>
     </a-col>
   </a-row>
