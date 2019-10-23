@@ -15,7 +15,7 @@
             :size="50"
           ></a-avatar>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="4">
+        <a-col :xs="0" :sm="0" :md="0" :lg="14">
           <h3
             style="color:white; margin-left: -6vh; cursor:pointer"
             @click="$router.push('/')"
