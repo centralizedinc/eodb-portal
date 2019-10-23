@@ -12,7 +12,7 @@
 
       <template v-else>
         <a-card
-          style="margin-bottom: 2vh; box-shadow: 0px 0px 10px 2px #88888847"
+          style="margin-bottom: 1vh; box-shadow: 0px 0px 10px 2px #88888847"
           v-for="(item, index) in posts"
           :key="index"
         >

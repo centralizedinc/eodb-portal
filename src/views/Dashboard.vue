@@ -85,7 +85,7 @@
     </a-layout-header>
     <a-layout-content
       class="content"
-      :style="`${constant_helper.theme.background} margin-top:10vh`"
+      :style="`${constant_helper.theme.background} margin-top:5vh`"
     >
       <a-row type="flex" justify="center" >
         <a-col :span="4" style="margin-right:1vw" v-if="$breakpoint.lgAndUp">
@@ -146,7 +146,7 @@
               :bodyStyle="{'background-color':'#e6e6e6'}"
               :headStyle="{'background-color':'#afadad'}"
               title="Citizen Report"
-              style="margin-top: 10vh"
+              style="margin-top: 8vh"
             >
               <p>Emergency Hotline</p>
               <a-row>
