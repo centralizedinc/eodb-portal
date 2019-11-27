@@ -17,15 +17,16 @@ Object.keys(process.env).forEach(key => {
 app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({'extended':'false'}));
+app.use(bodyParser.urlencoded({
+    'extended': 'false'
+}));
 app.use(serveStatic(__dirname + "/dist"));
-app.use('/auth', require('./api/routes/auth'))
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_66cb3ndj:3uakod32bsvvfek6e1cv4e8839@ds217678.mlab.com:17678/heroku_66cb3ndj"
 mongoose.connect(MONGODB_URI, {
-    promiseLibrary: require('bluebird'),
-    useNewUrlParser: true
-})
+        promiseLibrary: require('bluebird'),
+        useNewUrlParser: true
+    })
     .then(() => {
         console.log(`Database connection established.`)
     })
@@ -34,10 +35,13 @@ mongoose.connect(MONGODB_URI, {
     })
 
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log(`started at port: ${process.env.PORT || 4000}`)
-})
 
 // Routers
 // ########################################################################
+app.use('/auth', require('./api/routes/auth'))
 app.use("/permit", require('./api/routes/permit_router'));
+app.use("/account", require('./api/routes/account_router'))
+
+app.listen(process.env.PORT || 4000, () => {
+    console.log(`started at port: ${process.env.PORT || 4000}`)
+})

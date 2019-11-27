@@ -145,31 +145,31 @@ var PermitModelSchema = new mongoose.Schema({
             type: Number
         }
     },
-    payment_info: {
-        desc: {
-            type: String
-        },
-        amount: {
-            type: Number
-        },
-        method: {
-            type: String
-        }
-    },
-    billing_info: {
-        credit_number: {
-            type: Number
-        },
-        name: {
-            type: String
-        },
-        email: {
-            type: String
-        },
-        contact: {
-            type: Number
-        }
-    },
+    // payment_info: {
+    //     desc: {
+    //         type: String
+    //     },
+    //     amount: {
+    //         type: Number
+    //     },
+    //     method: {
+    //         type: String
+    //     }
+    // },
+    // billing_info: {
+    //     credit_number: {
+    //         type: Number
+    //     },
+    //     name: {
+    //         type: String
+    //     },
+    //     email: {
+    //         type: String
+    //     },
+    //     contact: {
+    //         type: Number
+    //     }
+    // },
     progress: {
         status: {
             type: String
