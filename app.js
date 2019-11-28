@@ -24,8 +24,8 @@ app.use(serveStatic(__dirname + "/dist"));
 require('./api/utils/db_connector.js').connect();
 
 // Initialize Passport
-// var passport = require('./api/utils/auth');
-// app.use(passport.initialize());
+var passport = require('./api/utils/auth');
+app.use(passport.initialize());
 
 
 

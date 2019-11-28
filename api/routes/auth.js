@@ -68,6 +68,8 @@ const constant_helper = require('../utils/constant_helper');
 router.route('/login')
     .post(function (req, res, next) {
         passport.authenticate('login', function (err, user, info) {
+            console.log("passport login auth user: " + JSON.stringify(user))
+            console.log("passport login auth err: " + JSON.stringify(err))
             if (err) {
                 return res.json({
                     error: err
@@ -84,6 +86,8 @@ router
     .route('/signup')
     .post(function (req, res, next) {
         passport.authenticate('signup', function (err, user, info) {
+            console.log("passport signup auth user: " + JSON.stringify(user))
+            console.log("passport signup auth err: " + JSON.stringify(err))
             if (err) {
                 return res.json({
                     error: err
@@ -178,7 +182,10 @@ router.route('/facebook/callback')
         session: false
     }),
         (req, res) => {
+            console.log("facebook callback")
+            console.log("facebook callback req.user: " + JSON.stringify(req.user))
             const code = new Buffer(JSON.stringify(req.user)).toString('base64');
+            console.log("facebook callback code data: " + JSON.stringify(code))
             res.redirect(`${process.env.VUE_APP_HOME_URL}confirmation?platform=facebook&data=${code}`)
         });
 

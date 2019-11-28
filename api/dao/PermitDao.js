@@ -7,6 +7,23 @@ class PermitDao {
         return model.find({})
     }
 
+    /**
+     * @returns {Promise}
+     * @param {Object} conditions 
+     */
+    static find(conditions) {
+        return model.find(conditions).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} id 
+     * @param {AccountModel} updated_account 
+     */
+    static modifyById(id, updated_account) {
+        return model.findByIdAndUpdate(id, updated_account).exec()
+    }
+
     static applyPermit(details) {
         return new Promise((resolve, reject) => {
             (new model(details)).save()

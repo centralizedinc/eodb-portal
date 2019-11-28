@@ -383,7 +383,7 @@ export default {
   methods: {
     init() {
       this.user = this.$store.state.user_session.user;
-      // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
+      console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
     },
     nav(e) {
       if (e.key === "logout") {

@@ -26,9 +26,9 @@ var SettingsSchema = new mongoose.Schema({
 });
 
 SettingsSchema.pre('save', function (params) {
-    
+
 })
-AccountModelSchema.pre('findOneAndUpdate', function (callback) {
+SettingsSchema.pre('findOneAndUpdate', function (callback) {
     console.log('this :', this._update);
     this.options.new = true;
     this.options.runValidators = true;
