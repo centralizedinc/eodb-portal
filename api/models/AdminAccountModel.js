@@ -1,5 +1,14 @@
 var mongoose = require('mongoose')
 var AdminAccountModelSchema = new mongoose.Schema({
+    status: {
+        type: Number,
+        default: 0
+        /**
+         * 0 - registered
+         * 1 - setup
+         * 2 - confirmed 
+         */
+    },
     email: {
         type: String
     },

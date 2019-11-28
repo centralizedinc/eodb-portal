@@ -31,7 +31,34 @@ var AccountModelSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
-    method: {}
+    method: {},
+    status: {
+        type: Number,
+        default: 0
+        /**
+         * 0 - registered
+         * 1 - setup
+         * 2 - confirmed 
+         */
+    },
+    confirmation_url: {
+        type: String
+    },
+    google_id: {
+        type: String
+    },
+    google_access_token: {
+        type: String
+    },
+    facebook_id: {
+        type: String
+    },
+    facebook_access_token: {
+        type: String
+    },
+    session_token: {
+        type: String
+    },
 })
 
 module.exports = mongoose.model('account', AccountModelSchema)
