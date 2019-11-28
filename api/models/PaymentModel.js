@@ -1,11 +1,11 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+
 var PaymentModelSchema = new mongoose.Schema({
-    method: {
+    application_id: {
         type: String
     },
-    details: {},
-    transaction_id: {
-        type: Number
+    transaction_no: {
+        type: String
     },
     total_payable: {
         type: Number
@@ -13,6 +13,16 @@ var PaymentModelSchema = new mongoose.Schema({
     amount_rendered: {
         type: Number
     },
+    method: {
+        type: String
+    },
+    mode_of_payment: {
+        type: String
+    },
+    status: {
+        type: String
+    },
+    details: {},
     date_created: {
         type: Date,
         default: new Date()

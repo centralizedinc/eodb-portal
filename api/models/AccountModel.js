@@ -33,7 +33,6 @@ var AccountModelSchema = new mongoose.Schema({
     avatar: {
         type: String
     },
-    method: {},
     status: {
         type: Number,
         default: 0
@@ -46,6 +45,14 @@ var AccountModelSchema = new mongoose.Schema({
     confirmation_url: {
         type: String
     },
+    method: {
+        type: String
+        /**
+         * local
+         * google
+         * facebook
+         */
+    },
     google_id: {
         type: String
     },
@@ -57,11 +64,29 @@ var AccountModelSchema = new mongoose.Schema({
     },
     facebook_access_token: {
         type: String
-    },
-    session_token: {
-        type: String
-    },
+    }
 })
+
+AccountModelSchema.pre('save', async function (callback) {
+    var account = this;
+    account.date_created = new Date();
+    account.date_modified = new Date();
+
+    if (account.password) {
+        const salt = bcrypt.genSaltSync(5);
+        const hash = bcrypt.hashSync(account.password, salt)
+        account.password = hash;
+    }
+    callback();
+});
+
+AccountModelSchema.pre('findOneAndUpdate', function (callback) {
+    console.log('this :', this._update);
+    this.options.new = true;
+    this.options.runValidators = true;
+    this._update.date_modified = new Date();
+    callback();
+});
 
 AccountModelSchema.methods.isValidPassword = function (password) {
     return new Promise((resolve, reject) => {
