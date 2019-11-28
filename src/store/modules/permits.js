@@ -1,19 +1,24 @@
-
 function initialState() {
     return {
-        records:[]
+        records: [],
+        permits: []
+
     }
 }
 
 const state = initialState()
 
 const mutations = {
-    ADD_TAXES(state, payload){
+    ADD_TAXES(state, payload) {
         state.records.push(payload)
+    },
+    GET_PERMITS(state, id) {
+
     }
 }
 
 const actions = {
+
 }
 
 export default {
@@ -21,5 +26,3 @@ export default {
     mutations,
     actions
 }
-
-
