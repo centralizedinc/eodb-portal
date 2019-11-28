@@ -26,6 +26,14 @@ export default {
                         hour: "2-digit",
                         minute: "2-digit"
                     });
+                },
+                formatCurrency(amount){
+                    const formatter = new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'PHP',
+                        minimumFractionDigits: 2
+                      })
+                      return formatter.format(amount) 
                 }
             },
         })

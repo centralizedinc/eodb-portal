@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import './plugins/ant-design-vue.js'
 import aos from 'aos'
 import 'aos/dist/aos.css';
+import VueApexCharts from 'vue-apexcharts'
 
 import breakpoint from './plugins/breakpoints'
 
@@ -27,6 +28,7 @@ console.log(' process.env.VUE_APP_GOOGLE_MAP_KEY ::: ', process.env.VUE_APP_GOOG
 console.log(' process.env.VUE_APP_BASE_API_URI ::: ', process.env.VUE_APP_BASE_API_URI)
 console.log('process.env.VUE_APP_CLIENT_AVATAR :', process.env.VUE_APP_CLIENT_AVATAR);
 
+Vue.component('apexchart', VueApexCharts)
 Vue.use(VueGeolocation)
 Vue.use(VueGoogleMaps, {
   load: {
