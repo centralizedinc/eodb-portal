@@ -4,7 +4,7 @@ const router = require("express").Router();
 var AccountDao = require('../dao/AccountDao')
 
 router
-    .route('/apply')
+    .route('/')
     .get((req, res) => {
         AccountDao.getAccount()
             .then((data) => {

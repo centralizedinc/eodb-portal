@@ -21,11 +21,11 @@ var PaymentModelSchema = new mongoose.Schema({
         type: String
     },
     payment_mode: {
-        type: String
+        type: Number
         /*
-         * A
-         * SA
-         * Q
+         * 0 - A
+         * 1 - SA
+         * 2 - Q
          */
     },
     payment_info: {

@@ -32,10 +32,13 @@ require('./api/utils/db_connector.js').connect();
 // Routers
 // ########################################################################
 app.use('/auth', require('./api/routes/auth'))
-app.use("/permits", require('./api/routes/permit_router'));
-app.use("/accounts", require('./api/routes/account_router'))
-app.use("/settings", require('./api/routes/settings_router'))
-
-app.listen(5000, () => {
-    console.log(`started at port: ${process.env.PORT || 5000}`)
+app.use("/permit", require('./api/routes/permit_router'));
+app.use("/account", require('./api/routes/account_router'))
+app.use("/activities", require('./api/routes/activities_router'))
+app.use("/admin", require('./api/routes/admin_account_router'))
+app.use("/payment", require('./api/routes/payment_router'))
+app.use("/task", require('./api/routes/task_router'))
+app.use("/workflow", require('./api/routes/task_workflow_router'))
+app.listen(process.env.PORT || 4000, () => {
+    console.log(`started at port: ${process.env.PORT || 4000}`)
 })
