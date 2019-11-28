@@ -19,20 +19,23 @@ app.use(helmet())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ 'extended': 'false' }));
 app.use(serveStatic(__dirname + "/dist"));
-app.use('/auth', require('./api/routes/auth'))
 
 // SETUP DB
 require('./api/utils/db_connector.js').connect();
 
 // Initialize Passport
-var passport = require('./api/utils/auth');
-app.use(passport.initialize());
+// var passport = require('./api/utils/auth');
+// app.use(passport.initialize());
 
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log(`started at port: ${process.env.PORT || 4000}`)
-})
 
 // Routers
 // ########################################################################
-app.use("/permit", require('./api/routes/permit_router'));
+app.use('/auth', require('./api/routes/auth'))
+app.use("/permits", require('./api/routes/permit_router'));
+app.use("/accounts", require('./api/routes/account_router'))
+app.use("/settings", require('./api/routes/settings_router'))
+
+app.listen(5000, () => {
+    console.log(`started at port: ${process.env.PORT || 5000}`)
+})

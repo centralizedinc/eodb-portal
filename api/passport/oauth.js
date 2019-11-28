@@ -62,29 +62,19 @@ passport.use('login', new LocalStrategy({
             }, false);
             else {
                 const token = jwt.sign({
-                    account_id: result.account.account_id,
+                    account_id: result.account._id,
                     email: email,
                     date: new Date()
                 }, ApplicationSettings.getValue("JWT_SECRET_TOKEN"));
                 result.token = token;
-                return AccountDao.modifyOne({
-                    account_id: result.account.account_id
-                }, {
-                    session_token: token
+                return AccountDao.modifyById(result.account._id, {
+                    token
                 });
             }
         })
         .then((modified_account) => {
-            if (modified_account) return UserDao.findOne({
-                account_id: result.account.account_id
-            });
-        })
-        .then((user) => {
-            if (user) {
-                result.user = user;
-                result.account.password = undefined;
-                result.is_authenticated = true;
-            }
+            result.account = modified_account;
+            result.is_authenticated = true;
             console.timeEnd("login");
             return done(null, result);
         })
@@ -121,23 +111,12 @@ passport.use('signup', new LocalStrategy({
             else {
                 AccountDao.create({
                         email,
-                        password
+                        password,
+                        name
                     })
                     .then((account) => {
                         result.account = account;
-                        return UserDao.create({
-                            account_id: account.account_id,
-                            email,
-                            tin,
-                            name: {
-                                first: name.first,
-                                last: name.last
-                            }
-                        })
-                    })
-                    .then((user) => {
-                        result.user = user;
-                        return SendEmail.registration(email, user.name.first, user.account_id);
+                        return SendEmail.registration(email, account.name.first, account._id);
                     })
                     .then((send_email) => {
                         const {

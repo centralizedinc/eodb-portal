@@ -18,8 +18,7 @@ class Uploader {
     aws.config.update({
       secretAccessKey: ApplicationSettings.getValue('AWS_SECRET_ACCESS_KEY'),
       accessKeyId: ApplicationSettings.getValue('AWS_ACCESS_KEY_ID'),
-      region: ApplicationSettings.getValue('AWS_REGION') // region of your bucke
-t
+      region: ApplicationSettings.getValue('AWS_REGION') // region of your bucket
     });
 
     s3 = new aws.S3();

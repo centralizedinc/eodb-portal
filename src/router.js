@@ -34,9 +34,9 @@ export default new Router({
       ]
     },
     {
-      path: '/auth',
-      name: 'Authorization',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Auth.vue'),
+      path: '/confirmation',
+      name: 'Confirmation',
+      component: () => import(/* webpackChunkName: "auth" */ './views/Confirmation.vue'),
     },
     {
       path: '/app',

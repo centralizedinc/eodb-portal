@@ -22,9 +22,9 @@ function connect(app) {
             console.log('Initialized Application Settings: ' + JSON.stringify(ApplicationSettings.getApplicationVariables()));
 
             /****** Setup Authentication ******/
-            require('../passport/oauth');
-            require('../passport/google');
-            require('../passport/facebook');
+            // require('../passport/oauth');
+            // require('../passport/google');
+            // require('../passport/facebook');
             sg_email.setKeys();
             uploader.setKeys();
         }).catch((err) => console.error(err));

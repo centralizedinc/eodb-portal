@@ -10,7 +10,8 @@ var SettingsSchema = new mongoose.Schema({
         type: String
     },
     status: {
-        type: String
+        type: String,
+        default: 'A'
     },
     created_by: {
         type: String
@@ -24,4 +25,14 @@ var SettingsSchema = new mongoose.Schema({
     }
 });
 
+SettingsSchema.pre('save', function (params) {
+    
+})
+AccountModelSchema.pre('findOneAndUpdate', function (callback) {
+    console.log('this :', this._update);
+    this.options.new = true;
+    this.options.runValidators = true;
+    this._update.date_modified = new Date();
+    callback();
+});
 module.exports = mongoose.model("settings", SettingsSchema);
