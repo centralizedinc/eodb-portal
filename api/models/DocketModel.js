@@ -1,76 +1,65 @@
-var mongoose = require('mongoose');
-
-var PaymentModelSchema = new mongoose.Schema({
-    application_id: {
-        type: String
-    },
+var mongoose = require('mongoose')
+var DocketSchema = new mongoose.Schema({
     auto_id: {
         type: Number
     },
-    transaction_no: {
+    reference_no: {
         type: String
     },
-    total_payable: {
-        type: Number
-    },
-    amount_rendered: {
-        type: Number
-    },
-    method: {
+    application_id: {
         type: String
     },
-    mode_of_payment: {
+    application_type: {
+        type: String
+    },
+    permit: {
         type: String
     },
     status: {
         type: String
     },
-    details: {},
+    payment_status: {
+        type: String
+    },
+    approval_activities: [{
+        department: {
+            type: String
+        },
+        approver: {
+            type: String
+        },
+        remarks: {
+            type: String
+        }
+    }],
+    created_by: {
+        type: String
+    },
+    modified_by: {
+        type: String
+    },
     date_created: {
         type: Date,
         default: new Date()
     },
-    created_by: {
-        type: String
-    },
-    payment_mode: {
-        type: Number
-        /*
-         * 0 - A
-         * 1 - SA
-         * 2 - Q
-         */
-    },
-    payment_info: {
-        desc: {
-            type: String
-        },
-        amount: {
-            type: Number
-        },
-        method: {
-            type: String
-        }
-    },
-    billing_info: {
-        credit_number: {
-            type: Number
-        },
-        name: {
-            type: String
-        },
-        email: {
-            type: String
-        },
-        contact: {
-            type: Number
-        }
-    },
+    date_modified: {
+        type: Date,
+        default: new Date()
+    }
 })
 
-PaymentModelSchema.pre('save', async function (callback) {
+DocketSchema.pre('save', async function (callback) {
     var account = this;
     account.date_created = new Date();
+    account.date_modified = new Date();
+    callback();
+});
+
+DocketSchema.pre('findOneAndUpdate', function (callback) {
+    console.log('this :', this._update);
+    this.options.new = true;
+    this.options.runValidators = true;
+    this._update.date_modified = new Date();
     callback();
 });
 
@@ -83,7 +72,7 @@ const options = {
     unique: false // Don't add a unique index
 };
 
-const plugin = new autoIncrement(PaymentModelSchema, 'payments', options);
+const plugin = new autoIncrement(DocketSchema, 'dockets', options);
 // users._nextCount()
 //     .then(count => console.log(`The next ID will be ${count}`));
 plugin.applyPlugin()
@@ -95,4 +84,4 @@ plugin.applyPlugin()
         console.log("############### init failed: " + e);
     });
 
-module.exports = mongoose.model('payments', PaymentModelSchema)
+module.exports = mongoose.model('dockets', DocketSchema)

@@ -1,10 +1,28 @@
-"use strict";
+const model = require('../models/PermitModel');
 
-var model = require('../models/PermitModel');
+class PermitsDao {
 
-class PermitDao {
-    static getPermit() {
-        return model.find({})
+    /**
+     * @returns {Promise}
+     */
+    static findAll() {
+        return model.find({}).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} id
+     */
+    static findOneByID(id) {
+        return model.findById(id).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} conditions 
+     */
+    static findOne(conditions) {
+        return model.findOne(conditions).lean().exec()
     }
 
     /**
@@ -17,38 +35,29 @@ class PermitDao {
 
     /**
      * @returns {Promise}
+     * @param {Object} details 
+     */
+    static create(details) {
+        return (new model(details)).save()
+    }
+
+    /**
+     * @returns {Promise}
      * @param {String} id 
-     * @param {AccountModel} updated_account 
+     * @param {Object} updated_account 
      */
     static modifyById(id, updated_account) {
         return model.findByIdAndUpdate(id, updated_account).exec()
     }
 
-    static applyPermit(details) {
-        return new Promise((resolve, reject) => {
-            (new model(details)).save()
-                .then(saved_permit => {
-                    console.log("saved_permit data: " + JSON.stringify(saved_permit))
-                    resolve(saved_permit)
-                }).catch(err => {
-                    console.log("error this")
-                    reject(err)
-                })
-
-
-        })
-    }
     /**
-     * 
-     * @param {*} ref_no 
+     * @returns {Promise}
+     * @param {Object} conditions 
+     * @param {Object} updated_account 
      */
-    static getSearch(ref_no) {
-        return model.findOne({
-            application: {
-
-            }
-        })
+    static modifyOne(conditions, updated_account) {
+        return model.findOneAndUpdate(conditions, updated_account).exec()
     }
 }
 
-module.exports = PermitDao
+module.exports = PermitsDao;

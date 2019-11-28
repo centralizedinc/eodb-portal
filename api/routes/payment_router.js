@@ -1,31 +1,42 @@
-"use strict";
-
+"use strict"
 const router = require("express").Router();
 
 var PaymentDao = require('../dao/PaymentDao');
 
-router
-    .route('/')
+router.route('/')
     .get((req, res) => {
-        PaymentDao.getTask()
-            .then((data) => {
-                console.log("get payment data: " + JSON.stringify(data))
-                res.json(data)
-            }).catch((err) => {
-                console.log("get payment error: " + err)
-            })
+        PaymentDao.findAll()
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
     })
     .post((req, res) => {
-        var new_payment = req.body
-        console.log("new payment data: " + JSON.stringify(new_payment))
-        PaymentDao.addPayment(new_payment)
-            .then((payment) => {
-                console.log("add payment data: " + JSON.stringify(payment))
-                res.json(payment)
-            })
-            .catch((err) => {
-                console.log("add payment error: " + err)
-            })
+        PaymentDao.create(req.body)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
+router.route('/:id')
+    .get((req, res) => {
+        PaymentDao.findOneByID(req.params.id)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+    .post((req, res) => {
+        PaymentDao.modifyById(req.params.id, req.body)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
     })
 
 module.exports = router

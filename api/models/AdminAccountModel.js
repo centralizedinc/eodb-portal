@@ -1,4 +1,6 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
+
 var AdminAccountModelSchema = new mongoose.Schema({
     status: {
         type: Number,
@@ -15,6 +17,9 @@ var AdminAccountModelSchema = new mongoose.Schema({
     password: {
         type: String
     },
+    avatar: {
+        type: String
+    },
     name: {
         first: {
             type: String
@@ -26,6 +31,12 @@ var AdminAccountModelSchema = new mongoose.Schema({
             type: String
         }
     },
+    department: {
+        type: String
+    },
+    role: {
+        type: String
+    },
     token: {
         type: String
     },
@@ -35,13 +46,37 @@ var AdminAccountModelSchema = new mongoose.Schema({
     },
     date_modified: {
         type: Date
-    },
-    avatar: {
-        type: String
-    },
-    task: {
-        type: String
     }
 })
 
-module.exports = mongoose.model('admin', AdminAccountModelSchema)
+AdminAccountModelSchema.pre('save', async function (callback) {
+    var account = this;
+    account.date_created = new Date();
+    account.date_modified = new Date();
+
+    if (account.password) {
+        const salt = bcrypt.genSaltSync(5);
+        const hash = bcrypt.hashSync(account.password, salt)
+        account.password = hash;
+    }
+    callback();
+});
+
+AdminAccountModelSchema.pre('findOneAndUpdate', function (callback) {
+    console.log('this :', this._update);
+    this.options.new = true;
+    this.options.runValidators = true;
+    this._update.date_modified = new Date();
+    callback();
+});
+
+AdminAccountModelSchema.methods.isValidPassword = function (password) {
+    return new Promise((resolve, reject) => {
+        bcrypt.compare(password, this.password, (err, isValid) => {
+            if (!err) resolve(isValid)
+            else reject(err)
+        });
+    })
+}
+
+module.exports = mongoose.model('admin_accounts', AdminAccountModelSchema)
