@@ -165,7 +165,7 @@
         <a-col :span="24">
           <a-form>
             <a-form-item>
-              <a-input placeholder="First Name"></a-input>
+              <a-input placeholder="First Name" ></a-input>
             </a-form-item>
             <a-form-item>
               <a-input placeholder="Last Name"></a-input>

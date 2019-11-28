@@ -32,4 +32,4 @@ DepartmentDependenciesSchema.pre('findOneAndUpdate', function (callback) {
     callback();
 });
 
-module.exports = mongoose.model('departments', DepartmentDependenciesSchema)
+module.exports = mongoose.model('department_dependecies', DepartmentDependenciesSchema)

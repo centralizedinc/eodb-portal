@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment-reworked').MongooseAutoIncrementID;
 
 var PaymentModelSchema = new mongoose.Schema({
     application_id: {
