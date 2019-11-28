@@ -1,25 +1,63 @@
-"use strict";
+const model = require('../models/ActivitiesModel');
 
-var model = require('../models/TaskModel');
+class ActivitiesDao {
 
-class TaskDao {
-    static getActivity() {
-        return model.find({})
+    /**
+     * @returns {Promise}
+     */
+    static findAll() {
+        return model.find({}).lean().exec()
     }
 
-    static addActivity(details) {
-        return new Promise((resolve, reject) => {
-            (new model(details)).save()
-                .then(saved_activity => {
-                    console.log("saved activity data: " + JSON.stringify(saved_activity))
-                    resolve(saved_activity)
-                })
-                .catch(err => {
-                    console.log("error this add activity: " + JSON.stringify(err))
-                    reject(saved_activity)
-                })
-        })
+    /**
+     * @returns {Promise}
+     * @param {String} id
+     */
+    static findOneByID(id) {
+        return model.findById(id).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} conditions 
+     */
+    static findOne(conditions) {
+        return model.findOne(conditions).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} conditions 
+     */
+    static find(conditions) {
+        return model.find(conditions).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} details 
+     */
+    static create(details) {
+        return (new model(details)).save()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} id 
+     * @param {Object} updated_account 
+     */
+    static modifyById(id, updated_account) {
+        return model.findByIdAndUpdate(id, updated_account).exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} conditions 
+     * @param {Object} updated_account 
+     */
+    static modifyOne(conditions, updated_account) {
+        return model.findOneAndUpdate(conditions, updated_account).exec()
     }
 }
 
-module.exports = TaskDao
+module.exports = ActivitiesDao;

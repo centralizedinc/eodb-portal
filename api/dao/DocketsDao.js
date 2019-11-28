@@ -1,6 +1,6 @@
-const model = require('../models/AccountModel');
+const model = require('../models/ActivitiesModel');
 
-class AccountDao {
+class ActivitiesDao {
 
     /**
      * @returns {Promise}
@@ -11,7 +11,7 @@ class AccountDao {
 
     /**
      * @returns {Promise}
-     * @param {String} id 
+     * @param {String} id
      */
     static findOneByID(id) {
         return model.findById(id).lean().exec()
@@ -27,36 +27,6 @@ class AccountDao {
 
     /**
      * @returns {Promise}
-     * @param {String} email 
-     */
-    static findByEmail(email) {
-        return model.findOne({
-            email
-        }).exec()
-    }
-
-    /**
-     * @returns {Promise}
-     * @param {String} facebook_id 
-     */
-    static findByFacebookID(facebook_id) {
-        return model.findOne({
-            facebook_id
-        }).lean().exec()
-    }
-
-    /**
-     * @returns {Promise}
-     * @param {String} google_id 
-     */
-    static findByGoogleID(google_id) {
-        return model.findOne({
-            google_id
-        }).lean().exec()
-    }
-
-    /**
-     * @returns {Promise}
      * @param {Object} conditions 
      */
     static find(conditions) {
@@ -68,13 +38,25 @@ class AccountDao {
      * @param {Object} details 
      */
     static create(details) {
-        return (new model(details)).save()
+        return new Promise((resolve, reject) => {
+            (new model(details)).save()
+                .then((result) => {
+                    const transaction_no = new Date().getTime().toString() + result.auto_id.toString();
+                    return this.modifyById(result._id, { transaction_no })
+                })
+                .then((result) => {
+                    resolve(result)
+                })
+                .catch((err) => {
+                    reject(err)
+                });
+        })
     }
 
     /**
      * @returns {Promise}
      * @param {String} id 
-     * @param {AccountModel} updated_account 
+     * @param {Object} updated_account 
      */
     static modifyById(id, updated_account) {
         return model.findByIdAndUpdate(id, updated_account).exec()
@@ -83,11 +65,11 @@ class AccountDao {
     /**
      * @returns {Promise}
      * @param {Object} conditions 
-     * @param {AccountModel} updated_account 
+     * @param {Object} updated_account 
      */
     static modifyOne(conditions, updated_account) {
         return model.findOneAndUpdate(conditions, updated_account).exec()
     }
 }
 
-module.exports = AccountDao;
+module.exports = ActivitiesDao;

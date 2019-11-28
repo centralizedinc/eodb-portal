@@ -1,11 +1,11 @@
 "use strict"
 const router = require("express").Router();
 
-var AccountDao = require('../dao/AccountDao');
+var DocketsDao = require('../dao/DocketsDao');
 
 router.route('/')
     .get((req, res) => {
-        AccountDao.findAll()
+        DocketsDao.findAll()
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -13,7 +13,7 @@ router.route('/')
             });
     })
     .post((req, res) => {
-        AccountDao.create(req.body)
+        DocketsDao.create(req.body)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -23,7 +23,7 @@ router.route('/')
 
 router.route('/:id')
     .get((req, res) => {
-        AccountDao.findOneByID(req.params.id)
+        DocketsDao.findOneByID(req.params.id)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -31,7 +31,7 @@ router.route('/:id')
             });
     })
     .post((req, res) => {
-        AccountDao.modifyById(req.params.id, req.body)
+        DocketsDao.modifyById(req.params.id, req.body)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
