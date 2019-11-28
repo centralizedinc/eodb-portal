@@ -5,7 +5,7 @@ const router = require("express").Router();
 var PermitDao = require('../dao/PermitDao');
 
 router
-    .route('/apply')
+    .route('/')
     .get((req, res) => {
         PermitDao.getPermit()
             .then((data) => {
