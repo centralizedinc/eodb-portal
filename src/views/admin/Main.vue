@@ -2,7 +2,7 @@
   <div id="components-layout-demo-basic">    
     <a-layout>
       <a-layout-sider :trigger="null" collapsible v-model="collapsed" theme="dark"  :width="220" style="background-color: #242B30">
-        <a-card style="border: none;height: 20vh; width: 100%;background-repeat: no-repeat; background-size: cover; background-image: url('https://picsum.photos/100');">
+        <a-card style="border: none; height: 20vh; width: 100%;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');">
           <a-row type="flex" justify="start" align="middle">
             <a-col :span="10">
               <a-avatar shape="square" :size="64" src="http://lorempixel.com/200/200/people/">

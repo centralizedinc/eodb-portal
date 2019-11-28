@@ -16,9 +16,7 @@
               <a-col :span="24" style="margin-top:-5vh">
                   <a-divider style="color:#B6C2C9"></a-divider>
               </a-col>
-              <a-col :span="6">
-                  <a-progress :percent="50" status="active" :showInfo="false" :strokeWidth="5"/>
-              </a-col>
+             
             </a-row>
         </a-card>
     </a-col>

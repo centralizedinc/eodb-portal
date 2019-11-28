@@ -17,30 +17,32 @@ Object.keys(process.env).forEach(key => {
 app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-    'extended': 'false'
-}));
+app.use(bodyParser.urlencoded({ 'extended': 'false' }));
 app.use(serveStatic(__dirname + "/dist"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_66cb3ndj:3uakod32bsvvfek6e1cv4e8839@ds217678.mlab.com:17678/heroku_66cb3ndj"
-mongoose.connect(MONGODB_URI, {
-        promiseLibrary: require('bluebird'),
-        useNewUrlParser: true
-    })
-    .then(() => {
-        console.log(`Database connection established.`)
-    })
-    .catch((err) => {
-        console.log(`ERROR in connecting to DB ::: ${err}`)
-    })
+// SETUP DB
+require('./api/utils/db_connector.js').connect();
+
+// Initialize Passport
+var passport = require('./api/utils/auth');
+app.use(passport.initialize());
 
 
 
 // Routers
 // ########################################################################
 app.use('/auth', require('./api/routes/auth'))
-app.use("/permit", require('./api/routes/permit_router'));
-app.use("/account", require('./api/routes/account_router'))
+app.use("/permits/business", require('./api/routes/business_permit'));
+app.use("/permits", require('./api/routes/permit_router'));
+app.use("/accounts", require('./api/routes/account_router'))
+app.use("/activities", require('./api/routes/activities_router'))
+app.use("/admins", require('./api/routes/admin_account_router'))
+app.use("/payments", require('./api/routes/payment_router'))
+app.use("/departments/dependencies", require('./api/routes/department_dependencies'));
+app.use("/departments", require('./api/routes/department_router'));
+app.use("/roles", require('./api/routes/roles_router'));
+
+
 
 app.listen(process.env.PORT || 4000, () => {
     console.log(`started at port: ${process.env.PORT || 4000}`)
