@@ -108,6 +108,9 @@ var BusinessPermitApplication = new mongoose.Schema({
         business_type: {
             type: String
         },
+        franchise: {
+            type: String
+        },
         registration_no: {
             type: String
         },
@@ -120,10 +123,16 @@ var BusinessPermitApplication = new mongoose.Schema({
         ctc_no: {
             type: String
         },
+        pin: {
+            type: String
+        },
         business_area: {
             type: Number
         },
-        no_of_employees: {
+        employees_establishment: {
+            type: Number
+        },
+        employees_residing: {
             type: Number
         },
         telno: {
@@ -138,10 +147,29 @@ var BusinessPermitApplication = new mongoose.Schema({
         enjoying_tax_incentive: {
             type: Boolean
         },
-        specify_tax_incentive: {
+        specify_entity: {
             type: String
         },
-        line_of_business: []
+        line_of_business: [{
+            code: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+            units: {
+                type: Number
+            },
+            capital_investment: {
+                type: Number
+            },
+            essential: {
+                type: Number
+            },
+            non_essential: {
+                type: Number
+            }
+        }]
     },
     business_address: {
         bldg_no: {
@@ -227,7 +255,8 @@ var BusinessPermitApplication = new mongoose.Schema({
             type: String
         },
         attachment: {}
-    }]
+    }],
+    requirements: []
 })
 
 BusinessPermitApplication.pre('save', async function (callback) {

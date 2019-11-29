@@ -1,4 +1,4 @@
-import axois from 'axios'
+import axios from 'axios'
 
 export default class BusinessPermitAPI {
     constructor(token) {
@@ -13,7 +13,7 @@ export default class BusinessPermitAPI {
      * @param {Object} data 
      */
     createPermit(data) {
-        return axios.post('/permit', data);
+        return axios.post('/permits/business', data);
     }
 
     /**
@@ -21,7 +21,7 @@ export default class BusinessPermitAPI {
      * @param {Object} data 
      */
     getPermit() {
-        return axios.get('/permit');
+        return axios.get('/permits/business');
     }
 
 }
