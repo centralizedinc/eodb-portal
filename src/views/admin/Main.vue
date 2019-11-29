@@ -15,13 +15,14 @@
           </a-row>
         </a-card>
          <a-menu 
+              @click="navigate"
               theme="dark" 
               mode="inline" 
               v-model="active_menu"
-              :defaultSelectedKeys="['1']"
+              :defaultSelectedKeys="['/admin/app']"
               style="background-color: #242B30; margin-top:5vh"  >
-        <a-menu-item key="1">
-          <a-icon type="appstore" :style="getMenuStyle('1')" />
+        <a-menu-item key="/admin/app">
+          <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
           <span>Dashboard</span>
         </a-menu-item>
         <a-menu-item key="2">
@@ -125,6 +126,16 @@ export default {
         return 'font-size:12px; color:#FFFFFF'
       }
       
+    },
+    navigate(e){
+      if (e.key === "logout") {
+        this.logout();
+      }else {
+        this.$router.push(e.key);
+      }
+    },
+    logout(){
+      this.$router.push('/admin')
     }
   }
 }
