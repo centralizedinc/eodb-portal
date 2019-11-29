@@ -1,55 +1,54 @@
 <template>
   <a-row type="flex" :gutter="16">
     <a-col :span="10">
-        <a-card style="background-color: #242B30">
-            <a-row type="flex" align="middle">
-              <a-col :span="24">
-                  <span style="color:#B6C2C9; font-weight:bold">TOTAL COLLECTIONS   <a-icon type="exclamation-circle"></a-icon></span>                                  
-              </a-col>
-              <a-col :span="10">
-                <h2 style="color: #FFFFFF">{{formatCurrency(Math.floor(Math.random()* 12345678.89))}}</h2>
-                <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{Math.floor(Math.random()* 50)}}% compare to last week</span>                                 
-              </a-col>
-              <a-col :span="14">
-                  <apexchart type="line" :options="chartOptions" :series="series" />
-              </a-col>
-              <a-col :span="24" style="margin-top:-5vh">
-                  <a-divider style="color:#B6C2C9"></a-divider>
-              </a-col>
-             
-            </a-row>
-        </a-card>
+        <collection-card></collection-card>
     </a-col>
     <a-col :span="7">
-        <a-card style="background-color: #242B30">
-            <a-row >
-              <a-col :span="24">
-                  <span style="color:#B6C2C9; font-weight:bold">TRANSACTIONS   <a-icon type="exclamation-circle"></a-icon></span>                  
-              </a-col>
-              
-            </a-row>
-        </a-card>
+        <transaction-card></transaction-card>
     </a-col>
     <a-col :span="7">
-        <a-card style="background-color: #242B30">
-            <a-row >
-              <a-col :span="24">
-                  <span style="color:#B6C2C9; font-weight:bold">REGISTERED USERS   <a-icon type="exclamation-circle"></a-icon></span>
-                  
-              </a-col>
-            </a-row>
-        </a-card>
+        <registration-card></registration-card>
+    </a-col>
+    <!-- Response TIME -->
+    <a-col :span="16" style="margin-top: 2vh">
+        <response-time-card></response-time-card>
+    </a-col>
+    <a-col :span="8" style="margin-top: 2vh">
+        <emergency-card></emergency-card>
+    </a-col>
+     <a-col :span="12" style="margin-top: 2vh">
+        <department-rate></department-rate>
+    </a-col>
+    <a-col :span="12" style="margin-top: 2vh">
+        <top-performers></top-performers>
     </a-col>
   </a-row>
 </template>
 
 <script>
+import CollectionCard from '@/components/admin/CollectionCard'
+import TransactionCard from '@/components/admin/TransactionCard'
+import RegistrationCard from '@/components/admin/RegistrationCard'
+import ResponseTimeCard from '@/components/admin/ResponseTimeCard'
+import EmergencyCard from '@/components/admin/EmergencyCard'
+import DepartmentRate from '@/components/admin/DepartmentRate'
+import TopPerformers from '@/components/admin/TopPerformers'
+
 export default {
+    components:{
+        CollectionCard,
+        TransactionCard,
+        RegistrationCard,
+        ResponseTimeCard,
+        EmergencyCard,
+        DepartmentRate,
+        TopPerformers
+    },
     data(){
         return {
             series: [{
                 name: 'Likes',
-                data: [4, 3, 10, 9, 29, 19, 22, 9, 12, 7, 19, 5, 13]
+                data: [Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100) ]
             }],
             chartOptions: {
                 chart: {

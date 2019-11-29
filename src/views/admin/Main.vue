@@ -5,7 +5,7 @@
         <a-card style="border: none; height: 20vh; width: 100%;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');">
           <a-row type="flex" justify="start" align="middle">
             <a-col :span="10">
-              <a-avatar shape="square" :size="64" src="http://lorempixel.com/200/200/people/">
+              <a-avatar style="border: 1px solid #FFFFFF" shape="square" :size="64" src="http://lorempixel.com/200/200/people/">
               </a-avatar>              
             </a-col>
             <a-col :span="14">
@@ -67,9 +67,24 @@
          </a-menu>          
       </a-layout-sider>
       <a-layout>
-        <a-layout-header></a-layout-header>
+        <a-layout-header theme="dark" style="background-color: #242B30">
+          <a-row>
+            <a-col :span="20">
+              <h3 style="color:#FFFFFF; font-weight:bold">SmartJuan</h3>
+            </a-col>
+            <a-col :span="1">
+              <a-icon style="color:#FFFFFF;" type="mail"></a-icon>
+            </a-col>
+             <a-col :span="1">
+              <a-icon style="color:#FFFFFF;" type="setting"></a-icon>
+            </a-col>
+            <a-col :span="2">
+              <a-avatar style="border: 1px solid #FFFFFF; margin-left: 20px" shape="square" :size="36" src="http://lorempixel.com/200/200/people/"/>              
+            </a-col>
+          </a-row>
+        </a-layout-header>
         <a-layout-content style="margin-left:2vh; margin-right:2vh; margin-top:2vh">
-          <a-row type="flex" justify="end" >
+          <a-row type="flex" justify="end" align="middle" >
             <a-col :span="18">
               <h1>{{$route.name}}</h1>
             </a-col>

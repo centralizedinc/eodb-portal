@@ -72,7 +72,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue'),
       children: [{
         path: '',
-        name: 'Admin Dashboard',
+        name: 'Dashboard',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
       },
       {
