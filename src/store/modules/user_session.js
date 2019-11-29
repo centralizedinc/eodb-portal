@@ -5,7 +5,8 @@ function initialState() {
             lname:'',
             avatar:'',
             email:''
-        }
+        },
+        token: ''
     }
 }
 

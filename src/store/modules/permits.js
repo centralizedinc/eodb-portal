@@ -1,7 +1,9 @@
+import BusinessPermitAPI from '../../api/BusinessPermitAPI';
+
 function initialState() {
     return {
         records: [],
-        permits: []
+        permits: [],
 
     }
 }
@@ -18,7 +20,12 @@ const mutations = {
 }
 
 const actions = {
-
+    CREATE_BUSINESS_PERMIT(context, data){
+        return new BusinessPermitAPI(context.rootState.user_session.token).createPermit(data);
+    },
+    GET_BUSINESS_PERMIT(context, data){
+        return new BusinessPermitAPI(context.rootState.user_session.token).getPermit();
+    }
 }
 
 export default {

@@ -1,4 +1,6 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment-reworked').MongooseAutoIncrementID;
+
 var DocketSchema = new mongoose.Schema({
     auto_id: {
         type: Number
