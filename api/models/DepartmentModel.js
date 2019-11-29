@@ -28,4 +28,4 @@ DepartmentSchema.pre('findOneAndUpdate', function (callback) {
     callback();
 });
 
-module.exports = mongoose.model('approval_departments', DepartmentSchema)
+module.exports = mongoose.model('departments', DepartmentSchema)

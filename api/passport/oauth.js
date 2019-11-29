@@ -92,7 +92,6 @@ passport.use('signup', new LocalStrategy({
 }, (req, email, password, done) => {
     const {
         name,
-        tin,
         confirm
     } = req.body;
     if (!email) return done({

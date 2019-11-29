@@ -233,4 +233,4 @@ BusinessPermitSchema.pre('findOneAndUpdate', function (callback) {
     callback();
 });
 
-module.exports = mongoose.model('departments', BusinessPermitSchema)
+module.exports = mongoose.model('business_permits', BusinessPermitSchema)

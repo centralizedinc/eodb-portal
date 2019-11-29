@@ -16,6 +16,7 @@ export default {
     console.log("data :", data);
     if (this.platform !== "local") {
       if (this.platform === "facebook") {
+        console.log("facebook data: " + JSON.stringify(data) ) 
         this.$store.commit("FB_LOGIN", JSON.parse(data));
       } else if (this.platform === "google") {
         this.$store.commit("GOOGLE_LOGIN", JSON.parse(data));

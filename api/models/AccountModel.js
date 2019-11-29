@@ -31,7 +31,6 @@ var AccountModelSchema = new mongoose.Schema({
         default: new Date()
     },
     avatar: {
-        type: String
     },
     status: {
         type: Number,
