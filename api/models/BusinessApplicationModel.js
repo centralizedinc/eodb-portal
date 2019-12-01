@@ -169,6 +169,20 @@ var BusinessPermitApplication = new mongoose.Schema({
             non_essential: {
                 type: Number
             }
+        }],
+        measure_or_pax: [{
+            unit: {
+                type: Number
+            },
+            capacity: {
+                type: Number
+            },
+            measure_or_pax: {
+                type: String
+            },
+            line_of_business: {
+                type: String
+            }
         }]
     },
     business_address: {

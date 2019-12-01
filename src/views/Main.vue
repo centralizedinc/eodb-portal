@@ -1,7 +1,7 @@
 <template>
     <a-layout class="main-layout">
       <a-affix :offsetTop="0">
-        <a-layout-header style="height: 10vh; background: linear-gradient(to right, #00f, #003 )">
+        <a-layout-header style="height: 60px; background: linear-gradient(to right, #00f, #003 )">
 
         </a-layout-header>
       </a-affix>

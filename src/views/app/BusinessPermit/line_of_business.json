@@ -1,0 +1,778 @@
+[
+    {
+        "code": "01411",
+        "description": "Beef cattle farming (including feed lot fattening)"
+    },
+    {
+        "code": "01430",
+        "description": "Dairy farming"
+    },
+    {
+        "code": "01450",
+        "description": "Hog farming"
+    },
+    {
+        "code": "01461",
+        "description": "Chicken production, broiler"
+    },
+    {
+        "code": "01462",
+        "description": "Chicken production, layer"
+    },
+    {
+        "code": "01463",
+        "description": "Chicken production, native"
+    },
+    {
+        "code": "01475",
+        "description": "Raising of game fowl"
+    },
+    {
+        "code": "01496",
+        "description": "Raising of semi-domesticated or wild animals including birds, reptiles, insects (eg butterfly) and turtles"
+    },
+    {
+        "code": "01499",
+        "description": "Raising of other animals, nec"
+    },
+    {
+        "code": "01582",
+        "description": "Growing of seedlings for reforestation"
+    },
+    {
+        "code": "03111",
+        "description": "Ocean fishing, commercial (using vessels over 3 tons)"
+    },
+    {
+        "code": "03211",
+        "description": "Operation of freshwater fishpond, except fish breeding farms and nurseries"
+    },
+    {
+        "code": "03212",
+        "description": "Operation of freshwater fish pens and fish cage"
+    },
+    {
+        "code": "07221",
+        "description": "Gold ore mining"
+    },
+    {
+        "code": "08105",
+        "description": "Sand and gravel quarrying"
+    },
+    {
+        "code": "10120",
+        "description": "Production processing and preserving of meat and meat products"
+    },
+    {
+        "code": "10203",
+        "description": "Smoking of fish and other marine products"
+    },
+    {
+        "code": "10610",
+        "description": "Rice/corn milling"
+    },
+    {
+        "code": "10711",
+        "description": "Baking of bread, cakes, pastries, pies and similar perishable bakery products, including hopia and doughnut making"
+    },
+    {
+        "code": "10770",
+        "description": "Coffee roasting and processing"
+    },
+    {
+        "code": "13119",
+        "description": "Preparation of textiles, n.e.c"
+    },
+    {
+        "code": "13130",
+        "description": "Finishing of textiles"
+    },
+    {
+        "code": "14199",
+        "description": "Manufacture of other wearing apparel, n.e.c."
+    },
+    {
+        "code": "14210",
+        "description": "Custom tailoring"
+    },
+    {
+        "code": "14220",
+        "description": "Custom dressmaking"
+    },
+    {
+        "code": "18122",
+        "description": "Bookbinding and related work"
+    },
+    {
+        "code": "18129",
+        "description": "Service activities related to printing, n.e.c."
+    },
+    {
+        "code": "20294",
+        "description": "Manufacture of glues and adhesive"
+    },
+    {
+        "code": "22112",
+        "description": "Retreading and rebuilding of rubber tires"
+    },
+    {
+        "code": "22204",
+        "description": "Manufacture of plastic pipes and tubes"
+    },
+    {
+        "code": "25934",
+        "description": "Manufacture of blacksmithing tools and welding shop operation"
+    },
+    {
+        "code": "29201",
+        "description": "Manufacture of bodies (coachwork) for motor vehicles"
+    },
+    {
+        "code": "30914",
+        "description": "Manufacture of side cars"
+    },
+    {
+        "code": "31010",
+        "description": "Manufacture of wood furniture"
+    },
+    {
+        "code": "36000",
+        "description": "Water collection, treatment and supply"
+    },
+    {
+        "code": "38300",
+        "description": "Materials recovery"
+    },
+    {
+        "code": "41001",
+        "description": "Residential (dwelling) building constructions"
+    },
+    {
+        "code": "42200",
+        "description": "Construction of utility projects"
+    },
+    {
+        "code": "43220",
+        "description": "Plumbing, heat and air-conditioning installation"
+    },
+    {
+        "code": "43309",
+        "description": "Other building completion and finishing activities"
+    },
+    {
+        "code": "43900",
+        "description": "Other specialized construction activities"
+    },
+    {
+        "code": "45201",
+        "description": "Repair of motor vehicles, including overhauling"
+    },
+    {
+        "code": "45203",
+        "description": "Vulcanizing or preparing of tires for motor vehicles"
+    },
+    {
+        "code": "45209",
+        "description": "Maintenance of motor vehicle, n.e.c."
+    },
+    {
+        "code": "45302",
+        "description": "Retail sale of motor vehicles parts and accessories"
+    },
+    {
+        "code": "45304",
+        "description": "Retail sale of motor vehicle tires and batteries"
+    },
+    {
+        "code": "45401",
+        "description": "Sale of motorcycles and their parts and components (Wholesale)"
+    },
+    {
+        "code": "45501",
+        "description": "Sale of motorcycles and their parts and components (Retail)"
+    },
+    {
+        "code": "46203",
+        "description": "Wholesale of coconut and coconut by-products"
+    },
+    {
+        "code": "46304",
+        "description": "Wholesale of rice, corn and other cereals"
+    },
+    {
+        "code": "46610",
+        "description": "Wholesale of solid, liquid and gaseous fuels and related products"
+    },
+    {
+        "code": "46635",
+        "description": "Wholesale of hardware, paints, varnishes and lacquers, and plumbing materials, including fittings and fixtures"
+    },
+    {
+        "code": "46637",
+        "description": "Wholesale of wallpaper and floor coverings"
+    },
+    {
+        "code": "46900",
+        "description": "Non-specialized wholesale trade"
+    },
+    {
+        "code": "47111",
+        "description": "Retail selling in groceries"
+    },
+    {
+        "code": "47112",
+        "description": "Retail selling in supermarkets"
+    },
+    {
+        "code": "47113",
+        "description": "Retail selling in sari-sari stores"
+    },
+    {
+        "code": "47199",
+        "description": "Retail selling in non-specialized stores, nec"
+    },
+    {
+        "code": "47211",
+        "description": "Retail sale of fruits and vegetables"
+    },
+    {
+        "code": "47212",
+        "description": "Retail sale of eggs and dairy products"
+    },
+    {
+        "code": "47213",
+        "description": "Retail sale of meat and poultry products"
+    },
+    {
+        "code": "47215",
+        "description": "Retail sale of fish and other seafoods (fresh and dried)"
+    },
+    {
+        "code": "47216",
+        "description": "Retail sale of rice, corn and other cereals"
+    },
+    {
+        "code": "47221",
+        "description": "Retail sale of alcoholic beverages (not consumed on the spot)"
+    },
+    {
+        "code": "47222",
+        "description": "Retail sale of non-alcohol beverages"
+    },
+    {
+        "code": "47230",
+        "description": "Retail sale of tobacco products in specialized stores"
+    },
+    {
+        "code": "47300",
+        "description": "Retail sale of automotive fuel in specialized stores"
+    },
+    {
+        "code": "47412",
+        "description": "Retail sale of computer peripheral equipment"
+    },
+    {
+        "code": "47414",
+        "description": "Retail sale of cellular phones, parts and accessories"
+    },
+    {
+        "code": "47421",
+        "description": "Retail sale of radio and television, including parts and accessories"
+    },
+    {
+        "code": "47521",
+        "description": "Retail sale of hardware materials"
+    },
+    {
+        "code": "47523",
+        "description": "Retail sale of lumber"
+    },
+    {
+        "code": "47527",
+        "description": "Retail sale of paints, varnishes and lacquers"
+    },
+    {
+        "code": "47529",
+        "description": "Retail sale of construction supplies, n.e.c."
+    },
+    {
+        "code": "47530",
+        "description": "Retail sale of carpets, rugs, wall and floor coverings in specialized stores"
+    },
+    {
+        "code": "47591",
+        "description": "Retail sale of home furnishing, furniture and fixtures, including lamps and lamp shades"
+    },
+    {
+        "code": "47592",
+        "description": "Retail sale of chinaware, glassware, earthenware and utensils"
+    },
+    {
+        "code": "47593",
+        "description": "Retail sale of household appliances, articles and equipment"
+    },
+    {
+        "code": "47594",
+        "description": "Retail sale of musical instruments and records, tapes and cartridges"
+    },
+    {
+        "code": "47599",
+        "description": "Retail sale of electrical household appliances, furniture, lighting equipment and other household articles in specialized stores, n.e.c."
+    },
+    {
+        "code": "47610",
+        "description": "Retail sale of books, newspapers and stationery in specialized stores"
+    },
+    {
+        "code": "47631",
+        "description": "Retail sale of sporting goods and athletic supplies"
+    },
+    {
+        "code": "47632",
+        "description": "Retail sale of marine supplies, including nets and gears"
+    },
+    {
+        "code": "47633",
+        "description": "Retail sale of camping goods and bicycles"
+    },
+    {
+        "code": "47711",
+        "description": "Retail sale of wearing apparel, except footwear"
+    },
+    {
+        "code": "47713",
+        "description": "Retail sale of footwear, all kinds"
+    },
+    {
+        "code": "47719",
+        "description": "Retail sale of other clothing, footwear and leather articles in specialized stores, n.e.c."
+    },
+    {
+        "code": "47721",
+        "description": "Retail sale of drugs and pharmaceutical goods"
+    },
+    {
+        "code": "47723",
+        "description": "Retail sale of perfumery, cosmetic and toilet articles"
+    },
+    {
+        "code": "47731",
+        "description": "Retail sale of feeds, fertilizers and insecticides"
+    },
+    {
+        "code": "47734",
+        "description": "Retail sale of jewelry, watches and clocks"
+    },
+    {
+        "code": "47735",
+        "description": "Retail sale of fresh and artificial flowers and plants"
+    },
+    {
+        "code": "47738",
+        "description": "Retail sale of optical goods and supplies"
+    },
+    {
+        "code": "47739",
+        "description": "Other retail sale of new goods in specialized stores, nec"
+    },
+    {
+        "code": "47741",
+        "description": "Retail sale of second-hand clothing, footwear and leather articles"
+    },
+    {
+        "code": "47750",
+        "description": "Retail sale of liquefied petroleum gas and other fuel products"
+    },
+    {
+        "code": "47810",
+        "description": "Retail sale via stalls and markets of food, beverages and tobacco products"
+    },
+    {
+        "code": "47891",
+        "description": "Retail sale of prepaid cards"
+    },
+    {
+        "code": "47893",
+        "description": "Retail sale of electronic load"
+    },
+    {
+        "code": "47994",
+        "description": "Retail sale of water (including distribution)"
+    },
+    {
+        "code": "47999",
+        "description": "Other retail sale not in stores, stalls or markets, nec"
+    },
+    {
+        "code": "49209",
+        "description": "Other transport via buses, nec"
+    },
+    {
+        "code": "49323",
+        "description": "Public utility cars and taxicabs operation"
+    },
+    {
+        "code": "49332",
+        "description": "Freight truck operation"
+    },
+    {
+        "code": "52109",
+        "description": "Storage and warehousing, nec"
+    },
+    {
+        "code": "52291",
+        "description": "Freight forwarding services"
+    },
+    {
+        "code": "55101",
+        "description": "Hotels and motels"
+    },
+    {
+        "code": "55102",
+        "description": "Resort hotels"
+    },
+    {
+        "code": "55105",
+        "description": "Camping sites/facilities"
+    },
+    {
+        "code": "55109",
+        "description": "Other short-term accommodation activities, nec"
+    },
+    {
+        "code": "56101",
+        "description": "Restaurants"
+    },
+    {
+        "code": "56102",
+        "description": "Fast-food chains"
+    },
+    {
+        "code": "56103",
+        "description": "Cafeterias"
+    },
+    {
+        "code": "56104",
+        "description": "Refreshment stands, kiosks and counters"
+    },
+    {
+        "code": "56109",
+        "description": "Other restaurants and mobile food service activities, nec"
+    },
+    {
+        "code": "56210",
+        "description": "Event catering"
+    },
+    {
+        "code": "56301",
+        "description": "Night clubs"
+    },
+    {
+        "code": "56302",
+        "description": "Bars and cocktail lounges"
+    },
+    {
+        "code": "56303",
+        "description": "Cafe or coffee shops"
+    },
+    {
+        "code": "61101",
+        "description": "Wired (landline) services"
+    },
+    {
+        "code": "61102",
+        "description": "Wired internet access service activities (eg DSL, leased line, dial-up)"
+    },
+    {
+        "code": "61202",
+        "description": "Mobile telecommunications services"
+    },
+    {
+        "code": "61300",
+        "description": "Satellite telecommunications activities"
+    },
+    {
+        "code": "64191",
+        "description": "Expanded commercial banking (universal banking)"
+    },
+    {
+        "code": "64193",
+        "description": "Savings and mortgage banking"
+    },
+    {
+        "code": "64196",
+        "description": "Regular rural banking"
+    },
+    {
+        "code": "64922",
+        "description": "Lending investor activities"
+    },
+    {
+        "code": "64930",
+        "description": "Pawnshop operations"
+    },
+    {
+        "code": "65110",
+        "description": "Life insurance"
+    },
+    {
+        "code": "65120",
+        "description": "Non-life insurance"
+    },
+    {
+        "code": "66130",
+        "description": "Foreign exchange dealing"
+    },
+    {
+        "code": "68110",
+        "description": "Real estate buying, selling, renting, leasing and operating of self-owned/leased apartment buildings, non-residential and dwellings"
+    },
+    {
+        "code": "68120",
+        "description": "Real estate buying, developing, subdividing and selling"
+    },
+    {
+        "code": "68130",
+        "description": "Cemetery and columbarium development, selling, renting, leasing and operating of self-owned cemetery/columbarium (including burial crypt)"
+    },
+    {
+        "code": "68190",
+        "description": "Other real estate activities with own or leased property"
+    },
+    {
+        "code": "68191",
+        "description": "Renting or leasing services of Papag (Bamboo bed)"
+    },
+    {
+        "code": "68200",
+        "description": "Real estate activities on a fee or contract basis"
+    },
+    {
+        "code": "69100",
+        "description": "Legal activities"
+    },
+    {
+        "code": "69200",
+        "description": "Accounting, bookkeeping and auditing activities; tax consultancy"
+    },
+    {
+        "code": "70100",
+        "description": "Activities of head offices"
+    },
+    {
+        "code": "70200",
+        "description": "Management consultancy activities"
+    },
+    {
+        "code": "71103",
+        "description": "Land surveying services"
+    },
+    {
+        "code": "74201",
+        "description": "Digital photograph processing"
+    },
+    {
+        "code": "74206",
+        "description": "Microfilming activities"
+    },
+    {
+        "code": "75000",
+        "description": "Veterinary activities"
+    },
+    {
+        "code": "77291",
+        "description": "Renting of wearing apparel"
+    },
+    {
+        "code": "77296",
+        "description": "Renting of audio-video machines, tapes and records"
+    },
+    {
+        "code": "77305",
+        "description": "Renting of construction and civil engineering machinery and equipment"
+    },
+    {
+        "code": "77306",
+        "description": "Renting of computers and computer peripherals equipment"
+    },
+    {
+        "code": "79110",
+        "description": "Travel agency activities"
+    },
+    {
+        "code": "80100",
+        "description": "Private security activities"
+    },
+    {
+        "code": "81292",
+        "description": "Pest control services, non-agricultural"
+    },
+    {
+        "code": "82191",
+        "description": "Photocopying service activities"
+    },
+    {
+        "code": "82199",
+        "description": "Other specialized office support activities"
+    },
+    {
+        "code": "82212",
+        "description": "Sales and marketing (including telemarketing) activities"
+    },
+    {
+        "code": "82300",
+        "description": "Organization of convention and trade shows"
+    },
+    {
+        "code": "82910",
+        "description": "Activities of collection agencies and credit bureaus"
+    },
+    {
+        "code": "82990",
+        "description": "Other business support service activities, n.e.c."
+    },
+    {
+        "code": "85112",
+        "description": "Private pre-primary/pre-school education (Non-stock/Non Profit)"
+    },
+    {
+        "code": "85113",
+        "description": "Private pre-primary/pre-school education (Stock)"
+    },
+    {
+        "code": "85212",
+        "description": "Private primary/elementary education (Non-stock/Non Profit)"
+    },
+    {
+        "code": "85213",
+        "description": "Private primary/elementary education (Stock)"
+    },
+    {
+        "code": "85312",
+        "description": "Private general secondary education (Non-stock/Non Profit)"
+    },
+    {
+        "code": "85313",
+        "description": "Private general secondary education (Stock)"
+    },
+    {
+        "code": "85332",
+        "description": "Private technical and vocational secondary education (Non Stock/Non Profit)"
+    },
+    {
+        "code": "85333",
+        "description": "Private technical and vocational secondary education (Stock)"
+    },
+    {
+        "code": "85402",
+        "description": "Private higher education (Non-stock/Non Profit)"
+    },
+    {
+        "code": "85403",
+        "description": "Private higher education (Stock)"
+    },
+    {
+        "code": "85590",
+        "description": "Other education n.e.c."
+    },
+    {
+        "code": "86121",
+        "description": "Private general hospital activities"
+    },
+    {
+        "code": "86221",
+        "description": "Private medical activities"
+    },
+    {
+        "code": "86222",
+        "description": "Private dental and laboratory services"
+    },
+    {
+        "code": "86229",
+        "description": "Private medical, dental and other health activities, n.e.c."
+    },
+    {
+        "code": "86900",
+        "description": "Other human health activities"
+    },
+    {
+        "code": "87901",
+        "description": "Child care services"
+    },
+    {
+        "code": "92000",
+        "description": "Gambling and betting activities"
+    },
+    {
+        "code": "92001",
+        "description": "Lotto Outlet Operation"
+    },
+    {
+        "code": "92002",
+        "description": "Jai-Alai Online Gaming"
+    },
+    {
+        "code": "93110",
+        "description": "Operation of sports facilities"
+    },
+    {
+        "code": "93299",
+        "description": "Other amusement and recreation activities, n.e.c."
+    },
+    {
+        "code": "94990",
+        "description": "Activities of other membership organizations, n.e.c."
+    },
+    {
+        "code": "95110",
+        "description": "Repair of computers and peripheral equipment"
+    },
+    {
+        "code": "95120",
+        "description": "Repair of communication equipment"
+    },
+    {
+        "code": "95210",
+        "description": "Repair of consumer electronics"
+    },
+    {
+        "code": "95231",
+        "description": "Repair of boots and shoes"
+    },
+    {
+        "code": "95290",
+        "description": "Repair of personal and household goods, n.e.c."
+    },
+    {
+        "code": "96101",
+        "description": "Spa activities"
+    },
+    {
+        "code": "96104",
+        "description": "Beauty treatment and personal grooming activities"
+    },
+    {
+        "code": "96105",
+        "description": "Beauty parlor activities"
+    },
+    {
+        "code": "96106",
+        "description": "Barber shop activities"
+    },
+    {
+        "code": "96109",
+        "description": "Other personal services for wellness activities, n.e.c."
+    },
+    {
+        "code": "96210",
+        "description": "Washing and dry cleaning of textile fur products"
+    },
+    {
+        "code": "96300",
+        "description": "Funeral and related activities"
+    },
+    {
+        "code": "96905",
+        "description": "Coin-operated machines activities"
+    }
+]

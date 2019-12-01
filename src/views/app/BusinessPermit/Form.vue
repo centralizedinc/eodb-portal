@@ -116,7 +116,8 @@ export default {
           email: "",
           enjoying_tax_incentive: false,
           specify_entity: "",
-          line_of_business: []
+          line_of_business: [],
+          measure_or_pax: []
         },
         business_address: {
           bldg_no: "",
@@ -161,6 +162,7 @@ export default {
         .dispatch("CREATE_BUSINESS_PERMIT", this.form)
         .then(result => {
           console.log("result.data :", result.data);
+          this.$router.push('/app');
         })
         .catch(err => {
           console.log("err :", err);
