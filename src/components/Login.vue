@@ -15,6 +15,7 @@
           v-model="account.password"
           placeholder="Password"
           :type="reveal?'text':'password'"
+          
         >
           <a-icon slot="prefix" type="lock" />
           <a-icon
