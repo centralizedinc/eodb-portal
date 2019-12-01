@@ -2,7 +2,9 @@
   <div id="components-layout-demo-basic">    
     <a-layout>
       <a-layout-sider :trigger="null" collapsible v-model="collapsed" theme="dark"  :width="220" style="background-color: #242B30">
-        <a-card style="border: none; height: 20vh; width: 100%;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');">
+        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');"> 
+        <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">
+          
           <a-row type="flex" justify="start" align="middle">
             <a-col :span="10">
               <a-avatar style="border: 1px solid #FFFFFF" shape="square" :size="64" src="http://lorempixel.com/200/200/people/">
@@ -13,7 +15,9 @@
               <p style="font-size:10px; color: #FFFFFF">Department Head</p>          
             </a-col>
           </a-row>
+          
         </a-card>
+        </div>
          <a-menu 
               @click="navigate"
               theme="dark" 
@@ -25,8 +29,8 @@
           <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
           <span>Dashboard</span>
         </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="snippets" :style="getMenuStyle('2')"/>
+        <a-menu-item key="/admin/app/applications">
+          <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')"/>
           <span>Applications</span>
         </a-menu-item>
         <a-menu-item key="3">

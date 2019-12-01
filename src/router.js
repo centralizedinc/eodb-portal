@@ -82,9 +82,9 @@ export default new Router({
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
       },
       {
-        path: 'permits',
-        name: 'Permit Applications',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Permits.vue'),
+        path: 'applications',
+        name: 'Applications',
+        component: () => import(/* webpackChunkName: "news" */ './views/admin/Applications.vue'),
       },
       {
         path: 'taxes',
