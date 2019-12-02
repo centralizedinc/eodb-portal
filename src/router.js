@@ -40,19 +40,25 @@ export default new Router({
     },
     {
       path: '/app',
-      component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      // component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      component: () => import('./views/Main.vue'),
       children: [
         {
           path: '',
           component: () => import('./views/app/Home')
         },
-        {
-          path: 'permits',
-          component: () => import('@/components/permits/Transactions')
-        },
+        // {
+        //   path: 'permits',
+        //   component: () => import('@/components/permits/Transactions')
+        // },
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
+        },
+        {
+          path: 'permits/business',
+          name: "Business Permit",
+          component: () => import("./views/app/BusinessPermit/Form.vue")
         }
       ]
     },
@@ -72,13 +78,13 @@ export default new Router({
       component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue'),
       children: [{
         path: '',
-        name: 'Admin Dashboard',
+        name: 'Dashboard',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
       },
       {
-        path: 'permits',
-        name: 'Permit Applications',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Permits.vue'),
+        path: 'applications',
+        name: 'Applications',
+        component: () => import(/* webpackChunkName: "news" */ './views/admin/Applications.vue'),
       },
       {
         path: 'taxes',
