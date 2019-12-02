@@ -91,6 +91,11 @@ export default new Router({
         name: 'Local Taxes Applications',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Taxes.vue'),
       }]
+    },
+    {
+      path: '/pdf',
+      name: 'PDF View',
+      component: () => import('./components/PdfView.vue')
     }
   ],
   scrollBehavior(to, from, savedPosition) {
