@@ -101,6 +101,11 @@ export default new Router({
         name: 'User Roles',
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/UserRoles.vue'),
       }]
+    },
+    {
+      path: '/pdf',
+      name: 'PDF View',
+      component: () => import('./components/PdfView.vue')
     }
   ],
   scrollBehavior(to, from, savedPosition) {
