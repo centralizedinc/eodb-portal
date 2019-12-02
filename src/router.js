@@ -40,8 +40,8 @@ export default new Router({
     },
     {
       path: '/app',
-      // component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
-      component: () => import('./views/Main.vue'),
+      component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      // component: () => import('./views/Main.vue'),
       children: [
         {
           path: '',
@@ -54,6 +54,10 @@ export default new Router({
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
+        },
+        {
+          path: 'account',
+          component: () => import('./views/app/Profile')
         },
         {
           path: 'permits/business',

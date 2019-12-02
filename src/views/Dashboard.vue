@@ -72,7 +72,7 @@
             <a-icon type="file-protect" />
             <span>My Taxes</span>
           </a-menu-item>
-          <a-menu-item key="/app/accounts">
+          <a-menu-item key="/app/account">
             <a-icon type="user-add" />
             <span>My Account</span>
           </a-menu-item>
