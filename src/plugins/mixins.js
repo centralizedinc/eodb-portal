@@ -13,6 +13,14 @@ export default {
                 deepCopy(obj) {
                     return JSON.parse(JSON.stringify(obj));
                 },
+                getPlatformIcon(platform){
+                    console.log('platform::::', platform)
+                    if(platform === 'facebook' || platform === 'google'){
+                        return platform
+                    }else{
+                        return 'mail';
+                    }
+                },
                 formatDate(date, type) {
                     var dt = new Date();
                     if (date) {

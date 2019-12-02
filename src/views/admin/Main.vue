@@ -37,18 +37,18 @@
           <a-icon type="reconciliation" :style="getMenuStyle('3')" />
           <span>Collections</span>
         </a-menu-item>
-        <a-menu-item key="4">
-          <a-icon type="team" :style="getMenuStyle('4')" />
+        <a-menu-item key="/admin/app/users">
+          <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
           <span>Users</span>
         </a-menu-item>
         <a-sub-menu key="5" :style="`background-color: #242B30`" >
           <span slot="title"><a-icon type="setting" /><span>Settings</span></span>          
-          <a-menu-item key="51">
-             <a-icon type="bank" :style="getMenuStyle('51')" />
+          <a-menu-item key="/admin/app/departments">
+             <a-icon type="bank" :style="getMenuStyle('/admin/app/departments')" />
             <span>Departments</span>
           </a-menu-item>
-          <a-menu-item key="52">
-            <a-icon type="cluster" :style="getMenuStyle('52')" />
+          <a-menu-item key="/admin/app/roles">
+            <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
             <span>User Roles</span>
           </a-menu-item>
           <a-menu-item key="53">

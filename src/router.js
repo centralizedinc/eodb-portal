@@ -74,26 +74,36 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: () => import(/* webpackChunkName: "news" */ './views/admin/Login.vue'),
+      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/Login.vue'),
     },
     {
       path: '/admin/app',
       name: 'Main',
-      component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue'),
+      component: () => import(/* webpackChunkName: "adminMain" */ './views/admin/Main.vue'),
       children: [{
         path: '',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "adminDashboard" */ './views/admin/Dashboard.vue'),
       },
       {
         path: 'applications',
         name: 'Applications',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Applications.vue'),
+        component: () => import(/* webpackChunkName: "adminApplications" */ './views/admin/Applications.vue'),
       },
       {
-        path: 'taxes',
-        name: 'Local Taxes Applications',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Taxes.vue'),
+        path: 'users',
+        name: 'Users',
+        component: () => import(/* webpackChunkName: "adminUsers" */ './views/admin/Users.vue'),
+      },
+      {
+        path: 'departments',
+        name: 'Departments',
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Departments.vue'),
+      },
+      {
+        path: 'roles',
+        name: 'User Roles',
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/UserRoles.vue'),
       }]
     },
     {

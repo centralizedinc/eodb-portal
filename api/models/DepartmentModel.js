@@ -3,6 +3,9 @@ var DepartmentSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    description:{
+        type:String
+    },
     date_created: {
         type: Date,
         default: new Date()
