@@ -268,7 +268,7 @@ var BusinessPermitApplication = new mongoose.Schema({
         title: {
             type: String
         },
-        attachment: {}
+        files: []
     }],
     requirements: []
 })
