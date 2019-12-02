@@ -507,63 +507,55 @@ export default {
       });
     },
     validate() {
-      var errors = false
-      this.validation.name.first = "";
-      this.validation.name.last = "";
-      this.validation.email = "";
-      this.validation.password = "";
-      this.validation.confirm = "";
-      
+      var errors = true
+     
       if (!this.account.name.first) {
         this.validation.name.first.status = "error";
         this.validation.name.first.message = "Please input first name";
         // return false;
-        errors = true
+        errors = false
       }
       if (!this.account.name.last) {
         this.validation.name.last.status = "error";
         this.validation.name.last.message = "Please input last name";
         // return false;
-        errors = true
+        errors = false
 
       }
       if (!this.account.email) {
         this.validation.email.status = "error";
         this.validation.email.message = "Please input email";
         // return false;
-        errors = true
+        errors = false
 
       }
-      if (this.account.password) {
+      // if (this.account.password) {
+      //   console.log("this.account.password")
         if (this.account.confirm && this.account.password !== this.account.confirm) {
+          console.log("this.account.confirm && this.account.password !== this.account.confirm")
           this.validation.password.status = "error";
-          this.validation.password.message =
-            "Password and Confirm Password does not match";
+          this.validation.password.message = "Password and Confirm Password does not match";
           // return false;
-          errors = true
+          errors = false
 
         }
-      } else {
+      // } 
+      if(!this.account.password)  {
+        console.log("!this.account.password")
         this.validation.password.status = "error";
         this.validation.password.message = "Please input password";
         // return false;
-        errors = true
+        errors = false
 
       }
-
       if (!this.account.confirm) {
         this.validation.confirm.status = "error";
         this.validation.confirm.message = "Please input confirm password";
         // return false;
-        errors = true
-
+        errors = false
       }
-
-      if(errors){
-         return false;
-      }else{
-        return true;
-      }
+      console.log("errors data: " + errors)
+      return errors
       
     },
     handleCancel(){
@@ -578,6 +570,7 @@ export default {
     handleOk(){
       this.loading = true,
       console.log("handleOk")
+      
       if(this.validate()){
         console.log("walang error registration")
         this.loading = false
@@ -587,13 +580,17 @@ export default {
       });
       }
       else{
+      //   this.validation.name.first = "";
+      // this.validation.name.last = "";
+      // this.validation.email = "";
+      // this.validation.password = "";
+      // this.validation.confirm = "";
         console.log("may error registration")
         this.loading = false
       }
     }
   },
   created() {
-    
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {

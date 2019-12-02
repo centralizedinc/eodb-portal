@@ -1,4 +1,4 @@
-
+const email_helper = require('../utils/email');
 // const router = require('express').Router();
 // const passport = require('passport');
 // const FacebookStrategy = require('passport-facebook').Strategy;
@@ -85,6 +85,7 @@ router.route('/login')
 router
     .route('/signup')
     .post(function (req, res, next) {
+
         passport.authenticate('signup', function (err, user, info) {
             console.log("passport signup auth user: " + JSON.stringify(user))
             console.log("passport signup auth err: " + JSON.stringify(err))
@@ -97,6 +98,14 @@ router
                 model: user
             });
         })(req, res, next);
+    })
+
+router.route('/invitation')
+    .post((req, res) => {
+        const { email, name, tin, sender } = req.body;
+        email_helper.registerInvitation(email, name, tin, sender)
+            .then((model) => res.json({ success: true, model }))
+            .catch((errors) => res.json({ success: false, errors }));
     })
 
 router

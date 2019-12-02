@@ -1,4 +1,5 @@
 import AccountAPI from "../../api/AccountAPI"
+
 function initialState() {
     return {
         user:{
@@ -48,12 +49,19 @@ const actions = {
     SIGN_UP(context, user_data){
         return new Promise ((resolve, reject) => {
             // AccountAPI.register(user_data)
+            var account_api = null
             AccountAPI.signup(user_data)
-
             .then((result) => {
              console.log("account register store result: " + JSON.stringify(result))
-             resolve(result)   
-            }).catch((err) => {
+             account_api = result              
+             return AccountAPI.sendRegisterInvitation(result)
+            })
+            .then((result) => {
+                console.log("account_api: " + JSON.stringify(account_api))
+                console.log("account api send register invitation result data: " + JSON.stringify(result))
+                resolve(account_api)                 
+            })
+            .catch((err) => {
                 console.log("account registration error")
                 reject(err)
             });

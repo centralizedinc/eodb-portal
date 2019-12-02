@@ -31,13 +31,16 @@ class SendEmail {
         console.log('confirmation_url :', confirmation_url);
         const msg = {
             to: email,
-            from: ApplicationSettings.getValue("ITAX_EMAIL"),
-            templateId: ApplicationSettings.getValue("REGISTRATION_EMAIL_TEMPLATE"),
+            from: ApplicationSettings.getValue("EODB_EMAIL"),
+            templateId: "d-ebe5030ff7dd4695a7fa263532510305",
+            // templateId: ApplicationSettings.getValue("REGISTRATION_EMAIL_TEMPLATE"),
             substitutions: { name, confirmation_url }
         };
         return new Promise((resolve, reject) => {
+            console.log("sgmail send##: " + JSON.stringify(msg))
             sgMail.send(msg)
                 .then((result) => {
+                    console.log("sgmail send result data: " + JSON.stringify(result))
                     resolve({ result, confirmation_url, expiry_date })
                 }).catch((err) => reject(err));
         })
