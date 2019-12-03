@@ -19,26 +19,166 @@ function fillup(details) {
  */
 function getContent(details) {
     var content = [{
-        layout: "noBorders",
+        //layout: "noBorders",
         table: {
-            widths: [22],
+            heights: [10],
+            widths: [300],
             body: [
                 [
                     {
-                        text: "test",
-                        fontSize: 15,
+                        text: "BAYAN  NG  SAN  ANTONIO",
+                        fontSize: 12,
                         bold: true,
-                        characterSpacing: 3,
+                        characterSpacing: 1,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, 0, 0, 0]
+                        margin: [60, -2, 0, 0]
                     }
                 ]
             ]
         }
-    }]
-    return content;
+
+    },
+    ///////////////////////////////////////////////////////////////////////
+    {
+        //layout: "noBorders",        
+        table: {
+        widths: [300],
+        heights: [6,],
+        body: [
+          [{
+                text:"LALAWIGAN NG QUEZON",
+                fontSize: 12,
+                characterSpacing: 2,
+                alignment: 'justify',
+                // right,down,left,up
+                margin: [60, -4, 0, 0]
+              },
+              
+                                        
+          ]
+        
+        ]
+        }
+    },
+///////////////////////////////////////////////////////////
+    {
+        //layout: "noBorders",        
+        table: {
+        widths: [300],
+        heights: [3,],
+        body: [
+          [{
+                text:" ",
+          
+              },
+              
+                                        
+          ]
+        
+        ]
+        }
+    },
+ //////////////////////////////////////////////////////////////
+ {
+    //layout: "noBorders",        
+    table: {
+    widths: [120, 171,],
+    heights: [7,],
+    body: [
+      [{
+            text:"ELECTRONIC RECEIPT  NO:",
+            fontSize: 9,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [1, -3, 0, 0]
+          },
+        {
+          text:"5879654852",
+          fontSize: 9,
+          alignment: 'justify',
+          // right,down,left,up
+          margin: [1, -3, 0, 0]
+          },
+    
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+ 
+/////////////////////////////////////////////////////////////////
+{
+    //layout: "noBorders",        
+    table: {
+    widths: [40, 261,],
+    heights: [7,],
+    body: [
+      [{
+            text:"DATE:",
+            fontSize: 9,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [1, -3, 0, 0]
+          },
+        {
+          text:"12 - 25 - 2019",
+          fontSize: 9,
+          alignment: 'justify',
+          // right,down,left,up
+          margin: [1, -3, 0, 0]
+          },
+    
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+
+////////////////////////////////////////////////////////////////
+{
+    //layout: "noBorders",        
+    table: {
+    widths: [40, 261,],
+    heights: [7,],
+    body: [
+      [{
+            text:"PAYOR:",
+            fontSize: 9,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [1, -3, 0, 0]
+          },
+        {
+          text:"JESON ARCEDE",
+          fontSize: 9,
+          alignment: 'justify',
+          // right,down,left,up
+          margin: [1, -3, 0, 0]
+          },
+    
+          
+                                    
+      ]
+    
+    ]
+    }
 }
+
+///////////////////////////////////////////////////////////////
+]
+
+    return content;
+    
+
+    
+}
+
+
 
 /**
  * @returns {String}
