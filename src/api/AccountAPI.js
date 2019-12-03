@@ -20,5 +20,14 @@ export default class AccountAPI{
         console.table("signup account API data: " + JSON.stringify(account));
         return axios.post(`auth/signup`, account);
     }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} details
+     */
+    sendRegisterInvitation(details) {
+        console.log("send register invitation details: " + JSON.stringify(details))
+        return axios.post('auth/invitation', details)
+    } 
     
 }

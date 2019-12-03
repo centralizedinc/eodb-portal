@@ -94,9 +94,12 @@ passport.use('signup', new LocalStrategy({
         name,
         confirm
     } = req.body;
+    console.log("oauth email: " + JSON.stringify(email))
     if (!email) return done({
         message: constant_helper.invalid_email
     });
+    console.log("oauth password: " + JSON.stringify(password))
+    console.log("oauth confirm: " + JSON.stringify(confirm))
     if (!password || !confirm || password !== confirm) return done({
         message: constant_helper.invalid_password
     });
@@ -104,6 +107,7 @@ passport.use('signup', new LocalStrategy({
     var result = {};
     AccountDao.findByEmail(email)
         .then((existing_account) => {
+            console.log("account dao find by email existing_account: " + JSON.stringify(existing_account))
             if (existing_account) done({
                 message: constant_helper.existing_email
             });
@@ -114,10 +118,12 @@ passport.use('signup', new LocalStrategy({
                         name
                     })
                     .then((account) => {
+                        console.log("account dao create: " + JSON.stringify(account))
                         result.account = account;
                         return SendEmail.registration(email, account.name.first, account._id);
                     })
                     .then((send_email) => {
+                        console.log("send email registration send_email data: " + JSON.stringify(send_email))
                         const {
                             confirmation_url,
                             expiry_date
@@ -131,6 +137,7 @@ passport.use('signup', new LocalStrategy({
                         })
                     })
                     .then((account) => {
+                        console.log("account dao modify by id: " + JSON.stringify(account))
                         result.account = account;
                         done(null, result);
                     })
