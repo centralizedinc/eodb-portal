@@ -2,7 +2,9 @@
   <div id="components-layout-demo-basic">    
     <a-layout>
       <a-layout-sider :trigger="null" collapsible v-model="collapsed" theme="dark"  :width="220" style="background-color: #242B30">
-        <a-card style="border: none; height: 20vh; width: 100%;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');">
+        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');"> 
+        <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">
+          
           <a-row type="flex" justify="start" align="middle">
             <a-col :span="10">
               <a-avatar style="border: 1px solid #FFFFFF" shape="square" :size="64" src="http://lorempixel.com/200/200/people/">
@@ -13,7 +15,9 @@
               <p style="font-size:10px; color: #FFFFFF">Department Head</p>          
             </a-col>
           </a-row>
+          
         </a-card>
+        </div>
          <a-menu 
               @click="navigate"
               theme="dark" 
@@ -25,36 +29,36 @@
           <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
           <span>Dashboard</span>
         </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="snippets" :style="getMenuStyle('2')"/>
+        <a-menu-item key="/admin/app/applications">
+          <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')"/>
           <span>Applications</span>
         </a-menu-item>
         <a-menu-item key="3">
           <a-icon type="reconciliation" :style="getMenuStyle('3')" />
           <span>Collections</span>
         </a-menu-item>
-        <a-menu-item key="4">
-          <a-icon type="team" :style="getMenuStyle('4')" />
+        <a-menu-item key="/admin/app/users">
+          <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
           <span>Users</span>
         </a-menu-item>
         <a-sub-menu key="5" :style="`background-color: #242B30`" >
           <span slot="title"><a-icon type="setting" /><span>Settings</span></span>          
-          <a-menu-item key="51">
-             <a-icon type="bank" :style="getMenuStyle('51')" />
+          <a-menu-item key="/admin/app/departments">
+             <a-icon type="bank" :style="getMenuStyle('/admin/app/departments')" />
             <span>Departments</span>
           </a-menu-item>
-          <a-menu-item key="52">
-            <a-icon type="cluster" :style="getMenuStyle('52')" />
+          <a-menu-item key="/admin/app/roles">
+            <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
             <span>User Roles</span>
           </a-menu-item>
-          <a-menu-item key="53">
-            <a-icon type="table" :style="getMenuStyle('53')" />
-            <span>Reference Tables</span>
+          <a-menu-item key="/admin/app/references">
+            <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
+            <span>References</span>
           </a-menu-item>          
         </a-sub-menu>
         <a-divider></a-divider>
-        <a-menu-item key="6">
-          <a-icon type="user" :style="getMenuStyle('6')"/>
+        <a-menu-item key="/admin/app/account">
+          <a-icon type="user" :style="getMenuStyle('/admin/app/account')"/>
           <span>Account</span>
         </a-menu-item>
         <a-menu-item key="7">
@@ -70,7 +74,7 @@
       <a-layout>
         <a-layout-header theme="dark" style="background-color: #242B30">
           <a-row>
-            <a-col :span="20">
+            <a-col :span="18">
               <h3 style="color:#FFFFFF; font-weight:bold">SmartJuan</h3>
             </a-col>
             <a-col :span="1">
@@ -78,6 +82,9 @@
             </a-col>
              <a-col :span="1">
               <a-icon style="color:#FFFFFF;" type="setting"></a-icon>
+            </a-col>
+            <a-col :span="1">
+              <a-icon style="color:#FFFFFF; cursor:pointer" type="lock" @click="$router.push('/admin/lock')"></a-icon>
             </a-col>
             <a-col :span="2">
               <a-avatar style="border: 1px solid #FFFFFF; margin-left: 20px" shape="square" :size="36" src="http://lorempixel.com/200/200/people/"/>              

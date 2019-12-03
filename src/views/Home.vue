@@ -176,6 +176,12 @@
       </a-row>
     </a-layout-footer>
     <a-modal v-model="signup_visible" title="Register">
+      <template slot="footer">
+        <a-button key="back" @click="handleCancel">Return</a-button>
+        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
+          Submit
+        </a-button>
+      </template>
       <a-row type="flex" justify="center" :gutter="16">
         <a-col :span="24">
           <p>Register with facebook or google</p>
@@ -205,20 +211,33 @@
         </a-col>
         <a-col :span="24">
           <a-form>
-            <a-form-item>
-              <a-input placeholder="First Name"></a-input>
+            <a-form-item
+            :validate-status="validation.name.first.status"
+              :help="validation.name.first.message"
+    
+            >
+              <a-input :disabled="loading" placeholder="First Name" v-model="account.name.first"></a-input>
             </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Last Name"></a-input>
+            <a-form-item
+            :validate-status="validation.name.last.status"
+              :help="validation.name.last.message"
+              >
+              <a-input :disabled="loading" placeholder="Last Name" v-model="account.name.last"></a-input>
             </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Email"></a-input>
+            <a-form-item
+            :validate-status="validation.email.status"
+              :help="validation.email.message">
+              <a-input :disabled="loading" placeholder="Email" v-model="account.email"></a-input>
             </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Password" type="password"></a-input>
+            <a-form-item
+            :validate-status="validation.password.status"
+              :help="validation.password.message">
+              <a-input :disabled="loading" placeholder="Password" type="password" v-model="account.password"></a-input>
             </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Confirm Password" type="password"></a-input>
+            <a-form-item
+            :validate-status="validation.confirm.status"
+              :help="validation.confirm.message">
+              <a-input :disabled="loading" placeholder="Confirm Password" type="password" v-model="account.confirm"></a-input>
             </a-form-item>
           </a-form>
         </a-col>
@@ -402,8 +421,27 @@ export default {
       visible: false,
       topLocation: 0,
       reveal: false,
+      loading: false,
       coordinates: { lat: 15.667300, lng: 120.734993 },
       animation: {},
+      account:{
+        name:{
+          first:"",
+          last:""
+        },
+        email: "",
+        password: "",
+        confirm: "",
+      },
+      validation: {
+        name: {
+          first: {},
+          last: {}
+        },
+        email: {},
+        password: {},
+        confirm: {}
+      },
       report_type: ""
     };
   },
@@ -460,16 +498,99 @@ export default {
       this.guest_visible = true;
     },
     submit() {
+      console.log("sumbit home")
       this.guest_visible = false;
       this.visible_report = false;
       this.$notification.success({
         message: "Thank you for your concern",
         description: "Your Report has been sent. Stay safe!"
       });
+    },
+    validate() {
+      var errors = true
+     
+      if (!this.account.name.first) {
+        this.validation.name.first.status = "error";
+        this.validation.name.first.message = "Please input first name";
+        // return false;
+        errors = false
+      }
+      if (!this.account.name.last) {
+        this.validation.name.last.status = "error";
+        this.validation.name.last.message = "Please input last name";
+        // return false;
+        errors = false
+
+      }
+      if (!this.account.email) {
+        this.validation.email.status = "error";
+        this.validation.email.message = "Please input email";
+        // return false;
+        errors = false
+
+      }
+      // if (this.account.password) {
+      //   console.log("this.account.password")
+        if (this.account.confirm && this.account.password !== this.account.confirm) {
+          console.log("this.account.confirm && this.account.password !== this.account.confirm")
+          this.validation.password.status = "error";
+          this.validation.password.message = "Password and Confirm Password does not match";
+          // return false;
+          errors = false
+
+        }
+      // } 
+      if(!this.account.password)  {
+        console.log("!this.account.password")
+        this.validation.password.status = "error";
+        this.validation.password.message = "Please input password";
+        // return false;
+        errors = false
+
+      }
+      if (!this.account.confirm) {
+        this.validation.confirm.status = "error";
+        this.validation.confirm.message = "Please input confirm password";
+        // return false;
+        errors = false
+      }
+      console.log("errors data: " + errors)
+      return errors
+      
+    },
+    handleCancel(){
+      console.log("handleCancel")
+      this.account.name.first = ""
+      this.account.name.last = ""
+      this.account.email = ""
+      this.account.password = ""
+      this.account.confirm = ""
+      this.signup_visible= false
+    },
+    handleOk(){
+      this.loading = true,
+      console.log("handleOk")
+      
+      if(this.validate()){
+        console.log("walang error registration")
+        this.loading = false
+        this.$store.dispatch("SIGN_UP",this.account).then(save_account => {
+        console.log("saved account" + JSON.stringify(save_account));
+        this.redirect("mainView");
+      });
+      }
+      else{
+      //   this.validation.name.first = "";
+      // this.validation.name.last = "";
+      // this.validation.email = "";
+      // this.validation.password = "";
+      // this.validation.confirm = "";
+        console.log("may error registration")
+        this.loading = false
+      }
     }
   },
   created() {
-    
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {

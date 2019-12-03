@@ -4,6 +4,9 @@ var RoleSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    description: {
+        type: String
+    },
     department: {
         type: String
     },

@@ -39,7 +39,26 @@
     <a-col :xs="{ span: 24 }" :md="{ span: 6 }" style="margin-top: 19vh;">
       <a-affix :offsetTop="60">
         <!-- Attachments -->
-        <a-card title="Required Documents"></a-card>
+        <a-card title="Required Documents">
+          <a-table :columns="document_columns" :dataSource="document_data_source">
+            <template slot="status" slot-scope="text">
+              {{text}}
+              <a-icon v-if="text" type="check-circle" style="color: green; font-weight: bold;" />
+              <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+            </template>
+            <template slot="action" slot-scope="text, record, index">
+              <a-upload
+                :multiple="true"
+                :showUploadList="false"
+                @change="attachFile(index, $event)" 
+                style="color: blue; font-weight: bold;"
+              >
+                <a-icon type="upload" />
+              </a-upload>
+              <a-icon v-if="record.status" style="color: red; font-weight: bold;" type="delete" @click="removeAttachment(index)" />
+            </template>
+          </a-table>
+        </a-card>
 
         <!-- Payment Details -->
         <a-card style="margin-top: 5vh;" title="Fees"></a-card>
@@ -116,7 +135,8 @@ export default {
           email: "",
           enjoying_tax_incentive: false,
           specify_entity: "",
-          line_of_business: []
+          line_of_business: [],
+          measure_or_pax: []
         },
         business_address: {
           bldg_no: "",
@@ -148,7 +168,45 @@ export default {
           email: ""
         },
         attachments: []
-      }
+      },
+      document_columns: [
+        {
+          title: "Document Title",
+          dataIndex: "title"
+        },
+        {
+          title: "Status",
+          dataIndex: "status",
+          scopedSlots: { customRender: "status" }
+        },
+        {
+          title: "",
+          dataIndex: "action",
+          scopedSlots: { customRender: "action" }
+        }
+      ],
+      document_data_source: [
+        {
+          title: "DTI/SEC/CDA Certificate",
+          status: false,
+          key: 0
+        },
+        {
+          title: "Residence Certificate",
+          status: false,
+          key: 1
+        },
+        {
+          title: "Barangay Clearance",
+          status: false,
+          key: 2
+        },
+        {
+          title: "Police Clearance",
+          status: false,
+          key: 3
+        }
+      ]
     };
   },
   methods: {
@@ -161,10 +219,43 @@ export default {
         .dispatch("CREATE_BUSINESS_PERMIT", this.form)
         .then(result => {
           console.log("result.data :", result.data);
+          this.$router.push("/app");
         })
         .catch(err => {
           console.log("err :", err);
         });
+    },
+    attachFile(i, info) {
+      if(info.file.status === 'uploading'){
+
+      }
+
+      if(info.file.status === 'done'){
+        
+      }
+
+      const index = this.form.attachments.findIndex(
+        v => v.title === this.document_data_source[i].title
+      );
+      var files = info.fileList;
+      console.log("files :", files);
+      if (index > -1) this.form.attachments[index].files = files;
+      else
+        this.form.attachments.push({
+          title: this.document_data_source[i].title,
+          files
+        });
+
+      this.document_data_source[i].status = true;
+    },
+    removeAttachment(i) {
+      const index = this.form.attachments.findIndex(
+        v => v.title === this.document_data_source[i].title
+      );
+      console.log("i :", i);
+      if (index > -1) this.form.attachments.splice(index, 1);
+
+      this.document_data_source[i].status = false;
     }
   }
 };

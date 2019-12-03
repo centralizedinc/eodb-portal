@@ -6,7 +6,7 @@
   >
     <a-form class="owner-form">
       <!-- Personal Details -->
-      <a-divider style="color: #7f7f7f;font-weight: bold;" orientation="left">Personal Details</a-divider>
+      <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
       <a-row>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" class="text-left">
@@ -114,7 +114,7 @@
 
       <!-- Owner Address -->
       <a-divider
-        style="color: #7f7f7f;font-weight: bold;margin-top: 5vh"
+        style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
       >Owner Address</a-divider>
       <a-row :gutter="15" style="font-weight: bold;">
@@ -215,16 +215,16 @@
       </a-row>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 9 }" :xl="{ span: 6 }">
           <a-button-group>
             <a-button @click="$emit('changeStep', step-1)" :disabled="true">Previous</a-button>
             <a-button type="primary" @click="$emit('changeStep', step+1)">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 15 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 15 }">
           <a-button>Save Draft</a-button>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 3 }">
           <a-button type="danger">Close</a-button>
         </a-col>
       </a-row>
