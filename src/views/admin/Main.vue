@@ -33,9 +33,13 @@
           <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')"/>
           <span>Applications</span>
         </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="reconciliation" :style="getMenuStyle('3')" />
+        <a-menu-item key="/admin/app/collections">
+          <a-icon type="reconciliation" :style="getMenuStyle('/admin/app/collections')" />
           <span>Collections</span>
+        </a-menu-item>
+        <a-menu-item key="/admin/app/emergency">
+          <a-icon type="safety" :style="getMenuStyle('/admin/app/emergency')" />
+          <span>Emergency</span>
         </a-menu-item>
         <a-menu-item key="/admin/app/users">
           <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
