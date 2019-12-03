@@ -73,6 +73,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/Login.vue'),
     },
     {
+      path: '/admin/lock',
+      name: 'lock screen',
+      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/LockScreen.vue'),
+    },
+    {
       path: '/admin/app',
       name: 'Main',
       component: () => import(/* webpackChunkName: "adminMain" */ './views/admin/Main.vue'),
@@ -100,6 +105,16 @@ export default new Router({
         path: 'roles',
         name: 'User Roles',
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/UserRoles.vue'),
+      },
+      {
+        path: 'references',
+        name: 'Application References',
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/References.vue'),
+      },
+      {
+        path: 'account',
+        name: 'Admin Account',
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Account.vue'),
       }]
     },
     {

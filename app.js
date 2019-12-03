@@ -41,6 +41,7 @@ app.use("/payments", require('./api/routes/payment_router'))
 app.use("/departments/dependencies", require('./api/routes/department_dependencies'));
 app.use("/departments", require('./api/routes/department_router'));
 app.use("/roles", require('./api/routes/roles_router'));
+app.use("/settings", require('./api/routes/settings_router'));
 
 
 
