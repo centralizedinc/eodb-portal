@@ -1,5 +1,5 @@
 <template>
-  <a-card style="background-color: #242B30">
+  <a-card style="background-color: #242B30;border-radius:10px">
     <a-row type="flex" align="middle">
         <a-col :span="24" style="margin-bottom: 2vh">
             <span style="color:#B6C2C9; font-weight:bold">{{title.toUpperCase()}}  </span>                  

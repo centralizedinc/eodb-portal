@@ -2,7 +2,7 @@
   <div id="components-layout-demo-basic">    
     <a-layout>
       <a-layout-sider :trigger="null" collapsible v-model="collapsed" theme="dark"  :width="220" style="background-color: #242B30">
-        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');"> 
+        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/2000?greyscale');"> 
         <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">
           
           <a-row type="flex" justify="start" align="middle">
@@ -33,9 +33,13 @@
           <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')"/>
           <span>Applications</span>
         </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="reconciliation" :style="getMenuStyle('3')" />
+        <a-menu-item key="/admin/app/collections">
+          <a-icon type="reconciliation" :style="getMenuStyle('/admin/app/collections')" />
           <span>Collections</span>
+        </a-menu-item>
+        <a-menu-item key="/admin/app/emergency">
+          <a-icon type="safety" :style="getMenuStyle('/admin/app/emergency')" />
+          <span>Emergency</span>
         </a-menu-item>
         <a-menu-item key="/admin/app/users">
           <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
