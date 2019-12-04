@@ -30,14 +30,18 @@
       <!-- mobile site -->
       <a-row v-else type="flex" justify="start">
         <a-col :xs="3" :sm="2" :md="2">
-          <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>          
+          <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>
         </a-col>
         <a-col :xs="20" :sm="21" :md="21">
-            <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
-          </a-col>
+          <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
+        </a-col>
         <a-col :span="1">
-          <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
-        </a-col> 
+          <a-icon
+            :type="visible_menu?'close':'menu'"
+            style="cursor:pointer"
+            @click="visible_menu=true"
+          ></a-icon>
+        </a-col>
       </a-row>
       <a-drawer
         placement="left"
@@ -45,18 +49,22 @@
         @close="visible_menu=false"
         :closable="false"
       >
-      <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
-        <a-col :xs="6" :sm="6" :md="6">
-          <a-avatar :src="user.avatar" :size="54" shape="square" style="border: 2px solid #ffffff" ></a-avatar>
-        </a-col>
-        <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
-          <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
-        </a-col>
-       
-      </a-row>
-       <a-divider></a-divider>
+        <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
+          <a-col :xs="6" :sm="6" :md="6">
+            <a-avatar
+              :src="user.avatar"
+              :size="54"
+              shape="square"
+              style="border: 2px solid #ffffff"
+            ></a-avatar>
+          </a-col>
+          <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
+            <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
+          </a-col>
+        </a-row>
+        <a-divider></a-divider>
         <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
-        <a-menu-item key="/app">
+          <a-menu-item key="/app">
             <a-icon type="layout" />
             <span>Home</span>
           </a-menu-item>
@@ -83,12 +91,235 @@
         </a-menu>
       </a-drawer>
     </a-layout-header>
-    <a-layout-content
-      class="content"
-      :style="`${constant_helper.theme.background} margin-top:5vh`"
-    >
-      <a-row type="flex" justify="center" >
+    <a-layout class="content">
+      <a-layout-sider :style="{background: '#e6e6e6', margin:'0px 16px', minHeight:'100%', }">
+        <!-- <a-card :style="`margin-top:10vh; margin-bottom:2vh; ${constant_helper.theme.default}`">
+          <a-row type="flex" justify="center">
+            <a-col :span="8">
+              <a-avatar
+                :src="user.avatar"
+                :size="54"
+                style="margin-top:-10vh; border: 2px solid #ffffff"
+              ></a-avatar>
+            </a-col>
+            <a-col :span="24" >
+              <a-row type="flex" justify="center" style="width:100%">
+                <a-col :span="24" style="text-align: center">
+                  <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
+                <a-menu>
+                
+                <a-sub-menu key="sub">
+            <span slot="title">
+              <a-avatar
+                :src="user.avatar"
+                :size="54"
+                style="margin-top:-10vh; border: 2px solid #ffffff"
+              ></a-avatar>
+            <h3 style="color:#FFFFFF">
+              
+              {{user.fname}} {{user.lname}}
+              </h3>
+            </span>
+            <a-menu-item key="1">New</a-menu-item>
+            <a-menu-item key="2">Renewal</a-menu-item>
+          </a-sub-menu>
+          </a-menu>
+                </a-col>
+              </a-row>
+            </a-col>
+          </a-row>
+        </a-card> -->
+        <a-affix :offsetTop="50">
+          <a-menu
+            :defaultSelectedKeys="['/app']"
+            mode="inline"
+            @click="nav"
+            style="background-color: #e6e6e6"
+            :style="`margin-top:15vh; margin-bottom:2vh; height:100%`"
+          >
+          
+          <a-row type="flex" justify="center">
+            <a-col :span="8">
+              <a-avatar
+                :src="user.avatar"
+                :size="44"
+                style="margin-top:-2vh; border: 2px solid #ffffff"
+              ></a-avatar>
+              
+               
+            </a-col>
+            <a-col :span="16">
+             <!-- <h3 style="color:#FFFFFF"> -->
+               <a-popconfirm placement="rightBottom">
+        <template slot="title">
+          <a-button type="link">My Account</a-button>
+          <a-button type="link">Notification</a-button>
+          <a-button type="link">Logout</a-button>
+        </template>
+        <!-- <a-button type="link" block="true"> -->
+          {{user.fname}}
+                  {{user.lname}}
+                  <!-- </a-button> -->
+      </a-popconfirm>
+ 
+              
+              <!-- </h3> -->
+            </a-col>
+          </a-row>
+          <!-- <a-menu-item style="height:10%">
+              <a-avatar
+                :src="user.avatar"
+                :size="54"
+              >
+              </a-avatar>
+              <a-sub-menu key="sub" >
+            <span>
+            <span slot="title">
+              <a-icon type="user"/>
+            <h3 style="color:#FFFFFF">
+              
+              {{user.fname}} {{user.lname}}
+              </h3>
+            </span>
+            
+            <a-menu-item key="1">New</a-menu-item>
+            <a-menu-item key="2">Renewal</a-menu-item>
+            
+          </a-sub-menu>
+            </a-menu-item> -->
+           <a-menu-item key="/app">
+              <a-icon type="layout" />
+              <span>Home</span>
+            </a-menu-item>
+          <a-sub-menu key="sub1">
+            <span slot="title"><a-icon type="user" />My Application</span>
+            <a-sub-menu key="sub1.1">
+            <span slot="title"><a-icon type="user" />Permit</span>
+            <a-menu-item key="1">New</a-menu-item>
+            <a-menu-item key="2">Renewal</a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="sub1.2">
+            <span slot="title"><a-icon type="user" />Taxes</span>
+            <a-menu-item key="1">New</a-menu-item>
+            <a-menu-item key="2">Renewal</a-menu-item>
+          </a-sub-menu>
+          </a-sub-menu>
+
+           
+            <a-menu-item key="/app/permits">
+              <a-icon type="file-exclamation" />
+              <span>My Permits</span>
+            </a-menu-item>
+            <a-menu-item key="/app/taxes">
+              <a-icon type="file-protect" />
+              <span>My Taxes</span>
+            </a-menu-item>
+            <a-menu-item key="/app/account">
+              <a-icon type="user-add" />
+              <span>My Account</span>
+            </a-menu-item>
+            <a-menu-item key="/app/account">
+              <a-icon type="user-add" />
+              <span>Citizen Report</span>
+            </a-menu-item>
+            <a-menu-item key="logout">
+              <a-icon type="logout" />
+              <span>Logout</span>
+            </a-menu-item>
+            <a-menu-item key="logout">
+              <a-icon type="logout" />
+              <span>Help & Support</span>
+            </a-menu-item>
+          </a-menu>
+        </a-affix>
+      </a-layout-sider>
+      <a-layout-content>
+        <router-view></router-view>
+      </a-layout-content>
+      <a-layout-sider :style="{background: '#e6e6e6', margin:'0px 16px', }">
+        <a-affix :offsetTop="100">
+          <a-card
+            :bodyStyle="{'background-color':'#ffffff'}"
+            :headStyle="{'background-color':'#afadad'}"
+            title="Citizen Report"
+            style="margin-top: 8vh"
+          >
+            <p>Emergency Hotline</p>
+            <a-row>
+              <a-col :span="12">
+                <a-tooltip>
+                  <span slot="title">Fire</span>
+                  <a-card
+                    :style="constant_helper.theme.button"
+                    class="emergency_btn"
+                    @click="report(1)"
+                  >
+                    <a-row type="flex" justify="center">
+                      <a-col :span="20">
+                        <a-icon type="fire" style="color:#ffffff;font-size:24px"></a-icon>
+                      </a-col>
+                    </a-row>
+                  </a-card>
+                </a-tooltip>
+              </a-col>
+              <a-col :span="12">
+                <a-tooltip>
+                  <span slot="title">Civil Disturbance</span>
+                  <a-card
+                    :style="constant_helper.theme.button"
+                    class="emergency_btn"
+                    @click="report(2)"
+                  >
+                    <a-row type="flex" justify="center">
+                      <a-col :span="20">
+                        <a-icon type="sound" style="color:#ffffff;font-size:24px"></a-icon>
+                      </a-col>
+                    </a-row>
+                  </a-card>
+                </a-tooltip>
+              </a-col>
+              <a-col :span="12">
+                <a-tooltip>
+                  <span slot="title">Flood</span>
+                  <a-card
+                    :style="constant_helper.theme.button"
+                    class="emergency_btn"
+                    @click="report(3)"
+                  >
+                    <a-row type="flex" justify="center">
+                      <a-col :span="20">
+                        <a-icon type="alert" style="color:#ffffff;font-size:24px"></a-icon>
+                      </a-col>
+                    </a-row>
+                  </a-card>
+                </a-tooltip>
+              </a-col>
+              <a-col :span="12">
+                <a-tooltip>
+                  <span slot="title">Crime</span>
+                  <a-card
+                    :style="constant_helper.theme.button"
+                    class="emergency_btn"
+                    @click="report(4)"
+                  >
+                    <a-row type="flex" justify="center">
+                      <a-col :span="20">
+                        <a-icon type="safety" style="color:#ffffff;font-size:24px; "></a-icon>
+                      </a-col>
+                    </a-row>
+                  </a-card>
+                </a-tooltip>
+              </a-col>
+              <a-col :span="24" style="margin-top:2vh">
+                <a-button block ghost type="primary" @click="report(0)">View Reports</a-button>
+              </a-col>
+            </a-row>
+          </a-card>
+        </a-affix>
+      </a-layout-sider>
+      <!-- <a-row type="flex" justify="center" >
         <a-col :span="4" style="margin-right:1vw" v-if="$breakpoint.lgAndUp">
+          -------------------
           <a-card :style="`margin-top:10vh; margin-bottom:2vh; ${constant_helper.theme.default}`">
             <a-row type="flex" justify="center">
               <a-col :span="8">
@@ -106,6 +337,7 @@
                 </a-row>
               </a-col>
             </a-row>
+            
           </a-card>
           <a-affix :offsetTop="100">
             <a-menu
@@ -136,6 +368,8 @@
               </a-menu-item>
             </a-menu>
           </a-affix>
+         
+          -----------------
         </a-col>
         <a-col  :xs="22" :sm="22" :md="22" :lg="14" :xl="14" style="margin-right:1vw; margin-left:1vw">
           <router-view></router-view>
@@ -222,8 +456,8 @@
           </a-affix>
         </a-col>
         <report-modal ref="report_modal" v-else :visible_report="visible_report" @close="visible_report=false"/>
-      </a-row>
-    </a-layout-content>
+      </a-row>-->
+    </a-layout>
     <a-layout-footer
       :style="`${constant_helper.theme.default} color: #ffffff`"
     >{{constant_helper.home_header.label}}</a-layout-footer>
@@ -320,16 +554,16 @@ import civil_disturbance_icon from "@/assets/civil_disturbance_icon_20.png";
 import flood_icon from "@/assets/flood_icon_20.png";
 import crime_icon from "@/assets/crime_icon_20.png";
 
-import ReportModal from '@/components/ReportModal'
+import ReportModal from "@/components/ReportModal";
 
 export default {
-  components:{
+  components: {
     ReportModal
   },
   data() {
     return {
-      visible_report:false,
-      visible_menu:false,
+      visible_report: false,
+      visible_menu: false,
       fire_icon,
       civil_disturbance_icon,
       flood_icon,
@@ -383,15 +617,18 @@ export default {
   methods: {
     init() {
       this.user = this.$store.state.user_session.user;
-      console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
+      console.log(
+        "USER_DETAILS ::: ",
+        JSON.stringify(this.$store.state.user_session)
+      );
     },
     nav(e) {
       if (e.key === "logout") {
         this.logout();
-      } else if(e.key === "report") {
-        this.$refs.report_modal.report()
-        this.visible_report =true
-      }else {
+      } else if (e.key === "report") {
+        this.$refs.report_modal.report();
+        this.visible_report = true;
+      } else {
         this.$router.push(e.key);
       }
     },
@@ -434,9 +671,9 @@ export default {
     submitReport() {
       this.visible = false;
       this.$store.commit("SEND_REPORTS", {
-        status:'Unconfirmed',
-        date:new Date(),
-        user:`${this.user.lname}, ${this.user.fname}`,
+        status: "Unconfirmed",
+        date: new Date(),
+        user: `${this.user.lname}, ${this.user.fname}`,
         report_type: this.report_mode,
         coordinates: this.coordinates
       });
@@ -463,8 +700,8 @@ export default {
     },
     onSearch() {}
   },
-  computed:{
-    menuStyle(){
+  computed: {
+    menuStyle() {
       return this.constant_helper.theme.default;
     }
   }

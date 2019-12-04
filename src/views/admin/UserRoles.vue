@@ -30,7 +30,7 @@
             <a-textarea placeholder="Description" v-model="role.description" :rows="5"></a-textarea>
         </a-form-item>
         <a-form-item label="Department">
-            <a-input placeholder="Description" v-model="role.department" :rows="5"></a-a>
+            <!-- <a-input placeholder="Description" v-model="role.department" :rows="5"></a-a> -->
         </a-form-item>
         <a-form-item>
             <a-button type="primary" icon="save" :loading="loading" block @click="submit">Submit</a-button>
