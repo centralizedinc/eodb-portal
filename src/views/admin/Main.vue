@@ -2,7 +2,7 @@
   <div id="components-layout-demo-basic">    
     <a-layout>
       <a-layout-sider :trigger="null" collapsible v-model="collapsed" theme="dark"  :width="220" style="background-color: #242B30">
-        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/100');"> 
+        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/2000?greyscale');"> 
         <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">
           
           <a-row type="flex" justify="start" align="middle">

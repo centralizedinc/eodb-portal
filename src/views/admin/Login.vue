@@ -60,23 +60,25 @@
             </a-menu>
     </a-drawer>
     </a-layout-header>
-    <a-layout-content>
-        <div :style="`background-image:url('${constant_helper.login_background}'); height:100%;background-repeat: no-repeat;
+    <a-layout-content >
+        <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat;
             background-size: cover`">
-      <a-row style="height:100vh" type="flex" justify="center" align="middle">
-          <a-col :span="8">
-              <a-card style="background: rgba(59, 79, 99, 0.62)">
-                  <template slot="title">
-              <h3 style="color:#ffffff">Administrator Login</h3>
-            </template>
+      <a-row style="height:100vh;background-color:#0912195c" type="flex" justify="center" align="middle">
+          <a-col :span="6">
+            <span style="color:#ffffff;font-size: 28px; font-weight:bold">Administrator Login <a-icon type="lock"></a-icon></span>
+            <p style="color:#ffffff;font-size: 12px;">For Official Use Only</p>
+              <!-- <a-card style="background: rgba(59, 79, 99, 0.62)"> -->
+                  <!-- <template slot="title">
+              
+            </template> -->
             <a-form>
               <a-form-item>
-                <a-input size="large" placeholder="Email">
+                <a-input size="large" placeholder="Email Address">
                   <a-icon slot="prefix" type="mail" />
                 </a-input>
               </a-form-item>
               <a-form-item>
-                <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
+                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'">
                   <a-icon slot="prefix" type="lock" />
                   <a-icon
                     slot="suffix"
@@ -89,7 +91,7 @@
               <a-divider></a-divider>
               <a-button size="large" type="primary" block @click="$router.push('/admin/app')">Login</a-button>
               </a-form>
-              </a-card>
+              <!-- </a-card> -->
           </a-col>
       </a-row>
         </div>
@@ -135,7 +137,7 @@
       </a-row>
     </a-layout-footer>
     <a-modal v-model="signup_visible" title="Register">
-      <a-row type="flex" justify="center" :gutter="16">
+      <a-row type="flex" justify="center" :gutter="16" >
         <a-col :span="24">
           <p>Register with facebook or google</p>
         </a-col>
