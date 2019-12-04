@@ -2,10 +2,10 @@
   <div>
   <a-row type="flex" justify="end">
     <a-col :span="4">
-        <a-button type="primary" block icon="plus" @click="visible=true" >NEW DEPARTMENT</a-button>
+        <a-button type="primary" block icon="plus" @click="visible=true" >NEW RECORD</a-button>
     </a-col>
     <a-col :span="24">
-         <a-table style="margin-top: 2vh" :dataSource="offices" :columns="cols">
+         <a-table style="margin-top: 2vh" :dataSource="settings" :columns="cols">
              <span slot="date" slot-scope="text, record">
                 {{formatDate(text)}}
             </span>
@@ -20,15 +20,15 @@
       theme="dark"
     >
     <div slot="title">
-        <span style="color:#FFFFFF">New Department</span>
+        <span style="color:#FFFFFF">New Reference</span>
     </div>
       <a-form>
-        <a-form-item label="Department Name">
-            <a-input placeholder="Enter Name" v-model="office.name"></a-input>
+        <a-form-item label="Code">
+            <a-input placeholder="Enter code" v-model="setting.code"></a-input>
         </a-form-item>
-        <a-form-item label="Description">
-            <a-textarea placeholder="Description" v-model="office.description" :rows="5"></a-textarea>
-        </a-form-item>
+        <a-form-item label="Value">
+            <a-textarea placeholder="Value" v-model="setting.value" :rows="5"></a-textarea>
+        </a-form-item>       
         <a-form-item>
             <a-button type="primary" icon="save" :loading="loading" block @click="submit">Submit</a-button>
         </a-form-item>
@@ -43,16 +43,20 @@ export default {
         return{
             loading:false,
             visible:false,
-            office:{},
-            offices:[],
+            settings:[],
+            setting:{},
             cols:[
                 {
-                    title:'Name',
-                    dataIndex:'name',
+                    title:'Code',
+                    dataIndex:'code',
                 },
                 {
-                    title:'Description',
-                    dataIndex:'description',
+                    title:'Value',
+                    dataIndex:'value',
+                },
+                {
+                    title:'Status',
+                    dataIndex:'status',
                 },
                 {
                     title:'Date Created',
@@ -72,9 +76,10 @@ export default {
     },
     methods:{
         init(){
-            this.$http.get('/departments')
-            .then(results=>{
-                this.offices = results.data;
+            this.$http.get('/settings')
+            .then(results =>{
+                console.log(JSON.stringify(results))
+                 this.settings = results.data.result;
             })
         },
         onClose(){
@@ -82,14 +87,14 @@ export default {
         },
         submit(){
             this.loading = true;
-            this.$http.post('/departments', this.office)
+            this.$http.post('/settings', this.setting)
             .then(result=>{
                 console.log(JSON.stringify(result))
                 this.loading = false;
                 this.visible = false;
                 this.$notification.success({
                     message: 'Success',
-                    description: 'New Department Office Created!'
+                    description: 'New Record Created!'
                 })
                 this.init();
             })

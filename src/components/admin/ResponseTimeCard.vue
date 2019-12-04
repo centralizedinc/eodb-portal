@@ -1,5 +1,5 @@
 <template> 
-<a-card style="background-color: #242B30">
+<a-card style="background-color: #242B30;border-radius:10px">
     <a-row>
         <a-col :span="24">
             <span style="color:#B6C2C9; font-weight:bold">APPROVAL RATE   <a-icon type="exclamation-circle"></a-icon></span>                                  

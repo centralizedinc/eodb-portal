@@ -26,60 +26,22 @@
           <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
         </a-col>
       </a-row>
-      <a-drawer
-      :placement="left"
-      :visible="visible_menu"
-      @close="visible_menu=false"
-      :closable="false"
-    >
-     <a-menu :defaultSelectedKeys="['/app']" mode="inline" >
-              <a-menu-item key="/app" @click="$router.push('/news')">
-                <a-icon type="layout" />
-                <span>News</span>
-              </a-menu-item>
-              <a-menu-item key="/app/permits" @click="report">
-                <a-icon type="file-exclamation" />
-                <span>Emergency</span>
-              </a-menu-item>
-              <a-menu-item key="/app/taxes" @click="$router.push('/taxes')">
-                <a-icon type="file-protect" />
-                <span>Local Taxes</span>
-              </a-menu-item>
-              <a-menu-item key="/app/account" @click="$router.push('/permits')">
-                <a-icon type="user-add" />
-                <span>Permits</span>
-              </a-menu-item>
-              <a-menu-item key="login" @click="login_visible=true">
-                <a-icon type="login" />
-                <span>Login</span>
-              </a-menu-item>
-              <a-menu-item key="logout" @click="signup_visible=true">
-                <a-icon type="logout" />
-                <span>Sign-up</span>
-              </a-menu-item>
-            </a-menu>
-    </a-drawer>
     </a-layout-header>
-    <a-layout-content >
-        <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat;
-            background-size: cover`">
+    <a-layout-content>
+        <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat; background-size: cover`">
       <a-row style="height:100vh;background-color:#0912195c" type="flex" justify="center" align="middle">
           <a-col :span="6">
-            <span style="color:#ffffff;font-size: 28px; font-weight:bold">Administrator Login <a-icon type="lock"></a-icon></span>
-            <p style="color:#ffffff;font-size: 12px;">For Official Use Only</p>
-              <!-- <a-card style="background: rgba(59, 79, 99, 0.62)"> -->
-                  <!-- <template slot="title">
-              
-            </template> -->
-            <a-form>
-              <a-form-item>
-                <a-input size="large" placeholder="Email Address">
-                  <a-icon slot="prefix" type="mail" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'">
-                  <a-icon slot="prefix" type="lock" />
+            <div style="text-align:center">
+                <a-avatar style="border: 2px solid #FFFFFF" shape="square" :size="100" src="http://lorempixel.com/200/200/people/">
+            </a-avatar>
+            <br/>
+            <span style="color:#ffffff;font-size: 24px; font-weight:bold">Balita, Ariel A.</span>
+            <p style="color:#ffffff;font-size: 10px">(Locked)</p>
+           </div>
+            <a-form>             
+              <a-form-item style="text-align:middle">
+                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" >
+                  <!-- <a-icon slot="prefix" type="lock" /> -->
                   <a-icon
                     slot="suffix"
                     :type="reveal?'eye':'eye-invisible'"
@@ -88,8 +50,9 @@
                   />
                 </a-input>
               </a-form-item>
-              <a-divider></a-divider>
+              <!-- <a-divider></a-divider> -->
               <a-button size="large" type="primary" block @click="$router.push('/admin/app')">Login</a-button>
+              <a-button size="large" type="link" style="color:#FFFFFF" block @click="$router.push('/admin')">Not you? Login as a different user</a-button>
               </a-form>
               <!-- </a-card> -->
           </a-col>
@@ -137,7 +100,7 @@
       </a-row>
     </a-layout-footer>
     <a-modal v-model="signup_visible" title="Register">
-      <a-row type="flex" justify="center" :gutter="16" >
+      <a-row type="flex" justify="center" :gutter="16">
         <a-col :span="24">
           <p>Register with facebook or google</p>
         </a-col>

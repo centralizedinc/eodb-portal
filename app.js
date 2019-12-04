@@ -37,10 +37,12 @@ app.use("/permits", require('./api/routes/permit_router'));
 app.use("/accounts", require('./api/routes/account_router'))
 app.use("/activities", require('./api/routes/activities_router'))
 app.use("/admins", require('./api/routes/admin_account_router'))
+app.use("/admin/auth", require('./api/routes/admin_auth'))
 app.use("/payments", require('./api/routes/payment_router'))
 app.use("/departments/dependencies", require('./api/routes/department_dependencies'));
 app.use("/departments", require('./api/routes/department_router'));
 app.use("/roles", require('./api/routes/roles_router'));
+app.use("/settings", require('./api/routes/settings_router'));
 
 
 

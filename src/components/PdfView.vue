@@ -46,7 +46,9 @@ export default {
       /**
        * To bypass the details override the `pdf_details`
        */
-      this.pdf_details = {};
+      this.pdf_details = {
+        amount: 0
+      };
 
       // Process PDF
       this.loading = true;
