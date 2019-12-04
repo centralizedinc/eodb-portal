@@ -25,6 +25,7 @@ function connect(app) {
             require('../passport/oauth');
             require('../passport/google');
             require('../passport/facebook');
+            require('../passport/local');
             sg_email.setKeys();
             uploader.setKeys();
         }).catch((err) => console.error(err));
