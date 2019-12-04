@@ -25,9 +25,17 @@ export default class AccountAPI{
      * @returns {Promise}
      * @param {Object} details
      */
-    sendRegisterInvitation(details) {
+    static staticsendRegisterInvitation(details) {
         console.log("send register invitation details: " + JSON.stringify(details))
         return axios.post('auth/invitation', details)
     } 
-    
+
+    /**
+     * @returns {Promise}
+     * @param {Object} id
+     */
+    static getAccount(id){
+        console.log("find account outer api: " + JSON.stringify(id))
+        return axios.get(`accounts/${id}`)
+    }
 }
