@@ -26,47 +26,15 @@ var PaymentModelSchema = new mongoose.Schema({
     status: {
         type: String
     },
-    details: {},
+    application_details: {},
+    payment_details: {},
     date_created: {
         type: Date,
         default: new Date()
     },
     created_by: {
         type: String
-    },
-    payment_mode: {
-        type: Number
-        /*
-         * 0 - A
-         * 1 - SA
-         * 2 - Q
-         */
-    },
-    payment_info: {
-        desc: {
-            type: String
-        },
-        amount: {
-            type: Number
-        },
-        method: {
-            type: String
-        }
-    },
-    billing_info: {
-        credit_number: {
-            type: Number
-        },
-        name: {
-            type: String
-        },
-        email: {
-            type: String
-        },
-        contact: {
-            type: Number
-        }
-    },
+    }
 })
 
 PaymentModelSchema.pre('save', async function (callback) {

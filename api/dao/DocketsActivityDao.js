@@ -1,6 +1,6 @@
-const model = require('../models/DocketModel');
+const model = require('../models/DocketActivitiesModel');
 
-class DocketsDao {
+class DocketActivitiesDao {
 
     /**
      * @returns {Promise}
@@ -72,4 +72,4 @@ class DocketsDao {
     }
 }
 
-module.exports = DocketsDao;
+module.exports = DocketActivitiesDao;

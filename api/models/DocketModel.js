@@ -18,22 +18,17 @@ var DocketSchema = new mongoose.Schema({
         type: String
     },
     status: {
-        type: String
+        type: Number,
+        default: 0
+        /**
+         * 0 - In Progress
+         * 1 - Done
+         * 2 - Rejected
+         */
     },
     payment_status: {
         type: String
     },
-    approval_activities: [{
-        department: {
-            type: String
-        },
-        approver: {
-            type: String
-        },
-        remarks: {
-            type: String
-        }
-    }],
     created_by: {
         type: String
     },
