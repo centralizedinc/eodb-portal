@@ -41,8 +41,8 @@ class DocketsDao {
         return new Promise((resolve, reject) => {
             (new model(details)).save()
                 .then((result) => {
-                    const transaction_no = new Date().getTime().toString() + result.auto_id.toString();
-                    return this.modifyById(result._id, { transaction_no })
+                    const reference_no = new Date().getTime().toString() + result.auto_id.toString();
+                    return this.modifyById(result._id, { reference_no })
                 })
                 .then((result) => {
                     resolve(result)
