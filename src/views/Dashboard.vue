@@ -93,75 +93,82 @@
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
           <a-affix :offsetTop="40">
-            <a-card title="Citizen Report" style="margin-top: 10vh">
-              <p>Emergency Hotline</p>
+            <a-card title="Citizen Report" :headStyle="{'background-image':'linear-gradient(#56CAEF, #3C6CB4)',color:'white'}" style="margin-top: 10vh, ">
+              <!-- <p>Emergency Hotline</p> -->
               <a-row>
-                <a-col :span="12">
+                <a-col :span="24">
                   <a-card
                     style="background-color:#ff000c; cursor:pointer"
                     class="emergency_btn"
                   >
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <a-icon
+                        <!-- <a-icon
                           type="fire"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon>
+                        ></a-icon> -->
+                        <h3 style="color:#FFF">FIRE</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
-                <a-col :span="12">
+                <a-col :span="24">
                   <a-card
                     style="background-color:#ff000c; cursor:pointer"
                     class="emergency_btn"
                   >
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <a-icon
+                        <!-- <a-icon
                           type="sound"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon>
+                        ></a-icon> -->
+                        <h3 style="color:#FFF">FLOOD</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
-                <a-col :span="12">
+                <a-col :span="24">
                   <a-card
                     style="background-color:#ff000c; cursor:pointer"
                     class="emergency_btn"
                   >
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <a-icon
+                        <!-- <a-icon
                           type="alert"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon>
+                        ></a-icon> -->
+                        <h3 style="color:#FFF">CIVIL DISTRUBANCE</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
-                <a-col :span="12">
+                <a-col :span="24">
                   <a-card
                     style="background-color:#ff000c; cursor:pointer"
                     class="emergency_btn"
                   >
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <a-icon
+                        <!-- <a-icon
                           type="safety"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon>
+                        ></a-icon> -->
+                        <h3 style="color:#FFF">CRIME</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
                 <a-col :span="24" style="margin-top:2vh">
-                  <a-button block ghost type="primary">View Reports</a-button>
+                  <a-button block style="background-color: #333333">
+                    <p style="color:#FFFFFF">View Reports
+                    </p>
+                    </a-button>
                 </a-col>
               </a-row>
             </a-card>
