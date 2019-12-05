@@ -1,7 +1,14 @@
 <template>
 
  <a-row type="flex" justify="center" :gutter="16">
-     <a-col :span="6">
+     <a-col :span="12">
+         <registered-user-card></registered-user-card>
+     </a-col>
+     <a-col :span="12">
+         <admin-user-card></admin-user-card>
+     </a-col>
+     
+     <!-- <a-col :span="6">
          <status-card title="facebook" icon="facebook" color="#1990FF" :stat="Math.floor(Math.random()* 123)"></status-card>
      </a-col>
      <a-col :span="6">
@@ -12,7 +19,7 @@
      </a-col>
      <a-col :span="6">
          <status-card title="administrators" icon="team" color="#52C41A" :stat="Math.floor(Math.random()* 123)"></status-card>
-     </a-col>
+     </a-col> -->
     <a-col :span="24" style="margin-top:1vh">
         <a-card>
             <a-tabs >
@@ -38,11 +45,15 @@
 
 <script>
 import StatusCard from '@/components/admin/StatusCard'
+import AdminUserCard from '@/components/admin/AdminUserCard'
+import RegisteredUserCard from '@/components/admin/RegisteredUserCard'
 import RegisteredUsers from '@/components/admin/Users'
 import AdminUsers from '@/components/admin/AdminUsers'
 export default {
 components:{
     StatusCard,
+    RegisteredUserCard,
+    AdminUserCard,
     RegisteredUsers,
     AdminUsers
 },

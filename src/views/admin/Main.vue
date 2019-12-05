@@ -11,8 +11,8 @@
               </a-avatar>              
             </a-col>
             <a-col :span="14">
-              <span style="color: #FFFFFF; font-weight: bold">Balita, Ariel A.</span>    
-              <p style="font-size:10px; color: #FFFFFF">Department Head</p>          
+              <span style="color: #FFFFFF; font-weight: bold">{{getFullName()}}</span>    
+              <p style="font-size:10px; color: #FFFFFF">{{$store.state.admin_session.admin.role}}</p>          
             </a-col>
           </a-row>
           
@@ -60,17 +60,24 @@
             <span>References</span>
           </a-menu-item>          
         </a-sub-menu>
-        <a-divider></a-divider>
-        <a-menu-item key="/admin/app/account">
-          <a-icon type="user" :style="getMenuStyle('/admin/app/account')"/>
-          <span>Account</span>
-        </a-menu-item>
-        <a-menu-item key="7">
+        <a-sub-menu key="6" :style="`background-color: #242B30`" >
+          <span slot="title"><a-icon type="user" /><span>Account</span></span>          
+          <a-menu-item key="/admin/app/account">
+             <a-icon type="user" :style="getMenuStyle('/admin/app/account')" />
+            <span>Profile</span>
+          </a-menu-item>
+          <a-menu-item key="7">
           <a-icon type="lock" :style="getMenuStyle('7')" />
           <span>Security</span>
         </a-menu-item>
-        <a-menu-item key="8">
-          <a-icon type="logout" :style="getMenuStyle('8')" />
+        </a-sub-menu>
+        <!-- <a-menu-item key="/admin/app/account">
+          <a-icon type="user" :style="getMenuStyle('/admin/app/account')"/>
+          <span>Account</span>
+        </a-menu-item> -->
+        
+        <a-menu-item key="logout">
+          <a-icon type="logout" :style="getMenuStyle('logout')" />
           <span>Logout</span>
         </a-menu-item>
          </a-menu>          
@@ -88,10 +95,20 @@
               <a-icon style="color:#FFFFFF;" type="setting"></a-icon>
             </a-col>
             <a-col :span="1">
-              <a-icon style="color:#FFFFFF; cursor:pointer" type="lock" @click="$router.push('/admin/lock')"></a-icon>
+              <a-icon style="color:#FFFFFF; cursor:pointer" type="lock" @click="lock"></a-icon>
             </a-col>
             <a-col :span="2">
-              <a-avatar style="border: 1px solid #FFFFFF; margin-left: 20px" shape="square" :size="36" src="http://lorempixel.com/200/200/people/"/>              
+              <a-popover  trigger="click" >
+                <span style="margin-top: 2vh;font-weight:bold" slot="title">{{$store.state.admin_session.admin.email}}</span>
+                <a-avatar style="cursor:pointer; border: 1px solid #FFFFFF; margin-left: 20px" shape="square" :size="36" src="http://lorempixel.com/200/200/people/"/>              
+                <template slot="content">
+                  <a-menu>
+                    <a-menu-item @click="$router.push('/admin/app/account')">Profile</a-menu-item>
+                    <a-menu-item>Change Password</a-menu-item>
+                    <a-menu-item @click="logout">Logout</a-menu-item>
+                  </a-menu>
+                </template>
+              </a-popover>
             </a-col>
           </a-row>
         </a-layout-header>
@@ -138,15 +155,36 @@ export default {
       }
       
     },
+    getFullName(){
+      var admin = this.$store.state.admin_session.admin
+      if(admin.name){
+        return `${admin.name.last}, ${admin.name.first} ${admin.name.middle?admin.name.middle.substring(0,1)+'.':''}`
+      }else{
+        return admin.email
+      }
+    },
     navigate(e){
       if (e.key === "logout") {
-        this.logout();
+        var _self = this
+        this.$confirm({
+          title: 'Are you sure you want to logout?',
+          content: 'Please make sure you saved you work before logging out.',
+          onOk() {
+            _self.logout()
+          },
+          onCancel() {},
+        });
       }else {
         this.$router.push(e.key);
       }
     },
     logout(){
+      this.$store.commit('ADMIN_LOGOUT')
       this.$router.push('/admin')
+    },
+    lock(){
+      this.$store.commit('LOCK_SCREEN')
+      this.$router.push('/admin/lock')
     }
   }
 }

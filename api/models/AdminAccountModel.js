@@ -58,6 +58,7 @@ AdminAccountModelSchema.pre('save', async function (callback) {
         const salt = bcrypt.genSaltSync(5);
         const hash = bcrypt.hashSync(account.password, salt)
         account.password = hash;
+        console.log('password:::', hash)
     }
     callback();
 });

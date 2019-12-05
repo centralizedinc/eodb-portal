@@ -17,10 +17,10 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
 // PDF Format
-import RECEIPT from "./pdf/receipt";
+import receipt from "./pdf/receipt";
 
 var printers = {
-  RECEIPT
+  RECEIPT: receipt
 };
 
 import BUSINESSPERMIT from "./pdf/businesspermit";
@@ -32,6 +32,7 @@ var printers = {
 
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 export default {
   props: ["filekey", "details"],
   data() {

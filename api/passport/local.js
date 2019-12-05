@@ -1,9 +1,13 @@
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-var User = require('/model/')
+var User = require('../models/AdminAccountModel')
 
-  passport.use(new LocalStrategy(
+  passport.use("local", new LocalStrategy({
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true
+  },
     function(username, password, done) {
       User.findOne({ username: username }, function(err, user) {
         if (err) { return done(err); }
