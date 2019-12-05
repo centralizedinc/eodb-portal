@@ -51,6 +51,7 @@ app.use("/upload", require('./api/routes/upload_router'));
 app.use("/creditcard/validate", require('./api/routes/card_validation_router'));
 app.use("/dockets", require('./api/routes/dockets_router'));
 app.use("/settings", require('./api/routes/settings_router'));
+app.use("/references", require('./api/routes/references_router'));
 
 
 
