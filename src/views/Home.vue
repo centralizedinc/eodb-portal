@@ -281,7 +281,7 @@
         </a-col>
         <a-col :span="24">
           <br />
-          <span>By clicking submit you are agreeing to the Terms and Conditions</span>
+          <span>By clicking Submit you are agreeing to the Terms and Conditions</span>
         </a-col>
       </a-row>
     </a-modal>
