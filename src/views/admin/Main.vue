@@ -119,9 +119,7 @@
             </a-col>
             <a-col :span="6">
               <a-breadcrumb>
-                <a-breadcrumb-item>Home</a-breadcrumb-item>
-                <a-breadcrumb-item>Dashboard</a-breadcrumb-item>
-                <a-breadcrumb-item>Dashboard</a-breadcrumb-item>
+                <a-breadcrumb-item v-for="item in $store.state.admin_breadcrumbs.path" :key="item">{{item}}</a-breadcrumb-item>
               </a-breadcrumb>
             </a-col>
           </a-row>
@@ -183,7 +181,9 @@ export default {
       this.$router.push('/admin')
     },
     lock(){
+
       this.$store.commit('LOCK_SCREEN')
+      this.$store.commit('SAVE_SCREEN', this.$route.path)
       this.$router.push('/admin/lock')
     }
   }
