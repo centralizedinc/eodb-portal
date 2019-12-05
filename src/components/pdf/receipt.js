@@ -515,7 +515,7 @@ function getContent(details) {
     heights: [2,],
     body: [
       [{
-            text:" This is only an electronic receipt. You can get your official receipt upon claiming the",
+            text:" This is only an electronic copy. You can get your official receipt upon claiming the",
             fontSize: 5,
             alignment: 'justify',
             characterSpacing: [0],
