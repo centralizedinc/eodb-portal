@@ -1,35 +1,27 @@
 <template>
   <div style="margin-top:10vh">
-    <img
-      style="width: 100%; height:30%"
-      :src="constant_helper.client_details.cover"
-    />
+    <img style="width: 100%; height:30%" :src="constant_helper.client_details.cover" />
     <a-affix :offsetTop="60">
-      <a-tabs
-        style="background-color:#e6e6e6 ; z-index:1000"
-        @change="changeView"
-      >
-        <a-tab-pane key="0">
+      <a-tabs style="background-color:#e6e6e6 ; z-index:1000" @change="changeView">
+        <!-- <a-tab-pane key="0">
           <template slot="tab">
             <span>
-              <a-avatar
-                :src="constant_helper.client_details.avatar"
-                style="margin-right: 1vh"
-              />
+              <a-avatar :src="constant_helper.client_details.avatar" style="margin-right: 1vh" />
               {{ constant_helper.client_details.title }}'s Corner
             </span>
           </template>
+        </a-tab-pane>-->
+
+        <a-tab-pane tab="Permits & Licenses" key="0">
+          <!-- <permits></permits> -->
         </a-tab-pane>
-        <a-tab-pane tab="Public Service" key="1">
+        <a-tab-pane tab="Certificates" key="1">
           <!-- <public-service></public-service> -->
         </a-tab-pane>
-        <a-tab-pane tab="Permits" key="2">
+        <a-tab-pane tab="Real Property Tax" key="2">
           <!-- <permits></permits> -->
         </a-tab-pane>
-        <a-tab-pane tab="Local Taxes" key="3">
-          <!-- <permits></permits> -->
-        </a-tab-pane>
-        <a-tab-pane tab="Downloadable Forms" key="4">
+        <a-tab-pane tab="Downloadable Forms" key="3">
           <!-- <downloadable-forms></downloadable-forms> -->
         </a-tab-pane>
       </a-tabs>
@@ -41,8 +33,8 @@
 </template>
 
 <script>
-import MayorsCorner from "@/components/MayorsCorner";
-import PublicService from "@/components/PublicService";
+// import MayorsCorner from "@/components/MayorsCorner";
+// import PublicService from "@/components/PublicService";
 import Permits from "@/components/Permits";
 import LocalTaxes from "@/components/Taxes";
 import DownloadableForms from "@/components/DownloadableForms";
@@ -50,24 +42,18 @@ import cover_image from "@/assets/cover.jpg";
 
 export default {
   components: {
-    MayorsCorner,
-    PublicService,
+    // MayorsCorner,
+    // PublicService,
     Permits,
     LocalTaxes,
     DownloadableForms
   },
   data() {
     return {
-      currentView: "MayorsCorner",
+      currentView: "Permits",
       visible: false,
 
-      tabView: [
-        "MayorsCorner",
-        "PublicService",
-        "Permits",
-        "LocalTaxes",
-        "DownloadableForms"
-      ],
+      tabView: ["Permits", "DownloadableForms", "LocalTaxes"],
       cover_image
     };
   },
