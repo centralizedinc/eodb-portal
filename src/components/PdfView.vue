@@ -18,17 +18,16 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import BGYCLEARANCE from "./pdf/bgyclearance";
 import BUSINESSPERMIT from "./pdf/businesspermit";
 import FIREANDSAFETY from "./pdf/fireandsafety";
+import POLICECLEARANCE from "./pdf/policeclearance";
 
 var printers = {
-  BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT
+  BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE
 };
 
 // var printers = {
 //   FIREANDSAFETY
 // };
 
-
-// var printers = {
 //   BUSINESSPERMIT
 // };
 

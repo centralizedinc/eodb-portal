@@ -237,7 +237,7 @@ function getContent(details) {
         {
           text:" 150.00 ",
           fontSize: 9,
-          alignment: 'justify',
+          alignment: 'right',
           // right,down,left,up
           margin: [1, -2, 0, 0]
           },
@@ -269,7 +269,7 @@ function getContent(details) {
         {
           text:" 175.00 ",
           fontSize: 9,
-          alignment: 'justify',
+          alignment: 'right',
           // right,down,left,up
           margin: [1, -2, 0, 0]
           },
@@ -299,7 +299,7 @@ function getContent(details) {
             {
               text:" 2500.00 ",
               fontSize: 9,
-              alignment: 'justify',
+              alignment: 'right',
               // right,down,left,up
               margin: [1, -2, 0, 0]
               },
@@ -331,7 +331,7 @@ function getContent(details) {
             {
               text:" 3500.00 ",
               fontSize: 9,
-              alignment: 'justify',
+              alignment: 'right',
               // right,down,left,up
               margin: [1, -2, 0, 0]
               },
@@ -362,7 +362,7 @@ function getContent(details) {
             {
               text:" 6325.00 ",
               fontSize: 9,
-              alignment: 'justify',
+              alignment: 'right',
               // right,down,left,up
               margin: [1, -2, 0, 0]
               },
@@ -471,7 +471,7 @@ function getContent(details) {
     heights: [2,],
     body: [
       [{
-            text:" PRINT BUTTON  ",
+            text:"[ PRINT BUTTON ]  ",
             fontSize: 6,
             alignment: 'justify',
             characterSpacing: [0],

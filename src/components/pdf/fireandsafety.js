@@ -27,7 +27,7 @@ function getContent(details) {
             body: [
                 [
                     {
-                        text: "REPUBLIC OF THE PHILIPPINES fire",
+                        text: "REPUBLIC OF THE PHILIPPINES",
                         fontSize: 7,
                         bold: true,
                         characterSpacing: 1,
@@ -48,12 +48,56 @@ function getContent(details) {
         heights: [6,],
         body: [
           [{
-                text:"(Municipality)",
+                text:"San Antonio Quezon",
                 fontSize: 7,
                 characterSpacing: 2,
                 alignment: 'center',
                 // right,down,left,up
                 margin: [1, -4, 0, 0]
+              },
+              
+                                        
+          ]
+        
+        ]
+        }
+    },
+        /////////////////////////////////////////////////////////////////////// municipality
+        {
+            layout: "noBorders",        
+            table: {
+            widths: [400],
+            heights: [6,],
+            body: [
+              [{
+                    text:"Public Safety Division",
+                    fontSize: 5,
+                    characterSpacing: 1,
+                    alignment: 'center',
+                    // right,down,left,up
+                    margin: [1, -5, 0, 0]
+                  },
+                  
+                                            
+              ]
+            
+            ]
+            }
+        },
+            /////////////////////////////////////////////////////////////////////// municipality
+    {
+        layout: "noBorders",        
+        table: {
+        widths: [400],
+        heights: [7,],
+        body: [
+          [{
+                text:"Fire & Rescue Section",
+                fontSize: 5,
+                characterSpacing: 2,
+                alignment: 'center',
+                // right,down,left,up
+                margin: [1, -7, 0, 0]
               },
               
                                         
@@ -70,12 +114,12 @@ function getContent(details) {
         heights: [3,],
         body: [
           [{
-            text:"BARANGAY CLEARANCE",
+            text:"FIRE SAFETY INSPECTION CERTIFICATE",
             fontSize: 7,
             characterSpacing: 2,
             alignment: 'center',
             // right,down,left,up
-            margin: [1, 10, 0, 0]
+            margin: [1, 5, 0, 0]
           
               },
               
@@ -85,45 +129,100 @@ function getContent(details) {
         ]
         }
     },
-    //////////////////////////////////////////////////////////////  SPACE
- {
-    layout: "noBorders",        
-    table: {
-    widths: [400],
-    heights: [50],
-    body: [
-      [{
-            text:" ",
+/////////////////////////////////////////////////////////////////////// municipality
+                {
+                    layout: "noBorders",        
+                    table: {
+                    widths: [400],
+                    heights: [7,],
+                    body: [
+                      [{
+                            text:"This certifies that",
+                            fontSize: 5,
+                            characterSpacing: 2,
+                            alignment: 'center',
+                            // right,down,left,up
+                            margin: [1, -4, 0, 0]
+                          },
+                          
+                                                    
+                      ]
+                    
+                    ]
+                    }
+                },
+
+/////////////////////////////////////////////////////////// brgy clearance
+    {
+        layout: "noBorders",        
+        table: {
+        widths: [400],
+        heights: [3,],
+        body: [
+          [{
+            text:"BERMUDEZ MANPOWER SERVICES CORPORATION",
             fontSize: 7,
-            alignment: 'left',
+            characterSpacing: 2,
+            alignment: 'center',
             // right,down,left,up
-            margin: [1, 1, 0, 0]
-          },
-                             
-      ]
-    
-    ]
-    }
-},
- //////////////////////////////////////////////////////////////  concern
- {
-    layout: "noBorders",        
-    table: {
-    widths: [400],
-    heights: [7,],
-    body: [
-      [{
-            text:"TO WHOM IT MAY CONCERN",
-            fontSize: 7,
-            alignment: 'left',
-            // right,down,left,up
-            margin: [1, 1, 0, 0]
-          },                                   
-      ]
-    
-    ]
-    }
-},
+            margin: [1, 5, 0, 0]
+          
+              },
+              
+                                        
+          ]
+        
+        ]
+        }
+    },
+ /////////////////////////////////////////////////////////////////////// municipality
+       {
+        layout: "noBorders",        
+        table: {
+        widths: [400],
+        heights: [7,],
+        body: [
+          [{
+                text:"__________________________________________________________",
+                fontSize: 5,
+                characterSpacing: 2,
+                alignment: 'center',
+                // right,down,left,up
+                margin: [1, -4, 0, 0]
+              },
+              
+                                        
+          ]
+        
+        ]
+        }
+    },
+ 
+
+    /////////////////////////////////////////////////////////////////////// municipality
+    {
+        layout: "noBorders",        
+        table: {
+        widths: [400],
+        heights: [7,],
+        body: [
+          [{
+                text:"Located at",
+                fontSize: 5,
+                characterSpacing: 2,
+                alignment: 'center',
+                // right,down,left,up
+                margin: [1, -3, 0, 0]
+              },
+              
+                                        
+          ]
+        
+        ]
+        }
+    },
+
+ 
     //////////////////////////////////////////////////////////////  SPACE
     {
         layout: "noBorders",        
@@ -153,7 +252,7 @@ function getContent(details) {
     heights: [6,],
     body: [
       [{
-            text:"This is to certify that (name of business) owned and operated by (name f owner showing n DTI registration) with business address located (business address), after complying with the requirements prescribed by his Office, is hereby issued a BARANGAY CLEARANCE for the purpose of securing a Mayor’s Permit in order to (nature of business) in accordance with Barangay  Revenue Ordinance of 2008. However, the Barangay Clearance may be cancelled or revoked anytime if public safety and interest so require.",
+            text:"Batangas-Quezon Road, Barangay Poblacion, San Antonio, 40988 Philippines has been inspected on March 18, 2019 and has Fully complied with the Fire Safety Requirements with regards R.A 9514 Fire Code of the Philippines. The owner/lessee shall periodically maintain the fire protection facilities. A certified true copy of this certificate shall be displayed conspicuously within the building and shall not be removed without authority from the undersigned",
             fontSize: 7,
             alignment: 'justify',
             // right,down,left,up
@@ -184,45 +283,59 @@ function getContent(details) {
     ]
     }
 },
-
 //////////////////////////////////////////////////////////////// request
 {
     layout: "noBorders",        
     table: {
-    widths: [400],
+    widths: [200,200],
     heights: [6,],
     body: [
       [{
-            text:" This Barangay Clearance is hereby issued upon request of ",
+            text:"------------------------------",
             fontSize: 7,
             alignment: 'justify',
             // right,down,left,up
-            margin: [1, -1, 0, 0]
-          },            
+            margin: [30, -1, 0, 0]
+          },    
+          {
+            text:"------------------------------",
+            fontSize: 7,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [100, -1, 0, 0]
+          },         
       ]
     
     ]
     }
 },
-////////////////////////////////////////////////////////////////  requestor
+//////////////////////////////////////////////////////////////// request
 {
     layout: "noBorders",        
     table: {
-    widths: [400],
+    widths: [200,200],
     heights: [6,],
     body: [
       [{
-            text:" (requestor) ",
+            text:" Fire Marshal ",
             fontSize: 7,
             alignment: 'justify',
             // right,down,left,up
-            margin: [1, -1, 0, 0]
-          },            
+            margin: [40, -7, 0, 0]
+          },    
+          {
+            text:" PSD Manager ",
+            fontSize: 7,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [110, -7, 0, 0]
+          },         
       ]
     
     ]
     }
 },
+
 
 /////////////////////////////////////////////////////////////// Space
 {
@@ -246,21 +359,140 @@ function getContent(details) {
 {
     layout: "noBorders",        
     table: {
-    widths: [400],
-    heights: [6,],
+    widths: [35,200],
+    heights: [6],
     body: [
       [{
-            text:" Issued this ___ day of (month)  ,  (year). ",
-            fontSize: 7,
+            text:"Certificate No:",
+            fontSize: 5,
+            alignment: 'justify',
+            italics: true,
+            // right,down,left,up
+            margin: [1, -1, 0, 0]
+          },    {
+            text:"2019-0595",
+            fontSize: 5,
             alignment: 'justify',
             // right,down,left,up
             margin: [1, -1, 0, 0]
+          },           
+      ]
+    
+    ]
+    }
+},
+////////////////////////////////////////////////////////////////  issued
+{
+    layout: "noBorders",        
+    table: {
+    widths: [100],
+    body: [
+      [{
+            text:"______________________________",
+            fontSize: 2,
+            alignment: 'left',
+            // right,down,left,up
+            margin: [43, -7, 0, 0]
+      }
+                
+      ]
+    
+    ]
+    }
+},
+////////////////////////////////////////////////////////////////  issued
+{
+    layout: "noBorders",        
+    table: {
+    widths: [35,200],
+    heights: [6,],
+    body: [
+      [{
+            text:"Date Issued:",
+            fontSize: 5,
+            alignment: 'justify',
+            italics: true,
+            // right,down,left,up
+            margin: [1, -5, 0, 0]
+          },   
+          {
+            text:"March 21, 2019",
+            fontSize: 5,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [1, -5, 0, 0]
           },            
       ]
     
     ]
     }
-},/////////////////////////////////////////////////////////////// Space
+},
+////////////////////////////////////////////////////////////////  issued
+{
+    layout: "noBorders",        
+    table: {
+    widths: [100],
+    body: [
+      [{
+            text:"________________________________________",
+            fontSize: 2,
+            alignment: 'left',
+            // right,down,left,up
+            margin: [43, -11, 0, 0]
+      }
+                
+      ]
+    
+    ]
+    }
+},
+////////////////////////////////////////////////////////////////  issued
+{
+    layout: "noBorders",        
+    table: {
+    widths: [35,200],
+    heights: [6,],
+    body: [
+      [{
+            text:"Valid Until:",
+            fontSize: 5,
+            italics: true,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [1, -8, 0, 0]
+          },  
+         {
+            text:"March 21, 2020",
+            fontSize: 5,
+            alignment: 'justify',
+            // right,down,left,up
+            margin: [1, -8, 0, 0]
+          },         
+      ]
+    
+    ]
+    }
+},
+////////////////////////////////////////////////////////////////  issued
+{
+    layout: "noBorders",        
+    table: {
+    widths: [100],
+    body: [
+      [{
+            text:"________________________________________",
+            fontSize: 2,
+            alignment: 'left',
+            // right,down,left,up
+            margin: [43, -14, 0, 0]
+      }
+                
+      ]
+    
+    ]
+    }
+},
+/////////////////////////////////////////////////////////////// Space
 {
     layout: "noBorders",        
     table: {
@@ -273,45 +505,6 @@ function getContent(details) {
           },
           
                                     
-      ]
-    
-    ]
-    }
-},
-////////////////////////////////////////////////////////////////  brgy chairman
-{
-    layout: "noBorders",        
-    table: {
-    widths: [400],
-    heights: [6,],
-    body: [
-      [{
-            text:" HON. (BRGY CHAIRMAN) ",
-            fontSize: 7,
-            alignment: 'left',
-            // right,down,left,up
-            margin: [250, -1, 0, 0]
-          },            
-      ]
-    
-    ]
-    }
-},
-////////////////////////////////////////////////////////////////  punong barangay
-{
-    layout: "noBorders",        
-    table: {
-    widths: [400],
-    heights: [6,],
-    body: [
-      [{
-            text:" Punong Barangay ",
-            fontSize: 7,
-            alignment: 'left',
-            italics: true,
-            // right,down,left,up
-            margin: [260, -1, 0, 0]
-          },            
       ]
     
     ]

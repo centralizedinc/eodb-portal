@@ -3,6 +3,7 @@ import AccountAPI from "../../api/AccountAPI"
 function initialState() {
     return {
         user:{
+            _id: '123',
             fname:'',
             lname:'',
             avatar:'',

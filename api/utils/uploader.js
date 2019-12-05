@@ -15,6 +15,7 @@ class Uploader {
       "AWS_ACCESS_KEY_ID:" + ApplicationSettings.getValue("AWS_ACCESS_KEY_ID")
     );
     console.log("AWS_REGION:" + ApplicationSettings.getValue("AWS_REGION"));
+    console.log("AWS_BUCKET:" + ApplicationSettings.getValue("AWS_BUCKET"));
     aws.config.update({
       secretAccessKey: ApplicationSettings.getValue('AWS_SECRET_ACCESS_KEY'),
       accessKeyId: ApplicationSettings.getValue('AWS_ACCESS_KEY_ID'),
@@ -104,11 +105,50 @@ class Uploader {
           });
         },
         key: function (req, file, cb) {
+          console.log('file :', file);
+          // console.log('req :', req);
+          console.log('directory :', directory);
           cb(null, `${directory}/${Date.now().toString()}`);
         }
       })
     });
     return upload.array("files");
+  }
+
+  static uploadPermitsDocRequired(directory) {
+    const upload = multer({
+      storage: multerS3({
+        s3: s3,
+        bucket: ApplicationSettings.getValue("AWS_BUCKET"),
+        acl: "public-read",
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        contentDisposition: "inline",
+        metadata: function (req, file, cb) {
+          console.log("UPLOADING FILE: " + JSON.stringify(file));
+          cb(null, {
+            fieldName: file.fieldname
+          });
+        },
+        key: function (req, file, cb) {
+          console.log('file :', file);
+          // console.log('req :', req);
+          console.log('directory :', directory);
+          cb(null, `${directory}/${file.fieldname}/${Date.now().toString()}`);
+        }
+      })
+    });
+    return upload.fields([{
+      name: "dti_sec_cda"
+    },
+    {
+      name: "residence"
+    },
+    {
+      name: "barangay"
+    },
+    {
+      name: "police"
+    }])
   }
 
   /**

@@ -2,8 +2,31 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Landing from './views/Landing'
+import store from './store'
 
 Vue.use(Router)
+
+function isAuthenticated(to, from, next) {
+  if(store.state.admin_session.admin.token){
+    if(store.state.admin_session.locked){
+      next('/admin/lock')
+    }else{
+      next()
+    }    
+  }else{
+    next('/admin/404')
+  }  
+  // if(store.state.admin_session.admin.){}
+}
+
+function checkSession(to, from, next){
+  console.log(from)
+  if(store.state.admin_session.admin.token){
+    next(from.path)
+  }else{
+    next()
+  }
+}
 
 export default new Router({
   routes: [
@@ -22,8 +45,8 @@ export default new Router({
           component: () => import(/* webpackChunkName: "news" */ './views/News.vue'),
         },
         {
-          path: 'permits',
-          name: 'permits',
+          path: 'permit',
+          name: 'Permits',
           component: () => import(/* webpackChunkName: "news" */ './views/Permits.vue'),
         },
         {
@@ -41,7 +64,6 @@ export default new Router({
     {
       path: '/app',
       component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
-      // component: () => import('./views/Main.vue'),
       children: [
         {
           path: '',
@@ -58,11 +80,6 @@ export default new Router({
         {
           path: 'account',
           component: () => import('./views/app/Profile')
-        },
-        {
-          path: 'permits/business',
-          name: "Business Permit",
-          component: () => import("./views/app/BusinessPermit/Form.vue")
         }
       ]
     },
@@ -74,12 +91,18 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
+      beforeEnter: checkSession,
       component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/Login.vue'),
     },
     {
       path: '/admin/lock',
       name: 'lock screen',
       component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/LockScreen.vue'),
+    },
+    {
+      path: '/admin/404',
+      name: 'Unauthorized',
+      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/UnAuthorized.vue'),
     },
     {
       path: '/admin/app',
@@ -89,36 +112,53 @@ export default new Router({
         path: '',
         name: 'Dashboard',
         component: () => import(/* webpackChunkName: "adminDashboard" */ './views/admin/Dashboard.vue'),
+        beforeEnter:isAuthenticated
       },
       {
         path: 'applications',
         name: 'Applications',
+        beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminApplications" */ './views/admin/Applications.vue'),
       },
       {
         path: 'users',
         name: 'Users',
+        beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminUsers" */ './views/admin/Users.vue'),
       },
       {
         path: 'departments',
         name: 'Departments',
+        beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Departments.vue'),
       },
       {
         path: 'roles',
         name: 'User Roles',
+        beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/UserRoles.vue'),
       },
       {
         path: 'references',
         name: 'Application References',
+        beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/References.vue'),
       },
       {
         path: 'account',
         name: 'Admin Account',
+        beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Account.vue'),
+      }]
+    },
+    {
+      path: '/permits',
+      name: "Permits",
+      component: () => import('./views/Main.vue'),
+      children: [{
+        path: 'business',
+        name: "Business Permit",
+        component: () => import("./views/app/BusinessPermit/Form.vue")
       }]
     },
     {

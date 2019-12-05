@@ -32,7 +32,9 @@
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.owner_details.gender}}</a-col>
+      <a-col
+        :span="15"
+      >{{form.owner_details.gender === 'M' ? 'Male' : form.owner_details.gender === 'F' ? 'Female' : ''}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Telephone Number</a-col>
@@ -58,12 +60,14 @@
     <a-row class="summary-row">
       <a-col :span="8">Application Type</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.application_type}}</a-col>
+      <a-col
+        :span="15"
+      >{{form.application_type === 0 ? 'New' : form.application_type === 0 ? 'Renewal' : ''}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Type of Business</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.business_type}}</a-col>
+      <a-col :span="15">{{getBusinessType(form.business_details.business_type)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Business Name</a-col>
@@ -131,8 +135,6 @@
       <a-col :span="15">{{form.business_details.is_rented ? 'YES':'NO'}}</a-col>
     </a-row>
 
-
-
     <!-- Part III. Business Activity -->
     <a-divider
       style="color: black;font-weight: bold;margin-top: 5vh"
@@ -144,17 +146,14 @@
     ></a-table>
 
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-      <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :xl="{ span: 10 }">
+      <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
         <a-button-group>
-          <a-button @click="$emit('changeStep', step-1)">Previous</a-button>
-          <a-button type="primary" @click="$emit('submit')">Submit</a-button>
+          <a-button @click="$emit('prev')" :disabled="loading">Previous</a-button>
+          <a-button type="primary" @click="$emit('payment')" :disabled="loading">Proceed to Payment</a-button>
         </a-button-group>
       </a-col>
-      <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :xl="{ span: 11 }">
-        <a-button>Save Draft</a-button>
-      </a-col>
-      <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :xl="{ span: 3 }">
-        <a-button type="danger">Close</a-button>
+      <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 6 }" style="text-align: right;">
+        <a-button :disabled="loading">Save Draft</a-button>
       </a-col>
     </a-row>
   </a-card>
@@ -162,7 +161,7 @@
 
 <script>
 export default {
-  props: ["form", "step"],
+  props: ["form", "step", "loading"],
   data() {
     return {
       line_of_business_columns: [
@@ -227,6 +226,12 @@ export default {
       if (region) result_address += `, ${region}`;
       if (postal_code) result_address += `, ${postal_code}`;
       return result_address;
+    },
+    getBusinessType(type) {
+      if (type === "SP") return "Single Proprietorship";
+      else if (type === "P") return "Partnership";
+      else if (type === "CE") return "Cooperative";
+      else if (type === "CN") return "Corporation";
     }
   }
 };
