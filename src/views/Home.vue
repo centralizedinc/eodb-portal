@@ -5,124 +5,21 @@
         <a-icon type="up" :size="42"></a-icon>
       </a-avatar>
     </a-back-top>
-    <a-layout-header class="header" :style="headerStyle">
-      <a-row type="flex" justify="start" :gutter="8" v-if="$breakpoint.lgAndUp">
-        <a-col :span="2">
-          <a-avatar
-            style="cursor:pointer"
-            @click="$router.push('/')"
-            :src="constant_helper.home_header.logo"
-            :size="50"
-          ></a-avatar>
-        </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="12">
-          <h2
-            style="color:white; margin-left: -4vh; cursor:pointer"
-            @click="$router.push('/')"
-          >{{constant_helper.home_header.label}}</h2>
-        </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2">
-          <a-button ghost block type="link" @click="$router.push('/news')">News</a-button>
-        </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2">
-          <a-button ghost block type="link" @click="report()">Emergency</a-button>
-        </a-col>
+    <!-- <a-layout-header class="header" :style="{background: '#333333',height:'40px'}">
+     <p style="margin-top:-10px; color:#D7D7D7" > <a-button type="link" shape="round" style="color: #1890FF">Create an account</a-button>
+     to track and manage your application, engage in information you care about and be a part of the concerned citizens of {{constant_helper.name_display}}
+      <a-button type="link" style="margin-left:15%; color: #1890FF" >Sign in</a-button>
+      </p>
 
-        <a-col :xs="0" :sm="0" :md="0" :lg="2">
-          <a-button ghost block type="link" @click="$router.push('/taxes')">Local Taxes</a-button>
-        </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2">
-          <a-button ghost block type="link" @click="$router.push('/permits')">Permits</a-button>
-        </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="2">
-          <a-button ghost block @click="signup_visible=true">SIGN-UP</a-button>
-        </a-col>
-        <!-- <a-col :md="2" :lg="0" :push="22">
-          <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
-        </a-col>-->
-        <a-divider style="margin-top: -1vh" v-show="topLocation<50"></a-divider>
-      </a-row>
-      <a-row v-else type="flex" justify="start">
-        <a-col :xs="6" :sm="3" :md="2">
-          <a-avatar
-            style="cursor:pointer"
-            @click="$router.push('/')"
-            :src="constant_helper.home_header.logo"
-            :size="50"
-          ></a-avatar>
-        </a-col>
-        <a-col :xs="17" :sm="20" :md="21" style="text-align:left">
-          <h3
-            style="color:white; cursor:pointer"
-            @click="$router.push('/')"
-          >{{constant_helper.home_header.label}}</h3>
-        </a-col>
-        <a-col :span="1">
-          <a-icon
-            :type="visible_menu?'close':'menu'"
-            style="cursor:pointer"
-            @click="visible_menu=true"
-          ></a-icon>
-        </a-col>
-        <a-divider style="margin-top: -1vh" v-show="topLocation<50"></a-divider>
-      </a-row>
-
-      <a-drawer
-        placement="left"
-        :visible="visible_menu"
-        @close="visible_menu=false"
-        :closable="false"
-      >
-        <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
-          <a-col :xs="6" :sm="6" :md="6">
-            <a-avatar
-              style="cursor:pointer"
-              @click="$router.push('/')"
-              :src="constant_helper.home_header.logo"
-              :size="50"
-            ></a-avatar>
-          </a-col>
-          <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
-            <h3 style="color:#FFFFFF">{{constant_helper.home_header.label}}</h3>
-          </a-col>
-        </a-row>
-        <a-divider></a-divider>
-        <a-menu :defaultSelectedKeys="['/']" mode="inline">
-          <a-menu-item key="/" @click="$router.push('/')">
-            <a-icon type="dashboard" />
-            <span>Home</span>
-          </a-menu-item>
-          <a-menu-item key="/app/news" @click="$router.push('/news')">
-            <a-icon type="layout" />
-            <span>News</span>
-          </a-menu-item>
-          <a-menu-item key="/app/permits" @click="report">
-            <a-icon type="file-exclamation" />
-            <span>Emergency</span>
-          </a-menu-item>
-          <a-menu-item key="/app/taxes" @click="$router.push('/taxes')">
-            <a-icon type="file-protect" />
-            <span>Local Taxes</span>
-          </a-menu-item>
-          <a-menu-item key="/app/account" @click="$router.push('/permits')">
-            <a-icon type="user-add" />
-            <span>Permits</span>
-          </a-menu-item>
-          <a-menu-item key="logout" @click="signup_visible=true">
-            <a-icon type="logout" />
-            <span>Sign-up</span>
-          </a-menu-item>
-        </a-menu>
-      </a-drawer>
-    </a-layout-header>
+    </a-layout-header> -->
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
-    <a-layout-footer :style="`${constant_helper.theme.default} color: #ffffff`">
+    <!-- <a-layout-footer :style="`${constant_helper.theme.default} color: #ffffff`">
       <a-row>
         <a-col :span="24">
           <h1 style="color:#ffffff">Get in touch</h1>
-          <!-- <a-divider></a-divider> -->
+          <a-divider></a-divider>
           <p>
             <a-icon style="margin-right: 5px" type="phone"></a-icon>Hotline: 123-3456
           </p>
@@ -179,6 +76,27 @@
             <a-icon type="instagram"></a-icon>
           </a-avatar>
         </a-col>
+      </a-row>
+    </a-layout-footer> -->
+    <a-layout-footer :style="{background: '#333333'}">
+      <a-row type="flex" justify="center">
+        <a-col :span="9"></a-col>
+        <a-col :span="6">
+          <a-row type="flex" justify="center">
+            <a-col :span="24">
+              <h1 align="center" style="color:#FFF">Pasyal tayo sa San Antonio</h1>
+            </a-col>
+          </a-row>
+          <a-row type="flex" justify="center">
+            <a-col :span="24">
+              <h4 align="center" style="color:#FFF">Office of the Mayor: (042) 545-4091<br/>
+Website: https://sanantonio.quezon.gov.ph<br/>
+Facebook: SanAntonio Quezon<br/>
+© Copyright 2019 CCCI Inc. - All Rights Reserved</h4>
+            </a-col>
+          </a-row>
+        </a-col>
+        <a-col :span="9"></a-col>
       </a-row>
     </a-layout-footer>
 
@@ -402,7 +320,7 @@
     </a-modal>
 
     <a-modal v-modal="login_visible">
-      <a-card style="background: rgba(59, 79, 99, 0.62)">
+      <a-card style="background: rgba(59, 79, 99, 0.62)" border-radius="20px 0px 0px 20px">
         <template slot="title">
           <div style="color:#ffffff">Enter Credentials</div>
         </template>

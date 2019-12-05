@@ -10,7 +10,6 @@
       :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
     <div  v-if="$breakpoint.lgAndUp" :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
-      
       <!-- desktop version -->
       <a-row style="height:100vh" type="flex" justify="end" align="center" :gutter="16">        
         <a-col
@@ -35,40 +34,62 @@
           <a-col :xs="22" :sm="22" style="margin-top:5vh">
             <title-component/>
           </a-col>
-          
         </a-row>   
-      </div>   
-    
-   
+      </div>      
     <a-row
       :gutter="16"
       type="flex"
       align="middle"
-      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
+      style="margin-top:-1vh; margin-left:5vh; margin-right:5vh"
     >
-      <a-col :md="24" :lg="8" >
-        <a-card title=" Report Emergency/Calamity">
-          To protect our community, emergency management has to keep our response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, we can optimize response times and help protect first responders in the field.
-          <a-divider></a-divider>
-          <a-button type="primary">Report</a-button>
+      <a-col :s="24" :md="12" :lg="6" >
+        <a href="#pl">
+        <a-card style="background-color:#1890FF; color:#FFFFFF"
+        :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
+        >
+        
+ <p style="margin-top:10pv, margin-bottom:10pv">Permits & Licenses</p>
+        
         </a-card>
+        </a>
       </a-col>
-      <a-col :md="24" :lg="8">
-        <a-card title="News/Announcements">
-          <p>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</p>
-          <a-divider></a-divider>
-          <a-button type="primary" @click="$router.push('/news')">Read More</a-button>
+      <a-col :s="24" :md="12" :lg="6" >
+        <a href=#cert>
+        <a-card style="background-color:#1890FF; color:#FFFFFF"
+        :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
+        >
+        
+ <p style="margin-top:10pv, margin-bottom:10pv color:#FFFFFF">Certificate</p>
+ 
+ <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
+ <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
+ </a-anchor> -->
         </a-card>
+        </a>
       </a-col>
-      <a-col :md="24" :lg="8">
-        <a-card title="Permits and Certificates">
-          In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.
-          <a-divider></a-divider>
-          <a-button type="primary" @click="$router.push('/permits')">Apply Now</a-button>
+      <a-col :s="24" :md="12" :lg="6" >
+        <a href="#rpt">
+        <a-card style="background-color:#1890FF; color:#FFFFFF"
+        :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
+        >
+        
+ <p style="margin-top:10pv, margin-bottom:10pv">Real Property Tax</p>
+       
         </a-card>
+        </a>
+      </a-col>
+      <a-col :s="24" :md="12" :lg="6" >
+        <a href="#rec">
+          <a-card style="background-color:#1890FF; color:#FFFFFF"
+          :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
+          >        
+            <p style="margin-top:10pv, margin-bottom:10pv">Report Emergency / Calamity</p>
+          </a-card>
+        </a>
       </a-col>
     </a-row>
     
+    <!-- ease of doing business -->
     <a-row
       :gutter="16"
       type="flex"
@@ -76,60 +97,118 @@
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
       <a-col :span="24" data-aos="fade-up">
-        <h1>Permits and Certificates</h1>
-        <a-divider></a-divider>
+        <h1 align="center">Ease of Doing Business</h1>
+        <h2 align="center">in {{constant_helper.home_header.label}}</h2>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
         <img
-          width="100%"
-          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
+          width="90%"
+          src="https://i.postimg.cc/MGz98Q0W/San-Antonio-Quezon-Halljf-0128-03.jpg"
           alt
         />
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <p>In compliance with the Ease of Doing Business Act, online registration and application of Permits and Certificates for all the constituents of {{constant_helper.home_header.label}} is now available through this Portal. The public may apply online, but only registered members can view, track and manage ALL their application.</p>
+        <p>SmartJuan is a One Stop Shop eGovernment Service of San Antonio, Quezon that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
+San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified and automated application to make it easier for all its constituents to put up or renew businesses and to pay their local taxes hassle free. It also features a zero-contact policy for complete transparency.</p>
+        <a-button type="primary" style="margin-top:10pv; text-align:right">Apply Now</a-button>
       </a-col>
     </a-row>
+
+    
+    <!-- permits & licenses -->
     <a-row
       :gutter="16"
       type="flex"
       align="middle"
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh;"
+      id="pl"
     >
       <a-col :span="24" data-aos="fade-up">
-        <h1>News/Announcements</h1>
+        <h1 >Permits & Licenses</h1>
         <a-divider></a-divider>
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <div>Stay updated with all the latest and official News and Announcements of {{constant_helper.home_header.label}}.</div>
+        <div >
+          In compliance with the Ease of Doing Business Act, registration and application of Permits and Licenses for all the constituents of {{constant_helper.home_header.label}} is now available online. Users can now apply for business permits anytime, anywhere. Apply, pay, view, track and manage ALL application in one place through SmartJuan.
+        </div>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
+        <!-- <a-icon type="file-text" /> -->
         <img
           src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/icloud/macos-mojave-ios12-macbook-ipad-pro-iphone-x-set-up-icloud-drive-hero.jpg"
-          width="100%"
+          width="90%"
           alt
         />
       </a-col>
     </a-row>
+    <!-- Certificates -->
     <a-row
       :gutter="16"
       type="flex"
       align="middle"
-      style="margin-top:10vh; margin-left:5vh; margin-right:5vh; margin-bottom:10vh"
+      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
+      id="cert"
     >
       <a-col :span="24" data-aos="fade-up">
-        <h1>Report Emergency/Calamity</h1>
-        <a-divider></a-divider>
-      </a-col>
-      <a-col :span="14" data-aos="fade-up">
-        <p>To protect our community, emergency management has to keep our response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, we can optimize response times and help protect first responders in the field.</p>
+        <h1>Certificates</h1>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
         <img
-          width="100%"
-          src="https://bjango.com/images/mac/skalapreview2/skala-preview-hero.jpg"
+          width="90%"
+          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
           alt
         />
+      </a-col>
+      <a-col :span="14" data-aos="fade-up">
+        <p>Request for issuance of certified copies of births, marriages and deaths.</p>
+      </a-col>
+    </a-row>
+    <!-- real property tax -->
+    <a-row
+      :gutter="16"
+      type="flex"
+      align="middle"
+      style="margin-top:10vh; margin-left:5vh; margin-right:5vh;"
+      id="rpt"
+    >
+      <a-col :span="24" data-aos="fade-up">
+        <h1>Real Property Tax</h1>
+        <a-divider></a-divider>
+      </a-col>
+      <a-col :span="14" data-aos="fade-up">
+        <div>
+          Filing and Payment of Real Property Tax (RPT) will now be a little easier for the people of {{constant_helper.home_header.label}}. Regardless of where you are or just being in the comfort of your home, you can now file and pay your real property tax obligations online using SmartJuan.
+        </div>
+      </a-col>
+      <a-col :span="8" data-aos="fade-up">
+        <img
+          src="https://support.apple.com/library/content/dam/edam/applecare/images/en_US/icloud/macos-mojave-ios12-macbook-ipad-pro-iphone-x-set-up-icloud-drive-hero.jpg"
+          width="90%"
+          alt
+        />
+      </a-col>
+    </a-row>
+    <!-- Report Emergency / Calamity -->
+    <a-row
+      :gutter="16"
+      type="flex"
+      align="middle"
+      style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
+      id="rec"
+    >
+      <a-col :span="24" data-aos="fade-up">
+        <h1>Report Emergency / Calamity</h1>
+      </a-col>
+      <a-col :span="8" data-aos="fade-up">
+        <!-- <a-icon type="warning" /> -->
+        <img
+          width="90%"
+          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
+          alt
+        />
+      </a-col>
+      <a-col :span="14" data-aos="fade-up">
+        <p>To protect the community, emergency management has to keep the response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, response times can be optimized and help protect first responders in the field.</p>
       </a-col>
     </a-row>
   </div>

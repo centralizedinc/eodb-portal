@@ -1,9 +1,69 @@
 <template>
-  <a-card style="background: rgba(59, 79, 99, 0.62)">
-    <template slot="title">
+  <a-card style="background: rgba(59, 79, 99, 0.62); border-radius:20px 20px 20px 20px;" >
+    <!-- <template slot="title">
       <div style="color:#ffffff">Enter Credentials</div>
-    </template>
-    <a-form>
+    </template> -->
+    <a-row>
+      <a-col :span="8"></a-col>
+      <a-col :span="8" align="center" >
+          <a-avatar
+            style="cursor:pointer;"
+            @click="$router.push('/')"
+            :src="constant_helper.home_header.logo"
+            :size="70"
+          ></a-avatar>
+      </a-col>
+      <a-col :span="8"></a-col>
+    </a-row>
+    <a-row>
+      <a-col :span="7"></a-col>
+      <a-col :span="10">
+          <h4 style="color:#D7D7D7" align="center">Avoid the hassle, apply for a business permit here!</h4>
+      </a-col>
+      <a-col :span="7"></a-col>
+    </a-row>
+    <a-row type="flex" style="margin-top:5%" :gutter="16">
+        <a-col :span="24">
+          <a-button
+            block
+            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
+            @click="registerFacebook"
+          >
+            <a-icon type="facebook"></a-icon>Login using Facebook
+          </a-button>
+        </a-col>
+      </a-row>
+      <a-row type="flex" :gutter="16" style="margin-top:5%">
+        <a-col :span="24">
+          <a-button
+            block
+            @click="registerGoogle"
+            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
+          >
+            <a-icon type="google"></a-icon>Login using Google
+          </a-button>
+        </a-col>
+      </a-row>
+       <a-row type="flex" :gutter="16" style="margin-top:5%; margin-bottom:5%">
+        <a-col :span="24">
+          <a-button
+            block
+            @click="registerGoogle"
+            style="border: #DE4935;background-color:#1890FF; color:#FFFFFF"
+          >
+          Login using e-mail
+          </a-button>
+        </a-col>
+      </a-row>
+      <a-divider> <h5 style="color:#FFF; margin-top:5px">or</h5> </a-divider>
+      <a-row>
+      <a-col :span="8"></a-col>
+      <a-col :span="8">
+        <a-button type="link" style="color:#1890FF; margin-left:20px">Create an account</a-button>
+      </a-col>
+      <a-col :span="8"></a-col>
+    </a-row>
+    <!-- <a-form>
       <a-form-item :validate-status="error_login ? 'error': ''">
         <a-input size="large" v-model="account.email" placeholder="Email">
           <a-icon slot="prefix" type="mail" />
@@ -53,7 +113,7 @@
           </a-button>
         </a-col>
       </a-row>
-    </a-form>
+    </a-form> -->
   </a-card>
 </template>
 
