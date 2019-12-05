@@ -21,33 +21,23 @@
             @click="$router.push('/')"
           >{{constant_helper.home_header.label}}</h3>
         </a-col>
-        
-        <!-- <a-col :md="2" :lg="0" :push="22">
-          <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
-        </a-col> -->
       </a-row>
-      
     </a-layout-header>
-    <a-layout-content >
-        <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat;
-            background-size: cover`">
+    <a-layout-content>
+        <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat; background-size: cover`">
       <a-row style="height:100vh;background-color:#0912195c" type="flex" justify="center" align="middle">
           <a-col :span="6">
-            <span style="color:#ffffff;font-size: 28px; font-weight:bold">Administrator Login <a-icon type="lock"></a-icon></span>
-            <p style="color:#ffffff;font-size: 12px;">For Official Use Only</p>
-              <!-- <a-card style="background: rgba(59, 79, 99, 0.62)"> -->
-                  <!-- <template slot="title">
-              
-            </template> -->
-            <a-form>
-              <a-form-item>
-                <a-input size="large" placeholder="Email Address" v-model="credentials.email">
-                  <a-icon slot="prefix" type="mail" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" v-model="credentials.password">
-                  <a-icon slot="prefix" type="lock" />
+            <div style="text-align:center">
+                <a-avatar style="border: 2px solid #FFFFFF" shape="square" :size="100" src="http://lorempixel.com/200/200/people/">
+            </a-avatar>
+            <br/>
+            <span style="color:#ffffff;font-size: 24px; font-weight:bold">{{$store.state.admin_session.admin.email}}</span>
+            <p style="color:#ffffff;font-size: 10px">(Locked)</p>
+           </div>
+            <a-form>             
+              <a-form-item style="text-align:middle">
+                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" v-model="credentials.password" >
+                  <!-- <a-icon slot="prefix" type="lock" /> -->
                   <a-icon
                     slot="suffix"
                     :type="reveal?'eye':'eye-invisible'"
@@ -56,8 +46,9 @@
                   />
                 </a-input>
               </a-form-item>
-              <a-divider></a-divider>
-              <a-button size="large" type="primary" block @click="login" :loading="loading">Login</a-button>
+              <!-- <a-divider></a-divider> -->
+              <a-button size="large" type="primary" block @click="unlock" :loading="loading">Login</a-button>
+              <a-button size="large" type="link" style="color:#FFFFFF" block @click="logout">Not you? Login as a different user</a-button>
               </a-form>
               <!-- </a-card> -->
           </a-col>
@@ -114,29 +105,24 @@ export default {
       loading:false,
       credentials:{},
       topLocation: 0,
-      reveal: false,
     };
   },
   methods: {
     handleScroll(event) {
+      // Any code to be executed when the window is scrolled
+      console.log("event ::: ", JSON.stringify(window.top.scrollY));
       this.topLocation = window.top.scrollY;
     },
-    login(){
-      this.loading = true;
+    unlock(){
+      this.loading=true
       this.$http.post('/admin/auth', this.credentials)
       .then(result=>{
         this.loading = false;
         console.log('result', JSON.stringify(result.data))
         if(result && result.data && result.data.model && result.data.model.is_authenticated){
-          var _self=this
-          this.$notification.success(
-            {
-              message: `Welcome ${_self.credentials.email}!`,
-              description: `You have successfully login at ${new Date()}`
-            }
-          )
-          this.$store.commit('ADMIN_LOGIN', result.data.model.account)
-          this.$router.push('/admin/app')
+          this.$store.commit('UNLOCK_SCREEN', result.data.model.account)
+          this.$router.push(this.$store.state.screens.locked_screen)
+          
         }else{
           this.credentials = {}
           this.$notification.error(
@@ -159,10 +145,28 @@ export default {
           }
         )
       })
+    },
+    logout(){
+      var _self = this
+        this.$confirm({
+          title: `Are you sure you want to logout ${this.credentials.email}?`,
+          content: 'Clicking OK will delete any unsaved work.',
+          onOk() {
+            _self.$notification.success({
+              message:'Success!',
+              description:'Logout Successful'
+            })
+             _self.$store.commit('ADMIN_LOGOUT')
+             _self.$router.push('/admin')
+          },
+          onCancel() {},
+        });
+     
     }
-    
   },
   created() {
+    // console.log('EMAIL:::',JSON.stringify(this.$store.state.admin_session.admin.account.email))
+    this.credentials.email = this.$store.state.admin_session.admin.email
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {

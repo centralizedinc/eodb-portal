@@ -17,13 +17,22 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
 // PDF Format
-import RECEIPT from "./pdf/receipt";
+import receipt from "./pdf/receipt";
 
 var printers = {
-  RECEIPT
+  RECEIPT: receipt
 };
 
+import BUSINESSPERMIT from "./pdf/businesspermit";
+
+var printers = {
+  BUSINESSPERMIT
+};
+
+
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 export default {
   props: ["filekey", "details"],
   data() {
@@ -45,7 +54,9 @@ export default {
       /**
        * To bypass the details override the `pdf_details`
        */
-      this.pdf_details = {};
+      this.pdf_details = {
+        amount: 0
+      };
 
       // Process PDF
       this.loading = true;

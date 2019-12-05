@@ -2,14 +2,14 @@
   <a-card style="background-color: #242B30;border-radius:10px">
             <a-row type="flex" align="middle">
               <a-col :span="24">
-                  <span style="color:#B6C2C9; font-weight:bold">TRANSACTIONS   <a-icon type="exclamation-circle"></a-icon></span>                  
+                  <span style="color:#B6C2C9; font-weight:bold">OUTBOX   <a-icon type="exclamation-circle"></a-icon></span>                  
               </a-col>
                <a-col :span="14" style="margin-top:3vh">
-                <h2 style="color: #FFFFFF"><a-icon type="snippets" style="font-size:32px"></a-icon> {{Math.floor(Math.random()* 12345)}}</h2>
+                <h2 style="color: #FFFFFF"><a-icon type="file-sync" style="font-size:32px"></a-icon> {{Math.floor(Math.random()* 12345)}}</h2>
                 <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{Math.floor(Math.random()* 50)}}% compare to last week</span>                                 
               </a-col>
               <a-col :span="10">
-                  <apexchart width="110" type="bar" :options="chartOptions" :series="series" />
+                  <apexchart width="150" type="area" :options="chartOptions" :series="series" />
               </a-col>
               <a-col :span="24" >
                   <a-divider style="color:#B6C2C9"></a-divider>                                

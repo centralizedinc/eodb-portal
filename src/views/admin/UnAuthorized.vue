@@ -32,34 +32,14 @@
         <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat;
             background-size: cover`">
       <a-row style="height:100vh;background-color:#0912195c" type="flex" justify="center" align="middle">
-          <a-col :span="6">
-            <span style="color:#ffffff;font-size: 28px; font-weight:bold">Administrator Login <a-icon type="lock"></a-icon></span>
-            <p style="color:#ffffff;font-size: 12px;">For Official Use Only</p>
-              <!-- <a-card style="background: rgba(59, 79, 99, 0.62)"> -->
-                  <!-- <template slot="title">
-              
-            </template> -->
-            <a-form>
-              <a-form-item>
-                <a-input size="large" placeholder="Email Address" v-model="credentials.email">
-                  <a-icon slot="prefix" type="mail" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" v-model="credentials.password">
-                  <a-icon slot="prefix" type="lock" />
-                  <a-icon
-                    slot="suffix"
-                    :type="reveal?'eye':'eye-invisible'"
-                    @click="reveal=!reveal"
-                    style="cursor:pointer"
-                  />
-                </a-input>
-              </a-form-item>
-              <a-divider></a-divider>
-              <a-button size="large" type="primary" block @click="login" :loading="loading">Login</a-button>
-              </a-form>
-              <!-- </a-card> -->
+          <a-col :span="6" style="text-align: center">
+            <span style="color:#ffffff;font-size: 64px; font-weight:bold">404</span>
+            <br/>
+            <span style="color:#ffffff;font-size: 42px;">Unauthorized</span>
+            <br/>
+             <a-button type="primary" size="large" @click="$router.push('/admin')">Login</a-button>
+            
+            
           </a-col>
       </a-row>
         </div>
@@ -109,66 +89,21 @@
 
 <script>
 export default {
-  data() {
-    return {
-      loading:false,
-      credentials:{},
-      topLocation: 0,
-      reveal: false,
-    };
-  },
-  methods: {
-    handleScroll(event) {
-      this.topLocation = window.top.scrollY;
-    },
-    login(){
-      this.loading = true;
-      this.$http.post('/admin/auth', this.credentials)
-      .then(result=>{
-        this.loading = false;
-        console.log('result', JSON.stringify(result.data))
-        if(result && result.data && result.data.model && result.data.model.is_authenticated){
-          var _self=this
-          this.$notification.success(
-            {
-              message: `Welcome ${_self.credentials.email}!`,
-              description: `You have successfully login at ${new Date()}`
-            }
-          )
-          this.$store.commit('ADMIN_LOGIN', result.data.model.account)
-          this.$router.push('/admin/app')
-        }else{
-          this.credentials = {}
-          this.$notification.error(
-          {
-            message: 'Unauthorized!',
-            description: 'Invalid Credentials. Please try again.'
-          }
-        )
-        }
-        
-      })
-      .catch(error=>{
-        this.loading = false;
-        console.error(error)
-        this.credentials = {}
-        this.$notification.error(
-          {
-            message: 'Unauthorized!',
-            description: 'Invalid Credentials. Please try again.'
-          }
-        )
-      })
-    }
-    
-  },
   created() {
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
   },
-
+  data(){
+      return{
+           topLocation: 0,
+      }
+  },
+  methods: {
+    handleScroll(event) {
+      this.topLocation = window.top.scrollY;
+    },
   computed: {
     headerStyle() {
       if (this.topLocation < 50) {
@@ -178,8 +113,10 @@ export default {
       }
     }
   }
-};
+  }
+}
 </script>
 
 <style>
+
 </style>

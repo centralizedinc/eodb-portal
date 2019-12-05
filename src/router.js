@@ -2,8 +2,31 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Landing from './views/Landing'
+import store from './store'
 
 Vue.use(Router)
+
+function isAuthenticated(to, from, next) {
+  if(store.state.admin_session.admin.token){
+    if(store.state.admin_session.locked){
+      next('/admin/lock')
+    }else{
+      next()
+    }    
+  }else{
+    next('/admin/404')
+  }  
+  // if(store.state.admin_session.admin.){}
+}
+
+function checkSession(to, from, next){
+  console.log(from)
+  if(store.state.admin_session.admin.token){
+    next(from.path)
+  }else{
+    next()
+  }
+}
 
 export default new Router({
   routes: [
@@ -53,6 +76,10 @@ export default new Router({
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
+        },
+        {
+          path: 'account',
+          component: () => import('./views/app/Profile')
         }
       ]
     },
@@ -64,26 +91,64 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: () => import(/* webpackChunkName: "news" */ './views/admin/Login.vue'),
+      beforeEnter: checkSession,
+      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/Login.vue'),
+    },
+    {
+      path: '/admin/lock',
+      name: 'lock screen',
+      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/LockScreen.vue'),
+    },
+    {
+      path: '/admin/404',
+      name: 'Unauthorized',
+      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/UnAuthorized.vue'),
     },
     {
       path: '/admin/app',
       name: 'Main',
-      component: () => import(/* webpackChunkName: "news" */ './views/admin/Main.vue'),
+      component: () => import(/* webpackChunkName: "adminMain" */ './views/admin/Main.vue'),
       children: [{
         path: '',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Dashboard.vue'),
+        component: () => import(/* webpackChunkName: "adminDashboard" */ './views/admin/Dashboard.vue'),
+        beforeEnter:isAuthenticated
       },
       {
         path: 'applications',
         name: 'Applications',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Applications.vue'),
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminApplications" */ './views/admin/Applications.vue'),
       },
       {
-        path: 'taxes',
-        name: 'Local Taxes Applications',
-        component: () => import(/* webpackChunkName: "news" */ './views/admin/Taxes.vue'),
+        path: 'users',
+        name: 'Users',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminUsers" */ './views/admin/Users.vue'),
+      },
+      {
+        path: 'departments',
+        name: 'Departments',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Departments.vue'),
+      },
+      {
+        path: 'roles',
+        name: 'User Roles',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/UserRoles.vue'),
+      },
+      {
+        path: 'references',
+        name: 'Application References',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/References.vue'),
+      },
+      {
+        path: 'account',
+        name: 'Admin Account',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Account.vue'),
       }]
     },
     {
