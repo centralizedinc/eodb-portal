@@ -8,10 +8,7 @@
     <a-layout-header class="header">
       <a-row justify="start" :gutter="24">
         <a-col :span="1">
-          <a-avatar
-            src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png"
-            :size="50"
-          ></a-avatar>
+          <a-avatar src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png" :size="50"></a-avatar>
         </a-col>
         <a-col :span="10">
           <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
@@ -26,11 +23,7 @@
           <a-icon type="setting" style="color:#ffffff"></a-icon>
         </a-col>
         <a-col :span="1">
-          <a-icon
-            type="logout"
-            style="color:#ffffff; cursor:pointer"
-            @click="logout"
-          ></a-icon>
+          <a-icon type="logout" style="color:#ffffff; cursor:pointer" @click="logout"></a-icon>
         </a-col>
       </a-row>
     </a-layout-header>
@@ -51,9 +44,7 @@
               <a-col :span="24">
                 <a-row type="flex" justify="center">
                   <a-col :span="12">
-                    <h3 style="color:#FFFFFF">
-                      {{ user.fname }} {{ user.lname }}
-                    </h3>
+                    <h3 style="color:#FFFFFF">{{ user.fname }} {{ user.lname }}</h3>
                   </a-col>
                 </a-row>
               </a-col>
@@ -63,27 +54,27 @@
             <a-menu :defaultSelectedKeys="['1']" mode="inline">
               <a-menu-item key="1">
                 <a-icon type="bars" />
-                <span>Posts</span>
+                <span>Home</span>
               </a-menu-item>
               <a-menu-item key="2">
                 <a-icon type="file-exclamation" />
-                <span>Reports</span>
+                <span>Permits & Licenses</span>
               </a-menu-item>
               <a-menu-item key="3">
                 <a-icon type="file-protect" />
-                <span>Reviews</span>
+                <span>Certificate</span>
               </a-menu-item>
               <a-menu-item key="4">
                 <a-icon type="user-add" />
-                <span>Jobs</span>
+                <span>Real Property Tax</span>
               </a-menu-item>
               <a-menu-item key="5">
                 <a-icon type="schedule" />
-                <span>Events</span>
+                <span>User Account</span>
               </a-menu-item>
               <a-menu-item key="6">
                 <a-icon type="team" />
-                <span>Community</span>
+                <span>Citizen Report</span>
               </a-menu-item>
             </a-menu>
           </a-affix>
@@ -93,72 +84,64 @@
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
           <a-affix :offsetTop="40">
-            <a-card title="Citizen Report" :headStyle="{'background-image':'linear-gradient(#56CAEF, #3C6CB4)',color:'white'}" style="margin-top: 10vh, ">
+            <a-card
+              title="Citizen Report"
+              :headStyle="{'background-image':'linear-gradient(#56CAEF, #3C6CB4)',color:'white'}"
+              style="margin-top: 10vh, "
+            >
               <!-- <p>Emergency Hotline</p> -->
               <a-row>
                 <a-col :span="24">
-                  <a-card
-                    style="background-color:#ff000c; cursor:pointer"
-                    class="emergency_btn"
-                  >
+                  <a-card style="background-color:#ff000c; cursor:pointer" class="emergency_btn">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
                         <!-- <a-icon
                           type="fire"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon> -->
+                        ></a-icon>-->
                         <h3 style="color:#FFF">FIRE</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
                 <a-col :span="24">
-                  <a-card
-                    style="background-color:#ff000c; cursor:pointer"
-                    class="emergency_btn"
-                  >
+                  <a-card style="background-color:#ff000c; cursor:pointer" class="emergency_btn">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
                         <!-- <a-icon
                           type="sound"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon> -->
+                        ></a-icon>-->
                         <h3 style="color:#FFF">FLOOD</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
                 <a-col :span="24">
-                  <a-card
-                    style="background-color:#ff000c; cursor:pointer"
-                    class="emergency_btn"
-                  >
+                  <a-card style="background-color:#ff000c; cursor:pointer" class="emergency_btn">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
                         <!-- <a-icon
                           type="alert"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon> -->
+                        ></a-icon>-->
                         <h3 style="color:#FFF">CIVIL DISTRUBANCE</h3>
                       </a-col>
                     </a-row>
                   </a-card>
                 </a-col>
                 <a-col :span="24">
-                  <a-card
-                    style="background-color:#ff000c; cursor:pointer"
-                    class="emergency_btn"
-                  >
+                  <a-card style="background-color:#ff000c; cursor:pointer" class="emergency_btn">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
                         <!-- <a-icon
                           type="safety"
                           @click="report(1)"
                           style="color:#ffffff;font-size:24px"
-                        ></a-icon> -->
+                        ></a-icon>-->
                         <h3 style="color:#FFF">CRIME</h3>
                       </a-col>
                     </a-row>
@@ -166,9 +149,8 @@
                 </a-col>
                 <a-col :span="24" style="margin-top:2vh">
                   <a-button block style="background-color: #333333">
-                    <p style="color:#FFFFFF">View Reports
-                    </p>
-                    </a-button>
+                    <p style="color:#FFFFFF">View Reports</p>
+                  </a-button>
                 </a-col>
               </a-row>
             </a-card>
@@ -178,8 +160,7 @@
     </a-layout-content>
     <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-      >Dolores Quezon</a-layout-footer
-    >
+    >Dolores Quezon</a-layout-footer>
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap
@@ -191,11 +172,7 @@
         draggable="true"
         style="width: 100%; height: 300px"
       >
-        <GmapMarker
-          :draggable="true"
-          :position="coordinates"
-          :animation="animation"
-        />
+        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
       </GmapMap>
       <template slot="footer">
         <a-button
@@ -205,8 +182,7 @@
           block
           :loading="loading"
           @click="submitReport"
-          >Confirm and Submit</a-button
-        >
+        >Confirm and Submit</a-button>
       </template>
     </a-modal>
   </a-layout>
