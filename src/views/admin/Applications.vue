@@ -5,10 +5,10 @@
     </a-col>
     <a-col :span="14"> -->
         <a-row type="flex" justify="center" align="middle" :gutter="24">
-          <a-col :span="10">
+          <a-col :span="12">
               <inbox-card></inbox-card>
           </a-col>
-           <a-col :span="10">
+           <a-col :span="12">
               <outbox-card></outbox-card>
           </a-col>
         <!-- <a-col :span="4">

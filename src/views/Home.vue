@@ -99,15 +99,17 @@ Facebook: SanAntonio Quezon<br/>
         <a-col :span="9"></a-col>
       </a-row>
     </a-layout-footer>
-    <a-modal v-model="signup_visible" title="Register">
+
+    <!-- REGISRATION -->
+
+    <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">
-          Submit
-        </a-button>
+        <a-button style="background-color: #1890ff;
+    border-color: #1890ff" key="submit" type="primary" :loading="loading" @click="handleOk">Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
-        <a-col :span="24">
+        <!-- <a-col :span="24">
           <p>Register with facebook or google</p>
         </a-col>
         <a-col :span="12">
@@ -119,8 +121,8 @@ Facebook: SanAntonio Quezon<br/>
           >
             <a-icon type="facebook"></a-icon>Facebook
           </a-button>
-        </a-col>
-        <a-col :span="12">
+        </a-col>-->
+        <!-- <a-col :span="12">
           <a-button
             block
             size="large"
@@ -129,41 +131,76 @@ Facebook: SanAntonio Quezon<br/>
           >
             <a-icon type="google"></a-icon>Google
           </a-button>
-        </a-col>
-        <a-col :span="24">
+        </a-col>-->
+        <!-- <a-col :span="24">
           <a-divider>Or</a-divider>
-        </a-col>
+        </a-col>-->
         <a-col :span="24">
           <a-form>
-            <a-form-item
-            :validate-status="validation.name.first.status"
+            <!-- <a-form-item
+              label="Username"
+              :validate-status="validation.name.first.status"
               :help="validation.name.first.message"
-    
             >
-              <a-input :disabled="loading" placeholder="First Name" v-model="account.name.first"></a-input>
-            </a-form-item>
-            <a-form-item
-            :validate-status="validation.name.last.status"
+              <a-input :disabled="loading" v-model="account.username"></a-input>
+            </a-form-item>-->
+            <!-- <a-form-item
+              :validate-status="validation.name.last.status"
               :help="validation.name.last.message"
-              >
+            >
               <a-input :disabled="loading" placeholder="Last Name" v-model="account.name.last"></a-input>
-            </a-form-item>
-            <a-form-item
-            :validate-status="validation.email.status"
-              :help="validation.email.message">
-              <a-input :disabled="loading" placeholder="Email" v-model="account.email"></a-input>
-            </a-form-item>
-            <a-form-item
-            :validate-status="validation.password.status"
-              :help="validation.password.message">
-              <a-input :disabled="loading" placeholder="Password" type="password" v-model="account.password"></a-input>
-            </a-form-item>
-            <a-form-item
-            :validate-status="validation.confirm.status"
-              :help="validation.confirm.message">
-              <a-input :disabled="loading" placeholder="Confirm Password" type="password" v-model="account.confirm"></a-input>
-            </a-form-item>
+            </a-form-item>-->
+            <a-col :span="24">
+              <a-form-item
+                label="Email Address"
+                :validate-status="validation.email.status"
+                :help="validation.email.message"
+              >
+                <a-input :disabled="loading" v-model="account.email"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :span="12">
+              <a-form-item
+                label="Enter Password"
+                :validate-status="validation.password.status"
+                :help="validation.password.message"
+              >
+                <a-input :disabled="loading" type="password" v-model="account.password"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :span="12">
+              <a-form-item
+                label="Confirm Password"
+                :validate-status="validation.confirm.status"
+                :help="validation.confirm.message"
+              >
+                <a-input :disabled="loading" type="password" v-model="account.confirm"></a-input>
+              </a-form-item>
+            </a-col>
           </a-form>
+        </a-col>
+        <a-col :span="24">
+          <a-divider>Terms & Conditions</a-divider>
+        </a-col>
+        <a-col :span="24">
+          <div style="font-weight: 700">Registration</div>
+          <span style=" line-height: 200%;">
+            The information provided is certified as true and correct.
+            <br />Registrant should validate their account by clicking the verification link sent to the supplied email address.
+            <br />Registrant should not create multiple false accounts.
+            <br />Registrant should keep their account credentials and will not share to anyone.
+          </span>
+        </a-col>
+        <a-col :span="24">
+          <br />
+          <div style="font-weight: 700">Disclaimer</div>
+          <span
+            style=" line-height: 200%;"
+          >In accordance to R.A. 10173 or Data Privacy Act, all collected information will be treated with utmost confidentiality and will not be subjected to public disclosure.</span>
+        </a-col>
+        <a-col :span="24">
+          <br />
+          <span>By clicking Submit you are agreeing to the Terms and Conditions</span>
         </a-col>
       </a-row>
     </a-modal>
@@ -346,16 +383,16 @@ export default {
       topLocation: 0,
       reveal: false,
       loading: false,
-      coordinates: { lat: 15.667300, lng: 120.734993 },
+      coordinates: { lat: 15.6673, lng: 120.734993 },
       animation: {},
-      account:{
-        name:{
-          first:"",
-          last:""
+      account: {
+        name: {
+          first: "",
+          last: ""
         },
         email: "",
         password: "",
-        confirm: "",
+        confirm: ""
       },
       validation: {
         name: {
@@ -422,7 +459,7 @@ export default {
       this.guest_visible = true;
     },
     submit() {
-      console.log("sumbit home")
+      console.log("sumbit home");
       this.guest_visible = false;
       this.visible_report = false;
       this.$notification.success({
@@ -431,86 +468,89 @@ export default {
       });
     },
     validate() {
-      var errors = true
-     
+      var errors = true;
+
       if (!this.account.name.first) {
         this.validation.name.first.status = "error";
-        this.validation.name.first.message = "Please input first name";
+        this.validation.name.first.message = "Please input desired username";
         // return false;
-        errors = false
+        errors = false;
       }
       if (!this.account.name.last) {
         this.validation.name.last.status = "error";
         this.validation.name.last.message = "Please input last name";
         // return false;
-        errors = false
-
+        errors = false;
       }
       if (!this.account.email) {
         this.validation.email.status = "error";
         this.validation.email.message = "Please input email";
         // return false;
-        errors = false
-
+        errors = false;
       }
       // if (this.account.password) {
       //   console.log("this.account.password")
-        if (this.account.confirm && this.account.password !== this.account.confirm) {
-          console.log("this.account.confirm && this.account.password !== this.account.confirm")
-          this.validation.password.status = "error";
-          this.validation.password.message = "Password and Confirm Password does not match";
-          // return false;
-          errors = false
-
-        }
-      // } 
-      if(!this.account.password)  {
-        console.log("!this.account.password")
+      if (
+        this.account.confirm &&
+        this.account.password !== this.account.confirm
+      ) {
+        console.log(
+          "this.account.confirm && this.account.password !== this.account.confirm"
+        );
+        this.validation.password.status = "error";
+        this.validation.password.message =
+          "Password and Confirm Password does not match";
+        // return false;
+        errors = false;
+      }
+      // }
+      if (!this.account.password) {
+        console.log("!this.account.password");
         this.validation.password.status = "error";
         this.validation.password.message = "Please input password";
         // return false;
-        errors = false
-
+        errors = false;
       }
       if (!this.account.confirm) {
         this.validation.confirm.status = "error";
         this.validation.confirm.message = "Please input confirm password";
         // return false;
-        errors = false
+        errors = false;
       }
-      console.log("errors data: " + errors)
-      return errors
-      
+      console.log("errors data: " + errors);
+      return errors;
     },
-    handleCancel(){
-      console.log("handleCancel")
-      this.account.name.first = ""
-      this.account.name.last = ""
-      this.account.email = ""
-      this.account.password = ""
-      this.account.confirm = ""
-      this.signup_visible= false
+    handleCancel() {
+      console.log("handleCancel");
+      this.account.name.first = "";
+      this.account.name.last = "";
+      this.account.email = "";
+      this.account.password = "";
+      this.account.confirm = "";
+      this.signup_visible = false;
     },
-    handleOk(){
-      this.loading = true,
-      console.log("handleOk")
-      
-      if(this.validate()){
-        console.log("walang error registration")
-        this.loading = false
-        this.$store.dispatch("SIGN_UP",this.account).then(save_account => {
-        console.log("saved account" + JSON.stringify(save_account));
-        this.redirect("mainView");
-      });
-      }
-      else{
-      //   this.validation.name.first = "";
-      // this.validation.name.last = "";
-      // this.validation.email = "";
-      // this.validation.password = "";
-      // this.validation.confirm = "";
-        console.log("may error registration")
-        this.loading = false
+    handleOk() {
+      (this.loading = true), console.log("handleOk");
+
+      if (this.validate()) {
+         this.$message.success(
+          'Your information has been sent successfully. Please check your email for verification link to activate your account.',
+          10,
+        )
+        console.log("walang error registration");
+        this.loading = false;
+        this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
+          console.log("saved account" + JSON.stringify(save_account));
+          this.redirect("mainView");
+        });
+      } else {
+        //   this.validation.name.first = "";
+        // this.validation.name.last = "";
+        // this.validation.email = "";
+        // this.validation.password = "";
+        // this.validation.confirm = "";
+        console.log("may error registration");
+        this.loading = false;
       }
     }
   },
@@ -529,7 +569,7 @@ export default {
         return this.constant_helper.theme.default;
       }
     },
-    menuStyle(){
+    menuStyle() {
       return this.constant_helper.theme.default;
     }
   }
@@ -537,4 +577,7 @@ export default {
 </script>
 
 <style>
+.modal_login {
+  width: 55% !important;
+}
 </style>

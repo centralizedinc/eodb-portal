@@ -25,8 +25,13 @@ require('./api/utils/db_connector.js').connect();
 
 // Initialize Passport
 var passport = require('./api/utils/auth');
+// app.use(cookieSession({
+//     name: 'mysession',
+//     keys: ['vueauthrandomkey'],
+//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
+// }))
 app.use(passport.initialize());
-
+// app.use(passport.session());
 
 
 // Routers

@@ -18,6 +18,7 @@
       :visible="visible"
       :width="500"
       theme="dark"
+      class="header"
     >
     <div slot="title">
         <span style="color:#FFFFFF">New Administrator</span>
@@ -36,10 +37,22 @@
             <a-input placeholder="Last Name" v-model="admin.name.last"></a-input>
         </a-form-item>
         <a-form-item label="Department ">
-            <a-input placeholder="Department" v-model="admin.department"></a-input>
+            <a-select v-model="admin.department" placeholder="Select Department">
+              <a-select-option v-for="office in offices" :key="office._id" :value="office._id">{{office.name}}</a-select-option>
+            </a-select>
+            <!-- <a-input placeholder="Department" v-model="admin.department"></a-input> -->
         </a-form-item>
         <a-form-item label="Role">
-            <a-input placeholder="Role" v-model="admin.role"></a-input>
+            <a-select v-model="admin.role" placeholder="Select Role">
+              <a-select-option v-for="role in roles" :key="role._id" :value="role._id">{{role.name}}</a-select-option>
+            </a-select>
+            <!-- <a-input placeholder="Role" v-model="admin.role"></a-input> -->
+        </a-form-item>
+        <a-form-item label="Auto-Generate Password" :label-col="{span:10}" :wrapper-col="{span:6}" >
+            <a-switch :checked="generate" @click="generate=!generate"/>
+        </a-form-item>  
+        <a-form-item label="Password">
+            <a-input placeholder="Password" v-model="admin.password" :disabled="generate"></a-input>
         </a-form-item>
         <a-form-item>
             <a-button type="primary" icon="save" block @click="submit" :loading="loading">Submit</a-button>
@@ -58,7 +71,10 @@ export default {
             admin:{
                 name:{}
             },
+            generate:false,
             visible:false,
+            offices:[],
+            roles:[],
             admins:[],
             cols:[
                 {
@@ -94,6 +110,16 @@ export default {
     },
     methods:{
         init(){
+            //get offices
+            this.$http.get('/departments')
+            .then(results=>{
+                this.offices = results.data;
+            })
+            //get roles
+            this.$http.get('/roles')
+            .then(results =>{
+                 this.roles = results.data;
+            })
             this.$http.get('/admins')
             .then(users=>{
                 this.admins = users.data
@@ -104,6 +130,23 @@ export default {
         },
         onClose(){
             this.visible = false
+        },
+        generatePassword(e){
+            if(e){
+                this.generate= this.generateRandomPassword()
+            }else{
+                this.generate = ''
+            }
+        },
+        generateRandomPassword() {
+            var length = 8,
+                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+                retVal = "";
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * n));
+            }
+            console.log(retVal)
+            return retVal;
         },
         submit(){
             this.$http.post('/admins', this.admin)
@@ -120,14 +163,27 @@ export default {
                 console.log(error)
             })
         }
+    },
+    watch:{
+        generate(){
+            if(this.generate){
+                this.admin.password = this.generateRandomPassword();
+            }else{
+                this.admin.password = ''
+            }
+        }
     }
 
 }
 </script>
 
-<style>
+<style >
+.ant-form-item-label label{
+    font-weight: bold;
+    color:black
+}
 .ant-drawer-header{
-    background: #242B30
+    background: #242B30 !important
 }
 .ant-drawer-close {
     color: #ffffff

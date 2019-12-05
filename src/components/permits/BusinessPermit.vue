@@ -1,6 +1,6 @@
 <template>
   <a-card title="Business Permit" style="box-shadow: 0px 0px 10px 2px #88888847">
-    <a-row>
+    <a-row> 
       <a-col :span="24">
         <a-steps size="small" :current="step_curr">
           <a-step title="Application">

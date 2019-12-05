@@ -23,6 +23,14 @@ var printers = {
   RECEIPT: receipt
 };
 
+import BUSINESSPERMIT from "./pdf/businesspermit";
+
+var printers = {
+  BUSINESSPERMIT
+};
+
+
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default {
