@@ -59,7 +59,7 @@
         :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
         >
         
- <p style="margin-top:10pv, margin-bottom:10pv color:#FFFFFF">Certificate</p>
+ <p style="margin-top:10pv, margin-bottom:10pv color:#FFFFFF">Certificates</p>
  
  <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
  <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />

@@ -22,11 +22,17 @@ import receipt from "./pdf/receipt";
 var printers = {
   RECEIPT: receipt
 };
-
+//////////////////////////////////////////////////////////////
 import BUSINESSPERMIT from "./pdf/businesspermit";
 
 var printers = {
   BUSINESSPERMIT
+};
+/////////////////////////////////////////////////////////////
+import POLICECLEARANCE from "./pdf/policeclearance";
+
+var printers = {
+  POLICECLEARANCE
 };
 
 
