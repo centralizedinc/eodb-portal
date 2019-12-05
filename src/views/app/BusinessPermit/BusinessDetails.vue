@@ -1,16 +1,31 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-    title="Business Details"
-  >
+  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
+    <!-- Title -->
+    <a-row slot="title">
+      <a-col :span="22" style="font-size: 25px;">Business Details</a-col>
+      <a-col :span="2" style="text-align: right;">
+        <a-tooltip placement="left">
+          <span slot="title">
+            Secure Business Permit in 4 steps (all fields marked with an asterisk
+            <i
+              style="color: red;"
+            >*</i> is required.)
+          </span>
+          <a-icon type="info-circle" />
+        </a-tooltip>
+      </a-col>
+    </a-row>
     <a-form class="business-form">
       <!-- Business Data -->
       <a-divider
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
       >Business Data</a-divider>
-      <a-form-item style="font-weight: bold;">
+      <a-form-item
+        style="font-weight: bold;"
+        :validate-status="checkErrors('business_details.business_type') ? 'error': ''"
+        :help="checkErrors('business_details.business_type')"
+      >
         <span slot="label">
           Business Type
           <i style="color: red">*</i>
@@ -23,7 +38,11 @@
         </a-radio-group>
       </a-form-item>
 
-      <a-form-item style="font-weight: bold">
+      <a-form-item
+        style="font-weight: bold"
+        :validate-status="checkErrors('business_details.business_name') ? 'error': ''"
+        :help="checkErrors('business_details.business_name')"
+      >
         <span slot="label">
           Business Name
           <i style="color: red">*</i>
@@ -37,7 +56,10 @@
 
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_details.registration_no') ? 'error': ''"
+            :help="checkErrors('business_details.registration_no')"
+          >
             <span slot="label">
               {{reg_code}} Registration No
               <i style="color: red">*</i>
@@ -49,7 +71,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_details.registration_date') ? 'error': ''"
+            :help="checkErrors('business_details.registration_date')"
+          >
             <span slot="label">
               {{reg_code}} Date of registration
               <i style="color: red">*</i>
@@ -61,7 +86,10 @@
 
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_details.tin') ? 'error': ''"
+            :help="checkErrors('business_details.tin')"
+          >
             <span slot="label">
               Tax Identification No
               <i style="color: red">*</i>
@@ -83,7 +111,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_details.business_area') ? 'error': ''"
+            :help="checkErrors('business_details.business_area')"
+          >
             <span slot="label">
               Business Area (in sq m)
               <i style="color: red">*</i>
@@ -98,7 +129,10 @@
 
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_details.employees_establishment') ? 'error': ''"
+            :help="checkErrors('business_details.employees_establishment')"
+          >
             <span slot="label">
               No. of Employees in Establishment (in sq m)
               <i style="color: red">*</i>
@@ -170,9 +204,12 @@
         </a-col>
       </a-row>
 
-      <a-row style="font-weight: bold" :gutter="5">
+      <a-row style="font-weight: bold; margin-top: 1vh;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_address.region') ? 'error': ''"
+            :help="checkErrors('business_address.region')"
+          >
             <span slot="label">
               Region
               <i style="color: red">*</i>
@@ -181,7 +218,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_address.province') ? 'error': ''"
+            :help="checkErrors('business_address.province')"
+          >
             <span slot="label">
               Province
               <i style="color: red">*</i>
@@ -193,7 +233,10 @@
 
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_address.barangay') ? 'error': ''"
+            :help="checkErrors('business_address.barangay')"
+          >
             <span slot="label">
               Barangay
               <i style="color: red">*</i>
@@ -202,7 +245,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_address.city') ? 'error': ''"
+            :help="checkErrors('business_address.city')"
+          >
             <span slot="label">
               City/Municipality
               <i style="color: red">*</i>
@@ -211,7 +257,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('business_address.postal_code') ? 'error': ''"
+            :help="checkErrors('business_address.postal_code')"
+          >
             <span slot="label">
               Postal Code
               <i style="color: red">*</i>
@@ -246,18 +295,207 @@
         <a-checkbox v-model="form.business_details.is_rented">Is the place of business rented?</a-checkbox>
       </a-form-item>
 
+      <template v-if="form.business_details.is_rented">
+        <a-row style="font-weight: bold" :gutter="5">
+          <a-col :xs="{ span: 24 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental') ? 'error': ''"
+              :help="checkErrors('business_address.rental')"
+            >
+              <span slot="label">
+                Monthly Rental
+                <i style="color: red">*</i>
+              </span>
+              <a-input v-model="form.business_address.rental" placeholder="Monthly Rental*"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.lessor_name') ? 'error': ''"
+              :help="checkErrors('business_address.lessor_name')"
+            >
+              <span slot="label">
+                Lessor Name
+                <i style="color: red">*</i>
+              </span>
+              <a-input v-model="form.business_address.lessor_name" placeholder="Lessor Name*"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.contact_no') ? 'error': ''"
+              :help="checkErrors('business_address.contact_no')"
+            >
+              <span slot="label">
+                Contact Number
+                <i style="color: red">*</i>
+              </span>
+              <a-input v-model="form.business_address.contact_no" placeholder="Contact Number*"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.email') ? 'error': ''"
+              :help="checkErrors('business_address.email')"
+            >
+              <span slot="label">
+                Email Address
+                <i style="color: red">*</i>
+              </span>
+              <a-input v-model="form.business_address.email" placeholder="Email Address*"></a-input>
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-divider></a-divider>
+        <a-row :gutter="15" style="font-weight: bold;">
+          <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
+            <a-row :gutter="5">
+              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+                <a-form-item label="House/Bldg No">
+                  <a-input
+                    v-model="form.business_address.rental_address.bldg_no"
+                    placeholder="House/Bldg No"
+                  ></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+                <a-form-item label="Unit No">
+                  <a-input
+                    v-model="form.business_address.rental_address.unit_no"
+                    placeholder="Unit No"
+                  ></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :span="24">
+                <a-form-item label="Building Name">
+                  <a-input
+                    v-model="form.business_address.rental_address.bldg_name"
+                    placeholder="Building Name"
+                  ></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :span="24">
+                <a-form-item label="Street">
+                  <a-input
+                    v-model="form.business_address.rental_address.street"
+                    placeholder="Street"
+                  ></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :span="24">
+                <a-form-item label="Subdivision">
+                  <a-input
+                    v-model="form.business_address.rental_address.subdivision"
+                    placeholder="Subdivision"
+                  ></a-input>
+                </a-form-item>
+              </a-col>
+            </a-row>
+          </a-col>
+
+          <!-- Map -->
+          <a-col :xs="{ span: 24 }" :sm="{ span: 14 }">
+            <GmapMap
+              id="map"
+              ref="map"
+              :center="{ lat: 13.960837, lng: 121.591532 }"
+              :zoom="16"
+              map-type-id="terrain"
+              draggable="true"
+              style="width: 100%; height: 300px"
+              :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
+            ></GmapMap>
+          </a-col>
+        </a-row>
+
+        <a-row style="font-weight: bold; margin-top: 1vh;" :gutter="5">
+          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental_address.region') ? 'error': ''"
+              :help="checkErrors('business_address.rental_address.region')"
+            >
+              <span slot="label">
+                Region
+                <i style="color: red">*</i>
+              </span>
+              <a-input v-model="form.business_address.rental_address.region" placeholder="Region*"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental_address.province') ? 'error': ''"
+              :help="checkErrors('business_address.rental_address.province')"
+            >
+              <span slot="label">
+                Province
+                <i style="color: red">*</i>
+              </span>
+              <a-input
+                v-model="form.business_address.rental_address.province"
+                placeholder="Province*"
+              ></a-input>
+            </a-form-item>
+          </a-col>
+        </a-row>
+
+        <a-row style="font-weight: bold" :gutter="5">
+          <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental_address.barangay') ? 'error': ''"
+              :help="checkErrors('business_address.rental_address.barangay')"
+            >
+              <span slot="label">
+                Barangay
+                <i style="color: red">*</i>
+              </span>
+              <a-input
+                v-model="form.business_address.rental_address.barangay"
+                placeholder="Barangay*"
+              ></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental_address.city') ? 'error': ''"
+              :help="checkErrors('business_address.rental_address.city')"
+            >
+              <span slot="label">
+                City/Municipality
+                <i style="color: red">*</i>
+              </span>
+              <a-input
+                v-model="form.business_address.rental_address.city"
+                placeholder="City/Municipality*"
+              ></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental_address.postal_code') ? 'error': ''"
+              :help="checkErrors('business_address.rental_address.postal_code')"
+            >
+              <span slot="label">
+                Postal Code
+                <i style="color: red">*</i>
+              </span>
+              <a-input
+                v-model="form.business_address.rental_address.postal_code"
+                placeholder="Postal Code*"
+              ></a-input>
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </template>
+
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 9 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
-            <a-button @click="$emit('changeStep', step-1)">Previous</a-button>
-            <a-button type="primary" @click="$emit('changeStep', step+1)">Next</a-button>
+            <a-button @click="$emit('prev')">Previous</a-button>
+            <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 15 }">
+        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 3 }">
-          <a-button type="danger">Close</a-button>
         </a-col>
       </a-row>
     </a-form>
@@ -266,9 +504,11 @@
 
 <script>
 export default {
-  props: ["form", "step"],
+  props: ["form", "step", "errors"],
   data() {
-    return {};
+    return {
+      show_rented_info: false
+    };
   },
   computed: {
     reg_code() {
@@ -280,6 +520,44 @@ export default {
         return "SEC";
       else if (this.form.business_details.business_type === "CE") return "CDA";
       return "";
+    }
+  },
+  watch: {
+    "form.business_details.is_rented": () => {
+      if (!this.form.business_details.is_rented) {
+        this.form.business_address.rental = "";
+        this.form.business_address.lessor_name = "";
+        this.form.business_address.contact_no = "";
+        this.form.business_address.email = "";
+        this.form.business_address.rental_address = {
+          bldg_no: "",
+          unit_no: "",
+          bldg_name: "",
+          street: "",
+          subdivision: "",
+          region: "",
+          province: "",
+          city: "",
+          barangay: "",
+          postal_code: ""
+        };
+      }
+    }
+  },
+  methods: {
+    checkIfRented() {
+      if (this.form.business_details.is_rented) this.show_rented_info = true;
+      else {
+        this.form.business_address.rental = "";
+        this.form.business_address.lessor_name = "";
+        this.form.business_address.contact_no = "";
+        this.form.business_address.email = "";
+        this.form.business_address.rental_address = {};
+      }
+    },
+    checkErrors(field) {
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
     }
   }
 };

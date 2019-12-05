@@ -22,8 +22,8 @@ export default new Router({
           component: () => import(/* webpackChunkName: "news" */ './views/News.vue'),
         },
         {
-          path: 'permits',
-          name: 'permits',
+          path: 'permit',
+          name: 'Permits',
           component: () => import(/* webpackChunkName: "news" */ './views/Permits.vue'),
         },
         {
@@ -40,8 +40,7 @@ export default new Router({
     },
     {
       path: '/app',
-      // component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
-      component: () => import('./views/Main.vue'),
+      component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
       children: [
         {
           path: '',
@@ -54,11 +53,6 @@ export default new Router({
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
-        },
-        {
-          path: 'permits/business',
-          name: "Business Permit",
-          component: () => import("./views/app/BusinessPermit/Form.vue")
         }
       ]
     },
@@ -90,6 +84,16 @@ export default new Router({
         path: 'taxes',
         name: 'Local Taxes Applications',
         component: () => import(/* webpackChunkName: "news" */ './views/admin/Taxes.vue'),
+      }]
+    },
+    {
+      path: '/permits',
+      name: "Permits",
+      component: () => import('./views/Main.vue'),
+      children: [{
+        path: 'business',
+        name: "Business Permit",
+        component: () => import("./views/app/BusinessPermit/Form.vue")
       }]
     },
     {

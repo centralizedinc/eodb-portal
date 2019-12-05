@@ -1,8 +1,10 @@
 "use strict"
 const router = require("express").Router();
 
-var BusinessApplicationDao = require('../dao/BusinessApplicationDao');
-var BusinessPermitDao = require('../dao/BusinessPermitDao');
+const BusinessApplicationDao = require('../dao/BusinessApplicationDao');
+const BusinessPermitDao = require('../dao/BusinessPermitDao');
+const DocketsDao = require('../dao/DocketsDao');
+const PaymentDao = require('../dao/PaymentDao');
 
 router.route('/')
     .get((req, res) => {
@@ -14,9 +16,26 @@ router.route('/')
             });
     })
     .post((req, res) => {
-        BusinessApplicationDao.create(req.body)
+        console.log("Creating Business Permit...")
+        const { data, payment } = req.body;
+        PaymentDao.create(payment)
             .then((result) => {
-                res.json(result)
+                console.log('payment result :', result);
+                return BusinessApplicationDao.create(data)
+            })
+            .then((result) => {
+                console.log('permit result :', result);
+                var details = {
+                    application_id: result.reference_no,
+                    application_type: result.application_type,
+                    permit: 'business',
+                    payment_status: payment.status
+                }
+                return DocketsDao.create(details)
+            })
+            .then((result) => {
+                console.log('docket result :', result);
+                res.json(result);
             }).catch((errors) => {
                 res.json({ errors })
             });

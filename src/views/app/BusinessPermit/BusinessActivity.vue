@@ -1,42 +1,60 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-    title="Business Activity"
-  >
+  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
+    <!-- Title -->
+    <a-row slot="title">
+      <a-col :span="22" style="font-size: 25px;">Business Activity</a-col>
+      <a-col :span="2" style="text-align: right;">
+        <a-tooltip placement="left">
+          <span slot="title">
+            Secure Business Permit in 4 steps (all fields marked with an asterisk
+            <i
+              style="color: red;"
+            >*</i> is required.)
+          </span>
+          <a-icon type="info-circle" />
+        </a-tooltip>
+      </a-col>
+    </a-row>
     <!-- LINE OF BUSINESS -->
     <a-divider
       style="color: black;font-weight: bold;margin-top: 5vh"
       orientation="left"
     >Line of Business</a-divider>
     <a-button type="primary" @click="showLineBusiness">Add</a-button>
-    <a-table
-      :dataSource="form.business_details.line_of_business"
-      :columns="line_of_business_columns"
-    >
-      <template slot="action" slot-scope="text, record, index">
-        <a-tooltip>
-          <span slot="title">Remove</span>
-          <a-icon
-            type="delete"
-            style="color: red; cursor: pointer;"
-            @click="removeLineBusiness(index)"
-          />
-        </a-tooltip>
-      </template>
-      <template slot="units" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.line_of_business[index].units" />
-      </template>
-      <template slot="capital_investment" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.line_of_business[index].capital_investment" />
-      </template>
-      <template slot="essential" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.line_of_business[index].essential" />
-      </template>
-      <template slot="non_essential" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.line_of_business[index].non_essential" />
-      </template>
-    </a-table>
+    <a-form>
+      <a-form-item
+        :validate-status="checkFormErrors('business_details.line_of_business') ? 'error': ''"
+        :help="checkFormErrors('business_details.line_of_business')"
+      >
+        <a-table
+          :dataSource="form.business_details.line_of_business"
+          :columns="line_of_business_columns"
+        >
+          <template slot="action" slot-scope="text, record, index">
+            <a-tooltip>
+              <span slot="title">Remove</span>
+              <a-icon
+                type="delete"
+                style="color: red; cursor: pointer;"
+                @click="removeLineBusiness(index)"
+              />
+            </a-tooltip>
+          </template>
+          <template slot="units" slot-scope="text, record, index">
+            <a-input v-model="form.business_details.line_of_business[index].units" />
+          </template>
+          <template slot="capital_investment" slot-scope="text, record, index">
+            <a-input v-model="form.business_details.line_of_business[index].capital_investment" />
+          </template>
+          <template slot="essential" slot-scope="text, record, index">
+            <a-input v-model="form.business_details.line_of_business[index].essential" />
+          </template>
+          <template slot="non_essential" slot-scope="text, record, index">
+            <a-input v-model="form.business_details.line_of_business[index].non_essential" />
+          </template>
+        </a-table>
+      </a-form-item>
+    </a-form>
     <a-modal
       :visible="show_line_of_business"
       @cancel="show_line_of_business=false"
@@ -90,19 +108,10 @@
           />
         </a-tooltip>
       </template>
-      <!-- <template slot="unit" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.measure_or_pax[index].unit" />
-      </template>
-      <template slot="capacity" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.measure_or_pax[index].capacity" />
-      </template>
-      <template slot="measure_or_pax" slot-scope="text, record, index">
-        <a-input v-model="form.business_details.measure_or_pax[index].measure_or_pax" />
-      </template>-->
-      <template slot="line_of_business" slot-scope="text">
-        <!-- <a-input v-model="form.business_details.measure_or_pax[index].line_of_business" /> -->
-        {{line_of_business.find(v=>v.code === text).description}}
-      </template>
+      <template
+        slot="line_of_business"
+        slot-scope="text"
+      >{{line_of_business.find(v=>v.code === text).description}}</template>
     </a-table>
     <a-modal
       :visible="show_measure_or_pax"
@@ -166,17 +175,14 @@
     </a-modal>
 
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-      <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 9 }" :xl="{ span: 6 }">
+      <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
         <a-button-group>
-          <a-button @click="$emit('changeStep', step-1)">Previous</a-button>
-          <a-button type="primary" @click="$emit('changeStep', step+1)">Next</a-button>
+          <a-button @click="$emit('prev')">Previous</a-button>
+          <a-button type="primary" @click="$emit('next')">Next</a-button>
         </a-button-group>
       </a-col>
-      <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 15 }">
+      <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
         <a-button>Save Draft</a-button>
-      </a-col>
-      <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 3 }">
-        <a-button type="danger">Close</a-button>
       </a-col>
     </a-row>
   </a-card>
@@ -187,7 +193,7 @@ import line_of_business from "./line_of_business.json";
 import measure_or_pax from "./measure_or_pax.json";
 
 export default {
-  props: ["form", "step"],
+  props: ["form", "step", "errors"],
   data() {
     return {
       line_of_business_columns: [
@@ -369,6 +375,10 @@ export default {
       }
       var obj = this[key].find(v => v.field === field);
       return obj ? obj.error : "";
+    },
+    checkFormErrors(field) {
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
     }
   }
 };

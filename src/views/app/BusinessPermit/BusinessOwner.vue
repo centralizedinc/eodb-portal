@@ -1,26 +1,28 @@
 <template>
   <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
+    :headStyle="{ border: 'none', color: '#7f7f7f' }"
     :bodyStyle="{ 'padding-top': 0 }"
-    title="Business Owner Information"
   >
+    <!-- Title -->
+    <a-row slot="title">
+      <a-col :span="22" style="font-size: 25px;">Business Owner Information</a-col>
+      <a-col :span="2" style="text-align: right;">
+        <a-tooltip placement="left">
+          <span slot="title">
+            Secure Business Permit in 4 steps (all fields marked with an asterisk
+            <i
+              style="color: red;"
+            >*</i> is required.)
+          </span>
+          <a-icon type="info-circle" />
+        </a-tooltip>
+      </a-col>
+    </a-row>
     <a-form class="owner-form">
       <!-- Personal Details -->
       <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
       <a-row>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item :label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" class="text-left">
-            <span slot="label">
-              Application Type
-              <i style="color: red">*</i>
-            </span>
-            <a-radio-group buttonStyle="solid" v-model="form.application_type">
-              <a-radio-button :value="0">New</a-radio-button>
-              <a-radio-button :value="1">Renew</a-radio-button>
-            </a-radio-group>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" style="text-align: right;">
+        <a-col :xs="{ span: 24 }">
           <a-form-item>
             <a-checkbox @change="onChange">Is the registrant the business owner</a-checkbox>
           </a-form-item>
@@ -29,26 +31,30 @@
 
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item 
+            :validate-status="checkErrors('owner_details.name.last') ? 'error': ''"
+            :help="checkErrors('owner_details.name.last')">
             <span slot="label">
               Last Name
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.name.last" placeholder="First Name"></a-input>
+            <a-input v-model="form.owner_details.name.last" placeholder="Last Name"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7}">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_details.name.first') ? 'error': ''"
+            :help="checkErrors('owner_details.name.first')">
             <span slot="label">
               First Name
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.name.first" placeholder="Middle Name"></a-input>
+            <a-input v-model="form.owner_details.name.first" placeholder="First Name"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
           <a-form-item label="Middle Name">
-            <a-input v-model="form.owner_details.name.middle" placeholder="Last Name"></a-input>
+            <a-input v-model="form.owner_details.name.middle" placeholder="Middle Name"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
@@ -58,18 +64,22 @@
         </a-col>
       </a-row>
 
-      <a-row style="font-weight: bold;">
+      <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_details.birthdate') ? 'error': ''"
+            :help="checkErrors('owner_details.birthdate')">
             <span slot="label">
               Date of Birth
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.owner_details.birthdate"></a-date-picker>
+            <a-date-picker style="width: 100%;" v-model="form.owner_details.birthdate"></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_details.gender') ? 'error': ''"
+            :help="checkErrors('owner_details.gender')">
             <span slot="label">
               Gender
               <i style="color: red">*</i>
@@ -84,7 +94,9 @@
 
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_details.telno') ? 'error': ''"
+            :help="checkErrors('owner_details.telno')">
             <span slot="label">
               Tel No
               <i style="color: red">*</i>
@@ -93,7 +105,9 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_details.mobile') ? 'error': ''"
+            :help="checkErrors('owner_details.mobile')">
             <span slot="label">
               Mobile No
               <i style="color: red">*</i>
@@ -102,7 +116,9 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_details.email') ? 'error': ''"
+            :help="checkErrors('owner_details.email')">
             <span slot="label">
               Email Address
               <i style="color: red">*</i>
@@ -163,9 +179,11 @@
         </a-col>
       </a-row>
 
-      <a-row style="font-weight: bold" :gutter="5">
+      <a-row style="font-weight: bold; margin-top: 1vh;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_address.region') ? 'error': ''"
+            :help="checkErrors('owner_address.region')">
             <span slot="label">
               Region
               <i style="color: red">*</i>
@@ -174,7 +192,9 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_address.province') ? 'error': ''"
+            :help="checkErrors('owner_address.province')">
             <span slot="label">
               Province
               <i style="color: red">*</i>
@@ -186,7 +206,9 @@
 
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_address.barangay') ? 'error': ''"
+            :help="checkErrors('owner_address.barangay')">
             <span slot="label">
               Barangay
               <i style="color: red">*</i>
@@ -195,7 +217,9 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_address.city') ? 'error': ''"
+            :help="checkErrors('owner_address.city')">
             <span slot="label">
               City/Municipality
               <i style="color: red">*</i>
@@ -204,7 +228,9 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('owner_address.postal_code') ? 'error': ''"
+            :help="checkErrors('owner_address.postal_code')">
             <span slot="label">
               Postal Code
               <i style="color: red">*</i>
@@ -215,17 +241,14 @@
       </a-row>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 9 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
-            <a-button @click="$emit('changeStep', step-1)" :disabled="true">Previous</a-button>
-            <a-button type="primary" @click="$emit('changeStep', step+1)">Next</a-button>
+            <a-button @click="$emit('prev')" :disabled="true">Previous</a-button>
+            <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 15 }">
+        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }" :md="{ span: 3 }">
-          <a-button type="danger">Close</a-button>
         </a-col>
       </a-row>
     </a-form>
@@ -234,7 +257,7 @@
 
 <script>
 export default {
-  props: ["form", "step"],
+  props: ["form", "step", "errors"],
   data() {
     return {};
   },
@@ -248,6 +271,10 @@ export default {
       if (e.target.checked) {
         this.form.owner_details.name = this.user.name;
       }
+    },
+    checkErrors(field){
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
     }
   }
 };

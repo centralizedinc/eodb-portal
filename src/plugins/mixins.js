@@ -40,6 +40,7 @@ export default {
                     const formatter = new Intl.NumberFormat('en-US', {
                         style: 'currency',
                         currency: 'PHP',
+                        currencyDisplay: 'code',
                         minimumFractionDigits: 2
                     })
                     return formatter.format(amount)

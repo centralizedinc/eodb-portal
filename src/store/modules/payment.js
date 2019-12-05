@@ -1,3 +1,4 @@
+import CardValidator from "../../api/CardValidatorAPI"
 
 function initialState() {
     return {
@@ -19,6 +20,15 @@ const mutations = {
 }
 
 const actions = {
+    VALIDATE_CARD(context, card){
+        return new CardValidator(context.rootState.user_session.token).validateCard(card);
+    },
+    VALIDATE_CVV(context, {cvv, max}){
+        return new CardValidator(context.rootState.user_session.token).validateCVV(cvv, max);
+    },
+    VALIDATE_EXPIRY(context, expiry){
+        return new CardValidator(context.rootState.user_session.token).validateExpiry(expiry);
+    }
 }
 
 export default {

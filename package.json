@@ -19,6 +19,8 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
+    "card": "^2.4.0",
+    "card-validator": "^6.2.0",
     "core-js": "^2.6.5",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
