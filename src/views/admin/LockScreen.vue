@@ -121,7 +121,8 @@ export default {
         console.log('result', JSON.stringify(result.data))
         if(result && result.data && result.data.model && result.data.model.is_authenticated){
           this.$store.commit('UNLOCK_SCREEN', result.data.model.account)
-          this.$router.push('/admin/app')
+          this.$router.push(this.$store.state.screens.locked_screen)
+          
         }else{
           this.credentials = {}
           this.$notification.error(
@@ -151,6 +152,10 @@ export default {
           title: `Are you sure you want to logout ${this.credentials.email}?`,
           content: 'Clicking OK will delete any unsaved work.',
           onOk() {
+            _self.$notification.success({
+              message:'Success!',
+              description:'Logout Successful'
+            })
              _self.$store.commit('ADMIN_LOGOUT')
              _self.$router.push('/admin')
           },

@@ -6,7 +6,13 @@ found in https://github.com/vueComponent/ant-design-vue/blob/master/components/s
 @import "~ant-design-vue/dist/antd.less";
 
 // Here are the variables to cover, such as:
-@primary-color: #2e4871;
+// @primary-color: #2e4871;
+@primary-color: #1890ff; // primary color for all components
+@link-color: #1890ff; // link color
+@success-color: #52c41a; // success state color
+@warning-color: #faad14; // warning state color
+@error-color: #f5222d; // error state color
+@border-radius-base: 5px; // major border radius
 
 .header {
   position: fixed;
@@ -18,6 +24,7 @@ found in https://github.com/vueComponent/ant-design-vue/blob/master/components/s
 .content {
   min-height: 100vh;
 }
+
 .footer {
   position: fixed;
   left: 0;
@@ -43,7 +50,7 @@ found in https://github.com/vueComponent/ant-design-vue/blob/master/components/s
 }
 
 .card_btn:hover {
-  
+
   // background: linear-gradient(to bottom, #0575e6, #021b79);
   transform: scale(0.95);
 }
@@ -52,6 +59,7 @@ found in https://github.com/vueComponent/ant-design-vue/blob/master/components/s
   cursor: pointer;
   background: linear-gradient(to right, #0575e6, #021b79);
 }
+
 .payment_card:hover {
   background: linear-gradient(to bottom, #0575e6, #021b79);
   transform: scale(0.95);

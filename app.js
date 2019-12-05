@@ -47,6 +47,9 @@ app.use("/payments", require('./api/routes/payment_router'))
 app.use("/departments/dependencies", require('./api/routes/department_dependencies'));
 app.use("/departments", require('./api/routes/department_router'));
 app.use("/roles", require('./api/routes/roles_router'));
+app.use("/upload", require('./api/routes/upload_router'));
+app.use("/creditcard/validate", require('./api/routes/card_validation_router'));
+app.use("/dockets", require('./api/routes/dockets_router'));
 app.use("/settings", require('./api/routes/settings_router'));
 
 
