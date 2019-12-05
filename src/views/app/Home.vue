@@ -1,13 +1,22 @@
 <template>
   <div style="margin-top:10vh">
-    <img style="width: 100%; height:30%" :src="constant_helper.client_details.cover" />
+    <img
+      style="width: 100%; height:30%"
+      :src="constant_helper.client_details.cover"
+    />
     <a-affix :offsetTop="60">
-      <a-tabs style="background-color:#e6e6e6 ; z-index:1000" @change="changeView">
+      <a-tabs
+        style="background-color:#e6e6e6 ; z-index:1000"
+        @change="changeView"
+      >
         <a-tab-pane key="0">
           <template slot="tab">
             <span>
-              <a-avatar :src="constant_helper.client_details.avatar" style="margin-right: 1vh" />
-              {{constant_helper.client_details.title}}'s Corner
+              <a-avatar
+                :src="constant_helper.client_details.avatar"
+                style="margin-right: 1vh"
+              />
+              {{ constant_helper.client_details.title }}'s Corner
             </span>
           </template>
         </a-tab-pane>
@@ -72,5 +81,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
