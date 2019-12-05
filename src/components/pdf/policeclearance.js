@@ -633,7 +633,187 @@ function getContent(details) {
         
         ]
         }
-    },                                          
+    },                  
+//////////////////////////////////////////////////////////////////////////////// ----------------------Thank You 
+
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" Thank you for your payment!  ",
+            fontSize: 9,
+            Bold: true,
+            alignment: 'justify',
+            characterSpacing: [1],
+            // right,down,left,up
+            margin: [80, -2, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+///////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" Here's your auto generated  certificate  ",
+            fontSize: 6,
+            alignment: 'justify',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [100, -2, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+
+///////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [1,],
+    body: [
+      [{
+            text:" ",
+            fontSize: 2,
+           
+                    
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+///////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:"[  PRINT BUTTON   ] ",
+            fontSize: 6,
+            alignment: 'justify',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [120, -2, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+/////////////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [1,],
+    body: [
+      [{
+            text:" ",
+            fontSize: 2,
+           
+                    
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+//////////////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" This is only an electronic copy. You can get your official  certificate upon claiming your",
+            fontSize: 5,
+            alignment: 'justify',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [45, -2, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+//////////////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" Police Clearance at the Municipal Hall. ",
+            fontSize: 5,
+            alignment: 'justify',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [100, -2, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+/////////////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" Thank you for your business ",
+            fontSize: 5,
+            alignment: 'justify',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [115, -2, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+
+/////////////////////////////////////////////////////////////////////////////////////                        
 
 //////////////////////////////////////-----END-----/////////////////////////////////////
 ]
