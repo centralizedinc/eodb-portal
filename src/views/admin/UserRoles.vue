@@ -117,6 +117,15 @@ export default {
 }
 </script>
 
-<style>
-
+<style >
+.ant-form-item-label label{
+    font-weight: bold;
+    color:black
+}
+.ant-drawer-header{
+    background: #242B30 !important
+}
+.ant-drawer-close {
+    color: #ffffff
+}
 </style>

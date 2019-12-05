@@ -60,6 +60,7 @@ class AccountDao {
      * @param {Object} conditions 
      */
     static find(conditions) {
+        console.log("conditions data: " + JSON.stringify(conditions))
         return model.find(conditions).lean().exec()
     }
 

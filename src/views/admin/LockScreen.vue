@@ -21,10 +21,6 @@
             @click="$router.push('/')"
           >{{constant_helper.home_header.label}}</h3>
         </a-col>
-        
-        <a-col :md="2" :lg="0" :push="22">
-          <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
-        </a-col>
       </a-row>
     </a-layout-header>
     <a-layout-content>
@@ -35,12 +31,12 @@
                 <a-avatar style="border: 2px solid #FFFFFF" shape="square" :size="100" src="http://lorempixel.com/200/200/people/">
             </a-avatar>
             <br/>
-            <span style="color:#ffffff;font-size: 24px; font-weight:bold">Balita, Ariel A.</span>
+            <span style="color:#ffffff;font-size: 24px; font-weight:bold">{{$store.state.admin_session.admin.email}}</span>
             <p style="color:#ffffff;font-size: 10px">(Locked)</p>
            </div>
             <a-form>             
               <a-form-item style="text-align:middle">
-                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" >
+                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" v-model="credentials.password" >
                   <!-- <a-icon slot="prefix" type="lock" /> -->
                   <a-icon
                     slot="suffix"
@@ -51,15 +47,15 @@
                 </a-input>
               </a-form-item>
               <!-- <a-divider></a-divider> -->
-              <a-button size="large" type="primary" block @click="$router.push('/admin/app')">Login</a-button>
-              <a-button size="large" type="link" style="color:#FFFFFF" block @click="$router.push('/admin')">Not you? Login as a different user</a-button>
+              <a-button size="large" type="primary" block @click="unlock" :loading="loading">Login</a-button>
+              <a-button size="large" type="link" style="color:#FFFFFF" block @click="logout">Not you? Login as a different user</a-button>
               </a-form>
               <!-- </a-card> -->
           </a-col>
       </a-row>
         </div>
     </a-layout-content>
-    <a-layout-footer style="background: linear-gradient(to left, #0575e6, #021b79); color: #ffffff">
+    <a-layout-footer style="background: #242B30; color: #ffffff">
       <a-row>
         <a-col :span="18">
           <p>© Copyright 2019 CCCI Inc. - All Rights Reserved</p>
@@ -99,219 +95,6 @@
         </a-col>
       </a-row>
     </a-layout-footer>
-    <a-modal v-model="signup_visible" title="Register">
-      <a-row type="flex" justify="center" :gutter="16">
-        <a-col :span="24">
-          <p>Register with facebook or google</p>
-        </a-col>
-        <a-col :span="12">
-          <a-button
-            block
-            size="large"
-            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
-            @click="registerFacebook"
-          >
-            <a-icon type="facebook"></a-icon>Facebook
-          </a-button>
-        </a-col>
-        <a-col :span="12">
-          <a-button
-            block
-            size="large"
-            @click="registerGoogle"
-            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
-          >
-            <a-icon type="google"></a-icon>Google
-          </a-button>
-        </a-col>
-        <a-col :span="24">
-          <a-divider>Or</a-divider>
-        </a-col>
-        <a-col :span="24">
-          <a-form>
-            <a-form-item>
-              <a-input placeholder="First Name" v-model="fname"></a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Last Name"></a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Email"></a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Password" type="password"></a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Confirm Password" type="password"></a-input>
-            </a-form-item>
-          </a-form>
-        </a-col>
-      </a-row>
-    </a-modal>
-    <!-- Report Modal -->
-    <a-modal v-model="visible_report" title="Report Incident">
-      <a-row type="flex" align="center" :gutter="16">
-        <a-col :span="6">
-          <a-card
-            style="background-color:#1A1693; cursor:pointer"
-            @click="report_type='1'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='1'?'check':'fire'"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-        <a-col :span="6">
-          <a-card
-            style="background-color:#1A1693; cursor:pointer"
-            @click="report_type='2'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='2'?'check':'sound'"
-                  @click="report(1)"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-        <a-col :span="6">
-          <a-card
-            style="background-color:#1A1693; cursor:pointer"
-            @click="report_type='3'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='3'?'check':'alert'"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-        <a-col :span="6">
-          <a-card
-            style="background-color:#1A1693; cursor:pointer"
-            @click="report_type='4'"
-            class="emergency_btn"
-          >
-            <a-row type="flex" justify="center">
-              <a-col :span="12">
-                <a-icon
-                  :type="report_type==='4'?'check':'safety'"
-                  style="color:#ffffff;font-size:24px"
-                ></a-icon>
-              </a-col>
-            </a-row>
-          </a-card>
-        </a-col>
-      </a-row>
-      <GmapMap
-        id="map"
-        ref="map"
-        :center="{lat:coordinates.lat, lng:coordinates.lng}"
-        :zoom="16"
-        map-type-id="terrain"
-        draggable="true"
-        style="width: 100%; height: 300px; margin-top:5vh"
-      >
-        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
-      </GmapMap>
-      <a-textarea style="margin-top: 2vh" :rows="3" placeholder="Add Comments here..."></a-textarea>
-      <template slot="footer">
-        <a-button
-          key="submit"
-          type="primary"
-          :loading="loading"
-          @click="submitReport"
-        >Confirm and Submit</a-button>
-      </template>
-    </a-modal>
-
-    <a-modal v-model="guest_visible" title="Contact Details" @ok="submit">
-      <a-row type="flex" justify="center" :gutter="16">
-        <a-col :span="24">
-          <a-form>
-            <a-form-item>
-              <a-input placeholder="Name">
-                <a-icon slot="prefix" type="user" />
-              </a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Contact Number">
-                <a-icon slot="prefix" type="phone" />
-              </a-input>
-            </a-form-item>
-            <a-form-item>
-              <a-input placeholder="Email">
-                <a-icon slot="prefix" type="mail" />
-              </a-input>
-            </a-form-item>
-          </a-form>
-        </a-col>
-      </a-row>
-    </a-modal>
-
-    <a-modal v-modal="login_visible">
-      <a-card style="background: rgba(59, 79, 99, 0.62)">
-            <template slot="title">
-              <div style="color:#ffffff">Enter Credentials</div>
-            </template>
-            <a-form>
-              <a-form-item>
-                <a-input size="large" placeholder="Email">
-                  <a-icon slot="prefix" type="mail" />
-                </a-input>
-              </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
-                  <a-icon slot="prefix" type="lock" />
-                  <a-icon
-                    slot="suffix"
-                    :type="reveal?'eye':'eye-invisible'"
-                    @click="reveal=!reveal"
-                    style="cursor:pointer"
-                  />
-                </a-input>
-              </a-form-item>
-              <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
-              <a-divider></a-divider>
-              <p style="color:white">Login using facebook or google accounts</p>
-              <a-row type="flex" :gutter="16">
-                <a-col :span="12">
-                  <a-button
-                    block
-                    style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
-                    @click="registerFacebook"
-                  >
-                    <a-icon type="facebook"></a-icon>Facebook
-                  </a-button>
-                </a-col>
-                <a-col :span="12">
-                  <a-button
-                    block
-                    @click="registerGoogle"
-                    style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
-                  >
-                    <a-icon type="google"></a-icon>Google
-                  </a-button>
-                </a-col>
-              </a-row>
-            </a-form>
-          </a-card>
-    </a-modal>
-
   </a-layout>
 </template>
 
@@ -319,17 +102,9 @@
 export default {
   data() {
     return {
-      visible_menu:false,
-      guest_visible: false,
-      signup_visible: false,
-      login_visible:false,
-      visible_report: false,
-      visible: false,
+      loading:false,
+      credentials:{},
       topLocation: 0,
-      reveal: false,
-      coordinates: { lat: 15.667300, lng: 120.734993 },
-      animation: {},
-      report_type: ""
     };
   },
   methods: {
@@ -338,62 +113,55 @@ export default {
       console.log("event ::: ", JSON.stringify(window.top.scrollY));
       this.topLocation = window.top.scrollY;
     },
-    registerFacebook() {
-      window.open(
-        `${process.env.VUE_APP_BASE_API_URI}/auth/facebook`,
-        "",
-        "width=500,height=450"
-      );
-      this.signup_visible = false;
+    unlock(){
+      this.loading=true
+      this.$http.post('/admin/auth', this.credentials)
+      .then(result=>{
+        this.loading = false;
+        console.log('result', JSON.stringify(result.data))
+        if(result && result.data && result.data.model && result.data.model.is_authenticated){
+          this.$store.commit('UNLOCK_SCREEN', result.data.model.account)
+          this.$router.push('/admin/app')
+        }else{
+          this.credentials = {}
+          this.$notification.error(
+          {
+            message: 'Unauthorized!',
+            description: 'Invalid Credentials. Please try again.'
+          }
+        )
+        }
+        
+      })
+      .catch(error=>{
+        this.loading = false;
+        console.error(error)
+        this.credentials = {}
+        this.$notification.error(
+          {
+            message: 'Unauthorized!',
+            description: 'Invalid Credentials. Please try again.'
+          }
+        )
+      })
     },
-    registerGoogle() {
-      window.open(
-        `${process.env.VUE_APP_BASE_API_URI}/auth/google`,
-        "",
-        "width=500,height=450"
-      );
-      this.signup_visible = false;
-    },
-    report() {
-      this.visible_report = true;
-      var _self = this;
-      this.$getLocation().then(coordinates => {
-        this.coordinates = coordinates;
-        this.$gmapApiPromiseLazy().then(() => {
-          _self.animation = google.maps.Animation.DROP;
+    logout(){
+      var _self = this
+        this.$confirm({
+          title: `Are you sure you want to logout ${this.credentials.email}?`,
+          content: 'Clicking OK will delete any unsaved work.',
+          onOk() {
+             _self.$store.commit('ADMIN_LOGOUT')
+             _self.$router.push('/admin')
+          },
+          onCancel() {},
         });
-      });
-    },
-    submitReport() {
-      // this.visible_report = false
-      var _self = this;
-      this.$confirm({
-        title: "You are about to submit a report as guest.",
-        content:
-          "For faster response, please enter your name & contact no. or Sign-up",
-        okText: "Sign-up",
-        cancelText: "Continue as guest",
-        onOk: _self.signup,
-        onCancel: _self.continue
-      });
-    },
-    signup() {
-      this.visible_report = false;
-      this.signup_visible = true;
-    },
-    continue() {
-      this.guest_visible = true;
-    },
-    submit() {
-      this.guest_visible = false;
-      this.visible_report = false;
-      this.$notification.success({
-        message: "Thank you for your concern",
-        description: "Your Report has been sent. Stay safe!"
-      });
+     
     }
   },
   created() {
+    // console.log('EMAIL:::',JSON.stringify(this.$store.state.admin_session.admin.account.email))
+    this.credentials.email = this.$store.state.admin_session.admin.email
     window.addEventListener("scroll", this.handleScroll);
   },
   destroyed() {
@@ -405,7 +173,7 @@ export default {
       if (this.topLocation < 50) {
         return "background: transparent";
       } else {
-        return "background: linear-gradient(to right, #0575e6, #021b79)";
+        return "background: #242B30";
       }
     }
   }

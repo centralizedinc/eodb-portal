@@ -17,6 +17,9 @@ var AccountModelSchema = new mongoose.Schema({
         },
         last: {
             type: String
+        },
+        suffix: {
+            type: String
         }
     },
     username: {
