@@ -22,9 +22,6 @@ var AccountModelSchema = new mongoose.Schema({
             type: String
         }
     },
-    username: {
-        type: String
-    },
     token: {
         type: String
     },

@@ -187,7 +187,8 @@
     <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
-        <a-button key="submit" type="primary" :loading="loading" @click="handleOk">Submit</a-button>
+        <a-button style="background-color: #1890ff;
+    border-color: #1890ff" key="submit" type="primary" :loading="loading" @click="handleOk">Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
         <!-- <a-col :span="24">
@@ -614,6 +615,10 @@ export default {
       (this.loading = true), console.log("handleOk");
 
       if (this.validate()) {
+         this.$message.success(
+          'Your information has been sent successfully. Please check your email for verification link to activate your account.',
+          10,
+        )
         console.log("walang error registration");
         this.loading = false;
         this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
