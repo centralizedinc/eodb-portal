@@ -62,18 +62,22 @@
               </a-menu-item>
               <a-menu-item key="3">
                 <a-icon type="file-protect" />
-                <span>Certificate</span>
+                <span>Certificates</span>
               </a-menu-item>
               <a-menu-item key="4">
-                <a-icon type="user-add" />
+                <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
               <a-menu-item key="5">
-                <a-icon type="schedule" />
-                <span>User Account</span>
+                <a-icon type="credit-card" />
+                <span>Payments</span>
               </a-menu-item>
               <a-menu-item key="6">
-                <a-icon type="team" />
+                <a-icon type="user-add" />
+                <span>My Profile</span>
+              </a-menu-item>
+              <a-menu-item key="7">
+                <a-icon type="sound" />
                 <span>Citizen Report</span>
               </a-menu-item>
             </a-menu>

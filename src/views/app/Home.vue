@@ -21,7 +21,7 @@
         <a-tab-pane tab="Real Property Tax" key="2">
           <!-- <permits></permits> -->
         </a-tab-pane>
-        <a-tab-pane tab="Downloadable Forms" key="3">
+        <a-tab-pane tab="Payments" key="3">
           <!-- <downloadable-forms></downloadable-forms> -->
         </a-tab-pane>
       </a-tabs>
