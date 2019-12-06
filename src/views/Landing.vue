@@ -26,7 +26,7 @@
       >
         <a-row>
           <a-col :span="15"></a-col>
-          <a-col>
+          <a-col :span="7">
             <img
               style="width: 100%; height: auto; padding-top: 5%; padding-bottom: -50%; padding-left: 2em"
               src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
