@@ -26,7 +26,62 @@
           <a-icon type="logout" style="color:#ffffff; cursor:pointer" @click="logout"></a-icon>
         </a-col>
       </a-row>
+      <!-- mobile site -->
+      <!-- <a-row v-else type="flex" justify="start">
+        <a-col :xs="3" :sm="2" :md="2">
+          <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>          
+        </a-col>
+        <a-col :xs="20" :sm="21" :md="21">
+            <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
+          </a-col>
+        <a-col :span="1">
+          <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
+        </a-col> 
+      </a-row>
+      <a-drawer
+        placement="left"
+        :visible="visible_menu"
+        @close="visible_menu=false"
+        :closable="false"
+      >
+      <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
+        <a-col :xs="6" :sm="6" :md="6">
+          <a-avatar :src="user.avatar" :size="54" shape="square" style="border: 2px solid #ffffff" ></a-avatar>
+        </a-col>
+        <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
+          <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
+        </a-col>
+       
+      </a-row>
+        <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+        <a-menu-item key="/app">
+            <a-icon type="layout" />
+            <span>Home</span>
+          </a-menu-item>
+          <a-menu-item key="report">
+            <a-icon type="alert" />
+            <span>Emergency</span>
+          </a-menu-item>
+          <a-menu-item key="/app/permits">
+            <a-icon type="file-exclamation" />
+            <span>My Permits</span>
+          </a-menu-item>
+          <a-menu-item key="/app/taxes">
+            <a-icon type="file-protect" />
+            <span>My Taxes</span>
+          </a-menu-item>
+          <a-menu-item key="/app/accounts">
+            <a-icon type="user-add" />
+            <span>My Account</span>
+          </a-menu-item>
+          <a-menu-item key="logout">
+            <a-icon type="logout" />
+            <span>Logout</span>
+          </a-menu-item>
+        </a-menu>
+      </a-drawer> -->
     </a-layout-header>
+    <!-- ------------------------------------------------ -->
     <a-layout-content class="content" style="margin-top:10vh">
       <a-row type="flex" justify="center">
         <a-col :span="4" style="margin-right:1vw">
@@ -51,32 +106,32 @@
             </a-row>
           </a-card>
           <a-affix :offsetTop="100">
-            <a-menu :defaultSelectedKeys="['1']" mode="inline">
-              <a-menu-item key="1">
+            <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+              <!-- <a-menu-item key="/app">
                 <a-icon type="bars" />
-                <span>Home</span>
+                <span>Home</span> -->
               </a-menu-item>
-              <a-menu-item key="2">
+              <a-menu-item key="/app">
                 <a-icon type="file-exclamation" />
                 <span>Permits & Licenses</span>
               </a-menu-item>
-              <a-menu-item key="3">
+              <a-menu-item key="/app/taxes">
                 <a-icon type="file-protect" />
                 <span>Certificates</span>
               </a-menu-item>
-              <a-menu-item key="4">
+              <a-menu-item key="/app/account">
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
-              <a-menu-item key="5">
+              <a-menu-item key="">
                 <a-icon type="credit-card" />
                 <span>Payments</span>
               </a-menu-item>
-              <a-menu-item key="6">
+              <a-menu-item key="/app/account">
                 <a-icon type="user-add" />
                 <span>My Profile</span>
               </a-menu-item>
-              <a-menu-item key="7">
+              <a-menu-item key="">
                 <a-icon type="sound" />
                 <span>Citizen Report</span>
               </a-menu-item>
@@ -162,6 +217,7 @@
         </a-col>
       </a-row>
     </a-layout-content>
+    <!-- ------------------------------------------------ -->
     <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
     >Dolores Quezon</a-layout-footer>
@@ -210,6 +266,16 @@ export default {
     init() {
       this.user = this.$store.state.user_session.user;
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
+    },
+    nav(e) {
+      if (e.key === "logout") {
+        this.logout();
+      } else if(e.key === "report") {
+        this.$refs.report_modal.report()
+        this.visible_report =true
+      }else {
+        this.$router.push(e.key);
+      }
     },
     report(num) {
       this.visible = true;

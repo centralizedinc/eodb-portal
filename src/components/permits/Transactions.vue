@@ -32,7 +32,7 @@
     </a-card-meta>
       <template slot="actions">
         <div>
-          <a @click="() => view_data(item)">View</a>
+          <a @click="() => view_data(item)" >Renew</a>
         </div>
       </template>
     </a-card>
@@ -442,25 +442,46 @@ export default {
       ],
       // transac: [],
       cols: [
-        {
-          title: "Permit",
-          dataIndex: "application.permit_type"
+        // {
+        //   title: "Permit",
+        //   dataIndex: "application.permit_type"
+        // },
+        // {
+        //   title: "Type",
+        //   dataIndex: "application.app_type",
+        //   scopedSlots: { customRender: "application.app_type" }
+        // },
+        // {
+        //   title: "Status",
+        //   dataIndex: "progress.status"
+        // },
+        // {
+        //   title: "Current Task",
+        //   dataIndex: "progress.current_task"
+        // },
+        // {
+        //   title: "Action",
+        //   dataIndex: "action",
+        //   scopedSlots: { customRender: "action" }
+        // }
+         {
+          title: "Reference No",
+          dataIndex: ""
         },
         {
-          title: "Type",
-          dataIndex: "application.app_type",
-          scopedSlots: { customRender: "application.app_type" }
+          title: "License/Permit Applied",
+          dataIndex: ""
+        },
+        {
+          title: "Date Submitted",
+          dataIndex: ""
         },
         {
           title: "Status",
-          dataIndex: "progress.status"
+          dataIndex: ""
         },
         {
-          title: "Current Task",
-          dataIndex: "progress.current_task"
-        },
-        {
-          title: "Action",
+          title: "",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }
@@ -476,12 +497,22 @@ export default {
     // });
 
     // this.transac = JSON.parse(JSON.stringify(this.$store.state.permit.permit));
-    this.store_handler = this.$store.state.permit.permit;
-    console.log("transac data: " + JSON.stringify(this.transac));
+    var user = this.$store.state.user_session.user
+    console.log("this.$store.state.user_session.user: " + JSON.stringify(this.$store.state.user_session.user))
+    // this.store_handler = this.$store.state.permit.permit;
+    this.$store.dispatch("GET_PERMIT", user.email)
+    .then((result) => {
+     console.log("get dispatch get permit result data: " + JSON.stringify(result)) 
+    }).catch((err) => {
+      console.log("error get permit: " + err)
+    });
+    // this.store_handler = this.$store.state.permit.permits
+    // console.log("this.store_handler ")
+    // console.log("transac data: " + JSON.stringify(this.transac));
   },
   computed:{
     transac(){
-      return JSON.parse(JSON.stringify(this.$store.state.permit.permit));
+      return JSON.parse(JSON.stringify(this.$store.state.permit.permits));
     }
   },
   methods: {
