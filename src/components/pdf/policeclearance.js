@@ -237,7 +237,7 @@ function getContent(details) {
                         characterSpacing: 0,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -10, 0, 0]
+                        margin: [1, -8, 0, 0]
                    
                     },
                     {

@@ -15,26 +15,34 @@
 import pdf from "vue-pdf";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-
-// PDF Format
-import receipt from "./pdf/receipt";
-
-var printers = {
-  RECEIPT: receipt
-};
-//////////////////////////////////////////////////////////////
+import BGYCLEARANCE from "./pdf/bgyclearance";
 import BUSINESSPERMIT from "./pdf/businesspermit";
-
-var printers = {
-  BUSINESSPERMIT
-};
-/////////////////////////////////////////////////////////////
+import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 
 var printers = {
-  POLICECLEARANCE
+  BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE
 };
 
+// var printers = {
+//   FIREANDSAFETY
+// };
+
+//   BUSINESSPERMIT
+// };
+
+// PDF Format
+// import receipt from "./pdf/receipt";
+
+// var printers = {
+//   RECEIPT: receipt
+// };
+
+// import BUSINESSPERMIT from "./pdf/businesspermit";
+
+// var printers = {
+//   BUSINESSPERMIT
+// };
 
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
