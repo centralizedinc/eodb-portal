@@ -11,6 +11,8 @@ function isAuthenticated(to, from, next) {
     if(store.state.admin_session.locked){
       next('/admin/lock')
     }else{
+      // console.log('dropping breadcrumbs::::')
+      store.commit('DROP_BREADCRUMBS', {name:to.name, path:to.path})
       next()
     }    
   }else{
