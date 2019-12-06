@@ -264,7 +264,7 @@
       id="rec"
     >
       <a-col :span="24" data-aos="fade-up">
-        <h1>Report Emergency / Calamity</h1>
+        <h1>Citizen Report</h1>
         <a-divider></a-divider>
       </a-col>
       <a-col :span="6" data-aos="fade-up">
@@ -277,11 +277,11 @@
       </a-col>
       <a-col :span="14" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
-          To protect the community, emergency management has to keep the
-          response teams well informed about situations-in-progress. This tool
-          efficiently gather, analyze, and associate critical information in a
-          timely manner. In this way, response times can be optimized and help
-          protect first responders in the field. <br />
+          Report crime, emergency, or calamity in San Antonio using SmartJuan.
+          This alert system tells the Command Center's server about the type of
+          emergency, name and address of establishment, contact number of
+          reporter (if any), along with other important pieces of information
+          <br />
           <br />
           <br />
         </div>
@@ -337,12 +337,17 @@ export default {
   text-shadow: -2px 5px 4px #000000;
 }
 
+.cardButton:hover {
+  background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1));
+  transform: scale(0.95);
+}
 .cardButton {
   background-color: #1890ff !important;
   color: #ffffff !important;
   border-radius: 5px !important;
   border-color: white !important;
   border-style: double !important;
+  cursor: pointer !important;
 }
 
 .textStyle {

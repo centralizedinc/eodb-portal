@@ -382,14 +382,14 @@ export default {
       (this.loading = true), console.log("handleOk");
 
       if (this.validate()) {
-        this.$message.success(
-          "Your information has been sent successfully. Please check your email for verification link to activate your account.",
-          10
-        );
         console.log("walang error registration");
         this.loading = false;
         this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
           console.log("saved account" + JSON.stringify(save_account));
+          this.$message.success(
+            "Your information has been sent successfully. Please check your email for verification link to activate your account.",
+            10
+          );
           this.redirect("mainView");
         });
       } else {
