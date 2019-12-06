@@ -12,8 +12,9 @@
               :size="40"
               class="card_btn"
               :style="btnStyle"
-              @click="redirect('business-permit')"
+              @click="$router.push('/permits/business')"
             >
+            <!-- redirect('business-permit') -->
               <a-icon type="shop" style="font-size:16px"></a-icon>
             </a-avatar>
           </a-col>

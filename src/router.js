@@ -71,10 +71,11 @@ export default new Router({
           path: '',
           component: () => import('./views/app/Home')
         },
-        // {
-        //   path: 'permits',
-        //   component: () => import('@/components/permits/Transactions')
-        // },
+        {
+          path: 'permits',
+          component: () => import('@/views/Permits')
+          // component: () => import('@/components/permits/Transactions')
+        },
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
