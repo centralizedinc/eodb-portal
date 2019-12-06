@@ -5,7 +5,7 @@
         <a-button type="primary" block icon="plus" @click="visible=true" >NEW USER</a-button>
     </a-col>
     <a-col :span="24">
-         <a-table style="margin-top: 2vh" :dataSource="admins" :columns="cols">
+         <a-table style="margin-top: 2vh" :dataSource="admins" :columns="cols" :bordered="true">
              <span slot="date" slot-scope="text, record">
                 {{formatDate(text)}}
             </span>
