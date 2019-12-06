@@ -17,25 +17,32 @@ router.route('/')
     })
     .post((req, res) => {
         console.log("Creating Business Permit...")
+        console.log('Saving data :', req.body);
         const { data, payment } = req.body;
-        PaymentDao.create(payment)
+        var results = {};
+        BusinessApplicationDao.create(data)
             .then((result) => {
                 console.log('payment result :', result);
-                return BusinessApplicationDao.create(data)
+                results.application = result;
+                payment.application_id = result._id;
+                return PaymentDao.create(payment)
             })
             .then((result) => {
+                results.payment = result;
                 console.log('permit result :', result);
                 var details = {
-                    application_id: result.reference_no,
-                    application_type: result.application_type,
+                    application_id: results.application._id,
+                    application_type: results.application.application_type,
                     permit: 'business',
                     payment_status: payment.status
                 }
                 return DocketsDao.create(details)
             })
             .then((result) => {
+                results.dockets = result;
                 console.log('docket result :', result);
-                res.json(result);
+                console.log('results :', results);
+                res.json(results);
             }).catch((errors) => {
                 res.json({ errors })
             });

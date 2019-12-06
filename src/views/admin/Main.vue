@@ -113,13 +113,13 @@
           </a-row>
         </a-layout-header>
         <a-layout-content style="margin-left:2vh; margin-right:2vh; margin-top:2vh">
-          <a-row type="flex" justify="end" align="middle" >
-            <a-col :span="18">
+          <a-row type="flex" align="middle" >
+            <a-col :span="8">
               <h1>{{$route.name}}</h1>
             </a-col>
-            <a-col :span="6">
+            <a-col :span="16" style="text-align:right">
               <a-breadcrumb>
-                <a-breadcrumb-item v-for="item in $store.state.admin_breadcrumbs.path" :key="item">{{item}}</a-breadcrumb-item>
+                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item">{{item.name}}</a-breadcrumb-item>
               </a-breadcrumb>
             </a-col>
           </a-row>
