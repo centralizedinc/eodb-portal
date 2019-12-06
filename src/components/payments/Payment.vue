@@ -4,7 +4,6 @@
     :closable="false"
     :width="450"
     @close="$emit('close')"
-    class="payment-drawer"
     :visible="show"
   >
     <a-row type="flex">
@@ -41,7 +40,6 @@
 </template>
 
 <script>
-import Card from "card";
 import CreditCard from "./CreditCard";
 
 export default {
@@ -60,22 +58,13 @@ export default {
   methods: {
     navigate(e) {
       this.current_option = this.tabs[e];
-      if (this.current_option === "CreditCard") this.init_card();
-    },
-    init_card() {
-      if (!this.card) {
-        this.card = new Card({
-          form: "form",
-          container: ".card-wrapper"
-        });
-      }
     }
   }
 };
 </script>
 
 <style>
-.payment-drawer .ant-drawer-body {
+.ant-drawer-body {
   padding: 0 !important;
 }
 </style>
