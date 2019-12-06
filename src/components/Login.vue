@@ -1,16 +1,6 @@
 <template>
   <div>
-    <!-- <a-row :push="10">
-      <a-col :span="24">
-        <img
-          style="width: 100%; margin-bottom: 10px"
-          src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
-        />
-      </a-col>
-    </a-row> -->
-    <a-card
-      style="background: #333333a6; border-radius:20px 20px 20px 20px; border: none!important"
-    >
+    <a-card class="loginCard">
       <!-- <template slot="title">
       <div style="color:#ffffff">Enter Credentials</div>
     </template> -->
@@ -30,8 +20,7 @@
         <a-col :span="7"></a-col>
         <a-col :span="24">
           <h3 style="color:white; margin-top: 10px" align="center">
-            Avoid the hassle,<br />
-            apply for a business permit here!
+            Avoid the hassle, apply for a business permit here!
           </h3>
         </a-col>
         <a-col :span="7"></a-col>
@@ -40,7 +29,7 @@
         <a-col :span="24">
           <a-button
             block
-            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
+            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF; height:6vh"
             @click="registerFacebook"
           >
             <a-icon type="facebook"></a-icon>Login using Facebook
@@ -52,7 +41,7 @@
           <a-button
             block
             @click="registerGoogle"
-            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
+            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF ;height:6vh"
           >
             <a-icon type="google"></a-icon>Login using Google
           </a-button>
@@ -63,7 +52,7 @@
           <a-button
             block
             @click="registerGoogle"
-            style="border: #DE4935;background-color:#1890FF; color:#FFFFFF"
+            style="border: #DE4935;background-color:#1890FF; color:#FFFFFF ; height:6vh"
           >
             <a-icon type="mail"></a-icon>
             Login using e-mail
@@ -417,4 +406,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.loginCard {
+  background: #333333a6 !important;
+  border-radius: 20px 20px 20px 20px !important;
+  border: none !important;
+  margin-top: -35% !important;
+}
+</style>

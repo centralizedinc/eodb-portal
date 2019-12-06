@@ -15,16 +15,25 @@
     <!-- desktop version -->
     <div
       v-if="$breakpoint.lgAndUp"
-      style="background-image:url('https://i.postimg.cc/mrc7nm7x/landing.jpg'); height:100%;background-repeat: no-repeat;
-  background-size: cover"
+      style="background-image:url('https://i.postimg.cc/mrc7nm7x/landing.jpg'); height:60%; background-repeat: no-repeat; background-size: cover"
     >
       <a-row
-        style="height:100vh"
+        style="height:95vh"
         type="flex"
         justify="end"
         align="center"
         :gutter="16"
       >
+        <a-row>
+          <a-col :span="15"></a-col>
+          <a-col>
+            <img
+              style="width: 100%; height: auto; padding-top: 5%; padding-bottom: -50%; padding-left: 2em"
+              src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
+            />
+          </a-col>
+        </a-row>
+
         <a-col :lg="8" :xl="8" style="margin-top:40vh">
           <title-component data-aos="fade-up" />
         </a-col>
@@ -37,7 +46,7 @@
     <!-- <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
     <div
       v-else
-      style="background-image:url('https://i.postimg.cc/mrc7nm7x/landing.jpg'); height:100%;background-repeat: no-repeat; background-size: cover"
+      style="background-image:url('https://i.postimg.cc/K8QHjLtY/1.jpg'); height:100%;background-repeat: no-repeat; background-size: cover"
     >
       <a-row type="flex" justify="center" align="center" style="100vh">
         <a-col :xs="22" :sm="18" style="margin-top:20vh">
@@ -48,23 +57,24 @@
         </a-col>
       </a-row>
     </div>
+
+    <!-- buttons -->
     <a-row
-      :gutter="16"
+      :gutter="5"
       type="flex"
       align="middle"
-      style="margin-top:-1vh; margin-left:5vh; margin-right:5vh"
+      style="margin-top:-5vh; margin-left:5vh; margin-right:5vh"
     >
       <a-col :s="24" :md="12" :lg="6">
         <a href="#pl">
           <a-card
-            style="background-color:#1890FF; color:#FFFFFF"
+            class="cardButton"
             :bodyStyle="{
               display: 'flex',
-              'justify-content': 'center',
-              'align-items': 'center'
+              'justify-content': 'center'
             }"
           >
-            <p style="margin-top:10pv, margin-bottom:10pv">
+            <p class="textStyle">
               Permits & Licenses
             </p>
           </a-card>
@@ -73,14 +83,14 @@
       <a-col :s="24" :md="12" :lg="6">
         <a href="#cert">
           <a-card
-            style="background-color:#1890FF; color:#FFFFFF"
+            class="cardButton"
             :bodyStyle="{
               display: 'flex',
               'justify-content': 'center',
               'align-items': 'center'
             }"
           >
-            <p style="margin-top:10pv, margin-bottom:10pv color:#FFFFFF">
+            <p class="textStyle">
               Certificates
             </p>
 
@@ -93,28 +103,28 @@
       <a-col :s="24" :md="12" :lg="6">
         <a href="#rpt">
           <a-card
-            style="background-color:#1890FF; color:#FFFFFF"
+            class="cardButton"
             :bodyStyle="{
               display: 'flex',
               'justify-content': 'center',
               'align-items': 'center'
             }"
           >
-            <p style="margin-top:10pv, margin-bottom:10pv">Real Property Tax</p>
+            <p class="textStyle">Real Property Tax</p>
           </a-card>
         </a>
       </a-col>
       <a-col :s="24" :md="12" :lg="6">
         <a href="#rec">
           <a-card
-            style="background-color:#1890FF; color:#FFFFFF"
+            class="cardButton"
             :bodyStyle="{
               display: 'flex',
               'justify-content': 'center',
               'align-items': 'center'
             }"
           >
-            <p style="margin-top:10pv, margin-bottom:10pv">Citizen Report</p>
+            <p class="textStyle">Citizen Report</p>
           </a-card>
         </a>
       </a-col>
@@ -154,7 +164,7 @@
           to pay their local taxes hassle free. It also features a zero-contact
           policy for complete transparency.
         </p>
-        <a-button type="primary" style="margin-top:10pv; text-align:right"
+        <a-button type="primary" style=" text-align:center; height: 50px"
           >Apply Now</a-button
         >
       </a-col>
@@ -325,5 +335,19 @@ export default {
 <style>
 .textShadow {
   text-shadow: -2px 5px 4px #000000;
+}
+
+.cardButton {
+  background-color: #1890ff !important;
+  color: #ffffff !important;
+  border-radius: 5px !important;
+  border-color: white !important;
+  border-style: double !important;
+}
+
+.textStyle {
+  margin-top: 1em !important;
+  margin-bottom: 1em !important;
+  font-stretch: ultra-expanded !important;
 }
 </style>
