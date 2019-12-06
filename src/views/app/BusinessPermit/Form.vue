@@ -480,7 +480,14 @@ export default {
       required_docs: []
     };
   },
+  created() {
+    this.init();
+  },
   methods: {
+    init(){
+      this.$store.dispatch('GET_REGIONS');
+      this.$store.dispatch('GET_PROVINCES');
+    },
     validateStep(validate_all) {
       var errors = [];
       console.log("validate_all :", validate_all);
@@ -651,15 +658,15 @@ export default {
               error: "Lessor Name is a required field."
             });
           }
-          if (!this.form.business_address.rental_address.contact_no) {
+          if (!this.form.business_address.contact_no) {
             errors.push({
-              field: "business_address.rental_address.contact_no",
+              field: "business_address.contact_no",
               error: "Contact No is a required field."
             });
           }
-          if (!this.form.business_address.rental_address.email) {
+          if (!this.form.business_address.email) {
             errors.push({
-              field: "business_address.rental_address.email",
+              field: "business_address.email",
               error: "Email Address is a required field."
             });
           }
@@ -774,11 +781,6 @@ export default {
     changeStep(step) {
       this.current_step = step;
       window.scrollTo(0, 0);
-    },
-    validate() {
-      // Validate first
-
-      this.show_payment = true;
     },
     proceedToSubmit({ payment_details, method }) {
       this.payment_details.payment_details = payment_details;

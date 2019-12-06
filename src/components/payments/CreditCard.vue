@@ -4,6 +4,7 @@
     <a-divider></a-divider>
     <div class="card-wrapper" style="margin-bottom: 2vh"></div>
     <a-divider></a-divider>
+   
     <form>
       <!-- <a-input type="text" name="number"></a-input> -->
       <a-form-item
@@ -14,7 +15,7 @@
         :help="errors.card"
         has-feedback
       >
-        <a-input
+        <input
           placeholder="•••• •••• •••• ••••"
           type="text"
           name="number"
@@ -79,6 +80,7 @@
 </template>
 
 <script>
+import Card from "card";
 export default {
   props: ["details"],
   data() {
@@ -106,6 +108,14 @@ export default {
       form: "form",
       container: ".card-wrapper"
     });
+    console.log('this.card1 :', this.card);
+  },
+  created() {
+    this.card = new Card({
+      form: "form",
+      container: ".card-wrapper"
+    });
+    console.log('this.card :', this.card);
   },
   methods: {
     // 

@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import Card from "card";
 import CreditCard from "./CreditCard";
 
 export default {

@@ -214,7 +214,20 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.region" placeholder="Region*"></a-input>
+            <!-- <a-input v-model="form.business_address.region" placeholder="Region*"></a-input> -->
+            <a-select
+              v-model="form.business_address.region"
+              showSearch
+              @change="changeRegion"
+              :filterOption="(input, option) => filterReference(input, option, regions, 'regCode', 'regDesc')"
+            >
+              <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
+              <a-select-option
+                v-for="item in regions"
+                :key="item.regCode"
+                :value="item.regCode"
+              >{{item.regDesc}}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -226,24 +239,26 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.province" placeholder="Province*"></a-input>
+            <!-- <a-input v-model="form.business_address.province" placeholder="Province*"></a-input> -->
+            <a-select
+              v-model="form.business_address.province"
+              :disabled="!form.business_address.region"
+              showSearch
+              @change="loadCities"
+              :filterOption="(input, option) => filterReference(input, option, provinces, 'provCode', 'provDesc')"
+            >
+              <a-select-option :value="''" disabled>Select Province</a-select-option>
+              <a-select-option
+                v-for="item in provinces"
+                :key="item.provCode"
+                :value="item.provCode"
+              >{{item.provDesc}}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item
-            :validate-status="checkErrors('business_address.barangay') ? 'error': ''"
-            :help="checkErrors('business_address.barangay')"
-          >
-            <span slot="label">
-              Barangay
-              <i style="color: red">*</i>
-            </span>
-            <a-input v-model="form.business_address.barangay" placeholder="Barangay*"></a-input>
-          </a-form-item>
-        </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-form-item
             :validate-status="checkErrors('business_address.city') ? 'error': ''"
@@ -253,7 +268,48 @@
               City/Municipality
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.city" placeholder="City/Municipality*"></a-input>
+            <!-- <a-input v-model="form.business_address.city" placeholder="City/Municipality*"></a-input> -->
+            <a-select
+              v-model="form.business_address.city"
+              :disabled="loading_cities || !form.business_address.province"
+              :loading="loading_cities"
+              @change="loadBarangays"
+              showSearch
+              :filterOption="(input, option) => filterReference(input, option, cities, 'citymunCode', 'citymunDesc')"
+            >
+              <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
+              <a-select-option
+                v-for="item in cities"
+                :key="item.citymunCode"
+                :value="item.citymunCode"
+              >{{item.citymunDesc}}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+          <a-form-item
+            :validate-status="checkErrors('business_address.barangay') ? 'error': ''"
+            :help="checkErrors('business_address.barangay')"
+          >
+            <span slot="label">
+              Barangay
+              <i style="color: red">*</i>
+            </span>
+            <!-- <a-input v-model="form.business_address.barangay" placeholder="Barangay*"></a-input> -->
+            <a-select
+              v-model="form.business_address.barangay"
+              :disabled="loading_barangay || !form.business_address.city"
+              :loading="loading_barangay"
+              showSearch
+              :filterOption="(input, option) => filterReference(input, option, barangays, 'brgyCode', 'brgyDesc')"
+            >
+              <a-select-option :value="''" disabled>Select Barangay</a-select-option>
+              <a-select-option
+                v-for="item in barangays"
+                :key="item.brgyCode"
+                :value="item.brgyCode"
+              >{{item.brgyDesc}}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
@@ -292,7 +348,10 @@
       </a-form-item>
 
       <a-form-item>
-        <a-checkbox v-model="form.business_details.is_rented">Is the place of business rented?</a-checkbox>
+        <a-checkbox
+          v-model="form.business_details.is_rented"
+          @change="resetRentedData"
+        >Is the place of business rented?</a-checkbox>
       </a-form-item>
 
       <template v-if="form.business_details.is_rented">
@@ -418,7 +477,20 @@
                 Region
                 <i style="color: red">*</i>
               </span>
-              <a-input v-model="form.business_address.rental_address.region" placeholder="Region*"></a-input>
+              <!-- <a-input v-model="form.business_address.rental_address.region" placeholder="Region*"></a-input> -->
+              <a-select
+                v-model="form.business_address.rental_address.region"
+                showSearch
+                @change="changeRentalRegion"
+                :filterOption="(input, option) => filterReference(input, option, regions, 'regCode', 'regDesc')"
+              >
+                <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
+                <a-select-option
+                  v-for="item in regions"
+                  :key="item.regCode"
+                  :value="item.regCode"
+                >{{item.regDesc}}</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -430,30 +502,29 @@
                 Province
                 <i style="color: red">*</i>
               </span>
-              <a-input
+              <!-- <a-input
                 v-model="form.business_address.rental_address.province"
                 placeholder="Province*"
-              ></a-input>
+              ></a-input>-->
+              <a-select
+                v-model="form.business_address.rental_address.province"
+                :disabled="!form.business_address.rental_address.region"
+                showSearch
+                @change="loadCities('rental')"
+                :filterOption="(input, option) => filterReference(input, option, rental_provinces, 'provCode', 'provDesc')"
+              >
+                <a-select-option :value="''" disabled>Select Province</a-select-option>
+                <a-select-option
+                  v-for="item in rental_provinces"
+                  :key="item.provCode"
+                  :value="item.provCode"
+                >{{item.provDesc}}</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
         </a-row>
 
         <a-row style="font-weight: bold" :gutter="5">
-          <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-            <a-form-item
-              :validate-status="checkErrors('business_address.rental_address.barangay') ? 'error': ''"
-              :help="checkErrors('business_address.rental_address.barangay')"
-            >
-              <span slot="label">
-                Barangay
-                <i style="color: red">*</i>
-              </span>
-              <a-input
-                v-model="form.business_address.rental_address.barangay"
-                placeholder="Barangay*"
-              ></a-input>
-            </a-form-item>
-          </a-col>
           <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
             <a-form-item
               :validate-status="checkErrors('business_address.rental_address.city') ? 'error': ''"
@@ -463,10 +534,54 @@
                 City/Municipality
                 <i style="color: red">*</i>
               </span>
-              <a-input
+              <!-- <a-input
                 v-model="form.business_address.rental_address.city"
                 placeholder="City/Municipality*"
-              ></a-input>
+              ></a-input>-->
+              <a-select
+                v-model="form.business_address.rental_address.city"
+                :disabled="loading_rental_cities || !form.business_address.rental_address.province"
+                :loading="loading_rental_cities"
+                @change="loadBarangays('rental')"
+                showSearch
+                :filterOption="(input, option) => filterReference(input, option, rental_cities, 'citymunCode', 'citymunDesc')"
+              >
+                <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
+                <a-select-option
+                  v-for="item in rental_cities"
+                  :key="item.citymunCode"
+                  :value="item.citymunCode"
+                >{{item.citymunDesc}}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+            <a-form-item
+              :validate-status="checkErrors('business_address.rental_address.barangay') ? 'error': ''"
+              :help="checkErrors('business_address.rental_address.barangay')"
+            >
+              <span slot="label">
+                Barangay
+                <i style="color: red">*</i>
+              </span>
+              <!-- <a-input
+                v-model="form.business_address.rental_address.barangay"
+                placeholder="Barangay*"
+              ></a-input> -->
+              <a-select
+                v-model="form.business_address.rental_address.barangay"
+                :disabled="loading_rental_barangay || !form.business_address.rental_address.city"
+                :loading="loading_rental_barangay"
+                showSearch
+                :filterOption="(input, option) => filterReference(input, option, rental_barangays, 'brgyCode', 'brgyDesc')"
+              >
+                <a-select-option :value="''" disabled>Select Barangay</a-select-option>
+                <a-select-option
+                  v-for="item in rental_barangays"
+                  :key="item.brgyCode"
+                  :value="item.brgyCode"
+                >{{item.brgyDesc}}</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
@@ -507,7 +622,15 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {
-      show_rented_info: false
+      show_rented_info: false,
+      cities: [],
+      barangays: [],
+      loading_cities: false,
+      loading_barangay: false,
+      rental_cities: [],
+      rental_barangays: [],
+      loading_rental_cities: false,
+      loading_rental_barangay: false
     };
   },
   computed: {
@@ -520,10 +643,29 @@ export default {
         return "SEC";
       else if (this.form.business_details.business_type === "CE") return "CDA";
       return "";
+    },
+    regions() {
+      return this.$store.state.references.regions;
+    },
+    rental_provinces() {
+      const region_code = this.form.business_address.rental_address.region;
+      const provinces = this.$store.state.references.provinces;
+      const provincesOnRegion = provinces.filter(
+        v => v.regCode === region_code
+      );
+      return provincesOnRegion;
+    },
+    provinces() {
+      const region_code = this.form.business_address.region;
+      const provinces = this.$store.state.references.provinces;
+      const provincesOnRegion = provinces.filter(
+        v => v.regCode === region_code
+      );
+      return provincesOnRegion;
     }
   },
-  watch: {
-    "form.business_details.is_rented": () => {
+  methods: {
+    resetRentedData() {
       if (!this.form.business_details.is_rented) {
         this.form.business_address.rental = "";
         this.form.business_address.lessor_name = "";
@@ -542,22 +684,138 @@ export default {
           postal_code: ""
         };
       }
-    }
-  },
-  methods: {
-    checkIfRented() {
-      if (this.form.business_details.is_rented) this.show_rented_info = true;
-      else {
-        this.form.business_address.rental = "";
-        this.form.business_address.lessor_name = "";
-        this.form.business_address.contact_no = "";
-        this.form.business_address.email = "";
-        this.form.business_address.rental_address = {};
-      }
     },
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
+    },
+    changeRegion() {
+      // clear data
+      this.form.business_address.province = "";
+      this.form.business_address.city = "";
+      this.form.business_address.barangay = "";
+
+      this.cities = [];
+      this.barangays = [];
+    },
+    changeRentalRegion() {
+      // clear data
+      this.form.business_address.rental_address.province = "";
+      this.form.business_address.rental_address.city = "";
+      this.form.business_address.rental_address.barangay = "";
+
+      this.rental_cities = [];
+      this.rental_barangays = [];
+    },
+    loadCities(key) {
+      if (key === "rental") {
+        console.log(
+          `loading rental_cities of ${this.form.business_address.rental_address.province}...`
+        );
+        this.loading_rental_cities = true;
+
+        // clear data first
+        this.form.business_address.rental_address.city = "";
+        this.form.business_address.rental_address.barangay = "";
+        this.rental_cities = [];
+        this.rental_barangays = [];
+      } else {
+        console.log(
+          `loading cities of ${this.form.business_address.province}...`
+        );
+        this.loading_cities = true;
+
+        // clear data first
+        this.form.business_address.city = "";
+        this.form.business_address.barangay = "";
+        this.cities = [];
+        this.barangays = [];
+      }
+
+      // load cities by province
+      this.$store
+        .dispatch(
+          "GET_CITIES",
+          key === "rental"
+            ? this.form.business_address.rental_address.province
+            : this.form.business_address.province
+        )
+        .then(cities => {
+          if (key === "rental") {
+            this.rental_cities = cities;
+            this.loading_rental_cities = false;
+          } else {
+            this.cities = cities;
+            this.loading_cities = false;
+          }
+        })
+        .catch(err => {
+          console.log("GET_CITIES err :", err);
+          if (key === "rental") {
+            this.rental_cities = [];
+            this.loading_rental_cities = false;
+          } else {
+            this.cities = [];
+            this.loading_cities = false;
+          }
+        });
+    },
+    loadBarangays(key) {
+      if (key === "rental") {
+        console.log(
+          `loading rental_barangays of ${this.form.business_address.rental_address.city}...`
+        );
+        this.loading_rental_barangay = true;
+
+        // clear data first
+        this.form.business_address.rental_address.barangay = "";
+        this.rental_barangays = [];
+      } else {
+        console.log(
+          `loading barangays of ${this.form.business_address.city}...`
+        );
+        this.loading_barangay = true;
+
+        // clear data first
+        this.form.business_address.barangay = "";
+        this.barangays = [];
+      }
+
+      // load barangay by city
+      this.$store
+        .dispatch(
+          "GET_BARANGAY",
+          key === "rental"
+            ? this.form.business_address.rental_address.city
+            : this.form.business_address.city
+        )
+        .then(barangays => {
+          if (key === "rental") {
+            this.rental_barangays = barangays;
+            this.loading_rental_barangay = false;
+          } else {
+            this.barangays = barangays;
+            this.loading_barangay = false;
+          }
+        })
+        .catch(err => {
+          console.log("GET_BARANGAY err :", err);
+          if (key === "rental") {
+            this.rental_barangays = [];
+            this.loading_rental_barangay = false;
+          } else {
+            this.barangays = [];
+            this.loading_barangay = false;
+          }
+        });
+    },
+    filterReference(inputValue, option, array, code, description) {
+      if (!option.key) return false;
+      const data = array.find(v => v[code] === option.key);
+      return (
+        data[code].toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
+        data[description].toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      );
     }
   }
 };
