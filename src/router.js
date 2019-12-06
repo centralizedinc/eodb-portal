@@ -11,6 +11,8 @@ function isAuthenticated(to, from, next) {
     if(store.state.admin_session.locked){
       next('/admin/lock')
     }else{
+      // console.log('dropping breadcrumbs::::')
+      store.commit('DROP_BREADCRUMBS', {name:to.name, path:to.path})
       next()
     }    
   }else{
@@ -69,10 +71,11 @@ export default new Router({
           path: '',
           component: () => import('./views/app/Home')
         },
-        // {
-        //   path: 'permits',
-        //   component: () => import('@/components/permits/Transactions')
-        // },
+        {
+          path: 'permits',
+          component: () => import('@/views/Permits')
+          // component: () => import('@/components/permits/Transactions')
+        },
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
@@ -149,6 +152,12 @@ export default new Router({
         name: 'Admin Account',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Account.vue'),
+      },
+      {
+        path: 'application',
+        name: 'Application Review',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/ApplicationReview.vue'),
       }]
     },
     {

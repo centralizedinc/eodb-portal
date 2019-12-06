@@ -1,3 +1,5 @@
+import BusinessPermit from "../../api/BusinessPermitAPI"
+
 var initialState = {
     permit: [{
             reference_no: "123456789",
@@ -158,14 +160,16 @@ var initialState = {
             }
         }
     ],
-
+    permits:[]
 }
 
 const state = JSON.parse(JSON.stringify(initialState))
 
 const mutations = {
     SAVE_PERMIT(state, permit) {
-        state.permit.push(permit)
+        console.log("save permit data: " + JSON.stringify(permit))
+        state.permits = []
+        state.permits.push(permit)
     },
     APPROVE_PERMIT(state, reference_no){
         state.permit.forEach(element => {
@@ -185,7 +189,19 @@ const mutations = {
 
 var actions = {
     GET_PERMIT(context, data) {
-        context.commit('SAVE_PERMIT', data)
+        return new Promise ((resolve, reject) => {
+            console.log("get permit email data: " + JSON.stringify(data))
+            BusinessPermit.getTransactions(data)
+            .then((result) => {
+                console.log("get permit data: " + JSON.stringify(result))
+                context.commit('SAVE_PERMIT', result)
+                resolve(result)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+        })
+        
     }
 }
 
