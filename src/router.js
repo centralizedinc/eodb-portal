@@ -152,6 +152,12 @@ export default new Router({
         name: 'Admin Account',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Account.vue'),
+      },
+      {
+        path: 'application',
+        name: 'Application Review',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/ApplicationReview.vue'),
       }]
     },
     {

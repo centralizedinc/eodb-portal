@@ -5,8 +5,8 @@
         <a-button type="primary" block icon="plus" @click="visible=true" >NEW ROLE</a-button>
     </a-col>
     <a-col :span="24">
-         <a-table style="margin-top: 2vh" :dataSource="roles" :columns="cols">
-             <span slot="date" slot-scope="text, record">
+         <a-table style="margin-top: 2vh" :dataSource="roles" :columns="cols" :bordered="true" :loading="loading">
+             <span slot="date" slot-scope="text">
                 {{formatDate(text)}}
             </span>
          </a-table>
@@ -83,8 +83,10 @@ export default {
     methods:{
         init(){
             //get offices
+            this.loading = true
             this.$http.get('/departments')
             .then(results=>{
+                this.loading = false
                 this.offices = results.data;
             })
             //get roles

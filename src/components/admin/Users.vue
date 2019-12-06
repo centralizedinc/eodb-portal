@@ -1,5 +1,5 @@
 <template>
-  <a-table :dataSource="users" :columns="cols"  :customRow="customRow" style="margin-top:2vh">           
+  <a-table :dataSource="users" :columns="cols"  :customRow="customRow" style="margin-top:2vh" :bordered="true">           
         
         <span slot="platform" slot-scope="text, record">
             <a-icon :type="getPlatformIcon(text)"></a-icon>
