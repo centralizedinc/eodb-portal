@@ -4,7 +4,6 @@
     <a-divider></a-divider>
     <div class="card-wrapper" style="margin-bottom: 2vh"></div>
     <a-divider></a-divider>
-   
     <form>
       <!-- <a-input type="text" name="number"></a-input> -->
       <a-form-item

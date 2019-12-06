@@ -6,7 +6,9 @@ export default {
         Vue.mixin({
             data() {
                 return {
-                    constant_helper
+                    constant_helper,
+                    fixed_address: true,
+                    fixed_postal: true
                 }
             },
             methods: {

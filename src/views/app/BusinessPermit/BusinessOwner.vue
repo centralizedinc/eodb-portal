@@ -221,7 +221,7 @@
               v-model="form.owner_address.province"
               :disabled="!form.owner_address.region"
               showSearch
-              @change="loadCities"
+              @change="changeProvince"
               :filterOption="(input, option) => filterReference(input, option, provinces, 'provCode', 'provDesc')"
             >
               <a-select-option :value="''" disabled>Select Province</a-select-option>
@@ -247,9 +247,8 @@
             </span>
             <a-select
               v-model="form.owner_address.city"
-              :disabled="loading_cities || !form.owner_address.province"
-              :loading="loading_cities"
-              @change="loadBarangays"
+              :disabled="!form.owner_address.province"
+              @change="changeCity"
               showSearch
               :filterOption="(input, option) => filterReference(input, option, cities, 'citymunCode', 'citymunDesc')"
             >
@@ -273,8 +272,7 @@
             </span>
             <a-select
               v-model="form.owner_address.barangay"
-              :disabled="loading_barangay || !form.owner_address.city"
-              :loading="loading_barangay"
+              :disabled="!form.owner_address.city"
               showSearch
               :filterOption="(input, option) => filterReference(input, option, barangays, 'brgyCode', 'brgyDesc')"
             >
@@ -317,14 +315,17 @@
 </template>
 
 <script>
+import regions_data from "../../../assets/references/regions.json";
+import provinces_data from "../../../assets/references/provinces.json";
+
 export default {
   props: ["form", "step", "errors"],
   data() {
     return {
+      regions_data,
+      provinces_data,
       cities: [],
-      barangays: [],
-      loading_cities: false,
-      loading_barangay: false
+      barangays: []
     };
   },
   computed: {
@@ -332,16 +333,28 @@ export default {
       return this.$store.state.user_session.user;
     },
     regions() {
-      return this.$store.state.references.regions;
+      return this.regions_data;
     },
     provinces() {
       const region_code = this.form.owner_address.region;
-      const provinces = this.$store.state.references.provinces;
-      const provincesOnRegion = provinces.filter(
+      if (!region_code) return [];
+
+      const provincesOnRegion = this.provinces_data.filter(
         v => v.regCode === region_code
       );
       return provincesOnRegion;
     }
+  },
+  created() {
+    if(this.fixed_address){
+      this.form.owner_address.region = "04";
+      this.changeRegion();
+      this.form.owner_address.province = "0456";
+      this.changeProvince();
+      this.form.owner_address.city = "045641";
+      this.changeCity();
+    }
+    if(this.fixed_postal) this.form.owner_address.postal_code = "4324"
   },
   methods: {
     changeRegion() {
@@ -349,53 +362,33 @@ export default {
       this.form.owner_address.province = "";
       this.form.owner_address.city = "";
       this.form.owner_address.barangay = "";
-
-      this.cities = [];
-      this.barangays = [];
     },
-    loadCities() {
-      console.log(`loading cities of ${this.form.owner_address.province}...`);
-      this.loading_cities = true;
-
+    changeProvince() {
       // clear data first
       this.form.owner_address.city = "";
       this.form.owner_address.barangay = "";
-      this.cities = [];
-      this.barangays = [];
 
-      // load cities by province
-      this.$store
-        .dispatch("GET_CITIES", this.form.owner_address.province)
-        .then(cities => {
-          this.cities = cities;
-          this.loading_cities = false;
-        })
-        .catch(err => {
-          this.cities = [];
-          console.log("GET_CITIES err :", err);
-          this.loading_cities = false;
+      // call cities
+      if (this.form.owner_address.province) {
+        import(
+          `../../../assets/references/cities/${this.form.owner_address.province}.json`
+        ).then(data => {
+          this.cities = data.default;
         });
+      }
     },
-    loadBarangays() {
-      console.log(`loading barangays of ${this.form.owner_address.city}...`);
-      this.loading_barangay = true;
-
+    changeCity() {
       // clear data first
       this.form.owner_address.barangay = "";
-      this.barangays = [];
 
-      // load barangay by city
-      this.$store
-        .dispatch("GET_BARANGAY", this.form.owner_address.city)
-        .then(barangays => {
-          this.barangays = barangays;
-          this.loading_barangay = false;
-        })
-        .catch(err => {
-          this.barangays = [];
-          console.log("GET_BARANGAY err :", err);
-          this.loading_barangay = false;
+      // Call Barangays
+      if (this.form.owner_address.city) {
+        import(
+          `../../../assets/references/barangay/${this.form.owner_address.city}.json`
+        ).then(data => {
+          this.barangays = data.default;
         });
+      }
     },
     onChange(e) {
       if (e.target.checked) {

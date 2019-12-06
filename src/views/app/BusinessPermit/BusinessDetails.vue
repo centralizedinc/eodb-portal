@@ -214,10 +214,10 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.business_address.region" placeholder="Region*"></a-input> -->
             <a-select
               v-model="form.business_address.region"
               showSearch
+              :disabled="fixed_address"
               @change="changeRegion"
               :filterOption="(input, option) => filterReference(input, option, regions, 'regCode', 'regDesc')"
             >
@@ -239,12 +239,11 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.business_address.province" placeholder="Province*"></a-input> -->
             <a-select
               v-model="form.business_address.province"
-              :disabled="!form.business_address.region"
+              :disabled="fixed_address || !form.business_address.region"
               showSearch
-              @change="loadCities"
+              @change="changeProvince"
               :filterOption="(input, option) => filterReference(input, option, provinces, 'provCode', 'provDesc')"
             >
               <a-select-option :value="''" disabled>Select Province</a-select-option>
@@ -268,12 +267,10 @@
               City/Municipality
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.business_address.city" placeholder="City/Municipality*"></a-input> -->
             <a-select
               v-model="form.business_address.city"
-              :disabled="loading_cities || !form.business_address.province"
-              :loading="loading_cities"
-              @change="loadBarangays"
+              :disabled="fixed_address || !form.business_address.province"
+              @change="changeCity"
               showSearch
               :filterOption="(input, option) => filterReference(input, option, cities, 'citymunCode', 'citymunDesc')"
             >
@@ -298,8 +295,7 @@
             <!-- <a-input v-model="form.business_address.barangay" placeholder="Barangay*"></a-input> -->
             <a-select
               v-model="form.business_address.barangay"
-              :disabled="loading_barangay || !form.business_address.city"
-              :loading="loading_barangay"
+              :disabled="!form.business_address.city"
               showSearch
               :filterOption="(input, option) => filterReference(input, option, barangays, 'brgyCode', 'brgyDesc')"
             >
@@ -321,7 +317,11 @@
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.postal_code" placeholder="Postal Code*"></a-input>
+            <a-input
+              :disabled="fixed_postal"
+              v-model="form.business_address.postal_code"
+              placeholder="Postal Code*"
+            ></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -477,10 +477,10 @@
                 Region
                 <i style="color: red">*</i>
               </span>
-              <!-- <a-input v-model="form.business_address.rental_address.region" placeholder="Region*"></a-input> -->
               <a-select
                 v-model="form.business_address.rental_address.region"
                 showSearch
+                :disabled="fixed_address"
                 @change="changeRentalRegion"
                 :filterOption="(input, option) => filterReference(input, option, regions, 'regCode', 'regDesc')"
               >
@@ -502,15 +502,11 @@
                 Province
                 <i style="color: red">*</i>
               </span>
-              <!-- <a-input
-                v-model="form.business_address.rental_address.province"
-                placeholder="Province*"
-              ></a-input>-->
               <a-select
                 v-model="form.business_address.rental_address.province"
-                :disabled="!form.business_address.rental_address.region"
+                :disabled="fixed_address || !form.business_address.rental_address.region"
                 showSearch
-                @change="loadCities('rental')"
+                @change="changeRentalProvince"
                 :filterOption="(input, option) => filterReference(input, option, rental_provinces, 'provCode', 'provDesc')"
               >
                 <a-select-option :value="''" disabled>Select Province</a-select-option>
@@ -534,15 +530,10 @@
                 City/Municipality
                 <i style="color: red">*</i>
               </span>
-              <!-- <a-input
-                v-model="form.business_address.rental_address.city"
-                placeholder="City/Municipality*"
-              ></a-input>-->
               <a-select
                 v-model="form.business_address.rental_address.city"
-                :disabled="loading_rental_cities || !form.business_address.rental_address.province"
-                :loading="loading_rental_cities"
-                @change="loadBarangays('rental')"
+                :disabled="fixed_address || !form.business_address.rental_address.province"
+                @change="changeRentalCity"
                 showSearch
                 :filterOption="(input, option) => filterReference(input, option, rental_cities, 'citymunCode', 'citymunDesc')"
               >
@@ -564,14 +555,9 @@
                 Barangay
                 <i style="color: red">*</i>
               </span>
-              <!-- <a-input
-                v-model="form.business_address.rental_address.barangay"
-                placeholder="Barangay*"
-              ></a-input> -->
               <a-select
                 v-model="form.business_address.rental_address.barangay"
-                :disabled="loading_rental_barangay || !form.business_address.rental_address.city"
-                :loading="loading_rental_barangay"
+                :disabled="!form.business_address.rental_address.city"
                 showSearch
                 :filterOption="(input, option) => filterReference(input, option, rental_barangays, 'brgyCode', 'brgyDesc')"
               >
@@ -594,6 +580,7 @@
                 <i style="color: red">*</i>
               </span>
               <a-input
+                :disabled="fixed_postal"
                 v-model="form.business_address.rental_address.postal_code"
                 placeholder="Postal Code*"
               ></a-input>
@@ -618,20 +605,42 @@
 </template>
 
 <script>
+import regions_data from "../../../assets/references/regions.json";
+import provinces_data from "../../../assets/references/provinces.json";
+
 export default {
   props: ["form", "step", "errors"],
   data() {
     return {
       show_rented_info: false,
+      regions_data,
+      provinces_data,
       cities: [],
       barangays: [],
-      loading_cities: false,
-      loading_barangay: false,
       rental_cities: [],
-      rental_barangays: [],
-      loading_rental_cities: false,
-      loading_rental_barangay: false
+      rental_barangays: []
     };
+  },
+  created() {
+    if (this.fixed_address) {
+      this.form.business_address.region = "04";
+      this.changeRegion();
+      this.form.business_address.province = "0456";
+      this.changeProvince();
+      this.form.business_address.city = "045641";
+      this.changeCity();
+
+      this.form.business_address.rental_address.region = "04";
+      this.changeRentalRegion();
+      this.form.business_address.rental_address.province = "0456";
+      this.changeRentalProvince();
+      this.form.business_address.rental_address.city = "045641";
+      this.changeRentalCity();
+    }
+    if (this.fixed_postal) {
+      this.form.business_address.postal_code = "4324";
+      this.form.business_address.rental_address.postal_code = "4324";
+    }
   },
   computed: {
     reg_code() {
@@ -645,20 +654,22 @@ export default {
       return "";
     },
     regions() {
-      return this.$store.state.references.regions;
+      return this.regions_data;
     },
-    rental_provinces() {
-      const region_code = this.form.business_address.rental_address.region;
-      const provinces = this.$store.state.references.provinces;
-      const provincesOnRegion = provinces.filter(
+    provinces() {
+      const region_code = this.form.business_address.region;
+      if (!region_code) return [];
+
+      const provincesOnRegion = this.provinces_data.filter(
         v => v.regCode === region_code
       );
       return provincesOnRegion;
     },
-    provinces() {
-      const region_code = this.form.business_address.region;
-      const provinces = this.$store.state.references.provinces;
-      const provincesOnRegion = provinces.filter(
+    rental_provinces() {
+      const region_code = this.form.business_address.rental_address.region;
+      if (!region_code) return [];
+
+      const provincesOnRegion = this.provinces_data.filter(
         v => v.regCode === region_code
       );
       return provincesOnRegion;
@@ -694,120 +705,66 @@ export default {
       this.form.business_address.province = "";
       this.form.business_address.city = "";
       this.form.business_address.barangay = "";
+    },
+    changeProvince() {
+      // clear data first
+      this.form.business_address.city = "";
+      this.form.business_address.barangay = "";
 
-      this.cities = [];
-      this.barangays = [];
+      // call cities
+      if (this.form.business_address.province) {
+        import(
+          `../../../assets/references/cities/${this.form.business_address.province}.json`
+        ).then(data => {
+          this.cities = data.default;
+        });
+      }
+    },
+    changeCity() {
+      // clear data first
+      this.form.business_address.barangay = "";
+
+      // Call Barangays
+      if (this.form.business_address.city) {
+        import(
+          `../../../assets/references/barangay/${this.form.business_address.city}.json`
+        ).then(data => {
+          this.barangays = data.default;
+        });
+      }
     },
     changeRentalRegion() {
       // clear data
       this.form.business_address.rental_address.province = "";
       this.form.business_address.rental_address.city = "";
       this.form.business_address.rental_address.barangay = "";
-
-      this.rental_cities = [];
-      this.rental_barangays = [];
     },
-    loadCities(key) {
-      if (key === "rental") {
-        console.log(
-          `loading rental_cities of ${this.form.business_address.rental_address.province}...`
-        );
-        this.loading_rental_cities = true;
+    changeRentalProvince() {
+      // clear data first
+      this.form.business_address.rental_address.city = "";
+      this.form.business_address.rental_address.barangay = "";
 
-        // clear data first
-        this.form.business_address.rental_address.city = "";
-        this.form.business_address.rental_address.barangay = "";
-        this.rental_cities = [];
-        this.rental_barangays = [];
-      } else {
-        console.log(
-          `loading cities of ${this.form.business_address.province}...`
-        );
-        this.loading_cities = true;
-
-        // clear data first
-        this.form.business_address.city = "";
-        this.form.business_address.barangay = "";
-        this.cities = [];
-        this.barangays = [];
-      }
-
-      // load cities by province
-      this.$store
-        .dispatch(
-          "GET_CITIES",
-          key === "rental"
-            ? this.form.business_address.rental_address.province
-            : this.form.business_address.province
-        )
-        .then(cities => {
-          if (key === "rental") {
-            this.rental_cities = cities;
-            this.loading_rental_cities = false;
-          } else {
-            this.cities = cities;
-            this.loading_cities = false;
-          }
-        })
-        .catch(err => {
-          console.log("GET_CITIES err :", err);
-          if (key === "rental") {
-            this.rental_cities = [];
-            this.loading_rental_cities = false;
-          } else {
-            this.cities = [];
-            this.loading_cities = false;
-          }
+      // call cities
+      if (this.form.business_address.rental_address.province) {
+        import(
+          `../../../assets/references/cities/${this.form.business_address.rental_address.province}.json`
+        ).then(data => {
+          this.rental_cities = data.default;
         });
+      }
     },
-    loadBarangays(key) {
-      if (key === "rental") {
-        console.log(
-          `loading rental_barangays of ${this.form.business_address.rental_address.city}...`
-        );
-        this.loading_rental_barangay = true;
+    changeRentalCity() {
+      // clear data first
+      this.form.business_address.rental_address.barangay = "";
 
-        // clear data first
-        this.form.business_address.rental_address.barangay = "";
-        this.rental_barangays = [];
-      } else {
-        console.log(
-          `loading barangays of ${this.form.business_address.city}...`
-        );
-        this.loading_barangay = true;
-
-        // clear data first
-        this.form.business_address.barangay = "";
-        this.barangays = [];
-      }
-
-      // load barangay by city
-      this.$store
-        .dispatch(
-          "GET_BARANGAY",
-          key === "rental"
-            ? this.form.business_address.rental_address.city
-            : this.form.business_address.city
-        )
-        .then(barangays => {
-          if (key === "rental") {
-            this.rental_barangays = barangays;
-            this.loading_rental_barangay = false;
-          } else {
-            this.barangays = barangays;
-            this.loading_barangay = false;
-          }
-        })
-        .catch(err => {
-          console.log("GET_BARANGAY err :", err);
-          if (key === "rental") {
-            this.rental_barangays = [];
-            this.loading_rental_barangay = false;
-          } else {
-            this.barangays = [];
-            this.loading_barangay = false;
-          }
+      // Call Barangays
+      if (this.form.business_address.rental_address.city) {
+        import(
+          `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
+        ).then(data => {
+          this.rental_barangays = data.default;
         });
+      }
     },
     filterReference(inputValue, option, array, code, description) {
       if (!option.key) return false;
