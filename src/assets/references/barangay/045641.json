@@ -1,0 +1,162 @@
+[
+    {
+        "id": 12221,
+        "brgyCode": "045641001",
+        "brgyDesc": "Arawan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12222,
+        "brgyCode": "045641002",
+        "brgyDesc": "Bagong Niing",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12223,
+        "brgyCode": "045641003",
+        "brgyDesc": "Balat Atis",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12224,
+        "brgyCode": "045641004",
+        "brgyDesc": "Briones",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12225,
+        "brgyCode": "045641005",
+        "brgyDesc": "Bulihan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12226,
+        "brgyCode": "045641006",
+        "brgyDesc": "Buliran",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12227,
+        "brgyCode": "045641007",
+        "brgyDesc": "Callejon",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12228,
+        "brgyCode": "045641008",
+        "brgyDesc": "Corazon",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12229,
+        "brgyCode": "045641009",
+        "brgyDesc": "Manuel del Valle, Sr.",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12230,
+        "brgyCode": "045641010",
+        "brgyDesc": "Loob",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12231,
+        "brgyCode": "045641011",
+        "brgyDesc": "Magsaysay",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12232,
+        "brgyCode": "045641012",
+        "brgyDesc": "Matipunso",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12233,
+        "brgyCode": "045641013",
+        "brgyDesc": "Niing",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12234,
+        "brgyCode": "045641014",
+        "brgyDesc": "Poblacion",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12235,
+        "brgyCode": "045641015",
+        "brgyDesc": "Pulo",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12236,
+        "brgyCode": "045641016",
+        "brgyDesc": "Pury",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12237,
+        "brgyCode": "045641017",
+        "brgyDesc": "Sampaga",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12238,
+        "brgyCode": "045641018",
+        "brgyDesc": "Sampaguita",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12239,
+        "brgyCode": "045641019",
+        "brgyDesc": "San Jose",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    },
+    {
+        "id": 12240,
+        "brgyCode": "045641020",
+        "brgyDesc": "Sinturisan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045641"
+    }
+]

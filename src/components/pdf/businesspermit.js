@@ -217,7 +217,7 @@ function getContent(details) {
         body: [
             [
                 {
-                    text: "Centralized Cloud Computing Compuer Shop",
+                    text: "Kris Legendary Computer Cafe",
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
@@ -243,7 +243,7 @@ function getContent(details) {
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
-                    alignment: 'left',
+                    alignment: 'center',
                     // right,down,left,up
                     margin: [1, -2, 0, 0]
                 }
@@ -288,7 +288,7 @@ function getContent(details) {
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
-                    alignment: 'left',
+                    alignment: 'center',
                     // right,down,left,up
                     margin: [1, -2, 0, 0]
                 }
@@ -310,7 +310,7 @@ function getContent(details) {
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
-                    alignment: 'justify',
+                    alignment: 'left',
                     // right,down,left,up
                     margin: [1, 1, 0, 0]
                
@@ -320,7 +320,7 @@ function getContent(details) {
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
-                    alignment: 'left',
+                    alignment: 'center',
                     // right,down,left,up
                     margin: [1, 1, 0, 0]
                 },
@@ -329,7 +329,7 @@ function getContent(details) {
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
-                    alignment: 'left',
+                    alignment: 'center',
                     // right,down,left,up
                     margin: [1, 1, 0, 0]
                 },
@@ -338,7 +338,7 @@ function getContent(details) {
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
-                    alignment: 'left',
+                    alignment: 'center',
                     // right,down,left,up
                     margin: [1, 1 , 0, 0]
                 },
@@ -364,7 +364,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'justify',
                     // right,down,left,up
-                    margin: [0, -2, 0, 0]
+                    margin: [50, -2, 0, 0]
                
                 },
                 {
@@ -374,7 +374,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [3, -2, 0, 0]
+                    margin: [24, -2, 0, 0]
                 },
                 {
                     text: "MODE OF PAYMENT",
@@ -383,7 +383,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [5, -2, 0, 0]
+                    margin: [12, -2, 0, 0]
                 },
                 {
                     text: " O.R NUMBER",
@@ -392,7 +392,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [5, -2  , 0, 0]
+                    margin: [20, -2  , 0, 0]
                 },
                
             ]

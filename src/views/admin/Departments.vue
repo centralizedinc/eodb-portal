@@ -5,8 +5,8 @@
         <a-button type="primary" block icon="plus" @click="visible=true" >NEW DEPARTMENT</a-button>
     </a-col>
     <a-col :span="24">
-         <a-table style="margin-top: 2vh" :dataSource="offices" :columns="cols">
-             <span slot="date" slot-scope="text, record">
+         <a-table style="margin-top: 2vh" :dataSource="offices" :columns="cols" :bordered="true" :loading="loading">
+             <span slot="date" slot-scope="text">
                 {{formatDate(text, 'time')}}
             </span>
          </a-table>
@@ -72,8 +72,10 @@ export default {
     },
     methods:{
         init(){
+            this.loading = true;
             this.$http.get('/departments')
             .then(results=>{
+                this.loading = false
                 this.offices = results.data;
             })
         },
