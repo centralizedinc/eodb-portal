@@ -52,11 +52,11 @@ const actions = {
         return new Promise ((resolve, reject) => {
             var account_api = null
             // AccountAPI.register(user_data)
-            AccountAPI.signup(user_data)
+            new AccountAPI(context.state.token).signup(user_data)
             .then((result) => {
              console.log("account register store result: " + JSON.stringify(result))
              account_api = result              
-             return AccountAPI.sendRegisterInvitation(result)
+             return new AccountAPI(context.state.token).sendRegisterInvitation(result)
             })
             .then((result) => {
                 console.log("account_api: " + JSON.stringify(account_api))
@@ -64,7 +64,7 @@ const actions = {
                 resolve(account_api)                 
             })
             .catch((err) => {
-                console.log("account registration error")
+                console.log("account registration error :", err)
                 reject(err)
             });
         })
@@ -72,7 +72,7 @@ const actions = {
     FIND_ACCOUNT(context, id){
         return new Promise ((resolve, reject) => {
             console.log("find account id data: " + JSON.stringify(id))
-            AccountAPI.getAccount(id)
+            new AccountAPI(context.state.token).getAccount(id)
             .then((result) => {
                 console.log("find account result data: " + JSON.stringify(result))
                 resolve(result)

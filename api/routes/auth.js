@@ -85,7 +85,6 @@ router.route('/login')
 router
     .route('/signup')
     .post(function (req, res, next) {
-
         passport.authenticate('signup', function (err, user, info) {
             console.log("passport signup auth user: " + JSON.stringify(user))
             console.log("passport signup auth err: " + JSON.stringify(err))
