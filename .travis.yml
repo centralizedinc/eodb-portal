@@ -1,0 +1,22 @@
+sudo: false
+language: node_js
+node_js:
+  - "lts/*"
+deploy:
+  provider: heroku
+  api_key:
+    secure: 0dfa3aa5-643d-41df-a9f2-451af3ac8fa4
+  app: sanantonio-portalv2
+  on:
+    repo: centralizedinc/eodb-portal
+notifications:
+  email:
+    - abalita@centralizedinc.com
+    - markjhonpaul.quijom@gmail.com
+    - blitzkris24@gmail.com
+    - godofuri76@gmail.com
+    - fquiocho@centralizedinc.com
+    - venus.belo.rhi@gmail.com
+    - jbasas@centralizedinc.com
+  on_success: change # default: change
+  on_failure: always # default: always

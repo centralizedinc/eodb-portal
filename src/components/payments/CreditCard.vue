@@ -10,10 +10,11 @@
         :label-col="{ span: 10 }"
         :wrapper-col="{ span: 14 }"
         label="Credit Card Number"
-        :validate-status="errors.card ? 'error': success_card ? 'success':''"
+        :validate-status="loading_card ? 'validating' : errors.card ? 'error': success_card ? 'success':''"
         :help="errors.card"
+        has-feedback
       >
-        <input
+        <a-input
           placeholder="•••• •••• •••• ••••"
           type="text"
           name="number"
@@ -28,6 +29,7 @@
         label="Cardholder Fullname"
         :validate-status="errors.card_name ? 'error':success_card_name ? 'success':''"
         :help="errors.card_name"
+        has-feedback
       >
         <input
           placeholder="Enter Fullname"
@@ -42,8 +44,9 @@
         :label-col="{ span: 10 }"
         :wrapper-col="{ span: 14 }"
         label="Expiry Date"
-        :validate-status="errors.expiry ? 'error':success_expiry ? 'success':''"
+        :validate-status="loading_expiry ? 'validating':errors.expiry ? 'error':success_expiry ? 'success':''"
         :help="errors.expiry"
+        has-feedback
       >
         <input
           placeholder="••/••"
@@ -58,8 +61,9 @@
         :label-col="{ span: 10 }"
         :wrapper-col="{ span: 14 }"
         label="CVC"
-        :validate-status="errors.cvc ? 'error':success_cvc ? 'success':''"
+        :validate-status="loading_cvc ? 'validating':errors.cvc ? 'error':success_cvc ? 'success':''"
         :help="errors.cvc"
+        has-feedback
       >
         <input
           placeholder="•••"
@@ -104,7 +108,9 @@ export default {
     });
   },
   methods: {
+    // 
     validateCard() {
+      this.errors.card = ""
       if (!this.details.card_no)
         this.errors.card = "Please fill up Credit Card Number.";
       else {
@@ -113,11 +119,16 @@ export default {
         this.$store
           .dispatch("VALIDATE_CARD", this.details.card_no)
           .then(result => {
+            console.log('result card :', result);
             if (result.data.isValid) {
               this.cvc_max = result.data.card.code.size;
               this.success_card = true;
             } else this.errors.card = "Input Credit Card Number is not valid.";
             this.loading_card = false;
+
+            console.log('this.loading_card :', this.loading_card);
+            console.log('this.success_card :', this.success_card);
+            console.log('this.errors.card :', this.errors.card);
           })
           .catch(err => {
             console.log("err :", err);
@@ -126,12 +137,14 @@ export default {
       }
     },
     validateName() {
+      this.errors.card_name = ""
       this.success_card_name = false;
       if (!this.details.card_name)
         this.errors.card_name = "Please fill up Cardholder Fullname.";
       else this.success_card_name = true;
     },
     validateExpiry() {
+      this.errors.expiry = ""
       if (!this.details.expiry)
         this.errors.expiry = "Please fill up Expiry Date.";
       else {
@@ -140,6 +153,7 @@ export default {
         this.$store
           .dispatch("VALIDATE_EXPIRY", this.details.expiry)
           .then(result => {
+            console.log('result expiry :', result);
             if (result.data.isValid) this.success_expiry = true;
             else this.errors.expiry = "Input Expiry Date is not valid.";
             this.loading_expiry = false;
@@ -151,16 +165,18 @@ export default {
       }
     },
     validateCvc() {
+      this.errors.cvc = ""
       if (!this.details.cvc) this.errors.cvc = "Please fill up CVC.";
       else {
         this.loading_cvc = true;
         this.success_cvc = false;
         this.$store
           .dispatch("VALIDATE_CVV", {
-            cvc: this.details.cvc,
+            cvv: this.details.cvc,
             max: this.cvc_max
           })
           .then(result => {
+            console.log('result cvc :', result);
             if (result.data.isValid) this.success_cvc = true;
             else this.errors.cvc = "Input CVC is not valid.";
             this.loading_cvc = false;
