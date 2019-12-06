@@ -12,16 +12,16 @@
           </template>
         </a-tab-pane>-->
 
-        <a-tab-pane tab="Permits & Licenses" key="0">
+        <a-tab-pane tab="Permits & Licenses" key="2">
           <!-- <permits></permits> -->
         </a-tab-pane>
-        <a-tab-pane tab="Certificates" key="1">
+        <a-tab-pane tab="Certificates" key="3">
           <!-- <public-service></public-service> -->
         </a-tab-pane>
-        <a-tab-pane tab="Real Property Tax" key="2">
+        <a-tab-pane tab="Real Property Tax" key="4">
           <!-- <permits></permits> -->
         </a-tab-pane>
-        <a-tab-pane tab="Payments" key="3">
+        <a-tab-pane tab="Payments" key="5">
           <!-- <downloadable-forms></downloadable-forms> -->
         </a-tab-pane>
       </a-tabs>

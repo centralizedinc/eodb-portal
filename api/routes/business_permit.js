@@ -59,6 +59,25 @@ router.route('/:id')
             });
     })
 
+    router.route('/transactions/:id')
+    .get((req, res) => {
+        console.log("transactions id data: " + JSON.stringify(req.params.id))
+        BusinessApplicationDao.find({owner_details:{email:req.params.id}})
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+    .post((req, res) => {
+        BusinessApplicationDao.modifyById(req.params.id, req.body)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
 router.route('/product')
     .get((req, res) => {
         BusinessPermitDao.findAll()
