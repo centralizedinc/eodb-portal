@@ -10,7 +10,7 @@
         <a-affix :offsetTop="10">
             <a-card style="background-color: #242B30;border-radius:10px">
                 <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
-                <a-list-item slot="renderItem" slot-scope="item, index">
+                <a-list-item slot="renderItem" slot-scope="item">
                     <a-checkbox></a-checkbox> <span style="margin-left:2vh">{{item}}</span>
                 </a-list-item>
                 <h2 slot="header">Application Checklist</h2>
