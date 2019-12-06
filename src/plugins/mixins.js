@@ -6,7 +6,9 @@ export default {
         Vue.mixin({
             data() {
                 return {
-                    constant_helper
+                    constant_helper,
+                    fixed_address: true,
+                    fixed_postal: true
                 }
             },
             methods: {
@@ -52,6 +54,12 @@ export default {
                         minimumFractionDigits: 2
                     })
                     return formatter.format(amount)
+                },
+                getDocketStatus(status){
+                    return ['In-progress', 'Done', 'Rejected'][status]
+                },
+                getDocketMode(mode){
+                    return ['NEW', 'RENEWAL'][mode]
                 }
             },
         })

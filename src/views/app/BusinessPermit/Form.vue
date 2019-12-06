@@ -1,5 +1,6 @@
 <template>
   <a-row type="flex" justify="space-between">
+
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }">
       <a-affix :offsetTop="60">
@@ -171,13 +172,6 @@
       </a-affix>
     </a-col>
 
-    <payment
-      :loading="loading"
-      :show="show_payment"
-      @pay="proceedToSubmit"
-      @close="show_payment=false"
-    />
-
     <a-modal :visible="show_required_doc_fields" :closable="false" :footer="null">
       <i
         style="font-weight: 600;"
@@ -260,6 +254,13 @@
         <a-button type="primary" block @click="submitRequiredDocs">Submit</a-button>
       </a-form>
     </a-modal>
+
+    <payment
+      :loading="loading"
+      :show="show_payment"
+      @pay="proceedToSubmit"
+      @close="show_payment=false"
+    />
   </a-row>
 </template>
 
@@ -312,11 +313,11 @@ export default {
           bldg_name: "",
           street: "",
           subdivision: "",
-          region: "",
-          province: "",
-          city: "",
+          region: "04",
+          province: "0456",
+          city: "045641",
           barangay: "",
-          postal_code: ""
+          postal_code: "4324",
         },
         business_details: {
           business_name: "",
@@ -342,11 +343,11 @@ export default {
           bldg_name: "",
           street: "",
           subdivision: "",
-          region: "",
-          province: "",
-          city: "",
+          region: "04",
+          province: "0456",
+          city: "045641",
           barangay: "",
-          postal_code: "",
+          postal_code: "4324",
           is_rented: false,
           rental: "",
           lessor_name: "",
@@ -356,11 +357,11 @@ export default {
             bldg_name: "",
             street: "",
             subdivision: "",
-            region: "",
-            province: "",
-            city: "",
+            region: "04",
+            province: "0456",
+            city: "045641",
             barangay: "",
-            postal_code: ""
+            postal_code: "4324",
           },
           contact_no: "",
           email: ""
@@ -477,10 +478,18 @@ export default {
       loading: false,
       errors: [],
       show_required_doc_fields: false,
-      required_docs: []
+      required_docs: [],
+      prevent_showing_required_docs: false
     };
   },
+  created() {
+    this.init();
+  },
   methods: {
+    init(){
+      this.$store.dispatch('GET_REGIONS');
+      this.$store.dispatch('GET_PROVINCES');
+    },
     validateStep(validate_all) {
       var errors = [];
       console.log("validate_all :", validate_all);
@@ -651,15 +660,15 @@ export default {
               error: "Lessor Name is a required field."
             });
           }
-          if (!this.form.business_address.rental_address.contact_no) {
+          if (!this.form.business_address.contact_no) {
             errors.push({
-              field: "business_address.rental_address.contact_no",
+              field: "business_address.contact_no",
               error: "Contact No is a required field."
             });
           }
-          if (!this.form.business_address.rental_address.email) {
+          if (!this.form.business_address.email) {
             errors.push({
-              field: "business_address.rental_address.email",
+              field: "business_address.email",
               error: "Email Address is a required field."
             });
           }
@@ -724,6 +733,7 @@ export default {
         this.$message.error('Please attach DTI/SEC/CDA Certificate file.');
         jump_to = 3;
       }
+      console.log('this.form :', this.form);
       console.log("errors :", errors);
       this.errors = errors;
 
@@ -732,14 +742,16 @@ export default {
         this.current_step = jump_to;
         window.scrollTo(0, 0);
       }
-
+      
       // if there is no errors
       if (!errors.length) {
         if (this.current_step === 3) {
           // Proceed to payment
-          if (this.checkRequiredDocs()) {
+          console.log('test: ', this.checkRequiredDocs() && !this.prevent_showing_required_docs);
+          if (this.checkRequiredDocs() && !this.prevent_showing_required_docs) {
             this.$message.info("The following details are needed to fill in the additional required documents.")
             this.show_required_doc_fields = true;
+            this.prevent_showing_required_docs = true;
           } else {
             this.show_payment = true;
           }
@@ -774,11 +786,6 @@ export default {
     changeStep(step) {
       this.current_step = step;
       window.scrollTo(0, 0);
-    },
-    validate() {
-      // Validate first
-
-      this.show_payment = true;
     },
     proceedToSubmit({ payment_details, method }) {
       this.payment_details.payment_details = payment_details;

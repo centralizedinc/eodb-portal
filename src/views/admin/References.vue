@@ -5,7 +5,7 @@
         <a-button type="primary" block icon="plus" @click="visible=true" >NEW RECORD</a-button>
     </a-col>
     <a-col :span="24">
-         <a-table style="margin-top: 2vh" :dataSource="settings" :columns="cols">
+         <a-table style="margin-top: 2vh" :dataSource="settings" :columns="cols" :bordered="true" :loading="loading">
              <span slot="date" slot-scope="text, record">
                 {{formatDate(text)}}
             </span>
@@ -76,9 +76,11 @@ export default {
     },
     methods:{
         init(){
+            this.loading = true
             this.$http.get('/settings')
             .then(results =>{
                 console.log(JSON.stringify(results))
+                this.loading = false
                  this.settings = results.data.result;
             })
         },

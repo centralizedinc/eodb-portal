@@ -5,7 +5,7 @@
         <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
       <a-col :xs="6" :sm="4" :md="2" :lg="2" :xl="2" :xxl="2">
-        <a-button :style="constant_helper.theme.button" block>
+        <a-button style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )" block>
           <a-icon type="plus"></a-icon>
         </a-button>
       </a-col>

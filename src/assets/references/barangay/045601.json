@@ -1,0 +1,98 @@
+[
+    {
+        "id": 11260,
+        "brgyCode": "045601001",
+        "brgyDesc": "Binagbag",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11261,
+        "brgyCode": "045601002",
+        "brgyDesc": "Dayap",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11262,
+        "brgyCode": "045601003",
+        "brgyDesc": "Ibabang Kinagunan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11263,
+        "brgyCode": "045601004",
+        "brgyDesc": "Ilayang Kinagunan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11264,
+        "brgyCode": "045601005",
+        "brgyDesc": "Kanlurang Calutan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11265,
+        "brgyCode": "045601006",
+        "brgyDesc": "Kanlurang Maligaya",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11266,
+        "brgyCode": "045601008",
+        "brgyDesc": "Salvacion",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11267,
+        "brgyCode": "045601009",
+        "brgyDesc": "Silangang Calutan",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11268,
+        "brgyCode": "045601010",
+        "brgyDesc": "Silangang Maligaya",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11269,
+        "brgyCode": "045601011",
+        "brgyDesc": "Sildora",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11270,
+        "brgyCode": "045601012",
+        "brgyDesc": "Poblacion I",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    },
+    {
+        "id": 11271,
+        "brgyCode": "045601013",
+        "brgyDesc": "Poblacion II",
+        "regCode": "04",
+        "provCode": "0456",
+        "citymunCode": "045601"
+    }
+]

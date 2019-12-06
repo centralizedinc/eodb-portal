@@ -17,6 +17,14 @@ class BusinessApplicationDao {
         return model.findById(id).lean().exec()
     }
 
+     /**
+     * @returns {Promise}
+     * @param {String} ref_no
+     */
+    static findOneByReference(ref_no) {
+        return model.findOne({reference_no:ref_no}).lean().exec()
+    }
+
     /**
      * @returns {Promise}
      * @param {Object} conditions 
