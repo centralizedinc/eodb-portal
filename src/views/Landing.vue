@@ -9,86 +9,117 @@
       :logged_in_greeting="constant_helper.chatbot.greetings"
       :logged_out_greeting="constant_helper.chatbot.greetings"
     ></div>
-    <div  v-if="$breakpoint.lgAndUp" :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
-      <!-- desktop version -->
-      <a-row style="height:100vh" type="flex" justify="end" align="center" :gutter="16">        
-        <a-col
-          :lg="8"
-          :xl="8"
-          style="margin-top:40vh"
-        >
-        <title-component data-aos="fade-up"/>
+
+    <!-- <div  v-if="$breakpoint.lgAndUp" :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
+
+    <!-- desktop version -->
+    <div
+      v-if="$breakpoint.lgAndUp"
+      style="background-image:url('https://i.postimg.cc/mrc7nm7x/landing.jpg'); height:100%;background-repeat: no-repeat;
+  background-size: cover"
+    >
+      <a-row
+        style="height:100vh"
+        type="flex"
+        justify="end"
+        align="center"
+        :gutter="16"
+      >
+        <a-col :lg="8" :xl="8" style="margin-top:40vh">
+          <title-component data-aos="fade-up" />
         </a-col>
-        <a-col :lg="8"
-          :xl="8" style="margin-top:20vh; margin-right:5vh">
+        <a-col :lg="8" :xl="8" style="margin-top:20vh; margin-right:5vh">
           <login />
         </a-col>
       </a-row>
-      </div>
-       <!-- mobile version -->
-      <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`">
-        <a-row  type="flex" justify="center" align="center" style="100vh">
-          <a-col :xs="22" :sm="18" style="margin-top:20vh">
-            <login/>
-          </a-col>
-          <a-col :xs="22" :sm="22" style="margin-top:5vh">
-            <title-component/>
-          </a-col>
-        </a-row>   
-      </div>      
+    </div>
+    <!-- mobile version -->
+    <!-- <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
+    <div
+      v-else
+      style="background-image:url('https://i.postimg.cc/mrc7nm7x/landing.jpg'); height:100%;background-repeat: no-repeat; background-size: cover"
+    >
+      <a-row type="flex" justify="center" align="center" style="100vh">
+        <a-col :xs="22" :sm="18" style="margin-top:20vh">
+          <login />
+        </a-col>
+        <a-col :xs="22" :sm="22" style="margin-top:5vh">
+          <title-component />
+        </a-col>
+      </a-row>
+    </div>
     <a-row
       :gutter="16"
       type="flex"
       align="middle"
       style="margin-top:-1vh; margin-left:5vh; margin-right:5vh"
     >
-      <a-col :s="24" :md="12" :lg="6" >
+      <a-col :s="24" :md="12" :lg="6">
         <a href="#pl">
-        <a-card style="background-color:#1890FF; color:#FFFFFF"
-        :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
-        >
-        
- <p style="margin-top:10pv, margin-bottom:10pv">Permits & Licenses</p>
-        
-        </a-card>
+          <a-card
+            style="background-color:#1890FF; color:#FFFFFF"
+            :bodyStyle="{
+              display: 'flex',
+              'justify-content': 'center',
+              'align-items': 'center'
+            }"
+          >
+            <p style="margin-top:10pv, margin-bottom:10pv">
+              Permits & Licenses
+            </p>
+          </a-card>
         </a>
       </a-col>
-      <a-col :s="24" :md="12" :lg="6" >
-        <a href=#cert>
-        <a-card style="background-color:#1890FF; color:#FFFFFF"
-        :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
-        >
-        
- <p style="margin-top:10pv, margin-bottom:10pv color:#FFFFFF">Certificates</p>
- 
- <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
+      <a-col :s="24" :md="12" :lg="6">
+        <a href="#cert">
+          <a-card
+            style="background-color:#1890FF; color:#FFFFFF"
+            :bodyStyle="{
+              display: 'flex',
+              'justify-content': 'center',
+              'align-items': 'center'
+            }"
+          >
+            <p style="margin-top:10pv, margin-bottom:10pv color:#FFFFFF">
+              Certificates
+            </p>
+
+            <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
  <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
  </a-anchor> -->
-        </a-card>
+          </a-card>
         </a>
       </a-col>
-      <a-col :s="24" :md="12" :lg="6" >
+      <a-col :s="24" :md="12" :lg="6">
         <a href="#rpt">
-        <a-card style="background-color:#1890FF; color:#FFFFFF"
-        :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
-        >
-        
- <p style="margin-top:10pv, margin-bottom:10pv">Real Property Tax</p>
-       
-        </a-card>
+          <a-card
+            style="background-color:#1890FF; color:#FFFFFF"
+            :bodyStyle="{
+              display: 'flex',
+              'justify-content': 'center',
+              'align-items': 'center'
+            }"
+          >
+            <p style="margin-top:10pv, margin-bottom:10pv">Real Property Tax</p>
+          </a-card>
         </a>
       </a-col>
-      <a-col :s="24" :md="12" :lg="6" >
+      <a-col :s="24" :md="12" :lg="6">
         <a href="#rec">
-          <a-card style="background-color:#1890FF; color:#FFFFFF"
-          :bodyStyle="{ display: 'flex', 'justify-content': 'center', 'align-items': 'center' }"
-          >        
-            <p style="margin-top:10pv, margin-bottom:10pv">Report Emergency / Calamity</p>
+          <a-card
+            style="background-color:#1890FF; color:#FFFFFF"
+            :bodyStyle="{
+              display: 'flex',
+              'justify-content': 'center',
+              'align-items': 'center'
+            }"
+          >
+            <p style="margin-top:10pv, margin-bottom:10pv">Citizen Report</p>
           </a-card>
         </a>
       </a-col>
     </a-row>
-    
+
     <!-- ease of doing business -->
     <a-row
       :gutter="16"
@@ -97,24 +128,38 @@
       style="margin-top:10vh; margin-left:5vh; margin-right:5vh"
     >
       <a-col :span="24" data-aos="fade-up">
-        <h1 align="center">Ease of Doing Business</h1>
-        <h2 align="center">in {{constant_helper.home_header.label}}</h2>
+        <p align="center" style="font-size: 44px; font-weight: 100">
+          Ease of doing business in San Antonio Quezon
+        </p>
+        <!-- <p align="center" style="font-size: 24px; font-weight: 200">
+          in San Antonio
+        </p> -->
       </a-col>
       <a-col :span="8" data-aos="fade-up">
         <img
+          style="border-radius: 20px"
           width="90%"
           src="https://i.postimg.cc/MGz98Q0W/San-Antonio-Quezon-Halljf-0128-03.jpg"
           alt
         />
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <p>SmartJuan is a One Stop Shop eGovernment Service of San Antonio, Quezon that expedites the application process for business registration, in compliance with the Ease of Doing Business Act under Republic Act No. 11032.
-San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified and automated application to make it easier for all its constituents to put up or renew businesses and to pay their local taxes hassle free. It also features a zero-contact policy for complete transparency.</p>
-        <a-button type="primary" style="margin-top:10pv; text-align:right">Apply Now</a-button>
+        <p style="line-height: 220%; font-size: 16px; font-weight: 100">
+          SmartJuan is a One Stop Shop eGovernment Service of San Antonio,
+          Quezon that expedites the application process for business
+          registration, in compliance with the Ease of Doing Business Act under
+          Republic Act No. 11032. San Antonio Quezon, under the leadership of
+          Mayor Erick Wagan, created a unified and automated application to make
+          it easier for all its constituents to put up or renew businesses and
+          to pay their local taxes hassle free. It also features a zero-contact
+          policy for complete transparency.
+        </p>
+        <a-button type="primary" style="margin-top:10pv; text-align:right"
+          >Apply Now</a-button
+        >
       </a-col>
     </a-row>
 
-    
     <!-- permits & licenses -->
     <a-row
       :gutter="16"
@@ -124,12 +169,16 @@ San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified
       id="pl"
     >
       <a-col :span="24" data-aos="fade-up">
-        <h1 >Permits & Licenses</h1>
+        <h1>Permits & Licenses</h1>
         <a-divider></a-divider>
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <div >
-          In compliance with the Ease of Doing Business Act, registration and application of Permits and Licenses for all the constituents of {{constant_helper.home_header.label}} is now available online. Users can now apply for business permits anytime, anywhere. Apply, pay, view, track and manage ALL application in one place through SmartJuan.
+        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
+          In compliance with the Ease of Doing Business Act, registration and
+          application of Permits and Licenses for all the constituents of San
+          Antonio is now available online. Users can now apply for business
+          permits anytime, anywhere. Apply, pay, view, track and manage ALL
+          application in one place through SmartJuan.
         </div>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
@@ -151,6 +200,7 @@ San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified
     >
       <a-col :span="24" data-aos="fade-up">
         <h1>Certificates</h1>
+        <a-divider></a-divider>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
         <img
@@ -160,7 +210,10 @@ San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified
         />
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <p>Request for issuance of certified copies of births, marriages and deaths.</p>
+        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
+          Request for issuance of certified copies of births, marriages and
+          deaths.
+        </div>
       </a-col>
     </a-row>
     <!-- real property tax -->
@@ -176,8 +229,12 @@ San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified
         <a-divider></a-divider>
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <div>
-          Filing and Payment of Real Property Tax (RPT) will now be a little easier for the people of {{constant_helper.home_header.label}}. Regardless of where you are or just being in the comfort of your home, you can now file and pay your real property tax obligations online using SmartJuan.
+        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
+          Filing and Payment of Real Property Tax (RPT) will now be a little
+          easier for the people of {{ constant_helper.home_header.label }}.
+          Regardless of where you are or just being in the comfort of your home,
+          you can now file and pay your real property tax obligations online
+          using SmartJuan.
         </div>
       </a-col>
       <a-col :span="8" data-aos="fade-up">
@@ -198,35 +255,44 @@ San Antonio Quezon, under the leadership of Mayor Erick Wagan, created a unified
     >
       <a-col :span="24" data-aos="fade-up">
         <h1>Report Emergency / Calamity</h1>
+        <a-divider></a-divider>
       </a-col>
-      <a-col :span="8" data-aos="fade-up">
+      <a-col :span="6" data-aos="fade-up">
         <!-- <a-icon type="warning" /> -->
         <img
-          width="90%"
-          src="https://basecamp.com/assets/general/devices-medium-1047d88c14b1c02d9415d18799ccd289eb16d6733166b4529f317faeb28621c6.png"
+          width="80%"
+          src="http://www.pngmart.com/files/7/Emergency-PNG-Transparent-Image.png"
           alt
         />
       </a-col>
       <a-col :span="14" data-aos="fade-up">
-        <p>To protect the community, emergency management has to keep the response teams well informed about situations-in-progress. This tool efficiently gather, analyze, and associate critical information in a timely manner. In this way, response times can be optimized and help protect first responders in the field.</p>
+        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
+          To protect the community, emergency management has to keep the
+          response teams well informed about situations-in-progress. This tool
+          efficiently gather, analyze, and associate critical information in a
+          timely manner. In this way, response times can be optimized and help
+          protect first responders in the field. <br />
+          <br />
+          <br />
+        </div>
       </a-col>
     </a-row>
   </div>
 </template>
 
 <script>
-import breakpoint from '@/plugins/breakpoints'
-import Login from '@/components/Login'
-import TitleComponent from '@/components/Title'
+import breakpoint from "@/plugins/breakpoints";
+import Login from "@/components/Login";
+import TitleComponent from "@/components/Title";
 export default {
-  components:{
+  components: {
     Login,
     TitleComponent
   },
   data() {
     return {
-      loading: false,
-    }
+      loading: false
+    };
   },
   created() {
     if (this.constant_helper.chatbot && this.constant_helper.chatbot.appId) {
@@ -253,9 +319,7 @@ export default {
       };
     }
   },
-  methods: {
-    
-  }
+  methods: {}
 };
 </script>
 <style>
