@@ -84,22 +84,5 @@ router.route('/product')
             });
     })
 
-router.route('/:id')
-    .get((req, res) => {
-        BusinessPermitDao.findOneByID(req.params.id)
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({ errors })
-            });
-    })
-    .post((req, res) => {
-        BusinessPermitDao.modifyById(req.params.id, req.body)
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({ errors })
-            });
-    })
 
 module.exports = router

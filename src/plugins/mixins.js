@@ -52,6 +52,12 @@ export default {
                         minimumFractionDigits: 2
                     })
                     return formatter.format(amount)
+                },
+                getDocketStatus(status){
+                    return ['In-progress', 'Done', 'Rejected'][status]
+                },
+                getDocketMode(mode){
+                    return ['NEW', 'RENEWAL'][mode]
                 }
             },
         })

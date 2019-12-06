@@ -7,7 +7,7 @@
     <a-col :span="24">
          <a-table style="margin-top: 2vh" :dataSource="offices" :columns="cols">
              <span slot="date" slot-scope="text, record">
-                {{formatDate(text)}}
+                {{formatDate(text, 'time')}}
             </span>
          </a-table>
     </a-col>   
@@ -102,5 +102,14 @@ export default {
 </script>
 
 <style>
-
+.ant-form-item-label label{
+    font-weight: bold;
+    color:black
+}
+.ant-drawer-header{
+    background: #242B30 !important
+}
+.ant-drawer-close {
+    color: #ffffff
+}
 </style>
