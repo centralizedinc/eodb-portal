@@ -130,7 +130,7 @@ passport.use('admin-login', new LocalStrategy({
             return done(null, result);
         })
         .catch((error) => {
-            console.log(':::',error)
+            console.log(':::', error)
             return done(error)
         })
 }))
@@ -147,27 +147,37 @@ passport.use('signup', new LocalStrategy({
     } = req.body;
     console.log("oauth email: " + JSON.stringify(email))
     if (!email) return done({
+        code: 1401,
         message: constant_helper.invalid_email
     });
     console.log("oauth password: " + JSON.stringify(password))
     console.log("oauth confirm: " + JSON.stringify(confirm))
-    if (!password || !confirm || password !== confirm) return done({
-        message: constant_helper.invalid_password
-    });
+    if (!password)
+        return done({
+            message: constant_helper.invalid_password,
+            code: 1402
+        });
+    else if (!confirm || password !== confirm)
+        return done({
+            message: constant_helper.invalid_confirm_password,
+            code: 1403
+        });
+
 
     var result = {};
     AccountDao.findByEmail(email)
         .then((existing_account) => {
             console.log("account dao find by email existing_account: " + JSON.stringify(existing_account))
             if (existing_account) done({
+                code: 1001,
                 message: constant_helper.existing_email
             });
             else {
                 AccountDao.create({
-                        email,
-                        password,
-                        name
-                    })
+                    email,
+                    password,
+                    name
+                })
                     .then((account) => {
                         console.log("account dao create: " + JSON.stringify(account))
                         result.account = account;
