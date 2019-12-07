@@ -52,7 +52,7 @@
         <a-col :span="24">
           <a-button
             block
-            @click="registerGoogle"
+            @click="login"
             style="border: #DE4935;background-color:#1890FF; color:#FFFFFF ; height:6vh"
           >
             <a-icon type="mail"></a-icon>Login using e-mail

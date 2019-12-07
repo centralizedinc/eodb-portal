@@ -7,7 +7,7 @@
     "build": "vue-cli-service build --mode prod",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test":"mocha --exit"
+    "test": "mocha --exit"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",

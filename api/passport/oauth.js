@@ -174,6 +174,7 @@ passport.use('signup', new LocalStrategy({
             });
             else {
                 AccountDao.create({
+                    method: 'local',
                     email,
                     password,
                     name
