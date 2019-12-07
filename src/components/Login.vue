@@ -3,7 +3,7 @@
     <a-card class="loginCard">
       <!-- <template slot="title">
       <div style="color:#ffffff">Enter Credentials</div>
-    </template> -->
+      </template>-->
       <a-row>
         <a-col :span="8"></a-col>
         <a-col :span="8" align="center">
@@ -19,9 +19,10 @@
       <a-row>
         <a-col :span="7"></a-col>
         <a-col :span="24">
-          <h3 style="color:white; margin-top: 10px" align="center">
-            Avoid the hassle, apply for a business permit here!
-          </h3>
+          <h3
+            style="color:white; margin-top: 10px"
+            align="center"
+          >Avoid the hassle, apply for a business permit here!</h3>
         </a-col>
         <a-col :span="7"></a-col>
       </a-row>
@@ -51,15 +52,16 @@
         <a-col :span="24">
           <a-button
             block
-            @click="registerGoogle"
+            @click="login"
             style="border: #DE4935;background-color:#1890FF; color:#FFFFFF ; height:6vh"
           >
-            <a-icon type="mail"></a-icon>
-            Login using e-mail
+            <a-icon type="mail"></a-icon>Login using e-mail
           </a-button>
         </a-col>
       </a-row>
-      <a-divider> <h5 style="color:#FFF; margin-top:5px">or</h5> </a-divider>
+      <a-divider>
+        <h5 style="color:#FFF; margin-top:5px">or</h5>
+      </a-divider>
       <a-row>
         <a-col :span="24">
           <a-button
@@ -67,8 +69,7 @@
             block
             style="color:#1890FF; margin-left:5px"
             @click="signup_visible = true"
-            >Create an account
-          </a-button>
+          >Create an account</a-button>
         </a-col>
       </a-row>
       <!-- <a-form>
@@ -121,14 +122,10 @@
           </a-button>
         </a-col>
       </a-row>
-    </a-form> -->
+      </a-form>-->
       <!-- REGISRATION -->
     </a-card>
-    <a-modal
-      class="modal_login"
-      v-model="signup_visible"
-      title="Create an Account"
-    >
+    <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
         <a-button
@@ -138,8 +135,7 @@
           type="primary"
           :loading="loading"
           @click="handleOk"
-          >Submit</a-button
-        >
+        >Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
         <!-- <a-col :span="24">
@@ -169,55 +165,75 @@
           <a-divider>Or</a-divider>
         </a-col>-->
         <a-col :span="24">
-          <a-form>
-            <!-- <a-form-item
-              label="Username"
-              :validate-status="validation.name.first.status"
-              :help="validation.name.first.message"
+          <a-form class="account-form">
+            <a-row :gutter="5">
+              <a-col :span="8">
+                <a-form-item
+                  :validate-status="validation.name.last.status"
+                  :help="validation.name.last.message"
+                  label="Last Name"
+                >
+                  <a-input :disabled="loading" placeholder="Last Name" v-model="account.name.last" />
+                </a-form-item>
+              </a-col>
+              <a-col :span="8">
+                <a-form-item
+                  :validate-status="validation.name.first.status"
+                  :help="validation.name.first.message"
+                  label="First Name"
+                >
+                  <a-input
+                    :disabled="loading"
+                    placeholder="First Name"
+                    v-model="account.name.first"
+                  />
+                </a-form-item>
+              </a-col>
+              <a-col :span="8">
+                <a-form-item
+                  :validate-status="validation.name.middle.status"
+                  :help="validation.name.middle.message"
+                  label="Middle Name"
+                >
+                  <a-input
+                    :disabled="loading"
+                    placeholder="Middle Name"
+                    v-model="account.name.middle"
+                  />
+                </a-form-item>
+              </a-col>
+            </a-row>
+            <a-form-item
+              label="Email Address"
+              :validate-status="validation.email.status"
+              :help="validation.email.message"
             >
-              <a-input :disabled="loading" v-model="account.username"></a-input>
-            </a-form-item>-->
-            <!-- <a-form-item
-              :validate-status="validation.name.last.status"
-              :help="validation.name.last.message"
+              <a-input :disabled="loading" placeholder="Email Address" v-model="account.email"></a-input>
+            </a-form-item>
+            <a-form-item
+              label="Enter Password"
+              :validate-status="validation.password.status"
+              :help="validation.password.message"
             >
-              <a-input :disabled="loading" placeholder="Last Name" v-model="account.name.last"></a-input>
-            </a-form-item>-->
-            <a-col :span="24">
-              <a-form-item
-                label="Email Address"
-                :validate-status="validation.email.status"
-                :help="validation.email.message"
-              >
-                <a-input :disabled="loading" v-model="account.email"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item
-                label="Enter Password"
-                :validate-status="validation.password.status"
-                :help="validation.password.message"
-              >
-                <a-input
-                  :disabled="loading"
-                  type="password"
-                  v-model="account.password"
-                ></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item
-                label="Confirm Password"
-                :validate-status="validation.confirm.status"
-                :help="validation.confirm.message"
-              >
-                <a-input
-                  :disabled="loading"
-                  type="password"
-                  v-model="account.confirm"
-                ></a-input>
-              </a-form-item>
-            </a-col>
+              <a-input
+                :disabled="loading"
+                placeholder="Password"
+                type="password"
+                v-model="account.password"
+              ></a-input>
+            </a-form-item>
+            <a-form-item
+              label="Confirm Password"
+              :validate-status="validation.confirm.status"
+              :help="validation.confirm.message"
+            >
+              <a-input
+                :disabled="loading"
+                placeholder="Confirm Password"
+                type="password"
+                v-model="account.confirm"
+              ></a-input>
+            </a-form-item>
           </a-form>
         </a-col>
         <a-col :span="24">
@@ -237,18 +253,18 @@
         <a-col :span="24">
           <br />
           <div style="font-weight: 700">Disclaimer</div>
-          <span style=" line-height: 200%;"
-            >In accordance to R.A. 10173 or Data Privacy Act, all collected
+          <span style=" line-height: 200%;">
+            In accordance to R.A. 10173 or Data Privacy Act, all collected
             information will be treated with utmost confidentiality and will not
-            be subjected to public disclosure.</span
-          >
+            be subjected to public disclosure.
+          </span>
         </a-col>
         <a-col :span="24">
           <br />
-          <span
-            >By clicking Submit you are agreeing to the Terms and
-            Conditions</span
-          >
+          <span>
+            By clicking Submit you are agreeing to the Terms and
+            Conditions
+          </span>
         </a-col>
       </a-row>
     </a-modal>
@@ -265,7 +281,8 @@ export default {
       account: {
         name: {
           first: "",
-          last: ""
+          last: "",
+          middle: ""
         },
         email: "",
         password: "",
@@ -274,7 +291,8 @@ export default {
       validation: {
         name: {
           first: {},
-          last: {}
+          last: {},
+          middle: {}
         },
         email: {},
         password: {},
@@ -384,14 +402,19 @@ export default {
       if (this.validate()) {
         console.log("walang error registration");
         this.loading = false;
-        this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
-          console.log("saved account" + JSON.stringify(save_account));
-          this.$message.success(
-            "Your information has been sent successfully. Please check your email for verification link to activate your account.",
-            10
-          );
-          this.redirect("mainView");
-        });
+        this.$store
+          .dispatch("SIGN_UP", this.account)
+          .then(save_account => {
+            console.log("saved account" + JSON.stringify(save_account));
+            this.$message.success(
+              "Your information has been sent successfully. Please check your email for verification link to activate your account.",
+              10
+            );
+            // this.redirect("mainView");
+          })
+          .catch(err => {
+            if (err.message) this.$message.error(err.message);
+          });
       } else {
         //   this.validation.name.first = "";
         // this.validation.name.last = "";
@@ -412,5 +435,13 @@ export default {
   border-radius: 20px 20px 20px 20px !important;
   border: none !important;
   margin-top: -35% !important;
+}
+
+.account-form .ant-form-item {
+  margin: 0 !important;
+}
+
+.account-form .ant-form-item-label {
+  font-weight: bold !important;
 }
 </style>
