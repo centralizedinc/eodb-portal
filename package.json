@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode prod",
+    "build": "npm version patch && vue-cli-service build --mode prod",
+    "postversion": "git push && git push --tags",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "mocha --exit"
