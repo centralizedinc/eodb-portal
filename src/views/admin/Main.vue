@@ -24,7 +24,7 @@
               mode="inline" 
               v-model="active_menu"
               :defaultSelectedKeys="['/admin/app']"
-              style="background-color: #242B30; margin-top:5vh"  >
+              style="background-color: #242B30; margin-top:2vh"  >
         <a-menu-item key="/admin/app">
           <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
           <span>Dashboard</span>
@@ -90,8 +90,8 @@
         <a-layout-header theme="dark" style="background-color: #242B30">
           <a-row>
             <a-col :span="18">
-              <!-- <h3 style="color:#FFFFFF; font-weight:bold">SmartJuan</h3> -->
-              <img width="25%" src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"/>
+              <h3 style="color:#FFFFFF; font-weight:bold; font-size:24px">SmartJuan24</h3>
+              <!-- <img width="25%" src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"/> -->
             </a-col>
             <a-col :span="1">
               <a-icon style="color:#FFFFFF;" type="mail"></a-icon>
