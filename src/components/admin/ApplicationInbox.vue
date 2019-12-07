@@ -168,4 +168,7 @@ export default {
 .ant-drawer-close {
     color: #ffffff
 }
+.ant-progress-inner {
+    background-color: #1B2229
+}
 </style>

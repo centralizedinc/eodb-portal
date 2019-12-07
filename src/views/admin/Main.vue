@@ -55,6 +55,10 @@
             <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
             <span>User Roles</span>
           </a-menu-item>
+          <a-menu-item key="/admin/app/checklists">
+            <a-icon type="bars" :style="getMenuStyle('/admin/app/checklists')" />
+            <span>Checklists</span>
+          </a-menu-item>
           <a-menu-item key="/admin/app/references">
             <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
             <span>References</span>
@@ -119,7 +123,7 @@
             </a-col>
             <a-col :span="16" style="text-align:right">
               <a-breadcrumb>
-                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item">{{item.name}}</a-breadcrumb-item>
+                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item"><a-button type="link" @click="$router.push(item.path)">{{item.name}}</a-button></a-breadcrumb-item>
               </a-breadcrumb>
             </a-col>
           </a-row>
@@ -146,7 +150,7 @@ export default {
       console.log()
     },
     getMenuStyle(indx){
-      if(this.active_menu[0]===indx){
+      if(this.$route.path===indx){
         return 'font-size:24px; color:#01acac'
       }else{
         return 'font-size:12px; color:#FFFFFF'
