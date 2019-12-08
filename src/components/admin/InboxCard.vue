@@ -35,7 +35,7 @@
         <!-- <a-avatar size="small" shape="square" icon="facebook" style="background-color: #4267B2"></a-avatar> -->
       </a-col>
       <a-col :span="16">
-        <span style="color:black; font-size:12px">Business Permit</span>
+        <span style="color:#B6C2C9; font-size:12px">Business Permit</span>
       </a-col>
       <a-col :span="6">
         <span style="color:#FFFFFF; font-weight: bold">{{
