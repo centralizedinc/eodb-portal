@@ -164,6 +164,18 @@ export default new Router({
         name: 'Application Checklist',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Checklists.vue'),
+      },
+      {
+        path: 'emergency',
+        name: 'Incident Reports',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/IncidentReports.vue'),
+      },
+      {
+        path: 'collections',
+        name: 'Collections',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Collections.vue'),
       }]
     },
     {

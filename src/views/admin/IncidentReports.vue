@@ -19,7 +19,7 @@
         </a-table>
     </a-col>
     <a-col :span="8">
-        <a-card>
+        <a-card > 
             <GmapMap
             id="map"
             ref="map"
