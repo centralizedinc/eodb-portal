@@ -1,13 +1,14 @@
 {
   "name": "eodb-portal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode prod",
+    "build": "npm version patch && vue-cli-service build --mode prod",
+    "postversion": "git push && git push --tags",
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test":"mocha --exit"
+    "test": "mocha --exit"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",

@@ -5,6 +5,7 @@ module.exports = {
     confirmation_required: "Please verify your account on your email first.",
     invalid_email: "Invalid Email.",
     invalid_password: "Invalid Password.",
+    invalid_confirm_password: "Password and Confirm Password does not match.",
     existing_email: "Email already use.",
     confirmation_success: "Successfully Setup",
     invalid_code: "Invalid Code",

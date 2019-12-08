@@ -24,7 +24,7 @@
               mode="inline" 
               v-model="active_menu"
               :defaultSelectedKeys="['/admin/app']"
-              style="background-color: #242B30; margin-top:5vh"  >
+              style="background-color: #242B30; margin-top:2vh"  >
         <a-menu-item key="/admin/app">
           <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
           <span>Dashboard</span>
@@ -54,6 +54,10 @@
           <a-menu-item key="/admin/app/roles">
             <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
             <span>User Roles</span>
+          </a-menu-item>
+          <a-menu-item key="/admin/app/checklists">
+            <a-icon type="bars" :style="getMenuStyle('/admin/app/checklists')" />
+            <span>Checklists</span>
           </a-menu-item>
           <a-menu-item key="/admin/app/references">
             <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
@@ -86,7 +90,8 @@
         <a-layout-header theme="dark" style="background-color: #242B30">
           <a-row>
             <a-col :span="18">
-              <h3 style="color:#FFFFFF; font-weight:bold">SmartJuan</h3>
+              <h3 style="color:#FFFFFF; font-weight:bold; font-size:24px">SmartJuan24</h3>
+              <!-- <img width="25%" src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"/> -->
             </a-col>
             <a-col :span="1">
               <a-icon style="color:#FFFFFF;" type="mail"></a-icon>
@@ -119,7 +124,7 @@
             </a-col>
             <a-col :span="16" style="text-align:right">
               <a-breadcrumb>
-                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item">{{item.name}}</a-breadcrumb-item>
+                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item"><a-button type="link" @click="$router.push(item.path)">{{item.name}}</a-button></a-breadcrumb-item>
               </a-breadcrumb>
             </a-col>
           </a-row>
@@ -146,7 +151,7 @@ export default {
       console.log()
     },
     getMenuStyle(indx){
-      if(this.active_menu[0]===indx){
+      if(this.$route.path===indx){
         return 'font-size:24px; color:#01acac'
       }else{
         return 'font-size:12px; color:#FFFFFF'

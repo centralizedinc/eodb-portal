@@ -10,10 +10,12 @@
         <a-affix :offsetTop="10">
             <a-card style="background-color: #242B30;border-radius:10px">
                 <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
-                <a-list-item slot="renderItem" slot-scope="item">
-                    <a-checkbox></a-checkbox> <span style="margin-left:2vh">{{item}}</span>
-                </a-list-item>
-                <h2 slot="header">Application Checklist</h2>
+                    <a-list-item slot="renderItem" slot-scope="item">
+                        <a-list-item-meta :title="item.name" :description="item.description">
+                            <a-checkbox slot="avatar"></a-checkbox> 
+                        </a-list-item-meta>
+                    </a-list-item>
+                    <h2 slot="header">Application Checklist</h2>
                 </a-list>
                                     
                 <a-textarea style="margin-top: 1vh" :rows="3" placeholder="Remarks"></a-textarea>
@@ -50,6 +52,17 @@ export default {
                 'Police Clearance',
                 'Barangay Clearance'
             ]
+        }
+    },
+    created(){
+        this.init()
+    },
+    methods:{
+        init(){
+            this.$http.get('/checklists')
+            .then(results =>{
+                this.checklist = results.data
+            })
         }
     }
 }
