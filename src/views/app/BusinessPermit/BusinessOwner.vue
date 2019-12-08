@@ -346,15 +346,27 @@ export default {
     }
   },
   created() {
-    if(this.fixed_address){
+    if (this.fixed_address) {
       this.form.owner_address.region = "04";
-      this.changeRegion();
+      // this.changeRegion();
       this.form.owner_address.province = "0456";
-      this.changeProvince();
+      // this.changeProvince();
       this.form.owner_address.city = "045641";
-      this.changeCity();
+      // this.changeCity();
+      import(
+        `../../../assets/references/cities/${this.form.owner_address.province}.json`
+      )
+        .then(data => {
+          this.cities = data.default;
+          return import(
+            `../../../assets/references/barangay/${this.form.owner_address.city}.json`
+          );
+        })
+        .then(data => {
+          this.barangays = data.default;
+        });
     }
-    if(this.fixed_postal) this.form.owner_address.postal_code = "4324"
+    if (this.fixed_postal) this.form.owner_address.postal_code = "4324";
   },
   methods: {
     changeRegion() {
