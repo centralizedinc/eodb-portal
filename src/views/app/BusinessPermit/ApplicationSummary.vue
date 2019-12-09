@@ -177,7 +177,7 @@
       :columns="line_of_business_columns"
     ></a-table>
 
-    <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!read-only"> 
+    <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
       <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
         <a-button-group>
           <a-button @click="$emit('prev')" :disabled="loading">Previous</a-button>
@@ -373,9 +373,9 @@ export default {
           if (postal_code) result_address += `, ${postal_code}`;
           this.rental_address = result_address.toUpperCase();
         })
-        .catch((err) => {
-          console.log('err :', err);
-        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     getBusinessType(type) {
       if (type === "SP") return "Single Proprietorship";
