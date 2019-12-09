@@ -6,7 +6,7 @@
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
-            Secure Business Permit in 4 steps (all fields marked with an asterisk
+            Secure Business Permit in 7 steps (all fields marked with an asterisk
             <i
               style="color: red;"
             >*</i> is required.)
@@ -624,18 +624,43 @@ export default {
   created() {
     if (this.fixed_address) {
       this.form.business_address.region = "04";
-      this.changeRegion();
+      // this.changeRegion();
       this.form.business_address.province = "0456";
-      this.changeProvince();
+      // this.changeProvince();
       this.form.business_address.city = "045641";
-      this.changeCity();
+      // this.changeCity();
 
       this.form.business_address.rental_address.region = "04";
-      this.changeRentalRegion();
+      // this.changeRentalRegion();
       this.form.business_address.rental_address.province = "0456";
-      this.changeRentalProvince();
+      // this.changeRentalProvince();
       this.form.business_address.rental_address.city = "045641";
-      this.changeRentalCity();
+      // this.changeRentalCity();
+
+      import(
+        `../../../assets/references/cities/${this.form.business_address.province}.json`
+      )
+        .then(data => {
+          this.cities = data.default;
+          return import(
+            `../../../assets/references/barangay/${this.form.business_address.city}.json`
+          );
+        })
+        .then(data => {
+          this.barangays = data.default;
+          return import(
+            `../../../assets/references/cities/${this.form.business_address.rental_address.province}.json`
+          );
+        })
+        .then(data => {
+          this.rental_cities = data.default;
+          return import(
+            `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
+          );
+        })
+        .then(data => {
+          this.rental_barangays = data.default;
+        });
     }
     if (this.fixed_postal) {
       this.form.business_address.postal_code = "4324";

@@ -31,7 +31,7 @@
         placement="right"
         @close="onClose"
         :visible="visible"
-        :width="500"
+        :width="450"
         theme="dark"
         >
         <div slot="title">
@@ -49,6 +49,19 @@
                 <p>{{docket.permit}}</p>
                 <p>{{getDocketMode(docket.application_type)}}</p>
                 <p>{{getDocketStatus(docket.status)}}</p>
+            </a-col>
+            <a-divider></a-divider>
+            <a-col :span="12">
+                <p style="font-weight:bold">BUSINESS NAME</p>
+                <p style="font-weight:bold">BUSINESS TYPE</p>
+                <p style="font-weight:bold">REGISTRATION NUMBER</p>
+                <p style="font-weight:bold">TIN</p>                
+            </a-col>
+            <a-col :span="12">
+                <p>{{application_details.business_details.business_name}}</p>
+                <p>{{application_details.business_details.business_type}}</p>
+                <p>{{application_details.business_details.registration_no}}</p>
+                <p>{{application_details.business_details.tin}}</p>
             </a-col>
             <a-divider></a-divider>
             <a-col :span="24">
@@ -151,7 +164,8 @@ export default {
                     description: `You have claimed Application #${record.reference_no}`
                 })
                 this.loading = false;
-                this.$router.push('/admin/app/application')
+                this.$store.commit('REVIEW', this.application_details )
+                this.$router.push(`/admin/app/application/`)
         }
     }
 }
@@ -167,5 +181,8 @@ export default {
 }
 .ant-drawer-close {
     color: #ffffff
+}
+.ant-progress-inner {
+    background-color: #1B2229
 }
 </style>

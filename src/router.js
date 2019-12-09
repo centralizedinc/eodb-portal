@@ -24,7 +24,7 @@ function isAuthenticated(to, from, next) {
 function checkSession(to, from, next){
   console.log(from)
   if(store.state.admin_session.admin.token){
-    next(from.path)
+    next('/admin/app')
   }else{
     next()
   }
@@ -158,6 +158,24 @@ export default new Router({
         name: 'Application Review',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/ApplicationReview.vue'),
+      },
+      {
+        path: 'checklists',
+        name: 'Application Checklist',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Checklists.vue'),
+      },
+      {
+        path: 'emergency',
+        name: 'Incident Reports',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/IncidentReports.vue'),
+      },
+      {
+        path: 'collections',
+        name: 'Collections',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Collections.vue'),
       }]
     },
     {

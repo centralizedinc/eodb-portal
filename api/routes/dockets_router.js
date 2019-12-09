@@ -22,6 +22,16 @@ router.route('/')
             });
     })
 
+router.route('/claim')
+    .post((req, res) => {
+        DocketsDao.create(req.body)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
 router.route('/:id')
     .get((req, res) => {
         DocketsDao.findOneByID(req.params.id)

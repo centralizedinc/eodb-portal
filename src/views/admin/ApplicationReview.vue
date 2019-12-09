@@ -10,17 +10,20 @@
         <a-affix :offsetTop="10">
             <a-card style="background-color: #242B30;border-radius:10px">
                 <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
-                <a-list-item slot="renderItem" slot-scope="item">
-                    <a-checkbox></a-checkbox> <span style="margin-left:2vh">{{item}}</span>
-                </a-list-item>
-                <h2 slot="header">Application Checklist</h2>
+                    <a-list-item slot="renderItem" slot-scope="item">
+                        <a-list-item-meta :title="item.name" :description="item.description">
+                            <a-checkbox slot="avatar"></a-checkbox> 
+                        </a-list-item-meta>
+                    </a-list-item>
+                    <h2 slot="header">Application Checklist</h2>
                 </a-list>
                                     
                 <a-textarea style="margin-top: 1vh" :rows="3" placeholder="Remarks"></a-textarea>
                 <a-divider></a-divider>
                 <a-button-group>
-                    <a-button type="danger" size="large" icon="stop" >Denied</a-button>
-                    <a-button type="primary" size="large" icon="issues-close">For Compliance</a-button>                        
+                    
+                    <a-button  size="large" icon="issues-close">For Compliance</a-button>   
+                    <a-button type="danger" size="large" icon="stop" >Denied</a-button>                     
                     <a-button type="primary" size="large" icon="check-circle">Approved</a-button>
                 </a-button-group>            
             </a-card>
@@ -50,6 +53,18 @@ export default {
                 'Police Clearance',
                 'Barangay Clearance'
             ]
+        }
+    },
+    created(){
+        this.init()
+    },
+    methods:{
+        init(){
+            this.$http.get('/checklists')
+            .then(results =>{
+                this.checklist = results.data
+            })
+            this.form = this.$store.state.admin_session.review
         }
     }
 }

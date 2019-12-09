@@ -3,7 +3,8 @@ import AccountAPI from "../../api/AccountAPI"
 function initialState() {
     return {
         admin:{},
-        locked:false
+        locked:false, 
+        for_review:{}
     }
 }
 
@@ -23,6 +24,9 @@ const mutations = {
     },
     UNLOCK_SCREEN(state){
         state.locked = false;
+    },
+    REVIEW(state, payload){
+        state.for_review = payload;
     },
     
 }

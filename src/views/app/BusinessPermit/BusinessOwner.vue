@@ -6,7 +6,7 @@
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
-            Secure Business Permit in 4 steps (all fields marked with an asterisk
+            Secure Business Permit in 7 steps (all fields marked with an asterisk
             <i
               style="color: red;"
             >*</i> is required.)
@@ -302,7 +302,7 @@
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
-            <a-button @click="$emit('prev')" :disabled="true">Previous</a-button>
+            <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
@@ -346,15 +346,27 @@ export default {
     }
   },
   created() {
-    if(this.fixed_address){
+    if (this.fixed_address) {
       this.form.owner_address.region = "04";
-      this.changeRegion();
+      // this.changeRegion();
       this.form.owner_address.province = "0456";
-      this.changeProvince();
+      // this.changeProvince();
       this.form.owner_address.city = "045641";
-      this.changeCity();
+      // this.changeCity();
+      import(
+        `../../../assets/references/cities/${this.form.owner_address.province}.json`
+      )
+        .then(data => {
+          this.cities = data.default;
+          return import(
+            `../../../assets/references/barangay/${this.form.owner_address.city}.json`
+          );
+        })
+        .then(data => {
+          this.barangays = data.default;
+        });
     }
-    if(this.fixed_postal) this.form.owner_address.postal_code = "4324"
+    if (this.fixed_postal) this.form.owner_address.postal_code = "4324";
   },
   methods: {
     changeRegion() {

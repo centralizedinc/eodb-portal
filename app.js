@@ -52,6 +52,8 @@ app.use("/creditcard/validate", require('./api/routes/card_validation_router'));
 app.use("/dockets", require('./api/routes/dockets_router'));
 app.use("/settings", require('./api/routes/settings_router'));
 app.use("/references", require('./api/routes/references_router'));
+app.use("/checklists", require('./api/routes/checklist_route'));
+app.use("/dashboard", require('./api/routes/dashboard_route'))
 
 // for chai testing
 app.get("/test", (req, res)=>{

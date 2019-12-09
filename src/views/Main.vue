@@ -1,6 +1,6 @@
 <template>
   <a-layout class="main-layout">
-    <a-affix :offsetTop="0">
+    <a-affix :offsetTop="0" style="height: 60px;">
       <a-layout-header
         a-im
         style="height: 60px; background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )"
