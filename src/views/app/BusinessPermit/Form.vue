@@ -4,7 +4,6 @@
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <a-affix :offsetTop="60">
         <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-          <span style="font-size: 15px; font-weight: bold;">Secure Business Permit in 5 steps</span>
           <a-steps direction="vertical" :current="current_step" class="form-stepper">
             <a-step
               v-for="(item, index) in steps"
@@ -23,7 +22,7 @@
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
-          <!-- <component
+          <component
             :is="form_components[current_step]"
             :form="form"
             @prev="current_step--"
@@ -31,8 +30,9 @@
             @payment="validateStep(true)"
             :loading="loading"
             :errors="errors"
-          />-->
-          <business-owner
+            :documents="document_data_source"
+          />
+          <!-- <business-owner
             ref="business_owner"
             v-if="current_step===0"
             :form="form"
@@ -68,7 +68,7 @@
             @payment="validateStep(true)"
             :loading="loading"
             :errors="errors"
-          />
+          />-->
         </a-col>
         <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
           <a-affix :offsetTop="60">
@@ -96,63 +96,51 @@
                   </a-tooltip>
                 </a-col>
               </a-row>
-              <a-form>
-                <a-form-item
-                  :validate-status="checkErrors('dti_sec_cda') ? 'error': ''"
-                  :help="checkErrors('dti_sec_cda')"
-                  style="margin:0"
-                >
-                  <a-table
-                    :columns="document_columns"
-                    :dataSource="document_data_source"
-                    bordered
-                    :pagination="false"
-                    size="small"
-                  >
-                    <template slot="status" slot-scope="text">
-                      <div style="text-align: center;">
-                        <a-icon
-                          v-if="text===2"
-                          type="check-circle"
-                          style="color: green; font-weight: bold;"
-                        />
-                        <a-icon
-                          v-else-if="text===1"
-                          type="loading"
-                          style="color: green; font-weight: bold;"
-                        />
-                        <a-icon v-else type="close" style="color: red; font-weight: bold;" />
-                      </div>
-                    </template>
-                    <template slot="action" slot-scope="text, record, index">
-                      <a-row style="text-align: center;">
-                        <a-col v-if="record.status === 2" :span="24">
-                          <a-icon
-                            style="cursor: pointer; color: red; font-weight: bold;"
-                            type="delete"
-                            @click="removeAttachment(index)"
-                          />
-                        </a-col>
-                        <a-col v-else :span="24">
-                          <a-upload
-                            :multiple="true"
-                            :showUploadList="false"
-                            :beforeUpload="file => attachFile(index, file)"
-                            style="cursor: pointer; color: blue; font-weight: bold;"
-                          >
-                            <a-icon type="upload" />
-                          </a-upload>
-                        </a-col>
-                      </a-row>
-                    </template>
-                  </a-table>
-                  <a-button
-                    type="link"
-                    v-if="required_docs.length>0"
-                    @click="show_required_doc_fields=true"
-                  >Show Additional Fields</a-button>
-                </a-form-item>
-              </a-form>
+              <a-table
+                :columns="document_columns"
+                :dataSource="required_documents"
+                bordered
+                :pagination="false"
+                size="small"
+              >
+                <template slot="status" slot-scope="text">
+                  <div style="text-align: center;">
+                    <a-icon
+                      v-if="text===2"
+                      type="check-circle"
+                      style="color: green; font-weight: bold;"
+                    />
+                    <a-icon
+                      v-else-if="text===1"
+                      type="loading"
+                      style="color: green; font-weight: bold;"
+                    />
+                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                  </div>
+                </template>
+                <template slot="action" slot-scope="text, record, index">
+                  <a-row style="text-align: center;">
+                    <a-col v-if="record.status === 2" :span="24">
+                      <a-icon
+                        style="cursor: pointer; color: red; font-weight: bold;"
+                        type="delete"
+                        @click="removeAttachment(index)"
+                      />
+                    </a-col>
+                    <a-col v-else :span="24">
+                      <a-upload
+                        :multiple="true"
+                        :showUploadList="false"
+                        :beforeUpload="file => attachFile(index, file)"
+                        style="cursor: pointer; color: blue; font-weight: bold;"
+                      >
+                        <a-icon type="upload" />
+                      </a-upload>
+                    </a-col>
+                  </a-row>
+                </template>
+              </a-table>
+              <!-- <span v-if="checkErrors('dti_sec_cda')" style="color: red">{{checkErrors('dti_sec_cda')}}</span> -->
             </a-card>
 
             <!-- Payment Details -->
@@ -207,89 +195,6 @@
       </a-row>
     </a-col>
 
-    <a-modal :visible="show_required_doc_fields" :closable="false" :footer="null">
-      <i
-        style="font-weight: 600;"
-      >The following details are needed to fill in the additional required documents.</i>
-      <a-form class="required-form">
-        <!-- Civil Status -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence','barangay','police'])"
-          style="font-weight: bold;"
-          :validate-status="checkErrors('required_documents.civil_status') ? 'error': ''"
-          :help="checkErrors('required_documents.civil_status')"
-        >
-          <span slot="label">
-            Civil Status
-            <i style="color: red">*</i>
-          </span>
-          <a-radio-group buttonStyle="solid" v-model="form.required_documents.civil_status">
-            <a-radio-button value="single">Single</a-radio-button>
-            <a-radio-button value="married">Married</a-radio-button>
-            <a-radio-button value="widowed">Widowed</a-radio-button>
-            <a-radio-button value="separated">Separated</a-radio-button>
-          </a-radio-group>
-        </a-form-item>
-        <!-- Birth Place -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence','barangay','police'])"
-          style="font-weight: bold;"
-          :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
-          :help="checkErrors('required_documents.birthplace')"
-        >
-          <span slot="label">
-            Place of Birth
-            <i style="color: red">*</i>
-          </span>
-          <a-input v-model="form.required_documents.birthplace" placeholder="Place of Birth" />
-        </a-form-item>
-        <!-- Monthly Salary -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence'])"
-          style="font-weight: bold;"
-          label="Monthly Salary"
-        >
-          <a-input v-model="form.required_documents.monthly_salary" placeholder="Monthly Salary" />
-        </a-form-item>
-        <!-- Occupation -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence', 'barangay'])"
-          style="font-weight: bold;"
-          label="Occupation/Profession"
-        >
-          <a-input
-            v-model="form.required_documents.occupation"
-            placeholder="Occupation/Profession"
-          />
-        </a-form-item>
-        <!-- Height -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence'])"
-          style="font-weight: bold;"
-          label="Height"
-        >
-          <a-input v-model="form.required_documents.height" placeholder="Height" />
-        </a-form-item>
-        <!-- Weight -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence'])"
-          style="font-weight: bold;"
-          label="Weight"
-        >
-          <a-input v-model="form.required_documents.weight" placeholder="Weight" />
-        </a-form-item>
-        <!-- ICR No -->
-        <a-form-item
-          v-if="checkDocsNeeded(['residence'])"
-          style="font-weight: bold;"
-          label="ICR No(if Alien)"
-        >
-          <a-input v-model="form.required_documents.icr_no" placeholder="ICR No(if Alien)" />
-        </a-form-item>
-        <a-button type="primary" block @click="submitRequiredDocs">Submit</a-button>
-      </a-form>
-    </a-modal>
-
     <payment
       :loading="loading"
       :show="show_payment"
@@ -300,8 +205,10 @@
 </template>
 
 <script>
+import ApplicationChecklist from "./ApplicationChecklist";
 import BusinessOwner from "./BusinessOwner";
 import BusinessDetails from "./BusinessDetails";
+import AdditionalFields from "./AdditionalFields";
 import BusinessActivity from "./BusinessActivity";
 import ApplicationSummary from "./ApplicationSummary";
 import Payment from "@/components/payments/Payment.vue";
@@ -309,8 +216,10 @@ import Payment from "@/components/payments/Payment.vue";
 export default {
   components: {
     Payment,
+    ApplicationChecklist,
     BusinessOwner,
     BusinessDetails,
+    AdditionalFields,
     BusinessActivity,
     ApplicationSummary
   },
@@ -319,8 +228,10 @@ export default {
       show_payment: false,
       current_step: 0,
       form_components: [
+        "ApplicationChecklist",
         "BusinessOwner",
         "BusinessDetails",
+        "AdditionalFields",
         "BusinessActivity",
         "ApplicationSummary"
       ],
@@ -433,11 +344,11 @@ export default {
         }
       ],
       document_data_source: [
-        {
-          title: "DTI/SEC/CDA Certificate",
-          status: 0,
-          keyword: "dti_sec_cda"
-        },
+        // {
+        //   title: "DTI/SEC/CDA Certificate",
+        //   status: 0,
+        //   keyword: "dti_sec_cda"
+        // },
         {
           title: "Residence Certificate",
           status: 0,
@@ -456,6 +367,10 @@ export default {
       ],
       steps: [
         {
+          title: "Application Checklist",
+          description: "This is to confirm all the required fields."
+        },
+        {
           title: "Business Owner Information",
           description:
             "Individual or entity who owns a business. Check all corresponding details for any errors."
@@ -469,6 +384,11 @@ export default {
           title: "Business Activity",
           description:
             "NOTE: For Business Codes, please refer to BIR Registration. Line of business cannot be blank."
+        },
+        {
+          title: "Additional Fields",
+          description:
+            "This is the additional fields for the not provided required documents."
         },
         {
           title: "Application Summary",
@@ -511,51 +431,26 @@ export default {
         }
       ],
       loading: false,
-      errors: [],
-      show_required_doc_fields: false,
-      required_docs: [],
-      prevent_showing_required_docs: false
+      errors: []
     };
   },
   created() {
     this.init();
   },
-  // mounted() {
-  //   console.log("this.$refs :", this.$refs);
-  //   if (this.fixed_address) {
-  //     // Business Owner
-  //     this.form.owner_address.region = "04";
-  //     this.$refs.business_owner.changeRegion();
-  //     this.form.owner_address.province = "0456";
-  //     this.$refs.business_owner.changeProvince();
-  //     this.form.owner_address.city = "045641";
-  //     this.$refs.business_owner.changeCity();
-
-  //     // Business Details
-  //     this.form.business_address.region = "04";
-  //     this.$refs.business_details.changeRegion();
-  //     this.form.business_address.province = "0456";
-  //     this.$refs.business_details.changeProvince();
-  //     this.form.business_address.city = "045641";
-  //     this.$refs.business_details.changeCity();
-
-  //     // Business Rental
-  //     this.form.business_address.rental_address.region = "04";
-  //     this.$refs.business_details.changeRentalRegion();
-  //     this.form.business_address.rental_address.province = "0456";
-  //     this.$refs.business_details.changeRentalProvince();
-  //     this.form.business_address.rental_address.city = "045641";
-  //     this.$refs.business_details.changeRentalCity();
-  //   }
-  //   if (this.fixed_postal) {
-  //     this.form.owner_address.postal_code = "4324";
-  //     this.form.business_address.postal_code = "4324";
-  //     this.form.business_address.rental_address.postal_code = "4324";
-  //   }
-  // },
   watch: {
     current_step() {
       console.log("this.form step :", this.form);
+    }
+  },
+  computed: {
+    required_documents() {
+      var docs = [];
+      this.form.attachments.forEach(attachment => {
+        docs.push(
+          this.document_data_source.find(v => v.keyword === attachment.doc_type)
+        );
+      });
+      return docs;
     }
   },
   methods: {
@@ -818,44 +713,14 @@ export default {
 
       // if there is no errors
       if (!errors.length) {
-        if (this.current_step === 3) {
+        if (this.current_step === 5) {
+          this.show_payment = true;
           // Proceed to payment
-          console.log(
-            "test: ",
-            this.checkRequiredDocs() && !this.prevent_showing_required_docs
-          );
-          if (this.checkRequiredDocs() && !this.prevent_showing_required_docs) {
-            this.$message.info(
-              "The following details are needed to fill in the additional required documents."
-            );
-            this.show_required_doc_fields = true;
-            this.prevent_showing_required_docs = true;
-          } else {
-            this.show_payment = true;
-          }
         } else {
           this.current_step++;
           window.scrollTo(0, 0);
         }
       }
-    },
-    checkRequiredDocs() {
-      this.required_docs = [];
-      this.document_data_source.forEach(doc => {
-        if (
-          this.form.attachments.findIndex(v => v.doc_type === doc.keyword) ===
-          -1
-        )
-          this.required_docs.push(doc.keyword);
-      });
-      return this.required_docs.length;
-    },
-    checkDocsNeeded(keywords) {
-      var show = false;
-      keywords.forEach(key => {
-        if (this.required_docs.includes(key)) show = true;
-      });
-      return show;
     },
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
@@ -915,7 +780,6 @@ export default {
           `${this.document_data_source[i].title} file uploaded.`
         );
         this.document_data_source[i].status = 2;
-        this.checkRequiredDocs();
       }, 1000);
     },
     removeAttachment(i) {
@@ -933,26 +797,6 @@ export default {
 
       this.$message.info(`Remove file ${this.document_data_source[i].title}.`);
       this.document_data_source[i].status = 0;
-    },
-    submitRequiredDocs() {
-      var errors = [];
-      if (!this.form.required_documents.civil_status) {
-        errors.push({
-          field: "required_documents.civil_status",
-          error: "Civil Status is a required field."
-        });
-      }
-      if (!this.form.required_documents.birthplace) {
-        errors.push({
-          field: "required_documents.birthplace",
-          error: "Place of Birth is a required field."
-        });
-      }
-      this.errors = errors;
-      if (!errors.length) {
-        this.show_required_doc_fields = false;
-        this.show_payment = true;
-      }
     }
   }
 };
@@ -964,7 +808,7 @@ export default {
 }
 
 .form-stepper .ant-steps-item-title {
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: bold !important;
 }
 
@@ -1002,9 +846,5 @@ export default {
   border: 0.5px solid #888;
   font-size: 12px;
   font-weight: 600;
-}
-
-.required-form .ant-form-item {
-  margin: 0;
 }
 </style>

@@ -177,7 +177,7 @@
       :columns="line_of_business_columns"
     ></a-table>
 
-    <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!read-only"> 
+    <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly"> 
       <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
         <a-button-group>
           <a-button @click="$emit('prev')" :disabled="loading">Previous</a-button>

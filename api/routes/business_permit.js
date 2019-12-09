@@ -41,6 +41,10 @@ router.route('/')
             .then((result) => {
                 results.dockets = result;
                 console.log('docket result :', result);
+                return BusinessApplicationDao.modifyById(results.application._id, { reference_no: result.reference_no });
+            })
+            .then((result) => {
+                results.application = result;
                 console.log('results :', results);
                 res.json(results);
             }).catch((errors) => {
@@ -66,10 +70,10 @@ router.route('/:id')
             });
     })
 
-    router.route('/transactions/:id')
+router.route('/transactions/:id')
     .get((req, res) => {
         console.log("transactions id data: " + JSON.stringify(req.params.id))
-        BusinessApplicationDao.find({owner_details:{email:req.params.id}})
+        BusinessApplicationDao.find({ owner_details: { email: req.params.id } })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {

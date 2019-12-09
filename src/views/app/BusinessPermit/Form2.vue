@@ -5,7 +5,7 @@
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <a-affix :offsetTop="60">
         <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-          <span style="font-size: 15px; font-weight: bold;">Secure Business Permit in 5 steps</span>
+          <span style="font-size: 15px; font-weight: bold;">Secure Business Permit in 7 steps</span>
           <a-steps direction="vertical" :current="current_step" class="form-stepper">
             <a-step
               v-for="(item, index) in steps"
