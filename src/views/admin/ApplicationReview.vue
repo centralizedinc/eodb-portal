@@ -21,8 +21,9 @@
                 <a-textarea style="margin-top: 1vh" :rows="3" placeholder="Remarks"></a-textarea>
                 <a-divider></a-divider>
                 <a-button-group>
-                    <a-button type="danger" size="large" icon="stop" >Denied</a-button>
-                    <a-button type="primary" size="large" icon="issues-close">For Compliance</a-button>                        
+                    
+                    <a-button  size="large" icon="issues-close">For Compliance</a-button>   
+                    <a-button type="danger" size="large" icon="stop" >Denied</a-button>                     
                     <a-button type="primary" size="large" icon="check-circle">Approved</a-button>
                 </a-button-group>            
             </a-card>
@@ -63,6 +64,7 @@ export default {
             .then(results =>{
                 this.checklist = results.data
             })
+            this.form = this.$store.state.admin_session.review
         }
     }
 }
