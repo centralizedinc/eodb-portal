@@ -22,8 +22,8 @@
               @click="navigate"
               theme="dark" 
               mode="inline" 
-              v-model="active_menu"
-              :defaultSelectedKeys="['/admin/app']"
+              :selectedKeys="active_menu"
+
               style="background-color: #242B30; margin-top:2vh"  >
         <a-menu-item key="/admin/app">
           <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
@@ -140,7 +140,6 @@
 export default {
   data(){
     return{
-      active_menu:''
     }
   },
   created(){
@@ -190,6 +189,11 @@ export default {
       this.$store.commit('LOCK_SCREEN')
       this.$store.commit('SAVE_SCREEN', this.$route.path)
       this.$router.push('/admin/lock')
+    }
+  },
+  computed:{
+    active_menu(){
+      return [this.$route.path]
     }
   }
 }
