@@ -78,7 +78,9 @@ export default {
         return{
             loading:false,
             visible:false,
-            application_details:{},
+            application_details:{
+                business_details:{}
+            },
             docket:{},
             dockets:[],
             cols:[
@@ -158,13 +160,14 @@ export default {
         },
         claim(record){
             this.loading = true;
+            this.$store.commit('REVIEW', this.application_details )
             this.$notification.success(
                 {
                     message: 'Claimed!',
                     description: `You have claimed Application #${record.reference_no}`
                 })
                 this.loading = false;
-                this.$store.commit('REVIEW', this.application_details )
+                
                 this.$router.push(`/admin/app/application/`)
         }
     }
