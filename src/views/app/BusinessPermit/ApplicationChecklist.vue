@@ -17,7 +17,13 @@
     </a-row>
     <a-form>
       <a-form-item label="Do you have a ...">
-        <a-checkbox-group :options="documents" @change="onDocumentSelect" />
+        <a-checkbox-group @change="onDocumentSelect">
+          <a-row>
+            <a-col :span="24" v-for="(item, index) in documents" :key="index">
+              <a-checkbox :value="item.keyword">{{item.title}}</a-checkbox>
+            </a-col>
+          </a-row>
+        </a-checkbox-group>
       </a-form-item>
     </a-form>
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
@@ -36,35 +42,20 @@
 
 <script>
 export default {
-  props: ["form"],
+  props: ["form", "documents"],
   data() {
-    return {
-      documents: [
-        {
-          label: "Residence Certificate",
-          value: "residence"
-        },
-        {
-          label: "Barangay Clearance",
-          value: "barangay"
-        },
-        {
-          label: "Police Clearance",
-          value: "police"
-        }
-      ]
-    };
+    return {};
   },
   methods: {
     onDocumentSelect(checkedValues) {
-        var attachments = [];
-        checkedValues.forEach(doc_type => {
-            attachments.push({
-                doc_type,
-                files: []
-            })
-        })
-        this.form.attachments = attachments;
+      var attachments = [];
+      checkedValues.forEach(doc_type => {
+        attachments.push({
+          doc_type,
+          files: []
+        });
+      });
+      this.form.attachments = attachments;
     }
   }
 };

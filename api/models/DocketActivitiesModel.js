@@ -31,4 +31,4 @@ var DocketActivitiesSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('activities', DocketActivitiesSchema)
+module.exports = mongoose.model('docket_activities', DocketActivitiesSchema)

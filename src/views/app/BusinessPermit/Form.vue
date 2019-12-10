@@ -32,43 +32,6 @@
             :errors="errors"
             :documents="document_data_source"
           />
-          <!-- <business-owner
-            ref="business_owner"
-            v-if="current_step===0"
-            :form="form"
-            @prev="current_step--"
-            @next="validateStep"
-            :loading="loading"
-            :errors="errors"
-          />
-          <business-details
-            ref="business_details"
-            v-else-if="current_step===1"
-            :form="form"
-            @prev="current_step--"
-            @next="validateStep"
-            :loading="loading"
-            :errors="errors"
-          />
-          <business-activity
-            ref="business_activity"
-            v-else-if="current_step===2"
-            :form="form"
-            @prev="current_step--"
-            @next="validateStep"
-            :loading="loading"
-            :errors="errors"
-          />
-          <application-summary
-            ref="application_summary"
-            v-else-if="current_step===3"
-            :form="form"
-            @prev="current_step--"
-            @next="validateStep"
-            @payment="validateStep(true)"
-            :loading="loading"
-            :errors="errors"
-          />-->
         </a-col>
         <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
           <a-affix :offsetTop="60">
