@@ -140,7 +140,7 @@
                   </a-row>
                 </template>
               </a-table>
-              <!-- <span v-if="checkErrors('dti_sec_cda')" style="color: red">{{checkErrors('dti_sec_cda')}}</span> -->
+              <span v-if="checkErrors('attachments')" style="color: red">{{checkErrors('attachments')}}</span>
             </a-card>
 
             <!-- Payment Details -->
@@ -208,7 +208,6 @@
 import ApplicationChecklist from "./ApplicationChecklist";
 import BusinessOwner from "./BusinessOwner";
 import BusinessDetails from "./BusinessDetails";
-import AdditionalFields from "./AdditionalFields";
 import BusinessActivity from "./BusinessActivity";
 import ApplicationSummary from "./ApplicationSummary";
 import Payment from "@/components/payments/Payment.vue";
@@ -219,7 +218,6 @@ export default {
     ApplicationChecklist,
     BusinessOwner,
     BusinessDetails,
-    AdditionalFields,
     BusinessActivity,
     ApplicationSummary
   },
@@ -231,7 +229,6 @@ export default {
         "ApplicationChecklist",
         "BusinessOwner",
         "BusinessDetails",
-        "AdditionalFields",
         "BusinessActivity",
         "ApplicationSummary"
       ],
@@ -385,11 +382,11 @@ export default {
           description:
             "NOTE: For Business Codes, please refer to BIR Registration. Line of business cannot be blank."
         },
-        {
-          title: "Additional Fields",
-          description:
-            "This is the additional fields for the not provided required documents."
-        },
+        // {
+        //   title: "Additional Fields",
+        //   description:
+        //     "This is the additional fields for the not provided required documents."
+        // },
         {
           title: "Application Summary",
           description:
@@ -701,6 +698,20 @@ export default {
       //   this.$message.error("Please attach DTI/SEC/CDA Certificate file.");
       //   jump_to = 3;
       // }
+
+      if (
+        validate_all &&
+        this.form.attachments && this.form.attachments.length &&
+        this.form.attachments.findIndex(v => !v.files || !v.files.length) > -1
+      ) {
+        // validate ATTACHMENTS
+        errors.push({
+          field: "attachments",
+          error: "Please attach the required documents."
+        });
+        this.$message.error("Please attach the required documents");
+        jump_to = 3;
+      }
       console.log("this.form :", this.form);
       console.log("errors :", errors);
       this.errors = errors;
@@ -713,7 +724,7 @@ export default {
 
       // if there is no errors
       if (!errors.length) {
-        if (this.current_step === 5) {
+        if (this.current_step === 4) {
           this.show_payment = true;
           // Proceed to payment
         } else {
