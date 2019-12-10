@@ -6,7 +6,7 @@
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
-            Secure Business Permit in 7 steps (all fields marked with an asterisk
+            Secure Business Permit in 6 steps (all fields marked with an asterisk
             <i
               style="color: red;"
             >*</i> is required.)
@@ -94,6 +94,40 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 10 }" v-if="checkDocsNeeded(['residence','barangay','police'])">
+          <a-form-item
+            style="font-weight: bold;"
+            :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
+            :help="checkErrors('required_documents.birthplace')"
+          >
+            <span slot="label">
+              Place of Birth
+              <i style="color: red">*</i>
+            </span>
+            <a-input v-model="form.required_documents.birthplace" placeholder="Place of Birth" />
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 14 }" v-if="checkDocsNeeded(['residence','barangay','police'])">
+          <a-form-item
+            style="font-weight: bold;"
+            :validate-status="checkErrors('required_documents.civil_status') ? 'error': ''"
+            :help="checkErrors('required_documents.civil_status')"
+          >
+            <span slot="label">
+              Civil Status
+              <i style="color: red">*</i>
+            </span>
+            <a-radio-group buttonStyle="solid" v-model="form.required_documents.civil_status">
+              <a-radio-button value="single">Single</a-radio-button>
+              <a-radio-button value="married">Married</a-radio-button>
+              <a-radio-button value="widowed">Widowed</a-radio-button>
+              <a-radio-button value="separated">Separated</a-radio-button>
+            </a-radio-group>
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.telno') ? 'error': ''"
@@ -128,6 +162,55 @@
               <i style="color: red">*</i>
             </span>
             <a-input v-model="form.owner_details.email" placeholder="Email Address*"></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row style="font-weight: bold;" :gutter="5">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['residence', 'barangay'])">
+          <a-form-item
+            style="font-weight: bold;"
+            label="Occupation/Profession"
+          >
+            <a-input
+              v-model="form.required_documents.occupation"
+              placeholder="Occupation/Profession"
+            />
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['residence'])">
+          <a-form-item
+            style="font-weight: bold;"
+            label="Monthly Salary"
+          >
+            <a-input v-model="form.required_documents.monthly_salary" placeholder="Monthly Salary" />
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row style="font-weight: bold;" :gutter="5">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+          <a-form-item
+            style="font-weight: bold;"
+            label="Height"
+          >
+            <a-input v-model="form.required_documents.height" placeholder="Height" />
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+          <a-form-item
+            style="font-weight: bold;"
+            label="Weight"
+          >
+            <a-input v-model="form.required_documents.weight" placeholder="Weight" />
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+          <a-form-item
+            style="font-weight: bold;"
+            label="ICR No(if Alien)"
+          >
+            <a-input v-model="form.required_documents.icr_no" placeholder="ICR No(if Alien)" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -319,13 +402,14 @@ import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
 
 export default {
-  props: ["form", "step", "errors"],
+  props: ["form", "step", "errors", "documents"],
   data() {
     return {
       regions_data,
       provinces_data,
       cities: [],
-      barangays: []
+      barangays: [],
+      required_docs: []
     };
   },
   computed: {
@@ -367,6 +451,9 @@ export default {
         });
     }
     if (this.fixed_postal) this.form.owner_address.postal_code = "4324";
+  },
+  mounted() {
+    this.checkRequiredDocs();
   },
   methods: {
     changeRegion() {
@@ -418,6 +505,23 @@ export default {
         data[code].toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
         data[description].toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       );
+    },
+    checkDocsNeeded(keywords) {
+      var show = false;
+      keywords.forEach(key => {
+        if (this.required_docs.includes(key)) show = true;
+      });
+      return show;
+    },
+    checkRequiredDocs() {
+      this.required_docs = [];
+      this.documents.forEach(doc => {
+        if (
+          this.form.attachments.findIndex(v => v.doc_type === doc.keyword) ===
+          -1
+        )
+          this.required_docs.push(doc.keyword);
+      });
     }
   }
 };

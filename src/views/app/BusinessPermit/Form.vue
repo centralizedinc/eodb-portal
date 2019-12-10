@@ -2,18 +2,18 @@
   <a-row type="flex" justify="space-between">
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
-      <a-affix :offsetTop="60">
-        <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-          <a-steps direction="vertical" :current="current_step" class="form-stepper">
-            <a-step
-              v-for="(item, index) in steps"
-              :key="index"
-              :title="item.title"
-              :description="item.description"
-            />
-          </a-steps>
-        </a-card>
-      </a-affix>
+      <!-- <a-affix :offsetTop="60"> -->
+      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
+        <a-steps direction="vertical" :current="current_step" class="form-stepper">
+          <a-step
+            v-for="(item, index) in steps"
+            :key="index"
+            :title="item.title"
+            :description="item.description"
+          />
+        </a-steps>
+      </a-card>
+      <!-- </a-affix> -->
     </a-col>
 
     <!-- Fill up form -->
@@ -103,7 +103,10 @@
                   </a-row>
                 </template>
               </a-table>
-              <span v-if="checkErrors('attachments')" style="color: red">{{checkErrors('attachments')}}</span>
+              <span
+                v-if="checkErrors('attachments')"
+                style="color: red"
+              >{{checkErrors('attachments')}}</span>
             </a-card>
 
             <!-- Payment Details -->
@@ -134,7 +137,7 @@
                 </a-col>
               </a-row>
 
-              <a-row>
+              <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
                 <template v-for="(item, index) in payments_data_source">
                   <a-col :span="15" :key="`a${index}`" class="row-border">{{item.description}}</a-col>
@@ -222,7 +225,7 @@ export default {
           region: "04",
           province: "0456",
           city: "045641",
-          barangay: "045641004",
+          barangay: "",
           postal_code: "4324"
         },
         business_details: {
@@ -327,8 +330,9 @@ export default {
       ],
       steps: [
         {
-          title: "Application Checklist",
-          description: "This is to confirm all the required fields."
+          title: "Document Checklist",
+          description:
+            "Check all the documents you have and apply for lacking requirements instantly within this app."
         },
         {
           title: "Business Owner Information",
@@ -357,7 +361,8 @@ export default {
         },
         {
           title: "Payment",
-          description: "Payment Details"
+          description:
+            "Pay application through Credit Card, Over-the-counter or at any 7-eleven outlets."
         }
       ],
       payment_details: {
@@ -424,247 +429,253 @@ export default {
       console.log("this.current_step :", this.current_step);
       console.log("this.form.attachments :", this.form.attachments);
       var jump_to = 0;
-      // if (validate_all || this.current_step === 0) {
-      //   if (!this.form.owner_details.name.last) {
-      //     errors.push({
-      //       field: "owner_details.name.last",
-      //       error: "Last Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_details.name.first) {
-      //     errors.push({
-      //       field: "owner_details.name.first",
-      //       error: "First Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_details.birthdate) {
-      //     errors.push({
-      //       field: "owner_details.birthdate",
-      //       error: "Date of Birth is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_details.gender) {
-      //     errors.push({
-      //       field: "owner_details.gender",
-      //       error: "Gender is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_details.telno) {
-      //     errors.push({
-      //       field: "owner_details.telno",
-      //       error: "Tel No is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_details.mobile) {
-      //     errors.push({
-      //       field: "owner_details.mobile",
-      //       error: "Mobile No is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_details.email) {
-      //     errors.push({
-      //       field: "owner_details.email",
-      //       error: "Email Address is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_address.region) {
-      //     errors.push({
-      //       field: "owner_address.region",
-      //       error: "Region is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_address.province) {
-      //     errors.push({
-      //       field: "owner_address.province",
-      //       error: "Province is a required field."
-      //     });
-      //   }
-      //   // if (!this.form.owner_address.barangay) {
-      //   //   errors.push({
-      //   //     field: "owner_address.barangay",
-      //   //     error: "Barangay is a required field."
-      //   //   });
-      //   // }
-      //   if (!this.form.owner_address.city) {
-      //     errors.push({
-      //       field: "owner_address.city",
-      //       error: "City/Municipality is a required field."
-      //     });
-      //   }
-      //   if (!this.form.owner_address.postal_code) {
-      //     errors.push({
-      //       field: "owner_address.postal_code",
-      //       error: "Postal Code is a required field."
-      //     });
-      //   }
+      if (validate_all || this.current_step === 1) {
+        if (!this.form.owner_details.name.last) {
+          errors.push({
+            field: "owner_details.name.last",
+            error: "Last Name is a required field."
+          });
+        }
+        if (!this.form.owner_details.name.first) {
+          errors.push({
+            field: "owner_details.name.first",
+            error: "First Name is a required field."
+          });
+        }
+        if (!this.form.owner_details.birthdate) {
+          errors.push({
+            field: "owner_details.birthdate",
+            error: "Date of Birth is a required field."
+          });
+        }
+        if (!this.form.owner_details.gender) {
+          errors.push({
+            field: "owner_details.gender",
+            error: "Gender is a required field."
+          });
+        }
+        if (!this.form.owner_details.telno) {
+          errors.push({
+            field: "owner_details.telno",
+            error: "Tel No is a required field."
+          });
+        }
+        if (!this.form.owner_details.mobile) {
+          errors.push({
+            field: "owner_details.mobile",
+            error: "Mobile No is a required field."
+          });
+        }
+        if (!this.form.owner_details.email) {
+          errors.push({
+            field: "owner_details.email",
+            error: "Email Address is a required field."
+          });
+        }
+        if (!this.form.owner_address.region) {
+          errors.push({
+            field: "owner_address.region",
+            error: "Region is a required field."
+          });
+        }
+        if (!this.form.owner_address.province) {
+          errors.push({
+            field: "owner_address.province",
+            error: "Province is a required field."
+          });
+        }
+        if (!this.form.owner_address.barangay) {
+          errors.push({
+            field: "owner_address.barangay",
+            error: "Barangay is a required field."
+          });
+        }
+        if (!this.form.owner_address.city) {
+          errors.push({
+            field: "owner_address.city",
+            error: "City/Municipality is a required field."
+          });
+        }
+        if (!this.form.owner_address.postal_code) {
+          errors.push({
+            field: "owner_address.postal_code",
+            error: "Postal Code is a required field."
+          });
+        }
 
-      //   if (errors.length) jump_to = 0;
-      // }
-      // if (validate_all || this.current_step === 1) {
-      //   if (!this.form.business_details.business_type) {
-      //     errors.push({
-      //       field: "business_details.business_type",
-      //       error: "Business Type is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_details.business_name) {
-      //     errors.push({
-      //       field: "business_details.business_name",
-      //       error: "Business Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_details.registration_no) {
-      //     errors.push({
-      //       field: "business_details.registration_no",
-      //       error: "Registration No is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_details.registration_date) {
-      //     errors.push({
-      //       field: "business_details.registration_date",
-      //       error: "Date of Registration is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_details.tin) {
-      //     errors.push({
-      //       field: "business_details.tin",
-      //       error: "Tax Identification No is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_details.business_area) {
-      //     errors.push({
-      //       field: "business_details.business_area",
-      //       error: "Business Area is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_details.employees_establishment) {
-      //     employees_residing: "",
-      //       errors.push({
-      //         field: "business_details.employees_establishment",
-      //         employees_residing: "",
-      //         error: "No of Employees is a required field."
-      //       });
-      //   }
-      //   if (!this.form.business_address.region) {
-      //     errors.push({
-      //       field: "business_address.region",
-      //       error: "Region is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_address.province) {
-      //     errors.push({
-      //       field: "business_address.province",
-      //       error: "Province is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_address.barangay) {
-      //     errors.push({
-      //       field: "business_address.barangay",
-      //       error: "Barangay is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_address.city) {
-      //     errors.push({
-      //       field: "business_address.city",
-      //       error: "City/Municipality is a required field."
-      //     });
-      //   }
-      //   if (!this.form.business_address.postal_code) {
-      //     errors.push({
-      //       field: "business_address.postal_code",
-      //       error: "Postal Code is a required field."
-      //     });
-      //   }
-      //   if (this.form.business_details.is_rented) {
-      //     if (!this.form.business_address.rental) {
-      //       errors.push({
-      //         field: "business_address.rental",
-      //         error: "Monthly Rental is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.lessor_name) {
-      //       errors.push({
-      //         field: "business_address.lessor_name",
-      //         error: "Lessor Name is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.contact_no) {
-      //       errors.push({
-      //         field: "business_address.contact_no",
-      //         error: "Contact No is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.email) {
-      //       errors.push({
-      //         field: "business_address.email",
-      //         error: "Email Address is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.rental_address.region) {
-      //       errors.push({
-      //         field: "business_address.rental_address.region",
-      //         error: "Region is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.rental_address.province) {
-      //       errors.push({
-      //         field: "business_address.rental_address.province",
-      //         error: "Province is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.rental_address.barangay) {
-      //       errors.push({
-      //         field: "business_address.rental_address.barangay",
-      //         error: "Barangay is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.rental_address.city) {
-      //       errors.push({
-      //         field: "business_address.rental_address.city",
-      //         error: "City/Municipality is a required field."
-      //       });
-      //     }
-      //     if (!this.form.business_address.rental_address.postal_code) {
-      //       errors.push({
-      //         field: "business_address.rental_address.postal_code",
-      //         error: "Postal Code is a required field."
-      //       });
-      //     }
-      //   }
-      //   if (errors.length) jump_to = 1;
-      // }
-      // if (validate_all || this.current_step === 2) {
-      //   if (
-      //     !this.form.business_details.line_of_business ||
-      //     !this.form.business_details.line_of_business.length
-      //   ) {
-      //     errors.push({
-      //       field: "business_details.line_of_business",
-      //       error: "Add atleast one line of business"
-      //     });
-      //     jump_to = 2;
-      //   }
-      // }
+        if (
+          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          !this.form.required_documents.civil_status
+        ) {
+          errors.push({
+            field: "required_documents.civil_status",
+            error: "Civil Status is a required field."
+          });
+        }
 
-      // if (
-      //   validate_all &&
-      //   (!this.form.attachments ||
-      //     !this.form.attachments.length ||
-      //     this.form.attachments.findIndex(v => v.doc_type === "dti_sec_cda") ===
-      //       -1)
-      // ) {
-      //   // validate DTI/SEC/CDA
-      //   errors.push({
-      //     field: "dti_sec_cda",
-      //     error: "Please attach DTI/SEC/CDA Certificate file."
-      //   });
-      //   this.$message.error("Please attach DTI/SEC/CDA Certificate file.");
-      //   jump_to = 3;
-      // }
+        console.log('this.checkDocsNeeded(["residence", "barangay", "police"]) :', this.checkDocsNeeded(["residence", "barangay", "police"]));
+        if (
+          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          !this.form.required_documents.birthplace
+        ) {
+          errors.push({
+            field: "required_documents.birthplace",
+            error: "Place of Birth is a required field."
+          });
+        }
+
+        if (errors.length) jump_to = 1;
+      }
+      if (validate_all || this.current_step === 2) {
+        if (!this.form.business_details.business_type) {
+          errors.push({
+            field: "business_details.business_type",
+            error: "Business Type is a required field."
+          });
+        }
+        if (!this.form.business_details.business_name) {
+          errors.push({
+            field: "business_details.business_name",
+            error: "Business Name is a required field."
+          });
+        }
+        if (!this.form.business_details.registration_no) {
+          errors.push({
+            field: "business_details.registration_no",
+            error: "Registration No is a required field."
+          });
+        }
+        if (!this.form.business_details.registration_date) {
+          errors.push({
+            field: "business_details.registration_date",
+            error: "Date of Registration is a required field."
+          });
+        }
+        if (!this.form.business_details.tin) {
+          errors.push({
+            field: "business_details.tin",
+            error: "Tax Identification No is a required field."
+          });
+        }
+        if (!this.form.business_details.business_area) {
+          errors.push({
+            field: "business_details.business_area",
+            error: "Business Area is a required field."
+          });
+        }
+        if (!this.form.business_details.employees_establishment) {
+          employees_residing: "",
+            errors.push({
+              field: "business_details.employees_establishment",
+              employees_residing: "",
+              error: "No of Employees is a required field."
+            });
+        }
+        if (!this.form.business_address.region) {
+          errors.push({
+            field: "business_address.region",
+            error: "Region is a required field."
+          });
+        }
+        if (!this.form.business_address.province) {
+          errors.push({
+            field: "business_address.province",
+            error: "Province is a required field."
+          });
+        }
+        if (!this.form.business_address.barangay) {
+          errors.push({
+            field: "business_address.barangay",
+            error: "Barangay is a required field."
+          });
+        }
+        if (!this.form.business_address.city) {
+          errors.push({
+            field: "business_address.city",
+            error: "City/Municipality is a required field."
+          });
+        }
+        if (!this.form.business_address.postal_code) {
+          errors.push({
+            field: "business_address.postal_code",
+            error: "Postal Code is a required field."
+          });
+        }
+        if (this.form.business_details.is_rented) {
+          if (!this.form.business_address.rental) {
+            errors.push({
+              field: "business_address.rental",
+              error: "Monthly Rental is a required field."
+            });
+          }
+          if (!this.form.business_address.lessor_name) {
+            errors.push({
+              field: "business_address.lessor_name",
+              error: "Lessor Name is a required field."
+            });
+          }
+          if (!this.form.business_address.contact_no) {
+            errors.push({
+              field: "business_address.contact_no",
+              error: "Contact No is a required field."
+            });
+          }
+          if (!this.form.business_address.email) {
+            errors.push({
+              field: "business_address.email",
+              error: "Email Address is a required field."
+            });
+          }
+          if (!this.form.business_address.rental_address.region) {
+            errors.push({
+              field: "business_address.rental_address.region",
+              error: "Region is a required field."
+            });
+          }
+          if (!this.form.business_address.rental_address.province) {
+            errors.push({
+              field: "business_address.rental_address.province",
+              error: "Province is a required field."
+            });
+          }
+          if (!this.form.business_address.rental_address.barangay) {
+            errors.push({
+              field: "business_address.rental_address.barangay",
+              error: "Barangay is a required field."
+            });
+          }
+          if (!this.form.business_address.rental_address.city) {
+            errors.push({
+              field: "business_address.rental_address.city",
+              error: "City/Municipality is a required field."
+            });
+          }
+          if (!this.form.business_address.rental_address.postal_code) {
+            errors.push({
+              field: "business_address.rental_address.postal_code",
+              error: "Postal Code is a required field."
+            });
+          }
+        }
+        if (errors.length) jump_to = 2;
+      }
+      if (validate_all || this.current_step === 3) {
+        if (
+          !this.form.business_details.line_of_business ||
+          !this.form.business_details.line_of_business.length
+        ) {
+          errors.push({
+            field: "business_details.line_of_business",
+            error: "Add atleast one line of business"
+          });
+          jump_to = 3;
+        }
+      }
 
       if (
         validate_all &&
-        this.form.attachments && this.form.attachments.length &&
+        this.form.attachments &&
+        this.form.attachments.length &&
         this.form.attachments.findIndex(v => !v.files || !v.files.length) > -1
       ) {
         // validate ATTACHMENTS
@@ -673,7 +684,7 @@ export default {
           error: "Please attach the required documents."
         });
         this.$message.error("Please attach the required documents");
-        jump_to = 3;
+        jump_to = 4;
       }
       console.log("this.form :", this.form);
       console.log("errors :", errors);
@@ -771,6 +782,14 @@ export default {
 
       this.$message.info(`Remove file ${this.document_data_source[i].title}.`);
       this.document_data_source[i].status = 0;
+    },
+    checkDocsNeeded(keywords) {
+      var show = false;
+      console.log('this.form.attachments :', this.form.attachments);
+      this.form.attachments.forEach(attachment => {
+        if (keywords.includes(attachment.doc_type)) show = true;
+      })
+      return !show;
     }
   }
 };
@@ -782,7 +801,7 @@ export default {
 }
 
 .form-stepper .ant-steps-item-title {
-  font-size: 12px !important;
+  font-size: 14px !important;
   font-weight: bold !important;
 }
 
@@ -791,7 +810,7 @@ export default {
 }
 
 .form-stepper .ant-steps-item {
-  height: 25% !important;
+  height: 18vh !important;
 }
 
 .form-affix {
