@@ -30,11 +30,28 @@ function checkSession(to, from, next){
   }
 }
 
+function isUserAppAuthenticated(to, from, next) {
+  const status = store.state.user_session && store.state.user_session.user && store.state.user_session.user.status ? parseInt(store.state.user_session.user.status) : 0;
+  const is_authenticated = store.state.user_session.token && status > 0;
+  console.log('APP is_authenticated :', is_authenticated);
+  if (is_authenticated) next(true);
+  else next("/");
+}
+
+function isUserHomeAuthenticated(to, from, next) {
+  const status = store.state.user_session && store.state.user_session.user && store.state.user_session.user.status ? parseInt(store.state.user_session.user.status) : 0;
+  const is_authenticated = store.state.user_session.token && status > 0;
+  console.log('HOME is_authenticated :', is_authenticated);
+  if (is_authenticated) next("/app");
+  else next(true);
+}
+
 export default new Router({
   routes: [
     {
       path: '/',
       component: Home,
+      beforeEnter: isUserHomeAuthenticated,
       children: [
         {
           path: '',
@@ -66,6 +83,7 @@ export default new Router({
     {
       path: '/app',
       component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      beforeEnter: isUserAppAuthenticated,
       children: [
         {
           path: '',

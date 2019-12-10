@@ -52,7 +52,7 @@
         <a-col :span="24">
           <a-button
             block
-            @click="login"
+            @click="signin_visible=true"
             style="border: #DE4935;background-color:#1890FF; color:#FFFFFF ; height:6vh"
           >
             <a-icon type="mail"></a-icon>Login using e-mail
@@ -127,108 +127,91 @@
     </a-card>
     <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
-        <a-button key="back" @click="handleCancel">Return</a-button>
+        <a-button key="back" @click="handleCancel" :disabled="registration_loading">Return</a-button>
         <a-button
-          style="background-color: #1890ff;
-    border-color: #1890ff"
+          style="background-color: #1890ff; border-color: #1890ff"
           key="submit"
           type="primary"
-          :loading="loading"
+          :loading="registration_loading"
           @click="handleOk"
         >Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
-        <!-- <a-col :span="24">
-          <p>Register with facebook or google</p>
-        </a-col>
-        <a-col :span="12">
-          <a-button
-            block
-            size="large"
-            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
-            @click="registerFacebook"
-          >
-            <a-icon type="facebook"></a-icon>Facebook
-          </a-button>
-        </a-col>-->
-        <!-- <a-col :span="12">
-          <a-button
-            block
-            size="large"
-            @click="registerGoogle"
-            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
-          >
-            <a-icon type="google"></a-icon>Google
-          </a-button>
-        </a-col>-->
-        <!-- <a-col :span="24">
-          <a-divider>Or</a-divider>
-        </a-col>-->
         <a-col :span="24">
           <a-form class="account-form">
             <a-row :gutter="5">
-              <a-col :span="8">
-                <a-form-item
-                  :validate-status="validation.name.last.status"
-                  :help="validation.name.last.message"
-                  label="Last Name"
-                >
-                  <a-input :disabled="loading" placeholder="Last Name" v-model="account.name.last" />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
+              <a-col :span="12">
                 <a-form-item
                   :validate-status="validation.name.first.status"
                   :help="validation.name.first.message"
-                  label="First Name"
                 >
+                  <span slot="label">
+                    First Name
+                    <i style="color: red">*</i>
+                  </span>
                   <a-input
-                    :disabled="loading"
+                    :disabled="registration_loading"
                     placeholder="First Name"
                     v-model="account.name.first"
                   />
                 </a-form-item>
               </a-col>
-              <a-col :span="8">
+              <a-col :span="12">
                 <a-form-item
-                  :validate-status="validation.name.middle.status"
-                  :help="validation.name.middle.message"
-                  label="Middle Name"
+                  :validate-status="validation.name.last.status"
+                  :help="validation.name.last.message"
                 >
+                  <span slot="label">
+                    Last Name
+                    <i style="color: red">*</i>
+                  </span>
                   <a-input
-                    :disabled="loading"
-                    placeholder="Middle Name"
-                    v-model="account.name.middle"
+                    :disabled="registration_loading"
+                    placeholder="Last Name"
+                    v-model="account.name.last"
                   />
                 </a-form-item>
               </a-col>
             </a-row>
             <a-form-item
-              label="Email Address"
               :validate-status="validation.email.status"
               :help="validation.email.message"
             >
-              <a-input :disabled="loading" placeholder="Email Address" v-model="account.email"></a-input>
+              <span slot="label">
+                Email Address
+                <i style="color: red">*</i>
+              </span>
+              <a-input
+                :disabled="registration_loading"
+                placeholder="Email Address"
+                v-model="account.email"
+              ></a-input>
             </a-form-item>
             <a-form-item
-              label="Enter Password"
               :validate-status="validation.password.status"
               :help="validation.password.message"
             >
+              <span slot="label">
+                Enter Password
+                <i style="color: red">*</i>
+              </span>
               <a-input
-                :disabled="loading"
+                :disabled="registration_loading"
                 placeholder="Password"
                 type="password"
                 v-model="account.password"
               ></a-input>
             </a-form-item>
             <a-form-item
-              label="Confirm Password"
               :validate-status="validation.confirm.status"
               :help="validation.confirm.message"
             >
+              <span slot="label">
+                Confirm Password
+                <i style="color: red">*</i>
+              </span>
               <a-input
-                :disabled="loading"
+                :disabled="registration_loading"
                 placeholder="Confirm Password"
                 type="password"
                 v-model="account.confirm"
@@ -268,6 +251,40 @@
         </a-col>
       </a-row>
     </a-modal>
+
+    <!-- LOGIN -->
+    <a-modal :visible="signin_visible" @cancel="signin_visible=false" :footer="null">
+      <div slot="title" style="text-align: center; padding-top: 3vh;">
+        <h1 style="color: #888;">Login to Continue</h1>
+        <h3 style="color: black">Welcome Back!</h3>
+      </div>
+      <a-form>
+        <a-form-item :validate-status="login_err ? 'error' : ''">
+          <a-input v-model="login_account.email" placeholder="Email" @keypress.enter="login">
+            <a-icon type="user" slot="prefix"></a-icon>
+          </a-input>
+        </a-form-item>
+        <a-form-item :validate-status="login_err ? 'error' : ''" :help="login_err">
+          <a-input
+            v-model="login_account.password"
+            placeholder="Password"
+            :type="reveal?'text':'password'"
+            @keypress.enter="login"
+          >
+            <a-icon type="lock" slot="prefix"></a-icon>
+            <a-tooltip slot="suffix">
+              <span slot="title">{{reveal ? "Hide Password" : "Show Password"}}</span>
+              <a-icon
+                :type="reveal?'eye':'eye-invisible'"
+                @click="reveal=!reveal"
+                style="cursor:pointer"
+              />
+            </a-tooltip>
+          </a-input>
+        </a-form-item>
+      </a-form>
+      <a-button type="primary" block @click="login" :loading="loading">LOGIN</a-button>
+    </a-modal>
   </div>
 </template>
 
@@ -276,6 +293,7 @@ export default {
   data() {
     return {
       reveal: false,
+      signin_visible: false,
       signup_visible: false,
       loading: false,
       account: {
@@ -298,7 +316,13 @@ export default {
         password: {},
         confirm: {}
       },
-      error_login: false
+      error_login: false,
+      registration_loading: false,
+      login_account: {
+        email: "",
+        password: ""
+      },
+      login_err: ""
     };
   },
   methods: {
@@ -320,50 +344,65 @@ export default {
     },
     login() {
       console.log("login");
-      this.error_login = false;
-      if (this.account.email && this.account.password) {
-        this.$store.commit("LOGIN", {
-          fname: "Juan",
-          lname: "Dela Cruz",
-          email: "juan@yahoo.com",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqFfakUP8kC6iKzxMLSQd-HaOJiC47T_gPz_S_UspSIX5BVYX5KQ&s"
-        });
-        this.$router.push("/app");
+      this.login_err = "";
+      this.loading = true;
+      if (this.login_account.email && this.login_account.password) {
+        this.$store
+          .dispatch("LOGIN", this.login_account)
+          .then(result => {
+            console.log("LOGIN result :", result);
+            this.$message.success(
+              `Welcome ${result.account.name.first}. You are now login.`
+            );
+            this.loading = false;
+            this.$router.push('/app');
+          })
+          .catch(err => {
+            this.$message.error(err.message);
+            this.login_err = err.message
+            this.loading = false;
+          });
       } else {
-        this.error_login = true;
+        this.login_err = "Please Input Email and Password."
       }
     },
     validate() {
       var errors = true;
+      this.validation = {
+        name: {
+          first: {},
+          last: {},
+          middle: {}
+        },
+        email: {},
+        password: {},
+        confirm: {}
+      };
 
-      // if (!this.account.name.first) {
-      //   this.validation.name.first.status = "error";
-      //   this.validation.name.first.message = "Please input desired username";
-      //   // return false;
-      //   errors = false;
-      // }
-      // if (!this.account.name.last) {
-      //   this.validation.name.last.status = "error";
-      //   this.validation.name.last.message = "Please input last name";
-      //   // return false;
-      //   errors = false;
-      // }
+      if (!this.account.name.first) {
+        this.validation.name.first.status = "error";
+        this.validation.name.first.message = "Please input desired username";
+        // return false;
+        errors = false;
+      }
+      if (!this.account.name.last) {
+        this.validation.name.last.status = "error";
+        this.validation.name.last.message = "Please input last name";
+        // return false;
+        errors = false;
+      }
       if (!this.account.email) {
         this.validation.email.status = "error";
         this.validation.email.message = "Please input email";
         // return false;
         errors = false;
       }
-      // if (this.account.password) {
-      //   console.log("this.account.password")
+
       if (
+        this.account.password &&
         this.account.confirm &&
         this.account.password !== this.account.confirm
       ) {
-        console.log(
-          "this.account.confirm && this.account.password !== this.account.confirm"
-        );
         this.validation.password.status = "error";
         this.validation.password.message =
           "Password and Confirm Password does not match";
@@ -397,11 +436,11 @@ export default {
       this.signup_visible = false;
     },
     handleOk() {
-      (this.loading = true), console.log("handleOk");
+      console.log("handleOk");
 
       if (this.validate()) {
+        this.registration_loading = true;
         console.log("walang error registration");
-        this.loading = false;
         this.$store
           .dispatch("SIGN_UP", this.account)
           .then(save_account => {
@@ -410,19 +449,26 @@ export default {
               "Your information has been sent successfully. Please check your email for verification link to activate your account.",
               10
             );
+            // this.account = {
+            //   name: {
+            //     first: "",
+            //     last: "",
+            //     middle: ""
+            //   },
+            //   email: "",
+            //   password: "",
+            //   confirm: ""
+            // };
+            this.registration_loading = false;
+            this.signup_visible = false;
             // this.redirect("mainView");
           })
           .catch(err => {
             if (err.message) this.$message.error(err.message);
+            this.registration_loading = false;
           });
       } else {
-        //   this.validation.name.first = "";
-        // this.validation.name.last = "";
-        // this.validation.email = "";
-        // this.validation.password = "";
-        // this.validation.confirm = "";
         console.log("may error registration");
-        this.loading = false;
       }
     }
   }

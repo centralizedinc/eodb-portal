@@ -15,11 +15,11 @@
           <!-- <a-avatar
             src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png"
             :size="50"
-          ></a-avatar> -->
+          ></a-avatar>-->
         </a-col>
         <!-- <a-col :span="10">
           <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
-        </a-col> -->
+        </a-col>-->
         <a-col :span="10">
           <a-input-search placeholder="Search" @search="onSearch" />
         </a-col>
@@ -33,18 +33,14 @@
         <a-col :span="1">
           <a-tooltip placement="left">
             <span slot="title">Lock Screen</span>
-            <a-icon type="setting" style="color:#ffffff"></a-icon
-          ></a-tooltip>
+            <a-icon type="setting" style="color:#ffffff"></a-icon>
+          </a-tooltip>
         </a-col>
         <a-col :span="1"></a-col>
         <a-tooltip placement="left">
-          <span slot="title">logout</span>
-          <a-icon
-            @click="logout"
-            type="logout"
-            style="color:#ffffff; cursor:pointer"
-          ></a-icon
-        ></a-tooltip>
+          <span slot="title">Logout</span>
+          <a-icon @click="logout" type="logout" style="color:#ffffff; cursor:pointer"></a-icon>
+        </a-tooltip>
       </a-row>
       <!-- mobile site -->
       <!-- <a-row v-else type="flex" justify="start">
@@ -99,13 +95,10 @@
             <span>Logout</span>
           </a-menu-item>
         </a-menu>
-      </a-drawer> -->
+      </a-drawer>-->
     </a-layout-header>
     <!-- ------------------------------------------------ -->
-    <a-layout-content
-      class="content"
-      style="margin-top:10vh; background-color: #EEEEEE"
-    >
+    <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
       <a-row type="flex" justify="center">
         <a-col :span="4" style="margin-right:1vw">
           <a-card style="margin-top:10vh; margin-bottom:2vh; color: #f2f2f2">
@@ -123,9 +116,7 @@
                   <a-col :span="18">
                     <h3
                       style="color:black; font-size: 14px; text-transform: uppercase"
-                    >
-                      {{ user.fname }} {{ user.lname }}
-                    </h3>
+                    >{{ user.name.first }} {{ user.name.last }}</h3>
                   </a-col>
                 </a-row>
               </a-col>
@@ -135,7 +126,7 @@
             <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
               <!-- <a-menu-item key="/app">
                 <a-icon type="bars" />
-                <span>Home</span> -->
+              <span>Home</span>-->
               <!-- </a-menu-item> -->
               <a-menu-item key="/app">
                 <a-icon type="file-exclamation" />
@@ -149,7 +140,7 @@
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
-              <a-menu-item key="">
+              <a-menu-item key>
                 <a-icon type="credit-card" />
                 <span>Payments</span>
               </a-menu-item>
@@ -157,7 +148,7 @@
                 <a-icon type="user-add" />
                 <span>My Profile</span>
               </a-menu-item>
-              <a-menu-item key="">
+              <a-menu-item key>
                 <a-icon type="sound" />
                 <span>Citizen Report</span>
               </a-menu-item>
@@ -180,8 +171,8 @@
                 <a-col :span="21">Citizen Report</a-col>
                 <a-col :span="2">
                   <a-tooltip placement="left">
-                    <span slot="title"
-                      >Report an emergency, calamity or crime and the alert
+                    <span slot="title">
+                      Report an emergency, calamity or crime and the alert
                       system tells the Command Center's server about the type of
                       emergency, name and address of establishment, contact
                       number of reporter (if any), along with other important
@@ -252,12 +243,10 @@
                 </a-col>
                 <a-col :span="24" style="margin-top:2vh">
                   <a-divider style="color: #D7D7D7"></a-divider>
-                  <a-button type="danger" block>
-                    View Reports
-                  </a-button>
+                  <a-button type="danger" block>View Reports</a-button>
                   <!-- <a-button block style="background-color: #333333">
                     <p style="color:#FFFFFF">View Reports</p>
-                  </a-button> -->
+                  </a-button>-->
                 </a-col>
               </a-row>
             </a-card>
@@ -268,8 +257,7 @@
     <!-- ------------------------------------------------ -->
     <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-      >Dolores Quezon</a-layout-footer
-    >
+    >Dolores Quezon</a-layout-footer>
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap
@@ -281,11 +269,7 @@
         draggable="true"
         style="width: 100%; height: 300px"
       >
-        <GmapMarker
-          :draggable="true"
-          :position="coordinates"
-          :animation="animation"
-        />
+        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
       </GmapMap>
       <template slot="footer">
         <a-button
@@ -295,8 +279,7 @@
           block
           :loading="loading"
           @click="submitReport"
-          >Confirm and Submit</a-button
-        >
+        >Confirm and Submit</a-button>
       </template>
     </a-modal>
   </a-layout>
@@ -357,6 +340,7 @@ export default {
         cancelText: "No",
         onOk() {
           console.log("OK");
+          _self.$store.dispatch("LOGOUT");
           _self.$router.push("/");
         },
         onCancel() {

@@ -2,13 +2,7 @@ import AccountAPI from "../../api/AccountAPI"
 
 function initialState() {
     return {
-        user: {
-            _id: '123',
-            fname: '',
-            lname: '',
-            avatar: '',
-            email: ''
-        },
+        user: {},
         token: ''
     }
 }
@@ -17,7 +11,8 @@ const state = initialState()
 
 const mutations = {
     LOGIN(state, payload) {
-        state.user = payload;
+        state.user = payload.account;
+        state.token = payload.token;
     },
     FB_LOGIN(state, payload) {
         console.log("fb login payload data: " + JSON.stringify(payload))
@@ -44,7 +39,11 @@ const mutations = {
         state.user.avatar = payload.account.avatar.location
         state.user.token = payload.account.session_token
     },
-
+    RESET(state) {
+        Object.keys(state).forEach(key => {
+            state[key] = initialState()[key];
+        })
+    }
 }
 
 const actions = {
@@ -81,6 +80,28 @@ const actions = {
                     reject(err)
                 });
         })
+    },
+    LOGIN(context, data) {
+        return new Promise((resolve, reject) => {
+            new AccountAPI(null).login(data)
+                .then((result) => {
+                    console.log('result.data :', result.data);
+                    if (!result.data.error) {
+                        context.commit("LOGIN", result.data.model);
+                        resolve(result.data.model);
+                    } else {
+                        reject(result.data.error);
+                    }
+                }).catch((err) => {
+                    reject(err)
+                });
+        })
+    },
+    CONFIRM_ACCOUNT(context, code) {
+        return new AccountAPI(null).confirmAccount(code);
+    },
+    LOGOUT(context){
+        context.commit('RESET');
     }
 }
 

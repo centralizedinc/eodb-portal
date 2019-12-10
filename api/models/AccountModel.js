@@ -48,7 +48,8 @@ var AccountModelSchema = new mongoose.Schema({
         type: String
     },
     method: {
-        type: String
+        type: String,
+        default: 'local'
         /**
          * local
          * google

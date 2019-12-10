@@ -43,6 +43,8 @@ passport.use('login', new LocalStrategy({
         is_authenticated: false
     }
     console.time("login");
+    console.log('email :', email);
+    console.log('password :', password);
     AccountDao.findByEmail(email)
         .then((account_result) => {
             if (!account_result) return done({
@@ -75,6 +77,7 @@ passport.use('login', new LocalStrategy({
         })
         .then((modified_account) => {
             result.account = modified_account;
+            result.account.password = null;
             result.is_authenticated = true;
             console.timeEnd("login");
             return done(null, result);
@@ -125,6 +128,7 @@ passport.use('admin-login', new LocalStrategy({
         })
         .then((modified_account) => {
             result.account = modified_account;
+            result.account.password = null;
             result.is_authenticated = true;
             console.timeEnd("login");
             return done(null, result);
