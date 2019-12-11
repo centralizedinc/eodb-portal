@@ -30,7 +30,9 @@
         style="font-size:12px; font-weight: 700; height:100%"
         type="primary"
         block
-      >BUSINESS PERMIT</a-button>
+        @click="$router.push('/permits/business')"
+        >BUSINESS PERMIT</a-button
+      >
     </a-col>
 
     <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
@@ -108,7 +110,9 @@
       </a-button>
     </a-col>
 
-    <h3 style="margin-top:2vh ; font-weight: 500; color:black">My Permit Application</h3>
+    <h3 style="margin-top:2vh ; font-weight: 500; color:black">
+      My Permit Application
+    </h3>
     <a-divider style="margin-top:-1vh; "></a-divider>
     <a-col :span="24" style="margin-top: -10vh">
       <transactions></transactions>

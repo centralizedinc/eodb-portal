@@ -547,7 +547,7 @@ export default {
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          // this.$router.push("/app");
+          this.$router.push("/app");
         })
         .catch(err => {
           console.log("CREATE_BUSINESS_PERMIT err :", err);
