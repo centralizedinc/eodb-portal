@@ -1,16 +1,17 @@
 <template>
   <a-card style="box-shadow: 0px 0px 10px 2px #88888847; margin-top: 10vh">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
-      <a-col :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
+      <!-- <a-col :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
         <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
       <a-col :xs="6" :sm="4" :md="2" :lg="2" :xl="2" :xxl="2">
         <a-button style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )" block>
           <a-icon type="plus"></a-icon>
         </a-button>
-      </a-col>
+      </a-col>-->
     </a-row>
     <a-divider></a-divider>
+
     <a-table :columns="cols" :dataSource="transac" :loading="loading" v-if="$breakpoint.mdAndUp">
       <!-- <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
@@ -494,10 +495,10 @@ export default {
           title: "Status",
           dataIndex: "status"
         },
-        {
-          title: "Payment Status",
-          dataIndex: "payment_status"
-        },
+        // {
+        //   title: "Payment Status",
+        //   dataIndex: "payment_status"
+        // },
         {
           title: "",
           dataIndex: "action",
