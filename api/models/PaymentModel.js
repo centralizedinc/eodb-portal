@@ -11,28 +11,63 @@ var PaymentModelSchema = new mongoose.Schema({
     transaction_no: {
         type: String
     },
-    total_payable: {
+    total_payable: { // Total Amount to be paid
         type: Number
     },
-    amount_rendered: {
+    amount_payable: { // Amount to be paid for this data
+        type: Number
+    },
+    amount_paid: { // Amount Rendered
         type: Number
     },
     method: {
         type: String
+        /**
+         * creditcard, onlinebanking, overcounter
+         */
     },
     mode_of_payment: {
         type: String
+        /**
+         * A - annual, SA - semiannual, Q - quarterly
+         */
     },
     status: {
-        type: String
+        type: String,
+        default: 'unpaid'
+        /**
+         * paid, unpaid
+         */
     },
-    application_details: {},
-    payment_details: {},
+    payment_details: {}, // Any Details of payment
+    due_date: {
+        type: Date
+    },
+    payment_breakdown: [{
+        description: {
+            type: String
+        },
+        fee_type: {
+            type: String
+            /**
+             * application_fees, local_taxes
+             */
+        },
+        amount: {
+            type: Number
+        }
+    }],
     date_created: {
         type: Date,
         default: new Date()
     },
     created_by: {
+        type: String
+    },
+    date_modified: {
+        type: Date
+    },
+    modified_by: {
         type: String
     }
 })
@@ -40,6 +75,14 @@ var PaymentModelSchema = new mongoose.Schema({
 PaymentModelSchema.pre('save', async function (callback) {
     var account = this;
     account.date_created = new Date();
+    callback();
+});
+
+PaymentModelSchema.pre('findOneAndUpdate', function (callback) {
+    console.log('this :', this._update);
+    this.options.new = true;
+    this.options.runValidators = true;
+    this._update.date_modified = new Date();
     callback();
 });
 

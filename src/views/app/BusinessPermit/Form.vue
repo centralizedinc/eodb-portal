@@ -38,13 +38,13 @@
             <!-- Attachments -->
             <a-card
               :headStyle="{ 
-            background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-            color: 'white', 
-            'font-weight': 'bold',
-            'font-size': '15px', 
-            padding: '5px 10px',
-            'min-height': '2vh'
-          }"
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
+                color: 'white', 
+                'font-weight': 'bold',
+                'font-size': '15px', 
+                padding: '5px 10px',
+                'min-height': '2vh'
+              }"
               :bodyStyle="{ padding: 0 }"
               class="document-card"
             >
@@ -81,20 +81,20 @@
                     <a-icon v-else type="close" style="color: red; font-weight: bold;" />
                   </div>
                 </template>
-                <template slot="action" slot-scope="text, record, index">
+                <template slot="action" slot-scope="text, record">
                   <a-row style="text-align: center;">
                     <a-col v-if="record.status === 2" :span="24">
                       <a-icon
                         style="cursor: pointer; color: red; font-weight: bold;"
                         type="delete"
-                        @click="removeAttachment(index)"
+                        @click="removeAttachment(record.keyword)"
                       />
                     </a-col>
                     <a-col v-else :span="24">
                       <a-upload
                         :multiple="true"
                         :showUploadList="false"
-                        :beforeUpload="file => attachFile(index, file)"
+                        :beforeUpload="file => attachFile(record.keyword, file)"
                         style="cursor: pointer; color: blue; font-weight: bold;"
                       >
                         <a-icon type="upload" />
@@ -114,26 +114,34 @@
               title="Fees"
               style="margin-top: 1vh;"
               :headStyle="{ 
-            background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-            color: 'white', 
-            'font-weight': 'bold', 
-            'font-size': '15px', 
-            padding: '5px 10px',
-            'min-height': '2vh'
-          }"
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
+                color: 'white', 
+                'font-weight': 'bold', 
+                'font-size': '15px', 
+                padding: '5px 10px',
+                'min-height': '2vh'
+              }"
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" style="margin-bottom: 1vh;">
+              <a-row type="flex" align="middle" :gutter="5">
                 <a-col :span="10">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
                 <a-col :span="14">
-                  <a-select style="width: 100%;" v-model="payment_details.mode_of_payment">
+                  <a-select
+                    style="width: 100%;"
+                    v-model="transaction_details.mode_of_payment"
+                    @change="updatePaymentMode"
+                  >
                     <a-select-option value="A">Annually</a-select-option>
                     <a-select-option value="SA">Semi-Annual</a-select-option>
                     <a-select-option value="Q">Quarterly</a-select-option>
                   </a-select>
+                  <span
+                    v-if="checkErrors('mode_of_payment')"
+                    style="color: red"
+                  >{{checkErrors('mode_of_payment')}}</span>
                 </a-col>
               </a-row>
 
@@ -153,7 +161,7 @@
                   :span="9"
                   class="row-border"
                   style="text-align: right; color: #333;background: #d7d7d7"
-                >{{formatCurrency(this.payment_details.total_payable)}}</a-col>
+                >{{formatCurrency(this.transaction_details.total_payable)}}</a-col>
               </a-row>
             </a-card>
           </a-affix>
@@ -365,17 +373,51 @@ export default {
             "Pay application through Credit Card, Over-the-counter or at any 7-eleven outlets."
         }
       ],
-      payment_details: {
+      transaction_details: {
         total_payable: 5000,
-        amount_rendered: 0,
+        amount_payable: 0,
+        amount_paid: 0,
+        payment_breakdown: [
+          {
+            description: "CTC or Sedula",
+            fee_type: "local_taxes",
+            amount: 1000
+          },
+          {
+            description: "Barangay Clearance",
+            fee_type: "local_taxes",
+            amount: 1000
+          },
+          {
+            description: "Police Clearance",
+            fee_type: "local_taxes",
+            amount: 1000
+          },
+          {
+            description: "Business Permit Fee",
+            fee_type: "local_taxes",
+            amount: 1000
+          },
+          {
+            description: "Fire Safety and Inspection Fee",
+            fee_type: "local_taxes",
+            amount: 1000
+          },
+          {
+            description: "Convenience Fee",
+            fee_type: "application_fee",
+            amount: 1000
+          }
+        ],
+        status: "unpaid",
         method: "",
         mode_of_payment: "",
-        application_details: {},
         payment_details: {}
       },
+      card_details: {},
       payments_data_source: [
         {
-          description: "Residence Certificate",
+          description: "CTC or Sedula",
           amount: 1000
         },
         {
@@ -392,6 +434,11 @@ export default {
         },
         {
           description: "Fire Safety and Inspection Fee",
+          amount: 1000
+        },
+        {
+          description: "Convenience Fee",
+          fee_type: "application_fee",
           amount: 1000
         }
       ],
@@ -424,11 +471,142 @@ export default {
       this.$store.dispatch("GET_PROVINCES");
     },
     validateStep(validate_all) {
-      var errors = [];
       console.log("validate_all :", validate_all);
       console.log("this.current_step :", this.current_step);
+      console.log("this.form :", this.form);
+
+      var { errors, jump_to } = this.validation(validate_all);
+      // var errors = [],
+      //   jump_to = 0;
+
+      console.log("errors :", errors);
+      this.errors = errors;
+
+      // if there is error and validate all then jump to the step
+      if (errors.length && validate_all) {
+        this.current_step = jump_to;
+        window.scrollTo(0, 0);
+      }
+
+      // if there is no errors
+      if (!errors.length) {
+        if (this.current_step === 4) {
+          this.show_payment = true;
+          // Proceed to payment
+        } else {
+          this.current_step++;
+          window.scrollTo(0, 0);
+        }
+      }
+    },
+    checkErrors(field) {
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
+    },
+    changeStep(step) {
+      this.current_step = step;
+      window.scrollTo(0, 0);
+    },
+    proceedToSubmit({ payment_details, method }) {
+      this.transaction_details.method = method;
+      if (method === "creditcard") {
+        this.card_details = payment_details;
+        const expiry = this.card_details.expiry.split("/");
+        this.card_details.exp_month = expiry[0];
+        this.card_details.exp_year = expiry[1];
+      } else this.transaction_details.payment_details = payment_details;
+      this.submit();
+    },
+    submit() {
+      this.loading = true;
+      var files = null;
+      if (this.form.attachments.length) {
+        files = new FormData();
+        this.form.attachments.forEach(attachment => {
+          attachment.files.forEach(file => {
+            files.append(attachment.doc_type, file, file.name);
+          });
+        });
+      }
+      this.$store
+        .dispatch("CREATE_BUSINESS_PERMIT", {
+          details: {
+            payment: {
+              method: this.transaction_details.method,
+              mode_of_payment: this.transaction_details.mode_of_payment,
+              card: this.card_details,
+              transaction_details: this.transaction_details
+            },
+            data: this.form
+          },
+          files
+        })
+        .then(result => {
+          console.log("CREATE_BUSINESS_PERMIT result :", result);
+          this.$message.success("Successful Payment.");
+          this.$message.success("Your application has been received.");
+          this.loading = false;
+          // this.$router.push("/app");
+        })
+        .catch(err => {
+          console.log("CREATE_BUSINESS_PERMIT err :", err);
+        });
+    },
+    attachFile(keyword, file) {
+      console.log("keyword :", keyword);
+      var i = this.document_data_source.findIndex(v => v.keyword === keyword);
+      this.document_data_source[i].status = 1;
+
+      setTimeout(() => {
+        // Add new attachment
+        var attachment_index = this.form.attachments.findIndex(
+          v => v.doc_type === keyword
+        );
+        this.form.attachments[attachment_index].files.push(file);
+        this.$message.info(
+          `${this.document_data_source[i].title} file uploaded.`
+        );
+        this.document_data_source[i].status = 2;
+      }, 1000);
+    },
+    removeAttachment(keyword) {
+      console.log("keyword :", keyword);
+      var i = this.document_data_source.findIndex(v => v.keyword === keyword);
+      this.document_data_source[i].status = 0;
+
+      var attachment_index = this.form.attachments.findIndex(
+        v => v.doc_type === keyword
+      );
+      this.form.attachments[attachment_index].files = [];
+
+      this.$message.info(`Remove file ${this.document_data_source[i].title}.`);
+      this.document_data_source[i].status = 0;
+    },
+    checkDocsNeeded(keywords) {
+      var show = false;
       console.log("this.form.attachments :", this.form.attachments);
-      var jump_to = 0;
+      this.form.attachments.forEach(attachment => {
+        if (keywords.includes(attachment.doc_type)) show = true;
+      });
+      return !show;
+    },
+    updatePaymentMode() {
+      if (this.transaction_details.mode_of_payment === "SA") {
+        var payable = parseFloat(this.transaction_details.total_payable) / 2;
+        this.transaction_details.amount_payable = payable;
+        this.transaction_details.amount_paid = payable;
+      } else if (this.transaction_details.mode_of_payment === "Q") {
+        var payable = parseFloat(this.transaction_details.total_payable) / 4;
+        this.transaction_details.amount_payable = payable;
+        this.transaction_details.amount_paid = payable;
+      } else {
+        this.transaction_details.amount_payable = this.transaction_details.total_payable;
+        this.transaction_details.amount_paid = this.transaction_details.total_payable;
+      }
+    },
+    validation(validate_all) {
+      var errors = [],
+        jump_to = 0;
       if (validate_all || this.current_step === 1) {
         if (!this.form.owner_details.name.last) {
           errors.push({
@@ -513,7 +691,6 @@ export default {
           });
         }
 
-        console.log('this.checkDocsNeeded(["residence", "barangay", "police"]) :', this.checkDocsNeeded(["residence", "barangay", "police"]));
         if (
           this.checkDocsNeeded(["residence", "barangay", "police"]) &&
           !this.form.required_documents.birthplace
@@ -564,12 +741,10 @@ export default {
           });
         }
         if (!this.form.business_details.employees_establishment) {
-          employees_residing: "",
-            errors.push({
-              field: "business_details.employees_establishment",
-              employees_residing: "",
-              error: "No of Employees is a required field."
-            });
+          errors.push({
+            field: "business_details.employees_establishment",
+            error: "No of Employees is a required field."
+          });
         }
         if (!this.form.business_address.region) {
           errors.push({
@@ -686,110 +861,17 @@ export default {
         this.$message.error("Please attach the required documents");
         jump_to = 4;
       }
-      console.log("this.form :", this.form);
-      console.log("errors :", errors);
-      this.errors = errors;
 
-      // if there is error and validate all then jump to the step
-      if (errors.length && validate_all) {
-        this.current_step = jump_to;
-        window.scrollTo(0, 0);
-      }
-
-      // if there is no errors
-      if (!errors.length) {
-        if (this.current_step === 4) {
-          this.show_payment = true;
-          // Proceed to payment
-        } else {
-          this.current_step++;
-          window.scrollTo(0, 0);
-        }
-      }
-    },
-    checkErrors(field) {
-      var form_error = this.errors.find(v => v.field === field);
-      return form_error ? form_error.error : null;
-    },
-    changeStep(step) {
-      this.current_step = step;
-      window.scrollTo(0, 0);
-    },
-    proceedToSubmit({ payment_details, method }) {
-      this.payment_details.payment_details = payment_details;
-      this.payment_details.method = method;
-      this.submit();
-    },
-    submit() {
-      this.loading = true;
-      var files = null;
-      if (this.form.attachments.length) {
-        files = new FormData();
-        this.form.attachments.forEach(attachment => {
-          files.append(
-            attachment.doc_type,
-            attachment.file,
-            attachment.file.name
-          );
+      // Validate Mode of Payment
+      if (validate_all && !this.transaction_details.mode_of_payment) {
+        errors.push({
+          field: "mode_of_payment",
+          error: "Please choose mode of payment."
         });
+        this.$message.error("Please choose mode of payment.");
+        jump_to = 4;
       }
-      this.$store
-        .dispatch("CREATE_BUSINESS_PERMIT", {
-          details: {
-            payment: this.payment_details,
-            data: this.form
-          },
-          files
-        })
-        .then(result => {
-          console.log("CREATE_BUSINESS_PERMIT result :", result);
-          this.$message.success("Successful Payment.");
-          this.$message.success("Your application has been received.");
-          this.loading = false;
-          // this.$router.push("/app");
-        })
-        .catch(err => {
-          console.log("CREATE_BUSINESS_PERMIT err :", err);
-        });
-    },
-    attachFile(i, file) {
-      this.document_data_source[i].status = 1;
-
-      setTimeout(() => {
-        // Add new attachment
-        this.form.attachments.push({
-          doc_type: this.document_data_source[i].keyword,
-          file
-        });
-        this.$message.info(
-          `${this.document_data_source[i].title} file uploaded.`
-        );
-        this.document_data_source[i].status = 2;
-      }, 1000);
-    },
-    removeAttachment(i) {
-      const remove_count = this.form.attachments.filter(
-        v => v.doc_type === this.document_data_source[i].keyword
-      ).length;
-      console.log("remove_count :", remove_count);
-
-      for (let index = 1; index <= remove_count; index++) {
-        var find_index = this.form.attachments.findIndex(
-          v => v.doc_type === this.document_data_source[i].keyword
-        );
-        this.form.attachments.splice(find_index, 1);
-      }
-
-      this.$message.info(`Remove file ${this.document_data_source[i].title}.`);
-      this.document_data_source[i].status = 0;
-    },
-    checkDocsNeeded(keywords) {
-      var show = false;
-      console.log('this.form.attachments :', this.form.attachments);
-      this.form.attachments.forEach(attachment => {
-        if (keywords.includes(attachment.doc_type)) show = true;
-      })
-      return !show;
+      return { errors, jump_to };
     }
   }
 };
