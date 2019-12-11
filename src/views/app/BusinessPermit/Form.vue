@@ -124,11 +124,11 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" :gutter="5">
-                <a-col :span="10">
+              <a-row type="flex" align="middle" justify="space-between">
+                <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
-                <a-col :span="14">
+                <a-col :span="12">
                   <a-select
                     style="width: 100%;"
                     v-model="transaction_details.mode_of_payment"
@@ -316,11 +316,12 @@ export default {
         }
       ],
       document_data_source: [
-        // {
-        //   title: "DTI/SEC/CDA Certificate",
-        //   status: 0,
-        //   keyword: "dti_sec_cda"
-        // },
+        {
+          title: "DTI/SEC/CDA Certificate",
+          status: 0,
+          keyword: "dti_sec_cda",
+          hidden: true
+        },
         {
           title: "Residence Certificate",
           status: 0,
@@ -476,9 +477,9 @@ export default {
       console.log("this.current_step :", this.current_step);
       console.log("this.form :", this.form);
 
-      var { errors, jump_to } = this.validation(validate_all);
-      // var errors = [],
-      //   jump_to = 0;
+      // var { errors, jump_to } = this.validation(validate_all);
+      var errors = [],
+        jump_to = 0;
 
       console.log("errors :", errors);
       this.errors = errors;
