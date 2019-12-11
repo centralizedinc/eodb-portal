@@ -373,9 +373,9 @@ export default {
           if (postal_code) result_address += `, ${postal_code}`;
           this.rental_address = result_address.toUpperCase();
         })
-        .catch((err) => {
-          console.log('err :', err);
-        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     getBusinessType(type) {
       if (type === "SP") return "Single Proprietorship";

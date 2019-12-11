@@ -96,7 +96,7 @@ router.route('/transactions/total')
     })
 
 /**
- * @decription details for RegisteredUserCard series
+ * @decription 
  */
 router.route('/transactions/trend/:filter')
     .get((req, res)=>{
@@ -125,8 +125,19 @@ router.route('/transactions/trend/:filter')
         })
     })
 
-
+/**
+ * @description COLLECTIONS
+ */
    
+router.route('/collections/total')
+    .get((req, res)=>{
+        var total = 0;
+        var response = {}
+        TransactionModel.countDocuments()        
+        .then(result=>{                       
+            res.json(result)
+        })
+    })
 
 
 module.exports = router

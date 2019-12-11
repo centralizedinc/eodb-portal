@@ -12,18 +12,24 @@ router.route('/')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
     .post((req, res) => {
         console.log("Creating Business Permit...")
         console.log('Saving data :', req.body);
-        const { data, payment } = req.body;
+        const {
+            data,
+            payment
+        } = req.body;
         var results = {};
         BusinessApplicationDao.create(data)
             .then((result) => {
                 console.log('application result :', result);
                 results.application = result;
+                payment.transaction_details.payment_for = "business";
                 payment.transaction_details.application_id = result._id;
                 var payment_actions = [], loopCount = payment.mode_of_payment === 'SA' ? 2 : payment.mode_of_payment === 'Q' ? 4 : 1;
                 for (let i = 0; i < loopCount; i++) {
@@ -81,7 +87,9 @@ router.route('/:id')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
     .post((req, res) => {
@@ -89,7 +97,9 @@ router.route('/:id')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
 
@@ -98,9 +108,12 @@ router.route('/transactions/:id')
         console.log("transactions id data: " + JSON.stringify(req.params.id))
         BusinessApplicationDao.find({ owner_details: { email: req.params.id } })
             .then((result) => {
+                console.log("transaction find result data:" + JSON.stringify(result))
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
     .post((req, res) => {
@@ -108,7 +121,9 @@ router.route('/transactions/:id')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
 
@@ -118,7 +133,9 @@ router.route('/product')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
     .post((req, res) => {
@@ -126,7 +143,9 @@ router.route('/product')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
 

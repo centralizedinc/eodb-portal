@@ -110,7 +110,7 @@ export default {
                 })
                 .catch(error=>{
                     console.error(error)
-                    reject(0)
+                    resolve(0)
                 })
             })    
         },

@@ -29,7 +29,7 @@
                 <a-col :span="6">
                     <!-- <span style="color:#FFFFFF; font-weight:bold">{{facebook}}</span> -->
                     <!-- <a-skeleton></a-skeleton> -->
-                    <span v-if="!loading_details" style="color:#FFFFFF; font-weight:bold">{{summary.facebook}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight:bold">{{summary.facebook}}</span>
                     <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col >
             </a-row>
@@ -43,7 +43,7 @@
                     <span style="color:#B6C2C9; font-size:12px">Google</span>
                 </a-col> 
                 <a-col :span="6">
-                    <span v-if="!loading_details" style="color:#FFFFFF; font-weight:bold">{{summary.google}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight:bold">{{summary.google}}</span>
                     <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col>
             </a-row>
@@ -57,7 +57,7 @@
                     <span style="color:#B6C2C9; font-size:12px">E-mail</span>
                 </a-col> 
                 <a-col :span="6">
-                    <span v-if="!loading_details" style="color:#FFFFFF; font-weight:bold">{{summary.local}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight:bold">{{summary.local}}</span>
                     <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col>
             </a-row>
@@ -71,7 +71,7 @@
                     <span style="color:#B6C2C9; font-size:12px">Administrators</span>
                 </a-col> 
                 <a-col :span="6">
-                    <span v-if="!loading_details" style="color:#FFFFFF; font-weight:bold">{{summary.admin}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight:bold">{{summary.admin}}</span>
                     <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col>
             </a-row>
@@ -83,7 +83,7 @@
 export default {
     data(){
         return {
-            loading_details:true,
+            loading:true,
             // summary:{},
             // total:0,
             series: null,
@@ -136,7 +136,7 @@ export default {
                 })
                 .catch(error=>{
                     console.error(error)
-                    reject(0)
+                    resolve(0)
                 })
             })    
         },
@@ -174,6 +174,27 @@ export default {
                         local:0,
                         admin:0
                     }
+        },
+        trend:{
+            get(){
+            return new Promise((resolve, reject)=>{
+                var trend = {name:'Registration', data:[]}
+                this.$http.get('/dashboard/users/trend/3')
+                .then(result=>{
+                    if(result.data){
+                        result.data.forEach(elem=>{
+                            trend.data.push(elem.count)
+                        })
+                    }
+                    resolve([trend])                        
+                })
+                .catch(error=>{
+                    console.error(error)
+                    resolve([trend])
+                })
+            })
+            },
+            default:[{name:'Transactions', data:[]}]
         }
         
     },

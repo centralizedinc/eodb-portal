@@ -39,6 +39,15 @@ var PaymentModelSchema = new mongoose.Schema({
          * paid, unpaid
          */
     },
+    payment_for:{
+        /**
+         * business
+         * police_clearance
+         * cedula
+         * rpt
+         */
+        type:String
+    },
     payment_details: {}, // Any Details of payment
     due_date: {
         type: Date

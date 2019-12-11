@@ -24,8 +24,8 @@ export default class BusinessPermitAPI {
         return axios.get('/permits/business');
     }
 
-    static getTransactions(id){
-        console.log("business permit api data:" + JSON.stringify(id) ) 
+    static getTransactions(id) {
+        console.log("business permit api data:" + JSON.stringify(id))
         return axios.get(`/permits/business/transactions/${id}`)
     }
 
