@@ -6,7 +6,7 @@
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
-            Secure Business Permit in 7 steps (all fields marked with an asterisk
+            Secure Business Permit in 6 steps (all fields marked with an asterisk
             <i
               style="color: red;"
             >*</i> is required.)

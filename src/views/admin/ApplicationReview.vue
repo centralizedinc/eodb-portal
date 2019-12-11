@@ -64,7 +64,7 @@ export default {
             .then(results =>{
                 this.checklist = results.data
             })
-            this.form = this.$store.state.admin_session.review
+            this.form = this.$store.state.admin_session.for_review
         }
     }
 }

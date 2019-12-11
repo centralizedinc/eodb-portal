@@ -36,7 +36,7 @@ class SendEmail {
             from: ApplicationSettings.getValue("EODB_EMAIL"),
             // templateId: "d-ebe5030ff7dd4695a7fa263532510305",
             templateId: ApplicationSettings.getValue("REGISTRATION_EMAIL_TEMPLATE"),
-            substitutions: { name, confirmation_url }
+            dynamic_template_data: { name, confirmation_url }
         };
         return new Promise((resolve, reject) => {
             console.log("sgmail send##: " + JSON.stringify(msg))

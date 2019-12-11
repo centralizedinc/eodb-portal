@@ -2,11 +2,11 @@
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
     <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Checklist</a-col>
+      <a-col :span="22" style="font-size: 25px;">Document Checklist</a-col>
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
-            Secure Business Permit in 7 steps (all fields marked with an asterisk
+            Secure Business Permit in 6 steps (all fields marked with an asterisk
             <i
               style="color: red;"
             >*</i> is required.)
@@ -16,8 +16,14 @@
       </a-col>
     </a-row>
     <a-form>
-      <a-form-item label="Do you have a ...">
-        <a-checkbox-group :options="documents" @change="onDocumentSelect" />
+      <a-form-item label="Check all the documents you already have">
+        <a-checkbox-group v-model="selected_documents" @change="onDocumentSelect">
+          <a-row>
+            <a-col :span="24" v-for="(item, index) in documents" :key="index">
+              <a-checkbox :value="item.keyword">{{item.title}}</a-checkbox>
+            </a-col>
+          </a-row>
+        </a-checkbox-group>
       </a-form-item>
     </a-form>
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
@@ -36,35 +42,29 @@
 
 <script>
 export default {
-  props: ["form"],
+  props: ["form", "documents"],
   data() {
     return {
-      documents: [
-        {
-          label: "Residence Certificate",
-          value: "residence"
-        },
-        {
-          label: "Barangay Clearance",
-          value: "barangay"
-        },
-        {
-          label: "Police Clearance",
-          value: "police"
-        }
-      ]
+      selected_documents: []
     };
+  },
+  mounted() {
+    var docs = [];
+    this.form.attachments.forEach(attachment => {
+      docs.push(attachment.doc_type);
+    })
+    this.selected_documents = docs;
   },
   methods: {
     onDocumentSelect(checkedValues) {
-        var attachments = [];
-        checkedValues.forEach(doc_type => {
-            attachments.push({
-                doc_type,
-                files: []
-            })
-        })
-        this.form.attachments = attachments;
+      var attachments = [];
+      checkedValues.forEach(doc_type => {
+        attachments.push({
+          doc_type,
+          files: []
+        });
+      });
+      this.form.attachments = attachments;
     }
   }
 };

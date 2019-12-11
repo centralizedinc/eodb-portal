@@ -61,6 +61,7 @@
 export default {
     data(){
         return {
+            user_count:{},
             series: [{
                 name: 'Transactions',
                 data: [Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100) ]
@@ -94,6 +95,20 @@ export default {
                 //     },
                 // }
             }
+        }
+    },
+    created(){
+        this.init()
+    },
+    methods:{
+        init(){
+            console.log('DASHBOARDING ::::')
+            this.$http.get('/dashboard/users')
+            .then(result=>{
+                console.log('DASHBOARD',JSON.stringify(result.data))
+                this.user = result.data
+                
+            })
         }
     }
 }

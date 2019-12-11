@@ -42,6 +42,24 @@ export default class AccountAPI {
      */
     getAccount(id) {
         console.log("find account outer api: " + JSON.stringify(id))
-        return axios.get(`accounts/${id}`)
+        return axios.get(`accounts/${id}`);
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} data
+     */
+    login(data) {
+        console.log('login :', data);
+        return axios.post('auth/login', data);
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} code
+     */
+    confirmAccount(code) {
+        console.log('code :', code);
+        return axios.get(`auth/confirmation/${code}`);
     }
 }
