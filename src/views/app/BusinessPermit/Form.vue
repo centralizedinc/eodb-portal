@@ -283,10 +283,11 @@ export default {
           contact_no: "",
           email: ""
         },
-        attachments: [],
+        attachments: [{
+          doc_type: "dti_sec_cda",
+          files: []
+        }],
         required_documents: {
-          // The following details are needed to fill in the additional required documents.
-          // cs(1,2,3) bp(1,2,3) ms(1) op(1,2) h(1) w(1) icr(1)
           civil_status: "",
           birthplace: "",
           monthly_salary: "",

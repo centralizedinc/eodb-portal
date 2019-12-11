@@ -351,7 +351,7 @@
         <a-checkbox
           v-model="form.business_details.is_rented"
           @change="resetRentedData"
-        >Is the place of business rented?</a-checkbox>
+        >Check if the place of business is rented</a-checkbox>
       </a-form-item>
 
       <template v-if="form.business_details.is_rented">
@@ -654,12 +654,14 @@ export default {
         })
         .then(data => {
           this.rental_cities = data.default;
+          console.log('this.rental_cities :', this.rental_cities);
           return import(
             `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
           );
         })
         .then(data => {
           this.rental_barangays = data.default;
+          console.log('this.rental_barangays :', this.rental_barangays);
         });
     }
     if (this.fixed_postal) {
