@@ -1,0 +1,194 @@
+[
+    {
+        "id":10307,
+        "brgyCode":"042114001",
+        "brgyDesc":"Anuling Lejos I (Anuling)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10308,
+        "brgyCode":"042114002",
+        "brgyDesc":"Asis I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10309,
+        "brgyCode":"042114003",
+        "brgyDesc":"Galicia I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10310,
+        "brgyCode":"042114004",
+        "brgyDesc":"Palocpoc I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10311,
+        "brgyCode":"042114005",
+        "brgyDesc":"Panungyan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10312,
+        "brgyCode":"042114007",
+        "brgyDesc":"Poblacion I (Barangay I)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10313,
+        "brgyCode":"042114008",
+        "brgyDesc":"Poblacion II (Barangay II)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10314,
+        "brgyCode":"042114009",
+        "brgyDesc":"Poblacion III (Barangay III)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10315,
+        "brgyCode":"042114010",
+        "brgyDesc":"Poblacion IV (Barangay IV)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10316,
+        "brgyCode":"042114011",
+        "brgyDesc":"Poblacion V (Barangay V)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10317,
+        "brgyCode":"042114012",
+        "brgyDesc":"Poblacion VI (Barangay VI)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10318,
+        "brgyCode":"042114013",
+        "brgyDesc":"Poblacion VII (Barangay VII)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10319,
+        "brgyCode":"042114014",
+        "brgyDesc":"Anuling Cerca I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10320,
+        "brgyCode":"042114015",
+        "brgyDesc":"Anuling Cerca II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10321,
+        "brgyCode":"042114016",
+        "brgyDesc":"Anuling Lejos II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10322,
+        "brgyCode":"042114017",
+        "brgyDesc":"Asis II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10323,
+        "brgyCode":"042114018",
+        "brgyDesc":"Asis III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10324,
+        "brgyCode":"042114019",
+        "brgyDesc":"Banayad",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10325,
+        "brgyCode":"042114020",
+        "brgyDesc":"Bukal",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10326,
+        "brgyCode":"042114021",
+        "brgyDesc":"Galicia II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10327,
+        "brgyCode":"042114022",
+        "brgyDesc":"Galicia III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10328,
+        "brgyCode":"042114023",
+        "brgyDesc":"Miguel Mojica",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10329,
+        "brgyCode":"042114024",
+        "brgyDesc":"Palocpoc II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        },
+        {
+        "id":10330,
+        "brgyCode":"042114025",
+        "brgyDesc":"Panungyan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042114"
+        }
+]

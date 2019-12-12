@@ -1,10 +1,10 @@
 {
   "name": "eodb-portal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npm version patch && vue-cli-service build --mode prod",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "mocha --exit"
@@ -47,6 +47,7 @@
     "serve-static": "^1.14.1",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.5.1",
+    "vue-async-computed": "^3.7.0",
     "vue-barcode": "^1.2.0",
     "vue-browser-geolocation": "^1.8.0",
     "vue-pdf": "^4.0.7",
@@ -58,7 +59,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-pwa": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-service": "^4.1.1",
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "string-replace-loader": "^2.2.0",

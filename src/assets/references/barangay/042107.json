@@ -1,0 +1,114 @@
+[
+    {
+        "id":10061,
+        "brgyCode":"042107001",
+        "brgyDesc":"A. Dalusag",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10062,
+        "brgyCode":"042107002",
+        "brgyDesc":"Batas Dao",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10063,
+        "brgyCode":"042107003",
+        "brgyDesc":"Castaños Cerca",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10064,
+        "brgyCode":"042107004",
+        "brgyDesc":"Castaños Lejos",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10065,
+        "brgyCode":"042107005",
+        "brgyDesc":"Kabulusan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10066,
+        "brgyCode":"042107006",
+        "brgyDesc":"Kaymisas",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10067,
+        "brgyCode":"042107007",
+        "brgyDesc":"Kaypaaba",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10068,
+        "brgyCode":"042107008",
+        "brgyDesc":"Lumipa",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10069,
+        "brgyCode":"042107009",
+        "brgyDesc":"Narvaez",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10070,
+        "brgyCode":"042107010",
+        "brgyDesc":"Poblacion I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10071,
+        "brgyCode":"042107011",
+        "brgyDesc":"Tabora",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10072,
+        "brgyCode":"042107012",
+        "brgyDesc":"Poblacion II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10073,
+        "brgyCode":"042107013",
+        "brgyDesc":"Poblacion III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        },
+        {
+        "id":10074,
+        "brgyCode":"042107014",
+        "brgyDesc":"Poblacion IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042107"
+        }
+]

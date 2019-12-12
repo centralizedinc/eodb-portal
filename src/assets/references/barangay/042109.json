@@ -1,0 +1,778 @@
+[
+    {
+        "id":10108,
+        "brgyCode":"042109001",
+        "brgyDesc":"Alapan I-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10109,
+        "brgyCode":"042109002",
+        "brgyDesc":"Alapan II-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10110,
+        "brgyCode":"042109003",
+        "brgyDesc":"Anabu I-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10111,
+        "brgyCode":"042109004",
+        "brgyDesc":"Anabu II-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10112,
+        "brgyCode":"042109006",
+        "brgyDesc":"Poblacion I-A (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10113,
+        "brgyCode":"042109007",
+        "brgyDesc":"Poblacion II-A (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10114,
+        "brgyCode":"042109008",
+        "brgyDesc":"Poblacion III-A (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10115,
+        "brgyCode":"042109009",
+        "brgyDesc":"Poblacion IV-A (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10116,
+        "brgyCode":"042109010",
+        "brgyDesc":"Bayan Luma I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10117,
+        "brgyCode":"042109011",
+        "brgyDesc":"Bucandala I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10118,
+        "brgyCode":"042109012",
+        "brgyDesc":"Carsadang Bago I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10119,
+        "brgyCode":"042109014",
+        "brgyDesc":"Malagasang I-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10120,
+        "brgyCode":"042109015",
+        "brgyDesc":"Malagasang II-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10121,
+        "brgyCode":"042109016",
+        "brgyDesc":"Medicion I-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10122,
+        "brgyCode":"042109017",
+        "brgyDesc":"Medicion II-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10123,
+        "brgyCode":"042109018",
+        "brgyDesc":"Pag-Asa I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10124,
+        "brgyCode":"042109019",
+        "brgyDesc":"Palico I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10125,
+        "brgyCode":"042109020",
+        "brgyDesc":"Pasong Buaya I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10126,
+        "brgyCode":"042109022",
+        "brgyDesc":"Tanzang Luma I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10127,
+        "brgyCode":"042109024",
+        "brgyDesc":"Toclong I-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10128,
+        "brgyCode":"042109025",
+        "brgyDesc":"Toclong II-A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10129,
+        "brgyCode":"042109026",
+        "brgyDesc":"Alapan I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10130,
+        "brgyCode":"042109027",
+        "brgyDesc":"Alapan I-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10131,
+        "brgyCode":"042109028",
+        "brgyDesc":"Alapan II-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10132,
+        "brgyCode":"042109029",
+        "brgyDesc":"Anabu I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10133,
+        "brgyCode":"042109030",
+        "brgyDesc":"Anabu I-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10134,
+        "brgyCode":"042109031",
+        "brgyDesc":"Anabu I-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10135,
+        "brgyCode":"042109032",
+        "brgyDesc":"Anabu I-E",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10136,
+        "brgyCode":"042109033",
+        "brgyDesc":"Anabu I-F",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10137,
+        "brgyCode":"042109034",
+        "brgyDesc":"Anabu I-G",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10138,
+        "brgyCode":"042109035",
+        "brgyDesc":"Anabu II-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10139,
+        "brgyCode":"042109036",
+        "brgyDesc":"Anabu II-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10140,
+        "brgyCode":"042109037",
+        "brgyDesc":"Anabu II-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10141,
+        "brgyCode":"042109038",
+        "brgyDesc":"Anabu II-E",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10142,
+        "brgyCode":"042109039",
+        "brgyDesc":"Anabu II-F",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10143,
+        "brgyCode":"042109040",
+        "brgyDesc":"Bagong Silang (Bahayang Pag-Asa)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10144,
+        "brgyCode":"042109041",
+        "brgyDesc":"Bayan Luma II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10145,
+        "brgyCode":"042109042",
+        "brgyDesc":"Bayan Luma III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10146,
+        "brgyCode":"042109043",
+        "brgyDesc":"Bayan Luma IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10147,
+        "brgyCode":"042109044",
+        "brgyDesc":"Bayan Luma V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10148,
+        "brgyCode":"042109045",
+        "brgyDesc":"Bayan Luma VI",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10149,
+        "brgyCode":"042109046",
+        "brgyDesc":"Bayan Luma VII",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10150,
+        "brgyCode":"042109047",
+        "brgyDesc":"Bayan Luma VIII",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10151,
+        "brgyCode":"042109048",
+        "brgyDesc":"Bayan Luma IX",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10152,
+        "brgyCode":"042109049",
+        "brgyDesc":"Bucandala II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10153,
+        "brgyCode":"042109050",
+        "brgyDesc":"Bucandala III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10154,
+        "brgyCode":"042109051",
+        "brgyDesc":"Bucandala IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10155,
+        "brgyCode":"042109052",
+        "brgyDesc":"Bucandala V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10156,
+        "brgyCode":"042109053",
+        "brgyDesc":"Buhay na Tubig",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10157,
+        "brgyCode":"042109054",
+        "brgyDesc":"Carsadang Bago II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10158,
+        "brgyCode":"042109055",
+        "brgyDesc":"Magdalo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10159,
+        "brgyCode":"042109056",
+        "brgyDesc":"Maharlika",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10160,
+        "brgyCode":"042109057",
+        "brgyDesc":"Malagasang I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10161,
+        "brgyCode":"042109058",
+        "brgyDesc":"Malagasang I-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10162,
+        "brgyCode":"042109059",
+        "brgyDesc":"Malagasang I-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10163,
+        "brgyCode":"042109060",
+        "brgyDesc":"Malagasang I-E",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10164,
+        "brgyCode":"042109061",
+        "brgyDesc":"Malagasang I-F",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10165,
+        "brgyCode":"042109062",
+        "brgyDesc":"Malagasang I-G",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10166,
+        "brgyCode":"042109063",
+        "brgyDesc":"Malagasang II-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10167,
+        "brgyCode":"042109064",
+        "brgyDesc":"Malagasang II-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10168,
+        "brgyCode":"042109065",
+        "brgyDesc":"Malagasang II-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10169,
+        "brgyCode":"042109066",
+        "brgyDesc":"Malagasang II-E",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10170,
+        "brgyCode":"042109067",
+        "brgyDesc":"Malagasang II-F",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10171,
+        "brgyCode":"042109068",
+        "brgyDesc":"Malagasang II-G",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10172,
+        "brgyCode":"042109069",
+        "brgyDesc":"Mariano Espeleta I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10173,
+        "brgyCode":"042109070",
+        "brgyDesc":"Mariano Espeleta II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10174,
+        "brgyCode":"042109071",
+        "brgyDesc":"Mariano Espeleta III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10175,
+        "brgyCode":"042109072",
+        "brgyDesc":"Medicion I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10176,
+        "brgyCode":"042109073",
+        "brgyDesc":"Medicion I-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10177,
+        "brgyCode":"042109074",
+        "brgyDesc":"Medicion I-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10178,
+        "brgyCode":"042109075",
+        "brgyDesc":"Medicion II-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10179,
+        "brgyCode":"042109076",
+        "brgyDesc":"Medicion II-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10180,
+        "brgyCode":"042109077",
+        "brgyDesc":"Medicion II-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10181,
+        "brgyCode":"042109078",
+        "brgyDesc":"Medicion II-E",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10182,
+        "brgyCode":"042109079",
+        "brgyDesc":"Medicion II-F",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10183,
+        "brgyCode":"042109080",
+        "brgyDesc":"Pag-Asa II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10184,
+        "brgyCode":"042109081",
+        "brgyDesc":"Pag-Asa III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10185,
+        "brgyCode":"042109082",
+        "brgyDesc":"Palico II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10186,
+        "brgyCode":"042109083",
+        "brgyDesc":"Palico III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10187,
+        "brgyCode":"042109084",
+        "brgyDesc":"Palico IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10188,
+        "brgyCode":"042109085",
+        "brgyDesc":"Pasong Buaya II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10189,
+        "brgyCode":"042109086",
+        "brgyDesc":"Pinagbuklod",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10190,
+        "brgyCode":"042109087",
+        "brgyDesc":"Poblacion I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10191,
+        "brgyCode":"042109088",
+        "brgyDesc":"Poblacion I-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10192,
+        "brgyCode":"042109089",
+        "brgyDesc":"Poblacion II-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10193,
+        "brgyCode":"042109090",
+        "brgyDesc":"Poblacion III-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10194,
+        "brgyCode":"042109091",
+        "brgyDesc":"Poblacion IV-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10195,
+        "brgyCode":"042109092",
+        "brgyDesc":"Poblacion IV-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10196,
+        "brgyCode":"042109093",
+        "brgyDesc":"Poblacion IV-D",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10197,
+        "brgyCode":"042109094",
+        "brgyDesc":"Tanzang Luma II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10198,
+        "brgyCode":"042109095",
+        "brgyDesc":"Tanzang Luma III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10199,
+        "brgyCode":"042109096",
+        "brgyDesc":"Tanzang Luma IV (Southern City)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10200,
+        "brgyCode":"042109097",
+        "brgyDesc":"Tanzang Luma V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10201,
+        "brgyCode":"042109098",
+        "brgyDesc":"Tanzang Luma VI",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10202,
+        "brgyCode":"042109099",
+        "brgyDesc":"Toclong I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10203,
+        "brgyCode":"042109100",
+        "brgyDesc":"Toclong I-C",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        },
+        {
+        "id":10204,
+        "brgyCode":"042109101",
+        "brgyDesc":"Toclong II-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042109"
+        }
+]

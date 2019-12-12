@@ -4,7 +4,6 @@
     :closable="false"
     :width="450"
     @close="$emit('close')"
-    class="payment-drawer"
     :visible="show"
   >
     <a-row type="flex">
@@ -33,7 +32,7 @@
         <a-card>
           <component :is="current_option" :details="payment_details" />
 
-          <a-button type="primary" block @click="$emit('pay', {payment_details, method: current_option})" :loading="loading">Submit</a-button>
+          <a-button type="primary" block @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})" :loading="loading">Submit</a-button>
         </a-card>
       </a-col>
     </a-row>
@@ -41,7 +40,6 @@
 </template>
 
 <script>
-import Card from "card";
 import CreditCard from "./CreditCard";
 
 export default {
@@ -60,22 +58,13 @@ export default {
   methods: {
     navigate(e) {
       this.current_option = this.tabs[e];
-      if (this.current_option === "CreditCard") this.init_card();
-    },
-    init_card() {
-      if (!this.card) {
-        this.card = new Card({
-          form: "form",
-          container: ".card-wrapper"
-        });
-      }
     }
   }
 };
 </script>
 
 <style>
-.payment-drawer .ant-drawer-body {
+.ant-drawer-body {
   padding: 0 !important;
 }
 </style>

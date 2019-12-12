@@ -1,0 +1,106 @@
+[
+    {
+        "id":10546,
+        "brgyCode":"042122002",
+        "brgyDesc":"Cabezas",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10547,
+        "brgyCode":"042122003",
+        "brgyDesc":"Cabuco",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10548,
+        "brgyCode":"042122004",
+        "brgyDesc":"De Ocampo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10549,
+        "brgyCode":"042122005",
+        "brgyDesc":"Lallana",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10550,
+        "brgyCode":"042122006",
+        "brgyDesc":"San Agustin (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10551,
+        "brgyCode":"042122008",
+        "brgyDesc":"Osorio",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10552,
+        "brgyCode":"042122009",
+        "brgyDesc":"Conchu (Lagundian)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10553,
+        "brgyCode":"042122010",
+        "brgyDesc":"Perez (Lucbanan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10554,
+        "brgyCode":"042122011",
+        "brgyDesc":"Aguado (Piscal Mundo)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10555,
+        "brgyCode":"042122012",
+        "brgyDesc":"Gregorio (Aliang)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10556,
+        "brgyCode":"042122013",
+        "brgyDesc":"Inocencio (B. Pook)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10557,
+        "brgyCode":"042122014",
+        "brgyDesc":"Lapidario (Bayog)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        },
+        {
+        "id":10558,
+        "brgyCode":"042122015",
+        "brgyDesc":"Luciano (Bitangan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042122"
+        }
+]

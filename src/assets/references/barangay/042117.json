@@ -1,0 +1,162 @@
+[
+    {
+        "id":10377,
+        "brgyCode":"042117001",
+        "brgyDesc":"Silangan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10378,
+        "brgyCode":"042117002",
+        "brgyDesc":"Bagbag I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10379,
+        "brgyCode":"042117003",
+        "brgyDesc":"Kanluran",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10380,
+        "brgyCode":"042117005",
+        "brgyDesc":"Ligtong I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10381,
+        "brgyCode":"042117006",
+        "brgyDesc":"Ligtong II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10382,
+        "brgyCode":"042117007",
+        "brgyDesc":"Muzon I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10383,
+        "brgyCode":"042117008",
+        "brgyDesc":"Poblacion",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10384,
+        "brgyCode":"042117009",
+        "brgyDesc":"Sapa I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10385,
+        "brgyCode":"042117010",
+        "brgyDesc":"Tejeros Convention",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10386,
+        "brgyCode":"042117011",
+        "brgyDesc":"Wawa I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10387,
+        "brgyCode":"042117012",
+        "brgyDesc":"Ligtong III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10388,
+        "brgyCode":"042117013",
+        "brgyDesc":"Bagbag II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10389,
+        "brgyCode":"042117014",
+        "brgyDesc":"Ligtong IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10390,
+        "brgyCode":"042117015",
+        "brgyDesc":"Muzon II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10391,
+        "brgyCode":"042117016",
+        "brgyDesc":"Sapa II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10392,
+        "brgyCode":"042117017",
+        "brgyDesc":"Sapa III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10393,
+        "brgyCode":"042117018",
+        "brgyDesc":"Sapa IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10394,
+        "brgyCode":"042117019",
+        "brgyDesc":"Silangan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10395,
+        "brgyCode":"042117020",
+        "brgyDesc":"Wawa II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        },
+        {
+        "id":10396,
+        "brgyCode":"042117021",
+        "brgyDesc":"Wawa III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042117"
+        }
+]

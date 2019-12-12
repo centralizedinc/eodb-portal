@@ -24,10 +24,26 @@ function isAuthenticated(to, from, next) {
 function checkSession(to, from, next){
   console.log(from)
   if(store.state.admin_session.admin.token){
-    next(from.path)
+    next('/admin/app')
   }else{
     next()
   }
+}
+
+function isUserAppAuthenticated(to, from, next) {
+  const status = store.state.user_session && store.state.user_session.user && store.state.user_session.user.status ? parseInt(store.state.user_session.user.status) : 0;
+  const is_authenticated = store.state.user_session.token && status > 0;
+  console.log('APP is_authenticated :', is_authenticated);
+  if (is_authenticated) next(true);
+  else next("/");
+}
+
+function isUserHomeAuthenticated(to, from, next) {
+  const status = store.state.user_session && store.state.user_session.user && store.state.user_session.user.status ? parseInt(store.state.user_session.user.status) : 0;
+  const is_authenticated = store.state.user_session.token && status > 0;
+  console.log('HOME is_authenticated :', is_authenticated);
+  if (is_authenticated) next("/app");
+  else next(true);
 }
 
 export default new Router({
@@ -35,6 +51,7 @@ export default new Router({
     {
       path: '/',
       component: Home,
+      beforeEnter: isUserHomeAuthenticated,
       children: [
         {
           path: '',
@@ -66,6 +83,7 @@ export default new Router({
     {
       path: '/app',
       component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      beforeEnter: isUserAppAuthenticated,
       children: [
         {
           path: '',
@@ -158,6 +176,24 @@ export default new Router({
         name: 'Application Review',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/ApplicationReview.vue'),
+      },
+      {
+        path: 'checklists',
+        name: 'Application Checklist',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Checklists.vue'),
+      },
+      {
+        path: 'emergency',
+        name: 'Incident Reports',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/IncidentReports.vue'),
+      },
+      {
+        path: 'collections',
+        name: 'Collections',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Collections.vue'),
       }]
     },
     {

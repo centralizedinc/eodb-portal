@@ -26,6 +26,12 @@ var DocketSchema = new mongoose.Schema({
          * 2 - Rejected
          */
     },
+    current_department: {
+        type: String
+    },
+    current_approver: {
+        type: String
+    },
     payment_status: {
         type: String
     },

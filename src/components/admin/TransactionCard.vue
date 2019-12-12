@@ -5,11 +5,11 @@
                   <span style="color:#B6C2C9; font-weight:bold">TRANSACTIONS   <a-icon type="exclamation-circle"></a-icon></span>                  
               </a-col>
                <a-col :span="14" style="margin-top:3vh">
-                <h2 style="color: #FFFFFF"><a-icon type="snippets" style="font-size:32px"></a-icon> {{Math.floor(Math.random()* 12345)}}</h2>
-                <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{Math.floor(Math.random()* 50)}}% compare to last week</span>                                 
+                <h2 style="color: #FFFFFF"><a-icon type="snippets" style="font-size:32px"></a-icon> {{total}}</h2>
+                <span style="color:#B6C2C9; font-size:10px; "><a-icon :type="trend[0].trend<0?'down':'up'"></a-icon> {{trend[0].percent}}% compare to last week</span>                                 
               </a-col>
               <a-col :span="10">
-                  <apexchart width="110" type="bar" :options="chartOptions" :series="series" />
+                  <apexchart width="110" type="bar" :options="chartOptions" :series="trend" />
               </a-col>
               <a-col :span="24" >
                   <a-divider style="color:#B6C2C9"></a-divider>                                
@@ -25,7 +25,8 @@
                     <span style="color:#B6C2C9; font-size:12px">In-progress</span>
                 </a-col>
                 <a-col :span="6">
-                    <span style="color:#FFFFFF; font-weight: bold">{{Math.floor(Math.random()* 12345)}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight: bold">{{summary.inProgress}}</span>
+                    <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col >
             </a-row>
             <a-row>
@@ -38,7 +39,8 @@
                     <span style="color:#B6C2C9; font-size:12px">Approved</span>
                 </a-col> 
                 <a-col :span="6">
-                    <span style="color:#FFFFFF; font-weight: bold">{{Math.floor(Math.random()* 12345)}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight: bold">{{summary.done}}</span>
+                    <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col>
             </a-row>
             <a-row>
@@ -51,7 +53,8 @@
                     <span style="color:#B6C2C9; font-size:12px">Denied</span>
                 </a-col> 
                 <a-col :span="6">
-                    <span style="color:#FFFFFF; font-weight: bold">{{Math.floor(Math.random()* 12345)}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight: bold">{{summary.denied}}</span>
+                    <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col>
             </a-row>
             <a-row>
@@ -64,7 +67,8 @@
                     <span style="color:#B6C2C9; font-size:12px">For Compliance</span>
                 </a-col> 
                 <a-col :span="6">
-                    <span style="color:#FFFFFF; font-weight:bold">{{Math.floor(Math.random()* 12345)}}</span>
+                    <span v-if="!loading" style="color:#FFFFFF; font-weight:bold">{{summary.forCompliance}}</span>
+                    <a-icon v-else type="loading" style="color:#FFFFFF"></a-icon>
                 </a-col>
             </a-row>
         </a-card>
@@ -74,6 +78,7 @@
 export default {
     data(){
         return {
+            loading:true,
             series: [{
                 name: 'Transactions',
                 data: [Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100), Math.floor(Math.random()*100) ]
@@ -83,30 +88,87 @@ export default {
                     type: 'line',
                     sparkline:{enabled:true}
                 },
-                stroke: {
-                    width: 3,
-                    curve: 'smooth'
-                },
-
-                xaxis: {
-                    labels:{show:false},
-                    axisBorder:{show:false},
-                    
-                },
-                grid: {show: false},
-                // fill: {
-                //     type: 'gradient',
-                //     gradient: {
-                //     shade: 'dark',
-                //     gradientToColors: ['#FDD835'],
-                //     shadeIntensity: 1,
-                //     type: 'horizontal',
-                //     opacityFrom: 1,
-                //     opacityTo: 1,
-                //     stops: [0, 100, 100, 100]
-                //     },
-                // }
+                tooltip: {
+                    x:{show:false}
+                }
             }
+        }
+    },
+    created(){
+        this.init()
+    },
+    methods:{
+        init(){
+        }
+    },
+    asyncComputed: {
+        total() {
+            return new Promise((resolve, reject)=>{
+                this.$http.get('/dashboard/transactions/total')
+                .then(result=>{
+                    resolve(result.data)
+                })
+                .catch(error=>{
+                    console.error(error)
+                    resolve(0)
+                })
+            })    
+        },
+        summary:{
+            get(){
+            return new Promise((resolve, reject)=>{
+                this.$http.get('/dashboard/transactions')
+                .then(result=>{
+                    this.loading=false;
+                    var summary = {
+                        inProgress:result.data.find(x => x._id == 0)?result.data.find(x => x._id == 0).count:0,
+                        done:result.data.find(x => x._id == 1)?result.data.find(x => x._id == 1).count:0,
+                        denied:result.data.find(x => x._id == 2)?result.data.find(x => x._id == 2).count:0,
+                        forCompliance:result.data.find(x => x._id == 3)?result.data.find(x => x._id == 3).count:0
+                    }
+                    resolve(summary)
+                })
+                .catch(error=>{
+                    console.error(error)
+                    this.loading=false;
+                    resolve({
+                        inProgress:0,
+                        done:0,
+                        denied:0,
+                        forCompliance:0
+                    })
+                })
+            })  
+            },
+            default: {
+                        inProgress:0,
+                        done:0,
+                        denied:0,
+                        forCompliance:0
+                    }
+        },
+        trend:{
+            get(){
+            return new Promise((resolve, reject)=>{
+                var trend = {name:'Transactions', data:[]}
+                this.$http.get('/dashboard/transactions/trend/3')
+                .then(result=>{
+                    if(result.data.series){
+                        result.data.series.forEach(elem=>{
+                            trend.data.push(elem.count)
+                        })
+                        trend.trend = result.data.trend
+                        trend.percent = result.data.percent
+                    }
+                    resolve([trend])                        
+                })
+                .catch(error=>{
+                    console.error(error)
+                    resolve([trend])
+                })
+            })
+            },
+            default:[{name:'Transactions', data:[]}]
         }
     }
 }
