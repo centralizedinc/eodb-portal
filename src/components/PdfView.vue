@@ -19,9 +19,10 @@ import BGYCLEARANCE from "./pdf/bgyclearance";
 import BUSINESSPERMIT from "./pdf/businesspermit";
 import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
+import RECEIPT from "./pdf/receipt";
 
 var printers = {
-  BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE
+  BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT
 };
 
 // var printers = {
