@@ -1,0 +1,218 @@
+[
+    {
+        "id":10280,
+        "brgyCode":"042113001",
+        "brgyDesc":"Caingin Pob. (Barangay 3)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10281,
+        "brgyCode":"042113002",
+        "brgyDesc":"Bucal I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10282,
+        "brgyCode":"042113003",
+        "brgyDesc":"Bucal II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10283,
+        "brgyCode":"042113004",
+        "brgyDesc":"Bucal III A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10284,
+        "brgyCode":"042113005",
+        "brgyDesc":"Bucal IV A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10285,
+        "brgyCode":"042113007",
+        "brgyDesc":"San Miguel I A (Caputatan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10286,
+        "brgyCode":"042113008",
+        "brgyDesc":"Garita I A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10287,
+        "brgyCode":"042113009",
+        "brgyDesc":"Mabato",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10288,
+        "brgyCode":"042113010",
+        "brgyDesc":"Talipusngo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10289,
+        "brgyCode":"042113011",
+        "brgyDesc":"Pantihan I (Balayungan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10290,
+        "brgyCode":"042113012",
+        "brgyDesc":"Pantihan II (Sagbat)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10291,
+        "brgyCode":"042113013",
+        "brgyDesc":"Pantihan III (Pook na Munti)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10292,
+        "brgyCode":"042113014",
+        "brgyDesc":"Pantihan IV (Pook ni Sara)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10293,
+        "brgyCode":"042113015",
+        "brgyDesc":"Patungan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10294,
+        "brgyCode":"042113016",
+        "brgyDesc":"Pinagsanhan I A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10295,
+        "brgyCode":"042113018",
+        "brgyDesc":"Poblacion I A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10296,
+        "brgyCode":"042113019",
+        "brgyDesc":"Poblacion II A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10297,
+        "brgyCode":"042113020",
+        "brgyDesc":"Tulay Silangan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10298,
+        "brgyCode":"042113021",
+        "brgyDesc":"Layong Mabilog",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10299,
+        "brgyCode":"042113022",
+        "brgyDesc":"Bucal III B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10300,
+        "brgyCode":"042113023",
+        "brgyDesc":"Bucal IV B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10301,
+        "brgyCode":"042113024",
+        "brgyDesc":"Garita I B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10302,
+        "brgyCode":"042113025",
+        "brgyDesc":"Pinagsanhan I B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10303,
+        "brgyCode":"042113026",
+        "brgyDesc":"Poblacion I B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10304,
+        "brgyCode":"042113027",
+        "brgyDesc":"Poblacion II B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10305,
+        "brgyCode":"042113028",
+        "brgyDesc":"San Miguel I B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        },
+        {
+        "id":10306,
+        "brgyCode":"042113029",
+        "brgyDesc":"Tulay Kanluran",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042113"
+        }
+]

@@ -1,0 +1,330 @@
+[
+{
+    "id":10495,
+    "brgyCode":"042120001",
+    "brgyDesc":"Amaya I",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10496,
+    "brgyCode":"042120002",
+    "brgyDesc":"Bagtas",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10497,
+    "brgyCode":"042120003",
+    "brgyDesc":"Biga",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10498,
+    "brgyCode":"042120004",
+    "brgyDesc":"Biwas",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10499,
+    "brgyCode":"042120005",
+    "brgyDesc":"Bucal",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10500,
+    "brgyCode":"042120006",
+    "brgyDesc":"Bunga",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10501,
+    "brgyCode":"042120007",
+    "brgyDesc":"Calibuyo",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10502,
+    "brgyCode":"042120008",
+    "brgyDesc":"Capipisa",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10503,
+    "brgyCode":"042120009",
+    "brgyDesc":"Daang Amaya I",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10504,
+    "brgyCode":"042120010",
+    "brgyDesc":"Halayhay",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10505,
+    "brgyCode":"042120011",
+    "brgyDesc":"Julugan I",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10506,
+    "brgyCode":"042120012",
+    "brgyDesc":"Mulawin",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10507,
+    "brgyCode":"042120015",
+    "brgyDesc":"Paradahan I",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10508,
+    "brgyCode":"042120016",
+    "brgyDesc":"Barangay I (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10509,
+    "brgyCode":"042120017",
+    "brgyDesc":"Barangay II (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10510,
+    "brgyCode":"042120018",
+    "brgyDesc":"Barangay III (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10511,
+    "brgyCode":"042120019",
+    "brgyDesc":"Barangay IV (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10512,
+    "brgyCode":"042120020",
+    "brgyDesc":"Punta I",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10513,
+    "brgyCode":"042120021",
+    "brgyDesc":"Sahud Ulan",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10514,
+    "brgyCode":"042120022",
+    "brgyDesc":"Sanja Mayor",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10515,
+    "brgyCode":"042120023",
+    "brgyDesc":"Santol",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10516,
+    "brgyCode":"042120024",
+    "brgyDesc":"Tanauan",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10517,
+    "brgyCode":"042120026",
+    "brgyDesc":"Tres Cruses",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10518,
+    "brgyCode":"042120027",
+    "brgyDesc":"Lambingan",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10519,
+    "brgyCode":"042120028",
+    "brgyDesc":"Amaya II",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10520,
+    "brgyCode":"042120029",
+    "brgyDesc":"Amaya III",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10521,
+    "brgyCode":"042120030",
+    "brgyDesc":"Amaya IV",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10522,
+    "brgyCode":"042120031",
+    "brgyDesc":"Amaya V",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10523,
+    "brgyCode":"042120032",
+    "brgyDesc":"Amaya VI",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10524,
+    "brgyCode":"042120033",
+    "brgyDesc":"Amaya VII",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10525,
+    "brgyCode":"042120034",
+    "brgyDesc":"Daang Amaya II",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10526,
+    "brgyCode":"042120035",
+    "brgyDesc":"Daang Amaya III",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10527,
+    "brgyCode":"042120036",
+    "brgyDesc":"Julugan II",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10528,
+    "brgyCode":"042120037",
+    "brgyDesc":"Julugan III",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10529,
+    "brgyCode":"042120038",
+    "brgyDesc":"Julugan IV",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10530,
+    "brgyCode":"042120039",
+    "brgyDesc":"Julugan V",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10531,
+    "brgyCode":"042120040",
+    "brgyDesc":"Julugan VI",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10532,
+    "brgyCode":"042120041",
+    "brgyDesc":"Julugan VII",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10533,
+    "brgyCode":"042120042",
+    "brgyDesc":"Julugan VIII",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10534,
+    "brgyCode":"042120043",
+    "brgyDesc":"Paradahan II",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    },
+    {
+    "id":10535,
+    "brgyCode":"042120044",
+    "brgyDesc":"Punta II",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042120"
+    }
+]

@@ -1,0 +1,130 @@
+[
+    {
+        "id":10361,
+        "brgyCode":"042116001",
+        "brgyDesc":"Magdiwang",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10362,
+        "brgyCode":"042116002",
+        "brgyDesc":"Poblacion",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10363,
+        "brgyCode":"042116003",
+        "brgyDesc":"Salcedo I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10364,
+        "brgyCode":"042116004",
+        "brgyDesc":"San Antonio I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10365,
+        "brgyCode":"042116005",
+        "brgyDesc":"San Juan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10366,
+        "brgyCode":"042116006",
+        "brgyDesc":"San Rafael I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10367,
+        "brgyCode":"042116007",
+        "brgyDesc":"San Rafael II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10368,
+        "brgyCode":"042116008",
+        "brgyDesc":"San Jose I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10369,
+        "brgyCode":"042116009",
+        "brgyDesc":"Santa Rosa I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10370,
+        "brgyCode":"042116010",
+        "brgyDesc":"Salcedo II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10371,
+        "brgyCode":"042116011",
+        "brgyDesc":"San Antonio II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10372,
+        "brgyCode":"042116012",
+        "brgyDesc":"San Jose II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10373,
+        "brgyCode":"042116013",
+        "brgyDesc":"San Juan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10374,
+        "brgyCode":"042116014",
+        "brgyDesc":"San Rafael III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10375,
+        "brgyCode":"042116015",
+        "brgyDesc":"San Rafael IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        },
+        {
+        "id":10376,
+        "brgyCode":"042116016",
+        "brgyDesc":"Santa Rosa II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042116"
+        }
+]

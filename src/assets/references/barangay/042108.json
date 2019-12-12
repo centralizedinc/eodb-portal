@@ -1,0 +1,266 @@
+[
+    {
+        "id":10075,
+        "brgyCode":"042108001",
+        "brgyDesc":"Alingaro",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10076,
+        "brgyCode":"042108002",
+        "brgyDesc":"Bacao I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10077,
+        "brgyCode":"042108003",
+        "brgyDesc":"Gov. Ferrer Pob. (Bgy. 1)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10078,
+        "brgyCode":"042108004",
+        "brgyDesc":"Sampalucan Pob. (Bgy. 2)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10079,
+        "brgyCode":"042108005",
+        "brgyDesc":"Dulong Bayan Pob. (Bgy. 3)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10080,
+        "brgyCode":"042108006",
+        "brgyDesc":"San Gabriel Pob. (Bgy. 4)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10081,
+        "brgyCode":"042108007",
+        "brgyDesc":"Bagumbayan Pob. (Bgy. 5)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10082,
+        "brgyCode":"042108008",
+        "brgyDesc":"Vibora Pob. (Bgy. 6)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10083,
+        "brgyCode":"042108009",
+        "brgyDesc":"Ninety Sixth Pob. (Bgy. 8)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10084,
+        "brgyCode":"042108010",
+        "brgyDesc":"Prinza Pob. (Bgy. 9)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10085,
+        "brgyCode":"042108011",
+        "brgyDesc":"Biclatan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10086,
+        "brgyCode":"042108012",
+        "brgyDesc":"Buenavista I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10087,
+        "brgyCode":"042108013",
+        "brgyDesc":"Corregidor Pob. (Bgy. 10)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10088,
+        "brgyCode":"042108014",
+        "brgyDesc":"Javalera",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10089,
+        "brgyCode":"042108015",
+        "brgyDesc":"Manggahan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10090,
+        "brgyCode":"042108016",
+        "brgyDesc":"Navarro",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10091,
+        "brgyCode":"042108017",
+        "brgyDesc":"Panungyanan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10092,
+        "brgyCode":"042108018",
+        "brgyDesc":"Pasong Camachile I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10093,
+        "brgyCode":"042108020",
+        "brgyDesc":"Pasong Kawayan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10094,
+        "brgyCode":"042108021",
+        "brgyDesc":"Pasong Kawayan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10095,
+        "brgyCode":"042108022",
+        "brgyDesc":"Pinagtipunan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10096,
+        "brgyCode":"042108023",
+        "brgyDesc":"San Francisco",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10097,
+        "brgyCode":"042108025",
+        "brgyDesc":"San Juan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10098,
+        "brgyCode":"042108026",
+        "brgyDesc":"Santa Clara",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10099,
+        "brgyCode":"042108027",
+        "brgyDesc":"Santiago",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10100,
+        "brgyCode":"042108028",
+        "brgyDesc":"Tapia",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10101,
+        "brgyCode":"042108029",
+        "brgyDesc":"Tejero",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10102,
+        "brgyCode":"042108030",
+        "brgyDesc":"Arnaldo Pob. (Bgy. 7)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10103,
+        "brgyCode":"042108031",
+        "brgyDesc":"Bacao II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10104,
+        "brgyCode":"042108032",
+        "brgyDesc":"Buenavista II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10105,
+        "brgyCode":"042108033",
+        "brgyDesc":"Buenavista III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10106,
+        "brgyCode":"042108034",
+        "brgyDesc":"Pasong Camachile II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        },
+        {
+        "id":10107,
+        "brgyCode":"042108035",
+        "brgyDesc":"San Juan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042108"
+        }
+]

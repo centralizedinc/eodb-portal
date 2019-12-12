@@ -1,0 +1,114 @@
+[
+{
+    "id":9888,
+    "brgyCode":"042104001",
+    "brgyDesc":"Bancal",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9889,
+    "brgyCode":"042104006",
+    "brgyDesc":"Cabilang Baybay",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9890,
+    "brgyCode":"042104008",
+    "brgyDesc":"Lantic",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9891,
+    "brgyCode":"042104009",
+    "brgyDesc":"Mabuhay",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9892,
+    "brgyCode":"042104010",
+    "brgyDesc":"Maduya",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9893,
+    "brgyCode":"042104011",
+    "brgyDesc":"Milagrosa",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9894,
+    "brgyCode":"042104012",
+    "brgyDesc":"Barangay 1 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9895,
+    "brgyCode":"042104013",
+    "brgyDesc":"Barangay 2 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9896,
+    "brgyCode":"042104014",
+    "brgyDesc":"Barangay 3 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9897,
+    "brgyCode":"042104015",
+    "brgyDesc":"Barangay 4 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9898,
+    "brgyCode":"042104016",
+    "brgyDesc":"Barangay 5 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9899,
+    "brgyCode":"042104017",
+    "brgyDesc":"Barangay 6 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9900,
+    "brgyCode":"042104018",
+    "brgyDesc":"Barangay 7 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    },
+    {
+    "id":9901,
+    "brgyCode":"042104019",
+    "brgyDesc":"Barangay 8 (Pob.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042104"
+    }
+]

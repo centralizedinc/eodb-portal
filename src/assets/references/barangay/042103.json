@@ -1,0 +1,586 @@
+[
+    {
+        "id":9815,
+        "brgyCode":"042103001",
+        "brgyDesc":"Alima",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9816,
+        "brgyCode":"042103002",
+        "brgyDesc":"Aniban I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9817,
+        "brgyCode":"042103003",
+        "brgyDesc":"Banalo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9818,
+        "brgyCode":"042103004",
+        "brgyDesc":"Bayanan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9819,
+        "brgyCode":"042103005",
+        "brgyDesc":"Daang Bukid",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9820,
+        "brgyCode":"042103006",
+        "brgyDesc":"Digman",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9821,
+        "brgyCode":"042103007",
+        "brgyDesc":"Dulong Bayan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9822,
+        "brgyCode":"042103008",
+        "brgyDesc":"Habay I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9823,
+        "brgyCode":"042103009",
+        "brgyDesc":"Kaingin (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9824,
+        "brgyCode":"042103010",
+        "brgyDesc":"Ligas I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9825,
+        "brgyCode":"042103011",
+        "brgyDesc":"Mabolo I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9826,
+        "brgyCode":"042103012",
+        "brgyDesc":"Maliksi I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9827,
+        "brgyCode":"042103013",
+        "brgyDesc":"Mambog I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9828,
+        "brgyCode":"042103014",
+        "brgyDesc":"Molino I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9829,
+        "brgyCode":"042103015",
+        "brgyDesc":"Niog I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9830,
+        "brgyCode":"042103018",
+        "brgyDesc":"P.F. Espiritu I (Panapaan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9831,
+        "brgyCode":"042103019",
+        "brgyDesc":"Real I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9832,
+        "brgyCode":"042103020",
+        "brgyDesc":"Salinas I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9833,
+        "brgyCode":"042103021",
+        "brgyDesc":"San Nicolas I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9834,
+        "brgyCode":"042103022",
+        "brgyDesc":"Sineguelasan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9835,
+        "brgyCode":"042103023",
+        "brgyDesc":"Tabing Dagat",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9836,
+        "brgyCode":"042103024",
+        "brgyDesc":"Talaba I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9837,
+        "brgyCode":"042103025",
+        "brgyDesc":"Zapote I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9838,
+        "brgyCode":"042103026",
+        "brgyDesc":"Queens Row Central",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9839,
+        "brgyCode":"042103027",
+        "brgyDesc":"Queens Row East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9840,
+        "brgyCode":"042103028",
+        "brgyDesc":"Queens Row West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9841,
+        "brgyCode":"042103029",
+        "brgyDesc":"Aniban II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9842,
+        "brgyCode":"042103030",
+        "brgyDesc":"Aniban III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9843,
+        "brgyCode":"042103031",
+        "brgyDesc":"Aniban IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9844,
+        "brgyCode":"042103032",
+        "brgyDesc":"Aniban V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9845,
+        "brgyCode":"042103033",
+        "brgyDesc":"Campo Santo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9846,
+        "brgyCode":"042103034",
+        "brgyDesc":"Habay II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9847,
+        "brgyCode":"042103035",
+        "brgyDesc":"Ligas II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9848,
+        "brgyCode":"042103036",
+        "brgyDesc":"Ligas III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9849,
+        "brgyCode":"042103037",
+        "brgyDesc":"Mabolo II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9850,
+        "brgyCode":"042103038",
+        "brgyDesc":"Mabolo III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9851,
+        "brgyCode":"042103039",
+        "brgyDesc":"Maliksi II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9852,
+        "brgyCode":"042103040",
+        "brgyDesc":"Maliksi III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9853,
+        "brgyCode":"042103041",
+        "brgyDesc":"Mambog II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9854,
+        "brgyCode":"042103042",
+        "brgyDesc":"Mambog III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9855,
+        "brgyCode":"042103043",
+        "brgyDesc":"Mambog IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9856,
+        "brgyCode":"042103044",
+        "brgyDesc":"Mambog V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9857,
+        "brgyCode":"042103045",
+        "brgyDesc":"Molino II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9858,
+        "brgyCode":"042103046",
+        "brgyDesc":"Molino III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9859,
+        "brgyCode":"042103047",
+        "brgyDesc":"Molino IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9860,
+        "brgyCode":"042103048",
+        "brgyDesc":"Molino V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9861,
+        "brgyCode":"042103049",
+        "brgyDesc":"Molino VI",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9862,
+        "brgyCode":"042103050",
+        "brgyDesc":"Molino VII",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9863,
+        "brgyCode":"042103051",
+        "brgyDesc":"Niog II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9864,
+        "brgyCode":"042103052",
+        "brgyDesc":"Niog III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9865,
+        "brgyCode":"042103053",
+        "brgyDesc":"P.F. Espiritu II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9866,
+        "brgyCode":"042103054",
+        "brgyDesc":"P.F. Espiritu III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9867,
+        "brgyCode":"042103055",
+        "brgyDesc":"P.F. Espiritu IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9868,
+        "brgyCode":"042103056",
+        "brgyDesc":"P.F. Espiritu V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9869,
+        "brgyCode":"042103057",
+        "brgyDesc":"P.F. Espiritu VI",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9870,
+        "brgyCode":"042103058",
+        "brgyDesc":"P.F. Espiritu VII",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9871,
+        "brgyCode":"042103059",
+        "brgyDesc":"P.F. Espiritu VIII",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9872,
+        "brgyCode":"042103060",
+        "brgyDesc":"Real II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9873,
+        "brgyCode":"042103061",
+        "brgyDesc":"Salinas II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9874,
+        "brgyCode":"042103062",
+        "brgyDesc":"Salinas III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9875,
+        "brgyCode":"042103063",
+        "brgyDesc":"Salinas IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9876,
+        "brgyCode":"042103064",
+        "brgyDesc":"San Nicolas II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9877,
+        "brgyCode":"042103065",
+        "brgyDesc":"San Nicolas III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9878,
+        "brgyCode":"042103066",
+        "brgyDesc":"Talaba II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9879,
+        "brgyCode":"042103067",
+        "brgyDesc":"Talaba III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9880,
+        "brgyCode":"042103068",
+        "brgyDesc":"Talaba IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9881,
+        "brgyCode":"042103069",
+        "brgyDesc":"Talaba V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9882,
+        "brgyCode":"042103070",
+        "brgyDesc":"Talaba VI",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9883,
+        "brgyCode":"042103071",
+        "brgyDesc":"Talaba VII",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9884,
+        "brgyCode":"042103072",
+        "brgyDesc":"Zapote II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9885,
+        "brgyCode":"042103073",
+        "brgyDesc":"Zapote III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9886,
+        "brgyCode":"042103074",
+        "brgyDesc":"Zapote IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        },
+        {
+        "id":9887,
+        "brgyCode":"042103075",
+        "brgyDesc":"Zapote V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042103"
+        }
+]

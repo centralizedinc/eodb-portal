@@ -1,0 +1,218 @@
+[
+{
+    "id":10559,
+    "brgyCode":"042123001",
+    "brgyDesc":"Aldiano Olaes",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10560,
+    "brgyCode":"042123002",
+    "brgyDesc":"Barangay 1 Poblacion (Area I)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10561,
+    "brgyCode":"042123003",
+    "brgyDesc":"Barangay 2 Poblacion",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10562,
+    "brgyCode":"042123004",
+    "brgyDesc":"Barangay 3 Poblacion",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10563,
+    "brgyCode":"042123005",
+    "brgyDesc":"Barangay 4 Poblacion",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10564,
+    "brgyCode":"042123006",
+    "brgyDesc":"Barangay 5 Poblacion",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10565,
+    "brgyCode":"042123007",
+    "brgyDesc":"Benjamin Tirona (Area D)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10566,
+    "brgyCode":"042123008",
+    "brgyDesc":"Bernardo Pulido (Area H)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10567,
+    "brgyCode":"042123009",
+    "brgyDesc":"Epifanio Malia",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10568,
+    "brgyCode":"042123010",
+    "brgyDesc":"Francisco De Castro (Sunshine Vill.)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10569,
+    "brgyCode":"042123011",
+    "brgyDesc":"Francisco Reyes",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10570,
+    "brgyCode":"042123012",
+    "brgyDesc":"Fiorello Carimag (Area C)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10571,
+    "brgyCode":"042123013",
+    "brgyDesc":"Gavino Maderan",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10572,
+    "brgyCode":"042123014",
+    "brgyDesc":"Gregoria De Jesus",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10573,
+    "brgyCode":"042123015",
+    "brgyDesc":"Inocencio Salud",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10574,
+    "brgyCode":"042123016",
+    "brgyDesc":"Jacinto Lumbreras",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10575,
+    "brgyCode":"042123017",
+    "brgyDesc":"Kapitan Kua (Area F)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10576,
+    "brgyCode":"042123018",
+    "brgyDesc":"Koronel Jose P. Elises (Area E)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10577,
+    "brgyCode":"042123019",
+    "brgyDesc":"Macario Dacon",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10578,
+    "brgyCode":"042123020",
+    "brgyDesc":"Marcelino Memije",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10579,
+    "brgyCode":"042123021",
+    "brgyDesc":"Nicolasa Virata (San Jose)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10580,
+    "brgyCode":"042123022",
+    "brgyDesc":"Pantaleon Granados (Area G)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10581,
+    "brgyCode":"042123023",
+    "brgyDesc":"Ramon Cruz (Area J)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10582,
+    "brgyCode":"042123024",
+    "brgyDesc":"San Gabriel (Area K)",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10583,
+    "brgyCode":"042123025",
+    "brgyDesc":"San Jose",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10584,
+    "brgyCode":"042123026",
+    "brgyDesc":"Severino De Las Alas",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    },
+    {
+    "id":10585,
+    "brgyCode":"042123027",
+    "brgyDesc":"Tiniente Tiago",
+    "regCode":"04",
+    "provCode":"0421",
+    "citymunCode":"042123"
+    }
+]

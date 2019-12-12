@@ -1,0 +1,82 @@
+[
+    {
+        "id":10536,
+        "brgyCode":"042121001",
+        "brgyDesc":"Poblacion I (Barangay I)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10537,
+        "brgyCode":"042121002",
+        "brgyDesc":"Poblacion II (Barangay II)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10538,
+        "brgyCode":"042121003",
+        "brgyDesc":"Bucana",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10539,
+        "brgyCode":"042121005",
+        "brgyDesc":"Poblacion III (Barangay III)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10540,
+        "brgyCode":"042121006",
+        "brgyDesc":"San Jose",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10541,
+        "brgyCode":"042121007",
+        "brgyDesc":"San Juan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10542,
+        "brgyCode":"042121008",
+        "brgyDesc":"Sapang I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10543,
+        "brgyCode":"042121009",
+        "brgyDesc":"Poblacion I A",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10544,
+        "brgyCode":"042121010",
+        "brgyDesc":"San Juan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        },
+        {
+        "id":10545,
+        "brgyCode":"042121011",
+        "brgyDesc":"Sapang II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042121"
+        }
+]

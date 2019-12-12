@@ -1,0 +1,274 @@
+[
+    {
+        "id":10461,
+        "brgyCode":"042119001",
+        "brgyDesc":"Asisan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10462,
+        "brgyCode":"042119002",
+        "brgyDesc":"Bagong Tubig",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10463,
+        "brgyCode":"042119003",
+        "brgyDesc":"Dapdap West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10464,
+        "brgyCode":"042119004",
+        "brgyDesc":"Francisco (San Francisco)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10465,
+        "brgyCode":"042119005",
+        "brgyDesc":"Guinhawa South",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10466,
+        "brgyCode":"042119006",
+        "brgyDesc":"Iruhin West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10467,
+        "brgyCode":"042119007",
+        "brgyDesc":"Calabuso (Calabuso South & North)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10468,
+        "brgyCode":"042119008",
+        "brgyDesc":"Kaybagal South (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10469,
+        "brgyCode":"042119010",
+        "brgyDesc":"Mag-Asawang Ilat",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10470,
+        "brgyCode":"042119011",
+        "brgyDesc":"Maharlika West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10471,
+        "brgyCode":"042119012",
+        "brgyDesc":"Maitim 2nd East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10472,
+        "brgyCode":"042119013",
+        "brgyDesc":"Mendez Crossing West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10473,
+        "brgyCode":"042119014",
+        "brgyDesc":"Neogan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10474,
+        "brgyCode":"042119015",
+        "brgyDesc":"Patutong Malaki South",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10475,
+        "brgyCode":"042119017",
+        "brgyDesc":"Sambong",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10476,
+        "brgyCode":"042119018",
+        "brgyDesc":"San Jose",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10477,
+        "brgyCode":"042119019",
+        "brgyDesc":"Silang Junction South",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10478,
+        "brgyCode":"042119020",
+        "brgyDesc":"Sungay South",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10479,
+        "brgyCode":"042119021",
+        "brgyDesc":"Tolentino West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10480,
+        "brgyCode":"042119022",
+        "brgyDesc":"Zambal",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10481,
+        "brgyCode":"042119023",
+        "brgyDesc":"Iruhin East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10482,
+        "brgyCode":"042119024",
+        "brgyDesc":"Kaybagal North",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10483,
+        "brgyCode":"042119025",
+        "brgyDesc":"Maitim 2nd West",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10484,
+        "brgyCode":"042119027",
+        "brgyDesc":"Dapdap East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10485,
+        "brgyCode":"042119028",
+        "brgyDesc":"Guinhawa North",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10486,
+        "brgyCode":"042119029",
+        "brgyDesc":"Iruhin South",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10487,
+        "brgyCode":"042119030",
+        "brgyDesc":"Kaybagal East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10488,
+        "brgyCode":"042119031",
+        "brgyDesc":"Maharlika East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10489,
+        "brgyCode":"042119032",
+        "brgyDesc":"Maitim 2nd Central",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10490,
+        "brgyCode":"042119033",
+        "brgyDesc":"Mendez Crossing East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10491,
+        "brgyCode":"042119034",
+        "brgyDesc":"Patutong Malaki North",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10492,
+        "brgyCode":"042119035",
+        "brgyDesc":"Silang Junction North",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10493,
+        "brgyCode":"042119036",
+        "brgyDesc":"Sungay North",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        },
+        {
+        "id":10494,
+        "brgyCode":"042119037",
+        "brgyDesc":"Tolentino East",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042119"
+        }
+]
