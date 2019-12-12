@@ -32,7 +32,7 @@
         <a-card>
           <component :is="current_option" :details="payment_details" />
 
-          <a-button type="primary" block @click="$emit('pay', {payment_details, method: current_option})" :loading="loading">Submit</a-button>
+          <a-button type="primary" block @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})" :loading="loading">Submit</a-button>
         </a-card>
       </a-col>
     </a-row>

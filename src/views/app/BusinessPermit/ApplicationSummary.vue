@@ -27,7 +27,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Date of Birth</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{formatDate(form.owner_details.birthdate)}}</a-col>
+      <a-col :span="15">{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
@@ -87,7 +87,7 @@
     <a-row class="summary-row">
       <a-col :span="8">{{`${reg_code} Date of Registration`}}</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.registration_date}}</a-col>
+      <a-col :span="15">{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Tax Identification No.(TIN)</a-col>

@@ -19,7 +19,7 @@
           type="text"
           name="number"
           class="ant-input"
-          v-model="details.card_no"
+          v-model="details.number"
           @blur="validateCard"
         />
       </a-form-item>
@@ -27,8 +27,8 @@
         :label-col="{ span: 10 }"
         :wrapper-col="{ span: 14 }"
         label="Cardholder Fullname"
-        :validate-status="errors.card_name ? 'error':success_card_name ? 'success':''"
-        :help="errors.card_name"
+        :validate-status="errors.name ? 'error':success_card_name ? 'success':''"
+        :help="errors.name"
         has-feedback
       >
         <input
@@ -36,7 +36,7 @@
           type="text"
           name="name"
           class="ant-input"
-          v-model="details.card_name"
+          v-model="details.name"
           @blur="validateName"
         />
       </a-form-item>
@@ -88,7 +88,7 @@ export default {
       cvc_max: 3,
       errors: {
         card: "",
-        card_name: "",
+        name: "",
         expiry: "",
         cvc: ""
       },
@@ -120,13 +120,13 @@ export default {
     // 
     validateCard() {
       this.errors.card = ""
-      if (!this.details.card_no)
+      if (!this.details.number)
         this.errors.card = "Please fill up Credit Card Number.";
       else {
         this.loading_card = true;
         this.success_card = false;
         this.$store
-          .dispatch("VALIDATE_CARD", this.details.card_no)
+          .dispatch("VALIDATE_CARD", this.details.number)
           .then(result => {
             console.log('result card :', result);
             if (result.data.isValid) {
@@ -146,10 +146,10 @@ export default {
       }
     },
     validateName() {
-      this.errors.card_name = ""
+      this.errors.name = ""
       this.success_card_name = false;
-      if (!this.details.card_name)
-        this.errors.card_name = "Please fill up Cardholder Fullname.";
+      if (!this.details.name)
+        this.errors.name = "Please fill up Cardholder Fullname.";
       else this.success_card_name = true;
     },
     validateExpiry() {

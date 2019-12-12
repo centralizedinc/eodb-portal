@@ -20,7 +20,7 @@
         <a-checkbox-group v-model="selected_documents" @change="onDocumentSelect">
           <a-row>
             <a-col :span="24" v-for="(item, index) in documents" :key="index">
-              <a-checkbox :value="item.keyword">{{item.title}}</a-checkbox>
+              <a-checkbox :value="item.keyword" v-if="!item.hidden">{{item.title}}</a-checkbox>
             </a-col>
           </a-row>
         </a-checkbox-group>

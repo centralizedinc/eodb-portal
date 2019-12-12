@@ -258,7 +258,7 @@
     <!-- ------------------------------------------------ -->
     <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-    >Dolores Quezon</a-layout-footer>
+    >San Antonio, Quezon City</a-layout-footer>
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap

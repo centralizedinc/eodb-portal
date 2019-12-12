@@ -5,11 +5,11 @@
             <span style="color:#B6C2C9; font-weight:bold">TOTAL COLLECTIONS   <a-icon type="exclamation-circle"></a-icon></span>                                  
         </a-col>
         <a-col :span="12">
-            <h2 style="color: #FFFFFF">{{formatCurrency(Math.random()* 12345678.89)}}</h2>
+            <h2 style="color: #FFFFFF">{{formatCurrency(total)}}</h2>
             <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{Math.floor(Math.random()* 50)}}% compare to last week</span>                                 
         </a-col>
         <a-col :span="12">
-            <apexchart width="180" type="area" :options="chartOptions" :series="series" />
+            <apexchart width="180" type="area" :options="chartOptions" :series="trend" />
         </a-col>
         <a-col :span="24">
             <a-divider style="color:#B6C2C9"></a-divider>                                
@@ -46,13 +46,14 @@ export default {
             chartOptions: {
                 chart: {
                     type: 'line',
-                    // toolbar:{show:false},
-                    // tooltip:{enabled:false}
                     sparkline: {enabled: true}
                 },
                 stroke: {
                     width: 2,
                     curve: 'smooth'
+                },
+                tooltip: {
+                    x:{show:false}
                 },
 
                 // xaxis: {
@@ -74,6 +75,41 @@ export default {
                     },
                 }
             }
+        }
+    },
+    asyncComputed: {
+        total(){
+            return new Promise((resolve, reject)=>{
+                this.$http.get('/dashboard/collections/total')
+                .then(result=>{
+                    resolve(result.data)
+                })
+                .catch(error=>{
+                    console.error(error)
+                    resolve(0)
+                })
+            })
+        },
+        trend:{
+            get(){
+            return new Promise((resolve, reject)=>{
+                var trend = {name:'Collections', data:[]}
+                this.$http.get('/dashboard/collections/trend/3')
+                .then(result=>{
+                    if(result.data){
+                        result.data.series.forEach(elem=>{
+                            trend.data.push(elem.collection)
+                        })
+                    }
+                    resolve([trend])                        
+                })
+                .catch(error=>{
+                    console.error(error)
+                    resolve([trend])
+                })
+            })
+            },
+            default:[{name:'Collections', data:[]}]
         }
     }
 }

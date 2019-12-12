@@ -6,7 +6,7 @@
     />
     <a-affix :offsetTop="60">
       <a-tabs
-        style="background-color:#EEEEEE ; z-index:1000"
+        style="background-color: #EEEEEE; z-index:1000"
         @change="changeView"
       >
         <!-- <a-tab-pane key="0">
