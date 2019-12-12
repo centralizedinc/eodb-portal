@@ -1,41 +1,44 @@
 <template>
   <a-card style="box-shadow: 0px 0px 10px 2px #88888847; margin-top: 10vh">
     <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
-      <a-col  :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
+      <!-- <a-col :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
         <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
       <a-col :xs="6" :sm="4" :md="2" :lg="2" :xl="2" :xxl="2">
-        <a-button :style="constant_helper.theme.button" block>
+        <a-button style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )" block>
           <a-icon type="plus"></a-icon>
         </a-button>
-      </a-col>
+      </a-col>-->
     </a-row>
     <a-divider></a-divider>
+
     <a-table :columns="cols" :dataSource="transac" :loading="loading" v-if="$breakpoint.mdAndUp">
-      <template slot="permit" slot-scope="text">
+      <!-- <template slot="permit" slot-scope="text">
         <a href="javascript:;">{{text}}</a>
         <a slot="action" href="javascript:;" @click="view_data">View</a>
-      </template>
-      <template slot="application.app_type" slot-scope="text">
+      </template>-->
+      <!-- <template slot="application.app_type" slot-scope="text">
         <p v-if="text == 1">New</p>
         <p v-else>Renewal</p>
-      </template>
+      </template>-->
       <template slot="action" slot-scope="text, record">
         <div>
-          <a @click="() => view_data(record)">View</a>
+          <a @click="() => view_data(record)">Renew</a>
         </div>
       </template>
     </a-table>
-    <div v-else >
-    <a-card v-for="item in transac" :key="item" style="margin-top: 1vh">
-      <a-card-meta :title="item.application.permit_type" :description="item.progress.current_task">
-    </a-card-meta>
-      <template slot="actions">
-        <div>
-          <a @click="() => view_data(item)">View</a>
-        </div>
-      </template>
-    </a-card>
+    <div v-else>
+      <a-card v-for="item in transac" :key="item" style="margin-top: 1vh">
+        <a-card-meta
+          :title="item.application.permit_type"
+          :description="item.progress.current_task"
+        ></a-card-meta>
+        <template slot="actions">
+          <div>
+            <a @click="() => view_data(item)">Renew</a>
+          </div>
+        </template>
+      </a-card>
     </div>
     <a-drawer width="75%" placement="right" :closable="false" @close="onClose" :visible="draw_show">
       <a-menu v-model="current" mode="horizontal">
@@ -52,7 +55,8 @@
               Republic of the Philippines
               <br />
               {{constant_helper.name_display}}
-              <br />{{constant_helper.client_details.transaction_label}}
+              <br />
+              {{constant_helper.client_details.transaction_label}}
               <br />
               {{form.application.permit_type}} and Licensing Office
               <br />Telephone no. +63 42 710-8892
@@ -85,9 +89,9 @@
             <p class="inset">
               Kind of Ownership:
               <a-radio-group buttonStyle="solid" v-model="form.business.ownership" disabled="true">
-                <a-radio-button :value="1">Sole Proprietorship</a-radio-button >
-                <a-radio-button :value="2">Partnership</a-radio-button >
-                <a-radio-button :value="3">Corporation</a-radio-button >
+                <a-radio-button :value="1">Sole Proprietorship</a-radio-button>
+                <a-radio-button :value="2">Partnership</a-radio-button>
+                <a-radio-button :value="3">Corporation</a-radio-button>
               </a-radio-group>
             </p>
           </a-col>
@@ -148,9 +152,13 @@
         <a-row>
           <a-col :span="24" style="margin-top:-15px">
             <p class="inset">
-              <a-radio-group buttonStyle="solid" v-model="form.business.business_type" disabled="true">
-                <a-radio-button :value="1">Rented</a-radio-button >
-                <a-radio-button :value="2">Owned</a-radio-button >
+              <a-radio-group
+                buttonStyle="solid"
+                v-model="form.business.business_type"
+                disabled="true"
+              >
+                <a-radio-button :value="1">Rented</a-radio-button>
+                <a-radio-button :value="2">Owned</a-radio-button>
               </a-radio-group>If place of business is RENTED, please identify the following
             </p>
           </a-col>
@@ -217,11 +225,18 @@
           <a-col :span="24" style="margin-top: -15px">
             <p class="inset">
               Mode of Payment:
-              <a-radio-group buttonStyle="solid" v-model="form.business.payment.mode" disabled="true">
-                <a-radio-button :value="1">Annual/Full</a-radio-button >
-                <a-radio-button :value="2">Quarterly</a-radio-button >
+              <a-radio-group
+                buttonStyle="solid"
+                v-model="form.business.payment.mode"
+                disabled="true"
+              >
+                <a-radio-button :value="1">Annual/Full</a-radio-button>
+                <a-radio-button :value="2">Quarterly</a-radio-button>
               </a-radio-group>
-              <span style="margin-left: 1vw;">No. of Quarters <u>{{form.business.payment.qrtly}}</u></span>
+              <span style="margin-left: 1vw;">
+                No. of Quarters
+                <u>{{form.business.payment.qrtly}}</u>
+              </span>
             </p>
           </a-col>
         </a-row>
@@ -318,7 +333,7 @@
       <a-card v-show="current =='approval'">
         <a-row type="flex" :gutter="16" justify="center">
           <a-col :span="24">
-            <a-textarea rows="10" placeholder="Write remarks here..." v-model="remarks"></a-textarea>            
+            <a-textarea rows="10" placeholder="Write remarks here..." v-model="remarks"></a-textarea>
             <a-divider></a-divider>
           </a-col>
 
@@ -339,10 +354,10 @@ import { stringify } from "querystring";
 import axios from "axios";
 
 export default {
-  props:['admin'],
+  props: ["admin"],
   data() {
     return {
-      remarks:'',
+      remarks: "",
       searching: null,
       loading: false,
       store_handler: [],
@@ -442,25 +457,50 @@ export default {
       ],
       // transac: [],
       cols: [
+        // {
+        //   title: "Permit",
+        //   dataIndex: "application.permit_type"
+        // },
+        // {
+        //   title: "Type",
+        //   dataIndex: "application.app_type",
+        //   scopedSlots: { customRender: "application.app_type" }
+        // },
+        // {
+        //   title: "Status",
+        //   dataIndex: "progress.status"
+        // },
+        // {
+        //   title: "Current Task",
+        //   dataIndex: "progress.current_task"
+        // },
+        // {
+        //   title: "Action",
+        //   dataIndex: "action",
+        //   scopedSlots: { customRender: "action" }
+        // }
         {
-          title: "Permit",
-          dataIndex: "application.permit_type"
+          title: "Reference No",
+          dataIndex: "reference_no"
         },
         {
-          title: "Type",
-          dataIndex: "application.app_type",
-          scopedSlots: { customRender: "application.app_type" }
+          title: "License/Permit Applied",
+          dataIndex: "application_type"
+        },
+        {
+          title: "Date Submitted",
+          dataIndex: "date_created"
         },
         {
           title: "Status",
-          dataIndex: "progress.status"
+          dataIndex: "status"
         },
+        // {
+        //   title: "Payment Status",
+        //   dataIndex: "payment_status"
+        // },
         {
-          title: "Current Task",
-          dataIndex: "progress.current_task"
-        },
-        {
-          title: "Action",
+          title: "",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }
@@ -476,12 +516,33 @@ export default {
     // });
 
     // this.transac = JSON.parse(JSON.stringify(this.$store.state.permit.permit));
-    this.store_handler = this.$store.state.permit.permit;
-    console.log("transac data: " + JSON.stringify(this.transac));
+    var user = this.$store.state.user_session.user;
+    console.log(
+      "this.$store.state.user_session.user: " +
+        JSON.stringify(this.$store.state.user_session.user)
+    );
+    // this.store_handler = this.$store.state.permit.permit;
+    this.$store
+      .dispatch("GET_PERMIT", user.email)
+      .then(result => {
+        console.log(
+          "get dispatch get permit result data: " + JSON.stringify(result.data)
+        );
+      })
+      .catch(err => {
+        console.log("error get permit: " + err);
+      });
+    // this.store_handler = this.$store.state.permit.permits
+    // console.log("this.store_handler ")
+    // console.log("transac data: " + JSON.stringify(this.transac));
   },
-  computed:{
-    transac(){
-      return JSON.parse(JSON.stringify(this.$store.state.permit.permit));
+  computed: {
+    transac() {
+      console.log(
+        "got transac data: " + JSON.stringify(this.$store.state.permit.permits)
+      );
+      // JSON.parse(JSON.stringify(this.$store.state.permit.permits));
+      return this.$store.state.permit.permits;
     }
   },
   methods: {
@@ -510,14 +571,14 @@ export default {
     onClose() {
       this.draw_show = false;
     },
-    approve(){
+    approve() {
       this.$notification.success({
-        message: 'Success',
-        description:`Application ${this.form.reference_no} is approved.`
-      })
-      this.$store.commit('APPROVE_PERMIT', this.form.reference_no)
+        message: "Success",
+        description: `Application ${this.form.reference_no} is approved.`
+      });
+      this.$store.commit("APPROVE_PERMIT", this.form.reference_no);
       this.draw_show = false;
-      this.remarks = ''
+      this.remarks = "";
     }
   }
 };

@@ -85,7 +85,6 @@ router.route('/login')
 router
     .route('/signup')
     .post(function (req, res, next) {
-
         passport.authenticate('signup', function (err, user, info) {
             console.log("passport signup auth user: " + JSON.stringify(user))
             console.log("passport signup auth err: " + JSON.stringify(err))
@@ -112,7 +111,7 @@ router
     .route('/confirmation/setup')
     .get((req, res) => {
         const account_id = jwt.decode(req.headers.access_token).account_id;
-        AccountDao.modifyByAccountId(account_id, {
+        AccountDao.modifyById(account_id, {
             status: 2
         })
             .then((model) => res.json({
@@ -138,6 +137,7 @@ router
                 }
             })
         }
+        console.log('confirmation data :', data);
         if (data) {
             const {
                 account_id,
@@ -152,7 +152,7 @@ router
                 })
             }
 
-            AccountDao.modifyByAccountId(account_id, {
+            AccountDao.modifyById(account_id, {
                 status: 1,
                 confirmation_url: null
             })

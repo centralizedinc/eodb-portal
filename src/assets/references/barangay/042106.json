@@ -1,0 +1,602 @@
+[
+    {
+        "id":9986,
+        "brgyCode":"042106003",
+        "brgyDesc":"Burol",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9987,
+        "brgyCode":"042106005",
+        "brgyDesc":"Langkaan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9988,
+        "brgyCode":"042106008",
+        "brgyDesc":"Paliparan I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9989,
+        "brgyCode":"042106010",
+        "brgyDesc":"Sabang",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9990,
+        "brgyCode":"042106011",
+        "brgyDesc":"Salawag",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9991,
+        "brgyCode":"042106012",
+        "brgyDesc":"Salitran I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9992,
+        "brgyCode":"042106013",
+        "brgyDesc":"Sampaloc I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9993,
+        "brgyCode":"042106014",
+        "brgyDesc":"San Agustin I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9994,
+        "brgyCode":"042106015",
+        "brgyDesc":"San Jose",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9995,
+        "brgyCode":"042106016",
+        "brgyDesc":"Zone I (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9996,
+        "brgyCode":"042106017",
+        "brgyDesc":"Zone II (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9997,
+        "brgyCode":"042106018",
+        "brgyDesc":"Zone III (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9998,
+        "brgyCode":"042106019",
+        "brgyDesc":"Zone IV (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":9999,
+        "brgyCode":"042106020",
+        "brgyDesc":"Datu Esmael (Bago-a-ingud)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10000,
+        "brgyCode":"042106021",
+        "brgyDesc":"Emmanuel Bergado I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10001,
+        "brgyCode":"042106022",
+        "brgyDesc":"Fatima I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10002,
+        "brgyCode":"042106023",
+        "brgyDesc":"Luzviminda I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10003,
+        "brgyCode":"042106024",
+        "brgyDesc":"Saint Peter I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10004,
+        "brgyCode":"042106025",
+        "brgyDesc":"San Andres I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10005,
+        "brgyCode":"042106026",
+        "brgyDesc":"San Antonio De Padua I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10006,
+        "brgyCode":"042106027",
+        "brgyDesc":"San Dionisio (Barangay 1)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10007,
+        "brgyCode":"042106028",
+        "brgyDesc":"San Esteban (Barangay 4)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10008,
+        "brgyCode":"042106029",
+        "brgyDesc":"San Francisco I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10009,
+        "brgyCode":"042106030",
+        "brgyDesc":"San Isidro Labrador I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10010,
+        "brgyCode":"042106031",
+        "brgyDesc":"San Juan (San Juan I)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10011,
+        "brgyCode":"042106032",
+        "brgyDesc":"San Lorenzo Ruiz I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10012,
+        "brgyCode":"042106033",
+        "brgyDesc":"San Luis I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10013,
+        "brgyCode":"042106034",
+        "brgyDesc":"San Manuel I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10014,
+        "brgyCode":"042106035",
+        "brgyDesc":"San Mateo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10015,
+        "brgyCode":"042106036",
+        "brgyDesc":"San Miguel",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10016,
+        "brgyCode":"042106037",
+        "brgyDesc":"San Nicolas I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10017,
+        "brgyCode":"042106038",
+        "brgyDesc":"San Roque (Sta. Cristina II)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10018,
+        "brgyCode":"042106039",
+        "brgyDesc":"San Simon (Barangay 7)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10019,
+        "brgyCode":"042106040",
+        "brgyDesc":"Santa Cristina I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10020,
+        "brgyCode":"042106041",
+        "brgyDesc":"Santa Cruz I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10021,
+        "brgyCode":"042106042",
+        "brgyDesc":"Santa Fe",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10022,
+        "brgyCode":"042106043",
+        "brgyDesc":"Santa Lucia (San Juan II)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10023,
+        "brgyCode":"042106044",
+        "brgyDesc":"Santa Maria (Barangay 20)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10024,
+        "brgyCode":"042106045",
+        "brgyDesc":"Santo Cristo (Barangay 3)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10025,
+        "brgyCode":"042106046",
+        "brgyDesc":"Santo Niño I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10026,
+        "brgyCode":"042106047",
+        "brgyDesc":"Burol I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10027,
+        "brgyCode":"042106048",
+        "brgyDesc":"Burol II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10028,
+        "brgyCode":"042106049",
+        "brgyDesc":"Burol III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10029,
+        "brgyCode":"042106050",
+        "brgyDesc":"Emmanuel Bergado II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10030,
+        "brgyCode":"042106051",
+        "brgyDesc":"Fatima II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10031,
+        "brgyCode":"042106052",
+        "brgyDesc":"Fatima III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10032,
+        "brgyCode":"042106053",
+        "brgyDesc":"Langkaan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10033,
+        "brgyCode":"042106054",
+        "brgyDesc":"Luzviminda II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10034,
+        "brgyCode":"042106055",
+        "brgyDesc":"Paliparan II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10035,
+        "brgyCode":"042106056",
+        "brgyDesc":"Paliparan III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10036,
+        "brgyCode":"042106057",
+        "brgyDesc":"Saint Peter II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10037,
+        "brgyCode":"042106058",
+        "brgyDesc":"Salitran II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10038,
+        "brgyCode":"042106059",
+        "brgyDesc":"Salitran III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10039,
+        "brgyCode":"042106060",
+        "brgyDesc":"Salitran IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10040,
+        "brgyCode":"042106061",
+        "brgyDesc":"Sampaloc II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10041,
+        "brgyCode":"042106062",
+        "brgyDesc":"Sampaloc III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10042,
+        "brgyCode":"042106063",
+        "brgyDesc":"Sampaloc IV",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10043,
+        "brgyCode":"042106064",
+        "brgyDesc":"Sampaloc V",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10044,
+        "brgyCode":"042106065",
+        "brgyDesc":"San Agustin II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10045,
+        "brgyCode":"042106066",
+        "brgyDesc":"San Agustin III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10046,
+        "brgyCode":"042106067",
+        "brgyDesc":"San Andres II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10047,
+        "brgyCode":"042106068",
+        "brgyDesc":"San Antonio De Padua II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10048,
+        "brgyCode":"042106069",
+        "brgyDesc":"San Francisco II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10049,
+        "brgyCode":"042106070",
+        "brgyDesc":"San Isidro Labrador II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10050,
+        "brgyCode":"042106071",
+        "brgyDesc":"San Lorenzo Ruiz II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10051,
+        "brgyCode":"042106072",
+        "brgyDesc":"San Luis II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10052,
+        "brgyCode":"042106073",
+        "brgyDesc":"San Manuel II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10053,
+        "brgyCode":"042106074",
+        "brgyDesc":"San Miguel II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10054,
+        "brgyCode":"042106075",
+        "brgyDesc":"San Nicolas II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10055,
+        "brgyCode":"042106076",
+        "brgyDesc":"Santa Cristina II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10056,
+        "brgyCode":"042106077",
+        "brgyDesc":"Santa Cruz II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10057,
+        "brgyCode":"042106078",
+        "brgyDesc":"Santo Niño II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10058,
+        "brgyCode":"042106079",
+        "brgyDesc":"Zone I-B",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10059,
+        "brgyCode":"042106080",
+        "brgyDesc":"H-2",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        },
+        {
+        "id":10060,
+        "brgyCode":"042106081",
+        "brgyDesc":"Victoria Reyes",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042106"
+        }
+]

@@ -14,55 +14,83 @@
             :src="constant_helper.home_header.logo"
             :size="50"
           ></a-avatar>
-        </a-col> 
+        </a-col>
         <a-col :xs="0" :sm="0" :md="0" :lg="4">
           <h3
             style="color:white; margin-left: -6vh; cursor:pointer"
             @click="$router.push('/')"
-          >{{constant_helper.home_header.label}}</h3>
+          >
+            {{ constant_helper.home_header.label }}
+          </h3>
         </a-col>
-        
+
         <!-- <a-col :md="2" :lg="0" :push="22">
           <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
         </a-col> -->
       </a-row>
-      
     </a-layout-header>
-    <a-layout-content >
-        <div :style="`background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat;
-            background-size: cover`">
-      <a-row style="height:100vh;background-color:#0912195c" type="flex" justify="center" align="middle">
+    <a-layout-content>
+      <div
+        :style="
+          `background-image:url('https://picsum.photos/800?grayscale'); height:100%;background-repeat: no-repeat;
+            background-size: cover`
+        "
+      >
+        <a-row
+          style="height:100vh;background-color:#0912195c"
+          type="flex"
+          justify="center"
+          align="middle"
+        >
           <a-col :span="6">
-            <span style="color:#ffffff;font-size: 28px; font-weight:bold">Administrator Login <a-icon type="lock"></a-icon></span>
+            <span style="color:#ffffff;font-size: 28px; font-weight:bold"
+              >Administrator Login <a-icon type="lock"></a-icon
+            ></span>
             <p style="color:#ffffff;font-size: 12px;">For Official Use Only</p>
-              <!-- <a-card style="background: rgba(59, 79, 99, 0.62)"> -->
-                  <!-- <template slot="title">
+            <!-- <a-card style="background: rgba(59, 79, 99, 0.62)"> -->
+            <!-- <template slot="title">
               
             </template> -->
             <a-form>
               <a-form-item>
-                <a-input size="large" placeholder="Email Address" v-model="credentials.email">
+                <a-input
+                  size="large"
+                  placeholder="Email Address"
+                  v-model="credentials.email"
+                >
                   <a-icon slot="prefix" type="mail" />
                 </a-input>
               </a-form-item>
               <a-form-item>
-                <a-input size="large" placeholder="Enter Password" :type="reveal?'text':'password'" v-model="credentials.password">
+                <a-input
+                  size="large"
+                  placeholder="Enter Password"
+                  :type="reveal ? 'text' : 'password'"
+                  v-model="credentials.password"
+                >
                   <a-icon slot="prefix" type="lock" />
                   <a-icon
                     slot="suffix"
-                    :type="reveal?'eye':'eye-invisible'"
-                    @click="reveal=!reveal"
+                    :type="reveal ? 'eye' : 'eye-invisible'"
+                    @click="reveal = !reveal"
                     style="cursor:pointer"
                   />
                 </a-input>
               </a-form-item>
               <a-divider></a-divider>
-              <a-button size="large" type="primary" block @click="login" :loading="loading">Login</a-button>
-              </a-form>
-              <!-- </a-card> -->
+              <a-button
+                size="large"
+                type="primary"
+                block
+                @click="login"
+                :loading="loading"
+                >Login</a-button
+              >
+            </a-form>
+            <!-- </a-card> -->
           </a-col>
-      </a-row>
-        </div>
+        </a-row>
+      </div>
     </a-layout-content>
     <a-layout-footer style="background: #242B30; color: #ffffff">
       <a-row>
@@ -111,56 +139,54 @@
 export default {
   data() {
     return {
-      loading:false,
-      credentials:{},
+      loading: false,
+      credentials: {},
       topLocation: 0,
-      reveal: false,
+      reveal: false
     };
   },
   methods: {
     handleScroll(event) {
       this.topLocation = window.top.scrollY;
     },
-    login(){
+    login() {
       this.loading = true;
-      this.$http.post('/admin/auth', this.credentials)
-      .then(result=>{
-        this.loading = false;
-        console.log('result', JSON.stringify(result.data))
-        if(result && result.data && result.data.model && result.data.model.is_authenticated){
-          var _self=this
-          this.$notification.success(
-            {
+      this.$http
+        .post("/admin/auth", this.credentials)
+        .then(result => {
+          this.loading = false;
+          console.log("result", JSON.stringify(result.data));
+          if (
+            result &&
+            result.data &&
+            result.data.model &&
+            result.data.model.is_authenticated
+          ) {
+            var _self = this;
+            this.$notification.success({
               message: `Welcome ${_self.credentials.email}!`,
               description: `You have successfully login at ${new Date()}`
-            }
-          )
-          this.$store.commit('ADMIN_LOGIN', result.data.model.account)
-          this.$router.push('/admin/app')
-        }else{
-          this.credentials = {}
-          this.$notification.error(
-          {
-            message: 'Unauthorized!',
-            description: 'Invalid Credentials. Please try again.'
+            });
+            this.$store.commit("ADMIN_LOGIN", result.data.model.account);
+            this.$router.push("/admin/app");
+          } else {
+            this.credentials = {};
+            this.$notification.error({
+              message: "Unauthorized!",
+              description: "Invalid Credentials. Please try again."
+            });
           }
-        )
-        }
-        
-      })
-      .catch(error=>{
-        this.loading = false;
-        console.error(error)
-        this.credentials = {}
-        this.$notification.error(
-          {
-            message: 'Unauthorized!',
-            description: 'Invalid Credentials. Please try again.'
-          }
-        )
-      })
+        })
+        .catch(error => {
+          this.loading = false;
+          console.error(error);
+          this.credentials = {};
+          this.$notification.error({
+            message: "Unauthorized!",
+            description: "Invalid Credentials. Please try again."
+          });
+        });
     }
-    
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
@@ -181,5 +207,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

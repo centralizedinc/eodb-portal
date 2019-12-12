@@ -22,7 +22,7 @@ import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
 
 var printers = {
-  BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT
+BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT
 };
 
 // var printers = {

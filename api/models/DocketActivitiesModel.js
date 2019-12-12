@@ -13,12 +13,13 @@ var DocketActivitiesSchema = new mongoose.Schema({
         type: String
     },
     status: {
-        type: Number,
-        default: 0
+        type: String
         /**
-         * 0 - In Progress
-         * 1 - Done
-         * 2 - Rejected
+         * claim
+         * approve
+         * reject
+         * compliance
+         * done
          */
     },
     remarks: {
@@ -27,10 +28,7 @@ var DocketActivitiesSchema = new mongoose.Schema({
     date_created: {
         type: Date,
         default: new Date()
-    },
-    created_by: {
-        type: String
     }
 })
 
-module.exports = mongoose.model('activities', DocketActivitiesSchema)
+module.exports = mongoose.model('docket_activities', DocketActivitiesSchema)

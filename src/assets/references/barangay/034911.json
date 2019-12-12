@@ -1,0 +1,514 @@
+[
+    {
+        "id": 6689,
+        "brgyCode": "034911001",
+        "brgyDesc": "Agcano",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6690,
+        "brgyCode": "034911002",
+        "brgyDesc": "Ayos Lomboy",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6691,
+        "brgyCode": "034911003",
+        "brgyDesc": "Bacayao",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6692,
+        "brgyCode": "034911004",
+        "brgyDesc": "Bagong Barrio",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6693,
+        "brgyCode": "034911005",
+        "brgyDesc": "Balbalino",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6694,
+        "brgyCode": "034911006",
+        "brgyDesc": "Balingog East",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6695,
+        "brgyCode": "034911007",
+        "brgyDesc": "Balingog West",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6696,
+        "brgyCode": "034911008",
+        "brgyDesc": "Banitan",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6697,
+        "brgyCode": "034911009",
+        "brgyDesc": "Bantug",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6698,
+        "brgyCode": "034911011",
+        "brgyDesc": "Bulakid",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6699,
+        "brgyCode": "034911014",
+        "brgyDesc": "Caballero",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6700,
+        "brgyCode": "034911015",
+        "brgyDesc": "Cabaruan",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6701,
+        "brgyCode": "034911016",
+        "brgyDesc": "Caingin Tabing Ilog",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6702,
+        "brgyCode": "034911017",
+        "brgyDesc": "Calem",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6703,
+        "brgyCode": "034911018",
+        "brgyDesc": "Camiling",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6704,
+        "brgyCode": "034911019",
+        "brgyDesc": "Cardinal",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6705,
+        "brgyCode": "034911020",
+        "brgyDesc": "Casongsong",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6706,
+        "brgyCode": "034911021",
+        "brgyDesc": "Catimon",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6707,
+        "brgyCode": "034911022",
+        "brgyDesc": "Cavite",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6708,
+        "brgyCode": "034911023",
+        "brgyDesc": "Cawayan Bugtong",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6709,
+        "brgyCode": "034911024",
+        "brgyDesc": "Consuelo",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6710,
+        "brgyCode": "034911025",
+        "brgyDesc": "Culong",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6711,
+        "brgyCode": "034911026",
+        "brgyDesc": "Escano",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6712,
+        "brgyCode": "034911027",
+        "brgyDesc": "Faigal",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6713,
+        "brgyCode": "034911028",
+        "brgyDesc": "Galvan",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6714,
+        "brgyCode": "034911029",
+        "brgyDesc": "Guiset",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6715,
+        "brgyCode": "034911030",
+        "brgyDesc": "Lamorito",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6716,
+        "brgyCode": "034911031",
+        "brgyDesc": "Lennec",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6717,
+        "brgyCode": "034911032",
+        "brgyDesc": "Macamias",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6718,
+        "brgyCode": "034911033",
+        "brgyDesc": "Macapabellag",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6719,
+        "brgyCode": "034911034",
+        "brgyDesc": "Macatcatuit",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6720,
+        "brgyCode": "034911035",
+        "brgyDesc": "Manacsac",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6721,
+        "brgyCode": "034911036",
+        "brgyDesc": "Manggang Marikit",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6722,
+        "brgyCode": "034911038",
+        "brgyDesc": "Maturanoc",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6723,
+        "brgyCode": "034911039",
+        "brgyDesc": "Maybubon",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6724,
+        "brgyCode": "034911041",
+        "brgyDesc": "Naglabrahan",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6725,
+        "brgyCode": "034911042",
+        "brgyDesc": "Nagpandayan",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6726,
+        "brgyCode": "034911043",
+        "brgyDesc": "Narvacan I",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6727,
+        "brgyCode": "034911044",
+        "brgyDesc": "Narvacan II",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6728,
+        "brgyCode": "034911045",
+        "brgyDesc": "Pacac",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6729,
+        "brgyCode": "034911046",
+        "brgyDesc": "Partida I",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6730,
+        "brgyCode": "034911047",
+        "brgyDesc": "Partida II",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6731,
+        "brgyCode": "034911048",
+        "brgyDesc": "Pasong Inchic",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6732,
+        "brgyCode": "034911049",
+        "brgyDesc": "Saint John District (Pob.)",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6733,
+        "brgyCode": "034911050",
+        "brgyDesc": "San Agustin",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6734,
+        "brgyCode": "034911051",
+        "brgyDesc": "San Andres",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6735,
+        "brgyCode": "034911052",
+        "brgyDesc": "San Bernardino",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6736,
+        "brgyCode": "034911053",
+        "brgyDesc": "San Marcelino",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6737,
+        "brgyCode": "034911054",
+        "brgyDesc": "San Miguel",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6738,
+        "brgyCode": "034911055",
+        "brgyDesc": "San Rafael",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6739,
+        "brgyCode": "034911056",
+        "brgyDesc": "San Roque",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6740,
+        "brgyCode": "034911057",
+        "brgyDesc": "Santa Ana",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6741,
+        "brgyCode": "034911058",
+        "brgyDesc": "Santa Cruz",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6742,
+        "brgyCode": "034911059",
+        "brgyDesc": "Santa Lucia",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6743,
+        "brgyCode": "034911060",
+        "brgyDesc": "Santa Veronica District (Pob.)",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6744,
+        "brgyCode": "034911061",
+        "brgyDesc": "Santo Cristo District (Pob.)",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6745,
+        "brgyCode": "034911062",
+        "brgyDesc": "Saranay District (Pob.)",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6746,
+        "brgyCode": "034911063",
+        "brgyDesc": "Sinulatan",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6747,
+        "brgyCode": "034911064",
+        "brgyDesc": "Subol",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6748,
+        "brgyCode": "034911065",
+        "brgyDesc": "Tampac I",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6749,
+        "brgyCode": "034911066",
+        "brgyDesc": "Tampac II & III",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6750,
+        "brgyCode": "034911068",
+        "brgyDesc": "Triala",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6751,
+        "brgyCode": "034911069",
+        "brgyDesc": "Yuson",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 6752,
+        "brgyCode": "034911070",
+        "brgyDesc": "Bunol",
+        "regCode": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    }
+]

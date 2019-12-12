@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import AsyncComputed from 'vue-async-computed'
 import './registerServiceWorker'
 import './plugins/ant-design-vue.js'
 import aos from 'aos'
@@ -15,6 +16,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import VueGeolocation from 'vue-browser-geolocation';
 import mixins from './plugins/mixins';
 
+Vue.use(AsyncComputed);
 Vue.config.productionTip = false
 Vue.use(mixins);
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API_URI

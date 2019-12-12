@@ -1,0 +1,674 @@
+[
+    {
+        "id":9902,
+        "brgyCode":"042105001",
+        "brgyDesc":"Barangay 1 (Hen. M. Alvarez)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9903,
+        "brgyCode":"042105002",
+        "brgyDesc":"Barangay 10 (Kingfisher)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9904,
+        "brgyCode":"042105003",
+        "brgyDesc":"Barangay 2 (C. Tirona)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9905,
+        "brgyCode":"042105004",
+        "brgyDesc":"Barangay 11 (Lawin)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9906,
+        "brgyCode":"042105005",
+        "brgyDesc":"Barangay 12 (Love Bird)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9907,
+        "brgyCode":"042105006",
+        "brgyDesc":"Barangay 13 (Aguila)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9908,
+        "brgyCode":"042105007",
+        "brgyDesc":"Barangay 14 (Loro)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9909,
+        "brgyCode":"042105008",
+        "brgyDesc":"Barangay 15 (Kilyawan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9910,
+        "brgyCode":"042105009",
+        "brgyDesc":"Barangay 16 (Martines)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9911,
+        "brgyCode":"042105010",
+        "brgyDesc":"Barangay 17 (Kalapati)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9912,
+        "brgyCode":"042105011",
+        "brgyDesc":"Barangay 18 (Maya)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9913,
+        "brgyCode":"042105012",
+        "brgyDesc":"Barangay 19 (Gemini)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9914,
+        "brgyCode":"042105013",
+        "brgyDesc":"Barangay 20 (Virgo)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9915,
+        "brgyCode":"042105014",
+        "brgyDesc":"Barangay 21 (Scorpio)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9916,
+        "brgyCode":"042105015",
+        "brgyDesc":"Barangay 22 (Leo)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9917,
+        "brgyCode":"042105016",
+        "brgyDesc":"Barangay 23 (Aquarius)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9918,
+        "brgyCode":"042105017",
+        "brgyDesc":"Barangay 24 (Libra)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9919,
+        "brgyCode":"042105018",
+        "brgyDesc":"Barangay 25 (Capricorn)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9920,
+        "brgyCode":"042105019",
+        "brgyDesc":"Barangay 26 (Cancer)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9921,
+        "brgyCode":"042105020",
+        "brgyDesc":"Barangay 27 (Sagitarius)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9922,
+        "brgyCode":"042105021",
+        "brgyDesc":"Barangay 28 (Taurus)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9923,
+        "brgyCode":"042105022",
+        "brgyDesc":"Barangay 29 (Lao-lao)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9924,
+        "brgyCode":"042105023",
+        "brgyDesc":"Barangay 3 (Hen. E. Aguinaldo)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9925,
+        "brgyCode":"042105024",
+        "brgyDesc":"Barangay 30 (Bid-bid)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9926,
+        "brgyCode":"042105025",
+        "brgyDesc":"Barangay 31 (Maya-maya)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9927,
+        "brgyCode":"042105026",
+        "brgyDesc":"Barangay 32 (Salay-salay)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9928,
+        "brgyCode":"042105027",
+        "brgyDesc":"Barangay 33 (Buwan-buwan)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9929,
+        "brgyCode":"042105028",
+        "brgyDesc":"Barangay 34 (Lapu-lapu)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9930,
+        "brgyCode":"042105029",
+        "brgyDesc":"Barangay 35 (Hasa-hasa)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9931,
+        "brgyCode":"042105030",
+        "brgyDesc":"Barangay 36 (Sap-sap)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9932,
+        "brgyCode":"042105031",
+        "brgyDesc":"Barangay 37 (Cadena De Amor)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9933,
+        "brgyCode":"042105032",
+        "brgyDesc":"Barangay 38 (Sampaguita)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9934,
+        "brgyCode":"042105033",
+        "brgyDesc":"Barangay 39 (Jasmin)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9935,
+        "brgyCode":"042105034",
+        "brgyDesc":"Barangay 4 (Hen. M. Trias)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9936,
+        "brgyCode":"042105035",
+        "brgyDesc":"Barangay 40 (Gumamela)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9937,
+        "brgyCode":"042105036",
+        "brgyDesc":"Barangay 41 (Rosal)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9938,
+        "brgyCode":"042105037",
+        "brgyDesc":"Barangay 42 (Pinagbuklod)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9939,
+        "brgyCode":"042105038",
+        "brgyDesc":"Barangay 43 (Pinagpala)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9940,
+        "brgyCode":"042105039",
+        "brgyDesc":"Barangay 44 (Maligaya)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9941,
+        "brgyCode":"042105040",
+        "brgyDesc":"Barangay 45 (Kaunlaran)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9942,
+        "brgyCode":"042105041",
+        "brgyDesc":"Barangay 46 (Sinagtala)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9943,
+        "brgyCode":"042105042",
+        "brgyDesc":"Barangay 47 (Pagkakaisa)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9944,
+        "brgyCode":"042105043",
+        "brgyDesc":"Barangay 48 (Narra)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9945,
+        "brgyCode":"042105044",
+        "brgyDesc":"Barangay 49 (Akasya)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9946,
+        "brgyCode":"042105045",
+        "brgyDesc":"Barangay 5 (Hen. E. Evangelista)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9947,
+        "brgyCode":"042105046",
+        "brgyDesc":"Barangay 50 (Kabalyero)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9948,
+        "brgyCode":"042105047",
+        "brgyDesc":"Barangay 51 (Kamagong)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9949,
+        "brgyCode":"042105048",
+        "brgyDesc":"Barangay 52 (Ipil)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9950,
+        "brgyCode":"042105049",
+        "brgyDesc":"Barangay 53 (Yakal)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9951,
+        "brgyCode":"042105050",
+        "brgyDesc":"Barangay 54 (Pechay)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9952,
+        "brgyCode":"042105051",
+        "brgyDesc":"Barangay 55 (Ampalaya)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9953,
+        "brgyCode":"042105052",
+        "brgyDesc":"Barangay 56 (Labanos)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9954,
+        "brgyCode":"042105053",
+        "brgyDesc":"Barangay 57 (Repolyo)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9955,
+        "brgyCode":"042105054",
+        "brgyDesc":"Barangay 58 (Patola)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9956,
+        "brgyCode":"042105055",
+        "brgyDesc":"Barangay 59 (Sitaw)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9957,
+        "brgyCode":"042105056",
+        "brgyDesc":"Barangay 6 (Diego Silang)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9958,
+        "brgyCode":"042105057",
+        "brgyDesc":"Barangay 60 (Letsugas)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9959,
+        "brgyCode":"042105058",
+        "brgyDesc":"Barangay 61 (Talong)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9960,
+        "brgyCode":"042105059",
+        "brgyDesc":"Barangay 62 (Kangkong)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9961,
+        "brgyCode":"042105060",
+        "brgyDesc":"Barangay 7 (Kapitan Kong)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9962,
+        "brgyCode":"042105061",
+        "brgyDesc":"Barangay 8 (Manuel S. Rojas)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9963,
+        "brgyCode":"042105062",
+        "brgyDesc":"Barangay 9 (Kanaway)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9964,
+        "brgyCode":"042105063",
+        "brgyDesc":"Barangay 10-A (Kingfisher-A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9965,
+        "brgyCode":"042105064",
+        "brgyDesc":"Barangay 10-B (Kingfisher-B)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9966,
+        "brgyCode":"042105065",
+        "brgyDesc":"Barangay 22-A (Leo A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9967,
+        "brgyCode":"042105066",
+        "brgyDesc":"Barangay 29-A (Lao-lao A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9968,
+        "brgyCode":"042105067",
+        "brgyDesc":"Barangay 36-A (Sap-sap A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9969,
+        "brgyCode":"042105068",
+        "brgyDesc":"Barangay 37-A (Cadena de Amor A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9970,
+        "brgyCode":"042105069",
+        "brgyDesc":"Barangay 38-A (Sampaguita A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9971,
+        "brgyCode":"042105070",
+        "brgyDesc":"Barangay 42-A (Pinagbuklod A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9972,
+        "brgyCode":"042105071",
+        "brgyDesc":"Barangay 42-B (Pinagbuklod B)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9973,
+        "brgyCode":"042105072",
+        "brgyDesc":"Barangay 42-C (Pinagbuklod C)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9974,
+        "brgyCode":"042105073",
+        "brgyDesc":"Barangay 45-A (Kaunlaran A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9975,
+        "brgyCode":"042105074",
+        "brgyDesc":"Barangay 47-A (Pagkakaisa A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9976,
+        "brgyCode":"042105075",
+        "brgyDesc":"Barangay 47-B (Pagkakaisa B)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9977,
+        "brgyCode":"042105076",
+        "brgyDesc":"Barangay 48-A (Narra A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9978,
+        "brgyCode":"042105077",
+        "brgyDesc":"Barangay 49-A (Akasya A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9979,
+        "brgyCode":"042105078",
+        "brgyDesc":"Barangay 53-A (Yakal A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9980,
+        "brgyCode":"042105079",
+        "brgyDesc":"Barangay 53-B (Yakal B)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9981,
+        "brgyCode":"042105080",
+        "brgyDesc":"Barangay 54-A (Pechay A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9982,
+        "brgyCode":"042105081",
+        "brgyDesc":"Barangay 58-A (Patola A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9983,
+        "brgyCode":"042105082",
+        "brgyDesc":"Barangay 61-A (Talong A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9984,
+        "brgyCode":"042105083",
+        "brgyDesc":"Barangay 62-A (Kangkong A)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        },
+        {
+        "id":9985,
+        "brgyCode":"042105084",
+        "brgyDesc":"Barangay 62-B (Kangkong B)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042105"
+        }
+]

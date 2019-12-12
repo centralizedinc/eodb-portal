@@ -6,25 +6,29 @@ export default {
         Vue.mixin({
             data() {
                 return {
-                    constant_helper
+                    constant_helper,
+                    fixed_address: true,
+                    fixed_postal: true
                 }
             },
             methods: {
                 deepCopy(obj) {
                     return JSON.parse(JSON.stringify(obj));
                 },
-                getPlatformIcon(platform){
+                getPlatformIcon(platform) {
                     console.log('platform::::', platform)
-                    if(platform === 'facebook' || platform === 'google'){
+                    if (platform === 'facebook' || platform === 'google') {
                         return platform
-                    }else{
+                    } else {
                         return 'mail';
                     }
                 },
-                formatDate(date, type) {
+                formatDate(date, type, allow_blank_date) {
                     var dt = new Date();
                     if (date) {
                         dt = new Date(date)
+                    } else if (allow_blank_date && !date) {
+                        return "";
                     }
                     if (!type) {
                         type = {
@@ -52,6 +56,12 @@ export default {
                         minimumFractionDigits: 2
                     })
                     return formatter.format(amount)
+                },
+                getDocketStatus(status) {
+                    return ['In-progress', 'Done', 'Rejected'][status]
+                },
+                getDocketMode(mode) {
+                    return ['NEW', 'RENEWAL'][mode]
                 }
             },
         })

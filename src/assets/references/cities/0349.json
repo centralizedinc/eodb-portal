@@ -1,0 +1,258 @@
+[
+    {
+        "id": 255,
+        "psgcCode": "034901000",
+        "citymunDesc": "ALIAGA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034901"
+    },
+    {
+        "id": 256,
+        "psgcCode": "034902000",
+        "citymunDesc": "BONGABON",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034902"
+    },
+    {
+        "id": 257,
+        "psgcCode": "034903000",
+        "citymunDesc": "CABANATUAN CITY",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034903"
+    },
+    {
+        "id": 258,
+        "psgcCode": "034904000",
+        "citymunDesc": "CABIAO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034904"
+    },
+    {
+        "id": 259,
+        "psgcCode": "034905000",
+        "citymunDesc": "CARRANGLAN",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034905"
+    },
+    {
+        "id": 260,
+        "psgcCode": "034906000",
+        "citymunDesc": "CUYAPO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034906"
+    },
+    {
+        "id": 261,
+        "psgcCode": "034907000",
+        "citymunDesc": "GABALDON (BITULOK & SABANI)",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034907"
+    },
+    {
+        "id": 262,
+        "psgcCode": "034908000",
+        "citymunDesc": "CITY OF GAPAN",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034908"
+    },
+    {
+        "id": 263,
+        "psgcCode": "034909000",
+        "citymunDesc": "GENERAL MAMERTO NATIVIDAD",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034909"
+    },
+    {
+        "id": 264,
+        "psgcCode": "034910000",
+        "citymunDesc": "GENERAL TINIO (PAPAYA)",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034910"
+    },
+    {
+        "id": 265,
+        "psgcCode": "034911000",
+        "citymunDesc": "GUIMBA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034911"
+    },
+    {
+        "id": 266,
+        "psgcCode": "034912000",
+        "citymunDesc": "JAEN",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034912"
+    },
+    {
+        "id": 267,
+        "psgcCode": "034913000",
+        "citymunDesc": "LAUR",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034913"
+    },
+    {
+        "id": 268,
+        "psgcCode": "034914000",
+        "citymunDesc": "LICAB",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034914"
+    },
+    {
+        "id": 269,
+        "psgcCode": "034915000",
+        "citymunDesc": "LLANERA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034915"
+    },
+    {
+        "id": 270,
+        "psgcCode": "034916000",
+        "citymunDesc": "LUPAO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034916"
+    },
+    {
+        "id": 271,
+        "psgcCode": "034917000",
+        "citymunDesc": "SCIENCE CITY OF MUÑOZ",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034917"
+    },
+    {
+        "id": 272,
+        "psgcCode": "034918000",
+        "citymunDesc": "NAMPICUAN",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034918"
+    },
+    {
+        "id": 273,
+        "psgcCode": "034919000",
+        "citymunDesc": "PALAYAN CITY (Capital)",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034919"
+    },
+    {
+        "id": 274,
+        "psgcCode": "034920000",
+        "citymunDesc": "PANTABANGAN",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034920"
+    },
+    {
+        "id": 275,
+        "psgcCode": "034921000",
+        "citymunDesc": "PEÑARANDA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034921"
+    },
+    {
+        "id": 276,
+        "psgcCode": "034922000",
+        "citymunDesc": "QUEZON",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034922"
+    },
+    {
+        "id": 277,
+        "psgcCode": "034923000",
+        "citymunDesc": "RIZAL",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034923"
+    },
+    {
+        "id": 278,
+        "psgcCode": "034924000",
+        "citymunDesc": "SAN ANTONIO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034924"
+    },
+    {
+        "id": 279,
+        "psgcCode": "034925000",
+        "citymunDesc": "SAN ISIDRO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034925"
+    },
+    {
+        "id": 280,
+        "psgcCode": "034926000",
+        "citymunDesc": "SAN JOSE CITY",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034926"
+    },
+    {
+        "id": 281,
+        "psgcCode": "034927000",
+        "citymunDesc": "SAN LEONARDO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034927"
+    },
+    {
+        "id": 282,
+        "psgcCode": "034928000",
+        "citymunDesc": "SANTA ROSA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034928"
+    },
+    {
+        "id": 283,
+        "psgcCode": "034929000",
+        "citymunDesc": "SANTO DOMINGO",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034929"
+    },
+    {
+        "id": 284,
+        "psgcCode": "034930000",
+        "citymunDesc": "TALAVERA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034930"
+    },
+    {
+        "id": 285,
+        "psgcCode": "034931000",
+        "citymunDesc": "TALUGTUG",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034931"
+    },
+    {
+        "id": 286,
+        "psgcCode": "034932000",
+        "citymunDesc": "ZARAGOZA",
+        "regDesc": "03",
+        "provCode": "0349",
+        "citymunCode": "034932"
+    }
+]

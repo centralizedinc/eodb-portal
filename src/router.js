@@ -11,6 +11,8 @@ function isAuthenticated(to, from, next) {
     if(store.state.admin_session.locked){
       next('/admin/lock')
     }else{
+      // console.log('dropping breadcrumbs::::')
+      store.commit('DROP_BREADCRUMBS', {name:to.name, path:to.path})
       next()
     }    
   }else{
@@ -22,10 +24,26 @@ function isAuthenticated(to, from, next) {
 function checkSession(to, from, next){
   console.log(from)
   if(store.state.admin_session.admin.token){
-    next(from.path)
+    next('/admin/app')
   }else{
     next()
   }
+}
+
+function isUserAppAuthenticated(to, from, next) {
+  const status = store.state.user_session && store.state.user_session.user && store.state.user_session.user.status ? parseInt(store.state.user_session.user.status) : 0;
+  const is_authenticated = store.state.user_session.token && status > 0;
+  console.log('APP is_authenticated :', is_authenticated);
+  if (is_authenticated) next(true);
+  else next("/");
+}
+
+function isUserHomeAuthenticated(to, from, next) {
+  const status = store.state.user_session && store.state.user_session.user && store.state.user_session.user.status ? parseInt(store.state.user_session.user.status) : 0;
+  const is_authenticated = store.state.user_session.token && status > 0;
+  console.log('HOME is_authenticated :', is_authenticated);
+  if (is_authenticated) next("/app");
+  else next(true);
 }
 
 export default new Router({
@@ -33,6 +51,7 @@ export default new Router({
     {
       path: '/',
       component: Home,
+      beforeEnter: isUserHomeAuthenticated,
       children: [
         {
           path: '',
@@ -64,15 +83,17 @@ export default new Router({
     {
       path: '/app',
       component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      beforeEnter: isUserAppAuthenticated,
       children: [
         {
           path: '',
           component: () => import('./views/app/Home')
         },
-        // {
-        //   path: 'permits',
-        //   component: () => import('@/components/permits/Transactions')
-        // },
+        {
+          path: 'permits',
+          component: () => import('@/views/Permits')
+          // component: () => import('@/components/permits/Transactions')
+        },
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
@@ -149,6 +170,30 @@ export default new Router({
         name: 'Admin Account',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Account.vue'),
+      },
+      {
+        path: 'application',
+        name: 'Application Review',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/ApplicationReview.vue'),
+      },
+      {
+        path: 'checklists',
+        name: 'Application Checklist',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Checklists.vue'),
+      },
+      {
+        path: 'emergency',
+        name: 'Incident Reports',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/IncidentReports.vue'),
+      },
+      {
+        path: 'collections',
+        name: 'Collections',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Collections.vue'),
       }]
     },
     {

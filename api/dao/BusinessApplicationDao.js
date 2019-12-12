@@ -17,6 +17,14 @@ class BusinessApplicationDao {
         return model.findById(id).lean().exec()
     }
 
+     /**
+     * @returns {Promise}
+     * @param {String} ref_no
+     */
+    static findOneByReference(ref_no) {
+        return model.findOne({reference_no:ref_no}).lean().exec()
+    }
+
     /**
      * @returns {Promise}
      * @param {Object} conditions 
@@ -30,6 +38,10 @@ class BusinessApplicationDao {
      * @param {Object} conditions 
      */
     static find(conditions) {
+        console.log("business application dao conditions data: " + JSON.stringify(conditions))
+        console.log("$## find all: " + JSON.stringify(model.find({
+            conditions
+        }).lean().exec()))
         return model.find(conditions).lean().exec()
     }
 

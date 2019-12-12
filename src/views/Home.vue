@@ -11,7 +11,7 @@
       <a-button type="link" style="margin-left:15%; color: #1890FF" >Sign in</a-button>
       </p>
 
-    </a-layout-header> -->
+    </a-layout-header>-->
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
@@ -77,26 +77,22 @@
           </a-avatar>
         </a-col>
       </a-row>
-    </a-layout-footer> -->
-    <a-layout-footer :style="{background: '#333333'}">
+    </a-layout-footer>-->
+    <a-layout-footer :style="{ background: '#555555' }">
       <a-row type="flex" justify="center">
-        <a-col :span="9"></a-col>
-        <a-col :span="6">
-          <a-row type="flex" justify="center">
-            <a-col :span="24">
-              <h1 align="center" style="color:#FFF">Pasyal tayo sa San Antonio</h1>
-            </a-col>
-          </a-row>
-          <a-row type="flex" justify="center">
-            <a-col :span="24">
-              <h4 align="center" style="color:#FFF">Office of the Mayor: (042) 545-4091<br/>
-Website: https://sanantonio.quezon.gov.ph<br/>
-Facebook: SanAntonio Quezon<br/>
-© Copyright 2019 CCCI Inc. - All Rights Reserved</h4>
-            </a-col>
-          </a-row>
+        <a-col :span="24">
+          <h1 align="center" class="slogan_style">Pasyal tayo sa San Antonio</h1>
         </a-col>
-        <a-col :span="9"></a-col>
+      </a-row>
+      <a-row type="flex" justify="center">
+        <a-col :span="24">
+          <h4 align="center" style="color:#FFF">
+            Office of the Mayor: (042) 545-4091
+            <br />Website: https://sanantonio.quezon.gov.ph
+            <br />Facebook: SanAntonio Quezon
+            <br />© Copyright 2019 CCCI Inc. - All Rights Reserved
+          </h4>
+        </a-col>
       </a-row>
     </a-layout-footer>
 
@@ -105,8 +101,14 @@ Facebook: SanAntonio Quezon<br/>
     <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
-        <a-button style="background-color: #1890ff;
-    border-color: #1890ff" key="submit" type="primary" :loading="loading" @click="handleOk">Submit</a-button>
+        <a-button
+          style="background-color: #1890ff;
+    border-color: #1890ff"
+          key="submit"
+          type="primary"
+          :loading="load2ing"
+          @click="handleOk"
+        >Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
         <!-- <a-col :span="24">
@@ -186,21 +188,28 @@ Facebook: SanAntonio Quezon<br/>
           <div style="font-weight: 700">Registration</div>
           <span style=" line-height: 200%;">
             The information provided is certified as true and correct.
-            <br />Registrant should validate their account by clicking the verification link sent to the supplied email address.
+            <br />Registrant should validate their account by clicking the
+            verification link sent to the supplied email address.
             <br />Registrant should not create multiple false accounts.
-            <br />Registrant should keep their account credentials and will not share to anyone.
+            <br />Registrant should keep their account credentials and will not
+            share to anyone.
           </span>
         </a-col>
         <a-col :span="24">
           <br />
           <div style="font-weight: 700">Disclaimer</div>
-          <span
-            style=" line-height: 200%;"
-          >In accordance to R.A. 10173 or Data Privacy Act, all collected information will be treated with utmost confidentiality and will not be subjected to public disclosure.</span>
+          <span style=" line-height: 200%;">
+            In accordance to R.A. 10173 or Data Privacy Act, all collected
+            information will be treated with utmost confidentiality and will not
+            be subjected to public disclosure.
+          </span>
         </a-col>
         <a-col :span="24">
           <br />
-          <span>By clicking Submit you are agreeing to the Terms and Conditions</span>
+          <span>
+            By clicking Submit you are agreeing to the Terms and
+            Conditions
+          </span>
         </a-col>
       </a-row>
     </a-modal>
@@ -210,13 +219,13 @@ Facebook: SanAntonio Quezon<br/>
         <a-col :span="6">
           <a-card
             :style="constant_helper.theme.button"
-            @click="report_type='1'"
+            @click="report_type = '1'"
             class="emergency_btn"
           >
             <a-row type="flex" justify="center">
               <a-col :span="12">
                 <a-icon
-                  :type="report_type==='1'?'check':'fire'"
+                  :type="report_type === '1' ? 'check' : 'fire'"
                   style="color:#ffffff;font-size:24px"
                 ></a-icon>
               </a-col>
@@ -226,13 +235,13 @@ Facebook: SanAntonio Quezon<br/>
         <a-col :span="6">
           <a-card
             :style="constant_helper.theme.button"
-            @click="report_type='2'"
+            @click="report_type = '2'"
             class="emergency_btn"
           >
             <a-row type="flex" justify="center">
               <a-col :span="12">
                 <a-icon
-                  :type="report_type==='2'?'check':'sound'"
+                  :type="report_type === '2' ? 'check' : 'sound'"
                   @click="report(1)"
                   style="color:#ffffff;font-size:24px"
                 ></a-icon>
@@ -243,13 +252,13 @@ Facebook: SanAntonio Quezon<br/>
         <a-col :span="6">
           <a-card
             :style="constant_helper.theme.button"
-            @click="report_type='3'"
+            @click="report_type = '3'"
             class="emergency_btn"
           >
             <a-row type="flex" justify="center">
               <a-col :span="12">
                 <a-icon
-                  :type="report_type==='3'?'check':'alert'"
+                  :type="report_type === '3' ? 'check' : 'alert'"
                   style="color:#ffffff;font-size:24px"
                 ></a-icon>
               </a-col>
@@ -259,13 +268,13 @@ Facebook: SanAntonio Quezon<br/>
         <a-col :span="6">
           <a-card
             :style="constant_helper.theme.button"
-            @click="report_type='4'"
+            @click="report_type = '4'"
             class="emergency_btn"
           >
             <a-row type="flex" justify="center">
               <a-col :span="12">
                 <a-icon
-                  :type="report_type==='4'?'check':'safety'"
+                  :type="report_type === '4' ? 'check' : 'safety'"
                   style="color:#ffffff;font-size:24px"
                 ></a-icon>
               </a-col>
@@ -276,7 +285,7 @@ Facebook: SanAntonio Quezon<br/>
       <GmapMap
         id="map"
         ref="map"
-        :center="{lat:coordinates.lat, lng:coordinates.lng}"
+        :center="{ lat: coordinates.lat, lng: coordinates.lng }"
         :zoom="16"
         map-type-id="terrain"
         draggable="true"
@@ -331,12 +340,12 @@ Facebook: SanAntonio Quezon<br/>
             </a-input>
           </a-form-item>
           <a-form-item>
-            <a-input size="large" placeholder="Password" :type="reveal?'text':'password'">
+            <a-input size="large" placeholder="Password" :type="reveal ? 'text' : 'password'">
               <a-icon slot="prefix" type="lock" />
               <a-icon
                 slot="suffix"
-                :type="reveal?'eye':'eye-invisible'"
-                @click="reveal=!reveal"
+                :type="reveal ? 'eye' : 'eye-invisible'"
+                @click="reveal = !reveal"
                 style="cursor:pointer"
               />
             </a-input>
@@ -533,10 +542,10 @@ export default {
       (this.loading = true), console.log("handleOk");
 
       if (this.validate()) {
-         this.$message.success(
-          'Your information has been sent successfully. Please check your email for verification link to activate your account.',
-          10,
-        )
+        this.$message.success(
+          "Your information has been sent successfully. Please check your email for verification link to activate your account.",
+          10
+        );
         console.log("walang error registration");
         this.loading = false;
         this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
@@ -579,5 +588,12 @@ export default {
 <style>
 .modal_login {
   width: 55% !important;
+}
+.slogan_style {
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.65);
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
 }
 </style>
