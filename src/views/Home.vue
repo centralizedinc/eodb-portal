@@ -11,7 +11,7 @@
       <a-button type="link" style="margin-left:15%; color: #1890FF" >Sign in</a-button>
       </p>
 
-    </a-layout-header> -->
+    </a-layout-header>-->
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
@@ -77,22 +77,20 @@
           </a-avatar>
         </a-col>
       </a-row>
-    </a-layout-footer> -->
+    </a-layout-footer>-->
     <a-layout-footer :style="{ background: '#555555' }">
       <a-row type="flex" justify="center">
         <a-col :span="24">
-          <h1 align="center" class="slogan_style">
-            Pasyal tayo sa San Antonio
-          </h1>
+          <h1 align="center" class="slogan_style">Pasyal tayo sa San Antonio</h1>
         </a-col>
       </a-row>
       <a-row type="flex" justify="center">
         <a-col :span="24">
           <h4 align="center" style="color:#FFF">
-            Office of the Mayor: (042) 545-4091<br />
-            Website: https://sanantonio.quezon.gov.ph<br />
-            Facebook: SanAntonio Quezon<br />
-            © Copyright 2019 CCCI Inc. - All Rights Reserved
+            Office of the Mayor: (042) 545-4091
+            <br />Website: https://sanantonio.quezon.gov.ph
+            <br />Facebook: SanAntonio Quezon
+            <br />© Copyright 2019 CCCI Inc. - All Rights Reserved
           </h4>
         </a-col>
       </a-row>
@@ -100,11 +98,7 @@
 
     <!-- REGISRATION -->
 
-    <a-modal
-      class="modal_login"
-      v-model="signup_visible"
-      title="Create an Account"
-    >
+    <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
         <a-button
@@ -112,10 +106,9 @@
     border-color: #1890ff"
           key="submit"
           type="primary"
-          :loading="loading"
+          :loading="load2ing"
           @click="handleOk"
-          >Submit</a-button
-        >
+        >Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
         <!-- <a-col :span="24">
@@ -174,11 +167,7 @@
                 :validate-status="validation.password.status"
                 :help="validation.password.message"
               >
-                <a-input
-                  :disabled="loading"
-                  type="password"
-                  v-model="account.password"
-                ></a-input>
+                <a-input :disabled="loading" type="password" v-model="account.password"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="12">
@@ -187,11 +176,7 @@
                 :validate-status="validation.confirm.status"
                 :help="validation.confirm.message"
               >
-                <a-input
-                  :disabled="loading"
-                  type="password"
-                  v-model="account.confirm"
-                ></a-input>
+                <a-input :disabled="loading" type="password" v-model="account.confirm"></a-input>
               </a-form-item>
             </a-col>
           </a-form>
@@ -213,18 +198,18 @@
         <a-col :span="24">
           <br />
           <div style="font-weight: 700">Disclaimer</div>
-          <span style=" line-height: 200%;"
-            >In accordance to R.A. 10173 or Data Privacy Act, all collected
+          <span style=" line-height: 200%;">
+            In accordance to R.A. 10173 or Data Privacy Act, all collected
             information will be treated with utmost confidentiality and will not
-            be subjected to public disclosure.</span
-          >
+            be subjected to public disclosure.
+          </span>
         </a-col>
         <a-col :span="24">
           <br />
-          <span
-            >By clicking Submit you are agreeing to the Terms and
-            Conditions</span
-          >
+          <span>
+            By clicking Submit you are agreeing to the Terms and
+            Conditions
+          </span>
         </a-col>
       </a-row>
     </a-modal>
@@ -306,25 +291,16 @@
         draggable="true"
         style="width: 100%; height: 300px; margin-top:5vh"
       >
-        <GmapMarker
-          :draggable="true"
-          :position="coordinates"
-          :animation="animation"
-        />
+        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
       </GmapMap>
-      <a-textarea
-        style="margin-top: 2vh"
-        :rows="3"
-        placeholder="Add Comments here..."
-      ></a-textarea>
+      <a-textarea style="margin-top: 2vh" :rows="3" placeholder="Add Comments here..."></a-textarea>
       <template slot="footer">
         <a-button
           key="submit"
           type="primary"
           :loading="loading"
           @click="submitReport"
-          >Confirm and Submit</a-button
-        >
+        >Confirm and Submit</a-button>
       </template>
     </a-modal>
 
@@ -353,10 +329,7 @@
     </a-modal>
 
     <a-modal v-modal="login_visible">
-      <a-card
-        style="background: rgba(59, 79, 99, 0.62)"
-        border-radius="20px 0px 0px 20px"
-      >
+      <a-card style="background: rgba(59, 79, 99, 0.62)" border-radius="20px 0px 0px 20px">
         <template slot="title">
           <div style="color:#ffffff">Enter Credentials</div>
         </template>
@@ -367,11 +340,7 @@
             </a-input>
           </a-form-item>
           <a-form-item>
-            <a-input
-              size="large"
-              placeholder="Password"
-              :type="reveal ? 'text' : 'password'"
-            >
+            <a-input size="large" placeholder="Password" :type="reveal ? 'text' : 'password'">
               <a-icon slot="prefix" type="lock" />
               <a-icon
                 slot="suffix"
@@ -381,9 +350,7 @@
               />
             </a-input>
           </a-form-item>
-          <a-button size="large" block ghost @click="$router.push('/app')"
-            >Login</a-button
-          >
+          <a-button size="large" block ghost @click="$router.push('/app')">Login</a-button>
           <a-divider></a-divider>
           <p style="color:white">Login using facebook or google accounts</p>
           <a-row type="flex" :gutter="16">

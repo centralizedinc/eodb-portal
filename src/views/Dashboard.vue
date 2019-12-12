@@ -108,13 +108,14 @@
                   :src="user.avatar"
                   :size="54"
                   style="margin-top:-10vh; border: 2px solid #ffffff"
-                ></a-avatar>
+                >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
               </a-col>
               <br />
               <a-col :span="24">
                 <a-row type="flex" justify="center">
-                  <a-col :span="18">
+                  <a-col :span="24">
                     <h3
+                      align="center"
                       style="color:black; font-size: 14px; text-transform: uppercase"
                     >{{ user.name.first }} {{ user.name.last }}</h3>
                   </a-col>
@@ -124,10 +125,10 @@
           </a-card>
           <a-affix :offsetTop="100">
             <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
-              <!-- <a-menu-item key="/app">
+              <a-menu-item key>
                 <a-icon type="bars" />
-              <span>Home</span>-->
-              <!-- </a-menu-item> -->
+                <span>Home</span>
+              </a-menu-item>
               <a-menu-item key="/app">
                 <a-icon type="file-exclamation" />
                 <span>Permits & Licenses</span>
@@ -140,18 +141,18 @@
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
-              <a-menu-item key>
+              <!-- <a-menu-item key>
                 <a-icon type="credit-card" />
                 <span>Payments</span>
-              </a-menu-item>
+              </a-menu-item>-->
               <a-menu-item key="/app/account">
                 <a-icon type="user-add" />
                 <span>My Profile</span>
               </a-menu-item>
-              <a-menu-item key>
+              <!-- <a-menu-item key>
                 <a-icon type="sound" />
                 <span>Citizen Report</span>
-              </a-menu-item>
+              </a-menu-item>-->
             </a-menu>
           </a-affix>
         </a-col>
@@ -257,7 +258,7 @@
     <!-- ------------------------------------------------ -->
     <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-    >Dolores Quezon</a-layout-footer>
+    >San Antonio, Quezon City</a-layout-footer>
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap

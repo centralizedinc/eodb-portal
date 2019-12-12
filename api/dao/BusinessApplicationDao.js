@@ -38,7 +38,10 @@ class BusinessApplicationDao {
      * @param {Object} conditions 
      */
     static find(conditions) {
-        console.log("business application dao conditions data: " + JSON.stringify("conditions"))
+        console.log("business application dao conditions data: " + JSON.stringify(conditions))
+        console.log("$## find all: " + JSON.stringify(model.find({
+            conditions
+        }).lean().exec()))
         return model.find(conditions).lean().exec()
     }
 
