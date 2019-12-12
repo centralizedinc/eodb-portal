@@ -62,11 +62,20 @@ var BusinessPermitApplication = new mongoose.Schema({
         civil_status: {
             type: String
         },
-        job_title: {
+        occupation: {
             type: String
         },
-        salary: {
+        monthly_salary: {
             type: Number
+        },
+        height: {
+            type: Number
+        },
+        weight: {
+            type: Number
+        },
+        icr_no: {
+            type: String
         }
     },
     owner_address: {
@@ -265,12 +274,11 @@ var BusinessPermitApplication = new mongoose.Schema({
         }
     },
     attachments: [{
-        title: {
+        doc_type: {
             type: String
         },
         files: []
-    }],
-    requirements: []
+    }]
 })
 
 BusinessPermitApplication.pre('save', async function (callback) {

@@ -25,16 +25,29 @@ const actions = {
         return new Promise((resolve, reject) => {
             console.log('details :', details);
             console.log('files :', files);
+            var application = {};
             new UploadAPI(context.rootState.user_session.token)
                 .uploadPermitsDocRequired('business', context.rootState.user_session.user._id, files)
                 .then((result) => {
-                    console.log('result upload :', result);
-                    if(result && result.data)details.attachments = result.data;
+                    if (result && result.data) {
+                        Object.keys(result.data).forEach(doc_type => {
+                            console.log('result.data[doc_type] :', result.data[doc_type]);
+                            details.data.attachments.push({
+                                doc_type,
+                                files: result.data[doc_type].map(v => v.location)
+                            })
+                        })
+                    }
+                    console.log('details2 :', details);
                     return new BusinessPermitAPI(context.rootState.user_session.token).createPermit(details);
                 })
                 .then((result) => {
                     console.log('Saving permit result :', result);
-                    resolve(result.data);
+                    application = result.data;
+                    return context.dispatch("GET_DOCKETS", true);
+                })
+                .then((result) => {
+                    resolve(application);
                 })
                 .catch((err) => {
                     console.log('err :', err);

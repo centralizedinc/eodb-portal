@@ -1,11 +1,5 @@
 <template>
-  <a-drawer
-    placement="left"
-    :closable="false"
-    :width="450"
-    @close="$emit('close')"
-    :visible="show"
-  >
+  <a-drawer placement="left" :closable="false" :width="450" @close="$emit('close')" :visible="show">
     <a-row type="flex">
       <a-col :span="24">
         <a-card style="background: linear-gradient(to right, #000046, #1cb5e0)">
@@ -30,9 +24,22 @@
       </a-col>
       <a-col :span="24">
         <a-card>
-          <component :is="current_option" :details="payment_details" />
+          <component
+            :is="current_option"
+            :details="payment_details"
+            @validCard="v => is_valid_card=v"
+            @validName="v => is_valid_name=v"
+            @validExpiry="v => is_valid_expiry=v"
+            @validCVC="v => is_valid_cvc=v"
+          />
 
-          <a-button type="primary" block @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})" :loading="loading">Submit</a-button>
+          <a-button
+            type="primary"
+            block
+            :disabled="is_allow"
+            @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
+            :loading="loading"
+          >Submit</a-button>
         </a-card>
       </a-col>
     </a-row>
@@ -49,11 +56,25 @@ export default {
   },
   data() {
     return {
+      is_valid_card: false,
+      is_valid_name: false,
+      is_valid_expiry: false,
+      is_valid_cvc: false,
       card: null,
       payment_details: {},
       current_option: "CreditCard",
       tabs: ["CreditCard", "OnlineBanking", "OverCounter"]
     };
+  },
+  computed: {
+    is_allow() {
+      return (
+        this.is_valid_card &&
+        this.is_valid_name &&
+        this.is_valid_expiry &&
+        this.is_valid_cvc
+      );
+    }
   },
   methods: {
     navigate(e) {

@@ -1,28 +1,29 @@
 <template>
   <a-card style="box-shadow: 0px 0px 10px 2px #88888847; margin-top: 10vh">
-    <a-row style="margin-bottom: 2vh" type="flex" :gutter="8">
-      <!-- <a-col :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
+    <!-- <a-row style="margin-bottom: 2vh" type="flex" :gutter="8"> -->
+    <!-- <a-col :xs="18" :sm="20" :md="22" :lg="22" :xl="22" :xxl="22">
         <a-input-search placeholder="Search" @search="onSearch" />
       </a-col>
       <a-col :xs="6" :sm="4" :md="2" :lg="2" :xl="2" :xxl="2">
         <a-button style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )" block>
           <a-icon type="plus"></a-icon>
         </a-button>
-      </a-col>-->
-    </a-row>
-    <a-divider></a-divider>
+    </a-col>-->
+    <!-- </a-row>
+    <a-divider></a-divider>-->
+
+    
 
     <a-table :columns="cols" :dataSource="transac" :loading="loading" v-if="$breakpoint.mdAndUp">
-      <!-- <template slot="permit" slot-scope="text">
-        <a href="javascript:;">{{text}}</a>
-        <a slot="action" href="javascript:;" @click="view_data">View</a>
-      </template>-->
-      <!-- <template slot="application.app_type" slot-scope="text">
-        <p v-if="text == 1">New</p>
-        <p v-else>Renewal</p>
-      </template>-->
+      <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
+      <template slot="date_created" slot-scope="text">{{formatDate(text, null, true)}}</template>
+      <template slot="status" slot-scope="text">
+        <span
+          :style="`color: ${text === 0? 'blue' : text === 1? 'green' : text === 2 ? 'red' : ''}`"
+        >{{getStatus(text)}}</span>
+      </template>
       <template slot="action" slot-scope="text, record">
-        <div>
+        <div v-if="record.status === 1">
           <a @click="() => view_data(record)">Renew</a>
         </div>
       </template>
@@ -350,9 +351,6 @@
 </template>
 
 <script>
-import { stringify } from "querystring";
-import axios from "axios";
-
 export default {
   props: ["admin"],
   data() {
@@ -455,50 +453,26 @@ export default {
           scopedSlots: { customRender: "receipts" }
         }
       ],
-      // transac: [],
       cols: [
-        // {
-        //   title: "Permit",
-        //   dataIndex: "application.permit_type"
-        // },
-        // {
-        //   title: "Type",
-        //   dataIndex: "application.app_type",
-        //   scopedSlots: { customRender: "application.app_type" }
-        // },
-        // {
-        //   title: "Status",
-        //   dataIndex: "progress.status"
-        // },
-        // {
-        //   title: "Current Task",
-        //   dataIndex: "progress.current_task"
-        // },
-        // {
-        //   title: "Action",
-        //   dataIndex: "action",
-        //   scopedSlots: { customRender: "action" }
-        // }
         {
           title: "Reference No",
           dataIndex: "reference_no"
         },
         {
           title: "License/Permit Applied",
-          dataIndex: "application_type"
+          dataIndex: "permit",
+          scopedSlots: { customRender: "permit" }
         },
         {
           title: "Date Submitted",
-          dataIndex: "date_created"
+          dataIndex: "date_created",
+          scopedSlots: { customRender: "date_created" }
         },
         {
           title: "Status",
-          dataIndex: "status"
+          dataIndex: "status",
+          scopedSlots: { customRender: "status" }
         },
-        // {
-        //   title: "Payment Status",
-        //   dataIndex: "payment_status"
-        // },
         {
           title: "",
           dataIndex: "action",
@@ -523,7 +497,7 @@ export default {
     );
     // this.store_handler = this.$store.state.permit.permit;
     this.$store
-      .dispatch("GET_PERMIT", user.email)
+      .dispatch("GET_DOCKETS")
       .then(result => {
         console.log(
           "get dispatch get permit result data: " + JSON.stringify(result.data)
@@ -539,10 +513,11 @@ export default {
   computed: {
     transac() {
       console.log(
-        "got transac data: " + JSON.stringify(this.$store.state.permit.permits)
+        "got transac data: " + JSON.stringify(this.$store.state.dockets.dockets)
       );
       // JSON.parse(JSON.stringify(this.$store.state.permit.permits));
-      return this.$store.state.permit.permits;
+      // return this.$store.state.permit.permits;
+      return this.$store.state.dockets.dockets;
     }
   },
   methods: {
@@ -579,6 +554,14 @@ export default {
       this.$store.commit("APPROVE_PERMIT", this.form.reference_no);
       this.draw_show = false;
       this.remarks = "";
+    },
+    getPermitType(type) {
+      if (type === "business") return "Business Permit";
+      return "";
+    },
+    getStatus(status) {
+      const status_desc = ["In Progress", "Approved", "Rejected"];
+      return status_desc[status];
     }
   }
 };

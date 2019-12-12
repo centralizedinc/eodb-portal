@@ -107,19 +107,20 @@ export default {
       form: "form",
       container: ".card-wrapper"
     });
-    console.log('this.card1 :', this.card);
+    console.log("this.card1 :", this.card);
   },
   created() {
     this.card = new Card({
       form: "form",
       container: ".card-wrapper"
     });
-    console.log('this.card :', this.card);
+    console.log("this.card :", this.card);
   },
   methods: {
-    // 
+    //
     validateCard() {
-      this.errors.card = ""
+      this.$emit("validCard", false);
+      this.errors.card = "";
       if (!this.details.number)
         this.errors.card = "Please fill up Credit Card Number.";
       else {
@@ -128,16 +129,17 @@ export default {
         this.$store
           .dispatch("VALIDATE_CARD", this.details.number)
           .then(result => {
-            console.log('result card :', result);
+            console.log("result card :", result);
             if (result.data.isValid) {
               this.cvc_max = result.data.card.code.size;
               this.success_card = true;
+              this.$emit("validCard", true);
             } else this.errors.card = "Input Credit Card Number is not valid.";
             this.loading_card = false;
 
-            console.log('this.loading_card :', this.loading_card);
-            console.log('this.success_card :', this.success_card);
-            console.log('this.errors.card :', this.errors.card);
+            console.log("this.loading_card :", this.loading_card);
+            console.log("this.success_card :", this.success_card);
+            console.log("this.errors.card :", this.errors.card);
           })
           .catch(err => {
             console.log("err :", err);
@@ -146,14 +148,19 @@ export default {
       }
     },
     validateName() {
-      this.errors.name = ""
+      this.$emit("validName", false);
+      this.errors.name = "";
       this.success_card_name = false;
       if (!this.details.name)
         this.errors.name = "Please fill up Cardholder Fullname.";
-      else this.success_card_name = true;
+      else {
+        this.success_card_name = true;
+        this.$emit("validName", true);
+      }
     },
     validateExpiry() {
-      this.errors.expiry = ""
+      this.$emit("validExpiry", false);
+      this.errors.expiry = "";
       if (!this.details.expiry)
         this.errors.expiry = "Please fill up Expiry Date.";
       else {
@@ -162,9 +169,11 @@ export default {
         this.$store
           .dispatch("VALIDATE_EXPIRY", this.details.expiry)
           .then(result => {
-            console.log('result expiry :', result);
-            if (result.data.isValid) this.success_expiry = true;
-            else this.errors.expiry = "Input Expiry Date is not valid.";
+            console.log("result expiry :", result);
+            if (result.data.isValid) {
+              this.success_expiry = true;
+              this.$emit("validExpiry", true);
+            } else this.errors.expiry = "Input Expiry Date is not valid.";
             this.loading_expiry = false;
           })
           .catch(err => {
@@ -174,7 +183,8 @@ export default {
       }
     },
     validateCvc() {
-      this.errors.cvc = ""
+      this.$emit("validCVC", true);
+      this.errors.cvc = "";
       if (!this.details.cvc) this.errors.cvc = "Please fill up CVC.";
       else {
         this.loading_cvc = true;
@@ -185,9 +195,11 @@ export default {
             max: this.cvc_max
           })
           .then(result => {
-            console.log('result cvc :', result);
-            if (result.data.isValid) this.success_cvc = true;
-            else this.errors.cvc = "Input CVC is not valid.";
+            console.log("result cvc :", result);
+            if (result.data.isValid) {
+              this.success_cvc = true;
+              this.$emit("validCVC", false);
+            } else this.errors.cvc = "Input CVC is not valid.";
             this.loading_cvc = false;
           })
           .catch(err => {

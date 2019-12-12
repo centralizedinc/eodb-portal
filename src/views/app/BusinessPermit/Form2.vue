@@ -487,8 +487,7 @@ export default {
   },
   methods: {
     init(){
-      this.$store.dispatch('GET_REGIONS');
-      this.$store.dispatch('GET_PROVINCES');
+      
     },
     validateStep(validate_all) {
       var errors = [];

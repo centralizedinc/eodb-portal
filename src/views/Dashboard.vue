@@ -21,7 +21,7 @@
           <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
         </a-col>-->
         <a-col :span="10">
-          <a-input-search placeholder="Search" @search="onSearch" />
+          <a-input-search placeholder="Search" />
         </a-col>
         <a-col :span="4"></a-col>
         <a-col :span="1">
@@ -107,7 +107,7 @@
                 <a-avatar
                   :src="user.avatar"
                   :size="54"
-                  style="margin-top:-10vh; border: 2px solid #ffffff"
+                  style="margin-top:-10vh; border: 2px solid #ffffff; font-weight: bold;"
                 >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
               </a-col>
               <br />
@@ -125,11 +125,11 @@
           </a-card>
           <a-affix :offsetTop="100">
             <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
-              <a-menu-item key>
+              <a-menu-item key="/app">
                 <a-icon type="bars" />
                 <span>Home</span>
               </a-menu-item>
-              <a-menu-item key="/app">
+              <a-menu-item key="/app/permits">
                 <a-icon type="file-exclamation" />
                 <span>Permits & Licenses</span>
               </a-menu-item>
@@ -137,7 +137,7 @@
                 <a-icon type="file-protect" />
                 <span>Certificates</span>
               </a-menu-item>
-              <a-menu-item key="/app/account">
+              <a-menu-item key="/app/realproperty">
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
@@ -256,9 +256,9 @@
       </a-row>
     </a-layout-content>
     <!-- ------------------------------------------------ -->
-    <a-layout-footer
+    <!-- <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-    >San Antonio, Quezon City</a-layout-footer>
+    >San Antonio, Quezon City</a-layout-footer> -->
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap
@@ -278,7 +278,6 @@
           key="submit"
           type="primary"
           block
-          :loading="loading"
           @click="submitReport"
         >Confirm and Submit</a-button>
       </template>

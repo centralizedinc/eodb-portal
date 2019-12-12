@@ -15,6 +15,7 @@ var DocketActivitiesSchema = new mongoose.Schema({
     status: {
         type: String
         /**
+         * applied
          * claim
          * approve
          * reject

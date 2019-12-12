@@ -22,7 +22,7 @@ var DocketSchema = new mongoose.Schema({
         default: 0
         /**
          * 0 - In Progress
-         * 1 - Done
+         * 1 - Approved
          * 2 - Rejected
          */
     },
@@ -40,6 +40,14 @@ var DocketSchema = new mongoose.Schema({
     },
     modified_by: {
         type: String
+    },
+    date_approved: {
+        type: Date,
+        default: new Date()
+    },
+    date_rejected: {
+        type: Date,
+        default: new Date()
     },
     date_created: {
         type: Date,

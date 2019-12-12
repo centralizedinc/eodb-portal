@@ -29,4 +29,9 @@ export default class BusinessPermitAPI {
         return axios.get(`/permits/business/transactions/${id}`)
     }
 
+    getApplicationByRef(reference_no) {
+        console.log('getApplicationByRef reference_no :', reference_no);
+        return axios.get(`/permits/business/application/reference/${reference_no}`)
+    }
+
 }
