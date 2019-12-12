@@ -9,7 +9,9 @@ router.route('/')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
     .post((req, res) => {
@@ -17,33 +19,52 @@ router.route('/')
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
 
-router.route('/user/id')
-    .get((req, res) =>{
+router.route('/user/profile/:email')
+    .get((req, res) => {
         console.log("test get id: " + JSON.stringify(req))
         // AccountDao.findOneByID()
+        AccountDao.findByEmail(req.params.email)
+            .then((result) => {
+                console.log("find by email result: " + JSON.stringify(result))
+                res.json(result)
+            }).catch((errors) => {
+                res.json({
+                    errors
+                })
+            })
     })
 
 router.route('/:id')
     .get((req, res) => {
         console.log("find one account id by one: " + JSON.stringify(req.params.id))
-        AccountDao.find({session_token: req.params.id})
+        AccountDao.find({
+                session_token: req.params.id
+            })
             .then((result) => {
                 console.log("find one by id: " + JSON.stringify(result))
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
     .post((req, res) => {
-        AccountDao.modifyOne({session_token: req.params.id}, req.body)
+        AccountDao.modifyOne({
+                session_token: req.params.id
+            }, req.body)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
 

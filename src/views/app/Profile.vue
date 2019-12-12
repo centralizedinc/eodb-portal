@@ -8,6 +8,11 @@
       @tabChange="key => onTabChange(key, 'noTitleKey')"
       class="profile-card"
     >
+      <a-avatar
+        :src="user.avatar"
+        :size="54"
+        style="margin-top:-10vh; border: 2px solid #ffffff"
+      >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
       <a-form v-if="noTitleKey === 'personal_details'">
         <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
           <span slot="label">
@@ -29,7 +34,11 @@
         <a-form-item label="Suffix" :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
           <a-input v-model="user.name.suffix" />
         </a-form-item>
-        <a-button type="primary" style="width:100%; margin-top: 3vh;" @click="save_changes(0)">Save Changes</a-button>
+        <a-button
+          type="primary"
+          style="width:100%; margin-top: 3vh;"
+          @click="save_changes(0)"
+        >Save Changes</a-button>
       </a-form>
       <a-form v-if="noTitleKey === 'change_password' && user.method !== ''">
         <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
@@ -53,7 +62,11 @@
           </span>
           <a-input type="password" v-model="password.verify" />
         </a-form-item>
-        <a-button type="primary" style="width:100%; margin-top: 3vh;" @click="save_changes(1)">Save Changes</a-button>
+        <a-button
+          type="primary"
+          style="width:100%; margin-top: 3vh;"
+          @click="save_changes(1)"
+        >Save Changes</a-button>
       </a-form>
     </a-card>
   </div>
@@ -129,15 +142,17 @@ export default {
         JSON.stringify(this.$store.state.user_session.user)
     );
     //    this.user = this.$store.state.user_session.user
-    var id = this.$store.state.user_session.user.token;
+    // var id = this.$store.state.user_session.user.token;
+    var id = this.$store.state.user_session.user.email;
     this.$store
       .dispatch("FIND_ACCOUNT", id)
       // this.$http.get('accounts?id=',{id:id})
       .then(result => {
-        console.log("profile result data: " + JSON.stringify(result));
+        console.log("profile result data: " + JSON.stringify(result.data));
         result.data.forEach(element => {
-          if (element.session_token == id) {
+          if (element.session_token == id || element.token == id) {
             this.user = element;
+            console.log("user data: " + JSON.stringify(this.user));
             this.tabListNoTitle[1].tab = "";
           }
         });

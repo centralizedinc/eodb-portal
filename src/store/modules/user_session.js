@@ -70,7 +70,9 @@ const actions = {
     FIND_ACCOUNT(context, id) {
         return new Promise((resolve, reject) => {
             console.log("find account id data: " + JSON.stringify(id))
-            new AccountAPI(context.state.token).getAccount(id)
+            // getAccountProfile
+            // getAccount
+            new AccountAPI(context.state.token).getAccountProfile(id)
                 .then((result) => {
                     console.log("find account result data: " + JSON.stringify(result))
                     resolve(result)
@@ -100,7 +102,7 @@ const actions = {
     CONFIRM_ACCOUNT(context, code) {
         return new AccountAPI(null).confirmAccount(code);
     },
-    LOGOUT(context){
+    LOGOUT(context) {
         context.commit('RESET');
     }
 }

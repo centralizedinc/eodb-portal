@@ -30,9 +30,9 @@ class AccountDao {
      * @param {String} email 
      */
     static findByEmail(email) {
-        return model.findOne({
-            email
-        }).exec()
+        console.log("static find by email data: " + JSON.stringify(email))
+        return model.findOne(
+            email).exec()
     }
 
     /**
