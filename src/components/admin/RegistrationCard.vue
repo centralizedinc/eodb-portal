@@ -2,12 +2,11 @@
   <a-card style="background-color: #242B30;border-radius:10px">
             <a-row type="flex" align="middle" :gutter="8">
               <a-col :span="24">
-                  <span style="color:#B6C2C9; font-weight:bold">REGISTERED USERS   <a-icon type="exclamation-circle"></a-icon></span>
-                  
+                  <span style="color:#B6C2C9; font-weight:bold">REGISTERED USERS   <a-icon type="exclamation-circle"></a-icon></span>                  
               </a-col>
               <a-col :span="14" style="margin-top:3vh">
                 <h2 style="color: #FFFFFF"><a-icon type="user" style="font-size:32px"></a-icon> {{total}}</h2>
-                <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{Math.floor(Math.random()* 50)}}% compare to last week</span>                                 
+                <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{trend[0].percent}}% compare to last week</span>                                 
               </a-col>
               <a-col :span="10">
                   <apexchart width="110" type="bar" :options="chartOptions" :series="trend" />
@@ -84,20 +83,13 @@ export default {
     data(){
         return {
             loading:true,
-            // summary:{},
-            // total:0,
-            series: null,
             chartOptions: {
                 chart: {
                     type: 'line',
                     sparkline:{enabled:true}
                 },
                 tooltip: {
-                    x:{show:false},
-                    // enabled:false,  
-                    // fixed: {
-                    //     enabled: true,
-                    // }
+                    x:{show:false}
                 }
             }
         }
@@ -106,26 +98,7 @@ export default {
         this.init()
     },
     methods:{
-        init(){
-            console.log('DASHBOARDING ::::')
-            this.$http.get('/dashboard/users')
-            .then(result=>{
-                console.log('DASHBOARD',JSON.stringify(result.data))
-                this.loading_details = false;
-                this.summary = result.data
-                
-            })
-            // this.$http.get('/dashboard/users/total')
-            // .then(result=>{
-            //     console.log('DASHBOARD',JSON.stringify(result.data))
-            //     this.total = result.data                
-            // })
-            this.$http.get('/dashboard/users/trend/3')
-            .then(result=>{
-                this.series = result.data
-                              
-            })
-        }
+        init(){}
     },
     asyncComputed: {
         total() {
@@ -142,11 +115,9 @@ export default {
         },
         summary:{
             get(){
-            console.log('calling summary')
             return new Promise((resolve, reject)=>{
                 this.$http.get('/dashboard/users')
-                .then(result=>{
-                    console.log('callling summary', JSON.stringify(result.data.users.find(x => x._id === 'facebook').count))
+                .then(result=>{                    
                     this.loading=false;
                     var summary = {
                         facebook:result.data.users.find(x => x._id === 'facebook')?result.data.users.find(x => x._id === 'facebook').count:0,
@@ -154,6 +125,7 @@ export default {
                         local:result.data.users.find(x => x._id === 'local')?result.data.users.find(x => x._id === 'local').count:0,
                         admin:result.data.admins[0]?result.data.admins[0].count:0
                     }
+                    console.log('callling summary', JSON.stringify(summary))
                     resolve(summary)
                 })
                 .catch(error=>{
@@ -169,10 +141,6 @@ export default {
             })  
             },
             default: {
-                        facebook:0,
-                        google:0,
-                        local:0,
-                        admin:0
                     }
         },
         trend:{
@@ -182,9 +150,11 @@ export default {
                 this.$http.get('/dashboard/users/trend/3')
                 .then(result=>{
                     if(result.data){
-                        result.data.forEach(elem=>{
+                        result.data.series.forEach(elem=>{
                             trend.data.push(elem.count)
                         })
+                        trend.trend = result.data.trend
+                        trend.percent = result.data.percent
                     }
                     resolve([trend])                        
                 })

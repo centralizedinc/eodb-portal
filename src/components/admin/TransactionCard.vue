@@ -6,7 +6,7 @@
               </a-col>
                <a-col :span="14" style="margin-top:3vh">
                 <h2 style="color: #FFFFFF"><a-icon type="snippets" style="font-size:32px"></a-icon> {{total}}</h2>
-                <span style="color:#B6C2C9; font-size:10px; "><a-icon type="up"></a-icon> {{Math.floor(Math.random()* 50)}}% compare to last week</span>                                 
+                <span style="color:#B6C2C9; font-size:10px; "><a-icon :type="trend[0].trend<0?'down':'up'"></a-icon> {{trend[0].percent}}% compare to last week</span>                                 
               </a-col>
               <a-col :span="10">
                   <apexchart width="110" type="bar" :options="chartOptions" :series="trend" />
@@ -116,11 +116,9 @@ export default {
         },
         summary:{
             get(){
-            console.log('callling summary')
             return new Promise((resolve, reject)=>{
                 this.$http.get('/dashboard/transactions')
                 .then(result=>{
-                    console.log('callling summary', JSON.stringify(result.data))
                     this.loading=false;
                     var summary = {
                         inProgress:result.data.find(x => x._id == 0)?result.data.find(x => x._id == 0).count:0,
@@ -155,10 +153,12 @@ export default {
                 var trend = {name:'Transactions', data:[]}
                 this.$http.get('/dashboard/transactions/trend/3')
                 .then(result=>{
-                    if(result.data){
-                        result.data.forEach(elem=>{
+                    if(result.data.series){
+                        result.data.series.forEach(elem=>{
                             trend.data.push(elem.count)
                         })
+                        trend.trend = result.data.trend
+                        trend.percent = result.data.percent
                     }
                     resolve([trend])                        
                 })
