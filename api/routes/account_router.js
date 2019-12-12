@@ -43,8 +43,9 @@ router.route('/user/profile/:email')
 router.route('/:id')
     .get((req, res) => {
         console.log("find one account id by one: " + JSON.stringify(req.params.id))
-        AccountDao.find({
-                session_token: req.params.id
+        var data = req.params.id
+        AccountDao.findOne({
+                email: data
             })
             .then((result) => {
                 console.log("find one by id: " + JSON.stringify(result))

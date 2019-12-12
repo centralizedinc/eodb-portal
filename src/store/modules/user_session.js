@@ -72,7 +72,7 @@ const actions = {
             console.log("find account id data: " + JSON.stringify(id))
             // getAccountProfile
             // getAccount
-            new AccountAPI(context.state.token).getAccountProfile(id)
+            new AccountAPI(context.state.token).getAccount(id)
                 .then((result) => {
                     console.log("find account result data: " + JSON.stringify(result))
                     resolve(result)

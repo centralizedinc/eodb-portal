@@ -50,7 +50,7 @@ export default class AccountAPI {
      * @param {Object} email
      */
     getAccountProfile(email) {
-        console.log("find account outer api: " + JSON.stringify(email))
+        console.log("find account profile outer api: " + JSON.stringify(email))
         return axios.get(`accounts/user/profile/${email}`);
     }
 

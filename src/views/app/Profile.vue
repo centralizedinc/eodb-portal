@@ -8,12 +8,15 @@
       @tabChange="key => onTabChange(key, 'noTitleKey')"
       class="profile-card"
     >
-      <a-avatar
-        :src="user.avatar"
-        :size="54"
-        style="margin-top:-10vh; border: 2px solid #ffffff"
-      >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
       <a-form v-if="noTitleKey === 'personal_details'">
+        <!-- <a-row> -->
+        <a-avatar
+          justify="center"
+          :src="user.avatar"
+          :size="54"
+          style="margin-top:-10vh; border: 2px solid #ffffff; margin-top:1%"
+        >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
+        <!-- </a-row> -->
         <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
           <span slot="label">
             Last Name
@@ -127,7 +130,7 @@ export default {
     save_changes(tab) {
       if (tab == 0) {
         this.$http
-          .post(`accounts/${this.user.session_token}`, this.user)
+          .post(`accounts/${this.user.email}`, this.user)
           .then(result => {
             console.log(
               "change profile details result data: " + JSON.stringify(result)
@@ -149,13 +152,8 @@ export default {
       // this.$http.get('accounts?id=',{id:id})
       .then(result => {
         console.log("profile result data: " + JSON.stringify(result.data));
-        result.data.forEach(element => {
-          if (element.session_token == id || element.token == id) {
-            this.user = element;
-            console.log("user data: " + JSON.stringify(this.user));
-            this.tabListNoTitle[1].tab = "";
-          }
-        });
+        this.user.name = result.data.name;
+        this.user.email = result.data.email;
       });
   }
 };
