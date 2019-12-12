@@ -9,14 +9,59 @@
       class="profile-card"
     >
       <a-form v-if="noTitleKey === 'personal_details'">
-        <!-- <a-row> -->
-        <a-avatar
-          justify="center"
-          :src="user.avatar"
-          :size="54"
-          style="margin-top:-10vh; border: 2px solid #ffffff; margin-top:1%"
-        >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
-        <!-- </a-row> -->
+        <a-row>
+          <a-col :span="24" align="middle" style="margin-top:5%" v-if="!user.avatar">
+            <a-avatar
+              v-if="!user.avatar"
+              class="profile_pic"
+              :size="150"
+              shape="square"
+              :src="user && user.avatar && user.avatar.location ? user.avatar.location : null"
+              @click="onTabChange()"
+            >{{user && user.name && user.name.first ? user.name.first[0]+""+user.name.last[0] : '?' }}</a-avatar>
+            <!-- <a-avatar
+            v-if="!user.avatar"
+              justify="center"
+              :src="user.avatar"
+              :size="54"
+              style="margin-top:-10vh; border: 2px solid #ffffff;"
+            >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>-->
+            <a-avatar
+              v-else
+              justify="center"
+              :src="user.avatar"
+              :size="54"
+              style="margin-top:-10vh; border: 2px solid #ffffff;"
+            >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: '?'}}</a-avatar>
+          </a-col>
+          <!-- <a-col :span="24">
+            <a-avatar
+              v-if="!taxpayer.avatar"
+              class="profile_pic"
+              :size="150"
+              shape="square"
+              @click="$refs.upload.click()"
+            >
+              <h1 style="color:#FFFFFF">TP</h1>
+            </a-avatar>
+            <a-avatar
+              v-else
+              class="profile_pic"
+              :size="150"
+              shape="square"
+              @click="$refs.upload.click()"
+              :src="taxpayer.avatar"
+            ></a-avatar>
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              @change="onFilePicked"
+              ref="upload"
+              style="display:none"
+            />
+          </a-col>-->
+        </a-row>
         <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
           <span slot="label">
             Last Name
@@ -101,7 +146,8 @@ export default {
           middle: "",
           last: "",
           suffix: ""
-        }
+        },
+        avatar: null
       },
       password: {
         new: null,
