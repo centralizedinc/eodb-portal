@@ -80,7 +80,9 @@ export default {
   },
   computed: {
     dockets() {
-      const dockets = this.$store.state.dockets.dockets;
+      const dockets = JSON.parse(
+        JSON.stringify(this.$store.state.dockets.dockets)
+      );
       return dockets.sort(
         (a, b) => new Date(b.date_created) - new Date(a.date_created)
       );

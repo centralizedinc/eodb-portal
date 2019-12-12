@@ -12,16 +12,16 @@ export default class AccountAPI {
 
     /** 
      * @param {AccountModel} user 
-    */
+     */
     register(new_account) {
         console.log("register account API data: " + JSON.stringify(new_account))
         return axios.post("account", new_account)
     }
 
     /**
-      * @returns {Promise}
-      * @param {Object} account 
-      */
+     * @returns {Promise}
+     * @param {Object} account 
+     */
     signup(account) {
         console.table("signup account API data: " + JSON.stringify(account));
         return axios.post('auth/signup', account);
@@ -44,6 +44,16 @@ export default class AccountAPI {
         console.log("find account outer api: " + JSON.stringify(id))
         return axios.get(`accounts/${id}`);
     }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} email
+     */
+    getAccountProfile(email) {
+        console.log("find account profile outer api: " + JSON.stringify(email))
+        return axios.get(`accounts/user/profile/${email}`);
+    }
+
 
     /**
      * @returns {Promise}

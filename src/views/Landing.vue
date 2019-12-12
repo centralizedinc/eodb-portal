@@ -163,9 +163,9 @@
           to pay their local taxes hassle free. It also features a zero-contact
           policy for complete transparency.
         </p>
-        <a-button type="primary" style=" text-align:center; height: 50px"
+        <!-- <a-button type="primary" style=" text-align:center; height: 50px"
           >Apply Now</a-button
-        >
+        > -->
       </a-col>
     </a-row>
 

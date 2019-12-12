@@ -1,11 +1,39 @@
 <template>
-  <a-row>
-    <a-col :xs="{ span: 24 }" :md="{ span: 12 }" v-if="platform==='local'">
-      <a-card title="Success">
-        <a-button type="primary" block @click="$router.push('/')">LOGIN</a-button>
-      </a-card>
-    </a-col>
-  </a-row>
+  <div>
+    <a-row>
+      <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :xl="{ span: 24}" v-if="platform!=='local'">
+        <a-row>
+          <a-col :span="24" style="background-color:#66bb6a">
+            <div align="center">
+              <a-icon
+                type="check-circle"
+                :style="{fontSize:'100px', color: '#FFF'}"
+                style="margin-top:80px"
+              />
+              <h1 style="margin-top:30px; margin-bottom:50px">Your account has been confirmed!</h1>
+            </div>
+          </a-col>
+        </a-row>
+        <a-card>
+          <h1 align="center" style="margin-top:50px">
+            We have successfully updated your account.
+            <br />You can login now securely
+          </h1>
+
+          <a-row>
+            <a-col :span="24" align="middle">
+              <a-button
+                style="background-color: #66bb6a;
+    color: #FFF; margin-top:40px; width:20%; height:50px"
+                align="middle"
+                @click="$router.push('/')"
+              >LOGIN</a-button>
+            </a-col>
+          </a-row>
+        </a-card>
+      </a-col>
+    </a-row>
+  </div>
 </template>
 
 <script>

@@ -1,0 +1,26 @@
+[
+    {
+        "id":10768,
+        "brgyCode":"043409001",
+        "brgyDesc":"Longos",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043409"
+        },
+        {
+        "id":10769,
+        "brgyCode":"043409002",
+        "brgyDesc":"San Antonio",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043409"
+        },
+        {
+        "id":10770,
+        "brgyCode":"043409003",
+        "brgyDesc":"San Juan (Pob.)",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043409"
+        }
+]

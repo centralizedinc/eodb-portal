@@ -1,7 +1,7 @@
 <template>
   <a-drawer placement="left" :closable="false" :width="450" @close="$emit('close')" :visible="show">
     <a-row type="flex">
-      <a-col :span="24">
+      <!-- <a-col :span="24">
         <a-card style="background: linear-gradient(to right, #000046, #1cb5e0)">
           <h2 style="color: #FFFFFF">Payment Options</h2>
         </a-card>
@@ -21,7 +21,7 @@
             </template>
           </a-tab-pane>
         </a-tabs>
-      </a-col>
+      </!--> -->
       <a-col :span="24">
         <a-card>
           <component

@@ -29,4 +29,18 @@ router.route('/permits')
         })
     })
 
+router.route('/account/profile')
+    .post((req, res) => {
+        console.log('uploading profile pic...', req.query);
+        const directory = `${req.query.permit}/${req.query.account_id}`
+        const upload = Uploader.uploadAvatar(directory);
+        upload(req, res, function (err, some) {
+            // console.log('some :', some);
+            console.log('err :', err);
+            console.log('req :', req.files);
+            res.json(req.files);
+        })
+    })
+
+
 module.exports = router;

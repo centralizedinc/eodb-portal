@@ -1,0 +1,122 @@
+[
+    {
+        "id":10586,
+        "brgyCode":"043401001",
+        "brgyDesc":"Del Carmen",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10587,
+        "brgyCode":"043401002",
+        "brgyDesc":"Palma",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10588,
+        "brgyCode":"043401003",
+        "brgyDesc":"Barangay I (Pob.)",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10589,
+        "brgyCode":"043401004",
+        "brgyDesc":"Barangay II (Pob.)",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10590,
+        "brgyCode":"043401005",
+        "brgyDesc":"Barangay III (Pob.)",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10591,
+        "brgyCode":"043401006",
+        "brgyDesc":"Barangay IV (Pob.)",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10592,
+        "brgyCode":"043401007",
+        "brgyDesc":"San Agustin",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10593,
+        "brgyCode":"043401008",
+        "brgyDesc":"San Andres",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10594,
+        "brgyCode":"043401009",
+        "brgyDesc":"San Benito",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10595,
+        "brgyCode":"043401010",
+        "brgyDesc":"San Gregorio",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10596,
+        "brgyCode":"043401011",
+        "brgyDesc":"San Ildefonso",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10597,
+        "brgyCode":"043401012",
+        "brgyDesc":"San Juan",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10598,
+        "brgyCode":"043401013",
+        "brgyDesc":"San Miguel",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10599,
+        "brgyCode":"043401014",
+        "brgyDesc":"San Roque",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        },
+        {
+        "id":10600,
+        "brgyCode":"043401015",
+        "brgyDesc":"Santa Rosa",
+        "regCode":"04",
+        "provCode":"0434",
+        "citymunCode":"043401"
+        }
+]

@@ -1,0 +1,290 @@
+[
+    {
+        "id":10205,
+        "brgyCode":"042110001",
+        "brgyDesc":"Agus-us",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10206,
+        "brgyCode":"042110002",
+        "brgyDesc":"Alulod",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10207,
+        "brgyCode":"042110003",
+        "brgyDesc":"Banaba Cerca",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10208,
+        "brgyCode":"042110004",
+        "brgyDesc":"Banaba Lejos",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10209,
+        "brgyCode":"042110005",
+        "brgyDesc":"Bancod",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10210,
+        "brgyCode":"042110006",
+        "brgyDesc":"Buna Cerca",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10211,
+        "brgyCode":"042110007",
+        "brgyDesc":"Buna Lejos I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10212,
+        "brgyCode":"042110008",
+        "brgyDesc":"Calumpang Cerca",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10213,
+        "brgyCode":"042110009",
+        "brgyDesc":"Calumpang Lejos I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10214,
+        "brgyCode":"042110010",
+        "brgyDesc":"Carasuchi",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10215,
+        "brgyCode":"042110011",
+        "brgyDesc":"Kayquit I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10216,
+        "brgyCode":"042110012",
+        "brgyDesc":"Daine I",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10217,
+        "brgyCode":"042110013",
+        "brgyDesc":"Guyam Malaki",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10218,
+        "brgyCode":"042110014",
+        "brgyDesc":"Guyam Munti",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10219,
+        "brgyCode":"042110015",
+        "brgyDesc":"Harasan",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10220,
+        "brgyCode":"042110016",
+        "brgyDesc":"Kaytambog",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10221,
+        "brgyCode":"042110018",
+        "brgyDesc":"Limbon",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10222,
+        "brgyCode":"042110019",
+        "brgyDesc":"Lumampong Balagbag",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10223,
+        "brgyCode":"042110020",
+        "brgyDesc":"Lumampong Halayhay",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10224,
+        "brgyCode":"042110021",
+        "brgyDesc":"Mahabangkahoy Lejos",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10225,
+        "brgyCode":"042110022",
+        "brgyDesc":"Mahabangkahoy Cerca",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10226,
+        "brgyCode":"042110023",
+        "brgyDesc":"Barangay 1 (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10227,
+        "brgyCode":"042110024",
+        "brgyDesc":"Barangay 2 (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10228,
+        "brgyCode":"042110025",
+        "brgyDesc":"Barangay 3 (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10229,
+        "brgyCode":"042110026",
+        "brgyDesc":"Barangay 4 (Pob.)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10230,
+        "brgyCode":"042110027",
+        "brgyDesc":"Pulo",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10231,
+        "brgyCode":"042110028",
+        "brgyDesc":"Tambo Balagbag",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10232,
+        "brgyCode":"042110029",
+        "brgyDesc":"Tambo Ilaya",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10233,
+        "brgyCode":"042110030",
+        "brgyDesc":"Tambo Malaki",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10234,
+        "brgyCode":"042110031",
+        "brgyDesc":"Tambo Kulit",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10235,
+        "brgyCode":"042110032",
+        "brgyDesc":"Buna Lejos II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10236,
+        "brgyCode":"042110033",
+        "brgyDesc":"Daine II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10237,
+        "brgyCode":"042110034",
+        "brgyDesc":"Kayquit II",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10238,
+        "brgyCode":"042110035",
+        "brgyDesc":"Kayquit III",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10239,
+        "brgyCode":"042110036",
+        "brgyDesc":"Kaytapos",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        },
+        {
+        "id":10240,
+        "brgyCode":"042110037",
+        "brgyDesc":"Mataas na Lupa (Checkpoint)",
+        "regCode":"04",
+        "provCode":"0421",
+        "citymunCode":"042110"
+        }
+]
