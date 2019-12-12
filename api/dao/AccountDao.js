@@ -30,6 +30,7 @@ class AccountDao {
      * @param {String} email 
      */
     static findByEmail(email) {
+        console.log("static find by email data: " + JSON.stringify(email))
         return model.findOne({
             email
         }).exec()

@@ -137,7 +137,7 @@
                 <a-icon type="file-protect" />
                 <span>Certificates</span>
               </a-menu-item>
-              <a-menu-item key="/app/account">
+              <a-menu-item key>
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
