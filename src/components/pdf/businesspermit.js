@@ -29,7 +29,7 @@ function getContent(details) {
             body: [
                 [
                     {
-                        text: "REPUBLIC OF THE PHILIPPINES",
+                        text: "REPUBLIKA NG PILIPINAS",
                         fontSize: 6,
                         bold: true,
                         characterSpacing: 0,
@@ -58,7 +58,7 @@ function getContent(details) {
                         characterSpacing: 0,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -12, 0, 0]
+                        margin: [1, -13 , 0, 0]
                     }
                 ]
             ]

@@ -94,7 +94,12 @@
               Tax Identification No
               <i style="color: red">*</i>
             </span>
-            <a-input placeholder="Tax Identification No*" v-model="form.business_details.tin"></a-input>
+            <a-input-number
+                  style="width:100%"
+                  maxlength="13"
+                    placeholder="Tax Identification No" v-model="business_details.tin"
+                     
+                    ></a-input-number>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
