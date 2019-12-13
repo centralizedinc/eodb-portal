@@ -54,9 +54,14 @@ var BarangayApplication = new mongoose.Schema({
     },
     date_issued: {
         type: Date
-    }
-
-
+    },
+    attachments: [{
+        title: {
+            type: String
+        },
+        files: []
+    }],
+    requirements: []
 })
 
 BusinessPermitApplication.pre('save', async function (callback) {

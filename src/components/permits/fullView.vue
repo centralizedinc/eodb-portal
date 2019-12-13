@@ -53,7 +53,11 @@
           </a-col>
         </a-row>
       </a-card>-->
-      <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
+      <a-button
+        style="font-size:12px ; font-weight: 700; height:100%"
+        block
+        @click="$router.push('/barangay')"
+      >
         RESIDENCE
         <br />CERTIFICATE
       </a-button>
