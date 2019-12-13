@@ -567,10 +567,6 @@ export default {
         });
       }
 
-      this.form.attachments = this.form.attachments.filter(
-        v => v.files && typeof v.files[0] === "string"
-      );
-
       console.log(
         "before saving this.form.attachments :",
         this.form.attachments
@@ -614,7 +610,12 @@ export default {
         this.$message.info(
           `${this.document_data_source[i].title} file uploaded.`
         );
-        console.log("this.form.attachments :", this.form.attachments);
+
+        const error_index = this.errors.findIndex(
+          v => v.field === "attachments"
+        );
+        if (error_index > -1) this.errors.splice(error_index, 1);
+
         this.document_data_source[i].status = 2;
       }, 1000);
     },
@@ -640,6 +641,10 @@ export default {
       return !show;
     },
     updatePaymentMode() {
+      const error_index = this.errors.findIndex(
+        v => v.field === "mode_of_payment"
+      );
+      if (error_index > -1) this.errors.splice(error_index, 1);
       if (this.transaction_details.mode_of_payment === "SA") {
         var payable = parseFloat(this.transaction_details.total_payable) / 2;
         this.transaction_details.amount_payable = payable;

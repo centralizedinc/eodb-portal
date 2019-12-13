@@ -29,6 +29,9 @@ const actions = {
             new UploadAPI(context.rootState.user_session.token)
                 .uploadPermitsDocRequired('business', context.rootState.user_session.user._id, files)
                 .then((result) => {
+                    details.data.attachments = details.data.attachments.filter(
+                        v => v.files && typeof v.files[0] === "string"
+                    );
                     if (result && result.data) {
                         Object.keys(result.data).forEach(doc_type => {
                             console.log('result.data[doc_type] :', result.data[doc_type]);

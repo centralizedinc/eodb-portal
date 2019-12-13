@@ -71,6 +71,7 @@ function signInFacebook(profile, facebook_access_token) {
                 const session_token = jwt.sign({
                     account_id: account._id,
                     email: account.email,
+                    name: account.name,
                     date: new Date()
                 }, ApplicationSettings.getValue("JWT_SECRET_TOKEN"))
                 result.token = session_token
