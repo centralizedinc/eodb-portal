@@ -123,8 +123,9 @@
               </a-col>
             </a-row>
           </a-card>
+          
           <a-affix :offsetTop="100">
-            <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+            <a-menu v-model="selected_menu" mode="inline" @click="nav">
               <a-menu-item key="/app">
                 <a-icon type="bars" />
                 <span>Home</span>
@@ -258,7 +259,7 @@
     <!-- ------------------------------------------------ -->
     <!-- <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-    >San Antonio, Quezon City</a-layout-footer> -->
+    >San Antonio, Quezon City</a-layout-footer>-->
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap
@@ -293,11 +294,17 @@ export default {
       user: {},
       visible: false,
       coordinates: { lat: 14.017685, lng: 121.417034 },
-      animation: {}
+      animation: {},
+      selected_menu: [this.$route.fullPath]
     };
   },
   created() {
     this.init();
+  },
+  watch: {
+    $route(to, from) {
+      this.selected_menu = [this.$route.fullPath];
+    }
   },
   methods: {
     init() {
@@ -305,6 +312,7 @@ export default {
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
     },
     nav(e) {
+      console.log("this.$route :", this.$route);
       if (e.key === "logout") {
         this.logout();
       } else if (e.key === "report") {

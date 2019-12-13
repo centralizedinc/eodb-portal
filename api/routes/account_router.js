@@ -2,6 +2,7 @@
 const router = require("express").Router();
 
 var AccountDao = require('../dao/AccountDao');
+const jwt = require('jsonwebtoken');
 
 router.route('/')
     .get((req, res) => {
@@ -40,13 +41,27 @@ router.route('/user/profile/:email')
             })
     })
 
+router.route('/profile')
+    .post((req, res) => {
+        const account_id = jwt.decode(req.headers.access_token).account_id;
+        console.log('account_id :', account_id);
+        console.log('req.body :', req.body);
+        AccountDao.modifyById(account_id, req.body)
+            .then((account) => {
+                account.password = null;
+                res.json(account);
+            }).catch((err) => {
+                res.json({ errors: err });
+            });
+    })
+
 router.route('/:id')
     .get((req, res) => {
         console.log("find one account id by one: " + JSON.stringify(req.params.id))
         var data = req.params.id
         AccountDao.findOne({
-                email: data
-            })
+            email: data
+        })
             .then((result) => {
                 console.log("find one by id: " + JSON.stringify(result))
                 res.json(result)
@@ -58,8 +73,8 @@ router.route('/:id')
     })
     .post((req, res) => {
         AccountDao.modifyOne({
-                session_token: req.params.id
-            }, req.body)
+            session_token: req.params.id
+        }, req.body)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
