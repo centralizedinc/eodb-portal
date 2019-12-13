@@ -192,6 +192,7 @@
         @pay="proceedToSubmit"
         @close="show_payment=false"
       />
+      <!-- :payment_amount="installment ? installment.amount : total_payable" -->
     </a-row>
   </div>
 </template>
