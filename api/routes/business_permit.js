@@ -6,7 +6,10 @@ const BusinessPermitDao = require('../dao/BusinessPermitDao');
 const DocketsDao = require('../dao/DocketsDao');
 const PaymentDao = require('../dao/PaymentDao');
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const sendgrid = require('../utils/email.js');
+const constant_helper = require('../utils/constant_helper');
+const ApplicationSettings = require('../utils/ApplicationSettings');
 
 router.route('/')
     .get((req, res) => {
@@ -21,16 +24,21 @@ router.route('/')
     })
     .post((req, res) => {
         console.log('Creating Business Permit :', req.body);
-        const created_by = jwt.decode(req.headers.access_token).account_id;
+        const decoded_data = jwt.decode(req.headers.access_token),
+            created_by = decoded_data.account_id,
+            user_email = decoded_data.email,
+            user_name = decoded_data.name;
         const {
             data,
             payment
         } = req.body;
         var results = {};
         data.created_by = created_by;
+        // CREATE BUSINESS PERMIT
         BusinessApplicationDao.create(data)
             .then((result) => {
                 console.log('application result :', result);
+                // PROCESS PAYMENTS
                 results.application = result;
                 payment.transaction_details.payment_for = "business";
                 payment.transaction_details.application_id = result._id;
@@ -61,6 +69,8 @@ router.route('/')
             })
             .then((payments) => {
                 console.log('payments results :', payments);
+
+                // CREATE DOCKET
                 results.payment = payments[0];
                 var details = {
                     application_id: results.application._id,
@@ -74,11 +84,25 @@ router.route('/')
             .then((result) => {
                 results.dockets = result;
                 console.log('docket result :', result);
+
+                // UPDATE BUSINESS PERMIT
                 return BusinessApplicationDao.modifyById(results.application._id, { reference_no: result.reference_no });
             })
             .then((result) => {
                 results.application = result;
                 console.log('results :', results);
+
+                // SEND NOTIFICATION TO CREATOR
+                const substitutions = {
+                    name: user_name.first,
+                    reference_no: result.reference_no,
+                    transaction_no: results.payment.transaction_no,
+                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?ref_no=${result.reference_no}`
+                }
+                return sendgrid.sendEmail(user_email, "SUCCESSFUL_APPLICATION_CREATION_TEMPLATE", substitutions)
+            })
+            .then((result) => {
+                console.log('creating business notification result :', result)
                 res.json(results);
             }).catch((errors) => {
                 console.log('errors :', errors);

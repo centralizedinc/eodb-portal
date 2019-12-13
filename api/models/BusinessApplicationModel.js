@@ -192,7 +192,10 @@ var BusinessPermitApplication = new mongoose.Schema({
             line_of_business: {
                 type: String
             }
-        }]
+        }],
+        capital_investment: {
+            type: Number
+        }
     },
     business_address: {
         bldg_no: {

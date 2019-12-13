@@ -99,9 +99,9 @@
     </a-layout-header>
     <!-- ------------------------------------------------ -->
     <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
-      <a-row type="flex" justify="center">
+      <a-row type="flex" justify="center" style="margin-top: 10vh">
         <a-col :span="4" style="margin-right:1vw">
-          <a-card style="margin-top:10vh; margin-bottom:2vh; color: #f2f2f2">
+          <a-card style="margin-bottom:2vh; color: #f2f2f2">
             <a-row type="flex" justify="center">
               <a-col :span="8">
                 <a-avatar
@@ -123,8 +123,9 @@
               </a-col>
             </a-row>
           </a-card>
+          
           <a-affix :offsetTop="100">
-            <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+            <a-menu v-model="selected_menu" mode="inline" @click="nav">
               <a-menu-item key="/app">
                 <a-icon type="bars" />
                 <span>Home</span>
@@ -157,16 +158,16 @@
           </a-affix>
         </a-col>
         <a-col :span="14" style="margin-right:1vw; margin-left:1vw">
+          <img style="width: 100%; height:30vh" src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cover.png" />
           <router-view></router-view>
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
-          <a-affix :offsetTop="40">
+          <!-- <a-affix :offsetTop="40">
             <a-card
               :headStyle="{
                 'background-image': 'linear-gradient(#56CAEF, #3C6CB4)',
                 color: 'white'
               }"
-              style="margin-top: 10vh, "
             >
               <a-row slot="title">
                 <a-col :span="21">Citizen Report</a-col>
@@ -184,17 +185,11 @@
                 </a-col>
               </a-row>
 
-              <!-- <p>Emergency Hotline</p> -->
               <a-row>
                 <a-col :span="24">
                   <a-card class="emergency_btn btnStyle hoverFire">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <!-- <a-icon
-                          type="fire"
-                          @click="report(1)"
-                          style="color:#ffffff;font-size:24px"
-                        ></a-icon>-->
                         <h4 style="color:#FFF">Fire</h4>
                       </a-col>
                     </a-row>
@@ -204,11 +199,6 @@
                   <a-card class="emergency_btn btnStyle hoverFlood">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <!-- <a-icon
-                          type="sound"
-                          @click="report(1)"
-                          style="color:#ffffff;font-size:24px"
-                        ></a-icon>-->
                         <h4 style="color:#FFF">Flood</h4>
                       </a-col>
                     </a-row>
@@ -218,11 +208,6 @@
                   <a-card class="emergency_btn btnStyle hoverDisturbance">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <!-- <a-icon
-                          type="alert"
-                          @click="report(1)"
-                          style="color:#ffffff;font-size:24px"
-                        ></a-icon>-->
                         <h4 style="color:#FFF">Civil Disturbance</h4>
                       </a-col>
                     </a-row>
@@ -232,11 +217,6 @@
                   <a-card class="emergency_btn btnStyle hoverCrime">
                     <a-row type="flex" justify="center">
                       <a-col :span="26">
-                        <!-- <a-icon
-                          type="safety"
-                          @click="report(1)"
-                          style="color:#ffffff;font-size:24px"
-                        ></a-icon>-->
                         <h4 style="color:#FFF">Crime</h4>
                       </a-col>
                     </a-row>
@@ -245,20 +225,17 @@
                 <a-col :span="24" style="margin-top:2vh">
                   <a-divider style="color: #D7D7D7"></a-divider>
                   <a-button type="danger" block>View Reports</a-button>
-                  <!-- <a-button block style="background-color: #333333">
-                    <p style="color:#FFFFFF">View Reports</p>
-                  </a-button>-->
                 </a-col>
               </a-row>
             </a-card>
-          </a-affix>
+          </a-affix> -->
         </a-col>
       </a-row>
     </a-layout-content>
     <!-- ------------------------------------------------ -->
     <!-- <a-layout-footer
       style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
-    >San Antonio, Quezon City</a-layout-footer> -->
+    >San Antonio, Quezon City</a-layout-footer>-->
 
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap
@@ -293,11 +270,17 @@ export default {
       user: {},
       visible: false,
       coordinates: { lat: 14.017685, lng: 121.417034 },
-      animation: {}
+      animation: {},
+      selected_menu: [this.$route.fullPath]
     };
   },
   created() {
     this.init();
+  },
+  watch: {
+    $route(to, from) {
+      this.selected_menu = [this.$route.fullPath];
+    }
   },
   methods: {
     init() {
@@ -305,6 +288,7 @@ export default {
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
     },
     nav(e) {
+      console.log("this.$route :", this.$route);
       if (e.key === "logout") {
         this.logout();
       } else if (e.key === "report") {

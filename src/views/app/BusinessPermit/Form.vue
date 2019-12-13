@@ -33,6 +33,8 @@
               :loading="loading"
               :errors="errors"
               :documents="document_data_source"
+              @updateGross="updateGross"
+              @updateCapital="updateCapital"
             />
           </a-col>
           <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
@@ -149,21 +151,34 @@
 
                 <a-row type="flex" align="middle">
                   <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
-                  <template v-for="(item, index) in payments_data_source">
-                    <a-col :span="15" :key="`a${index}`" class="row-border">{{item.description}}</a-col>
-                    <a-col
-                      :span="9"
-                      :key="`b${index}`"
-                      class="row-border"
-                      style="text-align: right;"
-                    >{{formatCurrency(item.amount)}}</a-col>
-                  </template>
-                  <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
+                  <a-col :span="24">
+                    <a-row v-for="(item, index) in payments_data_source" :key="`a${index}`">
+                      <a-col :span="15" class="row-border">{{item.description}}</a-col>
+                      <a-col
+                        :span="9"
+                        class="row-border"
+                        style="text-align: right;"
+                      >{{formatCurrency(item.amount)}}</a-col>
+                    </a-row>
+                  </a-col>
+                  <a-col
+                    :span="15"
+                    class="row-border"
+                    style="color: #333;background: #d7d7d7"
+                  >Total Amount</a-col>
                   <a-col
                     :span="9"
                     class="row-border"
                     style="text-align: right; color: #333;background: #d7d7d7"
-                  >{{formatCurrency(this.transaction_details.total_payable)}}</a-col>
+                  >{{formatCurrency(total_payable)}}</a-col>
+                  <template v-if="installment">
+                    <a-col :span="15" class="row-border" style="text-align: right;">
+                      <i>{{installment.label}}</i>
+                    </a-col>
+                    <a-col :span="9" class="row-border" style="text-align: right;">
+                      <i>{{formatCurrency(installment.amount)}}</i>
+                    </a-col>
+                  </template>
                 </a-row>
               </a-card>
             </a-affix>
@@ -177,6 +192,7 @@
         @pay="proceedToSubmit"
         @close="show_payment=false"
       />
+      <!-- :payment_amount="installment ? installment.amount : total_payable" -->
     </a-row>
   </div>
 </template>
@@ -269,7 +285,8 @@ export default {
           enjoying_tax_incentive: false,
           specify_entity: "",
           line_of_business: [],
-          measure_or_pax: []
+          measure_or_pax: [],
+          capital_investment: ""
         },
         business_address: {
           bldg_no: "",
@@ -389,38 +406,7 @@ export default {
         total_payable: 5000,
         amount_payable: 0,
         amount_paid: 0,
-        payment_breakdown: [
-          {
-            description: "CTC or Sedula",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Barangay Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Police Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Business Permit Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Fire Safety and Inspection Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Convenience Fee",
-            fee_type: "application_fee",
-            amount: 1000
-          }
-        ],
+        payment_breakdown: [],
         status: "unpaid",
         method: "",
         mode_of_payment: "",
@@ -430,33 +416,39 @@ export default {
       payments_data_source: [
         {
           description: "CTC or Sedula",
-          amount: 1000
+          fee_type: "local_taxes",
+          amount: 50
         },
         {
           description: "Barangay Clearance",
-          amount: 1000
+          fee_type: "local_taxes",
+          amount: 100
         },
         {
           description: "Police Clearance",
-          amount: 1000
-        },
-        {
-          description: "Business Permit Fee",
-          amount: 1000
+          fee_type: "local_taxes",
+          amount: 150
         },
         {
           description: "Fire Safety and Inspection Fee",
-          amount: 1000
+          fee_type: "local_taxes",
+          amount: 3000
+        },
+        {
+          description: "Business Permit Fee",
+          fee_type: "application_fee",
+          amount: 0
         },
         {
           description: "Convenience Fee",
-          fee_type: "application_fee",
-          amount: 1000
+          fee_type: "convenience_fee",
+          amount: 50
         }
       ],
       loading: false,
       errors: [],
-      fetching_data: false
+      fetching_data: false,
+      installment: null
     };
   },
   created() {
@@ -476,6 +468,13 @@ export default {
         );
       });
       return docs;
+    },
+    total_payable() {
+      var total = this.payments_data_source
+        .map(v => v.amount)
+        .reduce((t, c) => parseFloat(t) + parseFloat(c));
+      this.transaction_details.total_payable = total;
+      return total;
     }
   },
   methods: {
@@ -491,6 +490,7 @@ export default {
           })
           .then(app => {
             console.log("app :", app);
+            this.form.application_type = 1;
             this.form = app;
             this.form._id = undefined;
             this.mapFormForRenewal();
@@ -525,6 +525,7 @@ export default {
       // if there is no errors
       if (!errors.length) {
         if (this.current_step === 4) {
+          this.transaction_details.payment_breakdown = this.payments_data_source;
           this.show_payment = true;
           // Proceed to payment
         } else {
@@ -567,10 +568,6 @@ export default {
         });
       }
 
-      this.form.attachments = this.form.attachments.filter(
-        v => v.files && typeof v.files[0] === "string"
-      );
-
       console.log(
         "before saving this.form.attachments :",
         this.form.attachments
@@ -594,7 +591,7 @@ export default {
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          this.$router.push("/app");
+          this.$router.push("/app/permits");
         })
         .catch(err => {
           console.log("CREATE_BUSINESS_PERMIT err :", err);
@@ -614,7 +611,12 @@ export default {
         this.$message.info(
           `${this.document_data_source[i].title} file uploaded.`
         );
-        console.log("this.form.attachments :", this.form.attachments);
+
+        const error_index = this.errors.findIndex(
+          v => v.field === "attachments"
+        );
+        if (error_index > -1) this.errors.splice(error_index, 1);
+
         this.document_data_source[i].status = 2;
       }, 1000);
     },
@@ -640,22 +642,31 @@ export default {
       return !show;
     },
     updatePaymentMode() {
+      const error_index = this.errors.findIndex(
+        v => v.field === "mode_of_payment"
+      );
+      if (error_index > -1) this.errors.splice(error_index, 1);
       if (this.transaction_details.mode_of_payment === "SA") {
         var payable = parseFloat(this.transaction_details.total_payable) / 2;
         this.transaction_details.amount_payable = payable;
         this.transaction_details.amount_paid = payable;
+        this.installment = { label: "1/2 Installment", amount: payable };
       } else if (this.transaction_details.mode_of_payment === "Q") {
         var payable = parseFloat(this.transaction_details.total_payable) / 4;
         this.transaction_details.amount_payable = payable;
         this.transaction_details.amount_paid = payable;
+        this.installment = { label: "1/4 Installment", amount: payable };
       } else {
         this.transaction_details.amount_payable = this.transaction_details.total_payable;
         this.transaction_details.amount_paid = this.transaction_details.total_payable;
+        this.installment = null;
       }
     },
     validation(validate_all) {
       var errors = [],
         jump_to = 0;
+
+      // Business Owner
       if (validate_all || this.current_step === 1) {
         if (!this.form.owner_details.name.last) {
           errors.push({
@@ -752,6 +763,8 @@ export default {
 
         if (errors.length) jump_to = 1;
       }
+
+      // Business Details
       if (validate_all || this.current_step === 2) {
         if (!this.form.business_details.business_type) {
           errors.push({
@@ -823,6 +836,24 @@ export default {
           errors.push({
             field: "business_address.postal_code",
             error: "Postal Code is a required field."
+          });
+        }
+        if (
+          this.form.application_type === 0 &&
+          !this.form.business_details.capital_investment
+        ) {
+          errors.push({
+            field: "business_details.capital_investment",
+            error: "Capital Investment is a required field."
+          });
+        }
+        if (
+          this.form.application_type === 1 &&
+          !this.form.business_details.business_type
+        ) {
+          errors.push({
+            field: "business_details.business_types",
+            error: "Business Type is a required field."
           });
         }
         if (this.form.business_details.is_rented) {
@@ -940,7 +971,16 @@ export default {
       );
 
       // Map References
-    }
+    },
+    updateCapital(amount) {
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      const computed_amount = amount ? parseFloat(amount) / 100 / 20 : 0;
+      console.log("computed_amount :", computed_amount);
+      this.payments_data_source[index].amount = computed_amount;
+    },
+    updateGross(amount) {}
   }
 };
 </script>

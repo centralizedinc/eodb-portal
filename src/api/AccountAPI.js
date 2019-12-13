@@ -72,4 +72,12 @@ export default class AccountAPI {
         console.log('code :', code);
         return axios.get(`auth/confirmation/${code}`);
     }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} details 
+     */
+    updateProfile(details) {
+        return axios.post('accounts/profile', details);
+    }
 }

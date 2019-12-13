@@ -4,28 +4,6 @@
     <a-divider style="margin-top:-1vh "></a-divider>
 
     <a-col :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
-      <!-- <a-card style="box-shadow: 0px 0px 10px 2px #88888847">
-        <a-row type="flex" align="middle" justify="center">
-          <a-col :span="8">
-            <a-avatar
-              shape="square"
-              :size="40"
-              class="card_btn"
-              style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1))"
-              @click="$router.push('/permits/business')"
-            >
-              <a-icon type="shop" style="font-size:16px"></a-icon>
-            </a-avatar>
-          </a-col>
-          <a-col :span="24" align="middle">
-            <a-button
-              style="font-size:12px; font-weight: 700; height:100%"
-              type="primary"
-              block
-            >BUSINESS PERMIT</a-button>
-          </a-col>
-        </a-row>
-      </a-card>-->
       <a-button
         style="font-size:12px; font-weight: 700; height:66px"
         type="primary"
@@ -158,11 +136,6 @@ export default {
       this.$emit("redirect", nav);
     }
   }
-  // computed:{
-  //   btnStyle(){
-  //     return this.constant_helper.theme.button;
-  //   }
-  // }
 };
 </script>
 

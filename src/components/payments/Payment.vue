@@ -21,7 +21,7 @@
             </template>
           </a-tab-pane>
         </a-tabs>
-      </!--> -->
+      </a-col> -->
       <a-col :span="24">
         <a-card>
           <component
@@ -36,7 +36,6 @@
           <a-button
             type="primary"
             block
-            :disabled="is_allow"
             @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
             :loading="loading"
           >Submit</a-button>
@@ -65,16 +64,6 @@ export default {
       current_option: "CreditCard",
       tabs: ["CreditCard", "OnlineBanking", "OverCounter"]
     };
-  },
-  computed: {
-    is_allow() {
-      return (
-        this.is_valid_card &&
-        this.is_valid_name &&
-        this.is_valid_expiry &&
-        this.is_valid_cvc
-      );
-    }
   },
   methods: {
     navigate(e) {

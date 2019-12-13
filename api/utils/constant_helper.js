@@ -9,5 +9,5 @@ module.exports = {
     existing_email: "Email already use.",
     confirmation_success: "Successfully Setup",
     invalid_code: "Invalid Code",
-    confirmation_expired: "Confirmation has been expired"   
+    confirmation_expired: "Confirmation has been expired"
 }

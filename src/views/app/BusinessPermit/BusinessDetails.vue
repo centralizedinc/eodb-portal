@@ -54,6 +54,42 @@
         <a-input v-model="form.business_details.franchise" placeholder="Trade Name/Franchise"></a-input>
       </a-form-item>
 
+      <a-form-item
+        v-if="form.application_type===0"
+        style="font-weight: bold"
+        :validate-status="checkErrors('business_details.capital_investment') ? 'error': ''"
+        :help="checkErrors('business_details.capital_investment')"
+      >
+        <span slot="label">
+          Capital Investment
+          <i style="color: red">*</i>
+        </span>
+        <a-input-number
+          v-model="form.business_details.capital_investment"
+          @change="$emit('updateCapital', form.business_details.capital_investment)"
+          style="width: 100%;"
+          placeholder="Capital Investment"
+        ></a-input-number>
+      </a-form-item>
+
+      <a-form-item
+        v-else-if="form.application_type===1"
+        style="font-weight: bold"
+        :validate-status="checkErrors('business_details.gross_sales') ? 'error': ''"
+        :help="checkErrors('business_details.gross_sales')"
+      >
+        <span slot="label">
+          Annual Gross Sales
+          <i style="color: red">*</i>
+        </span>
+        <a-input-number
+          v-model="form.business_details.gross_sales"
+          @change="$emit('updateGross', form.business_details.gross_sales)"
+          style="width: 100%;"
+          placeholder="Annual Gross Sales"
+        ></a-input-number>
+      </a-form-item>
+
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
@@ -137,7 +173,8 @@
               No. of Employees in Establishment (in sq m)
               <i style="color: red">*</i>
             </span>
-            <a-input-number style="width: 100%"
+            <a-input-number
+              style="width: 100%"
               placeholder="No. of Employees in Establishment*"
               v-model="form.business_details.employees_establishment"
             ></a-input-number>
@@ -145,7 +182,8 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item label="No. of Employees Residing in LGU">
-            <a-input-number style="width: 100%"
+            <a-input-number
+              style="width: 100%"
               placeholder="No. of Employees in Residing in LGU"
               v-model="form.business_details.employees_residing"
             ></a-input-number>
@@ -654,14 +692,14 @@ export default {
         })
         .then(data => {
           this.rental_cities = data.default;
-          console.log('this.rental_cities :', this.rental_cities);
+          console.log("this.rental_cities :", this.rental_cities);
           return import(
             `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
           );
         })
         .then(data => {
           this.rental_barangays = data.default;
-          console.log('this.rental_barangays :', this.rental_barangays);
+          console.log("this.rental_barangays :", this.rental_barangays);
         });
     }
     if (this.fixed_postal) {
