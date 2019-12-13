@@ -22,7 +22,6 @@
         type="flex"
         justify="end"
         align="center"
-        :gutter="16"
       >
         <a-row>
           <a-col :span="15"></a-col>
@@ -48,7 +47,7 @@
       v-else
       style="background-image:url('https://i.postimg.cc/K8QHjLtY/1.jpg'); height:100%;background-repeat: no-repeat; background-size: cover"
     >
-      <a-row type="flex" justify="center" align="center" style="100vh">
+      <a-row type="flex" justify="center" align="center">
         <a-col :xs="22" :sm="18" style="margin-top:20vh">
           <login />
         </a-col>
@@ -95,8 +94,8 @@
             </p>
 
             <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
- <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
- </a-anchor> -->
+            <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
+            </a-anchor> -->
           </a-card>
         </a>
       </a-col>

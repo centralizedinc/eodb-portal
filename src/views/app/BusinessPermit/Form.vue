@@ -1,43 +1,45 @@
 <template>
-  <a-row type="flex" justify="space-between">
-    <!-- Steps -->
-    <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
-      <!-- <a-affix :offsetTop="60"> -->
-      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-        <a-steps direction="vertical" :current="current_step" class="form-stepper">
-          <a-step
-            v-for="(item, index) in steps"
-            :key="index"
-            :title="item.title"
-            :description="item.description"
-          />
-        </a-steps>
-      </a-card>
-      <!-- </a-affix> -->
-    </a-col>
+  <div>
+    <loading-content v-if="fetching_data" />
+    <a-row type="flex" v-else justify="space-between">
+      <!-- Steps -->
+      <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
+        <!-- <a-affix :offsetTop="60"> -->
+        <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
+          <a-steps direction="vertical" :current="current_step" class="form-stepper">
+            <a-step
+              v-for="(item, index) in steps"
+              :key="index"
+              :title="item.title"
+              :description="item.description"
+            />
+          </a-steps>
+        </a-card>
+        <!-- </a-affix> -->
+      </a-col>
 
-    <!-- Fill up form -->
-    <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
-      <h1 style="margin-top: 5vh;">Business Permit Application</h1>
-      <h4>This information will help us assess your application.</h4>
-      <a-row type="flex" justify="space-between">
-        <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
-          <component
-            :is="form_components[current_step]"
-            :form="form"
-            @prev="current_step--"
-            @next="validateStep"
-            @payment="validateStep(true)"
-            :loading="loading"
-            :errors="errors"
-            :documents="document_data_source"
-          />
-        </a-col>
-        <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
-          <a-affix :offsetTop="60">
-            <!-- Attachments -->
-            <a-card
-              :headStyle="{ 
+      <!-- Fill up form -->
+      <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
+        <h1 style="margin-top: 5vh;">Business Permit Application</h1>
+        <h4>This information will help us assess your application.</h4>
+        <a-row type="flex" justify="space-between">
+          <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
+            <component
+              :is="form_components[current_step]"
+              :form="form"
+              @prev="current_step--"
+              @next="validateStep"
+              @payment="validateStep(true)"
+              :loading="loading"
+              :errors="errors"
+              :documents="document_data_source"
+            />
+          </a-col>
+          <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
+            <a-affix :offsetTop="60">
+              <!-- Attachments -->
+              <a-card
+                :headStyle="{ 
                 background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
                 color: 'white', 
                 'font-weight': 'bold',
@@ -45,75 +47,75 @@
                 padding: '5px 10px',
                 'min-height': '2vh'
               }"
-              :bodyStyle="{ padding: 0 }"
-              class="document-card"
-            >
-              <a-row slot="title">
-                <a-col :span="22">Required Documents</a-col>
-                <a-col :span="2">
-                  <a-tooltip placement="left">
-                    <span
-                      slot="title"
-                    >Upload all the required documents. If there's a need to apply for a specific certificate/clearance, additional required information will be asked.</span>
-                    <a-icon type="info-circle" />
-                  </a-tooltip>
-                </a-col>
-              </a-row>
-              <a-table
-                :columns="document_columns"
-                :dataSource="required_documents"
-                bordered
-                :pagination="false"
-                size="small"
+                :bodyStyle="{ padding: 0 }"
+                class="document-card"
               >
-                <template slot="status" slot-scope="text">
-                  <div style="text-align: center;">
-                    <a-icon
-                      v-if="text===2"
-                      type="check-circle"
-                      style="color: green; font-weight: bold;"
-                    />
-                    <a-icon
-                      v-else-if="text===1"
-                      type="loading"
-                      style="color: green; font-weight: bold;"
-                    />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
-                  </div>
-                </template>
-                <template slot="action" slot-scope="text, record">
-                  <a-row style="text-align: center;">
-                    <a-col v-if="record.status === 2" :span="24">
+                <a-row slot="title">
+                  <a-col :span="22">Required Documents</a-col>
+                  <a-col :span="2">
+                    <a-tooltip placement="left">
+                      <span
+                        slot="title"
+                      >Upload all the required documents. If there's a need to apply for a specific certificate/clearance, additional required information will be asked.</span>
+                      <a-icon type="info-circle" />
+                    </a-tooltip>
+                  </a-col>
+                </a-row>
+                <a-table
+                  :columns="document_columns"
+                  :dataSource="required_documents"
+                  bordered
+                  :pagination="false"
+                  size="small"
+                >
+                  <template slot="status" slot-scope="text">
+                    <div style="text-align: center;">
                       <a-icon
-                        style="cursor: pointer; color: red; font-weight: bold;"
-                        type="delete"
-                        @click="removeAttachment(record.keyword)"
+                        v-if="text===2"
+                        type="check-circle"
+                        style="color: green; font-weight: bold;"
                       />
-                    </a-col>
-                    <a-col v-else :span="24">
-                      <a-upload
-                        :multiple="true"
-                        :showUploadList="false"
-                        :beforeUpload="file => attachFile(record.keyword, file)"
-                        style="cursor: pointer; color: blue; font-weight: bold;"
-                      >
-                        <a-icon type="upload" />
-                      </a-upload>
-                    </a-col>
-                  </a-row>
-                </template>
-              </a-table>
-              <span
-                v-if="checkErrors('attachments')"
-                style="color: red"
-              >{{checkErrors('attachments')}}</span>
-            </a-card>
+                      <a-icon
+                        v-else-if="text===1"
+                        type="loading"
+                        style="color: green; font-weight: bold;"
+                      />
+                      <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    </div>
+                  </template>
+                  <template slot="action" slot-scope="text, record">
+                    <a-row style="text-align: center;">
+                      <a-col v-if="record.status === 2" :span="24">
+                        <a-icon
+                          style="cursor: pointer; color: red; font-weight: bold;"
+                          type="delete"
+                          @click="removeAttachment(record.keyword)"
+                        />
+                      </a-col>
+                      <a-col v-else :span="24">
+                        <a-upload
+                          :multiple="true"
+                          :showUploadList="false"
+                          :beforeUpload="file => attachFile(record.keyword, file)"
+                          style="cursor: pointer; color: blue; font-weight: bold;"
+                        >
+                          <a-icon type="upload" />
+                        </a-upload>
+                      </a-col>
+                    </a-row>
+                  </template>
+                </a-table>
+                <span
+                  v-if="checkErrors('attachments')"
+                  style="color: red"
+                >{{checkErrors('attachments')}}</span>
+              </a-card>
 
-            <!-- Payment Details -->
-            <a-card
-              title="Fees"
-              style="margin-top: 1vh;"
-              :headStyle="{ 
+              <!-- Payment Details -->
+              <a-card
+                title="Fees"
+                style="margin-top: 1vh;"
+                :headStyle="{ 
                 background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
                 color: 'white', 
                 'font-weight': 'bold', 
@@ -121,70 +123,76 @@
                 padding: '5px 10px',
                 'min-height': '2vh'
               }"
-              :bodyStyle="{ padding: '1vh' }"
-              class="document-card"
-            >
-              <a-row type="flex" align="middle" justify="space-between">
-                <a-col :span="11">
-                  <span style="font-weight: bold;">Mode of Payment</span>
-                </a-col>
-                <a-col :span="12">
-                  <a-select
-                    style="width: 100%;"
-                    v-model="transaction_details.mode_of_payment"
-                    @change="updatePaymentMode"
-                  >
-                    <a-select-option value="A">Annually</a-select-option>
-                    <a-select-option value="SA">Semi-Annual</a-select-option>
-                    <a-select-option value="Q">Quarterly</a-select-option>
-                  </a-select>
-                  <span
-                    v-if="checkErrors('mode_of_payment')"
-                    style="color: red"
-                  >{{checkErrors('mode_of_payment')}}</span>
-                </a-col>
-              </a-row>
+                :bodyStyle="{ padding: '1vh' }"
+                class="document-card"
+              >
+                <a-row type="flex" align="middle" justify="space-between">
+                  <a-col :span="11">
+                    <span style="font-weight: bold;">Mode of Payment</span>
+                  </a-col>
+                  <a-col :span="12">
+                    <a-select
+                      style="width: 100%;"
+                      v-model="transaction_details.mode_of_payment"
+                      @change="updatePaymentMode"
+                    >
+                      <a-select-option value="A">Annually</a-select-option>
+                      <a-select-option value="SA">Semi-Annual</a-select-option>
+                      <a-select-option value="Q">Quarterly</a-select-option>
+                    </a-select>
+                    <span
+                      v-if="checkErrors('mode_of_payment')"
+                      style="color: red"
+                    >{{checkErrors('mode_of_payment')}}</span>
+                  </a-col>
+                </a-row>
 
-              <a-row type="flex" align="middle">
-                <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
-                <template v-for="(item, index) in payments_data_source">
-                  <a-col :span="15" :key="`a${index}`" class="row-border">{{item.description}}</a-col>
+                <a-row type="flex" align="middle">
+                  <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
+                  <template v-for="(item, index) in payments_data_source">
+                    <a-col :span="15" :key="`a${index}`" class="row-border">{{item.description}}</a-col>
+                    <a-col
+                      :span="9"
+                      :key="`b${index}`"
+                      class="row-border"
+                      style="text-align: right;"
+                    >{{formatCurrency(item.amount)}}</a-col>
+                  </template>
+                  <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
                   <a-col
                     :span="9"
-                    :key="`b${index}`"
                     class="row-border"
-                    style="text-align: right;"
-                  >{{formatCurrency(item.amount)}}</a-col>
-                </template>
-                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
-                <a-col
-                  :span="9"
-                  class="row-border"
-                  style="text-align: right; color: #333;background: #d7d7d7"
-                >{{formatCurrency(this.transaction_details.total_payable)}}</a-col>
-              </a-row>
-            </a-card>
-          </a-affix>
-        </a-col>
-      </a-row>
-    </a-col>
+                    style="text-align: right; color: #333;background: #d7d7d7"
+                  >{{formatCurrency(this.transaction_details.total_payable)}}</a-col>
+                </a-row>
+              </a-card>
+            </a-affix>
+          </a-col>
+        </a-row>
+      </a-col>
 
-    <payment
-      :loading="loading"
-      :show="show_payment"
-      @pay="proceedToSubmit"
-      @close="show_payment=false"
-    />
-  </a-row>
+      <payment
+        :loading="loading"
+        :show="show_payment"
+        @pay="proceedToSubmit"
+        @close="show_payment=false"
+      />
+    </a-row>
+  </div>
 </template>
 
 <script>
+// packages
+import moment from "moment";
+
+// Components
 import ApplicationChecklist from "./ApplicationChecklist";
 import BusinessOwner from "./BusinessOwner";
 import BusinessDetails from "./BusinessDetails";
 import BusinessActivity from "./BusinessActivity";
 import ApplicationSummary from "./ApplicationSummary";
 import Payment from "@/components/payments/Payment.vue";
+import LoadingContent from "@/components/Loading";
 
 export default {
   components: {
@@ -193,10 +201,12 @@ export default {
     BusinessOwner,
     BusinessDetails,
     BusinessActivity,
-    ApplicationSummary
+    ApplicationSummary,
+    LoadingContent
   },
   data() {
     return {
+      moment,
       show_payment: false,
       current_step: 0,
       form_components: [
@@ -222,7 +232,14 @@ export default {
           email: "",
           tin: "",
           job_title: "",
-          salary: ""
+          salary: "",
+          civil_status: "",
+          birthplace: "",
+          monthly_salary: "",
+          occupation: "",
+          height: "",
+          weight: "",
+          icr_no: ""
         },
         owner_address: {
           bldg_no: "",
@@ -283,19 +300,12 @@ export default {
           contact_no: "",
           email: ""
         },
-        attachments: [{
-          doc_type: "dti_sec_cda",
-          files: []
-        }],
-        required_documents: {
-          civil_status: "",
-          birthplace: "",
-          monthly_salary: "",
-          occupation: "",
-          height: "",
-          weight: "",
-          icr_no: ""
-        }
+        attachments: [
+          {
+            doc_type: "dti_sec_cda",
+            files: []
+          }
+        ]
       },
       document_columns: [
         {
@@ -445,7 +455,8 @@ export default {
         }
       ],
       loading: false,
-      errors: []
+      errors: [],
+      fetching_data: false
     };
   },
   created() {
@@ -469,17 +480,38 @@ export default {
   },
   methods: {
     init() {
-      this.$store.dispatch("GET_REGIONS");
-      this.$store.dispatch("GET_PROVINCES");
+      const { mode, ref_no } = this.$route.query;
+      console.log("this.$route.query :", this.$route.query);
+      if (mode && mode === "renewal" && ref_no) {
+        this.fetching_data = true;
+        this.$store
+          .dispatch("GET_APPLICATION_BY_REF", {
+            type: "business",
+            reference_no: ref_no
+          })
+          .then(app => {
+            console.log("app :", app);
+            this.form = app;
+            this.form._id = undefined;
+            this.mapFormForRenewal();
+            this.fetching_data = false;
+          })
+          .catch(err => {
+            console.log("GET_APPLICATION_BY_REF err :", err);
+            if (err && err.message) this.$message.error(err.message);
+            this.$router.push("/app");
+            this.fetching_data = false;
+          });
+      }
     },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
       console.log("this.current_step :", this.current_step);
       console.log("this.form :", this.form);
 
-      // var { errors, jump_to } = this.validation(validate_all);
-      var errors = [],
-        jump_to = 0;
+      var { errors, jump_to } = this.validation(validate_all);
+      // var errors = [],
+      //   jump_to = 0;
 
       console.log("errors :", errors);
       this.errors = errors;
@@ -522,14 +554,28 @@ export default {
     submit() {
       this.loading = true;
       var files = null;
-      if (this.form.attachments.length) {
+      var upload_attachments = this.form.attachments.filter(
+        v => v.files && typeof v.files[0] === "object"
+      );
+      console.log("upload_attachments :", upload_attachments);
+      if (upload_attachments.length) {
         files = new FormData();
-        this.form.attachments.forEach(attachment => {
+        upload_attachments.forEach(attachment => {
           attachment.files.forEach(file => {
             files.append(attachment.doc_type, file, file.name);
           });
         });
       }
+
+      this.form.attachments = this.form.attachments.filter(
+        v => v.files && typeof v.files[0] === "string"
+      );
+
+      console.log(
+        "before saving this.form.attachments :",
+        this.form.attachments
+      );
+
       this.$store
         .dispatch("CREATE_BUSINESS_PERMIT", {
           details: {
@@ -568,6 +614,7 @@ export default {
         this.$message.info(
           `${this.document_data_source[i].title} file uploaded.`
         );
+        console.log("this.form.attachments :", this.form.attachments);
         this.document_data_source[i].status = 2;
       }, 1000);
     },
@@ -685,7 +732,7 @@ export default {
 
         if (
           this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-          !this.form.required_documents.civil_status
+          !this.form.owner_details.civil_status
         ) {
           errors.push({
             field: "required_documents.civil_status",
@@ -695,7 +742,7 @@ export default {
 
         if (
           this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-          !this.form.required_documents.birthplace
+          !this.form.owner_details.birthplace
         ) {
           errors.push({
             field: "required_documents.birthplace",
@@ -874,6 +921,25 @@ export default {
         jump_to = 4;
       }
       return { errors, jump_to };
+    },
+    mapFormForRenewal() {
+      // Map Attachments
+      this.form.attachments.forEach(attachment => {
+        const index = this.document_data_source.findIndex(
+          v => v.keyword === attachment.doc_type
+        );
+        this.document_data_source[index].status = 2;
+      });
+
+      // Map Dates
+      this.form.owner_details.birthdate = moment(
+        this.form.owner_details.birthdate
+      );
+      this.form.business_details.registration_date = moment(
+        this.form.business_details.registration_date
+      );
+
+      // Map References
     }
   }
 };

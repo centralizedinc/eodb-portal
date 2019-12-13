@@ -260,7 +260,7 @@
       </div>
       <a-form>
         <a-form-item :validate-status="login_err ? 'error' : ''">
-          <a-input v-model="login_account.email" placeholder="Email" @keypress.enter="login">
+          <a-input v-model="login_account.email" placeholder="Email" @keypress.enter="login" :disabled="loading">
             <a-icon type="user" slot="prefix"></a-icon>
           </a-input>
         </a-form-item>
@@ -269,7 +269,8 @@
             v-model="login_account.password"
             placeholder="Password"
             :type="reveal?'text':'password'"
-            @keypress.enter="login"
+            @keypress.enter="login" 
+            :disabled="loading"
           >
             <a-icon type="lock" slot="prefix"></a-icon>
             <a-tooltip slot="suffix">
@@ -350,12 +351,12 @@ export default {
         this.$store
           .dispatch("LOGIN", this.login_account)
           .then(result => {
+            this.$router.push('/app');
             console.log("LOGIN result :", result);
             this.$message.success(
               `Welcome ${result.account.name.first}. You are now login.`
             );
             this.loading = false;
-            this.$router.push('/app');
           })
           .catch(err => {
             this.$message.error(err.message);

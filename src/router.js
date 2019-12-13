@@ -91,12 +91,16 @@ export default new Router({
         },
         {
           path: 'permits',
-          component: () => import('@/views/Permits')
+          component: () => import('./views/app/Permits')
           // component: () => import('@/components/permits/Transactions')
         },
         {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
+        },
+        {
+          path: 'realproperty',
+          component: () => import('./views/app/RealProperty')
         },
         {
           path: 'account',
@@ -201,6 +205,7 @@ export default new Router({
       path: '/permits',
       name: "Permits",
       component: () => import('./views/Main.vue'),
+      beforeEnter: isUserAppAuthenticated,
       children: [{
         path: 'business',
         name: "Business Permit",

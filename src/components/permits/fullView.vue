@@ -115,17 +115,39 @@
 
     <h3 style="margin-top:2vh ; font-weight: 500; color:black">My Permit Application</h3>
     <a-divider style="margin-top:-1vh; "></a-divider>
-    <a-col :span="24" style="margin-top: -10vh">
-      <transactions></transactions>
+    <a-col :span="24">
+      <a-card :bodyStyle="{ padding: '5px' }" class="permits-tabs">
+        <a-tabs v-model="current_view">
+        <a-tab-pane tab="Applied" :key="0" />
+        <a-tab-pane tab="Drafts" :key="1" />
+        <a-tab-pane tab="Payments" :key="2" />
+      </a-tabs>
+      </a-card>
+    </a-col>
+    <a-col :span="24">
+      <a-card :bodyStyle="{ padding: 0 }" class="permits-tables">
+        <component :is="view_components[current_view]" />
+      </a-card>
     </a-col>
   </a-row>
 </template>
 
 <script>
-import Transactions from "@/components/permits/Transactions";
+import Applied from "@/components/permits/Applied";
+import Drafts from "@/components/permits/Drafts";
+import Payments from "@/components/permits/Payments";
+
 export default {
   components: {
-    Transactions
+    Applied,
+    Drafts,
+    Payments
+  },
+  data() {
+    return {
+      current_view: 0,
+      view_components: ["Applied", "Drafts", "Payments"]
+    }
   },
   methods: {
     redirect(nav) {
@@ -140,4 +162,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.permits-tabs {
+  margin-bottom: 1vh;
+}
+
+.permits-tabs .ant-tab-bars {
+  margin: 0 !important;
+}
+
+.permits-tables .ant-pagination {
+  padding-right: 1vw;
+}
+</style>

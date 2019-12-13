@@ -6,6 +6,8 @@ const BusinessPermitDao = require('../dao/BusinessPermitDao');
 const DocketsDao = require('../dao/DocketsDao');
 const PaymentDao = require('../dao/PaymentDao');
 
+const jwt = require('jsonwebtoken')
+
 router.route('/')
     .get((req, res) => {
         BusinessApplicationDao.findAll()
@@ -18,19 +20,21 @@ router.route('/')
             });
     })
     .post((req, res) => {
-        console.log("Creating Business Permit...")
-        console.log('Saving data :', req.body);
+        console.log('Creating Business Permit :', req.body);
+        const created_by = jwt.decode(req.headers.access_token).account_id;
         const {
             data,
             payment
         } = req.body;
         var results = {};
+        data.created_by = created_by;
         BusinessApplicationDao.create(data)
             .then((result) => {
                 console.log('application result :', result);
                 results.application = result;
                 payment.transaction_details.payment_for = "business";
                 payment.transaction_details.application_id = result._id;
+                payment.created_by = created_by;
                 var payment_actions = [], loopCount = payment.mode_of_payment === 'SA' ? 2 : payment.mode_of_payment === 'Q' ? 4 : 1;
                 for (let i = 0; i < loopCount; i++) {
                     if (i === 0) { //paid on first
@@ -62,7 +66,8 @@ router.route('/')
                     application_id: results.application._id,
                     application_type: results.application.application_type,
                     permit: 'business',
-                    payment_status: payments[0].status
+                    payment_status: payments[0].status,
+                    created_by
                 }
                 return DocketsDao.create(details)
             })
@@ -149,5 +154,20 @@ router.route('/product')
             });
     })
 
+
+router.route('/application/reference/:reference_no')
+    .get((req, res) => {
+        const reference_no = req.params.reference_no;
+        console.log('reference_no :', reference_no);
+        BusinessApplicationDao.findOneByReference(reference_no)
+            .then((result) => {
+                console.log('result :', result);
+                if (!result) res.json({ errors: { message: "Invalid Reference Number" } })
+                res.json(result);
+            }).catch((err) => {
+                console.log('err :', err);
+                res.json({ errors: err });
+            });
+    })
 
 module.exports = router

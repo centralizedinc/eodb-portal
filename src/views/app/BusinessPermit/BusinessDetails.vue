@@ -137,18 +137,18 @@
               No. of Employees in Establishment (in sq m)
               <i style="color: red">*</i>
             </span>
-            <a-input
+            <a-input-number style="width: 100%"
               placeholder="No. of Employees in Establishment*"
               v-model="form.business_details.employees_establishment"
-            ></a-input>
+            ></a-input-number>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item label="No. of Employees Residing in LGU">
-            <a-input
+            <a-input-number style="width: 100%"
               placeholder="No. of Employees in Residing in LGU"
               v-model="form.business_details.employees_residing"
-            ></a-input>
+            ></a-input-number>
           </a-form-item>
         </a-col>
       </a-row>

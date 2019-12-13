@@ -5,9 +5,12 @@ var DocketsDao = require('../dao/DocketsDao');
 var BussinessApplicationDao = require('../dao/BusinessApplicationDao')
 var DocketsActivityDao = require('../dao/DocketsActivityDao');
 
+const jwt = require('jsonwebtoken');
+
 router.route('/')
     .get((req, res) => {
-        DocketsDao.findAll()
+        const created_by = jwt.decode(req.headers.access_token).account_id;
+        DocketsDao.find({ created_by })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -26,7 +29,7 @@ router.route('/')
 router.route('/unassign')
     .get((req, res) => {
         const { department } = req.query;
-        
+
     })
 
 router.route('/claim')
