@@ -53,11 +53,7 @@
           </a-col>
         </a-row>
       </a-card>-->
-      <a-button
-        style="font-size:12px ; font-weight: 700; height:100%"
-        block
-        @click="$router.push('/barangay')"
-      >
+      <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
         RESIDENCE
         <br />CERTIFICATE
       </a-button>
@@ -82,7 +78,11 @@
           </a-col>
         </a-row>
       </a-card>-->
-      <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
+      <a-button
+        style="font-size:12px ; font-weight: 700; height:100%"
+        block
+        @click="$router.push('/permits/barangay')"
+      >
         BARANGAY
         <br />CLEARANCE
       </a-button>
@@ -107,7 +107,11 @@
           </a-col>
         </a-row>
       </a-card>-->
-      <a-button style="font-size:12px; font-weight: 700; height:100%" block>
+      <a-button
+        style="font-size:12px; font-weight: 700; height:100%"
+        block
+        @click="$router.push('/permits/police')"
+      >
         POLICE
         <br />CLEARANCE
       </a-button>
@@ -118,10 +122,10 @@
     <a-col :span="24">
       <a-card :bodyStyle="{ padding: '5px' }" class="permits-tabs">
         <a-tabs v-model="current_view">
-        <a-tab-pane tab="Applied" :key="0" />
-        <a-tab-pane tab="Drafts" :key="1" />
-        <a-tab-pane tab="Payments" :key="2" />
-      </a-tabs>
+          <a-tab-pane tab="Applied" :key="0" />
+          <a-tab-pane tab="Drafts" :key="1" />
+          <a-tab-pane tab="Payments" :key="2" />
+        </a-tabs>
       </a-card>
     </a-col>
     <a-col :span="24">
@@ -147,7 +151,7 @@ export default {
     return {
       current_view: 0,
       view_components: ["Applied", "Drafts", "Payments"]
-    }
+    };
   },
   methods: {
     redirect(nav) {

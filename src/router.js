@@ -207,15 +207,21 @@ export default new Router({
       component: () => import('./views/Main.vue'),
       beforeEnter: isUserAppAuthenticated,
       children: [{
-        path: 'business',
-        name: "Business Permit",
-        component: () => import("./views/app/BusinessPermit/Form.vue")
-      }]
-    },
-    {
-      path: '/barangay',
-      name: "Barangay Clearance",
-      component: () => import("./views/app/BarangayClearance/Form.vue")
+          path: 'business',
+          name: "Business Permit",
+          component: () => import("./views/app/BusinessPermit/Form.vue")
+        },
+        {
+          path: 'barangay',
+          name: "Barangay Clearance",
+          component: () => import("./views/app/BarangayClearance/Form.vue")
+        },
+        {
+          path: 'police',
+          name: "Police Clearance",
+          component: () => import("./views/app/PoliceClearance/Form.vue")
+        },
+      ]
     },
     {
       path: '/pdf',
