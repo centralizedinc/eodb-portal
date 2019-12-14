@@ -148,7 +148,7 @@
           alt
         /> -->
         <img
-          style="border-radius: 20px"
+          style="border-radius: 20px; -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, 0.1)));}"
           width="100%"
           src="https://images.pexels.com/photos/1405500/pexels-photo-1405500.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
           alt="San Antonio Municipal Hall"
@@ -189,7 +189,7 @@
         </div>
       </a-col>
       <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="zoom-in-left">
+      <a-col :span="8" data-aos="fade-left">
         <!-- <a-icon type="file-text" /> -->
         <img
           src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/permits.png"
@@ -202,8 +202,8 @@
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="cert">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv"
-          >Civil Registry Forms</a-divider
-        >
+          >Civil Registry Forms <a-badge count="available soon"
+        /></a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
@@ -212,7 +212,7 @@
         </div>
       </a-col>
       <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="zoom-in-left">
+      <a-col :span="8" data-aos="fade-left">
         <img
           width="60%"
           src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cert.png"
@@ -229,15 +229,14 @@
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
-          Filing and Payment of Real Property Tax (RPT) will now be a little
-          easier for the people of {{ constant_helper.home_header.label }}.
-          Regardless of where you are or just being in the comfort of your home,
-          you can now file and pay your real property tax obligations online
-          using SmartJuan.
+          Filing and Payment of Real Property Tax (RPT) will now be easier for
+          the people of San Antonio Quezon. Regardless of where you are or just
+          being in the comfort of your home, you can now file and pay your real
+          property tax obligations online using SmartJuan.
         </div>
       </a-col>
       <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="zoom-in-left">
+      <a-col :span="8" data-aos="fade-left">
         <img
           src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/rpt.png"
           width="60%"
@@ -249,19 +248,20 @@
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rec">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv"
-          >Citizen Report</a-divider
-        >
+          >Citizen Report <a-badge count="available soon"
+        /></a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
           Report crime, emergency, or calamity in San Antonio using SmartJuan.
           This alert system tells the Command Center's server about the type of
-          emergency, name and address of establishment, contact number of
-          reporter (if any), along with other important pieces of information
+          emergency, name and address of establishment, along with other
+          important pieces of information.
+          <i>This service will be available very soon!</i>
         </div>
       </a-col>
       <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="zoom-in-left">
+      <a-col :span="8" data-aos="fade-left">
         <!-- <a-icon type="warning" /> -->
         <img
           width="60%"

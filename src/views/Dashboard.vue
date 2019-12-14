@@ -186,11 +186,11 @@
               </a-menu-item>
               <a-menu-item key="/app/permits">
                 <a-icon type="file-exclamation" />
-                <span>Permits & Licenses</span>
+                <span> Permits & Licenses</span>
               </a-menu-item>
-              <a-menu-item key="/app/taxes">
+              <a-menu-item key="/app/taxes" disabled>
                 <a-icon type="file-protect" />
-                <span>Civil Registry Forms</span>
+                <span>Civil Reg Forms <a-badge count="soon"/></span>
               </a-menu-item>
               <a-menu-item key="/app/realproperty">
                 <a-icon type="area-chart" />
