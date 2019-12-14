@@ -21,7 +21,7 @@
             </template>
           </a-tab-pane>
         </a-tabs>
-      </a-col> -->
+      </a-col>-->
       <a-col :span="24">
         <a-card>
           <component
@@ -32,14 +32,23 @@
             @validExpiry="v => is_valid_expiry=v"
             @validCVC="v => is_valid_cvc=v"
           />
-
-          <a-button
-            type="primary"
-            block
-            @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
-            :loading="loading"
-          >Submit</a-button>
         </a-card>
+      </a-col>
+      <a-col :span="24">
+        <a-affix :offsetBottom="0" class="payment-total-affix">
+          <a-card :bodyStyle="{ padding: '1vh' }">
+            <h3>
+              <i>Amount to be paid: <b>{{formatCurrency(payment_amount)}}</b></i>
+            </h3>
+            <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
+            <a-button
+              type="primary"
+              block
+              @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
+              :loading="loading"
+            >Submit</a-button>
+          </a-card>
+        </a-affix>
       </a-col>
     </a-row>
   </a-drawer>
@@ -49,7 +58,7 @@
 import CreditCard from "./CreditCard";
 
 export default {
-  props: ["show", "loading"],
+  props: ["show", "loading", "payment_amount"],
   components: {
     CreditCard
   },
@@ -65,6 +74,9 @@ export default {
       tabs: ["CreditCard", "OnlineBanking", "OverCounter"]
     };
   },
+  mounted() {
+    console.log("this.payment_amount :", this.payment_amount);
+  },
   methods: {
     navigate(e) {
       this.current_option = this.tabs[e];
@@ -76,5 +88,9 @@ export default {
 <style>
 .ant-drawer-body {
   padding: 0 !important;
+}
+
+.payment-total-affix .ant-affix {
+  left: 0 !important;
 }
 </style>

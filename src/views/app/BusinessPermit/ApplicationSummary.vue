@@ -184,9 +184,9 @@
           <a-button type="primary" @click="$emit('payment')" :disabled="loading">Proceed to Payment</a-button>
         </a-button-group>
       </a-col>
-      <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 6 }" style="text-align: right;">
+      <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 6 }" style="text-align: right;">
         <a-button :disabled="loading">Save Draft</a-button>
-      </a-col>
+      </a-col> -->
     </a-row>
   </a-card>
 </template>

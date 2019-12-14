@@ -42,13 +42,13 @@
               <!-- Attachments -->
               <a-card
                 :headStyle="{ 
-                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-                color: 'white', 
-                'font-weight': 'bold',
-                'font-size': '15px', 
-                padding: '5px 10px',
-                'min-height': '2vh'
-              }"
+                  background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
+                  color: 'white', 
+                  'font-weight': 'bold',
+                  'font-size': '15px', 
+                  padding: '5px 10px',
+                  'min-height': '2vh'
+                }"
                 :bodyStyle="{ padding: 0 }"
                 class="document-card"
               >
@@ -69,6 +69,7 @@
                   bordered
                   :pagination="false"
                   size="small"
+                  class="documents-table"
                 >
                   <template slot="status" slot-scope="text">
                     <div style="text-align: center;">
@@ -118,13 +119,13 @@
                 title="Fees"
                 style="margin-top: 1vh;"
                 :headStyle="{ 
-                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-                color: 'white', 
-                'font-weight': 'bold', 
-                'font-size': '15px', 
-                padding: '5px 10px',
-                'min-height': '2vh'
-              }"
+                  background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
+                  color: 'white', 
+                  'font-weight': 'bold', 
+                  'font-size': '15px', 
+                  padding: '5px 10px',
+                  'min-height': '2vh'
+                }"
                 :bodyStyle="{ padding: '1vh' }"
                 class="document-card"
               >
@@ -137,6 +138,7 @@
                       style="width: 100%;"
                       v-model="transaction_details.mode_of_payment"
                       @change="updatePaymentMode"
+                      size="small"
                     >
                       <a-select-option value="A">Annually</a-select-option>
                       <a-select-option value="SA">Semi-Annual</a-select-option>
@@ -149,37 +151,44 @@
                   </a-col>
                 </a-row>
 
-                <a-row type="flex" align="middle">
-                  <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
-                  <a-col :span="24">
-                    <a-row v-for="(item, index) in payments_data_source" :key="`a${index}`">
-                      <a-col :span="15" class="row-border">{{item.description}}</a-col>
-                      <a-col
-                        :span="9"
-                        class="row-border"
-                        style="text-align: right;"
-                      >{{formatCurrency(item.amount)}}</a-col>
-                    </a-row>
-                  </a-col>
+                <h5 style="font-weight: bold;">Payment Breakdown</h5>
+                <a-row
+                  v-for="(item, index) in payments_data_source"
+                  :key="`a${index}`"
+                  class="row-border"
+                  type="flex"
+                  align="middle"
+                >
+                  <a-col :span="15" class="row-cell">{{item.description}}</a-col>
+                  <a-col
+                    :span="9"
+                    style="text-align: right;"
+                    class="row-cell"
+                  >{{formatCurrency(item.amount)}}</a-col>
+                </a-row>
+
+                <a-row class="row-border">
                   <a-col
                     :span="15"
-                    class="row-border"
+                    class="row-cell"
                     style="color: #333;background: #d7d7d7"
                   >Total Amount</a-col>
                   <a-col
                     :span="9"
-                    class="row-border"
+                    class="row-cell"
                     style="text-align: right; color: #333;background: #d7d7d7"
                   >{{formatCurrency(total_payable)}}</a-col>
-                  <template v-if="installment">
-                    <a-col :span="15" class="row-border" style="text-align: right;">
+                </a-row>
+                <template v-if="installment">
+                  <a-row class="row-border">
+                    <a-col :span="15" class="row-cell" style="text-align: right;">
                       <i>{{installment.label}}</i>
                     </a-col>
-                    <a-col :span="9" class="row-border" style="text-align: right;">
+                    <a-col :span="9" class="row-cell" style="text-align: right;">
                       <i>{{formatCurrency(installment.amount)}}</i>
                     </a-col>
-                  </template>
-                </a-row>
+                  </a-row>
+                </template>
               </a-card>
             </a-affix>
           </a-col>
@@ -191,8 +200,8 @@
         :show="show_payment"
         @pay="proceedToSubmit"
         @close="show_payment=false"
+        :payment_amount="installment ? installment.amount : total_payable"
       />
-      <!-- :payment_amount="installment ? installment.amount : total_payable" -->
     </a-row>
   </div>
 </template>
@@ -386,11 +395,6 @@ export default {
           description:
             "NOTE: For Business Codes, please refer to BIR Registration. Line of business cannot be blank."
         },
-        // {
-        //   title: "Additional Fields",
-        //   description:
-        //     "This is the additional fields for the not provided required documents."
-        // },
         {
           title: "Application Summary",
           description:
@@ -1025,9 +1029,18 @@ export default {
 }
 
 .row-border {
-  padding: 5px;
   border: 0.5px solid #888;
   font-size: 12px;
   font-weight: 600;
+}
+
+.row-cell {
+  /* border-right: 0.5px solid #888; */
+  padding: 3px;
+}
+
+.documents-table th,
+.documents-table td {
+  padding: 3px;
 }
 </style>
