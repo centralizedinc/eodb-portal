@@ -9,7 +9,7 @@
       <a-row justify="start" :gutter="24">
         <a-col :span="7">
           <img
-            style="width: 60%; height: auto;"
+            style="width: 15vw; height: 8vh; margin-top: -8px;"
             src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
           />
           <!-- <a-avatar
