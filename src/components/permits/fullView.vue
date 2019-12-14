@@ -13,6 +13,24 @@
     </a-col>
 
     <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
+      <!-- <a-card style="box-shadow: 0px 0px 10px 2px #88888847">
+        <a-row type="flex" align="middle" justify="center">
+          <a-col :span="8">
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )"
+              @click="redirect('business-permit')"
+            >
+              <a-icon type="tool" style="font-size:16px"></a-icon>
+            </a-avatar>
+          </a-col>
+          <a-col :span="16" align="middle">
+            <span style="font-size:12px ; font-weight: 700">RESIDENCE CERTIFICATE</span>
+          </a-col>
+        </a-row>
+      </a-card>-->
       <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
         RESIDENCE
         <br />CERTIFICATE
@@ -20,14 +38,58 @@
     </a-col>
 
     <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
-      <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
+      <!-- <a-card style="box-shadow: 0px 0px 10px 2px #88888847">
+        <a-row type="flex" align="middle" justify="center">
+          <a-col :span="8">
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )"
+              @click="redirect('business-permit')"
+            >
+              <a-icon type="snippets" style="font-size:16px; font-weight: 700"></a-icon>
+            </a-avatar>
+          </a-col>
+          <a-col :span="16" align="middle">
+            <span style="font-size:12px ; font-weight: 700">BARANGAY CLEARANCE</span>
+          </a-col>
+        </a-row>
+      </a-card>-->
+      <a-button
+        style="font-size:12px ; font-weight: 700; height:100%"
+        block
+        @click="$router.push('/permits/barangay')"
+      >
         BARANGAY
         <br />CLEARANCE
       </a-button>
     </a-col>
 
     <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
-      <a-button style="font-size:12px; font-weight: 700; height:100%" block>
+      <!-- <a-card style="box-shadow: 0px 0px 10px 2px #88888847">
+        <a-row type="flex" align="middle" justify="center">
+          <a-col :span="8">
+            <a-avatar
+              shape="square"
+              :size="40"
+              class="card_btn"
+              style="background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1) )"
+              @click="redirect('business-permit')"
+            >
+              <a-icon type="exception" style="font-size:16px"></a-icon>
+            </a-avatar>
+          </a-col>
+          <a-col :span="16" align="middle">
+            <span style="font-size:12px; font-weight: 700">POLICE CLEARANCE</span>
+          </a-col>
+        </a-row>
+      </a-card>-->
+      <a-button
+        style="font-size:12px; font-weight: 700; height:100%"
+        block
+        @click="$router.push('/permits/police')"
+      >
         POLICE
         <br />CLEARANCE
       </a-button>
@@ -38,10 +100,10 @@
     <a-col :span="24">
       <a-card :bodyStyle="{ padding: '5px' }" class="permits-tabs">
         <a-tabs v-model="current_view">
-        <a-tab-pane tab="Applied" :key="0" />
-        <a-tab-pane tab="Drafts" :key="1" />
-        <a-tab-pane tab="Payments" :key="2" />
-      </a-tabs>
+          <a-tab-pane tab="Applied" :key="0" />
+          <a-tab-pane tab="Drafts" :key="1" />
+          <a-tab-pane tab="Payments" :key="2" />
+        </a-tabs>
       </a-card>
     </a-col>
     <a-col :span="24">
@@ -67,7 +129,7 @@ export default {
     return {
       current_view: 0,
       view_components: ["Applied", "Drafts", "Payments"]
-    }
+    };
   },
   methods: {
     redirect(nav) {
