@@ -6,10 +6,10 @@
       </a-avatar>
     </a-back-top>
     <a-layout-header class="header">
-      <a-row justify="start" :gutter="24">
-        <a-col :span="7">
+      <a-row justify="start" :gutter="16">
+        <a-col style="padding-left: 0px !important" :span="4">
           <img
-            style="width: 15vw; height: 8vh; margin-top: -8px;"
+            style="width: auto; height: 55px; margin-top: -8px;"
             src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
           />
           <!-- <a-avatar
@@ -20,27 +20,71 @@
         <!-- <a-col :span="10">
           <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
         </a-col>-->
-        <a-col :span="10">
+        <!-- <a-col :span="10">
           <a-input-search placeholder="Search" />
-        </a-col>
-        <a-col :span="4"></a-col>
+        </a-col> -->
+        <a-col :span="14"></a-col>
         <a-col :span="1">
+          <img
+            style="width: auto; height: 50px; margin-top: -5px;"
+            src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/SA_logo.png"
+          />
+        </a-col>
+        <a-col :span="2">
+          <img
+            style="width: auto; height: 35px; margin-top: -5px; "
+            src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
+          />
+        </a-col>
+        <a-col :span="2"></a-col>
+        <!-- <a-col :span="1">
           <a-tooltip placement="left">
             <span slot="title">Notification</span>
-            <a-icon type="notification" style="color:#ffffff"></a-icon>
-          </a-tooltip>
-        </a-col>
+            <a-icon
+              type="notification"
+              style="color:#ffffff"
+            ></a-icon> </a-tooltip
+        ></a-col> -->
         <a-col :span="1">
+          <a-dropdown placement="topCenter">
+            <a-menu slot="overlay">
+              <a-menu-item key="1"
+                ><a-icon type="notification" />Notification</a-menu-item
+              >
+              <a-menu-divider />
+              <a-menu-item key="2"
+                ><a-icon type="lock" />Lock Screen</a-menu-item
+              >
+              <a-menu-item key="3" @click="logout"
+                ><a-icon type="logout" />Logout</a-menu-item
+              >
+            </a-menu>
+            <a-tooltip placement="left">
+              <a-icon
+                type="setting"
+                style="color:#ffffff; padding-right:8px"
+              ></a-icon>
+              <a-icon type="caret-down" style="fontSize: 8px"
+            /></a-tooltip>
+          </a-dropdown>
+        </a-col>
+
+        <!-- <a-col :span="1">
           <a-tooltip placement="left">
             <span slot="title">Lock Screen</span>
-            <a-icon type="setting" style="color:#ffffff"></a-icon>
+            <a-icon type="setting" style="color:#ffffff"></a-icon> </a-tooltip
+        ></a-col> -->
+
+        <!-- <a-col :span="1">
+          <a-tooltip placement="left">
+            <span slot="title">Logout</span>
+            <a-icon
+              @click="logout"
+              type="logout"
+              style="color:#ffffff; cursor:pointer"
+            ></a-icon>
           </a-tooltip>
-        </a-col>
-        <a-col :span="1"></a-col>
-        <a-tooltip placement="left">
-          <span slot="title">Logout</span>
-          <a-icon @click="logout" type="logout" style="color:#ffffff; cursor:pointer"></a-icon>
-        </a-tooltip>
+        </a-col> -->
       </a-row>
       <!-- mobile site -->
       <!-- <a-row v-else type="flex" justify="start">
@@ -98,7 +142,10 @@
       </a-drawer>-->
     </a-layout-header>
     <!-- ------------------------------------------------ -->
-    <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
+    <a-layout-content
+      class="content"
+      style="margin-top:10vh; background-color: #EEEEEE"
+    >
       <a-row type="flex" justify="center" style="margin-top: 10vh">
         <a-col :span="4" style="margin-right:1vw">
           <a-card style="margin-bottom:2vh; color: #f2f2f2">
@@ -108,7 +155,12 @@
                   :src="user.avatar"
                   :size="54"
                   style="margin-top:-10vh; border: 2px solid #ffffff; font-weight: bold;"
-                >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
+                  >{{
+                    user && user.name && user.name.first
+                      ? user.name.first[0] + "" + user.name.last[0]
+                      : ""
+                  }}</a-avatar
+                >
               </a-col>
               <br />
               <a-col :span="24">
@@ -117,13 +169,15 @@
                     <h3
                       align="center"
                       style="color:black; font-size: 14px; text-transform: uppercase"
-                    >{{ user.name.first }} {{ user.name.last }}</h3>
+                    >
+                      {{ user.name.first }} {{ user.name.last }}
+                    </h3>
                   </a-col>
                 </a-row>
               </a-col>
             </a-row>
           </a-card>
-          
+
           <a-affix :offsetTop="100">
             <a-menu v-model="selected_menu" mode="inline" @click="nav">
               <a-menu-item key="/app">
@@ -136,16 +190,16 @@
               </a-menu-item>
               <a-menu-item key="/app/taxes">
                 <a-icon type="file-protect" />
-                <span>Certificates</span>
+                <span>Civil Registry Forms</span>
               </a-menu-item>
               <a-menu-item key="/app/realproperty">
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
               </a-menu-item>
-              <!-- <a-menu-item key>
-                <a-icon type="credit-card" />
-                <span>Payments</span>
-              </a-menu-item>-->
+              <a-menu-item key>
+                <a-icon type="compass" />
+                <span>Application Tracker</span>
+              </a-menu-item>
               <a-menu-item key="/app/account">
                 <a-icon type="user-add" />
                 <span>My Profile</span>
@@ -158,7 +212,10 @@
           </a-affix>
         </a-col>
         <a-col :span="14" style="margin-right:1vw; margin-left:1vw">
-          <img style="width: 100%; height:30vh" src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cover.png" />
+          <img
+            style="width: 100%; height:30vh"
+            src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cover.png"
+          />
           <router-view></router-view>
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
@@ -247,7 +304,11 @@
         draggable="true"
         style="width: 100%; height: 300px"
       >
-        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
+        <GmapMarker
+          :draggable="true"
+          :position="coordinates"
+          :animation="animation"
+        />
       </GmapMap>
       <template slot="footer">
         <a-button
@@ -256,7 +317,8 @@
           type="primary"
           block
           @click="submitReport"
-        >Confirm and Submit</a-button>
+          >Confirm and Submit</a-button
+        >
       </template>
     </a-modal>
   </a-layout>

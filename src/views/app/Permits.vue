@@ -20,11 +20,21 @@
             <p
               class="item-buttons primary-item-buttons"
               @click="$router.push(item.path)"
-            >{{item.title}}</p>
+            >
+              {{ item.title }}
+            </p>
           </a-col>
-          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 6 }" :lg="{ span: 5 }" v-else>
+          <a-col
+            :xs="{ span: 24 }"
+            :sm="{ span: 12 }"
+            :md="{ span: 6 }"
+            :lg="{ span: 5 }"
+            v-else
+          >
             <!-- <a-button @click="$router.push(item.path)">{{item.title}}</a-button> -->
-            <p class="item-buttons" @click="$router.push(item.path)">{{item.title}}</p>
+            <p class="item-buttons" @click="$router.push(item.path)">
+              {{ item.title }}
+            </p>
           </a-col>
         </transition>
         <!-- <a-col :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
@@ -125,6 +135,7 @@ export default {
 .primary-item-buttons {
   background-color: #40a9ff !important;
   color: white !important;
+  font-weight: 200;
 }
 
 .item-buttons {
@@ -139,6 +150,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-weight: 200;
 }
 
 .item-buttons:hover {
