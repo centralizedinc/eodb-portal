@@ -111,7 +111,7 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
-            <span slot="label">If other country</span>
+            <span slot="label">ICR No.<i>(if alien)</i></span>
             <a-input></a-input>
           </a-form-item>
         </a-col>
@@ -145,55 +145,6 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">
-              Blood Type
-              <i style="color: red">*</i>
-            </span>
-
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">Identification Marks</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">
-              Complexion
-              <i style="color: red">*</i>
-            </span>
-
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">
-              Educational Attainment
-              <i style="color: red">*</i>
-            </span>
-
-            <a-select>
-              <a-select-option value="primary">Primary</a-select-option>
-              <a-select-option value="secondary">Secondary</a-select-option>
-              <a-select-option value="vocational">Vocational</a-select-option>
-              <a-select-option value="tertiary">Tertiary</a-select-option>
-              <a-select-option value="master">Master's Degree</a-select-option>
-              <a-select-option value="doctorate"
-                >Doctorate Degree</a-select-option
-              >
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">
               Occupation
               <i style="color: red">*</i>
             </span>
@@ -202,130 +153,16 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-divider style="color: black;font-weight: bold;" orientation="left"
-        >Family Background</a-divider
-      >
+      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item>
+            <span slot="label">TIN <i>(if any)</i></span>
+            <a-input></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <!-- table -->
 
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">Father Last Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">First Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-          <a-form-item>
-            <span slot="label">Middle Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
-          <a-form-item>
-            <span slot="label">Suffix</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">Father Birth Place</span>
-            <a-input placeholder="Enter Municipality"></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">If other country</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">Mother Last Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">First Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-          <a-form-item>
-            <span slot="label">Middle Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
-          <a-form-item>
-            <span slot="label">Suffix</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">Mother Birth Place</span>
-            <a-input placeholder="Enter Municipality"></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">If other country</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">Spouse Last Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">First Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-          <a-form-item>
-            <span slot="label">Middle Name</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
-          <a-form-item>
-            <span slot="label">Suffix</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">Spouse Birth Place</span>
-            <a-input placeholder="Enter Municipality"></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
-            <span slot="label">If other country</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
