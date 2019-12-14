@@ -10,7 +10,7 @@
         <a-col style="padding-left: 0px !important" :span="4">
           <img
             style="width: auto; height: 55px; margin-top: -8px;"
-            src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
+            src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/smartjuan_logo.png"
           />
           <!-- <a-avatar
             src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png"
