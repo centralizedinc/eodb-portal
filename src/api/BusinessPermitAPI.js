@@ -13,7 +13,7 @@ export default class BusinessPermitAPI {
      * @param {Object} data 
      */
     createPermit(data) {
-        return axios.post('/permits/business', data);
+        return axios.post('/permits/business/application', data);
     }
 
     /**

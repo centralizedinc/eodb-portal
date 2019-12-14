@@ -95,6 +95,10 @@ export default new Router({
           // component: () => import('@/components/permits/Transactions')
         },
         {
+          path: 'tracker',
+          component: () => import('./views/app/ApplicationTracker')
+        },
+        {
           path: 'taxes',
           component: () => import('@/components/taxes/Transactions')
         },

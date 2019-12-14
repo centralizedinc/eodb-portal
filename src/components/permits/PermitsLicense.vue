@@ -57,7 +57,7 @@ export default {
   created() {
     this.loading = true;
     this.$store
-      .dispatch("GET_DOCKETS")
+      .dispatch("GET_BUSINESS_PERMIT")
       .then(result => {
         this.loading = false;
       })
@@ -66,11 +66,11 @@ export default {
       });
   },
   computed: {
-    dockets() {
-      const dockets = JSON.parse(
-        JSON.stringify(this.$store.state.dockets.dockets)
+    permits() {
+      const permits = JSON.parse(
+        JSON.stringify(this.$store.state.permits.permits)
       );
-      return dockets.sort(
+      return permits.sort(
         (a, b) => new Date(b.date_created) - new Date(a.date_created)
       );
     },

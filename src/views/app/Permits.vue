@@ -16,46 +16,15 @@
             :lg="{ span: 9 }"
             v-if="item.primary"
           >
-            <!-- <a-button type="primary" @click="$router.push(item.path)">{{item.title}}</a-button> -->
             <p
               class="item-buttons primary-item-buttons"
               @click="$router.push(item.path)"
             >{{item.title}}</p>
           </a-col>
           <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 6 }" :lg="{ span: 5 }" v-else>
-            <!-- <a-button @click="$router.push(item.path)">{{item.title}}</a-button> -->
             <p class="item-buttons" @click="$router.push(item.path)">{{item.title}}</p>
           </a-col>
         </transition>
-        <!-- <a-col :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
-            <a-button
-              style="font-size:12px; font-weight: 700; height:66px"
-              type="primary"
-              block
-              @click="$router.push('/permits/business')"
-            >BUSINESS PERMIT</a-button>
-          </a-col>
-
-          <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
-            <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
-              RESIDENCE
-              <br />CERTIFICATE
-            </a-button>
-          </a-col>
-
-          <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
-            <a-button style="font-size:12px ; font-weight: 700; height:100%" block>
-              BARANGAY
-              <br />CLEARANCE
-            </a-button>
-          </a-col>
-
-          <a-col :xl="4" :lg="4" :md="12" :sm="12" :xs="24">
-            <a-button style="font-size:12px; font-weight: 700; height:100%" block>
-              POLICE
-              <br />CLEARANCE
-            </a-button>
-        </a-col>-->
       </a-row>
     </a-col>
     <a-col :span="24">
@@ -82,20 +51,20 @@
 </template>
 
 <script>
-import Applied from "@/components/permits/Applied";
+import PermitsLicense from "@/components/permits/PermitsLicense";
 import Drafts from "@/components/permits/Drafts";
 import Payments from "@/components/permits/Payments";
 
 export default {
   components: {
-    Applied,
+    PermitsLicense,
     Drafts,
     Payments
   },
   data() {
     return {
       current_view: 0,
-      view_components: ["Applied", "Drafts", "Payments"],
+      view_components: ["PermitsLicense", "Drafts", "Payments"],
       items: [
         {
           title: "Business Permit",

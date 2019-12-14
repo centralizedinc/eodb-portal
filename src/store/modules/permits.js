@@ -15,8 +15,8 @@ const mutations = {
     ADD_TAXES(state, payload) {
         state.records.push(payload)
     },
-    GET_PERMITS(state, id) {
-
+    SET_PERMITS(state, data) {
+        state.permits = data;
     }
 }
 
@@ -58,8 +58,22 @@ const actions = {
                 });
         })
     },
-    GET_BUSINESS_PERMIT(context, data) {
-        return new BusinessPermitAPI(context.rootState.user_session.token).getPermit();
+    GET_BUSINESS_PERMIT(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if (refresh || !context.state.permits || !context.state.permits.length) {
+                new BusinessPermitAPI(context.rootState.user_session.token)
+                    .getPermit()
+                    .then((result) => {
+                        if (!result.data.errors) {
+                            context.commit("SET_PERMITS", result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors);
+                    }).catch((err) => {
+                        console.log("GET_BUSINESS_PERMIT err:", err);
+                        reject(err);
+                    });
+            } else resolve(context.state.permits);
+        })
     }
 }
 

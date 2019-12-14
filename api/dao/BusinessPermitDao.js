@@ -38,7 +38,19 @@ class BusinessPermitDao {
      * @param {Object} details 
      */
     static create(details) {
-        return (new model(details)).save()
+        return new Promise((resolve, reject) => {
+            (new model(details)).save()
+                .then((result) => {
+                    const business_no = new Date().getTime().toString() + result.auto_id.toString();
+                    return this.modifyById(result._id, { business_no })
+                })
+                .then((result) => {
+                    resolve(result)
+                })
+                .catch((err) => {
+                    reject(err)
+                });
+        })
     }
 
     /**

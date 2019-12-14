@@ -196,7 +196,7 @@ import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
 
 export default {
-  props: ["form", "step", "loading", "read-only"],
+  props: ["form", "loading", "read-only"],
   data() {
     return {
       regions_data,

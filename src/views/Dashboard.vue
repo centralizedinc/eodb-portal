@@ -21,7 +21,7 @@
           <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
         </a-col>-->
         <a-col :span="10">
-          <a-input-search placeholder="Search" />
+          <!-- <a-input-search placeholder="Search" /> -->
         </a-col>
         <a-col :span="4"></a-col>
         <a-col :span="1">
@@ -141,6 +141,10 @@
               <a-menu-item key="/app/realproperty">
                 <a-icon type="area-chart" />
                 <span>Real Property Tax</span>
+              </a-menu-item>
+              <a-menu-item key="/app/tracker">
+                <a-icon type="folder-open" />
+                <span>Application Tracker</span>
               </a-menu-item>
               <!-- <a-menu-item key>
                 <a-icon type="credit-card" />

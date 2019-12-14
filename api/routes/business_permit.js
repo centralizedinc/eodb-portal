@@ -5,6 +5,7 @@ const BusinessApplicationDao = require('../dao/BusinessApplicationDao');
 const BusinessPermitDao = require('../dao/BusinessPermitDao');
 const DocketsDao = require('../dao/DocketsDao');
 const PaymentDao = require('../dao/PaymentDao');
+const DepartmentDao = require('../dao/DepartmentDao');
 
 const jwt = require('jsonwebtoken');
 const sendgrid = require('../utils/email.js');
@@ -13,7 +14,9 @@ const ApplicationSettings = require('../utils/ApplicationSettings');
 
 router.route('/')
     .get((req, res) => {
-        BusinessApplicationDao.findAll()
+        const decoded_data = jwt.decode(req.headers.access_token),
+            account_id = decoded_data.account_id;
+        BusinessPermitDao.find({ account_id })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -22,6 +25,22 @@ router.route('/')
                 })
             });
     })
+    .post((req, res) => {
+        const decoded_data = jwt.decode(req.headers.access_token),
+            account_id = decoded_data.account_id;
+        var details = req.body;
+        details.account_id = account_id;
+        BusinessPermitDao.create(details)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({
+                    errors
+                })
+            });
+    })
+
+router.route('/application')
     .post((req, res) => {
         console.log('Creating Business Permit :', req.body);
         const decoded_data = jwt.decode(req.headers.access_token),
@@ -69,15 +88,20 @@ router.route('/')
             })
             .then((payments) => {
                 console.log('payments results :', payments);
-
-                // CREATE DOCKET
                 results.payment = payments[0];
+                return DepartmentDao.findAll();
+            })
+            .then((departments) => {
+                var activities = [];
+                if (departments) activities = departments.map(v => { return { department: v._id, date_claimed: null, date_approved: null, date_rejected: null } });
+                // CREATE DOCKET
                 var details = {
                     application_id: results.application._id,
                     application_type: results.application.application_type,
                     permit: 'business',
                     payment_status: payments[0].status,
-                    created_by
+                    created_by,
+                    activities
                 }
                 return DocketsDao.create(details)
             })
@@ -97,7 +121,7 @@ router.route('/')
                     name: user_name.first,
                     reference_no: result.reference_no,
                     transaction_no: results.payment.transaction_no,
-                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?ref_no=${result.reference_no}`
+                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=business&ref_no=${result.reference_no}`
                 }
                 return sendgrid.sendEmail(user_email, "SUCCESSFUL_APPLICATION_CREATION_TEMPLATE", substitutions)
             })

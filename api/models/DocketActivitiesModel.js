@@ -12,7 +12,7 @@ var DocketActivitiesSchema = new mongoose.Schema({
     approver: {
         type: String
     },
-    status: {
+    action: {
         type: String
         /**
          * applied
