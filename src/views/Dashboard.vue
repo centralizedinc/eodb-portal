@@ -46,7 +46,7 @@
             ></a-icon> </a-tooltip
         ></a-col> -->
         <a-col :span="1">
-          <a-dropdown placement="topCenter">
+          <a-dropdown>
             <a-menu slot="overlay">
               <a-menu-item key="1"
                 ><a-icon type="notification" />Notification</a-menu-item
