@@ -11,8 +11,9 @@
               </a-avatar>              
             </a-col>
             <a-col :span="14">
-              <span style="color: #FFFFFF; font-weight: bold">{{getFullName()}}</span>    
-              <p style="font-size:10px; color: #FFFFFF">{{$store.state.admin_session.admin.role}}</p>          
+              <span style="color: #FFFFFF; font-weight: bold">{{getFullName()}}</span><br>    
+              <span style="font-size:10px; color: #FFFFFF">{{role.name}}</span><br>           
+              <span style="font-size:10px; color: #01ACAC;">{{department.name}}</span><br>  
             </a-col>
           </a-row>
           
@@ -33,7 +34,7 @@
           <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')"/>
           <span>Applications</span>
         </a-menu-item>
-        <a-menu-item key="/admin/app/collections">
+        <a-menu-item key="/admin/app/collections" v-if="department.admin">
           <a-icon type="reconciliation" :style="getMenuStyle('/admin/app/collections')" />
           <span>Collections</span>
         </a-menu-item>
@@ -41,15 +42,19 @@
           <a-icon type="safety" :style="getMenuStyle('/admin/app/emergency')" />
           <span>Emergency</span>
         </a-menu-item>
-        <a-menu-item key="/admin/app/users">
+        <a-menu-item key="/admin/app/users" v-if="department.admin">
           <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
           <span>Users</span>
         </a-menu-item>
-        <a-sub-menu key="5" :style="`background-color: #242B30`" >
+        <a-sub-menu key="5" :style="`background-color: #242B30`" v-if="department.admin">
           <span slot="title"><a-icon type="setting" /><span>Settings</span></span>          
           <a-menu-item key="/admin/app/departments">
              <a-icon type="bank" :style="getMenuStyle('/admin/app/departments')" />
             <span>Departments</span>
+          </a-menu-item>          
+          <a-menu-item key="/admin/app/permits">
+            <a-icon type="file-search" :style="getMenuStyle('/admin/app/permits')" />
+            <span>Permit Types</span>
           </a-menu-item>
           <a-menu-item key="/admin/app/roles">
             <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
@@ -57,7 +62,7 @@
           </a-menu-item>
           <a-menu-item key="/admin/app/checklists">
             <a-icon type="bars" :style="getMenuStyle('/admin/app/checklists')" />
-            <span>Checklists</span>
+            <span>Application Checklist</span>
           </a-menu-item>
           <a-menu-item key="/admin/app/references">
             <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
@@ -194,6 +199,39 @@ export default {
   computed:{
     active_menu(){
       return [this.$route.path]
+    }
+  },
+  asyncComputed: {
+    role:{
+      get(){
+        return new Promise((resolve, reject)=>{
+          this.$http.get('/roles')
+          .then(result=>{
+            var role = result.data.find(x=>x._id === this.$store.state.admin_session.admin.role)
+            resolve(role)
+          })
+        })
+      },
+      default:{
+        name:''
+      }
+      
+    },
+    department:{
+      get(){
+        return new Promise((resolve, reject)=>{
+          this.$http.get('/departments')
+          .then(result=>{
+            var dept = result.data.find(x=>x._id === this.$store.state.admin_session.admin.department)
+            resolve(dept)
+          })
+        })
+      },
+      default:{
+        name:'',
+        admin:false
+      }
+      
     }
   }
 }
