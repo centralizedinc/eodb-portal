@@ -194,6 +194,12 @@ export default new Router({
         name: 'Collections',
         beforeEnter:isAuthenticated,
         component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Collections.vue'),
+      },
+      {
+        path: 'permits',
+        name: 'Permit Types',
+        beforeEnter:isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/PermitTypes.vue'),
       }]
     },
     {
