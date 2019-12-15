@@ -419,7 +419,7 @@ export default {
       card_details: {},
       payments_data_source: [
         {
-          description: "CTC or Sedula",
+          description: "CTC or Cedula",
           fee_type: "local_taxes",
           amount: 50
         },

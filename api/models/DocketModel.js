@@ -27,12 +27,6 @@ var DocketSchema = new mongoose.Schema({
          * 3 - For Compliance
          */
     },
-    current_department: {
-        type: String
-    },
-    current_approver: {
-        type: String
-    },
     payment_status: {
         type: String
     },
@@ -79,7 +73,10 @@ var DocketSchema = new mongoose.Schema({
         remarks: {
             type: String
         }
-    }]
+    }],
+    account_id: {
+        type: String
+    }
 })
 
 DocketSchema.pre('save', async function (callback) {

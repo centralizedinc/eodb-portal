@@ -316,7 +316,7 @@ export default {
         amount_paid: 0,
         payment_breakdown: [
           {
-            description: "CTC or Sedula",
+            description: "CTC or Cedula",
             fee_type: "local_taxes",
             amount: 1000
           },
@@ -354,7 +354,7 @@ export default {
       card_details: {},
       payments_data_source: [
         {
-          description: "CTC or Sedula",
+          description: "CTC or Cedula",
           amount: 1000
         },
         {

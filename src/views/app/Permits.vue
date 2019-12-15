@@ -75,15 +75,15 @@ export default {
         },
         {
           title: "Community Tax Certificate",
-          path: "/app/permits"
+          path: "/permits/ctc"
         },
         {
           title: "Barangay Clearance",
-          path: "/app/permits"
+          path: "/permits/barangay"
         },
         {
           title: "Police Clearance",
-          path: "/app/permits"
+          path: "/permits/police"
         }
       ]
     };

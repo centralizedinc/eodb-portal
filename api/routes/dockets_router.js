@@ -2,10 +2,13 @@
 const router = require("express").Router();
 
 var DocketsDao = require('../dao/DocketsDao');
-var BussinessApplicationDao = require('../dao/BusinessApplicationDao')
+var BussinessApplicationDao = require('../dao/BusinessApplicationDao');
 var DocketsActivityDao = require('../dao/DocketsActivityDao');
+var BusinessPermitDao = require('../dao/BusinessPermitDao');
+var AccountDao = require('../dao/AccountDao');
 
 const jwt = require('jsonwebtoken');
+const sendgrid = require('../utils/email');
 
 router.route('/')
     .get((req, res) => {
@@ -49,7 +52,7 @@ router.route('/outbox')
         DocketsDao.find({
             "activities.department": department,
             $or: [
-                { "activities.date_approved": { $ne: null } }, 
+                { "activities.date_approved": { $ne: null } },
                 { "activities.date_rejected": { $ne: null } }
             ]
         }).then((results) => {
@@ -134,12 +137,64 @@ router.route('/approve')
             })
             .then((result) => {
                 results.activity = result;
+
+                // Check if last approver
+                const approver = results.docket.activities.find(v => v.department === department);
+                if (approver.last_approver) return processApprovedApplication(docket_reference);
+            })
+            .then((result) => {
+                if (result) console.log('approved application result :', result);
                 res.json(results)
             })
             .catch((errors) => {
                 res.json({ errors })
             });
     })
+
+/**
+ * @returns {Promise}
+ * @param {String} reference_no 
+ */
+function processApprovedApplication(reference_no) {
+    return new Promise((resolve, reject) => {
+        var results = {};
+        // Update Docket
+        DocketsDao.modifyOne({ reference_no }, { status: 1 })
+            .then((result) => {
+                results.docket = result;
+                // Update Application
+                return BussinessApplicationDao.modifyOne({ reference_no }, { status: 1 });
+            })
+            .then((application) => {
+                results.application = application;
+                // Create Permit
+                return BusinessPermitDao.create(application);
+            })
+            .then((permit) => {
+                results.permit = permit;
+
+                // Find the user
+                return AccountDao.findOneByID(permit.account_id);
+            })
+            .then((user) => {
+                // Send Email Notifiation
+                const substitutions = {
+                    name: user.name.first,
+                    reference_no
+                }
+                return sendgrid.sendEmail(user.email, "APPROVE_APP_NOTIFICATION", substitutions)
+            })
+            .then((result) => {
+
+                console.log('processApprovedApplication results :', results);
+                resolve(results)
+            })
+            .catch((err) => {
+                console.log('processApprovedApplication err :', err);
+                reject(err);
+            });
+    })
+}
 
 router.route('/reject')
     .post((req, res) => {
@@ -165,6 +220,13 @@ router.route('/reject')
             })
             .then((result) => {
                 results.activity = result;
+
+                // Check if last approver
+                const approver = results.docket.activities.find(v => v.department === department);
+                if (approver.last_approver) return processRejectedApplication(docket_reference);
+            })
+            .then((result) => {
+                if (result) console.log('rejected application result :', result);
                 res.json(results)
             })
             .catch((errors) => {
@@ -172,10 +234,55 @@ router.route('/reject')
             });
     })
 
+/**
+ * @returns {Promise}
+ * @param {String} reference_no 
+ */
+function processRejectedApplication(reference_no) {
+    return new Promise((resolve, reject) => {
+        var results = {};
+        // Update Docket
+        DocketsDao.modifyOne({ reference_no }, { status: 2 })
+            .then((result) => {
+                results.docket = result;
+                // Update Application
+                return BussinessApplicationDao.modifyOne({ reference_no }, { status: 2 });
+            })
+            .then((application) => {
+                results.application = application;
+
+                // Find the user
+                return AccountDao.findOneByID(permit.account_id);
+            })
+            .then((user) => {
+                // Send Email Notifiation
+                const substitutions = {
+                    name: user.name.first,
+                    reference_no
+                }
+                return sendgrid.sendEmail(user.email, "REJECT_APP_NOTIFICATION", substitutions)
+            })
+            .then((result) => {
+
+                console.log('processRejectedApplication results :', results);
+                resolve(results)
+            })
+            .catch((err) => {
+                console.log('processRejectedApplication err :', err);
+                reject(err);
+            });
+    })
+}
+
 router.route('/compliance')
     .post((req, res) => {
         var { docket_reference, approver, department, remarks } = req.body, results = {};
-        DocketsDao.modifyOne({ reference_no: docket_reference }, { status: 3 })
+        BussinessApplicationDao.modifyOne({ reference_no: docket_reference }, { status: 3 })
+            .then((result) => {
+                results.application = result;
+
+                return DocketsDao.modifyOne({ reference_no: docket_reference }, { status: 3 });
+            })
             .then((result) => {
                 results.docket = result;
                 const docket_activity = {
@@ -197,6 +304,11 @@ router.route('/compliance')
                 res.json({ errors })
             });
     })
+
+// router.route('/compliance/response')
+//     .post((req, res) => {
+        
+//     })
 
 router.route('/:id')
     .get((req, res) => {

@@ -53,6 +53,7 @@ router.route('/application')
         } = req.body;
         var results = {};
         data.created_by = created_by;
+        data.account_id = created_by;
         // CREATE BUSINESS PERMIT
         BusinessApplicationDao.create(data)
             .then((result) => {
@@ -93,7 +94,7 @@ router.route('/application')
             })
             .then((departments) => {
                 var activities = [];
-                if (departments) activities = departments.map(v => { return { department: v._id, date_claimed: null, date_approved: null, date_rejected: null } });
+                if (departments) activities = departments.map(v => { return { department: v._id, last_approver: v.last_approver, date_claimed: null, date_approved: null, date_rejected: null } });
                 // CREATE DOCKET
                 var details = {
                     application_id: results.application._id,
@@ -101,6 +102,7 @@ router.route('/application')
                     permit: 'business',
                     payment_status: payments[0].status,
                     created_by,
+                    account_id: created_by,
                     activities
                 }
                 return DocketsDao.create(details)

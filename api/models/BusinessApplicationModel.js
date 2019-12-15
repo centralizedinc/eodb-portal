@@ -16,7 +16,14 @@ var BusinessPermitApplication = new mongoose.Schema({
         type: String
     },
     status: {
-        type: String
+        type: Number,
+        default: 0
+        /**
+         * 0 - In Progress
+         * 1 - Approved
+         * 2 - Rejected
+         * 3 - For Compliance
+         */
     },
 
     // DETAILS
@@ -281,7 +288,10 @@ var BusinessPermitApplication = new mongoose.Schema({
             type: String
         },
         files: []
-    }]
+    }],
+    account_id: {
+        type: String
+    }
 })
 
 BusinessPermitApplication.pre('save', async function (callback) {
