@@ -94,7 +94,11 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 10 }" v-if="checkDocsNeeded(['residence','barangay','police'])">
+        <a-col
+          :xs="{ span: 24 }"
+          :sm="{ span: 10 }"
+          v-if="checkDocsNeeded(['residence','barangay','police'])"
+        >
           <a-form-item
             style="font-weight: bold;"
             :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
@@ -104,10 +108,14 @@
               Place of Birth
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.required_documents.birthplace" placeholder="Place of Birth" />
+            <a-input v-model="form.owner_details.birthplace" placeholder="Place of Birth" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 14 }" v-if="checkDocsNeeded(['residence','barangay','police'])">
+        <a-col
+          :xs="{ span: 24 }"
+          :sm="{ span: 14 }"
+          v-if="checkDocsNeeded(['residence','barangay','police'])"
+        >
           <a-form-item
             style="font-weight: bold;"
             :validate-status="checkErrors('required_documents.civil_status') ? 'error': ''"
@@ -117,7 +125,7 @@
               Civil Status
               <i style="color: red">*</i>
             </span>
-            <a-radio-group buttonStyle="solid" v-model="form.required_documents.civil_status">
+            <a-radio-group buttonStyle="solid" v-model="form.owner_details.civil_status">
               <a-radio-button value="single">Single</a-radio-button>
               <a-radio-button value="married">Married</a-radio-button>
               <a-radio-button value="widowed">Widowed</a-radio-button>
@@ -167,50 +175,36 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['residence', 'barangay'])">
-          <a-form-item
-            style="font-weight: bold;"
-            label="Occupation/Profession"
-          >
-            <a-input
-              v-model="form.required_documents.occupation"
-              placeholder="Occupation/Profession"
-            />
+        <a-col
+          :xs="{ span: 24 }"
+          :sm="{ span: 12 }"
+          v-if="checkDocsNeeded(['residence', 'barangay'])"
+        >
+          <a-form-item style="font-weight: bold;" label="Occupation/Profession">
+            <a-input v-model="form.owner_details.occupation" placeholder="Occupation/Profession" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['residence'])">
-          <a-form-item
-            style="font-weight: bold;"
-            label="Monthly Salary"
-          >
-            <a-input v-model="form.required_documents.monthly_salary" placeholder="Monthly Salary" />
+          <a-form-item style="font-weight: bold;" label="Monthly Salary">
+            <a-input v-model="form.owner_details.monthly_salary" placeholder="Monthly Salary" />
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
-          <a-form-item
-            style="font-weight: bold;"
-            label="Height"
-          >
-            <a-input v-model="form.required_documents.height" placeholder="Height" />
+          <a-form-item style="font-weight: bold;" label="Height">
+            <a-input v-model="form.owner_details.height" placeholder="Height" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
-          <a-form-item
-            style="font-weight: bold;"
-            label="Weight"
-          >
-            <a-input v-model="form.required_documents.weight" placeholder="Weight" />
+          <a-form-item style="font-weight: bold;" label="Weight">
+            <a-input v-model="form.owner_details.weight" placeholder="Weight" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
-          <a-form-item
-            style="font-weight: bold;"
-            label="ICR No(if Alien)"
-          >
-            <a-input v-model="form.required_documents.icr_no" placeholder="ICR No(if Alien)" />
+          <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
+            <a-input v-model="form.owner_details.icr_no" placeholder="ICR No(if Alien)" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -389,9 +383,9 @@
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
+        </a-col> -->
       </a-row>
     </a-form>
   </a-card>
@@ -429,31 +423,11 @@ export default {
       return provincesOnRegion;
     }
   },
-  created() {
-    if (this.fixed_address) {
-      this.form.owner_address.region = "04";
-      // this.changeRegion();
-      this.form.owner_address.province = "0456";
-      // this.changeProvince();
-      this.form.owner_address.city = "045641";
-      // this.changeCity();
-      import(
-        `../../../assets/references/cities/${this.form.owner_address.province}.json`
-      )
-        .then(data => {
-          this.cities = data.default;
-          return import(
-            `../../../assets/references/barangay/${this.form.owner_address.city}.json`
-          );
-        })
-        .then(data => {
-          this.barangays = data.default;
-        });
-    }
-    if (this.fixed_postal) this.form.owner_address.postal_code = "4324";
-  },
+  created() {},
   mounted() {
     this.checkRequiredDocs();
+
+    this.loadReferences();
   },
   methods: {
     changeRegion() {
@@ -522,6 +496,50 @@ export default {
         )
           this.required_docs.push(doc.keyword);
       });
+    },
+    loadReferences() {
+      const { mode, ref_no } = this.$route.query;
+      if (this.fixed_address && !mode && !ref_no) {
+        this.form.owner_address.region = "04";
+        // this.changeRegion();
+        this.form.owner_address.province = "0456";
+        // this.changeProvince();
+        this.form.owner_address.city = "045641";
+        // this.changeCity();
+        import(
+          `../../../assets/references/cities/${this.form.owner_address.province}.json`
+        )
+          .then(data => {
+            this.cities = data.default;
+            console.log("this.cities :", this.cities);
+            return import(
+              `../../../assets/references/barangay/${this.form.owner_address.city}.json`
+            );
+          })
+          .then(data => {
+            this.barangays = data.default;
+            console.log("this.barangays :", this.barangays);
+          });
+      } else if (mode && ref_no) {
+        if (this.form.owner_address.province)
+          import(
+            `../../../assets/references/cities/${this.form.owner_address.province}.json`
+          )
+            .then(data => {
+              this.cities = data.default;
+              console.log("this.cities :", this.cities);
+              if (this.form.owner_address.city)
+                return import(
+                  `../../../assets/references/barangay/${this.form.owner_address.city}.json`
+                );
+            })
+            .then(data => {
+              this.barangays = data ? data.default : [];
+              console.log("this.barangays :", this.barangays);
+            });
+      }
+      if (this.fixed_postal && !mode && !ref_no)
+        this.form.owner_address.postal_code = "4324";
     }
   }
 };

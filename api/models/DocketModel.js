@@ -22,8 +22,9 @@ var DocketSchema = new mongoose.Schema({
         default: 0
         /**
          * 0 - In Progress
-         * 1 - Done
+         * 1 - Approved
          * 2 - Rejected
+         * 3 - For Compliance
          */
     },
     current_department: {
@@ -41,6 +42,14 @@ var DocketSchema = new mongoose.Schema({
     modified_by: {
         type: String
     },
+    date_approved: {
+        type: Date,
+        default: new Date()
+    },
+    date_rejected: {
+        type: Date,
+        default: new Date()
+    },
     date_created: {
         type: Date,
         default: new Date()
@@ -48,7 +57,29 @@ var DocketSchema = new mongoose.Schema({
     date_modified: {
         type: Date,
         default: new Date()
-    }
+    },
+    activities: [{
+        approver: {
+            type: String
+        },
+        department: {
+            type: String
+        },
+        date_claimed: {
+            type: Date
+        },
+        date_approved: {
+            type: Date,
+            default: new Date()
+        },
+        date_rejected: {
+            type: Date,
+            default: new Date()
+        },
+        remarks: {
+            type: String
+        }
+    }]
 })
 
 DocketSchema.pre('save', async function (callback) {

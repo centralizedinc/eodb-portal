@@ -5,10 +5,18 @@ const BusinessApplicationDao = require('../dao/BusinessApplicationDao');
 const BusinessPermitDao = require('../dao/BusinessPermitDao');
 const DocketsDao = require('../dao/DocketsDao');
 const PaymentDao = require('../dao/PaymentDao');
+const DepartmentDao = require('../dao/DepartmentDao');
+
+const jwt = require('jsonwebtoken');
+const sendgrid = require('../utils/email.js');
+const constant_helper = require('../utils/constant_helper');
+const ApplicationSettings = require('../utils/ApplicationSettings');
 
 router.route('/')
     .get((req, res) => {
-        BusinessApplicationDao.findAll()
+        const decoded_data = jwt.decode(req.headers.access_token),
+            account_id = decoded_data.account_id;
+        BusinessPermitDao.find({ account_id })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -18,19 +26,42 @@ router.route('/')
             });
     })
     .post((req, res) => {
-        console.log("Creating Business Permit...")
-        console.log('Saving data :', req.body);
+        const decoded_data = jwt.decode(req.headers.access_token),
+            account_id = decoded_data.account_id;
+        var details = req.body;
+        details.account_id = account_id;
+        BusinessPermitDao.create(details)
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({
+                    errors
+                })
+            });
+    })
+
+router.route('/application')
+    .post((req, res) => {
+        console.log('Creating Business Permit :', req.body);
+        const decoded_data = jwt.decode(req.headers.access_token),
+            created_by = decoded_data.account_id,
+            user_email = decoded_data.email,
+            user_name = decoded_data.name;
         const {
             data,
             payment
         } = req.body;
         var results = {};
+        data.created_by = created_by;
+        // CREATE BUSINESS PERMIT
         BusinessApplicationDao.create(data)
             .then((result) => {
                 console.log('application result :', result);
+                // PROCESS PAYMENTS
                 results.application = result;
                 payment.transaction_details.payment_for = "business";
                 payment.transaction_details.application_id = result._id;
+                payment.created_by = created_by;
                 var payment_actions = [], loopCount = payment.mode_of_payment === 'SA' ? 2 : payment.mode_of_payment === 'Q' ? 4 : 1;
                 for (let i = 0; i < loopCount; i++) {
                     if (i === 0) { //paid on first
@@ -58,22 +89,44 @@ router.route('/')
             .then((payments) => {
                 console.log('payments results :', payments);
                 results.payment = payments[0];
+                return DepartmentDao.findAll();
+            })
+            .then((departments) => {
+                var activities = [];
+                if (departments) activities = departments.map(v => { return { department: v._id, date_claimed: null, date_approved: null, date_rejected: null } });
+                // CREATE DOCKET
                 var details = {
                     application_id: results.application._id,
                     application_type: results.application.application_type,
                     permit: 'business',
-                    payment_status: payments[0].status
+                    payment_status: payments[0].status,
+                    created_by,
+                    activities
                 }
                 return DocketsDao.create(details)
             })
             .then((result) => {
                 results.dockets = result;
                 console.log('docket result :', result);
+
+                // UPDATE BUSINESS PERMIT
                 return BusinessApplicationDao.modifyById(results.application._id, { reference_no: result.reference_no });
             })
             .then((result) => {
                 results.application = result;
                 console.log('results :', results);
+
+                // SEND NOTIFICATION TO CREATOR
+                const substitutions = {
+                    name: user_name.first,
+                    reference_no: result.reference_no,
+                    transaction_no: results.payment.transaction_no,
+                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=business&ref_no=${result.reference_no}`
+                }
+                return sendgrid.sendEmail(user_email, "SUCCESSFUL_APPLICATION_CREATION_TEMPLATE", substitutions)
+            })
+            .then((result) => {
+                console.log('creating business notification result :', result)
                 res.json(results);
             }).catch((errors) => {
                 console.log('errors :', errors);
@@ -149,5 +202,20 @@ router.route('/product')
             });
     })
 
+
+router.route('/application/reference/:reference_no')
+    .get((req, res) => {
+        const reference_no = req.params.reference_no;
+        console.log('reference_no :', reference_no);
+        BusinessApplicationDao.findOneByReference(reference_no)
+            .then((result) => {
+                console.log('result :', result);
+                if (!result) res.json({ errors: { message: "Invalid Reference Number" } })
+                res.json(result);
+            }).catch((err) => {
+                console.log('err :', err);
+                res.json({ errors: err });
+            });
+    })
 
 module.exports = router

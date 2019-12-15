@@ -36,4 +36,12 @@ export default class UploadAPI {
         return axios.post(`/upload/permits?permit=${permit_type}&account_id=${account_id}`, files)
     }
 
+    /**
+     * @returns {Promise}
+     * @param {Form Data} file 
+     */
+    uploadAvatar(file) {
+        if(!file) return Promise.resolve();
+        return axios.post('upload/avatar', file);
+    }
 }

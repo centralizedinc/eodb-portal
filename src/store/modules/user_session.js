@@ -1,4 +1,5 @@
 import AccountAPI from "../../api/AccountAPI"
+import UploadAPI from "../../api/UploadAPI";
 
 function initialState() {
     return {
@@ -13,6 +14,9 @@ const mutations = {
     LOGIN(state, payload) {
         state.user = payload.account;
         state.token = payload.token;
+    },
+    UPDATE_USER(state, user) {
+        state.user = user;
     },
     FB_LOGIN(state, payload) {
         console.log("fb login payload data: " + JSON.stringify(payload))
@@ -70,6 +74,8 @@ const actions = {
     FIND_ACCOUNT(context, id) {
         return new Promise((resolve, reject) => {
             console.log("find account id data: " + JSON.stringify(id))
+            // getAccountProfile
+            // getAccount
             new AccountAPI(context.state.token).getAccount(id)
                 .then((result) => {
                     console.log("find account result data: " + JSON.stringify(result))
@@ -100,7 +106,30 @@ const actions = {
     CONFIRM_ACCOUNT(context, code) {
         return new AccountAPI(null).confirmAccount(code);
     },
-    LOGOUT(context){
+    UPDATE_PROFILE(context, { file, details }) {
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.state.token)
+                .uploadAvatar(file)
+                .then((result) => {
+                    console.log('UPDATE_PROFILE avatar result :', result);
+                    if (result && result.data) {
+                        details.avatar = result.data.location
+                    }
+                    return new AccountAPI(context.state.token).updateProfile(details)
+                })
+                .then((result) => {
+                    console.log('UPDATE_PROFILE result :', result);
+                    if (!result.data.errors) {
+                        context.commit('UPDATE_USER', result.data);
+                        resolve(result.data)
+                    } else reject(result.data.errors);
+                }).catch((err) => {
+                    console.log('UPDATE_PROFILE err :', err);
+                    reject(err);
+                });
+        })
+    },
+    LOGOUT(context) {
         context.commit('RESET');
     }
 }

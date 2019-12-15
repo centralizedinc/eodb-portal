@@ -1,6 +1,7 @@
 var router = require("express").Router();
 
-var Uploader = require('../utils/uploader')
+var Uploader = require('../utils/uploader');
+const jwt = require('jsonwebtoken');
 
 router.route('/')
     .post((req, res) => {
@@ -28,5 +29,16 @@ router.route('/permits')
             res.json(req.files);
         })
     })
+
+router.route('/avatar')
+    .post((req, res) => {
+        const account_id = jwt.decode(req.headers.access_token).account_id;
+        console.log('uploading profile pic...', account_id);
+        const upload = Uploader.uploadAvatar(account_id);
+        upload(req, res, function (err, some) {
+            res.json(req.file);
+        })
+    })
+
 
 module.exports = router;

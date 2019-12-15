@@ -13,7 +13,7 @@ export default class BusinessPermitAPI {
      * @param {Object} data 
      */
     createPermit(data) {
-        return axios.post('/permits/business', data);
+        return axios.post('/permits/business/application', data);
     }
 
     /**
@@ -27,6 +27,11 @@ export default class BusinessPermitAPI {
     static getTransactions(id) {
         console.log("business permit api data:" + JSON.stringify(id))
         return axios.get(`/permits/business/transactions/${id}`)
+    }
+
+    getApplicationByRef(reference_no) {
+        console.log('getApplicationByRef reference_no :', reference_no);
+        return axios.get(`/permits/business/application/reference/${reference_no}`)
     }
 
 }

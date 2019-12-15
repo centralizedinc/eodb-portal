@@ -5,105 +5,38 @@
         <a-icon type="up" :size="42"></a-icon>
       </a-avatar>
     </a-back-top>
-    <!-- <a-layout-header class="header" :style="{background: '#333333',height:'40px'}">
-     <p style="margin-top:-10px; color:#D7D7D7" > <a-button type="link" shape="round" style="color: #1890FF">Create an account</a-button>
-     to track and manage your application, engage in information you care about and be a part of the concerned citizens of {{constant_helper.name_display}}
-      <a-button type="link" style="margin-left:15%; color: #1890FF" >Sign in</a-button>
-      </p>
-
-    </a-layout-header>-->
     <a-layout-content>
       <router-view></router-view>
     </a-layout-content>
-    <!-- <a-layout-footer :style="`${constant_helper.theme.default} color: #ffffff`">
-      <a-row>
-        <a-col :span="24">
-          <h1 style="color:#ffffff">Get in touch</h1>
-          <a-divider></a-divider>
-          <p>
-            <a-icon style="margin-right: 5px" type="phone"></a-icon>Hotline: 123-3456
-          </p>
-          <p>
-            <a-icon style="margin-right: 5px" type="global"></a-icon>Website:
-            <a
-              style="color:#ffffff"
-              :href="constant_helper.client_details.website.label"
-            >{{constant_helper.client_details.website.label}}</a>
-          </p>
-          <p>
-            <a-icon style="margin-right: 5px" type="facebook"></a-icon>Facebook:
-            <a
-              style="color:#ffffff"
-              :href="constant_helper.client_details.facebook.label"
-            >{{constant_helper.client_details.facebook.label}}</a>
-          </p>
-          <a-divider></a-divider>
-        </a-col>
 
-        <a-col :span="18">
-          <p>© Copyright 2019 CCCI Inc. - All Rights Reserved</p>
-        </a-col>
-        <a-col :span="1">
-          <a-avatar size="large" style="background-color:#4267B2">
-            <a-icon type="facebook"></a-icon>
-          </a-avatar>
-        </a-col>
-        <a-col :span="1">
-          <a-avatar size="large" style="background-color:#EA4335">
-            <a-icon type="google"></a-icon>
-          </a-avatar>
-        </a-col>
-        <a-col :span="1">
-          <a-avatar size="large" style="background-color:#4267B2">
-            <a-icon type="twitter"></a-icon>
-          </a-avatar>
-        </a-col>
-        <a-col :span="1">
-          <a-avatar size="large" style="background:#00AFF0">
-            <a-icon type="skype"></a-icon>
-          </a-avatar>
-        </a-col>
-        <a-col :span="1">
-          <a-avatar size="large" style="background-color:#FF2500">
-            <a-icon type="youtube"></a-icon>
-          </a-avatar>
-        </a-col>
-        <a-col :span="1">
-          <a-avatar
-            size="large"
-            style="background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);"
-          >
-            <a-icon type="instagram"></a-icon>
-          </a-avatar>
-        </a-col>
-      </a-row>
-    </a-layout-footer>-->
     <a-layout-footer :style="{ background: '#555555' }">
       <a-row type="flex" justify="center">
-        <a-col :span="24">
-          <h1 align="center" class="slogan_style">Pasyal tayo sa San Antonio</h1>
+        <a-col :span="3"></a-col>
+        <a-col :span="8">
+          <img
+            style="width: auto; height: 45px; margin-top: -5px; "
+            src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
+          />
         </a-col>
       </a-row>
       <a-row type="flex" justify="center">
         <a-col :span="24">
           <h4 align="center" style="color:#FFF">
             Office of the Mayor: (042) 545-4091
-            <br />Website: https://sanantonio.quezon.gov.ph
-            <br />Facebook: SanAntonio Quezon
-            <br />© Copyright 2019 CCCI Inc. - All Rights Reserved
+            <br />Website: https://sanantonio.quezon.gov.ph <br />Facebook:
+            SanAntonio Quezon <br />© Copyright 2019 CCCI Inc. - All Rights
+            Reserved
           </h4>
         </a-col>
       </a-row>
     </a-layout-footer>
 
-    <!-- REGISRATION -->
-
-    <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
+    <!-- <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
         <a-button key="back" @click="handleCancel">Return</a-button>
         <a-button
           style="background-color: #1890ff;
-    border-color: #1890ff"
+      border-color: #1890ff"
           key="submit"
           type="primary"
           :loading="load2ing"
@@ -111,47 +44,8 @@
         >Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
-        <!-- <a-col :span="24">
-          <p>Register with facebook or google</p>
-        </a-col>
-        <a-col :span="12">
-          <a-button
-            block
-            size="large"
-            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF"
-            @click="registerFacebook"
-          >
-            <a-icon type="facebook"></a-icon>Facebook
-          </a-button>
-        </a-col>-->
-        <!-- <a-col :span="12">
-          <a-button
-            block
-            size="large"
-            @click="registerGoogle"
-            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF"
-          >
-            <a-icon type="google"></a-icon>Google
-          </a-button>
-        </a-col>-->
-        <!-- <a-col :span="24">
-          <a-divider>Or</a-divider>
-        </a-col>-->
         <a-col :span="24">
           <a-form>
-            <!-- <a-form-item
-              label="Username"
-              :validate-status="validation.name.first.status"
-              :help="validation.name.first.message"
-            >
-              <a-input :disabled="loading" v-model="account.username"></a-input>
-            </a-form-item>-->
-            <!-- <a-form-item
-              :validate-status="validation.name.last.status"
-              :help="validation.name.last.message"
-            >
-              <a-input :disabled="loading" placeholder="Last Name" v-model="account.name.last"></a-input>
-            </a-form-item>-->
             <a-col :span="24">
               <a-form-item
                 label="Email Address"
@@ -213,7 +107,7 @@
         </a-col>
       </a-row>
     </a-modal>
-    <!-- Report Modal -->
+    
     <a-modal v-model="visible_report" title="Report Incident">
       <a-row type="flex" align="center" :gutter="16">
         <a-col :span="6">
@@ -375,7 +269,7 @@
           </a-row>
         </a-form>
       </a-card>
-    </a-modal>
+    </a-modal> -->
   </a-layout>
 </template>
 
@@ -383,205 +277,205 @@
 export default {
   data() {
     return {
-      visible_menu: false,
-      guest_visible: false,
-      signup_visible: false,
-      login_visible: false,
-      visible_report: false,
-      visible: false,
-      topLocation: 0,
-      reveal: false,
-      loading: false,
-      coordinates: { lat: 15.6673, lng: 120.734993 },
-      animation: {},
-      account: {
-        name: {
-          first: "",
-          last: ""
-        },
-        email: "",
-        password: "",
-        confirm: ""
-      },
-      validation: {
-        name: {
-          first: {},
-          last: {}
-        },
-        email: {},
-        password: {},
-        confirm: {}
-      },
-      report_type: ""
+      // visible_menu: false,
+      // guest_visible: false,
+      // signup_visible: false,
+      // login_visible: false,
+      // visible_report: false,
+      // visible: false,
+      // topLocation: 0,
+      // reveal: false,
+      // loading: false,
+      // coordinates: { lat: 15.6673, lng: 120.734993 },
+      // animation: {},
+      // account: {
+      //   name: {
+      //     first: "",
+      //     last: ""
+      //   },
+      //   email: "",
+      //   password: "",
+      //   confirm: ""
+      // },
+      // validation: {
+      //   name: {
+      //     first: {},
+      //     last: {}
+      //   },
+      //   email: {},
+      //   password: {},
+      //   confirm: {}
+      // },
+      // report_type: ""
     };
-  },
-  methods: {
-    handleScroll(event) {
-      // Any code to be executed when the window is scrolled
-      console.log("event ::: ", JSON.stringify(window.top.scrollY));
-      this.topLocation = window.top.scrollY;
-    },
-    registerFacebook() {
-      window.open(
-        `${process.env.VUE_APP_BASE_API_URI}/auth/facebook`,
-        "",
-        "width=500,height=450"
-      );
-      this.signup_visible = false;
-    },
-    registerGoogle() {
-      window.open(
-        `${process.env.VUE_APP_BASE_API_URI}/auth/google`,
-        "",
-        "width=500,height=450"
-      );
-      this.signup_visible = false;
-    },
-    report() {
-      this.visible_report = true;
-      var _self = this;
-      this.$getLocation().then(coordinates => {
-        this.coordinates = coordinates;
-        this.$gmapApiPromiseLazy().then(() => {
-          _self.animation = google.maps.Animation.DROP;
-        });
-      });
-    },
-    submitReport() {
-      // this.visible_report = false
-      var _self = this;
-      this.$confirm({
-        title: "You are about to submit a report as guest.",
-        content:
-          "For faster response, please enter your name & contact no. or Sign-up",
-        okText: "Sign-up",
-        cancelText: "Continue as guest",
-        onOk: _self.signup,
-        onCancel: _self.continue
-      });
-    },
-    signup() {
-      this.visible_report = false;
-      this.signup_visible = true;
-    },
-    continue() {
-      this.guest_visible = true;
-    },
-    submit() {
-      console.log("sumbit home");
-      this.guest_visible = false;
-      this.visible_report = false;
-      this.$notification.success({
-        message: "Thank you for your concern",
-        description: "Your Report has been sent. Stay safe!"
-      });
-    },
-    validate() {
-      var errors = true;
-
-      if (!this.account.name.first) {
-        this.validation.name.first.status = "error";
-        this.validation.name.first.message = "Please input desired username";
-        // return false;
-        errors = false;
-      }
-      if (!this.account.name.last) {
-        this.validation.name.last.status = "error";
-        this.validation.name.last.message = "Please input last name";
-        // return false;
-        errors = false;
-      }
-      if (!this.account.email) {
-        this.validation.email.status = "error";
-        this.validation.email.message = "Please input email";
-        // return false;
-        errors = false;
-      }
-      // if (this.account.password) {
-      //   console.log("this.account.password")
-      if (
-        this.account.confirm &&
-        this.account.password !== this.account.confirm
-      ) {
-        console.log(
-          "this.account.confirm && this.account.password !== this.account.confirm"
-        );
-        this.validation.password.status = "error";
-        this.validation.password.message =
-          "Password and Confirm Password does not match";
-        // return false;
-        errors = false;
-      }
-      // }
-      if (!this.account.password) {
-        console.log("!this.account.password");
-        this.validation.password.status = "error";
-        this.validation.password.message = "Please input password";
-        // return false;
-        errors = false;
-      }
-      if (!this.account.confirm) {
-        this.validation.confirm.status = "error";
-        this.validation.confirm.message = "Please input confirm password";
-        // return false;
-        errors = false;
-      }
-      console.log("errors data: " + errors);
-      return errors;
-    },
-    handleCancel() {
-      console.log("handleCancel");
-      this.account.name.first = "";
-      this.account.name.last = "";
-      this.account.email = "";
-      this.account.password = "";
-      this.account.confirm = "";
-      this.signup_visible = false;
-    },
-    handleOk() {
-      (this.loading = true), console.log("handleOk");
-
-      if (this.validate()) {
-        this.$message.success(
-          "Your information has been sent successfully. Please check your email for verification link to activate your account.",
-          10
-        );
-        console.log("walang error registration");
-        this.loading = false;
-        this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
-          console.log("saved account" + JSON.stringify(save_account));
-          this.redirect("mainView");
-        });
-      } else {
-        //   this.validation.name.first = "";
-        // this.validation.name.last = "";
-        // this.validation.email = "";
-        // this.validation.password = "";
-        // this.validation.confirm = "";
-        console.log("may error registration");
-        this.loading = false;
-      }
-    }
-  },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-
-  computed: {
-    headerStyle() {
-      if (this.topLocation < 50) {
-        return "background: transparent";
-      } else {
-        return this.constant_helper.theme.default;
-      }
-    },
-    menuStyle() {
-      return this.constant_helper.theme.default;
-    }
   }
+  // methods: {
+  //   handleScroll(event) {
+  //     // Any code to be executed when the window is scrolled
+  //     console.log("event ::: ", JSON.stringify(window.top.scrollY));
+  //     this.topLocation = window.top.scrollY;
+  //   },
+  //   registerFacebook() {
+  //     window.open(
+  //       `${process.env.VUE_APP_BASE_API_URI}/auth/facebook`,
+  //       "",
+  //       "width=500,height=450"
+  //     );
+  //     this.signup_visible = false;
+  //   },
+  //   registerGoogle() {
+  //     window.open(
+  //       `${process.env.VUE_APP_BASE_API_URI}/auth/google`,
+  //       "",
+  //       "width=500,height=450"
+  //     );
+  //     this.signup_visible = false;
+  //   },
+  //   report() {
+  //     this.visible_report = true;
+  //     var _self = this;
+  //     this.$getLocation().then(coordinates => {
+  //       this.coordinates = coordinates;
+  //       this.$gmapApiPromiseLazy().then(() => {
+  //         _self.animation = google.maps.Animation.DROP;
+  //       });
+  //     });
+  //   },
+  //   submitReport() {
+  //     // this.visible_report = false
+  //     var _self = this;
+  //     this.$confirm({
+  //       title: "You are about to submit a report as guest.",
+  //       content:
+  //         "For faster response, please enter your name & contact no. or Sign-up",
+  //       okText: "Sign-up",
+  //       cancelText: "Continue as guest",
+  //       onOk: _self.signup,
+  //       onCancel: _self.continue
+  //     });
+  //   },
+  //   signup() {
+  //     this.visible_report = false;
+  //     this.signup_visible = true;
+  //   },
+  //   continue() {
+  //     this.guest_visible = true;
+  //   },
+  //   submit() {
+  //     console.log("sumbit home");
+  //     this.guest_visible = false;
+  //     this.visible_report = false;
+  //     this.$notification.success({
+  //       message: "Thank you for your concern",
+  //       description: "Your Report has been sent. Stay safe!"
+  //     });
+  //   },
+  //   validate() {
+  //     var errors = true;
+
+  //     if (!this.account.name.first) {
+  //       this.validation.name.first.status = "error";
+  //       this.validation.name.first.message = "Please input desired username";
+  //       // return false;
+  //       errors = false;
+  //     }
+  //     if (!this.account.name.last) {
+  //       this.validation.name.last.status = "error";
+  //       this.validation.name.last.message = "Please input last name";
+  //       // return false;
+  //       errors = false;
+  //     }
+  //     if (!this.account.email) {
+  //       this.validation.email.status = "error";
+  //       this.validation.email.message = "Please input email";
+  //       // return false;
+  //       errors = false;
+  //     }
+  //     // if (this.account.password) {
+  //     //   console.log("this.account.password")
+  //     if (
+  //       this.account.confirm &&
+  //       this.account.password !== this.account.confirm
+  //     ) {
+  //       console.log(
+  //         "this.account.confirm && this.account.password !== this.account.confirm"
+  //       );
+  //       this.validation.password.status = "error";
+  //       this.validation.password.message =
+  //         "Password and Confirm Password does not match";
+  //       // return false;
+  //       errors = false;
+  //     }
+  //     // }
+  //     if (!this.account.password) {
+  //       console.log("!this.account.password");
+  //       this.validation.password.status = "error";
+  //       this.validation.password.message = "Please input password";
+  //       // return false;
+  //       errors = false;
+  //     }
+  //     if (!this.account.confirm) {
+  //       this.validation.confirm.status = "error";
+  //       this.validation.confirm.message = "Please input confirm password";
+  //       // return false;
+  //       errors = false;
+  //     }
+  //     console.log("errors data: " + errors);
+  //     return errors;
+  //   },
+  //   handleCancel() {
+  //     console.log("handleCancel");
+  //     this.account.name.first = "";
+  //     this.account.name.last = "";
+  //     this.account.email = "";
+  //     this.account.password = "";
+  //     this.account.confirm = "";
+  //     this.signup_visible = false;
+  //   },
+  //   handleOk() {
+  //     (this.loading = true), console.log("handleOk");
+
+  //     if (this.validate()) {
+  //       this.$message.success(
+  //         "Your information has been sent successfully. Please check your email for verification link to activate your account.",
+  //         10
+  //       );
+  //       console.log("walang error registration");
+  //       this.loading = false;
+  //       this.$store.dispatch("SIGN_UP", this.account).then(save_account => {
+  //         console.log("saved account" + JSON.stringify(save_account));
+  //         this.redirect("mainView");
+  //       });
+  //     } else {
+  //       //   this.validation.name.first = "";
+  //       // this.validation.name.last = "";
+  //       // this.validation.email = "";
+  //       // this.validation.password = "";
+  //       // this.validation.confirm = "";
+  //       console.log("may error registration");
+  //       this.loading = false;
+  //     }
+  //   }
+  // },
+  // created() {
+  //   window.addEventListener("scroll", this.handleScroll);
+  // },
+  // destroyed() {
+  //   window.removeEventListener("scroll", this.handleScroll);
+  // },
+
+  // computed: {
+  //   headerStyle() {
+  //     if (this.topLocation < 50) {
+  //       return "background: transparent";
+  //     } else {
+  //       return this.constant_helper.theme.default;
+  //     }
+  //   },
+  //   menuStyle() {
+  //     return this.constant_helper.theme.default;
+  //   }
+  // }
 };
 </script>
 
