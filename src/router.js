@@ -225,6 +225,11 @@ export default new Router({
       name: "Police Clearance",
       component: () => import("./views/app/PoliceClearance/Form.vue")
     },
+    {
+      path: 'ctc',
+      name: "Community Tax Certificate",
+      component: () => import("./views/app/Cedula/Form.vue")
+    }
     ]
   },
   {
