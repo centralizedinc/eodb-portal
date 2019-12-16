@@ -16,7 +16,13 @@ var BusinessPermitApplication = new mongoose.Schema({
         type: String
     },
     status: {
-        type: String
+        type: Number,
+        default: 0
+        /**
+         * 0 - In Progress
+         * 1 - Approved
+         * 2 - Rejected
+         */
     },
 
     // DETAILS
@@ -62,11 +68,20 @@ var BusinessPermitApplication = new mongoose.Schema({
         civil_status: {
             type: String
         },
-        job_title: {
+        occupation: {
             type: String
         },
-        salary: {
+        monthly_salary: {
             type: Number
+        },
+        height: {
+            type: Number
+        },
+        weight: {
+            type: Number
+        },
+        icr_no: {
+            type: String
         }
     },
     owner_address: {
@@ -195,7 +210,10 @@ var BusinessPermitApplication = new mongoose.Schema({
             line_of_business: {
                 type: String
             }
-        }]
+        }],
+        capital_investment: {
+            type: Number
+        }
     },
     business_address: {
         bldg_no: {
@@ -277,12 +295,15 @@ var BusinessPermitApplication = new mongoose.Schema({
         }
     },
     attachments: [{
-        title: {
+        doc_type: {
             type: String
         },
         files: []
     }],
-    requirements: []
+    compliance_attachments: [],
+    account_id: {
+        type: String
+    }
 })
 
 BusinessPermitApplication.pre('save', async function (callback) {

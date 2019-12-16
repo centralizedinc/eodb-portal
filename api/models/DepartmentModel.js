@@ -3,17 +3,31 @@ var DepartmentSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    description:{
-        type:String
+    description: {
+        type: String
+    },
+    last_approver: {
+        type: Boolean,
+        default: false
+    },
+    admin: {
+        type: Boolean,
+        default: false
     },
     date_created: {
         type: Date,
         default: new Date()
     },
+    created_by: {
+        type: String
+    },
     date_modified: {
         type: Date,
         default: new Date()
-    }
+    },
+    modified_by: {
+        type: String
+    },
 })
 
 DepartmentSchema.pre('save', async function (callback) {

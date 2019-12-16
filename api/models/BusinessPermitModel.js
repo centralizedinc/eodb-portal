@@ -1,5 +1,26 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment-reworked').MongooseAutoIncrementID;
+
 var BusinessPermitSchema = new mongoose.Schema({
+    auto_id: {
+        type: Number
+    },
+    business_no: {
+        type: String
+    },
+    permit_type: {
+        type: String,
+        default: "business"
+    },
+    account_id: {
+        type: String
+    },
+    date_created: {
+        type: Date,
+        default: new Date()
+    },
+
+    // DETAILS
     application_type: {
         type: String //new || renewal
     },
@@ -42,11 +63,20 @@ var BusinessPermitSchema = new mongoose.Schema({
         civil_status: {
             type: String
         },
-        job_title: {
+        occupation: {
             type: String
         },
-        salary: {
+        monthly_salary: {
             type: Number
+        },
+        height: {
+            type: Number
+        },
+        weight: {
+            type: Number
+        },
+        icr_no: {
+            type: String
         }
     },
     owner_address: {
@@ -88,6 +118,9 @@ var BusinessPermitSchema = new mongoose.Schema({
         business_type: {
             type: String
         },
+        franchise: {
+            type: String
+        },
         registration_no: {
             type: String
         },
@@ -100,10 +133,16 @@ var BusinessPermitSchema = new mongoose.Schema({
         ctc_no: {
             type: String
         },
+        pin: {
+            type: String
+        },
         business_area: {
             type: Number
         },
-        no_of_employees: {
+        employees_establishment: {
+            type: Number
+        },
+        employees_residing: {
             type: Number
         },
         telno: {
@@ -118,10 +157,46 @@ var BusinessPermitSchema = new mongoose.Schema({
         enjoying_tax_incentive: {
             type: Boolean
         },
-        specify_tax_incentive: {
+        specify_entity: {
             type: String
         },
-        line_of_business: []
+        line_of_business: [{
+            code: {
+                type: String
+            },
+            description: {
+                type: String
+            },
+            units: {
+                type: Number
+            },
+            capital_investment: {
+                type: Number
+            },
+            essential: {
+                type: Number
+            },
+            non_essential: {
+                type: Number
+            }
+        }],
+        measure_or_pax: [{
+            unit: {
+                type: Number
+            },
+            capacity: {
+                type: Number
+            },
+            measure_or_pax: {
+                type: String
+            },
+            line_of_business: {
+                type: String
+            }
+        }],
+        capital_investment: {
+            type: Number
+        }
     },
     business_address: {
         bldg_no: {
@@ -203,25 +278,17 @@ var BusinessPermitSchema = new mongoose.Schema({
         }
     },
     attachments: [{
-        title: {
+        doc_type: {
             type: String
         },
-        attachment: {}
+        files: []
     }],
-    date_created: {
-        type: Date,
-        default: new Date()
-    },
-    date_modified: {
-        type: Date,
-        default: new Date()
-    }
+    compliance_attachments: []
 })
 
 BusinessPermitSchema.pre('save', async function (callback) {
     var account = this;
     account.date_created = new Date();
-    account.date_modified = new Date();
     callback();
 });
 
@@ -229,8 +296,25 @@ BusinessPermitSchema.pre('findOneAndUpdate', function (callback) {
     console.log('this :', this._update);
     this.options.new = true;
     this.options.runValidators = true;
-    this._update.date_modified = new Date();
     callback();
 });
+
+const options = {
+    field: 'auto_id', // auto_id will have an auto-incrementing value
+    incrementBy: 1, // incremented by 2 every time
+    nextCount: false, // Not interested in getting the next count - don't add it to the model
+    // resetCount: 'reset', // The model and each document can now reset the counter via the reset() method
+    startAt: 0, // Start the counter at 1000
+    unique: false // Don't add a unique index
+};
+
+const plugin = new autoIncrement(BusinessPermitSchema, 'business_permits', options);
+// users._nextCount()
+//     .then(count => console.log(`The next ID will be ${count}`));
+plugin.applyPlugin()
+    .catch(e => {
+        // Plugin failed to initialise
+        console.log("############### init failed: " + e);
+    });
 
 module.exports = mongoose.model('business_permits', BusinessPermitSchema)

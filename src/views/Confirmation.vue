@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-row>
-      <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :xl="{ span: 24}" v-if="platform!=='local'">
+      <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :xl="{ span: 24}" v-if="platform==='local'">
         <a-row>
           <a-col :span="24" style="background-color:#66bb6a">
             <div align="center">

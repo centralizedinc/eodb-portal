@@ -9,6 +9,11 @@
              <span slot="date" slot-scope="text">
                 {{formatDate(text, 'time')}}
             </span>
+            <span slot="actions" slot-scope="text,record" style="font-align:center">
+                <a-button-group>                    
+                    <a-button type="primary" icon="edit" @click="edit(record)"></a-button>
+                </a-button-group>
+            </span>
          </a-table>
     </a-col>   
   </a-row>
@@ -29,6 +34,10 @@
         <a-form-item label="Description">
             <a-textarea placeholder="Description" v-model="office.description" :rows="5"></a-textarea>
         </a-form-item>
+        <a-form-item label="System Administrator" :extra="office.admin?'Are you sure you want this new office to have Administrator priviledges? System Administrators can modify the application settings. If you want to continue, hit the submit button otherwise set the System Administrator flag back to NO.':''">
+            <!-- <a-textarea placeholder="Description" v-model="office.description" :rows="5"></a-textarea> -->
+            <a-switch checkedChildren="YES" unCheckedChildren="NO" :checked="office.admin"  @click="office.admin=!office.admin"></a-switch>
+        </a-form-item>
         <a-form-item>
             <a-button type="primary" icon="save" :loading="loading" block @click="submit">Submit</a-button>
         </a-form-item>
@@ -41,9 +50,12 @@
 export default {
     data(){
         return{
+            edit_mode:false,
             loading:false,
             visible:false,
-            office:{},
+            office:{
+                admin:false
+            },
             offices:[],
             cols:[
                 {
@@ -64,6 +76,11 @@ export default {
                     dataIndex:'date_modified',
                     scopedSlots:{customRender:'date'}
                 },
+                {
+                    title:'Actions',
+                    dataIndex:'_id',
+                    scopedSlots:{customRender:'actions'}
+                },
             ]
         }
     },
@@ -80,24 +97,55 @@ export default {
             })
         },
         onClose(){
+            this.office={admin:false}
             this.visible = false;
+            this.edit_mode = false;
+        },
+        edit(record){
+            this.edit_mode = true;
+            this.office = this.deepCopy(record)
+            this.visible = true
         },
         submit(){
             this.loading = true;
-            this.$http.post('/departments', this.office)
-            .then(result=>{
-                console.log(JSON.stringify(result))
-                this.loading = false;
-                this.visible = false;
-                this.$notification.success({
-                    message: 'Success',
-                    description: 'New Department Office Created!'
+            if(this.edit_mode){
+                this.$http.post(`/departments/${this.office._id}`, this.office)
+                .then(result=>{
+                    console.log(JSON.stringify(result))
+                    this.loading = false;
+                    this.visible = false;
+                    this.$notification.success({
+                        message: 'Success',
+                        description: 'Department Office Updated!'
+                    })
+                    this.office = {
+                        admin:false
+                    }
+                    this.init();
                 })
-                this.init();
-            })
-            .catch(error=>{
-                console.log(error)
-            })
+                .catch(error=>{
+                    console.log(error)
+                })
+
+            }else{
+                this.$http.post('/departments', this.office)
+                .then(result=>{
+                    console.log(JSON.stringify(result))
+                    this.loading = false;
+                    this.visible = false;
+                    this.$notification.success({
+                        message: 'Success',
+                        description: 'New Department Office Created!'
+                    })
+                    this.office = {
+                        admin:false
+                    }
+                    this.init();
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+            }
         }
     }
 }

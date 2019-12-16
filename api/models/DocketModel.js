@@ -22,15 +22,9 @@ var DocketSchema = new mongoose.Schema({
         default: 0
         /**
          * 0 - In Progress
-         * 1 - Done
+         * 1 - Approved
          * 2 - Rejected
          */
-    },
-    current_department: {
-        type: String
-    },
-    current_approver: {
-        type: String
     },
     payment_status: {
         type: String
@@ -41,6 +35,14 @@ var DocketSchema = new mongoose.Schema({
     modified_by: {
         type: String
     },
+    date_approved: {
+        type: Date,
+        default: new Date()
+    },
+    date_rejected: {
+        type: Date,
+        default: new Date()
+    },
     date_created: {
         type: Date,
         default: new Date()
@@ -48,6 +50,36 @@ var DocketSchema = new mongoose.Schema({
     date_modified: {
         type: Date,
         default: new Date()
+    },
+    activities: [{
+        approver: {
+            type: String
+        },
+        last_approver: {
+            type: Boolean
+        },
+        department: {
+            type: String
+        },
+        date_claimed: {
+            type: Date
+        },
+        date_approved: {
+            type: Date,
+        },
+        date_rejected: {
+            type: Date
+        },
+        remarks: {
+            type: String
+        },
+        for_compliance: {
+            type: Boolean,
+            default: false
+        }
+    }],
+    account_id: {
+        type: String
     }
 })
 

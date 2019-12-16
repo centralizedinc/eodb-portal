@@ -9,38 +9,63 @@
       class="profile-card"
     >
       <a-form v-if="noTitleKey === 'personal_details'">
-        <!-- <a-row> -->
-        <a-avatar
-          justify="center"
-          :src="user.avatar"
-          :size="54"
-          style="margin-top:-10vh; border: 2px solid #ffffff; margin-top:1%"
-        >{{user && user.name && user.name.first ? user.name.first[0] +""+user.name.last[0]: ''}}</a-avatar>
-        <!-- </a-row> -->
+        <div style="display: flex; justify-content: center; margin-bottom: 2vh">
+          <a-upload
+            listType="picture-card"
+            class="avatar-uploader"
+            :showUploadList="false"
+            @change="allow_details_update=true"
+            :beforeUpload="beforeAvatarUpload"
+            :disabled="loading_submit_details"
+          >
+            <img v-if="user.avatar" :src="user.avatar" alt="Avatar" />
+            <div v-else style="font-size: 35px">
+              <a-icon :type="loading_avatar ? 'loading' : 'plus'" />
+            </div>
+          </a-upload>
+        </div>
         <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
           <span slot="label">
             Last Name
             <i style="color: red">*</i>
           </span>
-          <a-input v-model="user.name.last" />
+          <a-input
+            @change="allow_details_update=true"
+            :disabled="loading_submit_details"
+            v-model="user.name.last"
+          />
         </a-form-item>
         <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
           <span slot="label">
             First Name
             <i style="color: red">*</i>
           </span>
-          <a-input v-model="user.name.first" />
+          <a-input
+            @change="allow_details_update=true"
+            :disabled="loading_submit_details"
+            v-model="user.name.first"
+          />
         </a-form-item>
         <a-form-item label="Middle Name" :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <a-input v-model="user.name.middle" />
+          <a-input
+            @change="allow_details_update=true"
+            :disabled="loading_submit_details"
+            v-model="user.name.middle"
+          />
         </a-form-item>
         <a-form-item label="Suffix" :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <a-input v-model="user.name.suffix" />
+          <a-input
+            @change="allow_details_update=true"
+            :disabled="loading_submit_details"
+            v-model="user.name.suffix"
+          />
         </a-form-item>
         <a-button
           type="primary"
           style="width:100%; margin-top: 3vh;"
-          @click="save_changes(0)"
+          :disabled="!allow_details_update"
+          :loading="loading_submit_details"
+          @click="submitPersonalDetails"
         >Save Changes</a-button>
       </a-form>
       <a-form v-if="noTitleKey === 'change_password' && user.method !== ''">
@@ -78,30 +103,14 @@
 export default {
   data() {
     return {
-      //     tabList: [
-      //   {
-      //     key: 'tab1',
-      //     // tab: 'tab1',
-      //     scopedSlots: { tab: 'customRender' },
-      //   },
-      //   {
-      //     key: 'tab2',
-      //     tab: 'tab2',
-      //   },
-      // ],
-      // contentList: {
-      //   tab1: 'content1',
-      //   tab2: 'content2',
-      // },
       user: {
-        email: "",
-        password: "",
         name: {
           first: "",
           middle: "",
           last: "",
           suffix: ""
-        }
+        },
+        avatar: null
       },
       password: {
         new: null,
@@ -118,7 +127,11 @@ export default {
         }
       ],
       key: "tab1",
-      noTitleKey: "personal_details"
+      noTitleKey: "personal_details",
+      loading_avatar: false,
+      uploaded_avatar: null,
+      allow_details_update: false,
+      loading_submit_details: false
     };
   },
   methods: {
@@ -129,33 +142,76 @@ export default {
     },
     save_changes(tab) {
       if (tab == 0) {
-        this.$http
-          .post(`accounts/${this.user.email}`, this.user)
-          .then(result => {
-            console.log(
-              "change profile details result data: " + JSON.stringify(result)
-            );
-          });
+        // this.$http
+        //   .post(`accounts/${this.user.email}`, this.user)
+        //   .then(result => {
+        //     console.log(
+        //       "change profile details result data: " + JSON.stringify(result)
+        //     );
+        //   });
       }
+    },
+    beforeAvatarUpload(file) {
+      const isJPGorPNG =
+        file.type === "image/jpeg" || file.type === "image/png";
+      if (isJPGorPNG) {
+        this.loading_avatar = true;
+        this.uploaded_avatar = file;
+        this.getBase64(file, imageUrl => {
+          this.user.avatar = imageUrl;
+          this.loading_avatar = false;
+        });
+      } else this.$message.error("You can only upload JPG file!");
+      // const isLt2M = file.size / 1024 / 1024 < 2;
+      // if (!isLt2M) {
+      //   this.$message.error("Image must smaller than 2MB!");
+      // }
+      return isJPGorPNG;
+    },
+    submitPersonalDetails() {
+      this.loading_submit_details = true;
+      var file = null;
+      if (this.uploaded_avatar) {
+        file = new FormData();
+        file.append("avatar", this.uploaded_avatar, this.uploaded_avatar.name);
+      }
+      this.$store
+        .dispatch("UPDATE_PROFILE", { file, details: this.user })
+        .then(result => {
+          console.log("UPDATE_PROFILE :", result);
+          this.$message.success("Successfully update your profile.");
+          this.allow_details_update = false;
+          this.loading_submit_details = false;
+          window.location.reload();
+        })
+        .catch(err => {
+          this.loading_submit_details = false;
+          if (err && err.message) this.$message.error(err.message);
+        });
     }
   },
-  created() {
-    console.log(
-      "profile user data: " +
-        JSON.stringify(this.$store.state.user_session.user)
-    );
-    //    this.user = this.$store.state.user_session.user
-    // var id = this.$store.state.user_session.user.token;
-    var id = this.$store.state.user_session.user.email;
-    this.$store
-      .dispatch("FIND_ACCOUNT", id)
-      // this.$http.get('accounts?id=',{id:id})
-      .then(result => {
-        console.log("profile result data: " + JSON.stringify(result.data));
-        this.user.name = result.data.name;
-        this.user.email = result.data.email;
-      });
+  mounted() {
+    var user = this.deepCopy(this.$store.state.user_session.user);
+    this.user.name = user.name;
+    this.user.avatar = user.avatar;
   }
+  // created() {
+  //   console.log(
+  //     "profile user data: " +
+  //       JSON.stringify(this.$store.state.user_session.user)
+  //   );
+  //   //    this.user = this.$store.state.user_session.user
+  //   // var id = this.$store.state.user_session.user.token;
+  //   var id = this.$store.state.user_session.user.email;
+  //   this.$store
+  //     .dispatch("FIND_ACCOUNT", id)
+  //     // this.$http.get('accounts?id=',{id:id})
+  //     .then(result => {
+  //       console.log("profile result data: " + JSON.stringify(result.data));
+  //       this.user.name = result.data.name;
+  //       this.user.email = result.data.email;
+  //     });
+  // }
 };
 </script>
 <style>
@@ -165,5 +221,15 @@ export default {
 
 .profile-card .ant-form .ant-form-item {
   margin: 0 !important;
+}
+
+.avatar-uploader {
+  width: 128px;
+  height: 128px;
+}
+
+.avatar-uploader img {
+  width: 110px;
+  height: 110px;
 }
 </style>

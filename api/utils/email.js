@@ -123,6 +123,24 @@ class SendEmail {
         })
         return sgMail.sendMultiple(messages);
     }
+
+
+    /**
+     * @returns {Promise}
+     * @param {String} to 
+     * @param {String} template_id 
+     * @param {Object} dynamic_template_data 
+     */
+    static sendEmail(to, template_id, dynamic_template_data) {
+        const msg = {
+            to,
+            from: ApplicationSettings.getValue("EODB_EMAIL"),
+            templateId: ApplicationSettings.getValue(template_id),
+            dynamic_template_data
+        };
+        console.log("Email Config: ", msg)
+        return sgMail.send(msg)
+    }
 }
 
 module.exports = SendEmail

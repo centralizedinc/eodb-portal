@@ -62,6 +62,11 @@ export default {
                 },
                 getDocketMode(mode) {
                     return ['NEW', 'RENEWAL'][mode]
+                },
+                getBase64(img, callback) {
+                    const reader = new FileReader();
+                    reader.addEventListener('load', () => callback(reader.result));
+                    reader.readAsDataURL(img);
                 }
             },
         })

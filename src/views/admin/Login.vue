@@ -57,6 +57,7 @@
                   size="large"
                   placeholder="Email Address"
                   v-model="credentials.email"
+                  @keypress.enter="login"
                 >
                   <a-icon slot="prefix" type="mail" />
                 </a-input>
@@ -67,6 +68,7 @@
                   placeholder="Enter Password"
                   :type="reveal ? 'text' : 'password'"
                   v-model="credentials.password"
+                  @keypress.enter="login"
                 >
                   <a-icon slot="prefix" type="lock" />
                   <a-icon
@@ -79,7 +81,7 @@
               </a-form-item>
               <a-divider></a-divider>
               <a-button
-                size="large"
+                size="large"  
                 type="primary"
                 block
                 @click="login"
