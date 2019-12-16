@@ -598,6 +598,7 @@ export default {
           this.$router.push("/app/permits");
         })
         .catch(err => {
+          this.loading = false;
           console.log("CREATE_BUSINESS_PERMIT err :", err);
         });
     },

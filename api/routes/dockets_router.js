@@ -12,8 +12,7 @@ const sendgrid = require('../utils/email');
 
 router.route('/')
     .get((req, res) => {
-        const created_by = jwt.decode(req.headers.access_token).account_id;
-        DocketsDao.find({ created_by })
+        DocketsDao.find()
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -29,46 +28,30 @@ router.route('/')
             });
     })
 
-router.route('/unassign')
+router.route('/inbox')
     .get((req, res) => {
-        const { department } = req.query;
+        // const { department } = req.query;
+        const { department } = jwt.decode(req.headers.access_token);
+        console.log('department :', department);
         if (!department) return res.json({ errors: "Invalid Query. `department` is required." })
         DocketsDao.find({
+            status: 0,
             "activities.department": department,
             "activities.date_claimed": null
         }).then((results) => {
-            console.log('unassign results :', results);
+            console.log('inbox results :', results);
             res.json(results)
         }).catch((err) => {
-            console.log('unassign err :', err);
+            console.log('inbox err :', err);
             res.json({ errors: err })
         });
     })
 
 router.route('/outbox')
     .get((req, res) => {
-        const { department } = req.query;
+        // const { department } = req.query;
+        const { department, account_id } = jwt.decode(req.headers.access_token);
         if (!department) return res.json({ errors: "Invalid Query. `department` is required." })
-        DocketsDao.find({
-            "activities.department": department,
-            $or: [
-                { "activities.date_approved": { $ne: null } },
-                { "activities.date_rejected": { $ne: null } }
-            ]
-        }).then((results) => {
-            console.log('outbox results :', results);
-            res.json(results)
-        }).catch((err) => {
-            console.log('outbox err :', err);
-            res.json({ errors: err })
-        });
-    })
-
-router.route('/claim')
-    .get((req, res) => {
-        const { department } = req.query;
-        if (!department) return res.json({ errors: "Invalid Query. `department` is required." })
-        var account_id = jwt.decode(req.headers.access_token).account_id;
         DocketsDao.find({
             "activities.department": department,
             "activities.date_claimed": {
@@ -83,15 +66,17 @@ router.route('/claim')
             res.json({ errors: err })
         });
     })
+
+router.route('/claim')
     .post((req, res) => {
-        var { docket_reference, approver, department, remarks } = req.body, results = {};
+        const { department, account_id } = jwt.decode(req.headers.access_token);
+        var { docket_reference } = req.body, results = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
         }, {
             "activities.$.approver": approver,
             "activities.$.department": department,
-            "activities.$.remarks": remarks,
             "activities.$.date_claimed": new Date()
         })
             .then((result) => {
@@ -102,7 +87,6 @@ router.route('/claim')
                     department,
                     approver,
                     action: "claim",
-                    remarks,
                     date_created: new Date()
                 }
                 return DocketsActivityDao.create(docket_activity)
@@ -118,7 +102,8 @@ router.route('/claim')
 
 router.route('/approve')
     .post((req, res) => {
-        var { docket_reference, approver, department, remarks } = req.body, results = {};
+        const { department, account_id } = jwt.decode(req.headers.access_token);
+        var { docket_reference, remarks } = req.body, results = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -204,7 +189,8 @@ function processApprovedApplication(reference_no) {
 
 router.route('/reject')
     .post((req, res) => {
-        var { docket_reference, approver, department, remarks } = req.body, results = {};
+        const { department, account_id } = jwt.decode(req.headers.access_token);
+        var { docket_reference, remarks } = req.body, results = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -285,8 +271,8 @@ function processRejectedApplication(reference_no) {
 
 router.route('/compliance')
     .post((req, res) => {
-        var { docket_reference, approver, department, remarks } = req.body, results = {};
-
+        const { department, account_id } = jwt.decode(req.headers.access_token);
+        var { docket_reference, remarks } = req.body, results = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -318,7 +304,7 @@ router.route('/compliance')
 
 router.route('/compliance/response')
     .post((req, res) => {
-        var { docket_reference, approver, department, remarks, attachments } = req.body;
+        var { docket_reference, department, remarks, attachments } = req.body;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -332,11 +318,12 @@ router.route('/compliance/response')
             }
         })
             .then((result) => {
+                const activity = result.activities.find(v=>v.department === department);
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
                     department,
-                    approver,
+                    approver: activity.approver,
                     action: "compliance",
                     remarks,
                     date_created: new Date()

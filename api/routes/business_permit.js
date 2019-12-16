@@ -94,8 +94,10 @@ router.route('/application')
             })
             .then((departments) => {
                 var activities = [];
+                console.log('departments :', departments);
                 if (departments)
                     activities = departments.map(v => {
+                        console.log('deparments v :', v);
                         return {
                             approver: "",
                             department: v._id,
@@ -111,7 +113,7 @@ router.route('/application')
                     application_id: results.application._id,
                     application_type: results.application.application_type,
                     permit: 'business',
-                    payment_status: payments[0].status,
+                    payment_status: results.payment.status,
                     created_by,
                     account_id: created_by,
                     activities

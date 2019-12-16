@@ -11,7 +11,45 @@ export default class DocketsAPI {
     /**
      * @returns {Promise}
      */
-    getDockets(){
+    getDockets() {
         return axios.get('dockets');
+    }
+
+    /**
+     * @returns {Promise}
+     */
+    getDocketsInbox() {
+        return axios.get('dockets/inbox');
+    }
+
+    /**
+     * @returns {Promise}
+     */
+    getDocketsOutbox() {
+        return axios.get('dockets/outbox');
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} docket_reference
+     */
+    claimDocket(docket_reference) {
+        return axios.post('dockets/claim', { docket_reference });
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} data
+     */
+    approveDocket(data) {
+        return axios.post('dockets/approve', data);
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} data
+     */
+    rejectDocket(data) {
+        return axios.post('dockets/reject', data);
     }
 }

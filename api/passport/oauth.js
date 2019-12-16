@@ -118,6 +118,7 @@ passport.use('admin-login', new LocalStrategy({
             else {
                 const token = jwt.sign({
                     account_id: result.account._id,
+                    department: result.account.department,
                     email: email,
                     date: new Date()
                 }, ApplicationSettings.getValue("JWT_SECRET_TOKEN"));

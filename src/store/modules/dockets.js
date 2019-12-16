@@ -4,7 +4,9 @@ import BusinessPermitAPI from '../../api/BusinessPermitAPI';
 function initialState() {
     return {
         dockets: [],
-        draft_apps: []
+        draft_apps: [],
+        dockets_inbox: [],
+        dockets_outbox: []
     }
 }
 
@@ -27,6 +29,12 @@ const mutations = {
         //     state[key] = initialState()[key];
         // })
         state.dockets = initialState().dockets;
+    },
+    SET_DOCKETS_INBOX(state, data) {
+        state.dockets_inbox = data;
+    },
+    SET_DOCKETS_OUTBOX(state, data) {
+        state.dockets_outbox = data;
     }
 }
 
@@ -66,6 +74,49 @@ const actions = {
             }
             else return reject("Invalid Request");
         })
+    },
+    GET_DOCKETS_INBOX(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if (refresh || !context.state.dockets_inbox || !context.state.dockets_inbox.length) {
+                new DocketsAPI(context.rootState.admin_session.token).getDocketsInbox()
+                    .then((result) => {
+                        console.log('result.data :', result.data);
+                        if (!result.data.errors) {
+                            context.commit("SET_DOCKETS_INBOX", result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors)
+                    }).catch((err) => {
+                        console.log('GET_DOCKETS_INBOX err :', err);
+                        reject({ errors: err })
+                    });
+            } else resolve(context.state.dockets_inbox)
+        })
+    },
+    GET_DOCKETS_OUTBOX(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if (refresh || !context.state.dockets_outbox || !context.state.dockets_outbox.length) {
+                new DocketsAPI(context.rootState.admin_session.token).getDocketsOutbox()
+                    .then((result) => {
+                        console.log('GET_DOCKETS_OUTBOX result.data :', result.data);
+                        if (!result.data.errors) {
+                            context.commit("SET_DOCKETS_OUTBOX", result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors)
+                    }).catch((err) => {
+                        console.log('GET_DOCKETS_OUTBOX err :', err);
+                        reject({ errors: err })
+                    });
+            } else resolve(context.state.dockets_outbox)
+        })
+    },
+    CLAIM_DOCKET(context, docket_reference){
+        return new DocketsAPI(context.rootState.admin_session.token).claimDocket(docket_reference);
+    },
+    APPROVE_DOCKET(context, {docket_reference, remarks}){
+        return new DocketsAPI(context.rootState.admin_session.token).approveDocket({docket_reference, remarks});
+    },
+    REJECT_DOCKET(context, {docket_reference, remarks}){
+        return new DocketsAPI(context.rootState.admin_session.token).rejectDocket({docket_reference, remarks});
     }
 }
 
