@@ -23,27 +23,27 @@
           <a-row :gutter="5">
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="House/Bldg No">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.bldg_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
               <a-form-item label="Unit No">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.unit_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Building Name">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.bldg_name"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Street">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.street"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Subdivision">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.subdivision"></a-input>
               </a-form-item>
             </a-col>
           </a-row>
@@ -70,7 +70,7 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.region"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
@@ -79,7 +79,7 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.province"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -90,7 +90,7 @@
               Barangay
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.barangay"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
@@ -99,7 +99,7 @@
               City / Municipality
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.city"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 4 }">
@@ -108,7 +108,7 @@
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -119,7 +119,7 @@
               Telephone No.
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.contact_details.tel_no"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -128,7 +128,7 @@
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.contact_details.mobile_no"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -137,7 +137,7 @@
               Email Address
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.contact_details.email"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -156,7 +156,12 @@
   </a-card>
 </template>
 <script>
-export default {};
+export default {
+  props: ["form", "step", "errors"],
+  data() {
+    return {};
+  }
+};
 </script>
 <style>
 </style>

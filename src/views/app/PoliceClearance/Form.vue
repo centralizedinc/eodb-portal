@@ -193,20 +193,61 @@ export default {
       current_step: 0,
       form_components: [PersonalDetails, ContactAddress],
       form: {
-        name: {
-          first: "",
-          middle: "",
-          last: "",
-          suffix: ""
+        personal_details: {
+          name: {
+            // first: "",
+            // middle: "",
+            // last: "",
+            // suffix: ""
+          },
+          birthday: "",
+          birthplace: "",
+          other_country: "",
+          icr: null,
+          gender: "",
+          civil_status: "",
+          height: null,
+          weight: null,
+          blood_type: "",
+          identification_marks: "",
+          complexion: "",
+          educational_attainment: "",
+          occupation: ""
         },
-        gender: "",
-        age: "",
-        spouse_name: {
-          first: "",
-          middle: "",
-          last: "",
-          suffix: ""
+        family_background: {
+          father_info: {
+            name: {
+              first: "",
+              middle: "",
+              last: "",
+              suffix: ""
+            },
+            birthplace: "",
+            other_country: ""
+          },
+          mother_info: {
+            name: {
+              first: "",
+              middle: "",
+              last: "",
+              suffix: ""
+            },
+            birthplace: "",
+            other_country: ""
+          },
+          spouse_info: {
+            name: {
+              first: "",
+              middle: "",
+              last: "",
+              suffix: ""
+            },
+            birthplace: "",
+            other_country: ""
+          }
         },
+        address_details: {},
+        contact_details: {},
         request_for: "",
         attachments: [
           {
@@ -404,9 +445,9 @@ export default {
       console.log("this.current_step :", this.current_step);
       console.log("this.form :", this.form);
 
-      // var { errors, jump_to } = this.validation(validate_all);
-      var errors = [],
-        jump_to = 0;
+      var { errors, jump_to } = this.validation(validate_all);
+      // var errors = [],
+      //   jump_to = 0;
 
       console.log("errors :", errors);
       this.errors = errors;
@@ -536,31 +577,99 @@ export default {
     validation(validate_all) {
       var errors = [],
         jump_to = 0;
-      if (validate_all || this.current_step === 1) {
-        if (!this.form.owner_details.name.last) {
+      if (validate_all || this.current_step === 0) {
+        console.log("current step 0: " + this.form.personal_details.name.last);
+        if (!this.form.personal_details.name.last) {
+          console.log("error push last name: ");
           errors.push({
-            field: "owner_details.name.last",
+            field: "personal_details.name.last",
             error: "Last Name is a required field."
           });
         }
-        if (!this.form.owner_details.name.first) {
+        if (!this.form.personal_details.name.first) {
           errors.push({
-            field: "owner_details.name.first",
+            field: "personal_details.name.first",
             error: "First Name is a required field."
           });
         }
-        if (!this.form.owner_details.birthdate) {
+        if (!this.form.personal_details.birthday) {
           errors.push({
-            field: "owner_details.birthdate",
+            field: "personal_details.birthday",
             error: "Date of Birth is a required field."
           });
         }
-        if (!this.form.owner_details.gender) {
+        if (!this.form.personal_details.gender) {
           errors.push({
-            field: "owner_details.gender",
+            field: "personal_details.gender",
             error: "Gender is a required field."
           });
         }
+        if (!this.form.personal_details.birthplace) {
+          errors.push({
+            field: "personal_details.birthplace",
+            error: "Birthplace is a required field."
+          });
+        }
+        if (!this.form.personal_details.height) {
+          errors.push({
+            field: "personal_details.height",
+            error: "Height is a required field."
+          });
+        }
+        if (!this.form.personal_details.weight) {
+          errors.push({
+            field: "personal_details.weight",
+            error: "Weight is a required field."
+          });
+        }
+        if (!this.form.personal_details.blood_type) {
+          errors.push({
+            field: "personal_details.blood_type",
+            error: "Blood Type is a required field."
+          });
+        }
+        if (!this.form.personal_details.complexion) {
+          errors.push({
+            field: "personal_details.complexion",
+            error: "Complexion is a required field."
+          });
+        }
+        if (!this.form.personal_details.educational_attainment) {
+          errors.push({
+            field: "personal_details.educational_attainment",
+            error: "Educational Attainment is a required field."
+          });
+        }
+        if (!this.form.personal_details.occupation) {
+          errors.push({
+            field: "personal_details.occupation",
+            error: "Occupation is a required field."
+          });
+        }
+
+        if (
+          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          !this.form.required_documents.civil_status
+        ) {
+          errors.push({
+            field: "required_documents.civil_status",
+            error: "Civil Status is a required field."
+          });
+        }
+
+        if (
+          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          !this.form.required_documents.birthplace
+        ) {
+          errors.push({
+            field: "required_documents.birthplace",
+            error: "Place of Birth is a required field."
+          });
+        }
+
+        if (errors.length) jump_to = 0;
+      }
+      if (validate_all || this.current_step === 1) {
         if (!this.form.owner_details.telno) {
           errors.push({
             field: "owner_details.telno",
@@ -609,30 +718,7 @@ export default {
             error: "Postal Code is a required field."
           });
         }
-
-        if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-          !this.form.required_documents.civil_status
-        ) {
-          errors.push({
-            field: "required_documents.civil_status",
-            error: "Civil Status is a required field."
-          });
-        }
-
-        if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-          !this.form.required_documents.birthplace
-        ) {
-          errors.push({
-            field: "required_documents.birthplace",
-            error: "Place of Birth is a required field."
-          });
-        }
-
-        if (errors.length) jump_to = 1;
-      }
-      if (validate_all || this.current_step === 2) {
+        // ---------------------------------------
         if (!this.form.business_details.business_type) {
           errors.push({
             field: "business_details.business_type",
@@ -791,6 +877,7 @@ export default {
         jump_to = 4;
       }
 
+      console.log("errors: " + JSON.stringify(errors));
       // Validate Mode of Payment
       if (validate_all && !this.transaction_details.mode_of_payment) {
         errors.push({
@@ -800,6 +887,7 @@ export default {
         this.$message.error("Please choose mode of payment.");
         jump_to = 4;
       }
+      console.log("errors to return: " + JSON.stringify(errors));
       return { errors, jump_to };
     }
   }
