@@ -24,7 +24,6 @@ var DocketSchema = new mongoose.Schema({
          * 0 - In Progress
          * 1 - Approved
          * 2 - Rejected
-         * 3 - For Compliance
          */
     },
     payment_status: {
@@ -56,6 +55,9 @@ var DocketSchema = new mongoose.Schema({
         approver: {
             type: String
         },
+        last_approver: {
+            type: Boolean
+        },
         department: {
             type: String
         },
@@ -64,14 +66,16 @@ var DocketSchema = new mongoose.Schema({
         },
         date_approved: {
             type: Date,
-            default: new Date()
         },
         date_rejected: {
-            type: Date,
-            default: new Date()
+            type: Date
         },
         remarks: {
             type: String
+        },
+        for_compliance: {
+            type: Boolean,
+            default: false
         }
     }],
     account_id: {

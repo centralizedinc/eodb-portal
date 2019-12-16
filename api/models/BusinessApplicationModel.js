@@ -22,7 +22,6 @@ var BusinessPermitApplication = new mongoose.Schema({
          * 0 - In Progress
          * 1 - Approved
          * 2 - Rejected
-         * 3 - For Compliance
          */
     },
 
@@ -289,6 +288,7 @@ var BusinessPermitApplication = new mongoose.Schema({
         },
         files: []
     }],
+    compliance_attachments: [],
     account_id: {
         type: String
     }
