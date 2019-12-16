@@ -57,7 +57,7 @@ var PoliceApplication = new mongoose.Schema({
         blood_type: {
             type: String
         },
-        idetification_marks: {
+        identification_marks: {
             type: String
         },
         complexion: {
@@ -79,6 +79,9 @@ var PoliceApplication = new mongoose.Schema({
                 middle: {
                     type: String
                 },
+                last: {
+                    type: String
+                },
                 suffix: {
                     type: String
                 }
@@ -96,6 +99,9 @@ var PoliceApplication = new mongoose.Schema({
                     type: String
                 },
                 middle: {
+                    type: String
+                },
+                last: {
                     type: String
                 },
                 suffix: {
@@ -117,6 +123,9 @@ var PoliceApplication = new mongoose.Schema({
                 middle: {
                     type: String
                 },
+                last: {
+                    type: String
+                },
                 suffix: {
                     type: String
                 }
@@ -128,6 +137,52 @@ var PoliceApplication = new mongoose.Schema({
                 type: String
             }
         }
+    },
+    address_details: {
+        bldg_no: {
+            type: String
+        },
+        unit_no: {
+            type: String
+        },
+        bldg_name: {
+            type: String
+        },
+        street: {
+            type: String
+        },
+        subdivision: {
+            type: String
+        },
+        region: {
+            type: String
+        },
+        province: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        barangay: {
+            type: String
+        },
+        postal_code: {
+            type: String
+        }
+    },
+    contact_details: {
+        tel_no: {
+            type: Number
+        },
+        mobile_no: {
+            type: Number
+        },
+        email: {
+            type: String
+        }
+    },
+    request_for: {
+        type: String
     },
     date_issued: {
         type: Date

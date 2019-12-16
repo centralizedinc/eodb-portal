@@ -2,8 +2,9 @@
 const router = require("express").Router
 
 const PoliceApplicationDao = require('../dao/PoliceApplicationDao')
-const DocketsDao = require('../dao/DocketsDao');
-const PaymentDao = require('../dao/PaymentDao');
+const jwt = require('jsonwebtoken');
+// const DocketsDao = require('../dao/DocketsDao');
+// const PaymentDao = require('../dao/PaymentDao');
 
 router.route('/')
     .get((req, res) => {
@@ -26,6 +27,7 @@ router.route('/')
                 })
             });
     })
+
 router.route('/:id')
     .get((req, res) => {
         PoliceApplicationDao.findOneByID(req.params.id)
