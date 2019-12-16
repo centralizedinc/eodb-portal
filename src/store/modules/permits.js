@@ -1,11 +1,13 @@
 import BusinessPermitAPI from '../../api/BusinessPermitAPI';
 import UploadAPI from '../../api/UploadAPI';
+import PermitsAPI from '../../api/PermitsAPI';
 
 function initialState() {
     return {
         records: [],
         permits: [],
-
+        filing_permit: {},
+        permit_types: []
     }
 }
 
@@ -17,14 +19,18 @@ const mutations = {
     },
     SET_PERMITS(state, data) {
         state.permits = data;
+    },
+    SET_FILING_PERMIT(state, data) {
+        state.filing_permit = data;
+    },
+    SET_PERMIT_TYPES(state, data) {
+        state.permit_types = data;
     }
 }
 
 const actions = {
     CREATE_BUSINESS_PERMIT(context, { details, files }) {
         return new Promise((resolve, reject) => {
-            console.log('details :', details);
-            console.log('files :', files);
             var application = {};
             new UploadAPI(context.rootState.user_session.token)
                 .uploadPermitsDocRequired('business', context.rootState.user_session.user._id, files)
@@ -73,6 +79,23 @@ const actions = {
                         reject(err);
                     });
             } else resolve(context.state.permits);
+        })
+    },
+    GET_PERMIT_TYPES(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if (refresh || !context.state.filing_permit || !context.state.filing_permit.length) {
+                new PermitsAPI(context.rootState.user_session.token).getPermitType()
+                    .then((result) => {
+                        console.log('GET_PERMIT_TYPES result :', result);
+                        if (!result.data.errors) {
+                            context.commit("SET_PERMIT_TYPES", result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors)
+                    }).catch((err) => {
+                        console.log('GET_PERMIT_TYPES err :', err);
+                        reject({ errors: err })
+                    });
+            } resolve(context.state.filing_permit)
         })
     }
 }

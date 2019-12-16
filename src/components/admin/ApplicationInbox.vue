@@ -164,6 +164,7 @@ export default {
           return this.$store.dispatch("GET_DOCKETS_INBOX", true);
         })
         .then(result => {
+          console.log('new result :', result);
           this.loading = false;
           this.$router.push(`/admin/app/application/`);
         })

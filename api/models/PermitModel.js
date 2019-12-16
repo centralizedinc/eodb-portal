@@ -16,6 +16,16 @@ var PermitModelSchema = new mongoose.Schema({
         name:String,
         application_type:String
     }],
+    primary: {
+        type: Boolean,
+        default: false
+    },
+    path: {
+        type: String
+    },
+    api_route:{
+        type:String
+    },
     date_created: {
         type: Date
     },

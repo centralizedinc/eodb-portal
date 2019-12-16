@@ -101,7 +101,7 @@ router.route('/application')
                         return {
                             approver: "",
                             department: v._id,
-                            last_approver: v.last_approver,
+                            status: 0,
                             date_claimed: null,
                             date_approved: null,
                             date_rejected: null,

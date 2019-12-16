@@ -30,14 +30,18 @@ router.route('/')
 
 router.route('/inbox')
     .get((req, res) => {
-        // const { department } = req.query;
-        const { department } = jwt.decode(req.headers.access_token);
+        // const { department } = req.query; 
+        const { department } = jwt.decode(req.headers.access_token); 
         console.log('department :', department);
         if (!department) return res.json({ errors: "Invalid Query. `department` is required." })
         DocketsDao.find({
             status: 0,
-            "activities.department": department,
-            "activities.date_claimed": null
+            activities: {
+                $elemMatch: {
+                    department,
+                    date_claimed: null
+                }
+            }
         }).then((results) => {
             console.log('inbox results :', results);
             res.json(results)
@@ -53,11 +57,15 @@ router.route('/outbox')
         const { department, account_id } = jwt.decode(req.headers.access_token);
         if (!department) return res.json({ errors: "Invalid Query. `department` is required." })
         DocketsDao.find({
-            "activities.department": department,
-            "activities.date_claimed": {
-                $ne: null
-            },
-            "activities.approver": account_id
+            activities: {
+                $elemMatch: {
+                    department,
+                    date_claimed: {
+                        $ne: null
+                    },
+                    approver: account_id
+                }
+            }
         }).then((results) => {
             console.log('claim results :', results);
             res.json(results)
@@ -76,11 +84,10 @@ router.route('/claim')
             "activities.department": department
         }, {
             "activities.$.approver": approver,
-            "activities.$.department": department,
             "activities.$.date_claimed": new Date()
         })
             .then((result) => {
-                results.docket = result;
+                results = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -92,7 +99,7 @@ router.route('/claim')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-                results.activity = result;
+                console.log('results :', results);
                 res.json(results)
             })
             .catch((errors) => {
@@ -108,13 +115,12 @@ router.route('/approve')
             reference_no: docket_reference,
             "activities.department": department
         }, {
-            "activities.$.approver": approver,
-            "activities.$.department": department,
+            "activities.$.status": 1,
             "activities.$.remarks": remarks,
             "activities.$.date_approved": new Date()
         })
             .then((result) => {
-                results.docket = result;
+                results = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -127,14 +133,18 @@ router.route('/approve')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-                results.activity = result;
 
                 // Check if last approver
-                const approver = results.docket.activities.find(v => v.department === department);
-                if (approver.last_approver) return processApprovedApplication(docket_reference);
+                const activity_index = results.docket.activities.findIndex(v => v.status === 0);
+                if (activity_index === -1) {
+                    const activity_rejected_index = results.docket.activities.findIndex(v => v.status === 2);
+                    if (activity_rejected_index === -1) return processApprovedApplication(docket_reference);
+                    else if (activity_rejected_index > -1) return processRejectedApplication(docket_reference);
+                }
             })
             .then((result) => {
                 if (result) console.log('approved application result :', result);
+                console.log('results :', results);
                 res.json(results)
             })
             .catch((errors) => {
@@ -171,7 +181,10 @@ function processApprovedApplication(reference_no) {
                 // Send Email Notifiation
                 const substitutions = {
                     name: user.name.first,
-                    reference_no
+                    reference_no,
+                    permit_classification: "Business",
+                    date: new Date(),
+                    link: `${process.env.VUE_APP_HOME_URL}app/permits?ref_no=${reference_no}`
                 }
                 return sendgrid.sendEmail(user.email, "APPROVE_APP_NOTIFICATION", substitutions)
             })
@@ -195,13 +208,12 @@ router.route('/reject')
             reference_no: docket_reference,
             "activities.department": department
         }, {
-            "activities.$.approver": approver,
-            "activities.$.department": department,
+            "activities.$.status": 2,
             "activities.$.remarks": remarks,
             "activities.$.date_rejected": new Date()
         })
             .then((result) => {
-                results.docket = result;
+                results = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -214,14 +226,14 @@ router.route('/reject')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-                results.activity = result;
 
                 // Check if last approver
-                const approver = results.docket.activities.find(v => v.department === department);
-                if (approver.last_approver) return processRejectedApplication(docket_reference);
+                const activity_index = results.docket.activities.findIndex(v => v.status === 0);
+                if (activity_index === -1) return processRejectedApplication(docket_reference);
             })
             .then((result) => {
                 if (result) console.log('rejected application result :', result);
+                console.log('results :', results);
                 res.json(results)
             })
             .catch((errors) => {
@@ -253,7 +265,10 @@ function processRejectedApplication(reference_no) {
                 // Send Email Notifiation
                 const substitutions = {
                     name: user.name.first,
-                    reference_no
+                    reference_no,
+                    permit_classification: "Business",
+                    date: new Date(),
+                    link: `${process.env.VUE_APP_HOME_URL}` //link of Declined app pdf
                 }
                 return sendgrid.sendEmail(user.email, "REJECT_APP_NOTIFICATION", substitutions)
             })
@@ -318,7 +333,7 @@ router.route('/compliance/response')
             }
         })
             .then((result) => {
-                const activity = result.activities.find(v=>v.department === department);
+                const activity = result.activities.find(v => v.department === department);
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
