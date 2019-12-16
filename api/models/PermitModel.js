@@ -3,6 +3,19 @@ var PermitModelSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    description:{
+        type:String
+    },
+    approvers:[],
+    checklists:[{
+        department:String,
+        name:String,
+        description:String
+    }],
+    requirements:[{
+        name:String,
+        application_type:String
+    }],
     date_created: {
         type: Date
     },
