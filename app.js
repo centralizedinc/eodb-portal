@@ -40,7 +40,7 @@ app.use(passport.initialize());
 // ########################################################################
 app.use('/auth', require('./api/routes/auth'))
 app.use("/permits/business", require('./api/routes/business_permit'));
-// app.use("/permits/police", require('./api/routes/police_clearance_router'));
+app.use("/permits/police", require('./api/routes/police_clearance_router'));
 app.use("/permits", require('./api/routes/permit_router'));
 app.use("/accounts", require('./api/routes/account_router'))
 app.use("/activities", require('./api/routes/activities_router'))

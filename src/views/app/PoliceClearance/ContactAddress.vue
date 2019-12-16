@@ -65,7 +65,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.region') ? 'error': ''"
+            :help="checkErrors('address_details.region')"
+          >
             <span slot="label">
               Region
               <i style="color: red">*</i>
@@ -74,7 +77,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.province') ? 'error': ''"
+            :help="checkErrors('address_details.province')"
+          >
             <span slot="label">
               Province
               <i style="color: red">*</i>
@@ -85,7 +91,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.barangay') ? 'error': ''"
+            :help="checkErrors('address_details.barangay')"
+          >
             <span slot="label">
               Barangay
               <i style="color: red">*</i>
@@ -94,7 +103,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.city') ? 'error': ''"
+            :help="checkErrors('address_details.city')"
+          >
             <span slot="label">
               City / Municipality
               <i style="color: red">*</i>
@@ -103,7 +115,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 4 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.postal_code') ? 'error': ''"
+            :help="checkErrors('address_details.postal_code')"
+          >
             <span slot="label">
               Postal Code
               <i style="color: red">*</i>
@@ -114,7 +129,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('contact_details.tel_no') ? 'error': ''"
+            :help="checkErrors('contact_details.tel_no')"
+          >
             <span slot="label">
               Telephone No.
               <i style="color: red">*</i>
@@ -123,16 +141,22 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('contact_details.mobile') ? 'error': ''"
+            :help="checkErrors('contact_details.mobile')"
+          >
             <span slot="label">
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.contact_details.mobile_no"></a-input>
+            <a-input v-model="form.contact_details.mobile"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('contact_details.email') ? 'error': ''"
+            :help="checkErrors('contact_details.email')"
+          >
             <span slot="label">
               Email Address
               <i style="color: red">*</i>
@@ -160,6 +184,12 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {};
+  },
+  methods: {
+    checkErrors(field) {
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
+    }
   }
 };
 </script>

@@ -38,7 +38,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.name.first') ? 'error': ''"
+            :help="checkErrors('personal_details.name.first')"
+          >
             <span slot="label">
               First Name
               <i style="color: red">*</i>
@@ -61,7 +64,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
+            :help="checkErrors('personal_details.birthday')"
+          >
             <span slot="label">
               Birthday
               <i style="color: red">*</i>
@@ -70,7 +76,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.gender') ? 'error': ''"
+            :help="checkErrors('personal_details.gender')"
+          >
             <span slot="label">
               Gender
               <i style="color: red">*</i>
@@ -95,7 +104,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.birthplace') ? 'error': ''"
+            :help="checkErrors('personal_details.birthplace')"
+          >
             <span slot="label">
               Birthplace
               <i style="color: red">*</i>
@@ -118,7 +130,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.height') ? 'error': ''"
+            :help="checkErrors('personal_details.height')"
+          >
             <span slot="label">
               Height(cm)
               <i style="color: red">*</i>
@@ -127,7 +142,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.weight') ? 'error': ''"
+            :help="checkErrors('personal_details.weight')"
+          >
             <span slot="label">
               Weight(kg)
               <i style="color: red">*</i>
@@ -137,7 +155,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.blood_type') ? 'error': ''"
+            :help="checkErrors('personal_details.blood_type')"
+          >
             <span slot="label">
               Blood Type
               <i style="color: red">*</i>
@@ -155,7 +176,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.complexion') ? 'error': ''"
+            :help="checkErrors('personal_details.complexion')"
+          >
             <span slot="label">
               Complexion
               <i style="color: red">*</i>
@@ -167,7 +191,10 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.educational_attainment') ? 'error': ''"
+            :help="checkErrors('personal_details.educational_attainment')"
+          >
             <span slot="label">
               Educational Attainment
               <i style="color: red">*</i>
@@ -184,7 +211,10 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.occupation') ? 'error': ''"
+            :help="checkErrors('personal_details.occupation')"
+          >
             <span slot="label">
               Occupation
               <i style="color: red">*</i>
