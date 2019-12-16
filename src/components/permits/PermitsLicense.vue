@@ -29,12 +29,12 @@ export default {
       cols: [
         {
           title: "Business Number",
-          dataIndex: "reference_no"
+          dataIndex: "business_no"
         },
         {
           title: "License/Permit Applied",
-          dataIndex: "permit",
-          scopedSlots: { customRender: "permit" }
+          dataIndex: "permit_type",
+          scopedSlots: { customRender: "permit_type" }
         },
         {
           title: "Date Submitted",

@@ -94,7 +94,18 @@ router.route('/application')
             })
             .then((departments) => {
                 var activities = [];
-                if (departments) activities = departments.map(v => { return { department: v._id, last_approver: v.last_approver, date_claimed: null, date_approved: null, date_rejected: null } });
+                if (departments)
+                    activities = departments.map(v => {
+                        return {
+                            approver: "",
+                            department: v._id,
+                            last_approver: v.last_approver,
+                            date_claimed: null,
+                            date_approved: null,
+                            date_rejected: null,
+                            for_compliance: false
+                        }
+                    });
                 // CREATE DOCKET
                 var details = {
                     application_id: results.application._id,

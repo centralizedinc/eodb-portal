@@ -89,7 +89,10 @@ router.route('/claim')
             reference_no: docket_reference,
             "activities.department": department
         }, {
-            approver, department, remarks, date_claimed: new Date()
+            "activities.$.approver": approver,
+            "activities.$.department": department,
+            "activities.$.remarks": remarks,
+            "activities.$.date_claimed": new Date()
         })
             .then((result) => {
                 results.docket = result;
@@ -120,7 +123,10 @@ router.route('/approve')
             reference_no: docket_reference,
             "activities.department": department
         }, {
-            approver, department, remarks, date_approved: new Date()
+            "activities.$.approver": approver,
+            "activities.$.department": department,
+            "activities.$.remarks": remarks,
+            "activities.$.date_approved": new Date()
         })
             .then((result) => {
                 results.docket = result;
@@ -129,7 +135,7 @@ router.route('/approve')
                     application_id: result.application_id,
                     department,
                     approver,
-                    status: "approve",
+                    action: "approve",
                     remarks,
                     date_created: new Date()
                 }
@@ -203,7 +209,10 @@ router.route('/reject')
             reference_no: docket_reference,
             "activities.department": department
         }, {
-            approver, department, remarks, date_rejected: new Date()
+            "activities.$.approver": approver,
+            "activities.$.department": department,
+            "activities.$.remarks": remarks,
+            "activities.$.date_rejected": new Date()
         })
             .then((result) => {
                 results.docket = result;
@@ -212,7 +221,7 @@ router.route('/reject')
                     application_id: result.application_id,
                     department,
                     approver,
-                    status: "reject",
+                    action: "reject",
                     remarks,
                     date_created: new Date()
                 }
@@ -277,12 +286,14 @@ function processRejectedApplication(reference_no) {
 router.route('/compliance')
     .post((req, res) => {
         var { docket_reference, approver, department, remarks } = req.body, results = {};
-        BussinessApplicationDao.modifyOne({ reference_no: docket_reference }, { status: 3 })
-            .then((result) => {
-                results.application = result;
 
-                return DocketsDao.modifyOne({ reference_no: docket_reference }, { status: 3 });
-            })
+        DocketsDao.modifyOne({
+            reference_no: docket_reference,
+            "activities.department": department
+        }, {
+            "activities.$.for_compliance": true,
+            "activities.$.remarks": remarks
+        })
             .then((result) => {
                 results.docket = result;
                 const docket_activity = {
@@ -290,7 +301,7 @@ router.route('/compliance')
                     application_id: result.application_id,
                     department,
                     approver,
-                    status: "compliance",
+                    action: "compliance",
                     remarks,
                     date_created: new Date()
                 }
@@ -305,10 +316,41 @@ router.route('/compliance')
             });
     })
 
-// router.route('/compliance/response')
-//     .post((req, res) => {
-        
-//     })
+router.route('/compliance/response')
+    .post((req, res) => {
+        var { docket_reference, approver, department, remarks, attachments } = req.body;
+        DocketsDao.modifyOne({
+            reference_no: docket_reference,
+            "activities.department": department
+        }, {
+            "activities.$.remarks": remarks,
+            "activities.$.for_compliance": false,
+            $push: {
+                "compliance_attachments": {
+                    $each: attachments
+                }
+            }
+        })
+            .then((result) => {
+                const docket_activity = {
+                    reference_no: result.reference_no,
+                    application_id: result.application_id,
+                    department,
+                    approver,
+                    action: "compliance",
+                    remarks,
+                    date_created: new Date()
+                }
+                return DocketsActivityDao.create(docket_activity)
+            })
+            .then((result) => {
+                results.activity = result;
+                res.json(results)
+            })
+            .catch((err) => {
+
+            });
+    })
 
 router.route('/:id')
     .get((req, res) => {
