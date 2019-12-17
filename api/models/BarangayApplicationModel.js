@@ -64,14 +64,14 @@ var BarangayApplication = new mongoose.Schema({
     requirements: []
 })
 
-BusinessPermitApplication.pre('save', async function (callback) {
+BarangayApplication.pre('save', async function (callback) {
     var account = this;
     account.date_created = new Date();
     account.date_modified = new Date();
     callback();
 });
 
-BusinessPermitApplication.pre('findOneAndUpdate', function (callback) {
+BarangayApplication.pre('findOneAndUpdate', function (callback) {
     console.log('this :', this._update);
     this.options.new = true;
     this.options.runValidators = true;

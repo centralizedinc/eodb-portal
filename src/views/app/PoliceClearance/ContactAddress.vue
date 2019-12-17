@@ -23,27 +23,27 @@
           <a-row :gutter="5">
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="House/Bldg No">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.bldg_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
               <a-form-item label="Unit No">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.unit_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Building Name">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.bldg_name"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Street">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.street"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Subdivision">
-                <a-input></a-input>
+                <a-input v-model="form.address_details.subdivision"></a-input>
               </a-form-item>
             </a-col>
           </a-row>
@@ -65,79 +65,103 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.region') ? 'error': ''"
+            :help="checkErrors('address_details.region')"
+          >
             <span slot="label">
               Region
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.region"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.province') ? 'error': ''"
+            :help="checkErrors('address_details.province')"
+          >
             <span slot="label">
               Province
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.province"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.barangay') ? 'error': ''"
+            :help="checkErrors('address_details.barangay')"
+          >
             <span slot="label">
               Barangay
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.barangay"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.city') ? 'error': ''"
+            :help="checkErrors('address_details.city')"
+          >
             <span slot="label">
               City / Municipality
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.city"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 4 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('address_details.postal_code') ? 'error': ''"
+            :help="checkErrors('address_details.postal_code')"
+          >
             <span slot="label">
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.address_details.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('contact_details.tel_no') ? 'error': ''"
+            :help="checkErrors('contact_details.tel_no')"
+          >
             <span slot="label">
               Telephone No.
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.contact_details.tel_no"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('contact_details.mobile') ? 'error': ''"
+            :help="checkErrors('contact_details.mobile')"
+          >
             <span slot="label">
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.contact_details.mobile"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('contact_details.email') ? 'error': ''"
+            :help="checkErrors('contact_details.email')"
+          >
             <span slot="label">
               Email Address
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.contact_details.email"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -156,7 +180,18 @@
   </a-card>
 </template>
 <script>
-export default {};
+export default {
+  props: ["form", "step", "errors"],
+  data() {
+    return {};
+  },
+  methods: {
+    checkErrors(field) {
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
+    }
+  }
+};
 </script>
 <style>
 </style>

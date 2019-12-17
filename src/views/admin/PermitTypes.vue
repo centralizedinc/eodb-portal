@@ -5,7 +5,7 @@
         <a-button type="primary" block icon="plus" @click="visible=true" >NEW TYPE</a-button>
     </a-col>
     <a-col :span="24">
-         <a-table style="margin-top: 2vh" :dataSource="offices" :columns="cols" :bordered="true" :loading="loading">
+         <a-table style="margin-top: 2vh" :dataSource="permits" :columns="cols" :bordered="true" :loading="loading">
              <span slot="date" slot-scope="text">
                 {{formatDate(text, 'time')}}
             </span>
@@ -29,10 +29,10 @@
     </div>
       <a-form>
         <a-form-item label="Permit Name">
-            <a-input placeholder="Enter Name" v-model="office.name"></a-input>
+            <a-input placeholder="Enter Name" v-model="permit.name"></a-input>
         </a-form-item>
         <a-form-item label="Description">
-            <a-textarea placeholder="Description" v-model="office.description" :rows="2"></a-textarea>
+            <a-textarea placeholder="Description" v-model="permit.description" :rows="2"></a-textarea>
         </a-form-item>
         <a-form-item>
             <a-card>
@@ -93,7 +93,7 @@
                                 
                                 <a-col :span="24">
                                     <a-select placeholder="Select Department" v-model="checklist.department">
-                                      <a-select-option v-for="office in permit.approvers" :key="office" :value="office">{{getDepartment(office.department)}}</a-select-option>
+                                      <a-select-option v-for="office in permit.approvers" :key="office.department" :value="office.department">{{getDepartment(office.department)}}</a-select-option>
                                     </a-select>
                                 </a-col>
                                 <a-col :span="12" style="margin-top:2vh">
@@ -103,13 +103,17 @@
                                     <a-input v-model="checklist.description" placeholder="Remarks"></a-input>
                                 </a-col>
                                 <a-col  :span="6" style="margin-top:2vh">
-                                    <a-button type="primary" block icon="plus" ghost @click="addChecklist">Add</a-button>  
+                                    <a-button type="primary" block icon="plus" ghost @click="addChecklist" :disabled="!checklist.department || !checklist.name">Add</a-button>  
                                 </a-col>                          
                             </a-row>
                         </a-col>
                     </a-row>              
                     <a-table style="margin-top:2vh" :columns="cols_check" :bordered="true" 
-                    :dataSource="permit.checklists"></a-table>
+                    :dataSource="permit.checklists">
+                        <span slot="department" slot-scope="text">
+                            {{getDepartment(text)}}
+                        </span>
+                    </a-table>
                 </a-tab-pane>
                 
             </a-tabs>
@@ -145,7 +149,8 @@ export default {
             requirement:{},
             cols_check:[{
                 title:'Department',
-                dataIndex:'department'
+                dataIndex:'department',
+                scopedSlots:{customRender:'department'}
             },
             {
                 title:'Name',
@@ -215,8 +220,12 @@ export default {
             this.loading = true;
             this.$http.get('/departments')
             .then(results=>{
-                this.loading = false
                 this.offices = results.data;
+            })
+            this.$http.get('/permits')
+            .then(results=>{
+                this.loading = false
+                this.permits = results.data;
             })
         },
         addApprover(){
@@ -240,7 +249,6 @@ export default {
             this.$notification.error({message:'Requirement Removed!'})
         },
         addChecklist(){
-            console.log(this.checklist)
             this.permit.checklists.push(this.deepCopy(this.checklist))
             this.checklist = {}
             
@@ -250,30 +258,42 @@ export default {
              return this.offices.find(x => x._id === id).description
         },
         onClose(){
-            this.office={admin:false}
+            this.permit={
+                approvers:[],
+                checklists:[],
+                requirements:[]
+            }
+            this.checklist={}
+            this.approver={}
+            this.requirement={}
             this.visible = false;
             this.edit_mode = false;
         },
         edit(record){
             this.edit_mode = true;
-            this.office = this.deepCopy(record)
+            this.permit = this.deepCopy(record)
             this.visible = true
         },
         submit(){
             this.loading = true;
             if(this.edit_mode){
-                this.$http.post(`/departments/${this.office._id}`, this.office)
+                this.$http.post(`/permits/${this.permit._id}`, this.permit)
                 .then(result=>{
                     console.log(JSON.stringify(result))
                     this.loading = false;
                     this.visible = false;
                     this.$notification.success({
                         message: 'Success',
-                        description: 'Department Office Updated!'
+                        description: 'Permit Type Updated!'
                     })
-                    this.office = {
-                        admin:false
+                    this.permit={
+                        approvers:[],
+                        checklists:[],
+                        requirements:[]
                     }
+                    this.checklist={}
+                    this.approver={}
+                    this.requirement={}
                     this.init();
                 })
                 .catch(error=>{
@@ -281,18 +301,23 @@ export default {
                 })
 
             }else{
-                this.$http.post('/departments', this.office)
+                this.$http.post('/permits', this.permit)
                 .then(result=>{
                     console.log(JSON.stringify(result))
                     this.loading = false;
                     this.visible = false;
                     this.$notification.success({
                         message: 'Success',
-                        description: 'New Department Office Created!'
+                        description: 'New Permit Type Created!'
                     })
-                    this.office = {
-                        admin:false
+                    this.permit={
+                        approvers:[],
+                        checklists:[],
+                        requirements:[]
                     }
+                    this.checklist={}
+                    this.approver={}
+                    this.requirement={}
                     this.init();
                 })
                 .catch(error=>{
