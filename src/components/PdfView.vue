@@ -20,9 +20,10 @@ import BUSINESSPERMIT from "./pdf/businesspermit";
 import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
+import BUSINESSPERMIT_SAN_ANTONIO from ".pdf/BusinessPermit_San_Antonio";
 
 var printers = {
-BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT
+BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT, BUSINESSPERMIT_SAN_ANTONIO,
 };
 
 // var printers = {
