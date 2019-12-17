@@ -1,13 +1,8 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-  >
+  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
     <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;"
-        >New Applicant Registration</a-col
-      >
+      <a-col :span="22" style="font-size: 25px;">New Applicant Registration</a-col>
       <a-col :span="2" style="text-align: right;">
         <!-- <a-tooltip placement="left">
           <span slot="title">
@@ -21,15 +16,11 @@
       </a-col>
     </a-row>
     <a-form>
-      <a-divider style="color: black;font-weight: bold;" orientation="left"
-        >Personal Details</a-divider
-      >
+      <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
       <a-row>
         <a-col :xs="{ span: 24 }">
           <a-form-item>
-            <a-checkbox @change="onChange"
-              >Check this box if the registrant is the applicant</a-checkbox
-            >
+            <a-checkbox @change="onChange">Check this box if the registrant is the applicant</a-checkbox>
           </a-form-item>
         </a-col>
       </a-row>
@@ -65,7 +56,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">
@@ -78,6 +69,26 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">
+              Birthplace
+              <i style="color: red">*</i>
+            </span>
+            <a-input placeholder="Enter Municipality"></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+          <a-form-item>
+            <span slot="label">
+              ICR No.
+              <i>(if alien)</i>
+            </span>
+            <a-input></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
+          <a-form-item>
+            <span slot="label">
               Gender
               <i style="color: red">*</i>
             </span>
@@ -87,7 +98,7 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
           <a-form-item>
             <span slot="label">Civil Status</span>
             <a-select>
@@ -98,32 +109,7 @@
             </a-select>
           </a-form-item>
         </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">
-              Birthplace
-              <i style="color: red">*</i>
-            </span>
-            <a-input placeholder="Enter Municipality"></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">ICR No.<i>(if alien)</i></span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
-            <span slot="label">ICR No. (if alien)</span>
-            <a-input></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
           <a-form-item>
             <span slot="label">
               Height(cm)
@@ -132,7 +118,7 @@
             <a-input></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
           <a-form-item>
             <span slot="label">
               Weight(kg)
@@ -142,7 +128,10 @@
             <a-input></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+      </a-row>
+
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">
               Occupation
@@ -152,30 +141,26 @@
             <a-input></a-input>
           </a-form-item>
         </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
-            <span slot="label">TIN <i>(if any)</i></span>
+            <span slot="label">
+              TIN
+              <i>(if any)</i>
+            </span>
             <a-input></a-input>
           </a-form-item>
         </a-col>
       </a-row>
       <!-- table -->
 
-      <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
+      <a-row type="flex" justify="space-around" style="margin-top: 5vh;">
         <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
             <!-- <a-button @click="$emit('prev')">Previous</a-button> -->
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col
-          :sm="{ span: 6 }"
-          :md="{ span: 12 }"
-          :xl="{ span: 18 }"
-          style="text-align: right;"
-        >
+        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
         </a-col>
       </a-row>
