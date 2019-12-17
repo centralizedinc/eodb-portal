@@ -1,12 +1,9 @@
-const form = require("../template/businesspermit"); const form = require("../template/businesspermit_template").template;
-
-
-import { IoTAnalytics } from "aws-sdk";
+const form = require("./template/businesspermit_template").template;
 
 
 /**
  *
- * @param {Object} details
+ * @param {LicenseModel} details
  * @returns {Object} document
  */
 function fillup(details) {
@@ -14,9 +11,20 @@ function fillup(details) {
     var content = getContent(details);
     console.log('get content ###### :', content);
     return {
+        background: function (page) {
+            return [{
+                image: "form",
+                width: 400
+            
+            }]
+        },
         content: content,
+        images: {
+            form: form
+        },
         pageSize: 'LEGAL'
     };
+
 }
 /**
  * 
@@ -28,12 +36,12 @@ function getContent(details) {
         {
         layout: "noBorders",
         table: {
-            heights: [10],
+            heights: [70],
             widths: [300],
             body: [
                 [
                     {
-                        text: "REPUBLIKA NG PILIPINAS",
+                        text: " ",
                         fontSize: 6,
                         bold: true,
                         characterSpacing: 0,
@@ -56,7 +64,7 @@ function getContent(details) {
             body: [
                 [
                     {
-                        text: "BAYAN NG SAN ANTONIO  LALAWIGAN NG QUEZON",
+                        text: " ",
                         fontSize: 6,
                         bold: true,
                         characterSpacing: 0,
@@ -74,24 +82,164 @@ function getContent(details) {
     {
         layout: "noBorders",
         table: {
-            heights: [8],
+            heights: [15],
             widths: [300],
             body: [
                 [
                     {
-                        text: "BUISNESS PERMIT",
-                        fontSize: 9,
+                        text: "BUSINESS PERMIT OFFICE",
+                        fontSize: 10,
                         bold: true,
-                        characterSpacing: 0,
-                        alignment: 'left',
+                        characterSpacing: 1,
+                        alignment: 'justify',
                         // right,down,left,up
-                        margin: [1, -20, 0, 0]
+                        margin: [94, -30, 0, 0]
                     }
                 ]
             ]
         }
 
     },
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        layout: "noBorders",
+        table: {
+            heights: [8],
+            widths: [300],
+            body: [
+                [
+                    {
+                        text: "BUSINESS PERMIT   ",
+                        fontSize: 12,
+                        bold: true,
+                        characterSpacing: 1,
+                        alignment: 'justify',
+                        // right,down,left,up
+                        margin: [116, -20, 0, 0]
+                    }
+                ]
+            ]
+        }
+
+    },
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        layout: "noBorders",
+        table: {
+            heights: [8],
+            widths: [300],
+            body: [
+                [
+                    {
+                        text: "REPUBLIC OF GAMERS COMPUTER CAFE",
+                        fontSize: 8,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'justify',
+                        // right,down,left,up
+                        margin: [118, 0, 0, 0]
+                    }
+                ]
+            ]
+        }
+
+    },
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        layout: "noBorders",
+        table: {
+            heights: [8],
+            widths: [170, 121],
+            body: [
+                [
+                    {
+                        text: "LICENSE NUMBER:",
+                        fontSize: 6,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'right',
+                        // right,down,left,up
+                        margin: [99, 0, 1, 0]
+                    },
+                    {
+                        text: "1546238984",
+                        fontSize: 5,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'left',
+                        // right,down,left,up
+                        margin: [0, 0, 0, 0]
+                    }
+                ]
+            ]
+        }
+
+    },
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        layout: "noBorders",
+        table: {
+            heights: [8],
+            widths: [170, 121],
+            body: [
+                [
+                    {
+                        text: "ADDRESS:",
+                        fontSize: 6,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'right',
+                        // right,down,left,up
+                        margin: [85, -6, 24, 0]
+                    },
+                    {
+                        text: "B17 L10 CAMELLA HOMES SAN ANTONIO QUEZON",
+                        fontSize: 5,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'left',
+                        // right,down,left,up
+                        margin: [1, -5, 0, 0]
+                    }
+                ]
+            ]
+        }
+
+    },
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    {
+        layout: "noBorders",
+        table: {
+            heights: [8],
+            widths: [170,121],
+            body: [
+                [
+                    {
+                        text: "BUSINESS OWNER:",
+                        fontSize: 6,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'right',
+                        // right,down,left,up
+                        margin: [85, -12, 0, 0]
+                    },
+                    {
+                        text: "RICHARD BERMUDEZ ",
+                        fontSize: 5,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'left',
+                        // right,down,left,up
+                        margin: [1, -11, 0, 0]
+                    }
+                ]
+            ]
+        }
+
+    },
+
+
 
     /////////////////////////////////////////////////////////////////////////////////////////////----Table 1
     {
@@ -221,7 +369,7 @@ function getContent(details) {
         body: [
             [
                 {
-                    text: "Kris Legendary Computer Cafe",
+                    text: "REPUBLIC OF GAMERS COMPUTER CAFE",
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
@@ -266,7 +414,7 @@ function getContent(details) {
         body: [
             [
                 {
-                    text: " Blk 17 Lot 10 Camella Homes SAN ANTONIO QUEZON",
+                    text: " B17 L10 CAMELLA HOMES SAN ANTONIO QUEZON",
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
@@ -310,7 +458,7 @@ function getContent(details) {
         body: [
             [
                 {
-                    text: "BERMUDEZ, RICHARD C",
+                    text: "BERMUDEZ, RICHARD ",
                     fontSize: 5,
                     bold: true,
                     characterSpacing: 0,
@@ -617,10 +765,10 @@ function getContent(details) {
     layout: "noBorders",        
     table: {
     widths: [300],
-    heights: [2,],
+    heights: [10,],
     body: [
       [{
-            text:" Thank you for your payment!  ",
+            text:"   ",
             fontSize: 9,
             Bold: true,
             alignment: 'justify',
@@ -640,10 +788,10 @@ function getContent(details) {
     layout: "noBorders",        
     table: {
     widths: [300],
-    heights: [2,],
+    heights: [10,],
     body: [
       [{
-            text:" Here's your auto generated business certificate  ",
+            text:"   ",
             fontSize: 6,
             alignment: 'justify',
             characterSpacing: [0],
@@ -659,6 +807,55 @@ function getContent(details) {
 },
 
 ///////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" Erick M Wagan ",
+            fontSize: 10,
+            alignment: 'left',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [115, 0, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+
+/////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [2,],
+    body: [
+      [{
+            text:" Minicipal Mayor ",
+            fontSize: 10,
+            alignment: 'left',
+            characterSpacing: [0],
+            // right,down,left,up
+            margin: [114, -5, 0, 0]
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+
+
+/////////////////////////////////////////////////////////////////////////////
 
 {
     layout: "noBorders",        
@@ -687,12 +884,12 @@ function getContent(details) {
     heights: [2,],
     body: [
       [{
-            text:"[  PRINT BUTTON   ] ",
-            fontSize: 6,
+            text:" DISPLAY IN PUBLIC VIEW",
+            fontSize: 12,
             alignment: 'justify',
             characterSpacing: [0],
             // right,down,left,up
-            margin: [120, -2, 0, 0]
+            margin: [80, 5, 0, 0]
           },
           
                                     
@@ -723,6 +920,27 @@ function getContent(details) {
     }
 },
 //////////////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",        
+    table: {
+    widths: [300],
+    heights: [30,],
+    body: [
+      [{
+            text:" ",
+            fontSize: 2,
+           
+                    
+          },
+          
+                                    
+      ]
+    
+    ]
+    }
+},
+
+/////////////////////////////////////////////////////////////////////////////////////
 
 {
     layout: "noBorders",        
@@ -731,7 +949,7 @@ function getContent(details) {
     heights: [2,],
     body: [
       [{
-            text:" This is only an electronic certificate. You can get your official business permit upon claiming the",
+            text:" This electronic permit (ePermit) is computer generated and does not require signature",
             fontSize: 5,
             alignment: 'justify',
             characterSpacing: [0],
@@ -753,7 +971,7 @@ function getContent(details) {
     heights: [2,],
     body: [
       [{
-            text:" business license plate at the Municipal Hall. ",
+            text:" Verify authenticity of this document at: ",
             fontSize: 5,
             alignment: 'justify',
             characterSpacing: [0],
