@@ -8,7 +8,7 @@
     </a-col>
     <a-col :span="24">
       <a-row type="flex" align="middle" :gutter="10">
-        <transition v-for="(item, index) in items" :key="index" name="bounce">
+        <transition v-for="(item, index) in permit_types" :key="index" name="bounce">
           <a-col
             :xs="{ span: 24 }"
             :sm="{ span: 12 }"
@@ -16,15 +16,10 @@
             :lg="{ span: 9 }"
             v-if="item.primary"
           >
-            <p
-              class="item-buttons primary-item-buttons"
-              @click="$router.push(item.path)"
-            >
-              {{ item.title }}
-            </p>
+            <p class="item-buttons primary-item-buttons" @click="openPath(item)">{{ item.name }}</p>
           </a-col>
           <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 6 }" :lg="{ span: 5 }" v-else>
-            <p class="item-buttons" @click="$router.push(item.path)">{{item.title}}</p>
+            <p class="item-buttons" @click="openPath(item)">{{item.name}}</p>
           </a-col>
         </transition>
       </a-row>
@@ -88,7 +83,27 @@ export default {
       ]
     };
   },
-  methods: {}
+  computed: {
+    permit_types() {
+      return this.$store.state.permits.permit_types;
+    }
+  },
+  created() {
+    this.$store
+      .dispatch("GET_PERMIT_TYPES")
+      .then(result => {
+        console.log("GET_PERMIT_TYPES result :", result);
+      })
+      .catch(err => {
+        console.log("GET_PERMIT_TYPES err :", err);
+      });
+  },
+  methods: {
+    openPath(item) {
+      this.$store.commit("SET_FILING_PERMIT", item);
+      this.$router.push(item.path);
+    }
+  }
 };
 </script>
 

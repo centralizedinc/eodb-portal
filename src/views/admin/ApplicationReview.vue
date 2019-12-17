@@ -23,8 +23,12 @@
                 <a-button-group>
                     
                     <a-button  size="large" icon="issues-close">For Compliance</a-button>   
-                    <a-button type="danger" size="large" icon="stop" >Denied</a-button>                     
-                    <a-button type="primary" size="large" icon="check-circle">Approved</a-button>
+                    <a-popconfirm title="Click PROCEED to denied this application." okText="PROCEED" @confirm="deniedApplication">
+                        <a-button type="danger" size="large" icon="stop">Denied</a-button>                     
+                    </a-popconfirm>
+                    <a-popconfirm title="Click PROCEED to approve this application." okText="PROCEED" @confirm="approveApplication">
+                        <a-button type="primary" size="large" icon="check-circle">Approved</a-button>
+                    </a-popconfirm>
                 </a-button-group>            
             </a-card>
         </a-affix>
@@ -52,7 +56,9 @@ export default {
             checklist:[
                 'Police Clearance',
                 'Barangay Clearance'
-            ]
+            ],
+            rejecting_application: false,
+            approving_application: false
         }
     },
     created(){
@@ -65,6 +71,14 @@ export default {
                 this.checklist = results.data
             })
             this.form = this.$store.state.admin_session.for_review
+        },
+        deniedApplication() {
+            this.rejecting_application = true;
+            this.rejecting_application = false;
+        },
+        approveApplication() {
+            this.approving_application = true;
+            this.approving_application = false;
         }
     }
 }

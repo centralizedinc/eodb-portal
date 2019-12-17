@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="cols" :dataSource="dockets" :loading="loading">
+  <a-table :columns="cols" :dataSource="permits" :loading="loading">
     <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
     <template slot="date_created" slot-scope="text">{{formatDate(text, null, true)}}</template>
     <template slot="status" slot-scope="text">

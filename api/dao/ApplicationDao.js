@@ -1,6 +1,6 @@
-const model = require('../models/DocketActivitiesModel');
+const model = require('../models/ApplicationModel');
 
-class DocketActivitiesDao {
+class ApplicationDao {
 
     /**
      * @returns {Promise}
@@ -15,6 +15,14 @@ class DocketActivitiesDao {
      */
     static findOneByID(id) {
         return model.findById(id).lean().exec()
+    }
+
+     /**
+     * @returns {Promise}
+     * @param {String} ref_no
+     */
+    static findOneByReference(ref_no) {
+        return model.findOne({reference_no:ref_no}).lean().exec()
     }
 
     /**
@@ -38,26 +46,26 @@ class DocketActivitiesDao {
      * @param {Object} details 
      */
     static create(details) {
-        return (new model(details)).save();
+        return (new model(details)).save()
     }
 
     /**
      * @returns {Promise}
      * @param {String} id 
-     * @param {Object} updated_account 
+     * @param {Object} updated_data 
      */
-    static modifyById(id, updated_account) {
-        return model.findByIdAndUpdate(id, updated_account).exec();
+    static modifyById(id, updated_data) {
+        return model.findByIdAndUpdate(id, updated_data).exec()
     }
 
     /**
      * @returns {Promise}
      * @param {Object} conditions 
-     * @param {Object} updated_account 
+     * @param {Object} updated_data 
      */
-    static modifyOne(conditions, updated_account) {
-        return model.findOneAndUpdate(conditions, updated_account).exec()
+    static modifyOne(conditions, updated_data) {
+        return model.findOneAndUpdate(conditions, updated_data).exec()
     }
 }
 
-module.exports = DocketActivitiesDao;
+module.exports = ApplicationDao;
