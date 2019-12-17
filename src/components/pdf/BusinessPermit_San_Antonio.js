@@ -1,4 +1,8 @@
+const form = require("../template/businesspermit"); const form = require("../template/businesspermit_template").template;
+
+
 import { IoTAnalytics } from "aws-sdk";
+
 
 /**
  *
