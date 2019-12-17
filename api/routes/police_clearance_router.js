@@ -1,9 +1,10 @@
 "use strict"
-const router = require("express").Router
+const router = require("express").Router()
 
 const PoliceApplicationDao = require('../dao/PoliceApplicationDao')
-const DocketsDao = require('../dao/DocketsDao');
-const PaymentDao = require('../dao/PaymentDao');
+const jwt = require('jsonwebtoken');
+// const DocketsDao = require('../dao/DocketsDao');
+// const PaymentDao = require('../dao/PaymentDao');
 
 router.route('/')
     .get((req, res) => {
@@ -17,6 +18,7 @@ router.route('/')
             });
     })
     .post((req, res) => {
+        console.log("police application dao: " + JSON.stringify(req.body))
         PoliceApplicationDao.create(req.body)
             .then((result) => {
                 res.json(result)
@@ -26,6 +28,7 @@ router.route('/')
                 })
             });
     })
+
 router.route('/:id')
     .get((req, res) => {
         PoliceApplicationDao.findOneByID(req.params.id)

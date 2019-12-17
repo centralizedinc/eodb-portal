@@ -103,7 +103,7 @@
                                     <a-input v-model="checklist.description" placeholder="Remarks"></a-input>
                                 </a-col>
                                 <a-col  :span="6" style="margin-top:2vh">
-                                    <a-button type="primary" block icon="plus" ghost @click="addChecklist">Add</a-button>  
+                                    <a-button type="primary" block icon="plus" ghost @click="addChecklist" :disabled="!checklist.department || !checklist.name">Add</a-button>  
                                 </a-col>                          
                             </a-row>
                         </a-col>

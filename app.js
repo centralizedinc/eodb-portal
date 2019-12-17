@@ -17,7 +17,9 @@ Object.keys(process.env).forEach(key => {
 app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ 'extended': 'false' }));
+app.use(bodyParser.urlencoded({
+    'extended': 'false'
+}));
 app.use(serveStatic(__dirname + "/dist"));
 
 // SETUP DB
@@ -38,6 +40,8 @@ app.use(passport.initialize());
 // ########################################################################
 app.use('/auth', require('./api/routes/auth'))
 app.use("/permits/business", require('./api/routes/business_permit'));
+app.use("/permits/police", require('./api/routes/police_clearance_router'));
+app.use("/permits/barangay", require('./api/routes/barangay_clearance'));
 app.use("/permits", require('./api/routes/permit_router'));
 app.use("/accounts", require('./api/routes/account_router'))
 app.use("/activities", require('./api/routes/activities_router'))
@@ -56,7 +60,7 @@ app.use("/checklists", require('./api/routes/checklist_route'));
 app.use("/dashboard", require('./api/routes/dashboard_route'))
 
 // for chai testing
-app.get("/test", (req, res)=>{
+app.get("/test", (req, res) => {
     res.sendStatus(200);
 })
 

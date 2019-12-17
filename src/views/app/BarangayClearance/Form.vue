@@ -179,22 +179,13 @@
 </template>
 
 <script>
-// import ApplicationChecklist from "./ApplicationChecklist";
-// import BusinessOwner from "./BusinessOwner";
-// import BusinessDetails from "./BusinessDetails";
-// import BusinessActivity from "./BusinessActivity";
-// import ApplicationSummary from "./ApplicationSummary";
-// import Payment from "@/components/payments/Payment.vue";
-
+import BarangayDetails from "./BarangayDetails";
+import ApplicationSummary from "./ApplicationSummary";
 export default {
-  // components: {
-  //   Payment,
-  //   ApplicationChecklist,
-  //   BusinessOwner,
-  //   BusinessDetails,
-  //   BusinessActivity,
-  //   ApplicationSummary
-  // },
+  components: {
+    BarangayDetails,
+    ApplicationSummary
+  },
   data() {
     return {
       show_payment: false,
