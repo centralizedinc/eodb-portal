@@ -174,7 +174,7 @@ var PoliceApplication = new mongoose.Schema({
         tel_no: {
             type: Number
         },
-        mobile_no: {
+        mobile: {
             type: Number
         },
         email: {

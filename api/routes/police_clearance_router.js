@@ -18,6 +18,7 @@ router.route('/')
             });
     })
     .post((req, res) => {
+        console.log("police application dao: " + JSON.stringify(req.body))
         PoliceApplicationDao.create(req.body)
             .then((result) => {
                 res.json(result)

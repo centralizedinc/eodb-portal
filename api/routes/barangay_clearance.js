@@ -1,5 +1,5 @@
 "use strict"
-const router = require("express").Router
+const router = require("express").Router()
 
 const BaranggayApplicationDao = require('../dao/BarangayApplicationDao')
 const DocketsDao = require('../dao/DocketsDao');

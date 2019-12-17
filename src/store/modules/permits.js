@@ -1,4 +1,7 @@
 import BusinessPermitAPI from '../../api/BusinessPermitAPI';
+import PoliceClearanceAPI from '../../api/PoliceClearanceAPI';
+import BarangayClearanceAPI from '../../api/BarangayClearanceAPI';
+
 import UploadAPI from '../../api/UploadAPI';
 import PermitsAPI from '../../api/PermitsAPI';
 import ApplicationAPI from '../../api/ApplicationAPI';
@@ -137,6 +140,50 @@ const actions = {
                         reject({ errors: err })
                     });
             } resolve(context.state.filing_permit)
+        });
+    },
+    // Police Clearance
+    CREATE_POLICE_CLEARANCE(context, {
+        details,
+        files
+    }) {
+        return new Promise((resolve, reject) => {
+            console.log('details PC:', details);
+            console.log('files PC:', files);
+            var application = {};
+            // new UploadAPI(context.rootState.user_session.token)
+            //     .uploadPermitsDocRequired('police', context.rootState.user_session.user._id, files)
+            //     .then((result) => {
+            //         console.log("result upload permit doc required: " + JSON.stringify(result))
+            //     })
+            new PoliceClearanceAPI(context.rootState.user_session.token).createPermit(details.data)
+                .then((result) => {
+
+                    console.log("PoliceClearanceAPI data: " + JSON.stringify(result))
+                    resolve(result)
+                })
+        })
+    },
+    // Barangay Clearance
+    CREATE_BARANGAY_CLEARANCE(context, {
+        details,
+        files
+    }) {
+        return new Promise((resolve, reject) => {
+            console.log('details PC:', details);
+            console.log('files PC:', files);
+            var application = {};
+            // new UploadAPI(context.rootState.user_session.token)
+            //     .uploadPermitsDocRequired('police', context.rootState.user_session.user._id, files)
+            //     .then((result) => {
+            //         console.log("result upload permit doc required: " + JSON.stringify(result))
+            //     })
+            new BarangayClearanceAPI(context.rootState.user_session.token).createPermit(details.data)
+                .then((result) => {
+
+                    console.log("BarangayClearanceAPI data: " + JSON.stringify(result))
+                    resolve(result)
+                })
         })
     }
 }
