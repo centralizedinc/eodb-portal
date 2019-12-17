@@ -13,8 +13,8 @@ export default class PoliceCleareanceAPI {
      * @param {Object} data 
      */
     createPermit(data) {
-        console.log("police api data: " + JSON.stringify(data))
-        return axios.post('/permits/police', data);
+
+        return axios.post('/permits/barangay', data);
     }
 
     /**
@@ -22,7 +22,7 @@ export default class PoliceCleareanceAPI {
      * @param {Object} data 
      */
     getPermit() {
-        return axios.get('/permits/police');
+        return axios.get('/permits/barangay');
     }
 
     // static getTransactions(id) {

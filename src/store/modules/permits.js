@@ -92,7 +92,7 @@ const actions = {
             //     .then((result) => {
             //         console.log("result upload permit doc required: " + JSON.stringify(result))
             //     })
-            new PoliceClearanceAPI(context.rootState.user_session.token).createPermit(details)
+            new PoliceClearanceAPI(context.rootState.user_session.token).createPermit(details.data)
                 .then((result) => {
                     console.log("PoliceClearanceAPI data: " + JSON.stringify(result))
                 })
