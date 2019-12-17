@@ -26,53 +26,65 @@
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.name.last') ? 'error': ''"
+            :help="checkErrors('personal_details.name.last')"
+          >
             <span slot="label">
               Last Name
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.name.last"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.name.first') ? 'error': ''"
+            :help="checkErrors('personal_details.name.first')"
+          >
             <span slot="label">
               First Name
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.name.first"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
           <a-form-item>
             <span slot="label">Middle Name</span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.name.middle"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
           <a-form-item>
             <span slot="label">Suffix</span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.name.suffix"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
+            :help="checkErrors('personal_details.birthday')"
+          >
             <span slot="label">
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker style="width: 100%;"></a-date-picker>
+            <a-date-picker v-model="form.personal_details.birthday" style="width: 100%;"></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.birthplace') ? 'error': ''"
+            :help="checkErrors('personal_details.birthplace')"
+          >
             <span slot="label">
               Birthplace
               <i style="color: red">*</i>
             </span>
-            <a-input placeholder="Enter Municipality"></a-input>
+            <a-input v-model="form.personal_details.birthplace" placeholder="Enter Municipality"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -81,18 +93,21 @@
               ICR No.
               <i>(if alien)</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.icr"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.gender') ? 'error': ''"
+            :help="checkErrors('personal_details.gender')"
+          >
             <span slot="label">
               Gender
               <i style="color: red">*</i>
             </span>
-            <a-select>
+            <a-select v-model="form.personal_details.gender">
               <a-select-option value="male">Male</a-select-option>
               <a-select-option value="female">Female</a-select-option>
             </a-select>
@@ -101,7 +116,7 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
           <a-form-item>
             <span slot="label">Civil Status</span>
-            <a-select>
+            <a-select v-model="form.personal_details.civil_status">
               <a-select-option value="single">Single</a-select-option>
               <a-select-option value="married">Married</a-select-option>
               <a-select-option value="widowed">Widowed</a-select-option>
@@ -110,35 +125,44 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.height') ? 'error': ''"
+            :help="checkErrors('personal_details.height')"
+          >
             <span slot="label">
               Height(cm)
               <i style="color: red">*</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.height"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.weight') ? 'error': ''"
+            :help="checkErrors('personal_details.weight')"
+          >
             <span slot="label">
               Weight(kg)
               <i style="color: red">*</i>
             </span>
 
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.weight"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
-          <a-form-item>
+          <a-form-item
+            :validate-status="checkErrors('personal_details.occupation') ? 'error': ''"
+            :help="checkErrors('personal_details.occupation')"
+          >
             <span slot="label">
               Occupation
               <i style="color: red">*</i>
             </span>
 
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.occupation"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
@@ -147,7 +171,61 @@
               TIN
               <i>(if any)</i>
             </span>
-            <a-input></a-input>
+            <a-input v-model="form.personal_details.tin"></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item>
+            <span slot="label">Basic Community Tax</span>
+            <a-select v-model="form.tax.basic">
+              <a-select-option value="voluntary">Voluntary</a-select-option>
+              <a-select-option value="exempted">Exempted</a-select-option>
+            </a-select>
+            <!-- <a-input v-model="form.tax.basic"></a-input> -->
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item>
+            <span slot="label">Additional Community Tax</span>
+            <a-input v-model="form.tax.additional"></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item>
+            <span slot="label">Gross Reciepts or Earnings derived</span>
+
+            <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>business during the preceding year</span>
+              </template>
+              <a-input v-model="form.tax.business_income"></a-input>
+            </a-tooltip>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item>
+            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
+            <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>exercise of profession or pursuit of any occupation</span>
+              </template>
+              <a-input v-model="form.tax.profession_income"></a-input>
+            </a-tooltip>
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item>
+            <span slot="label">Income from Real Property</span>
+
+            <a-input v-model="form.tax.property_income"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -168,6 +246,17 @@
   </a-card>
 </template>
 <script>
-export default {};
+export default {
+  props: ["form", "step", "errors"],
+  data() {
+    return {};
+  },
+  methods: {
+    checkErrors(field) {
+      var form_error = this.errors.find(v => v.field === field);
+      return form_error ? form_error.error : null;
+    }
+  }
+};
 </script>
 <style></style>

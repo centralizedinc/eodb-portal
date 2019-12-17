@@ -197,6 +197,8 @@ export default {
       current_step: 0,
       form_components: [PersonalDetails, ContactAddress, ApplicationSummary],
       form: {
+        application_type: 0,
+        permit_type: "police",
         personal_details: {
           name: {
             // first: "",
@@ -514,7 +516,7 @@ export default {
         });
       }
       this.$store
-        .dispatch("CREATE_POLICE_CLEARANCE", {
+        .dispatch("CREATE_APPLICATION", {
           details: {
             payment: {
               method: this.transaction_details.method,
