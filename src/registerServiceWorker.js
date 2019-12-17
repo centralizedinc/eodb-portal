@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { register } from 'register-service-worker'
+import axios from 'axios'
 
 /**
  * Global PWA variables
@@ -18,7 +19,7 @@ const urlB64ToUint8Array = base64String => {
 }
 
 window.eodb_pwa = {
-  applicationServerKey: urlB64ToUint8Array('BPUSkJ2PeyRjFl1036iZwJMtD2Ayitg9CU32YgCzmtECTvlL3gupQpQsTgk2qwFdQTax8HdYyMLLVqgXQz66MDA'),
+  applicationServerKey: urlB64ToUint8Array('BPkZHUsQThs4Qry2t-4iDqHyneZ-_O09bbToP8vId38cToT8Wod9MOCwmQgefAdMtUfEhMPPankmtMdX-tCq4hU'),
   isSubscribed: false,
   subscription: {},
   registration: {},
@@ -28,6 +29,7 @@ window.eodb_pwa = {
    * @param {*} registration 
    */
   checkSubscription(registration) {
+    console.log('checkSubscription:', JSON.stringify(registration))
     registration.pushManager.getSubscription()
       .then((subscription) => {
         console.log("subsription", JSON.stringify(subscription))
@@ -62,6 +64,13 @@ window.eodb_pwa = {
               }
             })
           }
+        }else{
+          Notification.requestPermission(result => {
+            console.log('result from permission question', result);
+            if (Notification.permission === 'granted') {
+              _self.checkLocalSubscription(account_id, subscriptions, _self)
+            }
+          })
         }
       }).catch((err) => {
         console.log('getSubscriptionByAccountId error :', err);
@@ -99,11 +108,11 @@ window.eodb_pwa = {
       subscription: this.subscription,
       account_id
     }
-    return axios.post(process.env.VUE_APP_API_BASE_URI + '/notify-api/subscriptions/subscribe', details)
+    return axios.post(process.env.VUE_APP_BASE_API_URI + '/subscriptions/', details)
   },
 
   getSubscriptionByAccountId(account_id) {
-    return axios.get(process.env.VUE_APP_API_BASE_URI + `/notify-api/subscriptions/subscribe/${account_id}`)
+    return axios.get(process.env.VUE_APP_BASE_API_URI + `/subscriptions/${account_id}`)
   },
 
   /**
@@ -123,6 +132,7 @@ window.eodb_pwa = {
         })
         .then(result => {
           _self.isSubscribed = true
+          _self.sendWelcomeNofitication()
           resolve()
         })
         .catch(error => {
@@ -144,7 +154,7 @@ window.eodb_pwa = {
   setSubscription(account_id, isSubscribe) {
     this.isSubscribed = isSubscribe
     if (!isSubscribe) {
-      return axios.get(process.env.VUE_APP_API_BASE_URI + `/notify-api/subscriptions/subscribe/remove/${account_id}`)
+      return axios.get(process.env.VUE_APP_BASE_API_URI + `/subscriptions/remove/${account_id}`)
     } else if (this.subscription) {
       return this.saveSubscription(account_id, this)
     } else {
@@ -162,6 +172,7 @@ if (process.env.NODE_ENV === 'production') {
         registration.update()
       }, 1000 * 60 * 60);
       //check permission
+      console.log('registered:', JSON.stringify(registration))
       window.eodb_pwa.checkSubscription(registration)
     },
     cached () {
@@ -170,15 +181,15 @@ if (process.env.NODE_ENV === 'production') {
     updatefound () {
       console.log('New content is downloading.')
     },
-    updated () {
-      console.log('New content is available; please refresh.')
+    updated (registration) {
+      console.log('New content is available; please refresh:', JSON.stringify(registration))
       document.dispatchEvent(new CustomEvent('swUpdated', {
         detail: registration
       }));
     },
-    offline () {
-      console.log('New content is available; please refresh.')
-      document.dispatchEvent(new CustomEvent('swUpdated', {
+    offline (registration) {
+      console.log('Offline:', JSON.stringify(registration))
+      document.dispatchEvent(new CustomEvent('swoffline', {
         detail: registration
       }));
     },
