@@ -628,7 +628,8 @@
       </template>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+        <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }"> -->
+      <a-col :span="24">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>

@@ -328,12 +328,7 @@ export default {
           contact_no: "",
           email: ""
         },
-        attachments: [
-          {
-            doc_type: "dti_sec_cda",
-            files: []
-          }
-        ]
+        attachments: []
       },
       document_columns: [
         {
@@ -439,13 +434,25 @@ export default {
       loading: false,
       errors: [],
       fetching_data: false,
-      installment: null
+      installment: null,
+      departments: []
     };
   },
   created() {
     this.init();
   },
   mounted() {
+    console.log('this.$store.state.permits.filing_permit :', this.$store.state.permits.filing_permit);
+    
+    // GET DEPARTMENTS
+    const departments = this.deepCopy(
+      this.$store.state.permits.filing_permit.approvers
+    );
+    console.log('departments :', departments);
+    this.departments = departments;
+    this.form.permit_code = this.$store.state.permits.filing_permit._id;
+
+    // GET REQUIREMENTS
     const requirements = this.deepCopy(
       this.$store.state.permits.filing_permit.requirements
     );
@@ -458,7 +465,18 @@ export default {
         hidden: v.required
       };
     });
+    
+    doc_req.forEach(v => {
+      if (v.hidden)
+        this.form.attachments.push({
+          doc_type: v.keyword,
+          files: []
+        });
+    });
+    console.log('this.form :', this.form);
     this.document_data_source = doc_req;
+
+    // To check payments needs to be pay
     this.updateDocsPayment();
   },
   watch: {
@@ -586,7 +604,8 @@ export default {
               card: this.card_details,
               transaction_details: this.transaction_details
             },
-            data: this.form
+            data: this.form,
+            departments: this.departments
           },
           files
         })
@@ -595,7 +614,7 @@ export default {
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          this.$router.push("/app/permits");
+          this.$router.push("/app/tracker");
         })
         .catch(err => {
           this.loading = false;
@@ -613,7 +632,7 @@ export default {
           v => v.doc_type === keyword
         );
         this.form.attachments[attachment_index].files.push(file);
-        console.log('this.form.attachments :', this.form.attachments);
+        console.log("this.form.attachments :", this.form.attachments);
         this.$message.info(
           `${this.document_data_source[i].title} file uploaded.`
         );
@@ -1008,14 +1027,7 @@ export default {
       const data = this.deepCopy(
         this.$store.state.permits.filing_permit.requirements
       ).filter(v => !v.required);
-      // values.forEach(val => {
-      //   const obj = data.find(v => v.keyword === val);
-      //   payments.push({
-      //     description: obj.name,
-      //     fee_type: obj.fee_type,
-      //     amount: obj.amount
-      //   });
-      // });
+      console.log('data :', data);
       data.forEach(dt => {
         var is_included = values ? values.includes(dt.keyword) : false;
         if (!is_included)

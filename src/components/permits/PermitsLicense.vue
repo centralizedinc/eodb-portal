@@ -1,12 +1,7 @@
 <template>
   <a-table :columns="cols" :dataSource="permits" :loading="loading">
-    <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
+    <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
     <template slot="date_created" slot-scope="text">{{formatDate(text, null, true)}}</template>
-    <template slot="status" slot-scope="text">
-      <span
-        :style="`color: ${text === 0? 'blue' : text === 1? 'green' : text === 2 ? 'red' : ''}`"
-      >{{getStatus(text)}}</span>
-    </template>
     <template slot="action" slot-scope="text, record">
       <a-popconfirm
         title="Click PROCEED to redirect in Renewal Form."
@@ -42,11 +37,6 @@ export default {
           scopedSlots: { customRender: "date_created" }
         },
         {
-          title: "Status",
-          dataIndex: "status",
-          scopedSlots: { customRender: "status" }
-        },
-        {
           title: "",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
@@ -59,6 +49,7 @@ export default {
     this.$store
       .dispatch("GET_BUSINESS_PERMIT")
       .then(result => {
+        console.log("GET_BUSINESS_PERMIT result :", result);
         this.loading = false;
       })
       .catch(err => {
@@ -76,6 +67,9 @@ export default {
     },
     user() {
       return this.$store.state.user_session.user;
+    },
+    permit_types() {
+      return this.$store.state.permits.permit_types;
     }
   },
   methods: {
@@ -89,6 +83,9 @@ export default {
     },
     renewApplication(record) {
       console.log("record :", record);
+      const permit = this.permit_types.find(v => v._id === record.permit_code);
+      console.log("permit :", permit);
+      this.$store.commit("SET_FILING_PERMIT", permit);
       this.$router.push(
         `/permits/business?mode=renewal&ref_no=${record.reference_no}`
       );
