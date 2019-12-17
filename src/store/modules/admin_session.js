@@ -3,6 +3,7 @@ import AccountAPI from "../../api/AccountAPI"
 function initialState() {
     return {
         admin:{},
+        token: "",
         locked:false, 
         for_review:{}
     }
@@ -13,10 +14,12 @@ const state = initialState()
 const mutations = {
     ADMIN_LOGIN(state, payload){
         state.admin = payload;
+        state.token = payload.token;
         state.locked = false;
     },
     ADMIN_LOGOUT(state){
         state.locked = false;
+        state.token = "";
         state.admin = initialState();
     },
     LOCK_SCREEN(state){

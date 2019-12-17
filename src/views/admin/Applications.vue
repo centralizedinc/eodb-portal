@@ -18,7 +18,7 @@
                   <div slot="tab">
                       <span>OUTBOX</span>
                   </div>
-                  <application-inbox></application-inbox>
+                  <application-outbox></application-outbox>
               </a-tab-pane>
             </a-tabs>
             

@@ -1,5 +1,5 @@
 "use strict"
-const router = require("express").Router()
+const router = require("express").Router();
 
 const PoliceApplicationDao = require('../dao/PoliceApplicationDao')
 const jwt = require('jsonwebtoken');
@@ -18,6 +18,7 @@ router.route('/')
             });
     })
     .post((req, res) => {
+        console.log("police application dao: " + JSON.stringify(req.body))
         PoliceApplicationDao.create(req.body)
             .then((result) => {
                 res.json(result)

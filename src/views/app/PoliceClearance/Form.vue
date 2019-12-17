@@ -592,149 +592,149 @@ export default {
     validation(validate_all) {
       var errors = [],
         jump_to = 0;
-      // if (validate_all || this.current_step === 0) {
-      //   console.log("current step 0: " + this.form.personal_details.name.last);
-      //   if (!this.form.personal_details.name.last) {
-      //     console.log("error push last name: ");
-      //     errors.push({
-      //       field: "personal_details.name.last",
-      //       error: "Last Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.name.first) {
-      //     errors.push({
-      //       field: "personal_details.name.first",
-      //       error: "First Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.birthday) {
-      //     errors.push({
-      //       field: "personal_details.birthday",
-      //       error: "Date of Birth is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.gender) {
-      //     errors.push({
-      //       field: "personal_details.gender",
-      //       error: "Gender is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.birthplace) {
-      //     errors.push({
-      //       field: "personal_details.birthplace",
-      //       error: "Birthplace is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.height) {
-      //     errors.push({
-      //       field: "personal_details.height",
-      //       error: "Height is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.weight) {
-      //     errors.push({
-      //       field: "personal_details.weight",
-      //       error: "Weight is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.blood_type) {
-      //     errors.push({
-      //       field: "personal_details.blood_type",
-      //       error: "Blood Type is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.complexion) {
-      //     errors.push({
-      //       field: "personal_details.complexion",
-      //       error: "Complexion is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.educational_attainment) {
-      //     errors.push({
-      //       field: "personal_details.educational_attainment",
-      //       error: "Educational Attainment is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.occupation) {
-      //     errors.push({
-      //       field: "personal_details.occupation",
-      //       error: "Occupation is a required field."
-      //     });
-      //   }
+      if (validate_all || this.current_step === 0) {
+        console.log("current step 0: " + this.form.personal_details.name.last);
+        if (!this.form.personal_details.name.last) {
+          console.log("error push last name: ");
+          errors.push({
+            field: "personal_details.name.last",
+            error: "Last Name is a required field."
+          });
+        }
+        if (!this.form.personal_details.name.first) {
+          errors.push({
+            field: "personal_details.name.first",
+            error: "First Name is a required field."
+          });
+        }
+        if (!this.form.personal_details.birthday) {
+          errors.push({
+            field: "personal_details.birthday",
+            error: "Date of Birth is a required field."
+          });
+        }
+        if (!this.form.personal_details.gender) {
+          errors.push({
+            field: "personal_details.gender",
+            error: "Gender is a required field."
+          });
+        }
+        if (!this.form.personal_details.birthplace) {
+          errors.push({
+            field: "personal_details.birthplace",
+            error: "Birthplace is a required field."
+          });
+        }
+        if (!this.form.personal_details.height) {
+          errors.push({
+            field: "personal_details.height",
+            error: "Height is a required field."
+          });
+        }
+        if (!this.form.personal_details.weight) {
+          errors.push({
+            field: "personal_details.weight",
+            error: "Weight is a required field."
+          });
+        }
+        if (!this.form.personal_details.blood_type) {
+          errors.push({
+            field: "personal_details.blood_type",
+            error: "Blood Type is a required field."
+          });
+        }
+        if (!this.form.personal_details.complexion) {
+          errors.push({
+            field: "personal_details.complexion",
+            error: "Complexion is a required field."
+          });
+        }
+        if (!this.form.personal_details.educational_attainment) {
+          errors.push({
+            field: "personal_details.educational_attainment",
+            error: "Educational Attainment is a required field."
+          });
+        }
+        if (!this.form.personal_details.occupation) {
+          errors.push({
+            field: "personal_details.occupation",
+            error: "Occupation is a required field."
+          });
+        }
 
-      //   // if (
-      //   //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-      //   //   !this.form.required_documents.civil_status
-      //   // ) {
-      //   //   errors.push({
-      //   //     field: "required_documents.civil_status",
-      //   //     error: "Civil Status is a required field."
-      //   //   });
-      //   // }
+        // if (
+        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   !this.form.required_documents.civil_status
+        // ) {
+        //   errors.push({
+        //     field: "required_documents.civil_status",
+        //     error: "Civil Status is a required field."
+        //   });
+        // }
 
-      //   // if (
-      //   //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-      //   //   !this.form.required_documents.birthplace
-      //   // ) {
-      //   //   errors.push({
-      //   //     field: "required_documents.birthplace",
-      //   //     error: "Place of Birth is a required field."
-      //   //   });
-      //   // }
+        // if (
+        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   !this.form.required_documents.birthplace
+        // ) {
+        //   errors.push({
+        //     field: "required_documents.birthplace",
+        //     error: "Place of Birth is a required field."
+        //   });
+        // }
 
-      //   if (errors.length) jump_to = 0;
-      // }
-      // if (validate_all || this.current_step === 1) {
-      //   if (!this.form.contact_details.tel_no) {
-      //     errors.push({
-      //       field: "contact_details.tel_no",
-      //       error: "Tel No is a required field."
-      //     });
-      //   }
-      //   if (!this.form.contact_details.mobile) {
-      //     errors.push({
-      //       field: "contact_details.mobile",
-      //       error: "Mobile No is a required field."
-      //     });
-      //   }
-      //   if (!this.form.contact_details.email) {
-      //     errors.push({
-      //       field: "contact_details.email",
-      //       error: "Email Address is a required field."
-      //     });
-      //   }
-      //   if (!this.form.address_details.region) {
-      //     errors.push({
-      //       field: "address_details.region",
-      //       error: "Region is a required field."
-      //     });
-      //   }
-      //   if (!this.form.address_details.province) {
-      //     errors.push({
-      //       field: "address_details.province",
-      //       error: "Province is a required field."
-      //     });
-      //   }
-      //   if (!this.form.address_details.barangay) {
-      //     errors.push({
-      //       field: "address_details.barangay",
-      //       error: "Barangay is a required field."
-      //     });
-      //   }
-      //   if (!this.form.address_details.city) {
-      //     errors.push({
-      //       field: "address_details.city",
-      //       error: "City/Municipality is a required field."
-      //     });
-      //   }
-      //   if (!this.form.address_details.postal_code) {
-      //     errors.push({
-      //       field: "address_details.postal_code",
-      //       error: "Postal Code is a required field."
-      //     });
-      //   }
-      //   if (errors.length) jump_to = 1;
-      // }
+        if (errors.length) jump_to = 0;
+      }
+      if (validate_all || this.current_step === 1) {
+        if (!this.form.contact_details.tel_no) {
+          errors.push({
+            field: "contact_details.tel_no",
+            error: "Tel No is a required field."
+          });
+        }
+        if (!this.form.contact_details.mobile) {
+          errors.push({
+            field: "contact_details.mobile",
+            error: "Mobile No is a required field."
+          });
+        }
+        if (!this.form.contact_details.email) {
+          errors.push({
+            field: "contact_details.email",
+            error: "Email Address is a required field."
+          });
+        }
+        if (!this.form.address_details.region) {
+          errors.push({
+            field: "address_details.region",
+            error: "Region is a required field."
+          });
+        }
+        if (!this.form.address_details.province) {
+          errors.push({
+            field: "address_details.province",
+            error: "Province is a required field."
+          });
+        }
+        if (!this.form.address_details.barangay) {
+          errors.push({
+            field: "address_details.barangay",
+            error: "Barangay is a required field."
+          });
+        }
+        if (!this.form.address_details.city) {
+          errors.push({
+            field: "address_details.city",
+            error: "City/Municipality is a required field."
+          });
+        }
+        if (!this.form.address_details.postal_code) {
+          errors.push({
+            field: "address_details.postal_code",
+            error: "Postal Code is a required field."
+          });
+        }
+        if (errors.length) jump_to = 1;
+      }
 
       if (
         validate_all &&
