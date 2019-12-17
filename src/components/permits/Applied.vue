@@ -26,7 +26,7 @@
           :disabled="loading_index>-1"
           type="search"
           style="cursor: pointer; color: blue; font-size: 20px;"
-          @click="viewApplication(record.permit, record.reference_no, index)"
+          @click="viewApplication(record.reference_no, index)"
         ></a-icon>
       </template>
     </a-table>
@@ -94,8 +94,8 @@ export default {
       });
   },
   mounted() {
-    if (this.$route.query.type && this.$route.query.ref_no)
-      this.viewApplication(this.$route.query.type, this.$route.query.ref_no);
+    if (this.$route.query.ref_no)
+      this.viewApplication(this.$route.query.ref_no);
   },
   computed: {
     dockets() {
@@ -119,10 +119,10 @@ export default {
       const status_desc = ["In Progress", "Approved", "Rejected"];
       return status_desc[status];
     },
-    viewApplication(type, reference_no, index) {
+    viewApplication(reference_no, index) {
       this.loading_index = index;
       this.$store
-        .dispatch("GET_APPLICATION_BY_REF", { type, reference_no })
+        .dispatch("GET_APPLICATION_BY_REF", reference_no)
         .then(app => {
           console.log("GET_APPLICATION_BY_REF app :", app);
           this.app_form = app;

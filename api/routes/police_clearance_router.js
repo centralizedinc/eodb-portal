@@ -1,5 +1,5 @@
 "use strict"
-const router = require("express").Router()
+const router = require("express").Router();
 
 const PoliceApplicationDao = require('../dao/PoliceApplicationDao')
 const jwt = require('jsonwebtoken');

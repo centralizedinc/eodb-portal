@@ -65,6 +65,7 @@ export default {
         });
       });
       this.form.attachments = attachments;
+      this.$emit("updateDocsPayment", checkedValues)
     }
   }
 };

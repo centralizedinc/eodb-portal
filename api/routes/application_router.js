@@ -1,12 +1,16 @@
 "use strict"
 const router = require("express").Router();
 
-const BusinessApplicationDao = require('../dao/BusinessApplicationDao');
-const BusinessPermitDao = require('../dao/BusinessPermitDao');
+// DAO
+const ApplicationDao = require('../dao/ApplicationDao');
 const DocketsDao = require('../dao/DocketsDao');
 const PaymentDao = require('../dao/PaymentDao');
 const DepartmentDao = require('../dao/DepartmentDao');
 
+// Permits
+const BusinessPermitDao = require('../dao/BusinessPermitDao');
+
+// Utils
 const jwt = require('jsonwebtoken');
 const sendgrid = require('../utils/email.js');
 const constant_helper = require('../utils/constant_helper');
@@ -14,35 +18,17 @@ const ApplicationSettings = require('../utils/ApplicationSettings');
 
 router.route('/')
     .get((req, res) => {
-        const decoded_data = jwt.decode(req.headers.access_token),
-            account_id = decoded_data.account_id;
-        BusinessPermitDao.find({ account_id })
+        ApplicationDao.findAll()
             .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
+                console.log('findAll result :', result);
+                res.json(result);
+            }).catch((err) => {
+                console.log('findAll err :', err);
+                res.json({ errors: err });
             });
     })
     .post((req, res) => {
-        const decoded_data = jwt.decode(req.headers.access_token),
-            account_id = decoded_data.account_id;
-        var details = req.body;
-        details.account_id = account_id;
-        BusinessPermitDao.create(details)
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-
-router.route('/application')
-    .post((req, res) => {
-        console.log('Creating Business Permit :', req.body);
+        console.log('Creating Application :', req.body);
         const decoded_data = jwt.decode(req.headers.access_token),
             created_by = decoded_data.account_id,
             user_email = decoded_data.email,
@@ -54,13 +40,20 @@ router.route('/application')
         var results = {};
         data.created_by = created_by;
         data.account_id = created_by;
-        // CREATE BUSINESS PERMIT
-        BusinessApplicationDao.create(data)
+        // CREATE APPLICATION
+        const app_data = {
+            application_type: data.application_type,
+            details: data,
+            account_id: created_by,
+            created_by,
+            permit_type: data.permit_type
+        }
+        ApplicationDao.create(app_data)
             .then((result) => {
                 console.log('application result :', result);
                 // PROCESS PAYMENTS
                 results.application = result;
-                payment.transaction_details.payment_for = "business";
+                payment.transaction_details.payment_for = data.permit_type;
                 payment.transaction_details.application_id = result._id;
                 payment.created_by = created_by;
                 var payment_actions = [], loopCount = payment.mode_of_payment === 'SA' ? 2 : payment.mode_of_payment === 'Q' ? 4 : 1;
@@ -112,7 +105,7 @@ router.route('/application')
                 var details = {
                     application_id: results.application._id,
                     application_type: results.application.application_type,
-                    permit: 'business',
+                    permit: data.permit_type,
                     payment_status: results.payment.status,
                     created_by,
                     account_id: created_by,
@@ -125,7 +118,7 @@ router.route('/application')
                 console.log('docket result :', result);
 
                 // UPDATE BUSINESS PERMIT
-                return BusinessApplicationDao.modifyById(results.application._id, { reference_no: result.reference_no });
+                return ApplicationDao.modifyById(results.application._id, { reference_no: result.reference_no, "details.reference_no": result.reference_no });
             })
             .then((result) => {
                 results.application = result;
@@ -136,12 +129,12 @@ router.route('/application')
                     name: user_name.first,
                     reference_no: result.reference_no,
                     transaction_no: results.payment.transaction_no,
-                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=business&ref_no=${result.reference_no}`
+                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=${data.permit_type}&ref_no=${result.reference_no}`
                 }
                 return sendgrid.sendEmail(user_email, "SUCCESSFUL_APPLICATION_CREATION_TEMPLATE", substitutions)
             })
             .then((result) => {
-                console.log('creating business notification result :', result)
+                console.log('creating application notification result :', result)
                 res.json(results);
             }).catch((errors) => {
                 console.log('errors :', errors);
@@ -149,86 +142,36 @@ router.route('/application')
             });
     })
 
-router.route('/:id')
+router.route('/reference/:reference_no')
     .get((req, res) => {
-        BusinessApplicationDao.findOneByID(req.params.id)
+        ApplicationDao.findOneByReference(req.params.reference_no)
             .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-    .post((req, res) => {
-        BusinessApplicationDao.modifyById(req.params.id, req.body)
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-
-router.route('/transactions/:id')
-    .get((req, res) => {
-        console.log("transactions id data: " + JSON.stringify(req.params.id))
-        BusinessApplicationDao.find({ owner_details: { email: req.params.id } })
-            .then((result) => {
-                console.log("transaction find result data:" + JSON.stringify(result))
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-    .post((req, res) => {
-        BusinessApplicationDao.modifyById(req.params.id, req.body)
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-
-router.route('/product')
-    .get((req, res) => {
-        BusinessPermitDao.findAll()
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-    .post((req, res) => {
-        BusinessPermitDao.create(req.body)
-            .then((result) => {
-                res.json(result)
-            }).catch((errors) => {
-                res.json({
-                    errors
-                })
-            });
-    })
-
-
-router.route('/application/reference/:reference_no')
-    .get((req, res) => {
-        const reference_no = req.params.reference_no;
-        console.log('reference_no :', reference_no);
-        BusinessApplicationDao.findOneByReference(reference_no)
-            .then((result) => {
-                console.log('result :', result);
-                if (!result) res.json({ errors: { message: "Invalid Reference Number" } })
+                console.log('findOneByReference result :', result);
                 res.json(result);
             }).catch((err) => {
-                console.log('err :', err);
+                console.log('findOneByReference err :', err);
+                res.json({ errors: err });
+            });
+    })
+
+router.route('/:id')
+    .get((req, res) => {
+        ApplicationDao.findOneByID(req.params.id)
+            .then((result) => {
+                console.log('findOneByID result :', result);
+                res.json(result);
+            }).catch((err) => {
+                console.log('findOneByID err :', err);
+                res.json({ errors: err });
+            });
+    })
+    .post((req, res) => {
+        ApplicationDao.modifyById(req.params.id, req.body)
+            .then((result) => {
+                console.log('modifyById result :', result);
+                res.json(result);
+            }).catch((err) => {
+                console.log('modifyById err :', err);
                 res.json({ errors: err });
             });
     })
