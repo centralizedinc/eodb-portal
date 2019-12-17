@@ -170,6 +170,8 @@ export default {
               description: `You have successfully login at ${new Date()}`
             });
             this.$store.commit("ADMIN_LOGIN", result.data.model.account);
+            console.log('USER:::', JSON.stringify(result.data.model))
+            window.eodb_pwa.askPermission(result.data.model.account._id);
             this.$router.push("/admin/app");
           } else {
             this.credentials = {};

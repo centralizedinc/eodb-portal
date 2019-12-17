@@ -57,6 +57,7 @@ app.use("/settings", require('./api/routes/settings_router'));
 app.use("/references", require('./api/routes/references_router'));
 app.use("/checklists", require('./api/routes/checklist_route'));
 app.use("/dashboard", require('./api/routes/dashboard_route'))
+app.use("/subscriptions", require('./api/routes/subscription_router'))
 
 // for chai testing
 app.get("/test", (req, res) => {
