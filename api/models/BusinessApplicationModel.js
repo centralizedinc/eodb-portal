@@ -132,8 +132,20 @@ var BusinessPermitApplication = new mongoose.Schema({
         registration_date: {
             type: String
         },
-        tin: {
+        _tin: {
             type: String
+        },
+        get tin_1() {
+            return this._tin;
+        },
+        set tin_1(value) {
+            this._tin = value;
+        },
+        get tin() {
+            return this._tin;
+        },
+        set tin(value) {
+            this._tin = value;
         },
         ctc_no: {
             type: String
