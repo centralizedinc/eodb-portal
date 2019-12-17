@@ -29,7 +29,7 @@ function getContent(details) {
                     {
                         text: "BAYAN  NG  SAN  ANTONIO",
                         fontSize: 12,
-                        bold: true,
+                        bold: true,  
                         characterSpacing: 1,
                         alignment: 'left',
                         // right,down,left,up

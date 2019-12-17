@@ -1,5 +1,16 @@
 <template>
   <div id="app">
+    <a-alert
+      :message="title"
+      :description="description"
+      type="info"
+      showIcon
+      v-if="show"
+      :banner="true"
+      :closeText="button"
+      :closable="true"
+      :afterClose="refreshApp"
+    />
     <transition name="fade">
       <router-view></router-view>
     </transition>
@@ -13,9 +24,10 @@ export default {
     return{
       refreshing: false,
       registration: null,
-      snackBtnText: "",
-      snackWithBtnText: "",
-      snackWithButtons: false,
+      title:"",
+      description: "",
+      button: "",
+      show: false,
       timeout: 0
     }
   },
@@ -25,11 +37,10 @@ export default {
   methods:{
   init() {
       document.addEventListener("swoffline", e => {
-        // this.registration = e.detail;
-        // this.snackBtnText = 'Refresh';
-        this.snackWithBtnText =
+        this.title = "No Connection"
+        this.button = "Retry";
+        this.description =
           "No internet connection found. App is running in offline mode.";
-        // this.snackWithButtons = true;
       });
       document.addEventListener("swUpdated", this.showRefreshUI, {
         once: true
@@ -42,10 +53,10 @@ export default {
     },
     showRefreshUI(e) {
       this.registration = e.detail;
-      this.snackBtnText = "Refresh";
-      this.snackWithBtnText =
-        "Version " + process.env.VUE_APP_VERSION + " is already available!";
-      this.snackWithButtons = true;
+      this.button = "Refresh";
+      this.title = "New Version Available"
+      this.description ="New version is already available! Please refresh.";
+      this.show = true;
     },
     refreshApp() {
       this.updateExists = false;
