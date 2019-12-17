@@ -14,6 +14,15 @@
           <a-tooltip title="Evaluate">
             <a-button type="primary" icon="file-search" @click="evaluate(record)"></a-button>
           </a-tooltip>
+          <a-popconfirm
+            title="Click PROCEED to unclaim this application"
+            okText="Proceed"
+            @confirm="unclaim(record)"
+          >
+            <a-tooltip title="Unclaim">
+              <a-button type="primary" ghost icon="logout"></a-button>
+            </a-tooltip>
+          </a-popconfirm>
         </a-button-group>
       </span>
     </a-table>
@@ -68,9 +77,9 @@ export default {
     this.init();
   },
   computed: {
-      dockets(){
-          return this.$store.state.dockets.dockets_outbox
-      }
+    dockets() {
+      return this.$store.state.dockets.dockets_outbox;
+    }
   },
   methods: {
     init() {
@@ -108,7 +117,36 @@ export default {
         });
     },
     evaluate(record) {
-        console.log('record :', record);
+      console.log("record :", record);
+      this.$store
+        .dispatch("GET_APPLICATION_BY_REF", record.reference_no)
+        .then(result => {
+          console.log('GET_APPLICATION_BY_REF result :', result);
+          this.$store.commit("REVIEW", result);
+          this.$router.push(`/admin/app/application/`);
+        })
+        .catch(err => {
+          console.log('GET_APPLICATION_BY_REF err :', err);
+        });
+    },
+    unclaim(record) {
+      this.loading = true;
+      this.$store
+        .dispatch("UNCLAIM_DOCKET", record.reference_no)
+        .then(result => {
+          console.log("unclaim result :", result);
+          return this.$store.dispatch("GET_DOCKETS_OUTBOX", true);
+        })
+        .then(result => {
+          return this.$store.dispatch("GET_DOCKETS_INBOX", true);
+        })
+        .then(result => {
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log("unclaim err :", err);
+          this.loading = false;
+        });
     }
   }
 };

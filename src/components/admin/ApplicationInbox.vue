@@ -14,9 +14,11 @@
           <a-tooltip title="View">
             <a-button type="primary" icon="search" @click="view(record)"></a-button>
           </a-tooltip>
-          <a-tooltip title="Claim">
-            <a-button type="primary" ghost icon="login" @click="claim(record)"></a-button>
-          </a-tooltip>
+          <a-popconfirm title="Click PROCEED to claim this application" okText="Proceed" @confirm="claim(record)">
+            <a-tooltip title="Claim">
+              <a-button type="primary" ghost icon="login"></a-button>
+            </a-tooltip>
+          </a-popconfirm>
         </a-button-group>
       </span>
     </a-table>
@@ -142,11 +144,13 @@ export default {
     view(record) {
       console.log(JSON.stringify(record));
       this.docket = record;
-      this.$http
-        .get(`/dockets/applications/${record.permit}/${record.reference_no}`)
+      // this.$http
+      //   .get(`/dockets/applications/${record.permit}/${record.reference_no}`)
+      this.$store
+        .dispatch("GET_APPLICATION_BY_REF", record.reference_no)
         .then(result => {
           this.visible = true;
-          this.application_details = result.data;
+          this.application_details = result;
           console.log(JSON.stringify(this.application_details));
         });
     },
@@ -155,8 +159,15 @@ export default {
 
       this.$store
         .dispatch("CLAIM_DOCKET", record.reference_no)
-        .then(application_details => {
-          this.$store.commit("REVIEW", application_details);
+        .then(result => {
+          console.log("CLAIM_DOCKET result :", result.data);
+          return this.$store.dispatch(
+            "GET_APPLICATION_BY_REF",
+            record.reference_no
+          );
+        })
+        .then(result => {
+          this.$store.commit("REVIEW", result);
           this.$notification.success({
             message: "Claimed!",
             description: `You have claimed Application #${record.reference_no}`
@@ -164,7 +175,10 @@ export default {
           return this.$store.dispatch("GET_DOCKETS_INBOX", true);
         })
         .then(result => {
-          console.log('new result :', result);
+          return this.$store.dispatch("GET_DOCKETS_OUTBOX", true);
+        })
+        .then(result => {
+          console.log("new result :", result);
           this.loading = false;
           this.$router.push(`/admin/app/application/`);
         })

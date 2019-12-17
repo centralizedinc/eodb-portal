@@ -3,18 +3,23 @@ var PermitModelSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    description:{
-        type:String
+    description: {
+        type: String
     },
-    approvers:[],
-    checklists:[{
-        department:String,
-        name:String,
-        description:String
+    approvers: [],
+    checklists: [{
+        department: String,
+        name: String,
+        description: String
     }],
-    requirements:[{
-        name:String,
-        application_type:String
+    requirements: [{
+        name: String,
+        keyword: String,
+        required: {
+            type: Boolean,
+            default: false
+        },
+        application_type: String
     }],
     primary: {
         type: Boolean,
@@ -23,8 +28,8 @@ var PermitModelSchema = new mongoose.Schema({
     path: {
         type: String
     },
-    api_route:{
-        type:String
+    api_route: {
+        type: String
     },
     date_created: {
         type: Date

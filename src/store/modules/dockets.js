@@ -1,5 +1,6 @@
 import DocketsAPI from '../../api/DocketsAPI';
 import BusinessPermitAPI from '../../api/BusinessPermitAPI';
+import ApplicationAPI from '../../api/ApplicationAPI';
 
 function initialState() {
     return {
@@ -30,6 +31,10 @@ const mutations = {
         // })
         state.dockets = initialState().dockets;
     },
+    ADMIN_LOGOUT(state) {
+        state.dockets_inbox = initialState().dockets_inbox;
+        state.dockets_outbox = initialState().dockets_outbox;
+    },
     SET_DOCKETS_INBOX(state, data) {
         state.dockets_inbox = data;
     },
@@ -53,26 +58,37 @@ const actions = {
             } else resolve(context.state.dockets)
         })
     },
-    GET_APPLICATION_BY_REF(context, { type, reference_no }) {
+    GET_APPLICATION_BY_REF(context, reference_no) {
         return new Promise((resolve, reject) => {
-            if (!type || !reference_no) return reject("Invalid Request");
-            console.log('type :', type);
+            if (!reference_no) return reject("Invalid Request");
             console.log('reference_no :', reference_no);
-            if (type === 'business') {
-                new BusinessPermitAPI(context.rootState.user_session.token)
-                    .getApplicationByRef(reference_no)
-                    .then((result) => {
-                        console.log('result :', result);
-                        if (result.data && !result.data.errors) {
-                            resolve(result.data);
-                        } else
-                            reject(result.data.errors);
-                    }).catch((err) => {
-                        console.log('getApplicationByRef err :', err);
-                        reject(err)
-                    });
-            }
-            else return reject("Invalid Request");
+            new ApplicationAPI(context.rootState.user_session.token)
+                .getApplicationByRef(reference_no)
+                .then((result) => {
+                    console.log('GET_APPLICATION_BY_REF result :', result);
+                    if (result.data && !result.data.errors) {
+                        resolve(result.data.details);
+                    } else
+                        reject(result.data.errors);
+                }).catch((err) => {
+                    console.log('GET_APPLICATION_BY_REF err :', err);
+                    reject(err)
+                });
+            // if (type === 'business') {
+            //     new BusinessPermitAPI(context.rootState.user_session.token)
+            //         .getApplicationByRef(reference_no)
+            //         .then((result) => {
+            //             console.log('result :', result);
+            //             if (result.data && !result.data.errors) {
+            //                 resolve(result.data);
+            //             } else
+            //                 reject(result.data.errors);
+            //         }).catch((err) => {
+            //             console.log('getApplicationByRef err :', err);
+            //             reject(err)
+            //         });
+            // }
+            // else return reject("Invalid Request");
         })
     },
     GET_DOCKETS_INBOX(context, refresh) {
@@ -109,14 +125,17 @@ const actions = {
             } else resolve(context.state.dockets_outbox)
         })
     },
-    CLAIM_DOCKET(context, docket_reference){
+    CLAIM_DOCKET(context, docket_reference) {
         return new DocketsAPI(context.rootState.admin_session.token).claimDocket(docket_reference);
     },
-    APPROVE_DOCKET(context, {docket_reference, remarks}){
-        return new DocketsAPI(context.rootState.admin_session.token).approveDocket({docket_reference, remarks});
+    UNCLAIM_DOCKET(context, docket_reference) {
+        return new DocketsAPI(context.rootState.admin_session.token).unclaimDocket(docket_reference);
     },
-    REJECT_DOCKET(context, {docket_reference, remarks}){
-        return new DocketsAPI(context.rootState.admin_session.token).rejectDocket({docket_reference, remarks});
+    APPROVE_DOCKET(context, { docket_reference, remarks }) {
+        return new DocketsAPI(context.rootState.admin_session.token).approveDocket({ docket_reference, remarks });
+    },
+    REJECT_DOCKET(context, { docket_reference, remarks }) {
+        return new DocketsAPI(context.rootState.admin_session.token).rejectDocket({ docket_reference, remarks });
     }
 }
 

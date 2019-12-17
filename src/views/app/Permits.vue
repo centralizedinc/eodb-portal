@@ -16,13 +16,10 @@
             :lg="{ span: 9 }"
             v-if="item.primary"
           >
-            <p
-              class="item-buttons primary-item-buttons"
-              @click="$router.push(item.path)"
-            >{{ item.title }}</p>
+            <p class="item-buttons primary-item-buttons" @click="openPath(item)">{{ item.name }}</p>
           </a-col>
           <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" :md="{ span: 6 }" :lg="{ span: 5 }" v-else>
-            <p class="item-buttons" @click="$router.push(item.path)">{{item.name}}</p>
+            <p class="item-buttons" @click="openPath(item)">{{item.name}}</p>
           </a-col>
         </transition>
       </a-row>
@@ -101,7 +98,12 @@ export default {
         console.log("GET_PERMIT_TYPES err :", err);
       });
   },
-  methods: {}
+  methods: {
+    openPath(item) {
+      this.$store.commit("SET_FILING_PERMIT", item);
+      this.$router.push(item.path);
+    }
+  }
 };
 </script>
 

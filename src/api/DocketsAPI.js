@@ -34,7 +34,17 @@ export default class DocketsAPI {
      * @param {String} docket_reference
      */
     claimDocket(docket_reference) {
+        console.log('docket_reference :', docket_reference);
         return axios.post('dockets/claim', { docket_reference });
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} docket_reference
+     */
+    unclaimDocket(docket_reference) {
+        console.log('docket_reference :', docket_reference);
+        return axios.post('dockets/unclaim', { docket_reference });
     }
 
     /**

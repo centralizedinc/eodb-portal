@@ -2,10 +2,10 @@
 const router = require("express").Router();
 
 var DocketsDao = require('../dao/DocketsDao');
-var BussinessApplicationDao = require('../dao/BusinessApplicationDao');
 var DocketsActivityDao = require('../dao/DocketsActivityDao');
 var BusinessPermitDao = require('../dao/BusinessPermitDao');
 var AccountDao = require('../dao/AccountDao');
+var ApplicationDao = require('../dao/ApplicationDao');
 
 const jwt = require('jsonwebtoken');
 const sendgrid = require('../utils/email');
@@ -31,7 +31,7 @@ router.route('/')
 router.route('/inbox')
     .get((req, res) => {
         // const { department } = req.query; 
-        const { department } = jwt.decode(req.headers.access_token); 
+        const { department } = jwt.decode(req.headers.access_token);
         console.log('department :', department);
         if (!department) return res.json({ errors: "Invalid Query. `department` is required." })
         DocketsDao.find({
@@ -67,10 +67,10 @@ router.route('/outbox')
                 }
             }
         }).then((results) => {
-            console.log('claim results :', results);
+            console.log('outbox results :', results);
             res.json(results)
         }).catch((err) => {
-            console.log('claim err :', err);
+            console.log('outbox err :', err);
             res.json({ errors: err })
         });
     })
@@ -78,7 +78,9 @@ router.route('/outbox')
 router.route('/claim')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference } = req.body, results = {}, approver = account_id;
+        var { docket_reference } = req.body, docket = {}, approver = account_id;
+        console.log('docket_reference :', docket_reference);
+        console.log('department :', department);
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -87,7 +89,8 @@ router.route('/claim')
             "activities.$.date_claimed": new Date()
         })
             .then((result) => {
-                results = result;
+                console.log('claim result :', docket);
+                docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -99,8 +102,41 @@ router.route('/claim')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-                console.log('results :', results);
-                res.json(results)
+                console.log('claim docket_activity results :', result);
+                res.json(docket)
+            })
+            .catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
+router.route('/unclaim')
+    .post((req, res) => {
+        const { department, account_id } = jwt.decode(req.headers.access_token);
+        var { docket_reference } = req.body, docket = {}, approver = account_id;
+        DocketsDao.modifyOne({
+            reference_no: docket_reference,
+            "activities.department": department
+        }, {
+            "activities.$.approver": null,
+            "activities.$.date_claimed": null
+        })
+            .then((result) => {
+                console.log('unclaim result :', result);
+                docket = result;
+                const docket_activity = {
+                    reference_no: result.reference_no,
+                    application_id: result.application_id,
+                    department,
+                    approver,
+                    action: "unclaim",
+                    date_created: new Date()
+                }
+                return DocketsActivityDao.create(docket_activity)
+            })
+            .then((result) => {
+                console.log('unclaim docket_activity results :', result);
+                res.json(docket)
             })
             .catch((errors) => {
                 res.json({ errors })
@@ -164,12 +200,12 @@ function processApprovedApplication(reference_no) {
             .then((result) => {
                 results.docket = result;
                 // Update Application
-                return BussinessApplicationDao.modifyOne({ reference_no }, { status: 1 });
+                return ApplicationDao.findOneByReference(reference_no);
             })
             .then((application) => {
                 results.application = application;
-                // Create Permit
-                return BusinessPermitDao.create(application);
+                // Create Permit based on permit type
+                if (application.permit_type === "business") return BusinessPermitDao.create(application.details);
             })
             .then((permit) => {
                 results.permit = permit;
@@ -178,11 +214,15 @@ function processApprovedApplication(reference_no) {
                 return AccountDao.findOneByID(permit.account_id);
             })
             .then((user) => {
-                // Send Email Notifiation
+                // GET PERMIT CLASSIFICATION
+                const permit_classification =
+                    results.application.permit_type === "business" ? "Business" : "";
+
+                // Send Email Notification
                 const substitutions = {
                     name: user.name.first,
                     reference_no,
-                    permit_classification: "Business",
+                    permit_classification,
                     date: new Date(),
                     link: `${process.env.VUE_APP_HOME_URL}app/permits?ref_no=${reference_no}`
                 }
@@ -253,7 +293,7 @@ function processRejectedApplication(reference_no) {
             .then((result) => {
                 results.docket = result;
                 // Update Application
-                return BussinessApplicationDao.modifyOne({ reference_no }, { status: 2 });
+                return ApplicationDao.findOneByReference(reference_no);
             })
             .then((application) => {
                 results.application = application;
@@ -262,6 +302,10 @@ function processRejectedApplication(reference_no) {
                 return AccountDao.findOneByID(permit.account_id);
             })
             .then((user) => {
+                // GET PERMIT CLASSIFICATION
+                const permit_classification =
+                    results.application.permit_type === "business" ? "Business" : "";
+
                 // Send Email Notifiation
                 const substitutions = {
                     name: user.name.first,
@@ -374,7 +418,8 @@ router.route('/:id')
 
 router.route('/applications/business/:ref_no')
     .get((req, res) => {
-        BussinessApplicationDao.findOneByReference(req.params.ref_no)
+        // BussinessApplicationDao.findOneByReference(req.params.ref_no)
+        ApplicationDao.findOneByReference(req.params.ref_no)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
