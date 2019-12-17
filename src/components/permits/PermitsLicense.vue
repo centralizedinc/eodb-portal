@@ -1,7 +1,7 @@
 <template>
   <a-table :columns="cols" :dataSource="permits" :loading="loading">
     <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
-    <template slot="date_created" slot-scope="text">{{formatDate(text, null, true)}}</template>
+    <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
     <template slot="action" slot-scope="text, record">
       <a-popconfirm
         title="Click PROCEED to redirect in Renewal Form."
@@ -32,7 +32,7 @@ export default {
           scopedSlots: { customRender: "permit_type" }
         },
         {
-          title: "Date Submitted",
+          title: "Date Approved",
           dataIndex: "date_created",
           scopedSlots: { customRender: "date_created" }
         },

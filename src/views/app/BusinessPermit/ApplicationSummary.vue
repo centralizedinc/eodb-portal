@@ -132,10 +132,10 @@
     <a-row class="summary-row">
       <a-col :span="8">Is the place of business rented?</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.is_rented ? 'YES':'NO'}}</a-col>
+      <a-col :span="15">{{form.business_address.is_rented ? 'YES':'NO'}}</a-col>
     </a-row>
 
-    <template v-if="form.business_details.is_rented">
+    <template v-if="form.business_address.is_rented">
       <a-divider
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
@@ -177,7 +177,7 @@
       :columns="line_of_business_columns"
     ></a-table>
 
-    <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly"> 
+    <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly">
       <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }"> -->
       <a-col :span="24">
         <a-button-group>
@@ -187,7 +187,7 @@
       </a-col>
       <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 6 }" style="text-align: right;">
         <a-button :disabled="loading">Save Draft</a-button>
-      </a-col> -->
+      </a-col>-->
     </a-row>
   </a-card>
 </template>
@@ -278,9 +278,11 @@ export default {
         })
         .then(data => {
           const barangays = data.default;
-          console.log('barangay :', barangay);
-          console.log('barangays :', barangays);
-          var brgy_data = barangays.find(v => v.brgyCode === barangay);
+          console.log("barangay :", barangay);
+          console.log("barangays :", barangays);
+          var brgy_data = barangays.find(
+            v => v.brgyCode.toString() === barangay.toString()
+          );
           var brgy_desc = brgy_data.brgyDesc;
           var result_address = "";
           if (unit_no) result_address += `Unit ${unit_no},`;
@@ -338,47 +340,49 @@ export default {
         });
     },
     getRentalAddress() {
-      const {
-        unit_no,
-        bldg_no,
-        bldg_name,
-        subdivision,
-        street,
-        barangay,
-        province,
-        city,
-        region,
-        postal_code
-      } = this.form.business_address.rental_address;
-      var city_desc = "";
-      import(`../../../assets/references/cities/${province}.json`)
-        .then(data => {
-          const cities = data.default;
-          var city_data = cities.find(v => v.citymunCode === city);
-          city_desc = city_data.citymunDesc;
-          return import(`../../../assets/references/barangay/${city}.json`);
-        })
-        .then(data => {
-          const barangays = data.default;
-          var brgy_data = barangays.find(v => v.brgyCode === barangay);
-          var brgy_desc = brgy_data.brgyDesc;
-          var result_address = "";
-          if (unit_no) result_address += `Unit ${unit_no},`;
-          if (bldg_no) result_address += ` ${bldg_no}`;
-          if (bldg_name) result_address += ` ${bldg_name}`;
-          if (subdivision) result_address += ` ${subdivision}`;
-          if (street) result_address += ` ${street}`;
-          if (barangay) result_address += ` ${brgy_desc}`;
-          if (province)
-            result_address += ` ${this.getProvinceByCode(province)}`;
-          if (city) result_address += ` ${city_desc}`;
-          if (region) result_address += `, ${this.getRegionByCode(region)}`;
-          if (postal_code) result_address += `, ${postal_code}`;
-          this.rental_address = result_address.toUpperCase();
-        })
-        .catch(err => {
-          console.log("err :", err);
-        });
+      if (this.form.business_address.is_rented) {
+        const {
+          unit_no,
+          bldg_no,
+          bldg_name,
+          subdivision,
+          street,
+          barangay,
+          province,
+          city,
+          region,
+          postal_code
+        } = this.form.business_address.rental_address;
+        var city_desc = "";
+        import(`../../../assets/references/cities/${province}.json`)
+          .then(data => {
+            const cities = data.default;
+            var city_data = cities.find(v => v.citymunCode === city);
+            city_desc = city_data.citymunDesc;
+            return import(`../../../assets/references/barangay/${city}.json`);
+          })
+          .then(data => {
+            const barangays = data.default;
+            var brgy_data = barangays.find(v => v.brgyCode === barangay);
+            var brgy_desc = brgy_data.brgyDesc;
+            var result_address = "";
+            if (unit_no) result_address += `Unit ${unit_no},`;
+            if (bldg_no) result_address += ` ${bldg_no}`;
+            if (bldg_name) result_address += ` ${bldg_name}`;
+            if (subdivision) result_address += ` ${subdivision}`;
+            if (street) result_address += ` ${street}`;
+            if (barangay) result_address += ` ${brgy_desc}`;
+            if (province)
+              result_address += ` ${this.getProvinceByCode(province)}`;
+            if (city) result_address += ` ${city_desc}`;
+            if (region) result_address += `, ${this.getRegionByCode(region)}`;
+            if (postal_code) result_address += `, ${postal_code}`;
+            this.rental_address = result_address.toUpperCase();
+          })
+          .catch(err => {
+            console.log("err :", err);
+          });
+      }
     },
     getBusinessType(type) {
       if (type === "SP") return "Single Proprietorship";

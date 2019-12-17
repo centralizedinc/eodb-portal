@@ -335,6 +335,7 @@ function processRejectedApplication(reference_no) {
                     title: "Your Application has been declined.",
                     message: `Application with reference #${results.application.reference_no} has been declined.`
                 }
+                console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
                 return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscription/notify/${results.application.account_id}`, notification_message)
             })
             .then((result) => {
