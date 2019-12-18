@@ -27,7 +27,8 @@
       </a-form-item>
     </a-form>
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-      <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+      <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }"> -->
+      <a-col :span="24">
         <a-button-group>
           <a-button disabled>Previous</a-button>
           <a-button type="primary" @click="$emit('next')">Next</a-button>
@@ -35,7 +36,7 @@
       </a-col>
       <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
         <a-button>Save Draft</a-button>
-      </a-col> -->
+      </a-col>-->
     </a-row>
   </a-card>
 </template>
@@ -52,19 +53,34 @@ export default {
     var docs = [];
     this.form.attachments.forEach(attachment => {
       docs.push(attachment.doc_type);
-    })
+    });
     this.selected_documents = docs;
   },
   methods: {
     onDocumentSelect(checkedValues) {
+      console.log("checkedValues :", checkedValues);
       var attachments = [];
-      checkedValues.forEach(doc_type => {
-        attachments.push({
-          doc_type,
-          files: []
-        });
+      // Reuse required
+      this.documents.forEach(doc => {
+        if (doc.hidden) {
+          var req_docs = this.form.attachments.find(
+            v => v.doc_type === doc.keyword
+          );
+          attachments.push(req_docs);
+        }
+        console.log("#attachments :", attachments);
       });
+
+      checkedValues.forEach(doc_type => {
+        var index = this.form.attachments.findIndex(
+          v => v.doc_type === doc_type
+        );
+        if (index > -1) attachments.push(this.form.attachments[index]);
+        else attachments.push({ doc_type, files: [] });
+      });
+      console.log("attachments :", attachments);
       this.form.attachments = attachments;
+      this.$emit("updateDocsPayment", checkedValues);
     }
   }
 };

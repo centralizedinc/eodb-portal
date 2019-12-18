@@ -35,6 +35,7 @@
               :documents="document_data_source"
               @updateGross="updateGross"
               @updateCapital="updateCapital"
+              @updateDocsPayment="updateDocsPayment"
             />
           </a-col>
           <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
@@ -243,6 +244,7 @@ export default {
       ],
       form: {
         application_type: 0,
+        permit_type: "business",
         owner_details: {
           name: {
             first: "",
@@ -326,12 +328,7 @@ export default {
           contact_no: "",
           email: ""
         },
-        attachments: [
-          {
-            doc_type: "dti_sec_cda",
-            files: []
-          }
-        ]
+        attachments: []
       },
       document_columns: [
         {
@@ -419,21 +416,6 @@ export default {
       card_details: {},
       payments_data_source: [
         {
-          description: "CTC or Cedula",
-          fee_type: "local_taxes",
-          amount: 50
-        },
-        {
-          description: "Barangay Clearance",
-          fee_type: "local_taxes",
-          amount: 100
-        },
-        {
-          description: "Police Clearance",
-          fee_type: "local_taxes",
-          amount: 150
-        },
-        {
           description: "Fire Safety and Inspection Fee",
           fee_type: "local_taxes",
           amount: 3000
@@ -452,11 +434,50 @@ export default {
       loading: false,
       errors: [],
       fetching_data: false,
-      installment: null
+      installment: null,
+      departments: []
     };
   },
   created() {
     this.init();
+  },
+  mounted() {
+    console.log('this.$store.state.permits.filing_permit :', this.$store.state.permits.filing_permit);
+    
+    // GET DEPARTMENTS
+    const departments = this.deepCopy(
+      this.$store.state.permits.filing_permit.approvers
+    );
+    console.log('departments :', departments);
+    this.departments = departments;
+    this.form.permit_code = this.$store.state.permits.filing_permit._id;
+
+    // GET REQUIREMENTS
+    const requirements = this.deepCopy(
+      this.$store.state.permits.filing_permit.requirements
+    );
+    console.log("requirements :", requirements);
+    const doc_req = requirements.map(v => {
+      return {
+        title: v.name,
+        status: 0,
+        keyword: v.keyword,
+        hidden: v.required
+      };
+    });
+    
+    doc_req.forEach(v => {
+      if (v.hidden)
+        this.form.attachments.push({
+          doc_type: v.keyword,
+          files: []
+        });
+    });
+    console.log('this.form :', this.form);
+    this.document_data_source = doc_req;
+
+    // To check payments needs to be pay
+    this.updateDocsPayment();
   },
   watch: {
     current_step() {
@@ -488,10 +509,7 @@ export default {
       if (mode && mode === "renewal" && ref_no) {
         this.fetching_data = true;
         this.$store
-          .dispatch("GET_APPLICATION_BY_REF", {
-            type: "business",
-            reference_no: ref_no
-          })
+          .dispatch("GET_APPLICATION_BY_REF", ref_no)
           .then(app => {
             console.log("app :", app);
             this.form.application_type = 1;
@@ -578,7 +596,7 @@ export default {
       );
 
       this.$store
-        .dispatch("CREATE_BUSINESS_PERMIT", {
+        .dispatch("CREATE_APPLICATION", {
           details: {
             payment: {
               method: this.transaction_details.method,
@@ -586,7 +604,8 @@ export default {
               card: this.card_details,
               transaction_details: this.transaction_details
             },
-            data: this.form
+            data: this.form,
+            departments: this.departments
           },
           files
         })
@@ -595,9 +614,10 @@ export default {
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          this.$router.push("/app/permits");
+          this.$router.push("/app/tracker");
         })
         .catch(err => {
+          this.loading = false;
           console.log("CREATE_BUSINESS_PERMIT err :", err);
         });
     },
@@ -612,6 +632,7 @@ export default {
           v => v.doc_type === keyword
         );
         this.form.attachments[attachment_index].files.push(file);
+        console.log("this.form.attachments :", this.form.attachments);
         this.$message.info(
           `${this.document_data_source[i].title} file uploaded.`
         );
@@ -984,7 +1005,40 @@ export default {
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
     },
-    updateGross(amount) {}
+    updateGross(amount) {},
+    updateDocsPayment(values) {
+      const payments = [
+        {
+          description: "Business Permit Fee",
+          fee_type: "application_fee",
+          amount: 0
+        },
+        {
+          description: "Convenience Fee",
+          fee_type: "convenience_fee",
+          amount: 50
+        },
+        {
+          description: "Fire Safety and Inspection Fee",
+          fee_type: "local_taxes",
+          amount: 3000
+        }
+      ];
+      const data = this.deepCopy(
+        this.$store.state.permits.filing_permit.requirements
+      ).filter(v => !v.required);
+      console.log('data :', data);
+      data.forEach(dt => {
+        var is_included = values ? values.includes(dt.keyword) : false;
+        if (!is_included)
+          payments.push({
+            description: dt.name,
+            fee_type: dt.fee_type,
+            amount: dt.amount
+          });
+      });
+      this.payments_data_source = payments;
+    }
   }
 };
 </script>

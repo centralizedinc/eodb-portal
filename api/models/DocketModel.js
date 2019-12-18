@@ -55,8 +55,15 @@ var DocketSchema = new mongoose.Schema({
         approver: {
             type: String
         },
-        last_approver: {
-            type: Boolean
+        status: {
+            type: Number,
+            default: 0
+            /**
+             * 0 - In Progress
+             * 1 - Approved
+             * 2 - Rejected
+             * 3 - Claimed
+             */
         },
         department: {
             type: String

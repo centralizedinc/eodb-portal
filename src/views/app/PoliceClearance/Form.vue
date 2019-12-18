@@ -124,7 +124,7 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" justify="space-between">
+              <!-- <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
@@ -143,7 +143,7 @@
                     style="color: red"
                   >{{checkErrors('mode_of_payment')}}</span>
                 </a-col>
-              </a-row>
+              </a-row>-->
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -197,6 +197,8 @@ export default {
       current_step: 0,
       form_components: [PersonalDetails, ContactAddress, ApplicationSummary],
       form: {
+        application_type: 0,
+        permit_type: "police",
         personal_details: {
           name: {
             // first: "",
@@ -255,19 +257,19 @@ export default {
         request_for: "",
         attachments: [
           {
-            doc_type: "dti_sec_cda",
+            doc_type: "barangay",
             files: []
           }
-        ],
-        required_documents: {
-          civil_status: "",
-          birthplace: "",
-          monthly_salary: "",
-          occupation: "",
-          height: "",
-          weight: "",
-          icr_no: ""
-        }
+        ]
+        // required_documents: {
+        //   civil_status: "",
+        //   birthplace: "",
+        //   monthly_salary: "",
+        //   occupation: "",
+        //   height: "",
+        //   weight: "",
+        //   icr_no: ""
+        // }
       },
       document_columns: [
         {
@@ -287,29 +289,30 @@ export default {
           scopedSlots: { customRender: "action" }
         }
       ],
-      document_data_source: [
-        {
-          title: "DTI/SEC/CDA Certificate",
-          status: 0,
-          keyword: "dti_sec_cda",
-          hidden: true
-        },
-        {
-          title: "Residence Certificate",
-          status: 0,
-          keyword: "residence"
-        },
-        {
-          title: "Barangay Clearance",
-          status: 0,
-          keyword: "barangay"
-        },
-        {
-          title: "Police Clearance",
-          status: 0,
-          keyword: "police"
-        }
-      ],
+      document_data_source: null,
+      // [
+      //   {
+      //     title: "DTI/SEC/CDA Certificate!!!!!",
+      //     status: 0,
+      //     keyword: "dti_sec_cda",
+      //     hidden: true
+      //   },
+      //   {
+      //     title: "Residence Certificate",
+      //     status: 0,
+      //     keyword: "residence"
+      //   },
+      //   {
+      //     title: "Barangay Clearance",
+      //     status: 0,
+      //     keyword: "barangay"
+      //   },
+      //   {
+      //     title: "Police Clearance",
+      //     status: 0,
+      //     keyword: "police"
+      //   }
+      // ],
       steps: [
         // {
         //   title: "Document Checklist",
@@ -400,26 +403,26 @@ export default {
       },
       card_details: {},
       payments_data_source: [
-        {
-          description: "CTC or Cedula",
-          amount: 1000
-        },
+        // {
+        //   description: "CTC or Cedula",
+        //   amount: 1000
+        // },
         {
           description: "Barangay Clearance",
           amount: 1000
         },
-        {
-          description: "Police Clearance",
-          amount: 1000
-        },
-        {
-          description: "Business Permit Fee",
-          amount: 1000
-        },
-        {
-          description: "Fire Safety and Inspection Fee",
-          amount: 1000
-        },
+        // {
+        //   description: "Police Clearance",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Business Permit Fee",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Fire Safety and Inspection Fee",
+        //   amount: 1000
+        // },
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
@@ -441,13 +444,41 @@ export default {
   computed: {
     required_documents() {
       var docs = [];
+      console.log(
+        "document data source @ required documents: " +
+          JSON.stringify(this.document_data_source)
+      );
+
       this.form.attachments.forEach(attachment => {
         docs.push(
           this.document_data_source.find(v => v.keyword === attachment.doc_type)
         );
+        // docs.push(this.document_data_source[0]);
       });
+      console.log("required documents data docs: " + JSON.stringify(docs));
       return docs;
     }
+  },
+  mounted() {
+    const requirements = this.deepCopy(
+      this.$store.state.permits.filing_permit.requirements
+    );
+    console.log("requirements :", JSON.stringify(requirements));
+    const doc_req = requirements.map(v => {
+      return {
+        title: v.name,
+        status: 0,
+        keyword: v.keyword,
+        hidden: v.required
+      };
+    });
+
+    console.log("doc rep data: " + JSON.stringify(doc_req));
+    this.document_data_source = doc_req;
+    console.log(
+      "document data soure: " + JSON.stringify(this.document_data_source)
+    );
+    // this.updateDocsPayment();
   },
   methods: {
     init() {
@@ -514,7 +545,7 @@ export default {
         });
       }
       this.$store
-        .dispatch("CREATE_POLICE_CLEARANCE", {
+        .dispatch("CREATE_APPLICATION", {
           details: {
             payment: {
               method: this.transaction_details.method,

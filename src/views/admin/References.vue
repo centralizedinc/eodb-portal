@@ -6,8 +6,13 @@
     </a-col>
     <a-col :span="24">
          <a-table style="margin-top: 2vh" :dataSource="settings" :columns="cols" :bordered="true" :loading="loading">
-             <span slot="date" slot-scope="text, record">
+             <span slot="date" slot-scope="text">
                 {{formatDate(text)}}
+            </span>
+            <span slot="action" slot-scope="text, record">
+                <a-button-group>                    
+                    <a-button type="primary" icon="edit" @click="edit(record)"></a-button>
+                </a-button-group>
             </span>
          </a-table>
     </a-col>   
@@ -41,6 +46,7 @@
 export default {
     data(){
         return{
+            edit_mode:false,
             loading:false,
             visible:false,
             settings:[],
@@ -68,6 +74,11 @@ export default {
                     dataIndex:'date_modified',
                     scopedSlots:{customRender:'date'}
                 },
+                {
+                    title:'Actions',
+                    dataIndex:'_id',
+                    scopedSlots:{customRender:'action'}
+                },
             ]
         }
     },
@@ -86,23 +97,48 @@ export default {
         },
         onClose(){
             this.visible = false;
+            this.setting = {}
+        },
+        edit(record){
+            this.edit_mode = true;
+            this.setting = this.deepCopy(record)
+            this.visible = true
         },
         submit(){
             this.loading = true;
-            this.$http.post('/settings', this.setting)
-            .then(result=>{
-                console.log(JSON.stringify(result))
-                this.loading = false;
-                this.visible = false;
-                this.$notification.success({
-                    message: 'Success',
-                    description: 'New Record Created!'
+            if(this.edit_mode){
+                this.$http.post(`/settings/${this.setting._id}`, this.setting)
+                .then(result=>{
+                    console.log(JSON.stringify(result))
+                    this.loading = false;
+                    this.visible = false;
+                    this.setting = {}
+                    this.$notification.success({
+                        message: 'Success',
+                        description: 'Record Updated!'
+                    })
+                    this.init();
                 })
-                this.init();
-            })
-            .catch(error=>{
-                console.log(error)
-            })
+                .catch(error=>{
+                    console.log(error)
+                })
+            }else{
+                this.$http.post('/settings', this.setting)
+                .then(result=>{
+                    console.log(JSON.stringify(result))
+                    this.loading = false;
+                    this.visible = false;
+                    this.setting = {}
+                    this.$notification.success({
+                        message: 'Success',
+                        description: 'New Record Created!'
+                    })
+                    this.init();
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+            }
         }
     }
 }

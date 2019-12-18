@@ -1,14 +1,11 @@
 "use strict"
-const router = require("express").Router();
+const router = require("express").Router()
 
-const PoliceApplicationDao = require('../dao/PoliceApplicationDao')
-const jwt = require('jsonwebtoken');
-// const DocketsDao = require('../dao/DocketsDao');
-// const PaymentDao = require('../dao/PaymentDao');
+const CedulaApplicationDao = require('../dao/CedulaApplicationDao')
 
 router.route('/')
     .get((req, res) => {
-        PoliceApplicationDao.findAll()
+        CedulaApplicationDao.findAll()
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -18,8 +15,7 @@ router.route('/')
             });
     })
     .post((req, res) => {
-        console.log("police application dao: " + JSON.stringify(req.body))
-        PoliceApplicationDao.create(req.body)
+        CedulaApplicationDao.create(req.body)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -28,10 +24,9 @@ router.route('/')
                 })
             });
     })
-
 router.route('/:id')
     .get((req, res) => {
-        PoliceApplicationDao.findOneByID(req.params.id)
+        CedulaApplicationDao.findOneByID(req.params.id)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -41,7 +36,7 @@ router.route('/:id')
             });
     })
     .post((req, res) => {
-        PoliceApplicationDao.modifyById(req.params.id, req.body)
+        CedulaApplicationDao.modifyById(req.params.id, req.body)
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {

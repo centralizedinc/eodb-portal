@@ -42,6 +42,7 @@ app.use('/auth', require('./api/routes/auth'))
 app.use("/permits/business", require('./api/routes/business_permit'));
 app.use("/permits/police", require('./api/routes/police_clearance_router'));
 app.use("/permits/barangay", require('./api/routes/barangay_clearance'));
+app.use("/permits/cedula", require('./api/routes/cedula_router'));
 app.use("/permits", require('./api/routes/permit_router'));
 app.use("/accounts", require('./api/routes/account_router'))
 app.use("/activities", require('./api/routes/activities_router'))
@@ -58,6 +59,8 @@ app.use("/settings", require('./api/routes/settings_router'));
 app.use("/references", require('./api/routes/references_router'));
 app.use("/checklists", require('./api/routes/checklist_route'));
 app.use("/dashboard", require('./api/routes/dashboard_route'))
+app.use("/subscriptions", require('./api/routes/subscription_router'))
+app.use("/applications", require('./api/routes/application_router'));
 
 // for chai testing
 app.get("/test", (req, res) => {
