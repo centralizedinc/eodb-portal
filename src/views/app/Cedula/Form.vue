@@ -18,7 +18,7 @@
 
     <!-- Fill up form -->
     <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
-      <h1 style="margin-top: 5vh;">Police Clearance Application</h1>
+      <h1 style="margin-top: 5vh;">Community Tax Certificate</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
@@ -36,7 +36,7 @@
         <!-- Attachments -->
         <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
           <a-affix :offsetTop="60">
-            <a-card
+            <!-- <a-card
               :headStyle="{ 
                 background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
                 color: 'white', 
@@ -107,7 +107,7 @@
                 v-if="checkErrors('attachments')"
                 style="color: red"
               >{{checkErrors('attachments')}}</span>
-            </a-card>
+            </a-card>-->
 
             <!-- Payment Details -->
             <a-card
@@ -258,29 +258,30 @@ export default {
           scopedSlots: { customRender: "action" }
         }
       ],
-      document_data_source: [
-        {
-          title: "DTI/SEC/CDA Certificate",
-          status: 0,
-          keyword: "dti_sec_cda",
-          hidden: true
-        },
-        {
-          title: "Residence Certificate",
-          status: 0,
-          keyword: "residence"
-        },
-        {
-          title: "Barangay Clearance",
-          status: 0,
-          keyword: "barangay"
-        },
-        {
-          title: "Police Clearance",
-          status: 0,
-          keyword: "police"
-        }
-      ],
+      document_data_source: null,
+      //  [
+      //   {
+      //     title: "DTI/SEC/CDA Certificate",
+      //     status: 0,
+      //     keyword: "dti_sec_cda",
+      //     hidden: true
+      //   },
+      //   {
+      //     title: "Residence Certificate",
+      //     status: 0,
+      //     keyword: "residence"
+      //   },
+      //   {
+      //     title: "Barangay Clearance",
+      //     status: 0,
+      //     keyword: "barangay"
+      //   },
+      //   {
+      //     title: "Police Clearance",
+      //     status: 0,
+      //     keyword: "police"
+      //   }
+      // ],
       steps: [
         {
           title: "Personal Details",
@@ -342,25 +343,29 @@ export default {
       card_details: {},
       payments_data_source: [
         {
-          description: "CTC or Cedula",
+          description: "Application Fee",
           amount: 1000
         },
-        {
-          description: "Barangay Clearance",
-          amount: 1000
-        },
-        {
-          description: "Police Clearance",
-          amount: 1000
-        },
-        {
-          description: "Business Permit Fee",
-          amount: 1000
-        },
-        {
-          description: "Fire Safety and Inspection Fee",
-          amount: 1000
-        },
+        // {
+        //   description: "CTC or Cedula",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Barangay Clearance",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Police Clearance",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Business Permit Fee",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Fire Safety and Inspection Fee",
+        //   amount: 1000
+        // },
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
@@ -382,13 +387,39 @@ export default {
   computed: {
     required_documents() {
       var docs = [];
+      console.log(
+        "document data source @ required documents: " +
+          JSON.stringify(this.document_data_source)
+      );
       this.form.attachments.forEach(attachment => {
         docs.push(
           this.document_data_source.find(v => v.keyword === attachment.doc_type)
         );
       });
+      console.log("required documents data docs: " + JSON.stringify(docs));
       return docs;
     }
+  },
+  mounted() {
+    const requirements = this.deepCopy(
+      this.$store.state.permits.filing_permit.requirements
+    );
+    console.log("requirements :", JSON.stringify(requirements));
+    const doc_req = requirements.map(v => {
+      return {
+        title: v.name,
+        status: 0,
+        keyword: v.keyword,
+        hidden: v.required
+      };
+    });
+
+    console.log("doc rep data: " + JSON.stringify(doc_req));
+    this.document_data_source = doc_req;
+    console.log(
+      "document data soure: " + JSON.stringify(this.document_data_source)
+    );
+    // this.updateDocsPayment();
   },
   methods: {
     init() {

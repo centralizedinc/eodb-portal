@@ -613,7 +613,7 @@ export default {
           v => v.doc_type === keyword
         );
         this.form.attachments[attachment_index].files.push(file);
-        console.log('this.form.attachments :', this.form.attachments);
+        console.log("this.form.attachments :", this.form.attachments);
         this.$message.info(
           `${this.document_data_source[i].title} file uploaded.`
         );
