@@ -90,6 +90,26 @@ class AccountDao {
     static modifyOne(conditions, updated_account) {
         return model.findOneAndUpdate(conditions, updated_account).exec()
     }
+
+    static changePassword(id, account){
+        return new Promise((resolve, reject)=>{
+            model.findById(id).exec()
+            .then(result=>{
+                console.log('updating password: ', JSON.stringify(result))
+                result.updatePassword(account.new_password)
+                console.log('new password: ', JSON.stringify(result))
+                return result.save()
+            })
+            .then(result=>{
+                console.log('saved: ', JSON.stringify(result))
+                resolve(result)
+            })
+            .catch(error=>{
+                console.error('error: ',error)
+                reject(error)
+            })
+        })
+    }
 }
 
 module.exports = AccountDao;
