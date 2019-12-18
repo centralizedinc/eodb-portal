@@ -3,8 +3,15 @@
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
-      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-        <a-steps direction="vertical" :current="current_step" class="form-stepper">
+      <a-card
+        :bodyStyle="{ padding: '10px', height: '100%' }"
+        style="height: 100%;border: none;"
+      >
+        <a-steps
+          direction="vertical"
+          :current="current_step"
+          class="form-stepper"
+        >
           <a-step
             v-for="(item, index) in steps"
             :key="index"
@@ -18,7 +25,9 @@
 
     <!-- Fill up form -->
     <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
-      <h1 style="margin-top: 5vh;">Barangay Clearance Application</h1>
+      <h1 style="margin-top: 5vh;">
+        Barangay Clearance / Barangay Business Clearance Application
+      </h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
@@ -37,11 +46,11 @@
         <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
           <a-affix :offsetTop="60">
             <a-card
-              :headStyle="{ 
-                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-                color: 'white', 
+              :headStyle="{
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)',
+                color: 'white',
                 'font-weight': 'bold',
-                'font-size': '15px', 
+                'font-size': '15px',
                 padding: '5px 10px',
                 'min-height': '2vh'
               }"
@@ -52,9 +61,11 @@
                 <a-col :span="22">Required Documents</a-col>
                 <a-col :span="2">
                   <a-tooltip placement="left">
-                    <span
-                      slot="title"
-                    >Upload all the required documents. If there's a need to apply for a specific certificate/clearance, additional required information will be asked.</span>
+                    <span slot="title">
+                      Upload all the required documents. If there's a need to
+                      apply for a specific certificate/clearance, additional
+                      required information will be asked.
+                    </span>
                     <a-icon type="info-circle" />
                   </a-tooltip>
                 </a-col>
@@ -69,16 +80,20 @@
                 <template slot="status" slot-scope="text">
                   <div style="text-align: center;">
                     <a-icon
-                      v-if="text===2"
+                      v-if="text === 2"
                       type="check-circle"
                       style="color: green; font-weight: bold;"
                     />
                     <a-icon
-                      v-else-if="text===1"
+                      v-else-if="text === 1"
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    <a-icon
+                      v-else
+                      type="close"
+                      style="color: red; font-weight: bold;"
+                    />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -103,21 +118,20 @@
                   </a-row>
                 </template>
               </a-table>
-              <span
-                v-if="checkErrors('attachments')"
-                style="color: red"
-              >{{checkErrors('attachments')}}</span>
+              <span v-if="checkErrors('attachments')" style="color: red">
+                {{ checkErrors("attachments") }}
+              </span>
             </a-card>
 
             <!-- Payment Details -->
             <a-card
               title="Fees"
               style="margin-top: 1vh;"
-              :headStyle="{ 
-                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-                color: 'white', 
-                'font-weight': 'bold', 
-                'font-size': '15px', 
+              :headStyle="{
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)',
+                color: 'white',
+                'font-weight': 'bold',
+                'font-size': '15px',
                 padding: '5px 10px',
                 'min-height': '2vh'
               }"
@@ -141,27 +155,40 @@
                   <span
                     v-if="checkErrors('mode_of_payment')"
                     style="color: red"
-                  >{{checkErrors('mode_of_payment')}}</span>
+                    >{{ checkErrors("mode_of_payment") }}</span
+                  >
                 </a-col>
               </a-row>
 
               <a-row type="flex" align="middle">
-                <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
+                <a-col style="font-weight: bold;" :span="24"
+                  >Payment Breakdown</a-col
+                >
                 <template v-for="(item, index) in payments_data_source">
-                  <a-col :span="15" :key="`a${index}`" class="row-border">{{item.description}}</a-col>
+                  <a-col :span="15" :key="`a${index}`" class="row-border">
+                    {{ item.description }}
+                  </a-col>
                   <a-col
                     :span="9"
                     :key="`b${index}`"
                     class="row-border"
                     style="text-align: right;"
-                  >{{formatCurrency(item.amount)}}</a-col>
+                    >{{ formatCurrency(item.amount) }}</a-col
+                  >
                 </template>
-                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
+                <a-col
+                  :span="15"
+                  class="row-border"
+                  style="color: #333;background: #d7d7d7"
+                  >Total</a-col
+                >
                 <a-col
                   :span="9"
                   class="row-border"
                   style="text-align: right; color: #333;background: #d7d7d7"
-                >{{formatCurrency(this.transaction_details.total_payable)}}</a-col>
+                >
+                  {{ formatCurrency(this.transaction_details.total_payable) }}
+                </a-col>
               </a-row>
             </a-card>
           </a-affix>
@@ -173,55 +200,91 @@
       :loading="loading"
       :show="show_payment"
       @pay="proceedToSubmit"
-      @close="show_payment=false"
+      @close="show_payment = false"
     />
   </a-row>
 </template>
 
 <script>
-import BarangayDetails from "./BarangayDetails";
+import Purpose from "./Purpose";
+import PersonalDetails from "./PersonalDetails";
 import ApplicationSummary from "./ApplicationSummary";
+import ApplicationChecklist from "./ApplicationChecklist";
+import BusinessDetails from "./BusinessDetails";
+import Payment from "@/components/payments/Payment.vue";
 export default {
   components: {
-    BarangayDetails,
+    Payment,
+    Purpose,
+    ApplicationChecklist,
+    PersonalDetails,
+    BusinessDetails,
+    BusinessDetails,
     ApplicationSummary
   },
   data() {
     return {
       show_payment: false,
       current_step: 0,
-      form_components: [],
+      form_components: [
+        ApplicationChecklist,
+        Purpose,
+        PersonalDetails,
+        BusinessDetails,
+        ApplicationSummary
+      ],
       form: {
-        name: {
-          first: "",
-          middle: "",
-          last: "",
-          suffix: ""
+        residential_address: {
+          bldg_no: "",
+          unit_no: "",
+          bldg_name: "",
+          street: "",
+          subd: "",
+          region: "",
+          province: "",
+          city: "",
+          barangay: "",
+          postal_code: ""
         },
-        gender: "",
-        age: "",
-        spouse_name: {
-          first: "",
-          middle: "",
-          last: "",
-          suffix: ""
+        personal_details: {
+          name: {
+            first: "",
+            middle: "",
+            last: "",
+            suffix: ""
+          }
         },
-        request_for: "",
+        business_details: {
+          business_name: "",
+          business_type: "",
+          franchise: ""
+        },
+        business_address: {
+          bldg_no: "",
+          unit_no: "",
+          bldg_name: "",
+          street: "",
+          subdivision: "",
+          region: "",
+          province: "",
+          city: "",
+          barangay: "",
+          postal_code: ""
+        },
+        // spouse_name: {
+        //   first: "",
+        //   middle: "",
+        //   last: "",
+        //   suffix: ""
+        // },
+        // request_for: "",
         attachments: [
           {
             doc_type: "dti_sec_cda",
             files: []
           }
         ],
-        required_documents: {
-          civil_status: "",
-          birthplace: "",
-          monthly_salary: "",
-          occupation: "",
-          height: "",
-          weight: "",
-          icr_no: ""
-        }
+        required_documents: {}
       },
       document_columns: [
         {
@@ -249,19 +312,9 @@ export default {
           hidden: true
         },
         {
-          title: "Residence Certificate",
+          title: "Community Tax Certificate",
           status: 0,
           keyword: "residence"
-        },
-        {
-          title: "Barangay Clearance",
-          status: 0,
-          keyword: "barangay"
-        },
-        {
-          title: "Police Clearance",
-          status: 0,
-          keyword: "police"
         }
       ],
       steps: [
@@ -271,19 +324,19 @@ export default {
             "Check all the documents you have and apply for lacking requirements instantly within this app."
         },
         {
-          title: "Business Owner Information",
+          title: "Purpose",
           description:
-            "Individual or entity who owns a business. Check all corresponding details for any errors."
+            "State the reason or the purpose of your request (i.e., local employment, police clearance, business permit, loan purposes, etc.) "
+        },
+        {
+          title: "Personal Details",
+          description:
+            "Details about the applicant, such as  name, address and other personal information"
         },
         {
           title: "Business Details",
           description:
-            "Includes important details such as Business Name and Business Address. Provide the updated contact number and email."
-        },
-        {
-          title: "Business Activity",
-          description:
-            "NOTE: For Business Codes, please refer to BIR Registration. Line of business cannot be blank."
+            "For business permit applicants, this section must be filled in. It includes important details such as name, address and nature of business."
         },
         // {
         //   title: "Additional Fields",
@@ -375,7 +428,7 @@ export default {
     };
   },
   created() {
-    this.init();
+    // this.init();
   },
   watch: {
     current_step() {
@@ -394,16 +447,19 @@ export default {
     }
   },
   methods: {
-    init() {
-      this.$store.dispatch("GET_REGIONS");
-      this.$store.dispatch("GET_PROVINCES");
-    },
+    // init() {
+    //   this.$store.dispatch("GET_REGIONS");
+    //   this.$store.dispatch("GET_PROVINCES");
+    // },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
       console.log("this.current_step :", this.current_step);
       console.log("this.form :", this.form);
 
+      // comment to validate
       // var { errors, jump_to } = this.validation(validate_all);
+
+      // comment to  bypass
       var errors = [],
         jump_to = 0;
 
@@ -532,79 +588,98 @@ export default {
         this.transaction_details.amount_paid = this.transaction_details.total_payable;
       }
     },
+    // validation
     validation(validate_all) {
       var errors = [],
         jump_to = 0;
-      if (validate_all || this.current_step === 1) {
-        if (!this.form.owner_details.name.last) {
+      if (validate_all || this.current_step === 2) {
+        if (!this.form.personal_details.name.last) {
           errors.push({
-            field: "owner_details.name.last",
+            field: "personal_details.name.last",
             error: "Last Name is a required field."
           });
         }
-        if (!this.form.owner_details.name.first) {
+        if (!this.form.personal_details.name.first) {
           errors.push({
-            field: "owner_details.name.first",
+            field: "personal_details.name.first",
             error: "First Name is a required field."
           });
         }
-        if (!this.form.owner_details.birthdate) {
+        if (!this.form.personal_details.birthday) {
           errors.push({
-            field: "owner_details.birthdate",
+            field: "personal_details.birthday",
             error: "Date of Birth is a required field."
           });
         }
-        if (!this.form.owner_details.gender) {
+        if (!this.form.personal_details.birthplace) {
           errors.push({
-            field: "owner_details.gender",
+            field: "personal_details.birthplace",
+            error: "Birthplace is a required field."
+          });
+        }
+        if (!this.form.personal_details.gender) {
+          errors.push({
+            field: "personal_details.gender",
             error: "Gender is a required field."
           });
         }
-        if (!this.form.owner_details.telno) {
+        if (!this.form.personal_details.civil_status) {
           errors.push({
-            field: "owner_details.telno",
+            field: "personal_details.civil_status",
+            error: "Civil Status is a required field."
+          });
+        }
+        if (!this.form.personal_details.ctc_no) {
+          errors.push({
+            field: "personal_details.ctc_no",
+            error: "CTC is a required field."
+          });
+        }
+        if (!this.form.personal_details.telno) {
+          errors.push({
+            field: "personal_details.telno",
             error: "Tel No is a required field."
           });
         }
-        if (!this.form.owner_details.mobile) {
+        if (!this.form.personal_details.mobile) {
           errors.push({
-            field: "owner_details.mobile",
+            field: "personal_details.mobile",
             error: "Mobile No is a required field."
           });
         }
-        if (!this.form.owner_details.email) {
+        if (!this.form.personal_details.email) {
           errors.push({
-            field: "owner_details.email",
+            field: "personal_details.email",
             error: "Email Address is a required field."
           });
         }
-        if (!this.form.owner_address.region) {
+        if (!this.form.residential_address.region) {
           errors.push({
-            field: "owner_address.region",
+            field: "residential_address.region",
             error: "Region is a required field."
           });
         }
-        if (!this.form.owner_address.province) {
+        if (!this.form.residential_address.province) {
           errors.push({
-            field: "owner_address.province",
+            field: "residential_address.province",
             error: "Province is a required field."
           });
         }
-        if (!this.form.owner_address.barangay) {
+        if (!this.form.residential_address.barangay) {
           errors.push({
-            field: "owner_address.barangay",
+            field: "residential_address.barangay",
             error: "Barangay is a required field."
           });
         }
-        if (!this.form.owner_address.city) {
+        if (!this.form.residential_address.city) {
           errors.push({
-            field: "owner_address.city",
+            field: "residential_address.city",
             error: "City/Municipality is a required field."
           });
         }
-        if (!this.form.owner_address.postal_code) {
+        if (!this.form.residential_address.postal_code) {
           errors.push({
-            field: "owner_address.postal_code",
+            field: "residential_address.postal_code",
             error: "Postal Code is a required field."
           });
         }
@@ -629,9 +704,9 @@ export default {
           });
         }
 
-        if (errors.length) jump_to = 1;
+        if (errors.length) jump_to = 2;
       }
-      if (validate_all || this.current_step === 2) {
+      if (validate_all || this.current_step === 3) {
         if (!this.form.business_details.business_type) {
           errors.push({
             field: "business_details.business_type",
@@ -644,36 +719,7 @@ export default {
             error: "Business Name is a required field."
           });
         }
-        if (!this.form.business_details.registration_no) {
-          errors.push({
-            field: "business_details.registration_no",
-            error: "Registration No is a required field."
-          });
-        }
-        if (!this.form.business_details.registration_date) {
-          errors.push({
-            field: "business_details.registration_date",
-            error: "Date of Registration is a required field."
-          });
-        }
-        if (!this.form.business_details.tin) {
-          errors.push({
-            field: "business_details.tin",
-            error: "Tax Identification No is a required field."
-          });
-        }
-        if (!this.form.business_details.business_area) {
-          errors.push({
-            field: "business_details.business_area",
-            error: "Business Area is a required field."
-          });
-        }
-        if (!this.form.business_details.employees_establishment) {
-          errors.push({
-            field: "business_details.employees_establishment",
-            error: "No of Employees is a required field."
-          });
-        }
+
         if (!this.form.business_address.region) {
           errors.push({
             field: "business_address.region",
@@ -760,7 +806,7 @@ export default {
             });
           }
         }
-        if (errors.length) jump_to = 2;
+        if (errors.length) jump_to = 3;
       }
       if (validate_all || this.current_step === 3) {
         if (

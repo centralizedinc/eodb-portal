@@ -47,7 +47,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Birthplace</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.personal_details.Birthplace}}</a-col>
+      <a-col :span="15">{{form.personal_details.birthplace}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">If other country</a-col>
