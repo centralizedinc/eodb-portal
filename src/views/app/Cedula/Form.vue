@@ -124,7 +124,7 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" justify="space-between">
+              <!-- <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
@@ -143,7 +143,7 @@
                     style="color: red"
                   >{{checkErrors('mode_of_payment')}}</span>
                 </a-col>
-              </a-row>
+              </a-row>-->
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -174,6 +174,7 @@
       :show="show_payment"
       @pay="proceedToSubmit"
       @close="show_payment=false"
+      :payment_amount="installment ? installment.amount : total_payable"
     />
   </a-row>
 </template>
@@ -215,10 +216,20 @@ export default {
           occupation: ""
         },
         tax: {
-          additional: 0,
-          business_income: 0,
-          profession_income: 0,
-          property_income: 0,
+          taxable: {
+            additional: 0,
+            business_income: 0,
+            profession_income: 0,
+            property_income: 0
+          },
+          community: {
+            basic: 0,
+            additional: 0,
+            business_income: 0,
+            profession_income: 0,
+            property_income: 0
+          },
+
           total: 0,
           interest: 0,
           total_amount_paid: 0
@@ -300,7 +311,7 @@ export default {
         }
       ],
       transaction_details: {
-        total_payable: 5000,
+        total_payable: 0,
         amount_payable: 0,
         amount_paid: 0,
         payment_breakdown: [
@@ -337,7 +348,7 @@ export default {
         ],
         status: "unpaid",
         method: "",
-        mode_of_payment: "",
+        mode_of_payment: "A",
         payment_details: {}
       },
       card_details: {},
@@ -369,7 +380,7 @@ export default {
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
-          amount: 1000
+          amount: 100
         }
       ],
       loading: false,
@@ -398,6 +409,17 @@ export default {
       });
       console.log("required documents data docs: " + JSON.stringify(docs));
       return docs;
+    },
+    total_payable() {
+      console.log("total payable data: " + JSON.stringify(this.form.tax));
+      this.payments_data_source[0].amount =
+        this.form.tax.total_amount_paid + 50;
+      var total = this.payments_data_source
+        .map(v => v.amount)
+        .reduce((t, c) => parseFloat(t) + parseFloat(c));
+      console.log("total payable total value: " + JSON.stringify(total));
+      this.transaction_details.total_payable = total;
+      return total;
     }
   },
   mounted() {

@@ -180,7 +180,7 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Basic Community Tax</span>
-            <a-select v-model="form.tax.basic">
+            <a-select v-model="form.tax.taxable.basic" @change="computation">
               <a-select-option value="voluntary">Voluntary</a-select-option>
               <a-select-option value="exempted">Exempted</a-select-option>
             </a-select>
@@ -190,7 +190,7 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Additional Community Tax</span>
-            <a-input v-model="form.tax.additional"></a-input>
+            <a-input v-model="form.tax.taxable.additional" @change="computation"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -203,7 +203,7 @@
               <template slot="title">
                 <span>business during the preceding year</span>
               </template>
-              <a-input v-model="form.tax.business_income"></a-input>
+              <a-input v-model="form.tax.taxable.business_income" @change="computation"></a-input>
             </a-tooltip>
           </a-form-item>
         </a-col>
@@ -214,7 +214,7 @@
               <template slot="title">
                 <span>exercise of profession or pursuit of any occupation</span>
               </template>
-              <a-input v-model="form.tax.profession_income"></a-input>
+              <a-input v-model="form.tax.taxable.profession_income" @change="computation"></a-input>
             </a-tooltip>
           </a-form-item>
         </a-col>
@@ -225,7 +225,7 @@
           <a-form-item>
             <span slot="label">Income from Real Property</span>
 
-            <a-input v-model="form.tax.property_income"></a-input>
+            <a-input v-model="form.tax.taxable.property_income" @change="computation"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -255,6 +255,30 @@ export default {
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
+    },
+    computation() {
+      this.form.tax.taxable.basic == "voluntary"
+        ? (this.form.tax.community.basic = 5)
+        : (this.form.tax.community.basic = 1);
+      this.form.tax.community.business_income =
+        (this.form.tax.taxable.business_income || 0) / 1000;
+      this.form.tax.community.profession_income =
+        (this.form.tax.taxable.profession_income || 0) / 1000;
+      this.form.tax.community.property_income =
+        (this.form.tax.taxable.property_income || 0) / 1000;
+      this.form.tax.total =
+        (this.form.tax.community.basic || 0) +
+        (this.form.tax.community.business_income || 0) +
+        (this.form.tax.community.profession_income || 0) +
+        (this.form.tax.taxable.property_income || 0);
+      this.form.tax.interest = 0;
+      this.form.tax.total_amount_paid =
+        this.form.tax.total + this.form.tax.interest;
+      console.log(
+        "this.form.tax.taxable.property_income: " +
+          this.form.tax.community.property_income
+      );
+      console.log("computation of tax: " + JSON.stringify(this.form.tax));
     }
   }
 };

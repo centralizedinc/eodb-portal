@@ -69,20 +69,39 @@ var CedulaApplication = new mongoose.Schema({
         },
     },
     tax: {
-        basic: {
-            type: Number
+        taxable: {
+            basic: {
+                type: String
+            },
+            additional: {
+                type: Number
+            },
+            business_income: {
+                type: Number
+            },
+            profession_income: {
+                type: Number
+            },
+            property_income: {
+                type: Number
+            },
         },
-        additional: {
-            type: Number
-        },
-        business_income: {
-            type: Number
-        },
-        profession_income: {
-            type: Number
-        },
-        property_income: {
-            type: Number
+        community: {
+            basic: {
+                type: Number
+            },
+            additional: {
+                type: Number
+            },
+            business_income: {
+                type: Number
+            },
+            profession_income: {
+                type: Number
+            },
+            property_income: {
+                type: Number
+            },
         },
         total: {
             type: Number

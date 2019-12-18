@@ -174,6 +174,7 @@
       :show="show_payment"
       @pay="proceedToSubmit"
       @close="show_payment=false"
+      :payment_amount="installment ? installment.amount : total_payable"
     />
   </a-row>
 </template>
@@ -398,7 +399,7 @@ export default {
         ],
         status: "unpaid",
         method: "",
-        mode_of_payment: "",
+        mode_of_payment: "A",
         payment_details: {}
       },
       card_details: {},
@@ -409,7 +410,7 @@ export default {
         // },
         {
           description: "Barangay Clearance",
-          amount: 1000
+          amount: 100
         },
         // {
         //   description: "Police Clearance",
@@ -426,7 +427,7 @@ export default {
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
-          amount: 1000
+          amount: 100
         }
       ],
       loading: false,
@@ -457,6 +458,13 @@ export default {
       });
       console.log("required documents data docs: " + JSON.stringify(docs));
       return docs;
+    },
+    total_payable() {
+      var total = this.payments_data_source
+        .map(v => v.amount)
+        .reduce((t, c) => parseFloat(t) + parseFloat(c));
+      this.transaction_details.total_payable = total;
+      return total;
     }
   },
   mounted() {
