@@ -60,10 +60,10 @@
             <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
             <span>User Roles</span>
           </a-menu-item>
-          <a-menu-item key="/admin/app/checklists">
+          <!-- <a-menu-item key="/admin/app/checklists">
             <a-icon type="bars" :style="getMenuStyle('/admin/app/checklists')" />
             <span>Application Checklist</span>
-          </a-menu-item>
+          </a-menu-item> -->
           <a-menu-item key="/admin/app/references">
             <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
             <span>References</span>
@@ -79,8 +79,8 @@
              <a-icon type="user" :style="getMenuStyle('/admin/app/account')" />
             <span>Profile</span>
           </a-menu-item>
-          <a-menu-item key="7">
-          <a-icon type="lock" :style="getMenuStyle('7')" />
+          <a-menu-item key="/admin/app/security">
+          <a-icon type="lock" :style="getMenuStyle('/admin/app/security')" />
           <span>Security</span>
         </a-menu-item>
         </a-sub-menu>

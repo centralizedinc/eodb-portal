@@ -68,6 +68,58 @@ class AdminAccountDao {
     static modifyOne(conditions, updated_account) {
         return model.findOneAndUpdate(conditions, updated_account).exec()
     }
+
+    static changePassword(id, account){
+        var admin = {}
+        return new Promise((resolve, reject)=>{
+            model.findById(id).exec()
+            .then(result=>{
+                admin = result
+                return result.isValidPassword(account.old_password)
+            })
+            .then(result=>{
+                console.log('result::::', result)
+                if(result){
+                    admin.password=account.new_password                
+                    return admin.save()
+                }else{
+                    return false
+                }
+                
+            })
+            .then(result=>{
+                if(!result){
+                    console.log('saved: ', JSON.stringify(result))
+                    reject({error:'invalid password'})
+                }else{
+                    console.log('saved: ', JSON.stringify(result))
+                    resolve(result)
+                }
+                
+            })
+            .catch(error=>{
+                console.error('error: ',error)
+                reject(error)
+            })
+        })
+    }
+
+    static updateSettings(id, settings) {
+        return new Promise((resolve, reject)=>{
+            model.findById(id).exec()
+            .then(result=>{
+                result.settings = settings
+                return result.save()
+            })
+            .then(result=>{                
+                resolve(result)
+            })
+            .catch(error=>{
+                console.error('error: ',error)
+                reject(error)
+            })
+        })
+    }
 }
 
 module.exports = AdminAccountDao;

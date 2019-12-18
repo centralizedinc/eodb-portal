@@ -100,4 +100,13 @@ AccountModelSchema.methods.isValidPassword = function (password) {
     })
 }
 
+AccountModelSchema.methods.updatePassword = function (password) {
+
+    const salt = bcrypt.genSaltSync(5);
+    const hash = bcrypt.hashSync(password, salt)
+    this.password = hash
+    console.log('hash: ', this.password)
+    return this.password
+}
+
 module.exports = mongoose.model('account', AccountModelSchema)

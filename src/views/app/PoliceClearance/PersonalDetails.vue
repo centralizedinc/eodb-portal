@@ -380,7 +380,8 @@ export default {
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
-    }
+    },
+    onChage() {}
   }
 };
 </script>

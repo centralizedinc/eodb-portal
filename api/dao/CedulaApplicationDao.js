@@ -1,38 +1,8 @@
-"use strict";
+const model = require('../models/CedulaApplicationModel');
 
-var model = require('../models/SettingsModel');
-
-class SettingsDao {
-    /**
-     * @returns {Promise}
-     */
-    static getSettings() {
-        return model.find({}).lean().exec()
-    }
+class CedulaApplicationDao {
 
     /**
-     * @returns {Promise}
-     */
-    static getActiveSettings() {
-        return model.find({
-            "status": 'A'
-        }).lean().exec()
-    }
-
-    /**
-     * @returns {Promise}
-     */
-    static getInActiveSettings() {
-        return model.find({
-            "status": 'I'
-        }).lean().exec()
-    }
-
-    static addSettings(details) {
-        return (new model(details)).save()
-    }
-
-     /**
      * @returns {Promise}
      */
     static findAll() {
@@ -45,6 +15,16 @@ class SettingsDao {
      */
     static findOneByID(id) {
         return model.findById(id).lean().exec()
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} ref_no
+     */
+    static findOneByReference(ref_no) {
+        return model.findOne({
+            reference_no: ref_no
+        }).lean().exec()
     }
 
     /**
@@ -90,4 +70,4 @@ class SettingsDao {
     }
 }
 
-module.exports = SettingsDao;
+module.exports = CedulaApplicationDao;
