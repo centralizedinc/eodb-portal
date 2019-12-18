@@ -64,6 +64,9 @@
                           <a-input v-model="requirement.keyword" placeholder="Keyword" />
                       </a-col>
                       <a-col :span="12">
+                          <a-input-number v-model="requirement.amount" placeholder="Amount" />
+                      </a-col>
+                      <a-col :span="12">
                           <a-checkbox :v-model="requirement.required">Check if this is a required</a-checkbox>
                       </a-col>
                       <a-col style="margin-top:2vh" :span="6">

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve-mark": "vue-cli-service serve --mode mark",
     "build": "vue-cli-service build --mode prod",
     "build-dev": "vue-cli-service build",
     "start": "node app.js",

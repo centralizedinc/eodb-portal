@@ -15,26 +15,118 @@ var BarangayApplication = new mongoose.Schema({
     modified_by: {
         type: String
     },
-    name: {
-        first: {
+    personal_details: {
+        name: {
+            first: {
+                type: String
+            },
+            middle: {
+                type: String
+            },
+            last: {
+                type: String
+            },
+            suffix: {
+                type: String
+            }
+        },
+        birthday: {
             type: String
         },
-        middle: {
+        birthplace: {
             type: String
         },
-        last: {
+        gender: {
             type: String
         },
-        suffix: {
+        civil_status: {
+            type: String
+        },
+        ctc_no: {
+            type: String
+        },
+
+    },
+    residential_address: {
+        bldg_no: {
+            type: String
+        },
+        unit_no: {
+            type: String
+        },
+        bldg_name: {
+            type: String
+        },
+        street: {
+            type: String
+        },
+        subd: {
+            type: String
+        },
+        region: {
+            type: String
+        },
+        province: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        barangay: {
+            type: String
+        },
+        postal_code: {
             type: String
         }
-    },
-    gender: {
-        type: String
     },
     age: {
         type: Number
     },
+    // business details
+    business_details: {
+        business_name: {
+            type: String
+        },
+        business_type: {
+            type: String
+        },
+        franchise: {
+            type: String
+        },
+    },
+    business_address: {
+        bldg_no: {
+            type: String
+        },
+        unit_no: {
+            type: String
+        },
+        bldg_name: {
+            type: String
+        },
+        street: {
+            type: String
+        },
+        subdivision: {
+            type: String
+        },
+        region: {
+            type: String
+        },
+        province: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        barangay: {
+            type: String
+        },
+        postal_code: {
+            type: String
+        }
+    },
+
     spouse_name: {
         first: {
             type: String

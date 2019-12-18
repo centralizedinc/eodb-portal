@@ -21,10 +21,35 @@ router.route('/')
             });
     })
 
+router.route('/password/:id')
+    .post((req, res) => {
+        AdminAccountDao.changePassword(req.params.id, req.body)
+        .then((account) => {
+            account.password = null;
+            res.json(account);
+        }).catch((err) => {
+            console.error(err)
+            res.sendStatus(500)
+        });
+    })
+
+router.route('/settings/:id')
+    .post((req, res) => {
+        AdminAccountDao.updateSettings(req.params.id, req.body)
+        .then((account) => {
+            account.password = null;
+            res.json(account);
+        }).catch((err) => {
+            console.error(err)
+            res.sendStatus(500)
+        });
+    })
+
 router.route('/:id')
     .get((req, res) => {
         AdminAccountDao.findOneByID(req.params.id)
             .then((result) => {
+                result.password=null
                 res.json(result)
             }).catch((errors) => {
                 res.json({ errors })
@@ -33,6 +58,7 @@ router.route('/:id')
     .post((req, res) => {
         AdminAccountDao.modifyById(req.params.id, req.body)
             .then((result) => {
+                result.password=null
                 res.json(result)
             }).catch((errors) => {
                 res.json({ errors })

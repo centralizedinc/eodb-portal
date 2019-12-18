@@ -35,7 +35,8 @@ router.route('/')
             user_name = decoded_data.name;
         const {
             data,
-            payment
+            payment,
+            departments
         } = req.body;
         var results = {};
         data.created_by = created_by;
@@ -83,24 +84,33 @@ router.route('/')
             .then((payments) => {
                 console.log('payments results :', payments);
                 results.payment = payments[0];
-                return DepartmentDao.findAll();
-            })
-            .then((departments) => {
+
                 var activities = [];
                 console.log('departments :', departments);
-                if (departments)
-                    activities = departments.map(v => {
-                        console.log('deparments v :', v);
-                        return {
+                if (departments && departments.length)
+                    departments.forEach(v => {
+                        activities.push({
                             approver: "",
-                            department: v._id,
+                            department: v.department,
                             status: 0,
                             date_claimed: null,
                             date_approved: null,
                             date_rejected: null,
                             for_compliance: false
-                        }
-                    });
+                        })
+                    })
+                // activities = departments.map(v => {
+                //     console.log('deparments v :', v);
+                //     return {
+                //         approver: "",
+                //         department: v._id,
+                //         status: 0,
+                //         date_claimed: null,
+                //         date_approved: null,
+                //         date_rejected: null,
+                //         for_compliance: false
+                //     }
+                // });
                 // CREATE DOCKET
                 var details = {
                     application_id: results.application._id,

@@ -385,6 +385,7 @@ export default {
               `Welcome ${result.account.name.first}. You are now login.`
             );
             this.loading = false;
+            window.eodb_pwa.askPermission(result.account._id);
           })
           .catch(err => {
             this.$message.error(err.message);

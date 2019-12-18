@@ -25,9 +25,98 @@ var CedulaApplication = new mongoose.Schema({
          * 3 - For Compliance
          */
     },
+    personal_details: {
+        name: {
+            last: {
+                type: String
+            },
+            first: {
+                type: String
+            },
+            middle: {
+                type: String
+            },
+            suffix: {
+                type: String
+            }
+        },
+        birthday: {
+            type: Date
+        },
+        gender: {
+            type: String
+        },
+        civil_status: {
+            type: String
+        },
+        birthplace: {
+            type: String
+        },
+        icr: {
+            type: Number
+        },
+        height: {
+            type: Number
+        },
+        weight: {
+            type: Number
+        },
+        occupation: {
+            type: String
+        },
+        tin: {
+            type: Number
+        },
+    },
+    tax: {
+        taxable: {
+            basic: {
+                type: String
+            },
+            additional: {
+                type: Number
+            },
+            business_income: {
+                type: Number
+            },
+            profession_income: {
+                type: Number
+            },
+            property_income: {
+                type: Number
+            },
+        },
+        community: {
+            basic: {
+                type: Number
+            },
+            additional: {
+                type: Number
+            },
+            business_income: {
+                type: Number
+            },
+            profession_income: {
+                type: Number
+            },
+            property_income: {
+                type: Number
+            },
+        },
+        total: {
+            type: Number
+        },
+        interest: {
+            type: Number
+        },
+        total_amount_paid: {
+            type: Number
+        }
+    },
     account_id: {
         type: String
     },
+
 
     // DETAILS
     application_type: {

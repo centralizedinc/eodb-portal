@@ -1,6 +1,8 @@
 import BusinessPermitAPI from '../../api/BusinessPermitAPI';
 import PoliceClearanceAPI from '../../api/PoliceClearanceAPI';
 import BarangayClearanceAPI from '../../api/BarangayClearanceAPI';
+import CedulaAPI from '../../api/CedulaAPI';
+
 
 import UploadAPI from '../../api/UploadAPI';
 import PermitsAPI from '../../api/PermitsAPI';
@@ -182,6 +184,28 @@ const actions = {
                 .then((result) => {
 
                     console.log("BarangayClearanceAPI data: " + JSON.stringify(result))
+                    resolve(result)
+                })
+        })
+    },
+    // Cedula
+    CREATE_CTC(context, {
+        details,
+        files
+    }) {
+        return new Promise((resolve, reject) => {
+            console.log('details PC:', details);
+            console.log('files PC:', files);
+            var application = {};
+            // new UploadAPI(context.rootState.user_session.token)
+            //     .uploadPermitsDocRequired('police', context.rootState.user_session.user._id, files)
+            //     .then((result) => {
+            //         console.log("result upload permit doc required: " + JSON.stringify(result))
+            //     })
+            new CedulaAPI(context.rootState.user_session.token).createPermit(details.data)
+                .then((result) => {
+
+                    console.log("CedulaAPI data: " + JSON.stringify(result))
                     resolve(result)
                 })
         })

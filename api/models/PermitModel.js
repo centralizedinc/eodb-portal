@@ -19,6 +19,9 @@ var PermitModelSchema = new mongoose.Schema({
             type: Boolean,
             default: false
         },
+        amount: {
+            type: Number
+        },
         application_type: String
     }],
     primary: {

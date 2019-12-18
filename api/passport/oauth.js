@@ -112,6 +112,7 @@ passport.use('admin-login', new LocalStrategy({
             }
         })
         .then((isValid) => {
+            console.log('############# isValid: ', isValid)
             if (!isValid) return done({
                 message: constant_helper.invalid_auth
             }, false);

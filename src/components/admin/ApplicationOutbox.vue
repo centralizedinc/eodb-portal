@@ -2,7 +2,7 @@
   <div>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
-      <span slot="status" slot-scope="text">{{getDocketStatus(text)}}</span>
+      <span slot="status" slot-scope="text, record" :style="`color: ${getStatusColor(record)}; font-weight: bold;`">{{getDepartmentStatus(record)}}</span>
       <span slot="mode" slot-scope="text">{{getDocketMode(text)}}</span>
       <span slot="age" slot-scope="text" style="text-align:center">
         <a-tooltip :title="computeAge(text).display">
@@ -79,6 +79,9 @@ export default {
   computed: {
     dockets() {
       return this.$store.state.dockets.dockets_outbox;
+    },
+    admin(){
+      return this.$store.state.admin_session.admin;
     }
   },
   methods: {
@@ -147,6 +150,21 @@ export default {
           console.log("unclaim err :", err);
           this.loading = false;
         });
+    },
+    getDepartmentStatus(record) {
+      console.log('record :', record);
+      if(!record) return ""
+      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
+      if(!data) return ""
+      return this.getDocketStatus(data.status);
+    },
+    getStatusColor(record){
+      console.log('record :', record);
+      if(!record) return ""
+      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
+      if(!data) return ""
+      const colors = ["blue", "green", "red"];
+      return colors[data.status];
     }
   }
 };

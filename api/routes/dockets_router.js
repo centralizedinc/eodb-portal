@@ -9,6 +9,7 @@ var ApplicationDao = require('../dao/ApplicationDao');
 
 const jwt = require('jsonwebtoken');
 const sendgrid = require('../utils/email');
+const axios = require('axios');
 
 router.route('/')
     .get((req, res) => {
@@ -146,7 +147,7 @@ router.route('/unclaim')
 router.route('/approve')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference, remarks } = req.body, results = {}, approver = account_id;
+        var { docket_reference, remarks } = req.body, docket = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -156,7 +157,8 @@ router.route('/approve')
             "activities.$.date_approved": new Date()
         })
             .then((result) => {
-                results = result;
+                console.log('result :', result);
+                docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -169,18 +171,21 @@ router.route('/approve')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-
+                console.log('result :', result);
+                console.log('check results :', docket);
                 // Check if last approver
-                const activity_index = results.docket.activities.findIndex(v => v.status === 0);
+                const activity_index = docket.activities.findIndex(v => v.status === 0);
+                console.log('check if last approver :', activity_index);
                 if (activity_index === -1) {
-                    const activity_rejected_index = results.docket.activities.findIndex(v => v.status === 2);
+                    const activity_rejected_index = docket.activities.findIndex(v => v.status === 2);
+                    console.log('check if rejected :', activity_rejected_index);
                     if (activity_rejected_index === -1) return processApprovedApplication(docket_reference);
                     else if (activity_rejected_index > -1) return processRejectedApplication(docket_reference);
                 }
             })
             .then((result) => {
                 if (result) console.log('approved application result :', result);
-                console.log('results :', results);
+                console.log('results :', docket);
                 res.json(results)
             })
             .catch((errors) => {
@@ -193,6 +198,7 @@ router.route('/approve')
  * @param {String} reference_no 
  */
 function processApprovedApplication(reference_no) {
+    console.log("Process approve application...");
     return new Promise((resolve, reject) => {
         var results = {};
         // Update Docket
@@ -229,7 +235,14 @@ function processApprovedApplication(reference_no) {
                 return sendgrid.sendEmail(user.email, "APPROVE_APP_NOTIFICATION", substitutions)
             })
             .then((result) => {
-
+                console.log('sendgrid result :', result);
+                const notification_message = {
+                    title: "Your Application has been approved.",
+                    message: `Application with reference #${results.application.reference_no} has been approved.`
+                }
+                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscription/notify/${results.application.account_id}`, notification_message)
+            })
+            .then((result) => {
                 console.log('processApprovedApplication results :', results);
                 resolve(results)
             })
@@ -243,7 +256,7 @@ function processApprovedApplication(reference_no) {
 router.route('/reject')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference, remarks } = req.body, results = {}, approver = account_id;
+        var { docket_reference, remarks } = req.body, docket = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -253,7 +266,7 @@ router.route('/reject')
             "activities.$.date_rejected": new Date()
         })
             .then((result) => {
-                results = result;
+                docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -268,13 +281,13 @@ router.route('/reject')
             .then((result) => {
 
                 // Check if last approver
-                const activity_index = results.docket.activities.findIndex(v => v.status === 0);
+                const activity_index = docket.activities.findIndex(v => v.status === 0);
                 if (activity_index === -1) return processRejectedApplication(docket_reference);
             })
             .then((result) => {
                 if (result) console.log('rejected application result :', result);
-                console.log('results :', results);
-                res.json(results)
+                console.log('results :', docket);
+                res.json(docket)
             })
             .catch((errors) => {
                 res.json({ errors })
@@ -299,7 +312,7 @@ function processRejectedApplication(reference_no) {
                 results.application = application;
 
                 // Find the user
-                return AccountDao.findOneByID(permit.account_id);
+                return AccountDao.findOneByID(application.account_id);
             })
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
@@ -310,14 +323,22 @@ function processRejectedApplication(reference_no) {
                 const substitutions = {
                     name: user.name.first,
                     reference_no,
-                    permit_classification: "Business",
+                    permit_classification,
                     date: new Date(),
                     link: `${process.env.VUE_APP_HOME_URL}` //link of Declined app pdf
                 }
                 return sendgrid.sendEmail(user.email, "REJECT_APP_NOTIFICATION", substitutions)
             })
             .then((result) => {
-
+                console.log('sendgrid result :', result);
+                const notification_message = {
+                    title: "Your Application has been declined.",
+                    message: `Application with reference #${results.application.reference_no} has been declined.`
+                }
+                console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
+                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscription/notify/${results.application.account_id}`, notification_message)
+            })
+            .then((result) => {
                 console.log('processRejectedApplication results :', results);
                 resolve(results)
             })
