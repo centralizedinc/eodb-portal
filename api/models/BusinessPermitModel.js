@@ -8,9 +8,15 @@ var BusinessPermitSchema = new mongoose.Schema({
     business_no: {
         type: String
     },
+    reference_no: {
+        type: String
+    },
     permit_type: {
         type: String,
         default: "business"
+    },
+    permit_code: {
+        type: String
     },
     account_id: {
         type: String

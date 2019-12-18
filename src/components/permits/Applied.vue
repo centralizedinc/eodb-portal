@@ -13,7 +13,7 @@
     </div>
     <a-table v-else :columns="cols" :dataSource="dockets" :loading="loading">
       <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
-      <template slot="date_created" slot-scope="text">{{formatDate(text, null, true)}}</template>
+      <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
       <template slot="status" slot-scope="text">
         <span
           :style="`color: ${text === 0? 'blue' : text === 1? 'green' : text === 2 ? 'red' : ''}`"

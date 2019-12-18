@@ -2,7 +2,7 @@
   <div>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
-      <span slot="status" slot-scope="text">{{getDocketStatus(text)}}</span>
+      <span slot="status" slot-scope="text, record" :style="`color: ${getStatusColor(record)}; font-weight: bold;`">{{getDepartmentStatus(record)}}</span>
       <span slot="mode" slot-scope="text">{{getDocketMode(text)}}</span>
       <span slot="age" slot-scope="text" style="text-align:center">
         <a-tooltip :title="computeAge(text).display">
@@ -37,7 +37,7 @@
           <p>{{docket.reference_no}}</p>
           <p>{{docket.permit}}</p>
           <p>{{getDocketMode(docket.application_type)}}</p>
-          <p>{{getDocketStatus(docket.status)}}</p>
+          <p>{{getDepartmentStatus(docket)}}</p>
         </a-col>
         <a-divider></a-divider>
         <a-col :span="12">
@@ -54,7 +54,7 @@
         </a-col>
         <a-divider></a-divider>
         <a-col :span="24">
-          <a-button type="primary" block @click="claim(docket)">CLAIM</a-button>
+          <a-button type="primary" block @click="claim(docket)" :loading="loading">CLAIM</a-button>
         </a-col>
       </a-row>
     </a-drawer>
@@ -115,10 +115,14 @@ export default {
   computed: {
     dockets() {
       return this.$store.state.dockets.dockets_inbox;
+    },
+    admin(){
+      return this.$store.state.admin_session.admin;
     }
   },
   methods: {
     init() {
+      console.log('this.$store.state.admin_session.admin :', this.$store.state.admin_session.admin);
       //get records
       this.loading = true;
 
@@ -209,6 +213,21 @@ export default {
       //       this.$router.push(`/admin/app/application/`);
       //     });
       // }
+    },
+    getDepartmentStatus(record) {
+      console.log('record :', record);
+      if(!record) return ""
+      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
+      if(!data) return ""
+      return this.getDocketStatus(data.status);
+    },
+    getStatusColor(record){
+      console.log('record :', record);
+      if(!record) return ""
+      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
+      if(!data) return ""
+      const colors = ["blue", "green", "red"];
+      return colors[data.status];
     }
   }
 };
