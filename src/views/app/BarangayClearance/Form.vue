@@ -3,8 +3,15 @@
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
-      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-        <a-steps direction="vertical" :current="current_step" class="form-stepper">
+      <a-card
+        :bodyStyle="{ padding: '10px', height: '100%' }"
+        style="height: 100%;border: none;"
+      >
+        <a-steps
+          direction="vertical"
+          :current="current_step"
+          class="form-stepper"
+        >
           <a-step
             v-for="(item, index) in steps"
             :key="index"
@@ -18,7 +25,9 @@
 
     <!-- Fill up form -->
     <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
-      <h1 style="margin-top: 5vh;">Barangay Clearance Application</h1>
+      <h1 style="margin-top: 5vh;">
+        Barangay Clearance / Barangay Business Clearance Application
+      </h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
@@ -80,7 +89,11 @@
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    <a-icon
+                      v-else
+                      type="close"
+                      style="color: red; font-weight: bold;"
+                    />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -106,9 +119,7 @@
                 </template>
               </a-table>
               <span v-if="checkErrors('attachments')" style="color: red">
-                {{
-                checkErrors("attachments")
-                }}
+                {{ checkErrors("attachments") }}
               </span>
             </a-card>
 
@@ -144,34 +155,39 @@
                   <span
                     v-if="checkErrors('mode_of_payment')"
                     style="color: red"
-                  >{{ checkErrors("mode_of_payment") }}</span>
+                    >{{ checkErrors("mode_of_payment") }}</span
+                  >
                 </a-col>
               </a-row>
 
               <a-row type="flex" align="middle">
-                <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
+                <a-col style="font-weight: bold;" :span="24"
+                  >Payment Breakdown</a-col
+                >
                 <template v-for="(item, index) in payments_data_source">
                   <a-col :span="15" :key="`a${index}`" class="row-border">
-                    {{
-                    item.description
-                    }}
+                    {{ item.description }}
                   </a-col>
                   <a-col
                     :span="9"
                     :key="`b${index}`"
                     class="row-border"
                     style="text-align: right;"
-                  >{{ formatCurrency(item.amount) }}</a-col>
+                    >{{ formatCurrency(item.amount) }}</a-col
+                  >
                 </template>
-                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
+                <a-col
+                  :span="15"
+                  class="row-border"
+                  style="color: #333;background: #d7d7d7"
+                  >Total</a-col
+                >
                 <a-col
                   :span="9"
                   class="row-border"
                   style="text-align: right; color: #333;background: #d7d7d7"
                 >
-                  {{
-                  formatCurrency(this.transaction_details.total_payable)
-                  }}
+                  {{ formatCurrency(this.transaction_details.total_payable) }}
                 </a-col>
               </a-row>
             </a-card>
@@ -320,7 +336,7 @@ export default {
         {
           title: "Business Details",
           description:
-            "Includes important details such as name, address and Nature of business."
+            "For business permit applicants, this section must be filled in. It includes important details such as name, address and nature of business."
         },
         // {
         //   title: "Additional Fields",

@@ -1,8 +1,11 @@
 <template>
-  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
+  <a-card
+    :headStyle="{ border: 'none', color: '#7f7f7f' }"
+    :bodyStyle="{ 'padding-top': 0 }"
+  >
     <!-- Title -->
     <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Business Details</a-col>
+      <a-col :span="22" style="font-size: 25px;">Business Details </a-col>
     </a-row>
     <a-form class="business-form">
       <!-- Business Data -->
@@ -33,9 +36,12 @@
       <a-divider
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
-      >Business Address</a-divider>
+        >Business Address</a-divider
+      >
       <a-form-item>
-        <a-checkbox @change="resetRentedData">Check if the address is the same as residential</a-checkbox>
+        <a-checkbox @change="resetRentedData"
+          >Check if the address is the same as residential</a-checkbox
+        >
       </a-form-item>
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
@@ -110,12 +116,15 @@
                   filterReference(input, option, regions, 'regCode', 'regDesc')
               "
             >
-              <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
+              <a-select-option :value="''" :key="''" disabled
+                >Select Region</a-select-option
+              >
               <a-select-option
                 v-for="item in regions"
                 :key="item.regCode"
                 :value="item.regCode"
-              >{{ item.regDesc }}</a-select-option>
+                >{{ item.regDesc }}</a-select-option
+              >
             </a-select>
           </a-form-item>
         </a-col>
@@ -146,12 +155,15 @@
                   )
               "
             >
-              <a-select-option :value="''" disabled>Select Province</a-select-option>
+              <a-select-option :value="''" disabled
+                >Select Province</a-select-option
+              >
               <a-select-option
                 v-for="item in provinces"
                 :key="item.provCode"
                 :value="item.provCode"
-              >{{ item.provDesc }}</a-select-option>
+                >{{ item.provDesc }}</a-select-option
+              >
             </a-select>
           </a-form-item>
         </a-col>
@@ -160,7 +172,9 @@
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-form-item
-            :validate-status="checkErrors('business_address.city') ? 'error': ''"
+            :validate-status="
+              checkErrors('business_address.city') ? 'error' : ''
+            "
             :help="checkErrors('business_address.city')"
           >
             <span slot="label">
@@ -172,20 +186,34 @@
               :disabled="fixed_address || !form.business_address.province"
               @change="changeCity"
               showSearch
-              :filterOption="(input, option) => filterReference(input, option, cities, 'citymunCode', 'citymunDesc')"
+              :filterOption="
+                (input, option) =>
+                  filterReference(
+                    input,
+                    option,
+                    cities,
+                    'citymunCode',
+                    'citymunDesc'
+                  )
+              "
             >
-              <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
+              <a-select-option :value="''" disabled
+                >Select City/Municipality</a-select-option
+              >
               <a-select-option
                 v-for="item in cities"
                 :key="item.citymunCode"
                 :value="item.citymunCode"
-              >{{item.citymunDesc}}</a-select-option>
+                >{{ item.citymunDesc }}</a-select-option
+              >
             </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
           <a-form-item
-            :validate-status="checkErrors('business_address.barangay') ? 'error': ''"
+            :validate-status="
+              checkErrors('business_address.barangay') ? 'error' : ''
+            "
             :help="checkErrors('business_address.barangay')"
           >
             <span slot="label">
@@ -197,20 +225,34 @@
               v-model="form.business_address.barangay"
               :disabled="!form.business_address.city"
               showSearch
-              :filterOption="(input, option) => filterReference(input, option, barangays, 'brgyCode', 'brgyDesc')"
+              :filterOption="
+                (input, option) =>
+                  filterReference(
+                    input,
+                    option,
+                    barangays,
+                    'brgyCode',
+                    'brgyDesc'
+                  )
+              "
             >
-              <a-select-option :value="''" disabled>Select Barangay</a-select-option>
+              <a-select-option :value="''" disabled
+                >Select Barangay</a-select-option
+              >
               <a-select-option
                 v-for="item in barangays"
                 :key="item.brgyCode"
                 :value="item.brgyCode"
-              >{{item.brgyDesc}}</a-select-option>
+                >{{ item.brgyDesc }}</a-select-option
+              >
             </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
           <a-form-item
-            :validate-status="checkErrors('business_address.postal_code') ? 'error': ''"
+            :validate-status="
+              checkErrors('business_address.postal_code') ? 'error' : ''
+            "
             :help="checkErrors('business_address.postal_code')"
           >
             <span slot="label">
@@ -233,9 +275,14 @@
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+        <a-col
+          :sm="{ span: 6 }"
+          :md="{ span: 12 }"
+          :xl="{ span: 18 }"
+          style="text-align: right;"
+        >
           <a-button>Save Draft</a-button>
-        </a-col>-->
+        </a-col>
       </a-row>
     </a-form>
   </a-card>
