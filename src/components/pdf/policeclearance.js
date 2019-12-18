@@ -1,8 +1,9 @@
-import { IoTAnalytics } from "aws-sdk";
+const form = require("./template/businesspermit_template").template;
+
 
 /**
  *
- * @param {Object} details
+ * @param {LicenseModel} details
  * @returns {Object} document
  */
 function fillup(details) {
@@ -10,9 +11,41 @@ function fillup(details) {
     var content = getContent(details);
     console.log('get content ###### :', content);
     return {
+        background: function (page) {
+            return [{
+                image: "form",
+                width: 370
+            
+            }]
+        },
         content: content,
+        images: {
+            form: form
+        },
         pageSize: 'LEGAL'
     };
+
+
+
+
+// const form = require("./template/policeclearance_template").template;
+
+
+// import { IoTAnalytics } from "aws-sdk";
+
+// /**
+//  *
+//  * @param {Object} details
+//  * @returns {Object} document
+//  */
+// function fillup(details) {
+//     console.log("fillup details printer: " + JSON.stringify(details))
+//     var content = getContent(details);
+//     console.log('get content ###### :', content);
+//     return {
+//         content: content,
+//         pageSize: 'LEGAL'
+//     };
 }
 /**
  * 
@@ -24,12 +57,12 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                heights: [1],
+                heights: [70],
                 widths: [300],
                 body: [
                     [
                         {
-                            text: "Republic of the Philippines",
+                            text: " ",
                             fontSize: 5,
                             bold: true,
                             characterSpacing: 0,
@@ -53,12 +86,12 @@ function getContent(details) {
                 [
                     {
                         text: "National Police Commission",
-                        fontSize: 5,
+                        fontSize: 8,
                         bold: true,
                         characterSpacing: 0,
-                        alignment: 'center',
+                        alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -20, 0, 0]
+                        margin: [95, -20, 0, 0]
                     }
                 ]
             ]
@@ -75,12 +108,12 @@ function getContent(details) {
                 [
                     {
                         text: "Quezon Police Provincial Office",
-                        fontSize: 5,
+                        fontSize: 8,
                         bold: true,
                         characterSpacing: 0,
-                        alignment: 'center',
+                        alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -20, 0, 0]
+                        margin: [92, -16, 0, 0]
                     }
                 ]
             ]
@@ -97,12 +130,12 @@ function getContent(details) {
                 [
                     {
                         text: "San Antonio Police Station",
-                        fontSize: 5,
+                        fontSize: 8,
                         bold: true,
                         characterSpacing: 0,
-                        alignment: 'center',
+                        alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -20, 0, 0]
+                        margin: [100, -12, 0, 0]
                     }
                 ]
             ]
@@ -118,7 +151,7 @@ function getContent(details) {
             body: [
                 [
                     {
-                        text: "San Antonio, Province of Quezon",
+                        text: " ",
                         fontSize: 5,
                         bold: true,
                         characterSpacing: 0,
