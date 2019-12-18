@@ -12,7 +12,20 @@
               src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/smartjuan_logo.png"
             />
           </a-col>
-          <a-col :span="19"></a-col>
+          <a-col :span="14"></a-col>
+          <a-col :span="1">
+            <img
+              style="width: auto; height: 50px; margin-top: -5px;"
+              src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/SA_logo.png"
+            />
+          </a-col>
+          <a-col :span="2">
+            <img
+              style="width: auto; height: 35px; margin-top: -5px; "
+              src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
+            />
+          </a-col>
+          <a-col :span="2"></a-col>
           <a-col :span="1">
             <a-dropdown>
               <a-menu slot="overlay">
