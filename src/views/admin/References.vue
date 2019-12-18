@@ -6,7 +6,7 @@
     </a-col>
     <a-col :span="24">
          <a-table style="margin-top: 2vh" :dataSource="settings" :columns="cols" :bordered="true" :loading="loading">
-             <span slot="date" slot-scope="text, record">
+             <span slot="date" slot-scope="text">
                 {{formatDate(text)}}
             </span>
             <span slot="action" slot-scope="text, record">
