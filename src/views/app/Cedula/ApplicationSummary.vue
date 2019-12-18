@@ -159,6 +159,39 @@ export default {
         }
       ]
     };
+  },
+  mounted() {
+    console.log("form data: " + JSON.stringify(this.form));
+    this.form.tax.taxable.basic == "voluntary"
+      ? (this.data[0].community_tax = 5)
+      : (this.data[0].community_tax = 1);
+    this.form.tax.community.basic = this.data[0].community_tax;
+    // this.data[0].taxable_amount;
+    // this.data[1].taxable_amount;
+    // this.data[2].taxable_amount;
+    this.data[2].taxable_amount = this.form.tax.taxable.business_income;
+    this.data[2].community_tax = this.form.tax.taxable.business_income / 1000;
+    this.form.tax.community.business_income = this.data[2].community_tax;
+    // this.data[3].taxable_amount;
+    this.data[3].taxable_amount = this.form.tax.taxable.profession_income;
+    this.data[3].community_tax = this.form.tax.taxable.profession_income / 1000;
+    this.form.tax.community.profession_income = this.data[3].community_tax;
+    // this.data[4].taxable_amount;
+    this.data[4].taxable_amount = this.form.tax.taxable.property_income;
+    this.data[4].community_tax = this.form.tax.taxable.property_income / 1000;
+    this.form.tax.community.property_income = this.data[4].community_tax;
+    this.data[5].community_tax =
+      this.data[0].community_tax +
+      this.data[1].community_tax +
+      this.data[2].community_tax +
+      this.data[3].community_tax +
+      this.data[4].community_tax;
+    this.form.tax.total = this.data[5].community_tax;
+    this.data[6].community_tax = 0;
+    this.form.tax.interest = this.data[6].community_tax;
+    this.data[7].community_tax =
+      this.data[5].community_tax + this.data[6].community_tax;
+    this.form.tax.total_amount_paid = this.data[7].community_tax;
   }
 };
 </script>
