@@ -53,42 +53,44 @@
       <a-form-item label="Trade Name/Franchise" style="font-weight: bold">
         <a-input v-model="form.business_details.franchise" placeholder="Trade Name/Franchise"></a-input>
       </a-form-item>
+      
+      <template v-if="form.application_type===0">
+        <a-form-item
+          style="font-weight: bold"
+          :validate-status="checkErrors('business_details.capital_investment') ? 'error': ''"
+          :help="checkErrors('business_details.capital_investment')"
+        >
+          <span slot="label">
+            Capital Investment
+            <i style="color: red">*</i>
+          </span>
+          <a-input-number
+            v-model="form.business_details.capital_investment"
+            @change="$emit('updateCapital', form.business_details.capital_investment)"
+            style="width: 100%;"
+            placeholder="Capital Investment"
+          ></a-input-number>
+        </a-form-item>
+      </template>
 
-      <a-form-item
-        v-if="form.application_type===0"
-        style="font-weight: bold"
-        :validate-status="checkErrors('business_details.capital_investment') ? 'error': ''"
-        :help="checkErrors('business_details.capital_investment')"
-      >
-        <span slot="label">
-          Capital Investment
-          <i style="color: red">*</i>
-        </span>
-        <a-input-number
-          v-model="form.business_details.capital_investment"
-          @change="$emit('updateCapital', form.business_details.capital_investment)"
-          style="width: 100%;"
-          placeholder="Capital Investment"
-        ></a-input-number>
-      </a-form-item>
-
-      <a-form-item
-        v-else-if="form.application_type===1"
-        style="font-weight: bold"
-        :validate-status="checkErrors('business_details.gross_sales') ? 'error': ''"
-        :help="checkErrors('business_details.gross_sales')"
-      >
-        <span slot="label">
-          Annual Gross Sales
-          <i style="color: red">*</i>
-        </span>
-        <a-input-number
-          v-model="form.business_details.gross_sales"
-          @change="$emit('updateGross', form.business_details.gross_sales)"
-          style="width: 100%;"
-          placeholder="Annual Gross Sales"
-        ></a-input-number>
-      </a-form-item>
+      <template v-else-if="form.application_type===1">
+        <a-form-item
+          style="font-weight: bold"
+          :validate-status="checkErrors('business_details.gross_sales') ? 'error': ''"
+          :help="checkErrors('business_details.gross_sales')"
+        >
+          <span slot="label">
+            Annual Gross Sales
+            <i style="color: red">*</i>
+          </span>
+          <a-input-number
+            v-model="form.business_details.gross_sales"
+            @change="$emit('updateGross', form.business_details.gross_sales)"
+            style="width: 100%;"
+            placeholder="Annual Gross Sales"
+          ></a-input-number>
+        </a-form-item>
+      </template>
 
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -130,19 +132,12 @@
               Tax Identification No
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input
-                  style="width:100%"
-                  maxlength="13"
-                  placeholder="Tax Identification Number" v-model="business_details.tin">
-            </a-input> -->
-
             <a-input
-                  style="width:100%"
-                  maxlength="13"
-                    placeholder="Tax Identification Number" v-model="form.business_details._tin"
-                      
-                    ></a-input>
-
+              style="width:100%"
+              maxlength="13"
+              placeholder="Tax Identification Number"
+              v-model="form.business_details.tin"
+            ></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -641,7 +636,7 @@
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }"> -->
-      <a-col :span="24">
+        <a-col :span="24">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
@@ -649,7 +644,7 @@
         </a-col>
         <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col> -->
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>

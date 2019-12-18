@@ -4,6 +4,7 @@ const router = require("express").Router();
 var ApplicationSettings = require('../utils/ApplicationSettings');
 
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
 
 var PaymentDao = require('../dao/PaymentDao');
 
@@ -38,6 +39,21 @@ router.route('/')
     })
 
 
+router.route('/client')
+    .get((req, res) => {
+        const decoded_data = jwt.decode(req.headers.access_token),
+            created_by = decoded_data.account_id;
+        console.log('decoded_data :', decoded_data);
+        PaymentDao.findOne({ created_by, status: 'paid' })
+        // PaymentDao.findAll()
+            .then((result) => {
+                console.log('result :', result);
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
 /**
  * @returns {Promise}
  * @param {Object} card 
@@ -53,23 +69,6 @@ function getPaymentToken(card) {
             password: ""
         }
     })
-    // request({
-    //     method: "POST",
-    //     url: ApplicationSettings.getValue('PAYMENT_TOKEN_URL'),
-    //     // url: "https://api.magpie.im/v1/tokens",
-    //     auth: {
-    //         // username: "pk_live_gVCdhumg9FRcpgxjTGSlqw",
-    //         // username: "pk_test_NoM3tpGyp2VPwySywrM8zQ",
-    //         username: ApplicationSettings.getValue('PAYMENT_TOKEN_USERNAME'),
-    //         password: ""
-    //     },
-    //     json: card_details
-    // },
-    //     (err, response, body) => {
-    //         console.log(err)
-    //         console.log("########## reponse: " + JSON.stringify(response));
-    //         cb(err || response.body.error, response.body.id);
-    //     })
 }
 
 /**
@@ -88,21 +87,6 @@ function getPaymentCharges(payment_details) {
             password: ""
         }
     })
-    // request({
-    //     // url: "https://api.magpie.im/v1/charges",
-    //     url: ApplicationSettings.getValue('PAYMENT_CHARGES_URL'),
-    //     method: "POST",
-    //     auth: {
-    //         // username: "sk_live_9wdShdjegw2QvVXZexinIw",
-    //         // username: "sk_test_0AHS75l4Dbgm2E2MqysooQ",
-    //         username: ApplicationSettings.getValue('PAYMENT_CHARGES_USERNAME'), password: ""
-    //     },
-    //     json: payment_details
-    // },
-    //     (err, response, body) => {
-    //         console.log("########## charge reponse: " + JSON.stringify(response.body));
-    //         cb(err, response.body);
-    //     })
 }
 
 router.route('/:id')

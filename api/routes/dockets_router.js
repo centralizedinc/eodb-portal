@@ -147,7 +147,7 @@ router.route('/unclaim')
 router.route('/approve')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference, remarks } = req.body, docket = {}, approver = account_id;
+        var { docket_reference, remarks, department_title } = req.body, docket = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -157,7 +157,7 @@ router.route('/approve')
             "activities.$.date_approved": new Date()
         })
             .then((result) => {
-                console.log('result :', result);
+                console.log('DocketsDao result :', result);
                 docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
@@ -171,8 +171,7 @@ router.route('/approve')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-                console.log('result :', result);
-                console.log('check results :', docket);
+                console.log('DocketsActivityDao result :', result);
                 // Check if last approver
                 const activity_index = docket.activities.findIndex(v => v.status === 0);
                 console.log('check if last approver :', activity_index);
@@ -184,9 +183,21 @@ router.route('/approve')
                 }
             })
             .then((result) => {
-                if (result) console.log('approved application result :', result);
+                console.log('evaluated application result :', result);
+                console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
+
+                const notification_message = {
+                    title: `Your ${getPermitType(docket.permit)} Application has been approved.`,
+                    message: `Application with reference #${docket.reference_no} has been approved by ${department_title}.`
+                }
+                console.log('notification_message :', notification_message);
+                // return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscriptions/notify/${docket.account_id}`, notification_message)
+                return axios.post(`http://192.168.1.134:4000/subscriptions/notify/${docket.account_id}`, notification_message)
+            })
+            .then((result) => {
+                console.log('notification result :', result);
                 console.log('results :', docket);
-                res.json(results)
+                res.json(docket)
             })
             .catch((errors) => {
                 res.json({ errors })
@@ -201,30 +212,30 @@ function processApprovedApplication(reference_no) {
     console.log("Process approve application...");
     return new Promise((resolve, reject) => {
         var results = {};
-        // Update Docket
+
         DocketsDao.modifyOne({ reference_no }, { status: 1 })
+            // Update Docket
             .then((result) => {
                 results.docket = result;
-                // Update Application
                 return ApplicationDao.findOneByReference(reference_no);
             })
+            // Update Application
             .then((application) => {
                 results.application = application;
-                // Create Permit based on permit type
                 if (application.permit_type === "business") return BusinessPermitDao.create(application.details);
             })
+            // Create Permit based on permit type
             .then((permit) => {
                 results.permit = permit;
 
-                // Find the user
                 return AccountDao.findOneByID(permit.account_id);
             })
+            // Find the user
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
                 const permit_classification =
                     results.application.permit_type === "business" ? "Business" : "";
 
-                // Send Email Notification
                 const substitutions = {
                     name: user.name.first,
                     reference_no,
@@ -234,15 +245,9 @@ function processApprovedApplication(reference_no) {
                 }
                 return sendgrid.sendEmail(user.email, "APPROVE_APP_NOTIFICATION", substitutions)
             })
+            // Send Email Notification
             .then((result) => {
                 console.log('sendgrid result :', result);
-                const notification_message = {
-                    title: "Your Application has been approved.",
-                    message: `Application with reference #${results.application.reference_no} has been approved.`
-                }
-                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscription/notify/${results.application.account_id}`, notification_message)
-            })
-            .then((result) => {
                 console.log('processApprovedApplication results :', results);
                 resolve(results)
             })
@@ -256,7 +261,8 @@ function processApprovedApplication(reference_no) {
 router.route('/reject')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference, remarks } = req.body, docket = {}, approver = account_id;
+        var { docket_reference, remarks, department_title } = req.body, docket = {}, approver = account_id;
+        console.log(`Rejecting application with reference #${docket_reference}`);
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -266,6 +272,7 @@ router.route('/reject')
             "activities.$.date_rejected": new Date()
         })
             .then((result) => {
+                console.log('DocketsDao result :', result);
                 docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
@@ -279,13 +286,23 @@ router.route('/reject')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
-
+                console.log('DocketsActivityDao result :', result);
                 // Check if last approver
                 const activity_index = docket.activities.findIndex(v => v.status === 0);
                 if (activity_index === -1) return processRejectedApplication(docket_reference);
             })
             .then((result) => {
-                if (result) console.log('rejected application result :', result);
+                console.log('rejected application result :', result);
+
+                const notification_message = {
+                    title: `Your ${getPermitType(docket.permit)} Application has been declined.`,
+                    message: `Application with reference #${docket.reference_no} has been declined by ${department_title}.`
+                }
+                console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
+                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscriptions/notify/${docket.account_id}`, notification_message)
+            })
+            .then((result) => {
+                console.log('Notification result :', result);
                 console.log('results :', docket);
                 res.json(docket)
             })
@@ -294,6 +311,11 @@ router.route('/reject')
             });
     })
 
+function getPermitType(type) {
+    if (type === "business") return "Business Permit";
+    return "";
+}
+
 /**
  * @returns {Promise}
  * @param {String} reference_no 
@@ -301,25 +323,26 @@ router.route('/reject')
 function processRejectedApplication(reference_no) {
     return new Promise((resolve, reject) => {
         var results = {};
-        // Update Docket
+
         DocketsDao.modifyOne({ reference_no }, { status: 2 })
+            // Update Docket
             .then((result) => {
                 results.docket = result;
-                // Update Application
+
                 return ApplicationDao.findOneByReference(reference_no);
             })
+            // Update Application
             .then((application) => {
                 results.application = application;
 
-                // Find the user
                 return AccountDao.findOneByID(application.account_id);
             })
+            // Find the user
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
                 const permit_classification =
                     results.application.permit_type === "business" ? "Business" : "";
 
-                // Send Email Notifiation
                 const substitutions = {
                     name: user.name.first,
                     reference_no,
@@ -329,16 +352,9 @@ function processRejectedApplication(reference_no) {
                 }
                 return sendgrid.sendEmail(user.email, "REJECT_APP_NOTIFICATION", substitutions)
             })
+            // Send Email Notifiation
             .then((result) => {
                 console.log('sendgrid result :', result);
-                const notification_message = {
-                    title: "Your Application has been declined.",
-                    message: `Application with reference #${results.application.reference_no} has been declined.`
-                }
-                console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
-                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscription/notify/${results.application.account_id}`, notification_message)
-            })
-            .then((result) => {
                 console.log('processRejectedApplication results :', results);
                 resolve(results)
             })

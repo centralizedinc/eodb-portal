@@ -2,7 +2,11 @@
   <div>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
-      <span slot="status" slot-scope="text, record" :style="`color: ${getStatusColor(record)}; font-weight: bold;`">{{getDepartmentStatus(record)}}</span>
+      <span
+        slot="status"
+        slot-scope="text, record"
+        :style="`color: ${getStatusColor(record)}; font-weight: bold;`"
+      >{{getDepartmentStatus(record)}}</span>
       <span slot="mode" slot-scope="text">{{getDocketMode(text)}}</span>
       <span slot="age" slot-scope="text" style="text-align:center">
         <a-tooltip :title="computeAge(text).display">
@@ -61,7 +65,7 @@ export default {
         },
         {
           title: "AGE",
-          dataIndex: "date_created",
+          dataIndex: "date_created_age",
           scopedSlots: { customRender: "age" }
         },
         {
@@ -80,8 +84,8 @@ export default {
     dockets() {
       return this.$store.state.dockets.dockets_outbox;
     },
-    admin(){
-      return this.$store.state.admin_session.admin;
+    department() {
+      return this.$store.state.admin_session.department;
     }
   },
   methods: {
@@ -89,11 +93,20 @@ export default {
       //get records
       this.loading = true;
 
-      this.$store.dispatch("GET_DOCKETS_OUTBOX").then(result => {
-        console.log("result.data :", result.data);
-        // this.dockets = results.data;
-        this.loading = false;
-      });
+      this.$store
+        .dispatch("GET_DOCKETS_OUTBOX")
+        .then(result => {
+          console.log("GET_DOCKETS_OUTBOX result :", result);
+          // this.dockets = results.data;
+          return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
+        })
+        .then(result => {
+          console.log("GET_ADMIN_DEPARTMENT result :", result);
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log("GET_DOCKETS_OUTBOX err :", err);
+        });
     },
     computeAge(date) {
       var date_created = new Date(date);
@@ -124,12 +137,12 @@ export default {
       this.$store
         .dispatch("GET_APPLICATION_BY_REF", record.reference_no)
         .then(result => {
-          console.log('GET_APPLICATION_BY_REF result :', result);
+          console.log("GET_APPLICATION_BY_REF result :", result);
           this.$store.commit("REVIEW", result);
           this.$router.push(`/admin/app/application/`);
         })
         .catch(err => {
-          console.log('GET_APPLICATION_BY_REF err :', err);
+          console.log("GET_APPLICATION_BY_REF err :", err);
         });
     },
     unclaim(record) {
@@ -152,17 +165,21 @@ export default {
         });
     },
     getDepartmentStatus(record) {
-      console.log('record :', record);
-      if(!record) return ""
-      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
-      if(!data) return ""
+      console.log("record :", record);
+      if (!record) return "";
+      const data = record.activities
+        ? record.activities.find(v => v.department === this.department._id)
+        : null;
+      if (!data) return "";
       return this.getDocketStatus(data.status);
     },
-    getStatusColor(record){
-      console.log('record :', record);
-      if(!record) return ""
-      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
-      if(!data) return ""
+    getStatusColor(record) {
+      console.log("record :", record);
+      if (!record) return "";
+      const data = record.activities
+        ? record.activities.find(v => v.department === this.department._id)
+        : null;
+      if (!data) return "";
       const colors = ["blue", "green", "red"];
       return colors[data.status];
     }

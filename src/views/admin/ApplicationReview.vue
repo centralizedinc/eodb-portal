@@ -18,29 +18,45 @@
             <h2 slot="header">Application Checklist</h2>
           </a-list>
 
-          <a-textarea 
-            style="margin-top: 1vh" 
-            :rows="3" 
-            placeholder="Remarks" 
+          <a-textarea
+            style="margin-top: 1vh"
+            :rows="3"
+            placeholder="Remarks"
             v-model="remarks"
-            :disabled="rejecting_application || approving_application" />
+            :disabled="rejecting_application || approving_application"
+          />
           <a-divider></a-divider>
           <a-button-group>
-            <a-button size="large" icon="issues-close"
-            :disabled="rejecting_application || approving_application">For Compliance</a-button>
+            <a-button
+              size="large"
+              icon="issues-close"
+              :disabled="rejecting_application || approving_application"
+            >For Compliance</a-button>
             <a-popconfirm
               title="Click PROCEED to denied this application."
               okText="PROCEED"
               @confirm="deniedApplication"
             >
-              <a-button type="danger" size="large" icon="stop" :disabled="approving_application" :loading="rejecting_application">Denied</a-button>
+              <a-button
+                type="danger"
+                size="large"
+                icon="stop"
+                :disabled="approving_application"
+                :loading="rejecting_application"
+              >Denied</a-button>
             </a-popconfirm>
             <a-popconfirm
               title="Click PROCEED to approve this application."
               okText="PROCEED"
               @confirm="approveApplication"
             >
-              <a-button type="primary" size="large" icon="check-circle" :disabled="rejecting_application" :loading="approving_application">Approved</a-button>
+              <a-button
+                type="primary"
+                size="large"
+                icon="check-circle"
+                :disabled="rejecting_application"
+                :loading="approving_application"
+              >Approved</a-button>
             </a-popconfirm>
           </a-button-group>
         </a-card>
@@ -74,11 +90,26 @@ export default {
   created() {
     this.init();
   },
+  computed: {
+    department() {
+      return this.$store.state.admin_session.department;
+    }
+  },
   methods: {
     init() {
-      this.$http.get("/checklists").then(results => {
-        this.checklist = results.data;
-      });
+      this.$http
+        .get("/checklists")
+        .then(results => {
+          this.checklist = results.data;
+          return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
+        })
+        .then(result => {
+          console.log("GET_ADMIN_DEPARTMENT result :", result);
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log("checklists err :", err);
+        });
       this.form = this.$store.state.admin_session.for_review;
     },
     deniedApplication() {
@@ -86,7 +117,8 @@ export default {
       this.$store
         .dispatch("REJECT_DOCKET", {
           docket_reference: this.form.reference_no,
-          remarks: this.remarks
+          remarks: this.remarks,
+          department_title: this.department.description
         })
         .then(result => {
           console.log("REJECT_DOCKET result :", result);
@@ -98,7 +130,7 @@ export default {
         })
         .then(result => {
           console.log("GET_DOCKETS_OUTBOX result :", result);
-          this.$router.push('/admin/app/applications');
+          this.$router.push("/admin/app/applications");
           this.rejecting_application = false;
         })
         .catch(err => {
@@ -111,7 +143,8 @@ export default {
       this.$store
         .dispatch("APPROVE_DOCKET", {
           docket_reference: this.form.reference_no,
-          remarks: this.remarks
+          remarks: this.remarks,
+          department_title: this.department.description
         })
         .then(result => {
           console.log("APPROVE_DOCKET result :", result);
@@ -123,7 +156,7 @@ export default {
         })
         .then(result => {
           console.log("GET_DOCKETS_OUTBOX result :", result);
-          this.$router.push('/admin/app/applications');
+          this.$router.push("/admin/app/applications");
           this.approving_application = false;
         })
         .catch(err => {

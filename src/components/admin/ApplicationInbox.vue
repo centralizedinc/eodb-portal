@@ -2,7 +2,11 @@
   <div>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
-      <span slot="status" slot-scope="text, record" :style="`color: ${getStatusColor(record)}; font-weight: bold;`">{{getDepartmentStatus(record)}}</span>
+      <span
+        slot="status"
+        slot-scope="text, record"
+        :style="`color: ${getStatusColor(record)}; font-weight: bold;`"
+      >{{getDepartmentStatus(record)}}</span>
       <span slot="mode" slot-scope="text">{{getDocketMode(text)}}</span>
       <span slot="age" slot-scope="text" style="text-align:center">
         <a-tooltip :title="computeAge(text).display">
@@ -14,7 +18,11 @@
           <a-tooltip title="View">
             <a-button type="primary" icon="search" @click="view(record)"></a-button>
           </a-tooltip>
-          <a-popconfirm title="Click PROCEED to claim this application" okText="Proceed" @confirm="claim(record)">
+          <a-popconfirm
+            title="Click PROCEED to claim this application"
+            okText="Proceed"
+            @confirm="claim(record)"
+          >
             <a-tooltip title="Claim">
               <a-button type="primary" ghost icon="login"></a-button>
             </a-tooltip>
@@ -116,21 +124,33 @@ export default {
     dockets() {
       return this.$store.state.dockets.dockets_inbox;
     },
-    admin(){
-      return this.$store.state.admin_session.admin;
+    department() {
+      return this.$store.state.admin_session.department;
     }
   },
   methods: {
     init() {
-      console.log('this.$store.state.admin_session.admin :', this.$store.state.admin_session.admin);
+      console.log(
+        "this.$store.state.admin_session.admin :",
+        this.$store.state.admin_session.admin
+      );
       //get records
       this.loading = true;
 
-      this.$store.dispatch("GET_DOCKETS_INBOX").then(result => {
-        console.log("result.data :", result.data);
-        // this.dockets = results.data;
-        this.loading = false;
-      });
+      this.$store
+        .dispatch("GET_DOCKETS_INBOX")
+        .then(result => {
+          console.log("GET_DOCKETS_INBOX result :", result);
+          // this.dockets = results.data;
+          return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
+        })
+        .then(result => {
+          console.log("GET_ADMIN_DEPARTMENT result :", result);
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log("GET_DOCKETS_INBOX err :", err);
+        });
     },
     computeAge(date) {
       var date_created = new Date(date);
@@ -215,17 +235,21 @@ export default {
       // }
     },
     getDepartmentStatus(record) {
-      console.log('record :', record);
-      if(!record) return ""
-      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
-      if(!data) return ""
+      console.log("record :", record);
+      if (!record) return "";
+      const data = record.activities
+        ? record.activities.find(v => v.department === this.department._id)
+        : null;
+      if (!data) return "";
       return this.getDocketStatus(data.status);
     },
-    getStatusColor(record){
-      console.log('record :', record);
-      if(!record) return ""
-      const data = record.activities ? record.activities.find(v => v.department === this.admin.department) : null;
-      if(!data) return ""
+    getStatusColor(record) {
+      console.log("record :", record);
+      if (!record) return "";
+      const data = record.activities
+        ? record.activities.find(v => v.department === this.department._id)
+        : null;
+      if (!data) return "";
       const colors = ["blue", "green", "red"];
       return colors[data.status];
     }
