@@ -140,6 +140,7 @@ export default {
     },
     approveApplication() {
       this.approving_application = true;
+      var results = {};
       this.$store
         .dispatch("APPROVE_DOCKET", {
           docket_reference: this.form.reference_no,
@@ -147,6 +148,7 @@ export default {
           department_title: this.department.description
         })
         .then(result => {
+          if(!result.data.errors) results = result.data;
           console.log("APPROVE_DOCKET result :", result);
           this.$notification.success({
             message: "Approve!",
@@ -156,6 +158,31 @@ export default {
         })
         .then(result => {
           console.log("GET_DOCKETS_OUTBOX result :", result);
+          // if(results.permit) {
+          //   if(results.permit.is_approve) {
+          //     const details = {
+          //       business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
+          //       business_no: "445433110",
+          //       business_address: "Unit 2320 Pasong Tamo Extension",
+          //       business_owner: "",
+          //       plate_no: "",
+          //       ownership_type: "",
+          //       valid_until: "",
+          //       area: "",
+          //       date_issued: "",
+          //       application_type: "",
+          //       mode_of_payment: "",
+          //       transaction_no: "",
+          //       transactions: []
+          //     }
+          //     return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
+          //   }
+          //   // if(!results.permit.is_approve) return this.$upload(results.permit.details, "BUSINESSPERMIT_SAN_ANTONIO")
+          // }
+        // })
+        // .then((result) => {
+
+
           this.$router.push("/admin/app/applications");
           this.approving_application = false;
         })
