@@ -31,7 +31,7 @@
         <a-col :lg="8" :xl="8" style="margin-top:40vh">
           <title-component data-aos="fade-up" />
         </a-col>
-        <a-col :lg="8" :xl="8" style="margin-top:150px;">
+        <a-col :lg="8" :xl="8" style="margin-top:13%;">
           <login />
         </a-col>
       </a-row>
