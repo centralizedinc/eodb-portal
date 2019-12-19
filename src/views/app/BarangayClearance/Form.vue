@@ -491,11 +491,11 @@ export default {
       console.log("this.form :", this.form);
 
       // comment to validate
-      // var { errors, jump_to } = this.validation(validate_all);
+      var { errors, jump_to } = this.validation(validate_all);
 
       // comment to  bypass
-      var errors = [],
-        jump_to = 0;
+      // var errors = [],
+      //   jump_to = 0;
 
       console.log("errors :", errors);
       this.errors = errors;
