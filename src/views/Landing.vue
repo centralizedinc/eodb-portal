@@ -80,9 +80,7 @@
               'justify-content': 'center'
             }"
           >
-            <p class="textStyle">
-              Apply Permits & Licenses
-            </p>
+            <p class="textStyle">Apply Permits & Licenses</p>
           </a-card>
         </a>
       </a-col>
@@ -96,13 +94,11 @@
               'align-items': 'center'
             }"
           >
-            <p class="textStyle">
-              Civil Registry Forms
-            </p>
+            <p class="textStyle">Civil Registry Forms</p>
 
             <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
             <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
-            </a-anchor> -->
+            </a-anchor>-->
           </a-card>
         </a>
       </a-col>
@@ -144,7 +140,7 @@
         </p>
         <!-- <p align="center" style="font-size: 24px; font-weight: 200">
           in San Antonio
-        </p> -->
+        </p>-->
       </a-col>
       <a-col :span="8" data-aos="fade-right">
         <!-- <img
@@ -152,7 +148,7 @@
           width="90%"
           src="https://i.postimg.cc/MGz98Q0W/San-Antonio-Quezon-Halljf-0128-03.jpg"
           alt
-        /> -->
+        />-->
         <img
           style="border-radius: 20px; -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, 0.1)));}"
           width="100%"
@@ -174,7 +170,7 @@
         </p>
         <!-- <a-button type="primary" style=" text-align:center; height: 50px"
           >Apply Now</a-button
-        > -->
+        >-->
       </a-col>
     </a-row>
 

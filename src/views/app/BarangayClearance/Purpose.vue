@@ -37,8 +37,8 @@
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
-            <a-button @click="$emit('prev')">Previous</a-button>
-            <a-button type="primary" @click="$emit('next')">Next</a-button>
+            <!-- <a-button @click="$emit('prev')">Previous</a-button> -->
+            <a-button type="primary" @click="$emit('next')" :disabled="show_next">Next</a-button>
           </a-button-group>
         </a-col>
         <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
@@ -55,6 +55,7 @@ export default {
     return {
       indeterminate: true,
       checkedList: null,
+      show_next: false,
       checkAll: false,
       check_pc: false,
       check_bp: false,
@@ -71,6 +72,7 @@ export default {
       return form_error ? form_error.error : null;
     },
     onChange(data) {
+      this.show_next = false;
       if (this.checkedList.length == 1) {
         console.log("checklist greater than 0");
         if (this.checkedList[0] == "b") {
@@ -86,6 +88,8 @@ export default {
             this.checkedList = [];
           }
         });
+      } else if (this.checkedList) {
+        this.show_next = true;
       }
       this.form.purpose = this.checkedList;
       console.log("onChange data: " + JSON.stringify(this.checkedList));

@@ -100,27 +100,24 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.region"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.business_address.region"></a-input> -->
+            <a-select
               v-model="form.business_address.region"
               showSearch
-              :disabled="fixed_address"
+              disabled
               @change="changeRegion"
               :filterOption="
                 (input, option) =>
                   filterReference(input, option, regions, 'regCode', 'regDesc')
               "
             >
-              <a-select-option :value="''" :key="''" disabled
-                >Select Region</a-select-option
-              >
+              <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
               <a-select-option
                 v-for="item in regions"
                 :key="item.regCode"
                 :value="item.regCode"
-                >{{ item.regDesc }}</a-select-option
-              >
-            </a-select>-->
+              >{{ item.regDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -134,10 +131,10 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.province"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.business_address.province"></a-input> -->
+            <a-select
               v-model="form.business_address.province"
-              :disabled="fixed_address || !form.business_address.region"
+              disabled
               showSearch
               @change="changeProvince"
               :filterOption="
@@ -151,16 +148,13 @@
                   )
               "
             >
-              <a-select-option :value="''" disabled
-                >Select Province</a-select-option
-              >
+              <a-select-option :value="''" disabled>Select Province</a-select-option>
               <a-select-option
                 v-for="item in provinces"
                 :key="item.provCode"
                 :value="item.provCode"
-                >{{ item.provDesc }}</a-select-option
-              >
-            </a-select>-->
+              >{{ item.provDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
@@ -177,10 +171,10 @@
               City/Municipality
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.business_address.city"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.business_address.city"></a-input> -->
+            <a-select
               v-model="form.business_address.city"
-              :disabled="fixed_address || !form.business_address.province"
+              disabled
               @change="changeCity"
               showSearch
               :filterOption="
@@ -194,16 +188,13 @@
                   )
               "
             >
-              <a-select-option :value="''" disabled
-                >Select City/Municipality</a-select-option
-              >
+              <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
               <a-select-option
                 v-for="item in cities"
                 :key="item.citymunCode"
                 :value="item.citymunCode"
-                >{{ item.citymunDesc }}</a-select-option
-              >
-            </a-select>-->
+              >{{ item.citymunDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -218,8 +209,8 @@
               <i style="color: red">*</i>
             </span>
             <!-- <a-input v-model="form.business_address.barangay" placeholder="Barangay*"></a-input> -->
-            <a-input v-model="form.business_address.barangay"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.business_address.barangay"></a-input> -->
+            <a-select
               v-model="form.business_address.barangay"
               :disabled="!form.business_address.city"
               showSearch
@@ -234,16 +225,13 @@
                   )
               "
             >
-              <a-select-option :value="''" disabled
-                >Select Barangay</a-select-option
-              >
+              <a-select-option :value="''" disabled>Select Barangay</a-select-option>
               <a-select-option
                 v-for="item in barangays"
                 :key="item.brgyCode"
                 :value="item.brgyCode"
-                >{{ item.brgyDesc }}</a-select-option
-              >
-            </a-select>-->
+              >{{ item.brgyDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
@@ -258,7 +246,7 @@
               <i style="color: red">*</i>
             </span>
             <a-input
-              :disabled="fixed_postal"
+              disabled
               v-model="form.business_address.postal_code"
               placeholder="Postal Code*"
             ></a-input>
@@ -345,6 +333,7 @@ export default {
   },
   computed: {
     regions() {
+      console.log("regions_data: " + JSON.stringify(this.regions_data));
       return this.regions_data;
     },
     provinces() {
