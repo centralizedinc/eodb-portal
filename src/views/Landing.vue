@@ -15,41 +15,47 @@
     <!-- desktop version -->
     <div
       v-if="$breakpoint.lgAndUp"
-      style="background-image:url('https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing.png'); height:80%; background-repeat: no-repeat; background-size: cover"
+      :style="
+        `background-image:url('${randomImage}'); height:100%; background-repeat: no-repeat; background-size: cover`
+      "
     >
-      <a-row style="height:100vh">
+      <a-row style="height:100%">
         <a-row>
-          <a-col :span="9"></a-col>
-          <a-col :span="9">
+          <a-col :span="8"></a-col>
+          <a-col :span="8" style="text-align: center">
             <img
-              style="width: 65%; height: auto; padding-top: 2vh; margin-bottom: 1.5vh; padding-left: 2vh"
+              style="width: 65%; height: auto; margin-top: 25px; margin-bottom: 10px;"
               src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
             />
           </a-col>
+          <a-col :span="8"></a-col>
         </a-row>
 
         <a-col :lg="8" :xl="8" style="margin-top:40vh">
           <title-component data-aos="fade-up" />
         </a-col>
-        <a-col :lg="8" :xl="8" style="margin-top:13%;">
+        <a-col :lg="8" :xl="8" style="margin-top:12%; margin-bottom: 25px;">
           <login />
         </a-col>
       </a-row>
     </div>
+
     <!-- mobile version -->
     <!-- <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
     <div
       v-else
-      style="background-image:url('https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing.png'); height:100%;background-repeat: no-repeat; background-size: cover"
+      :style="
+        `background-image:url('${randomImage}'); height:100%;background-repeat: no-repeat; background-size: cover`
+      "
     >
       <a-row type="flex" justify="center" align="center">
         <a-col :xs="18" :sm="18">
           <img
-            style="width: 100%; height: auto; padding-top: 2vh; margin-bottom: 2.5vh; padding-left: 2vh"
+            style="width: 100%; height: auto; margin-top: 25px; margin-bottom: 10px;"
             src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"
           />
         </a-col>
-        <a-col :xs="18" :sm="18" style="margin-top:20vh; margin-bottom: 5vh">
+        <a-col :xs="18" :sm="18" style="margin-top:30%; margin-bottom: 25px">
           <login />
         </a-col>
         <a-col :xs="22" :sm="22" style="margin-top:5vh">
@@ -60,10 +66,10 @@
 
     <!-- buttons -->
     <a-row
-      :gutter="8"
+      :gutter="2"
       type="flex"
       align="middle"
-      style="margin-top: 15px; margin-left: 8vw; margin-right: 5vw;"
+      style="margin-top: 15px; margin-left: 35px;  padding: 2px"
     >
       <a-col :xs="24" :s="12" :md="12" :lg="6">
         <a href="#pl">
@@ -74,9 +80,7 @@
               'justify-content': 'center'
             }"
           >
-            <p class="textStyle">
-              Apply Permits & Licenses
-            </p>
+            <p class="textStyle">Apply Permits & Licenses</p>
           </a-card>
         </a>
       </a-col>
@@ -90,13 +94,11 @@
               'align-items': 'center'
             }"
           >
-            <p class="textStyle">
-              Civil Registry Forms
-            </p>
+            <p class="textStyle">Civil Registry Forms</p>
 
             <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
             <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
-            </a-anchor> -->
+            </a-anchor>-->
           </a-card>
         </a>
       </a-col>
@@ -138,7 +140,7 @@
         </p>
         <!-- <p align="center" style="font-size: 24px; font-weight: 200">
           in San Antonio
-        </p> -->
+        </p>-->
       </a-col>
       <a-col :span="8" data-aos="fade-right">
         <!-- <img
@@ -146,7 +148,7 @@
           width="90%"
           src="https://i.postimg.cc/MGz98Q0W/San-Antonio-Quezon-Halljf-0128-03.jpg"
           alt
-        /> -->
+        />-->
         <img
           style="border-radius: 20px; -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, 0.1)));}"
           width="100%"
@@ -168,7 +170,7 @@
         </p>
         <!-- <a-button type="primary" style=" text-align:center; height: 50px"
           >Apply Now</a-button
-        > -->
+        >-->
       </a-col>
     </a-row>
 
@@ -202,13 +204,13 @@
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="cert">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv"
-          >Civil Registry Forms <a-badge count="available soon"
-        /></a-divider>
+          >Civil Registry Forms
+        </a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
           Request for issuance of certified copies of births, marriages and
-          deaths. <br /><i>This service will be available very soon!</i>
+          deaths. <br /><a-badge count="This service will be available soon" />
         </div>
       </a-col>
       <a-col :span="1"></a-col>
@@ -248,8 +250,8 @@
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rec">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv"
-          >Citizen Report <a-badge count="available soon"
-        /></a-divider>
+          >Citizen Report
+        </a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
@@ -257,7 +259,7 @@
           This alert system tells the Command Center's server about the type of
           emergency, name and address of establishment, along with other
           important pieces of information.
-          <i>This service will be available very soon!</i>
+          <a-badge count="This service will be available soon" />
         </div>
       </a-col>
       <a-col :span="1"></a-col>
@@ -287,10 +289,24 @@ export default {
   },
   data() {
     return {
-      loading: false
+      loading: false,
+      randomImage: "",
+      paths: [
+        "https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing.png",
+        "https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing2.jpg",
+        "https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing3.jpg",
+        "https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing4.jpg",
+        "https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing5.jpg",
+        "https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing6.jpg"
+      ]
     };
   },
   created() {
+    this.randomImage = this.paths[
+      Math.floor(Math.random() * this.paths.length)
+    ];
+    console.log("randomimage## :", this.randomImage);
+
     if (this.constant_helper.chatbot && this.constant_helper.chatbot.appId) {
       (function(d, s, id) {
         var js,
@@ -353,6 +369,7 @@ export default {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
   font-stretch: ultra-expanded !important;
+  font-size: 12px !important;
 }
 
 .descStyle {

@@ -20,7 +20,7 @@
         <!-- <a-col :span="7"></a-col> -->
         <a-col :span="24">
           <h3
-            style="letter-spacing: 1px; color:white; margin-top: 10px"
+            style="letter-spacing: 1px; color:white; margin-top: 10px; font-size: 16px"
             align="center"
           >
             Avoid the hassle, <br />apply your business permit here!
@@ -32,7 +32,8 @@
         <a-col :span="24">
           <a-button
             block
-            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF; height:6vh"
+            class="loginButtonStyle"
+            style="border: #4267B2;background-color:#4267B2; color:#FFFFFF; font-size: 14px; hover"
             @click="registerFacebook"
           >
             <a-icon type="facebook"></a-icon>Login using Facebook
@@ -43,8 +44,9 @@
         <a-col :span="24">
           <a-button
             block
+            class="loginButtonStyle"
             @click="registerGoogle"
-            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF ;height:6vh"
+            style="border: #DE4935;background-color:#DE4935; color:#FFFFFF ; font-size: 14px; hover"
           >
             <a-icon type="google"></a-icon>Login using Google
           </a-button>
@@ -55,7 +57,8 @@
           <a-button
             block
             @click="signin_visible = true"
-            style="border: #DE4935;background-color:#1890FF; color:#FFFFFF ; height:6vh"
+            class="loginButtonStyle"
+            style="border: #DE4935;background-color:#1890FF; color:#FFFFFF ;  font-size: 14px; hover"
           >
             <a-icon type="mail"></a-icon>Login using e-mail
           </a-button>
@@ -69,7 +72,8 @@
           <a-button
             type="link"
             block
-            style="color:#1890FF; margin-left:5px"
+            class="linkHover"
+            style="color: #1890ff; margin-left: 5px; font-size: 14px; hover"
             @click="signup_visible = true"
             >Create an account</a-button
           >
@@ -519,5 +523,15 @@ export default {
 
 .account-form .ant-form-item-label {
   font-weight: bold !important;
+}
+
+.loginButtonStyle:hover {
+  /* background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1)); */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: scale(1.1);
+}
+.linkHover:hover {
+  color: #56caef !important;
+  transform: scale(1.1);
 }
 </style>

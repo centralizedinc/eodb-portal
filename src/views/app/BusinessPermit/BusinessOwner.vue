@@ -412,6 +412,7 @@ export default {
       return this.$store.state.user_session.user;
     },
     regions() {
+      console.log("regions_data: " + JSON.stringify(this.regions_data));
       return this.regions_data;
     },
     provinces() {

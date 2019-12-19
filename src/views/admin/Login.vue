@@ -1,28 +1,25 @@
 <template>
   <a-layout>
-    <a-back-top>
-      <a-avatar>
-        <a-icon type="up" :size="42"></a-icon>
-      </a-avatar>
-    </a-back-top>
+    
     <a-layout-header class="header" :style="headerStyle">
       <a-row type="flex" justify="start" :gutter="8">
-        <a-col :md="2">
-          <a-avatar
+        <a-col :md="4">
+          <!-- <a-avatar
             style="cursor:pointer"
             @click="$router.push('/')"
             :src="constant_helper.home_header.logo"
             :size="50"
-          ></a-avatar>
+          ></a-avatar> -->
+          <img style="width:90%" src="https://i.postimg.cc/CK4CJSKP/smartjuan-logo.png"/>
         </a-col>
-        <a-col :xs="0" :sm="0" :md="0" :lg="4">
+        <!-- <a-col :xs="0" :sm="0" :md="0" :lg="4">
           <h3
             style="color:white; margin-left: -6vh; cursor:pointer"
             @click="$router.push('/')"
           >
             {{ constant_helper.home_header.label }}
           </h3>
-        </a-col>
+        </a-col> -->
 
         <!-- <a-col :md="2" :lg="0" :push="22">
           <a-icon type="menu" style="cursor:pointer" @click="visible_menu=true"></a-icon>
@@ -204,7 +201,8 @@ export default {
       if (this.topLocation < 50) {
         return "background: transparent";
       } else {
-        return "background: #242B30";
+        // return "background: #242B30";
+        return "background: #FFFFFF"
       }
     }
   }

@@ -73,7 +73,24 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.address_details.region"></a-input>
+            <!-- <a-input v-model="form.address_details.region"></a-input> -->
+            <a-select
+              v-model="form.address_details.region"
+              showSearch
+              disabled
+              @change="changeRegion"
+              :filterOption="
+                (input, option) =>
+                  filterReference(input, option, regions, 'regCode', 'regDesc')
+              "
+            >
+              <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
+              <a-select-option
+                v-for="item in regions"
+                :key="item.regCode"
+                :value="item.regCode"
+              >{{ item.regDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
@@ -85,7 +102,30 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.address_details.province"></a-input>
+            <!-- <a-input v-model="form.address_details.province"></a-input> -->
+            <a-select
+              v-model="form.address_details.province"
+              disabled
+              showSearch
+              @change="changeProvince"
+              :filterOption="
+                (input, option) =>
+                  filterReference(
+                    input,
+                    option,
+                    provinces,
+                    'provCode',
+                    'provDesc'
+                  )
+              "
+            >
+              <a-select-option :value="''" disabled>Select Province</a-select-option>
+              <a-select-option
+                v-for="item in provinces"
+                :key="item.provCode"
+                :value="item.provCode"
+              >{{ item.provDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
@@ -99,7 +139,28 @@
               Barangay
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.address_details.barangay"></a-input>
+            <!-- <a-input v-model="form.address_details.barangay"></a-input> -->
+            <a-select
+              v-model="form.address_details.barangay"
+              showSearch
+              :filterOption="
+                (input, option) =>
+                  filterReference(
+                    input,
+                    option,
+                    barangays,
+                    'brgyCode',
+                    'brgyDesc'
+                  )
+              "
+            >
+              <a-select-option :value="''" disabled>Select Barangay</a-select-option>
+              <a-select-option
+                v-for="item in barangays"
+                :key="item.brgyCode"
+                :value="item.brgyCode"
+              >{{ item.brgyDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
@@ -111,7 +172,30 @@
               City / Municipality
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.address_details.city"></a-input>
+            <!-- <a-input v-model="form.address_details.city"></a-input> -->
+            <a-select
+              v-model="form.address_details.city"
+              disabled
+              @change="changeCity"
+              showSearch
+              :filterOption="
+                (input, option) =>
+                  filterReference(
+                    input,
+                    option,
+                    cities,
+                    'citymunCode',
+                    'citymunDesc'
+                  )
+              "
+            >
+              <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
+              <a-select-option
+                v-for="item in cities"
+                :key="item.citymunCode"
+                :value="item.citymunCode"
+              >{{ item.citymunDesc }}</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 4 }">
@@ -123,7 +207,7 @@
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.address_details.postal_code"></a-input>
+            <a-input disabled v-model="form.address_details.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -167,7 +251,7 @@
       </a-row>
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }"> -->
-      <a-col :span="24">
+        <a-col :span="24">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
@@ -175,21 +259,124 @@
         </a-col>
         <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col> -->
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
 </template>
 <script>
+import regions_data from "../../../assets/references/regions.json";
+import provinces_data from "../../../assets/references/provinces.json";
+
 export default {
   props: ["form", "step", "errors"],
   data() {
-    return {};
+    return {
+      regions_data,
+      provinces_data,
+      cities: [],
+      barangays: []
+    };
+  },
+  computed: {
+    regions() {
+      console.log("regions_data: " + JSON.stringify(this.regions_data));
+      return this.regions_data;
+    },
+    provinces() {
+      const region_code = this.form.address_details.region;
+      if (!region_code) return [];
+
+      const provincesOnRegion = this.provinces_data.filter(
+        v => v.regCode === region_code
+      );
+      return provincesOnRegion;
+    }
+  },
+  mounted() {
+    this.loadReferences();
   },
   methods: {
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
+    },
+    changeRegion() {
+      // clear data
+      this.form.address_details.province = "";
+      this.form.address_details.city = "";
+      this.form.address_details.barangay = "";
+    },
+    changeProvince() {
+      // clear data first
+      this.form.address_details.city = "";
+      this.form.address_details.barangay = "";
+
+      // call cities
+      if (this.form.address_details.province) {
+        import(
+          `../../../assets/references/cities/${this.form.address_details.province}.json`
+        ).then(data => {
+          this.cities = data.default;
+        });
+      }
+    },
+    changeCity() {
+      // clear data first
+      this.form.address_details.barangay = "";
+
+      // Call Barangays
+      if (this.form.address_details.city) {
+        import(
+          `../../../assets/references/barangay/${this.form.address_details.city}.json`
+        ).then(data => {
+          this.barangays = data.default;
+        });
+      }
+    },
+    loadReferences() {
+      const { mode, ref_no } = this.$route.query;
+      if (this.fixed_address && !mode && !ref_no) {
+        this.form.address_details.region = "04";
+        // this.changeRegion();
+        this.form.address_details.province = "0456";
+        // this.changeProvince();
+        this.form.address_details.city = "045641";
+        // this.changeCity();
+        import(
+          `../../../assets/references/cities/${this.form.address_details.province}.json`
+        )
+          .then(data => {
+            this.cities = data.default;
+            console.log("this.cities :", this.cities);
+            return import(
+              `../../../assets/references/barangay/${this.form.address_details.city}.json`
+            );
+          })
+          .then(data => {
+            this.barangays = data.default;
+            console.log("this.barangays :", this.barangays);
+          });
+      } else if (mode && ref_no) {
+        if (this.form.address_details.province)
+          import(
+            `../../../assets/references/cities/${this.form.address_details.province}.json`
+          )
+            .then(data => {
+              this.cities = data.default;
+              console.log("this.cities :", this.cities);
+              if (this.form.address_details.city)
+                return import(
+                  `../../../assets/references/barangay/${this.form.address_details.city}.json`
+                );
+            })
+            .then(data => {
+              this.barangays = data ? data.default : [];
+              console.log("this.barangays :", this.barangays);
+            });
+      }
+      if (this.fixed_postal && !mode && !ref_no)
+        this.form.address_details.postal_code = "4324";
     }
   }
 };
