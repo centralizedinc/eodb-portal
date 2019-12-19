@@ -76,7 +76,14 @@
     <a-divider></a-divider>
     <a-row>
       <a-col :span="24">
-        <a-table :columns="columns" :dataSource="data" :pagination="pagination" :loading="loading"></a-table>
+        <a-table :columns="columns" :dataSource="data" :pagination="pagination" :loading="loading">
+          <template slot="taxable_amount" slot-scope="text, record, index">
+            <span v-if="index>1&&index<5">Php {{text}}</span>
+          </template>
+          <template slot="community_tax" slot-scope="text, record, index">
+            <span v-if="index==0||index>1">Php {{text}}</span>
+          </template>
+        </a-table>
       </a-col>
     </a-row>
     <!-- button -->
@@ -84,7 +91,7 @@
       <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
         <a-button-group>
           <a-button @click="$emit('prev')">Previous</a-button>
-          <a-button type="primary" @click="$emit('next')">To Proceed</a-button>
+          <a-button type="primary" @click="$emit('payment')">Proceed to Payment</a-button>
         </a-button-group>
       </a-col>
       <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
@@ -151,11 +158,13 @@ export default {
         },
         {
           title: "Taxable Amount",
-          dataIndex: "taxable_amount"
+          dataIndex: "taxable_amount",
+          scopedSlots: { customRender: "taxable_amount" }
         },
         {
           title: "Community Tax Due",
-          dataIndex: "community_tax"
+          dataIndex: "community_tax",
+          scopedSlots: { customRender: "community_tax" }
         }
       ]
     };
