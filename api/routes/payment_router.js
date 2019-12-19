@@ -44,7 +44,7 @@ router.route('/client')
         const decoded_data = jwt.decode(req.headers.access_token),
             created_by = decoded_data.account_id;
         console.log('decoded_data :', decoded_data);
-        PaymentDao.findOne({ created_by, status: 'paid' })
+        PaymentDao.find({ created_by, status: 'paid' })
         // PaymentDao.findAll()
             .then((result) => {
                 console.log('result :', result);

@@ -40,5 +40,17 @@ router.route('/avatar')
         })
     })
 
+router.route('/epermit/:epermit_no')
+    .post((req, res) => {
+        console.log('uploading permits...', req.params.epermit_no);
+        const upload = Uploader.uploadPermitDocument(req.params.epermit_no);
+        upload(req, res, function (err, some) {
+            // console.log('some :', some);
+            console.log('err :', err);
+            console.log('req :', req.file);
+            res.json(req.file);
+        })
+    })
+
 
 module.exports = router;

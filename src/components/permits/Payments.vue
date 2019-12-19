@@ -1,5 +1,6 @@
 <template>
   <a-table :columns="cols" :dataSource="payments" :loading="loading">
+    <span slot="amount_paid" slot-scope="text">{{formatCurrency(text)}}</span>
     <span slot="payment_for" slot-scope="text">{{getPermitType(text)}}</span>
     <span slot="method" slot-scope="text">{{getPermitMethod(text)}}</span>
     <span slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</span>
@@ -23,7 +24,8 @@ export default {
         },
         {
           title: "Amount",
-          dataIndex: "amount_paid"
+          dataIndex: "amount_paid",
+          scopedSlots: { customRender: "amount_paid" }
         },
         {
           title: "Permit Type",

@@ -14,7 +14,7 @@
         </a-tooltip>
       </span>
       <span slot="actions" slot-scope="text, record">
-        <a-button-group>
+        <a-button-group v-if="record.status === 0">
           <a-tooltip title="Evaluate">
             <a-button type="primary" icon="file-search" @click="evaluate(record)"></a-button>
           </a-tooltip>

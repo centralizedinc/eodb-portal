@@ -289,7 +289,10 @@ var BusinessPermitSchema = new mongoose.Schema({
         },
         files: []
     }],
-    compliance_attachments: []
+    compliance_attachments: [],
+    epermit_attachment: {
+        type: String
+    }
 })
 
 BusinessPermitSchema.pre('save', async function (callback) {
