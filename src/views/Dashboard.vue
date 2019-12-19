@@ -7,21 +7,33 @@
     </a-back-top>
     <a-layout-header class="header">
       <a-row justify="start" :gutter="16">
-        <a-col style="padding-left: 0px !important" :span="4">
+        <a-col
+          style="margin-left: -20px !important; text-align: left"
+          :span="4"
+        >
           <img
             style="width: auto; height: 55px; margin-top: -8px;"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/smartjuan_logo.png"
           />
+          <!-- <a-avatar
+            src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png"
+            :size="50"
+          ></a-avatar>-->
         </a-col>
-
+        <!-- <a-col :span="10">
+          <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
+        </a-col>-->
+        <!-- <a-col :span="10">
+          <a-input-search placeholder="Search" />
+        </a-col> -->
         <a-col :span="14"></a-col>
-        <a-col :span="1">
+        <a-col :span="1" style="text-align: right">
           <img
             style="width: auto; height: 50px; margin-top: -5px;"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/SA_logo.png"
           />
         </a-col>
-        <a-col :span="2">
+        <a-col :span="2" style="text-align: left">
           <img
             style="width: auto; height: 35px; margin-top: -5px; "
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
@@ -36,7 +48,7 @@
               style="color:#ffffff"
             ></a-icon> </a-tooltip
         ></a-col> -->
-        <a-col :span="1">
+        <a-col :span="1" style="text-align: center">
           <a-dropdown>
             <a-menu slot="overlay">
               <a-menu-item key="1"
