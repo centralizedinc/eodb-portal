@@ -32,7 +32,7 @@ const mutations = {
     SET_PERMIT_TYPES(state, data) {
         state.permit_types = data;
     },
-    RESET(state){
+    RESET(state) {
         Object.keys(state).forEach(key => {
             state[key] = initialState()[key];
         })
@@ -71,6 +71,22 @@ const actions = {
                 })
                 .catch((err) => {
                     console.log('err :', err);
+                    reject(err)
+                });
+        })
+    },
+    SAVE_EPERMIT_ATTACHMENT(context, { business_no, form_data }) {
+        console.log('#########  business_no :', business_no);
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.rootState.user_session.token).uploadPermitDocument(business_no, form_data)
+                .then((result) => {
+                    console.log('result.data :', result.data);
+                    if (result) return new BusinessPermitAPI(context.rootState.user_session.token).updatePermitByBusinessNo(business_no, { attachment: result.data.location })
+                })
+                .then((result) => {
+                    resolve(result);
+                }).catch((err) => {
+                    console.log('SAVE_EPERMIT_ATTACHMENT err :', err);
                     reject(err)
                 });
         })

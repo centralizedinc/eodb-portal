@@ -133,6 +133,7 @@
                 </a-col>
                 <a-col :span="12">
                   <a-select
+                    disabled
                     style="width: 100%;"
                     v-model="transaction_details.mode_of_payment"
                     @change="updatePaymentMode"
@@ -370,7 +371,7 @@ export default {
         ],
         status: "unpaid",
         method: "",
-        mode_of_payment: "",
+        mode_of_payment: "A",
         payment_details: {}
       },
       card_details: {},
@@ -412,7 +413,7 @@ export default {
     };
   },
   created() {
-    // this.init();
+    this.init();
   },
   watch: {
     current_step() {
@@ -479,10 +480,12 @@ export default {
     // this.updateDocsPayment();
   },
   methods: {
-    // init() {
-    //   this.$store.dispatch("GET_REGIONS");
-    //   this.$store.dispatch("GET_PROVINCES");
-    // },
+    init() {
+      this.$store.dispatch("GET_REGIONS");
+      this.$store.dispatch("GET_PROVINCES");
+      var data = this.$store.state.user_session.user
+    this.form.personal_details.name = data.name
+    },
     prev_step() {
       if (this.form.purpose[0] == "pc" && this.current_step == 3) {
         this.current_step--;
@@ -495,11 +498,11 @@ export default {
       console.log("this.form :", this.form);
 
       // comment to validate
-      // var { errors, jump_to } = this.validation(validate_all);
+      var { errors, jump_to } = this.validation(validate_all);
 
       // comment to  bypass
-      var errors = [],
-        jump_to = 0;
+      // var errors = [],
+      //   jump_to = 0;
 
       console.log("errors :", errors);
       this.errors = errors;

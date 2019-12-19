@@ -189,9 +189,14 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
+            <span slot="label">Income from Real Property</span>
+
+            <a-input v-model="form.tax.taxable.property_income" @change="computation"></a-input>
+          </a-form-item>
+          <!-- <a-form-item>
             <span slot="label">Additional Community Tax</span>
             <a-input v-model="form.tax.taxable.additional" @change="computation"></a-input>
-          </a-form-item>
+          </a-form-item>-->
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
@@ -220,7 +225,7 @@
         </a-col>
       </a-row>
 
-      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+      <!-- <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Income from Real Property</span>
@@ -228,7 +233,7 @@
             <a-input v-model="form.tax.taxable.property_income" @change="computation"></a-input>
           </a-form-item>
         </a-col>
-      </a-row>
+      </a-row>-->
       <!-- table -->
 
       <a-row type="flex" justify="space-around" style="margin-top: 5vh;">
@@ -250,6 +255,9 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {};
+  },
+  mounted() {
+    // this.form.tax.taxable.basic = "exempted";
   },
   methods: {
     checkErrors(field) {

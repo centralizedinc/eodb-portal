@@ -6,6 +6,7 @@ var DocketsActivityDao = require('../dao/DocketsActivityDao');
 var BusinessPermitDao = require('../dao/BusinessPermitDao');
 var AccountDao = require('../dao/AccountDao');
 var ApplicationDao = require('../dao/ApplicationDao');
+var PaymentDao = require('../dao/PaymentDao');
 
 const jwt = require('jsonwebtoken');
 const sendgrid = require('../utils/email');
@@ -213,9 +214,11 @@ router.route('/approve')
 function processApprovedApplication(reference_no) {
     console.log("Process approve application...");
     return new Promise((resolve, reject) => {
-        var results = {};
+        var results = {
+            is_approve: true
+        };
 
-        DocketsDao.modifyOne({ reference_no }, { status: 1 })
+        DocketsDao.modifyOne({ reference_no }, { status: 1, date_approved: new Date() })
             // Update Docket
             .then((result) => {
                 results.docket = result;
@@ -228,9 +231,13 @@ function processApprovedApplication(reference_no) {
             })
             // Create Permit based on permit type
             .then((permit) => {
-                results.permit = permit;
-
-                return AccountDao.findOneByID(permit.account_id);
+                results.details = permit;
+                return PaymentDao.findOne({ reference_no: results.details.reference_no })
+            })
+            // GET FIRST PAYMENT
+            .then((payments) => {
+                results.payments = payments;
+                return AccountDao.findOneByID(results.details.account_id);
             })
             // Find the user
             .then((user) => {
@@ -328,7 +335,7 @@ function processRejectedApplication(reference_no) {
     return new Promise((resolve, reject) => {
         var results = {};
 
-        DocketsDao.modifyOne({ reference_no }, { status: 2 })
+        DocketsDao.modifyOne({ reference_no }, { status: 2, date_rejected: new Date() })
             // Update Docket
             .then((result) => {
                 results.docket = result;

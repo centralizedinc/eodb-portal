@@ -33,7 +33,7 @@
         </a-row>
         <a-card>
           <h1 align="center" style="margin-top:50px">
-            We have successfully updated your account.
+            We have successfully registered your account.
             <br />You can login now securely
           </h1>
 

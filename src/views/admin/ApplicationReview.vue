@@ -67,12 +67,15 @@
 
 <script>
 import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary";
+import provinces_data from "../../assets/references/provinces.json";
+
 export default {
   components: {
     ApplicationSummary
   },
   data() {
     return {
+      provinces_data,
       form: {
         owner_details: {
           name: {}
@@ -112,6 +115,10 @@ export default {
         });
       this.form = this.$store.state.admin_session.for_review;
     },
+    getProvinceByCode(code) {
+      const data = this.provinces_data.find(v => v.provCode === code);
+      return data.provDesc;
+    },
     deniedApplication() {
       this.rejecting_application = true;
       this.$store
@@ -148,41 +155,74 @@ export default {
           department_title: this.department.description
         })
         .then(result => {
-          if(!result.data.errors) results = result.data;
+          if (!result.data.errors) results = result.data;
           console.log("APPROVE_DOCKET result :", result);
           this.$notification.success({
             message: "Approve!",
             description: `You have approved Application #${this.form.reference_no}`
           });
+          if (results.permit)
+            return this.getAddress(results.permit.details.business_address);
+        })
+        .then(business_address => {
+          console.log("getAddress result :", business_address);
+          if (results.permit && business_address) {
+            if (results.permit.is_approve) {
+              if (results.permit.details.permit_type === "business") {
+                const valid_until = new Date(
+                  results.permit.details.date_created
+                );
+                const details = {
+                  business_name:
+                    results.permit.details.business_details.business_name,
+                  business_no: results.permit.details.business_no,
+                  business_address,
+                  business_owner: `${results.permit.details.owner_details.name.first} ${results.permit.details.owner_details.name.last}`,
+                  plate_no: results.permit.details.reference_no,
+                  ownership_type: this.getBusinessType(
+                    results.permit.details.business_details.business_type
+                  ),
+                  valid_until,
+                  area: `${results.permit.details.business_details.business_area} sq.m`,
+                  date_issued: new Date(valid_until.getFullYear() + 1, 11, 31),
+                  application_type: this.getApplicationType(
+                    results.permit.details.business_details.application_types
+                  ),
+                  mode_of_payment: this.getPaymentMode(
+                    results.permit.payments.mode_of_payment
+                  ),
+                  transaction_no: results.permit.payments.transaction_no,
+                  transactions: results.permit.payments.payment_breakdown
+                };
+                return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
+              }
+            }
+            // if(!results.permit.is_approve) return this.$upload(results.permit.details, "BUSINESSPERMIT_SAN_ANTONIO")
+          }
+        })
+        .then(blob => {
+          if (blob && results.permit.details.permit_type === "business") {
+            var file = new File(
+              [blob],
+              `business-permit-${Date.now()}-smart-juan.pdf`,
+              {
+                type: "application/pdf",
+                lastModified: Date.now()
+              }
+            );
+            var form_data = new FormData();
+            form_data.append("file", file);
+            return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
+              business_no: results.permit.details.business_no,
+              form_data
+            });
+          }
+        })
+        .then(result => {
+          console.log("SAVE_EPERMIT_ATTACHMENT result :", result);
           return this.$store.dispatch("GET_DOCKETS_OUTBOX", true);
         })
         .then(result => {
-          console.log("GET_DOCKETS_OUTBOX result :", result);
-          // if(results.permit) {
-          //   if(results.permit.is_approve) {
-          //     const details = {
-          //       business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
-          //       business_no: "445433110",
-          //       business_address: "Unit 2320 Pasong Tamo Extension",
-          //       business_owner: "",
-          //       plate_no: "",
-          //       ownership_type: "",
-          //       valid_until: "",
-          //       area: "",
-          //       date_issued: "",
-          //       application_type: "",
-          //       mode_of_payment: "",
-          //       transaction_no: "",
-          //       transactions: []
-          //     }
-          //     return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
-          //   }
-          //   // if(!results.permit.is_approve) return this.$upload(results.permit.details, "BUSINESSPERMIT_SAN_ANTONIO")
-          // }
-        // })
-        // .then((result) => {
-
-
           this.$router.push("/admin/app/applications");
           this.approving_application = false;
         })
@@ -190,6 +230,65 @@ export default {
           console.log("APPROVE_DOCKET err :", err);
           this.approving_application = false;
         });
+    },
+    getAddress(address) {
+      return new Promise((resolve, reject) => {
+        const {
+          unit_no,
+          bldg_no,
+          bldg_name,
+          subdivision,
+          street,
+          barangay,
+          province,
+          city,
+          region,
+          postal_code
+        } = address;
+        var city_desc = "";
+        import(`../../assets/references/cities/${province}.json`)
+          .then(data => {
+            const cities = data.default;
+            var city_data = cities.find(v => v.citymunCode === city);
+            city_desc = city_data.citymunDesc;
+            return import(`../../assets/references/barangay/${city}.json`);
+          })
+          .then(data => {
+            const barangays = data.default;
+            var brgy_data = barangays.find(v => v.brgyCode === barangay);
+            var brgy_desc = brgy_data.brgyDesc;
+            var result_address = "";
+            if (unit_no) result_address += `Unit ${unit_no},`;
+            if (bldg_no) result_address += ` ${bldg_no}`;
+            if (bldg_name) result_address += ` ${bldg_name}`;
+            if (barangay) result_address += ` ${brgy_desc}`;
+            if (city) result_address += ` ${city_desc}`;
+            if (province)
+              result_address += ` ${this.getProvinceByCode(province)}`;
+            if (postal_code) result_address += `, ${postal_code}`;
+            resolve(result_address.toUpperCase());
+          })
+          .catch(err => {
+            console.log("err :", err);
+            reject(err);
+          });
+      });
+    },
+    getBusinessType(type) {
+      if (type === "SP") return "Single Proprietorship";
+      else if (type === "P") return "Partnership";
+      else if (type === "CE") return "Cooperative";
+      else if (type === "CN") return "Corporation";
+    },
+    getApplicationType(type) {
+      const types = ["NEW", "RENEWAL"];
+      return types[type];
+    },
+    getPaymentMode(mode) {
+      if (mode === "A") return "Annual";
+      else if (mode === "SA") return "Semi Annual";
+      else if (mode === "Q") return "Quarterly";
+      else return "";
     }
   }
 };

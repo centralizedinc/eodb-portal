@@ -149,6 +149,28 @@ router.route('/application')
             });
     })
 
+router.route('/epermit/:business_no')
+    .get((req, res) => {
+        BusinessPermitDao.findOne({ business_no: req.params.business_no })
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({
+                    errors
+                })
+            });
+    })
+    .post((req, res) => {
+        BusinessPermitDao.modifyOne({ business_no: req.params.business_no }, { epermit_attachment: req.body.attachment })
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({
+                    errors
+                })
+            });
+    })
+
 router.route('/:id')
     .get((req, res) => {
         BusinessApplicationDao.findOneByID(req.params.id)

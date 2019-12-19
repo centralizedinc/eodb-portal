@@ -34,8 +34,8 @@
       <a-card :bodyStyle="{ padding: '5px' }" class="permits-tabs">
         <a-tabs v-model="current_view">
           <a-tab-pane tab="Permits & Licenses" :key="0" />
-          <a-tab-pane tab="Drafts" :key="1" />
-          <a-tab-pane tab="Payments" :key="2" />
+          <!-- <a-tab-pane tab="Drafts" :key="1" /> -->
+          <a-tab-pane tab="Payments" :key="1" />
         </a-tabs>
       </a-card>
     </a-col>
@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       current_view: 0,
-      view_components: ["PermitsLicense", "Drafts", "Payments"],
+      view_components: ["PermitsLicense", "Payments"],
       items: [
         {
           title: "Business Permit",

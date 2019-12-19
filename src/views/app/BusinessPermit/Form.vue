@@ -418,6 +418,7 @@ export default {
         {
           description: "Fire Safety and Inspection Fee",
           fee_type: "local_taxes",
+          is_fire_and_safety: true,
           amount: 3000
         },
         {
@@ -903,10 +904,10 @@ export default {
         }
         if (
           this.form.application_type === 1 &&
-          !this.form.business_details.business_type
+          !this.form.business_details.gross_sales
         ) {
           errors.push({
-            field: "business_details.business_types",
+            field: "business_details.gross_sales",
             error: "Business Type is a required field."
           });
         }
@@ -1037,13 +1038,18 @@ export default {
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
         // computed_amount = parseFloat(amount) / 100 / 20;
         var computation_function = this.computation_formula.replace(
-          "{#amount}",
+          /{#amount}/g,
           parseFloat(amount)
         );
         computed_amount = eval(computation_function);
       }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
+
+      const fire_index = this.payments_data_source.findIndex(
+        v => v.is_fire_and_safety
+      );
+      this.payments_data_source[fire_index].amount = computed_amount * 0.15;
     },
     updateGross(amount) {
       const index = this.payments_data_source.findIndex(
@@ -1058,13 +1064,18 @@ export default {
         // else computed_amount = parseFloat(amount) * 0.02;
 
         var computation_function = this.computation_formula.replace(
-          "{#amount}",
+          /{#amount}/g,
           parseFloat(amount)
         );
         computed_amount = eval(computation_function);
       }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
+
+      const fire_index = this.payments_data_source.findIndex(
+        v => v.is_fire_and_safety
+      );
+      this.payments_data_source[fire_index].amount = computed_amount * 0.15;
     },
     updateDocsPayment(values) {
       const payments = [
@@ -1081,6 +1092,7 @@ export default {
         {
           description: "Fire Safety and Inspection Fee",
           fee_type: "local_taxes",
+          is_fire_and_safety: true,
           amount: 3000
         }
       ];

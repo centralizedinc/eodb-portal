@@ -124,12 +124,13 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <!-- <a-row type="flex" align="middle" justify="space-between">
+              <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
                 <a-col :span="12">
                   <a-select
+                    disabled
                     style="width: 100%;"
                     v-model="transaction_details.mode_of_payment"
                     @change="updatePaymentMode"
@@ -143,7 +144,7 @@
                     style="color: red"
                   >{{checkErrors('mode_of_payment')}}</span>
                 </a-col>
-              </a-row>-->
+              </a-row>
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -409,7 +410,7 @@ export default {
         //   amount: 1000
         // },
         {
-          description: "Barangay Clearance",
+          description: "Application Fee",
           amount: 100
         },
         // {
@@ -505,6 +506,9 @@ export default {
     init() {
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
+      var data = this.$store.state.user_session.user
+    this.form.personal_details.name = data.name
+    this.form.contact_details.email = data.email
     },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
@@ -527,7 +531,7 @@ export default {
       // if there is no errors
       if (!errors.length) {
         if (this.current_step === 2) {
-          this.submit();
+          // this.submit();
           this.show_payment = true;
           // Proceed to payment
         } else {
@@ -814,7 +818,7 @@ export default {
           error: "Please attach the required documents."
         });
         this.$message.error("Please attach the required documents");
-        jump_to = 4;
+        jump_to = 2;
       }
 
       console.log("errors: " + JSON.stringify(errors));
@@ -825,7 +829,7 @@ export default {
           error: "Please choose mode of payment."
         });
         this.$message.error("Please choose mode of payment.");
-        jump_to = 4;
+        jump_to = 2;
       }
       console.log("errors to return: " + JSON.stringify(errors));
       return { errors, jump_to };
