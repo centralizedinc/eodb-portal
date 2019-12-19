@@ -44,4 +44,11 @@ export default class UploadAPI {
         if(!file) return Promise.resolve();
         return axios.post('upload/avatar', file);
     }
+
+
+    uploadPermitDocument(epermit_no, form_data) {
+        console.log('#########  epermit_no :', epermit_no);
+        if(!form_data) return Promise.resolve();
+        else return axios.post(`upload/epermit/${epermit_no}`, form_data);
+    }
 }

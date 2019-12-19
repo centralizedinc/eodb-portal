@@ -2,16 +2,25 @@
   <a-table :columns="cols" :dataSource="permits" :loading="loading">
     <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
     <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
-    <template slot="action" slot-scope="text, record">
-      <a-popconfirm
-        title="Click PROCEED to redirect in Renewal Form."
-        okText="Proceed"
-        cancelText="Cancel"
-        @confirm="renewApplication(record)"
-      >
-        <a-button type="link">Renew</a-button>
-      </a-popconfirm>
-    </template>
+    <a-row slot="action" slot-scope="text, record">
+      <a-col :span="12">
+        <a-popconfirm
+          title="Click PROCEED to redirect in Renewal Form."
+          okText="Proceed"
+          cancelText="Cancel"
+          @confirm="renewApplication(record)"
+        >
+          <a-tooltip title="Renew">
+            <a-icon type="reload" style="cursor: pointer; color: #1890ff; font-weight: bold;" />
+          </a-tooltip>
+        </a-popconfirm>
+      </a-col>
+      <a-col :span="12">
+        <a-tooltip title="Print">
+          <a-icon type="printer" @click="print(record)" style="cursor: pointer; color: #1890ff; font-weight: bold;" />
+        </a-tooltip>
+      </a-col>
+    </a-row>
   </a-table>
 </template>
 
@@ -37,7 +46,7 @@ export default {
           scopedSlots: { customRender: "date_created" }
         },
         {
-          title: "",
+          title: "Actions",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }
@@ -89,6 +98,11 @@ export default {
       this.$router.push(
         `/permits/business?mode=renewal&ref_no=${record.reference_no}`
       );
+    },
+    download(record) {},
+    print(record) {
+      var w = window.open(record.epermit_attachment);
+      w.print();
     }
   }
 };

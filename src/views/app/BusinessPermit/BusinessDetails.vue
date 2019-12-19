@@ -53,7 +53,7 @@
       <a-form-item label="Trade Name/Franchise" style="font-weight: bold">
         <a-input v-model="form.business_details.franchise" placeholder="Trade Name/Franchise"></a-input>
       </a-form-item>
-      
+
       <template v-if="form.application_type===0">
         <a-form-item
           style="font-weight: bold"
@@ -194,6 +194,18 @@
               placeholder="No. of Employees in Residing in LGU"
               v-model="form.business_details.employees_residing"
             ></a-input-number>
+          </a-form-item>
+        </a-col>
+      </a-row>
+
+      <a-row style="font-weight: bold">
+        <a-col :span="24">
+          <a-form-item label="Specify the tax incentive from any Government Entity">
+            <a-input
+              v-model="form.business_details.specify_entity"
+              placeholder="Please specify the Entity"
+              @change="checkTaxEntity"
+            ></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -373,15 +385,14 @@
 
       <!-- Others -->
       <a-divider></a-divider>
-      <a-form-item>
+      <!-- <a-form-item>
         <a-checkbox
           v-model="form.business_details.enjoying_tax_incentive"
         >Are you enjoying tax incentive from any Government Entity?</a-checkbox>
       </a-form-item>
 
       <a-form-item
-        v-if="form.business_details.enjoying_tax_incentive"
-        label="Specify the Entity"
+        label="Specify the tax incentive from any Government Entity"
         :label-col="{ span: 5 }"
         :wrapper-col="{ span: 10 }"
         class="text-left"
@@ -389,8 +400,9 @@
         <a-input
           v-model="form.business_details.specify_entity"
           placeholder="Please specify the Entity"
+          @change="checkTaxEntity"
         ></a-input>
-      </a-form-item>
+      </a-form-item>-->
 
       <a-form-item>
         <a-checkbox
@@ -450,7 +462,7 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <a-divider></a-divider>
+        <!-- <a-divider></a-divider>
         <a-row :gutter="15" style="font-weight: bold;">
           <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
             <a-row :gutter="5">
@@ -497,7 +509,6 @@
             </a-row>
           </a-col>
 
-          <!-- Map -->
           <a-col :xs="{ span: 24 }" :sm="{ span: 14 }">
             <GmapMap
               id="map"
@@ -631,7 +642,7 @@
               ></a-input>
             </a-form-item>
           </a-col>
-        </a-row>
+        </a-row>-->
       </template>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
@@ -767,11 +778,42 @@ export default {
           barangay: "",
           postal_code: ""
         };
+      } else {
+        const {
+          bldg_no,
+          unit_no,
+          bldg_name,
+          street,
+          subdivision,
+          region,
+          province,
+          city,
+          barangay,
+          postal_code
+        } = this.form.business_address;
+        this.form.business_address.rental_address = {
+          bldg_no,
+          unit_no,
+          bldg_name,
+          street,
+          subdivision,
+          region,
+          province,
+          city,
+          barangay,
+          postal_code
+        };
       }
     },
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
+    },
+    checkTaxEntity() {
+      this.form.business_details.enjoying_tax_incentive = this.form
+        .business_details.specify_entity
+        ? true
+        : false;
     },
     changeRegion() {
       // clear data

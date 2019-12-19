@@ -18,13 +18,13 @@
     <a-form class="owner-form">
       <!-- Personal Details -->
       <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
-      <a-row>
+      <!-- <a-row>
         <a-col :xs="{ span: 24 }">
           <a-form-item>
             <a-checkbox @change="onChange">Is the registrant the business owner</a-checkbox>
           </a-form-item>
         </a-col>
-      </a-row>
+      </a-row>-->
 
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -425,7 +425,10 @@ export default {
       return provincesOnRegion;
     }
   },
-  created() {},
+  created() {
+    this.form.owner_details.name = this.user.name;
+    this.form.owner_details.email = this.user.email;
+  },
   mounted() {
     this.checkRequiredDocs();
 

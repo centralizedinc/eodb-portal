@@ -34,4 +34,13 @@ export default class BusinessPermitAPI {
         return axios.get(`/permits/business/application/reference/${reference_no}`)
     }
 
+    /**
+     * @returns {Promise}
+     * @param {String} business_no 
+     * @param {Object} data 
+     */
+    updatePermitByBusinessNo(business_no, data) {
+        console.log('business_no :', business_no);
+        return axios.post(`/permits/business/epermit/${business_no}`, data);
+    }
 }

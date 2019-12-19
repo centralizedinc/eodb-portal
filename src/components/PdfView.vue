@@ -23,7 +23,12 @@ import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
 
 var printers = {
-BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT, BUSINESSPERMIT_SAN_ANTONIO
+  BGYCLEARANCE,
+  FIREANDSAFETY,
+  BUSINESSPERMIT,
+  POLICECLEARANCE,
+  RECEIPT,
+  BUSINESSPERMIT_SAN_ANTONIO
 };
 
 // var printers = {
@@ -45,7 +50,6 @@ BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT, BUSINESSP
 // var printers = {
 //   BUSINESSPERMIT
 // };
-
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -71,7 +75,28 @@ export default {
        * To bypass the details override the `pdf_details`
        */
       this.pdf_details = {
-        amount: 0
+        business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
+        business_no: "445433110",
+        business_address: "Unit 2320 Pasong Tamo Extension",
+        business_owner: "RICHARD BERMUDEZ",
+        plate_no: "1546238984",
+        ownership_type: "SINGLE PROPRIETORSHIP",
+        valid_until: new Date(2019, 11, 31),
+        area: "50 sq.m",
+        date_issued: new Date(2019, 3, 20),
+        application_type: "NEW",
+        mode_of_payment: "QUARTERLY",
+        transaction_no: "115498845612848",
+        transactions: [
+          {
+            description: "Application Fee",
+            amount: 1000
+          },
+          {
+            description: "Convenience Fee",
+            amount: 50
+          }
+        ]
       };
 
       // Process PDF

@@ -12,17 +12,8 @@
             style="width: auto; height: 55px; margin-top: -8px;"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/smartjuan_logo.png"
           />
-          <!-- <a-avatar
-            src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png"
-            :size="50"
-          ></a-avatar>-->
         </a-col>
-        <!-- <a-col :span="10">
-          <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
-        </a-col>-->
-        <!-- <a-col :span="10">
-          <a-input-search placeholder="Search" />
-        </a-col> -->
+
         <a-col :span="14"></a-col>
         <a-col :span="1">
           <img

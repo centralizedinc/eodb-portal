@@ -11,6 +11,15 @@
 
     <a-layout-footer :style="{ background: '#555555' }">
       <a-row type="flex" justify="center">
+        <a-col :span="4"></a-col>
+        <a-col :span="16" style="text-align: center">
+          <img
+            style="width: auto; height: 45px; margin-top: -5px; "
+            src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
+        /></a-col>
+        <a-col :span="4"></a-col>
+      </a-row>
+      <!-- <a-row type="flex" justify="center">
         <a-col :span="3"></a-col>
         <a-col :span="8">
           <img
@@ -18,16 +27,18 @@
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
           />
         </a-col>
-      </a-row>
+      </a-row> -->
       <a-row type="flex" justify="center">
-        <a-col :span="24">
-          <h4 align="center" style="color:#FFF">
+        <a-col :span="4"></a-col>
+        <a-col :span="16" style="text-align: center">
+          <h4 style="color:#FFF">
             Office of the Mayor: (042) 545-4091
             <br />Website: https://sanantonio.quezon.gov.ph <br />Facebook:
             SanAntonio Quezon <br />© Copyright 2019 CCCI Inc. - All Rights
             Reserved
           </h4>
         </a-col>
+        <a-col :span="4"></a-col>
       </a-row>
     </a-layout-footer>
 
