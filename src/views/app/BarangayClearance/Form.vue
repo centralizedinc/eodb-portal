@@ -22,10 +22,11 @@
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
+          <!-- current_step-- -->
           <component
             :is="form_components[current_step]"
             :form="form"
-            @prev="current_step--"
+            @prev="prev_step"
             @next="validateStep"
             @payment="validateStep(true)"
             :loading="loading"
@@ -417,9 +418,6 @@ export default {
     current_step() {
       console.log("this.form step :", this.form);
     }
-    // prev_step(){
-
-    // }
   },
   computed: {
     required_documents() {
@@ -485,17 +483,23 @@ export default {
     //   this.$store.dispatch("GET_REGIONS");
     //   this.$store.dispatch("GET_PROVINCES");
     // },
+    prev_step() {
+      if (this.form.purpose[0] == "pc" && this.current_step == 3) {
+        this.current_step--;
+      }
+      this.current_step--;
+    },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
       console.log("this.current_step :", this.current_step);
       console.log("this.form :", this.form);
 
       // comment to validate
-      var { errors, jump_to } = this.validation(validate_all);
+      // var { errors, jump_to } = this.validation(validate_all);
 
       // comment to  bypass
-      // var errors = [],
-      //   jump_to = 0;
+      var errors = [],
+        jump_to = 0;
 
       console.log("errors :", errors);
       this.errors = errors;
@@ -769,7 +773,7 @@ export default {
         }
 
         if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          this.checkDocsNeeded(["residence"]) ||
           !this.form.required_documents.civil_status
         ) {
           errors.push({

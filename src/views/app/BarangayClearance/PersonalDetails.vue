@@ -238,11 +238,12 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.residential_address.region"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.residential_address.region"></a-input> -->
+            <a-select
               v-model="form.residential_address.region"
               showSearch
               @change="changeRegion"
+              disabled
               :filterOption="
                 (input, option) =>
                   filterReference(input, option, regions, 'regCode', 'regDesc')
@@ -254,7 +255,7 @@
                 :key="item.regCode"
                 :value="item.regCode"
               >{{ item.regDesc }}</a-select-option>
-            </a-select>-->
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -268,10 +269,10 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.residential_address.province"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.residential_address.province"></a-input> -->
+            <a-select
               v-model="form.residential_address.province"
-              :disabled="!form.residential_address.region"
+              disabled
               showSearch
               @change="changeProvince"
               :filterOption="
@@ -291,7 +292,7 @@
                 :key="item.provCode"
                 :value="item.provCode"
               >{{ item.provDesc }}</a-select-option>
-            </a-select>-->
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
@@ -305,10 +306,10 @@
               City/Municipality
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.residential_address.city"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.residential_address.city"></a-input> -->
+            <a-select
               v-model="form.residential_address.city"
-              :disabled="!form.residential_address.province"
+              disabled
               @change="changeCity"
               showSearch
               :filterOption="
@@ -328,7 +329,7 @@
                 :key="item.citymunCode"
                 :value="item.citymunCode"
               >{{ item.citymunDesc }}</a-select-option>
-            </a-select>-->
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -342,10 +343,9 @@
               Barangay
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.residential_address.barangay"></a-input>
-            <!-- <a-select
+            <!-- <a-input v-model="form.residential_address.barangay"></a-input> -->
+            <a-select
               v-model="form.residential_address.barangay"
-              :disabled="!form.residential_address.city"
               showSearch
               :filterOption="
                 (input, option) =>
@@ -364,7 +364,7 @@
                 :key="item.brgyCode"
                 :value="item.brgyCode"
               >{{ item.brgyDesc }}</a-select-option>
-            </a-select>-->
+            </a-select>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
@@ -378,7 +378,7 @@
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.residential_address.postal_code"></a-input>
+            <a-input disabled v-model="form.residential_address.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -413,6 +413,7 @@ export default {
   },
   computed: {
     regions() {
+      console.log("regions_data: " + JSON.stringify(this.regions_data));
       return this.regions_data;
     },
     provinces() {
@@ -424,6 +425,9 @@ export default {
       );
       return provincesOnRegion;
     }
+  },
+  mounted() {
+    this.loadReferences();
   },
   methods: {
     checkErrors(field) {
