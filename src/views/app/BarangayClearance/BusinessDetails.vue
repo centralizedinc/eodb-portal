@@ -1,11 +1,8 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-  >
+  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
     <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Business Details </a-col>
+      <a-col :span="22" style="font-size: 25px;">Business Details</a-col>
     </a-row>
     <a-form class="business-form">
       <!-- Business Data -->
@@ -36,12 +33,9 @@
       <a-divider
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
-        >Business Address</a-divider
-      >
+      >Business Address</a-divider>
       <a-form-item>
-        <a-checkbox @change="resetRentedData"
-          >Check if the address is the same as residential</a-checkbox
-        >
+        <a-checkbox @change="resetRentedData">Check if the address is the same as residential</a-checkbox>
       </a-form-item>
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
@@ -106,7 +100,8 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.business_address.region"></a-input>
+            <!-- <a-select
               v-model="form.business_address.region"
               showSearch
               :disabled="fixed_address"
@@ -125,7 +120,7 @@
                 :value="item.regCode"
                 >{{ item.regDesc }}</a-select-option
               >
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -139,7 +134,8 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.business_address.province"></a-input>
+            <!-- <a-select
               v-model="form.business_address.province"
               :disabled="fixed_address || !form.business_address.region"
               showSearch
@@ -164,7 +160,7 @@
                 :value="item.provCode"
                 >{{ item.provDesc }}</a-select-option
               >
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
       </a-row>
@@ -181,7 +177,8 @@
               City/Municipality
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.business_address.city"></a-input>
+            <!-- <a-select
               v-model="form.business_address.city"
               :disabled="fixed_address || !form.business_address.province"
               @change="changeCity"
@@ -206,7 +203,7 @@
                 :value="item.citymunCode"
                 >{{ item.citymunDesc }}</a-select-option
               >
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -221,7 +218,8 @@
               <i style="color: red">*</i>
             </span>
             <!-- <a-input v-model="form.business_address.barangay" placeholder="Barangay*"></a-input> -->
-            <a-select
+            <a-input v-model="form.business_address.barangay"></a-input>
+            <!-- <a-select
               v-model="form.business_address.barangay"
               :disabled="!form.business_address.city"
               showSearch
@@ -245,7 +243,7 @@
                 :value="item.brgyCode"
                 >{{ item.brgyDesc }}</a-select-option
               >
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
@@ -275,12 +273,7 @@
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col
-          :sm="{ span: 6 }"
-          :md="{ span: 12 }"
-          :xl="{ span: 18 }"
-          style="text-align: right;"
-        >
+        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
         </a-col>
       </a-row>

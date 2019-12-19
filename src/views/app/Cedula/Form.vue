@@ -609,60 +609,60 @@ export default {
     validation(validate_all) {
       var errors = [],
         jump_to = 0;
-      // if (validate_all || this.current_step === 0) {
-      //   console.log("current step 0: " + this.form.personal_details.name.last);
-      //   if (!this.form.personal_details.name.last) {
-      //     console.log("error push last name: ");
-      //     errors.push({
-      //       field: "personal_details.name.last",
-      //       error: "Last Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.name.first) {
-      //     errors.push({
-      //       field: "personal_details.name.first",
-      //       error: "First Name is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.birthday) {
-      //     errors.push({
-      //       field: "personal_details.birthday",
-      //       error: "Date of Birth is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.gender) {
-      //     errors.push({
-      //       field: "personal_details.gender",
-      //       error: "Gender is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.birthplace) {
-      //     errors.push({
-      //       field: "personal_details.birthplace",
-      //       error: "Birthplace is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.height) {
-      //     errors.push({
-      //       field: "personal_details.height",
-      //       error: "Height is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.weight) {
-      //     errors.push({
-      //       field: "personal_details.weight",
-      //       error: "Weight is a required field."
-      //     });
-      //   }
-      //   if (!this.form.personal_details.occupation) {
-      //     errors.push({
-      //       field: "personal_details.occupation",
-      //       error: "Occupation is a required field."
-      //     });
-      //   }
+      if (validate_all || this.current_step === 0) {
+        console.log("current step 0: " + this.form.personal_details.name.last);
+        if (!this.form.personal_details.name.last) {
+          console.log("error push last name: ");
+          errors.push({
+            field: "personal_details.name.last",
+            error: "Last Name is a required field."
+          });
+        }
+        if (!this.form.personal_details.name.first) {
+          errors.push({
+            field: "personal_details.name.first",
+            error: "First Name is a required field."
+          });
+        }
+        if (!this.form.personal_details.birthday) {
+          errors.push({
+            field: "personal_details.birthday",
+            error: "Date of Birth is a required field."
+          });
+        }
+        if (!this.form.personal_details.gender) {
+          errors.push({
+            field: "personal_details.gender",
+            error: "Gender is a required field."
+          });
+        }
+        if (!this.form.personal_details.birthplace) {
+          errors.push({
+            field: "personal_details.birthplace",
+            error: "Birthplace is a required field."
+          });
+        }
+        if (!this.form.personal_details.height) {
+          errors.push({
+            field: "personal_details.height",
+            error: "Height is a required field."
+          });
+        }
+        if (!this.form.personal_details.weight) {
+          errors.push({
+            field: "personal_details.weight",
+            error: "Weight is a required field."
+          });
+        }
+        if (!this.form.personal_details.occupation) {
+          errors.push({
+            field: "personal_details.occupation",
+            error: "Occupation is a required field."
+          });
+        }
 
-      //   if (errors.length) jump_to = 0;
-      // }
+        if (errors.length) jump_to = 0;
+      }
 
       if (
         validate_all &&

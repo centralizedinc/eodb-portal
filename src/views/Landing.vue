@@ -17,7 +17,7 @@
       v-if="$breakpoint.lgAndUp"
       style="background-image:url('https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing.png'); height:80%; background-repeat: no-repeat; background-size: cover"
     >
-      <a-row style="height:100vh">
+      <a-row style="height:100%">
         <a-row>
           <a-col :span="9"></a-col>
           <a-col :span="9">
@@ -36,6 +36,7 @@
         </a-col>
       </a-row>
     </div>
+
     <!-- mobile version -->
     <!-- <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
     <div
@@ -74,9 +75,7 @@
               'justify-content': 'center'
             }"
           >
-            <p class="textStyle">
-              Apply Permits & Licenses
-            </p>
+            <p class="textStyle">Apply Permits & Licenses</p>
           </a-card>
         </a>
       </a-col>
@@ -90,13 +89,11 @@
               'align-items': 'center'
             }"
           >
-            <p class="textStyle">
-              Civil Registry Forms
-            </p>
+            <p class="textStyle">Civil Registry Forms</p>
 
             <!-- <a-anchor style="background-color:#1890FF; color:#FFFFFF" :affix="false">
             <a-anchor-link style="background-color:#1890FF; color:#FFFFFF" href="#cert" title="Certificate" />
-            </a-anchor> -->
+            </a-anchor>-->
           </a-card>
         </a>
       </a-col>
@@ -133,12 +130,13 @@
     <!-- ease of doing business -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
-        <p align="center" style="font-size: 44px; font-weight: 100">
-          Ease of doing business in San Antonio Quezon
-        </p>
+        <p
+          align="center"
+          style="font-size: 44px; font-weight: 100"
+        >Ease of doing business in San Antonio Quezon</p>
         <!-- <p align="center" style="font-size: 24px; font-weight: 200">
           in San Antonio
-        </p> -->
+        </p>-->
       </a-col>
       <a-col :span="8" data-aos="fade-right">
         <!-- <img
@@ -146,7 +144,7 @@
           width="90%"
           src="https://i.postimg.cc/MGz98Q0W/San-Antonio-Quezon-Halljf-0128-03.jpg"
           alt
-        /> -->
+        />-->
         <img
           style="border-radius: 20px; -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, 0.1)));}"
           width="100%"
@@ -168,16 +166,14 @@
         </p>
         <!-- <a-button type="primary" style=" text-align:center; height: 50px"
           >Apply Now</a-button
-        > -->
+        >-->
       </a-col>
     </a-row>
 
     <!-- permits & licenses -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="pl">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Permits & Licenses</a-divider
-        >
+        <a-divider orientation="left" class="titleDiv">Permits & Licenses</a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
@@ -201,14 +197,17 @@
     <!-- Certificates -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="cert">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Civil Registry Forms <a-badge count="available soon"
-        /></a-divider>
+        <a-divider orientation="left" class="titleDiv">
+          Civil Registry Forms
+          <a-badge count="available soon" />
+        </a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
           Request for issuance of certified copies of births, marriages and
-          deaths. <br /><i>This service will be available very soon!</i>
+          deaths.
+          <br />
+          <i>This service will be available very soon!</i>
         </div>
       </a-col>
       <a-col :span="1"></a-col>
@@ -223,9 +222,7 @@
     <!-- real property tax -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rpt">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Real Property Tax</a-divider
-        >
+        <a-divider orientation="left" class="titleDiv">Real Property Tax</a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
@@ -247,9 +244,10 @@
     <!-- Report Emergency / Calamity -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rec">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Citizen Report <a-badge count="available soon"
-        /></a-divider>
+        <a-divider orientation="left" class="titleDiv">
+          Citizen Report
+          <a-badge count="available soon" />
+        </a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
@@ -353,6 +351,7 @@ export default {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
   font-stretch: ultra-expanded !important;
+  font-size: 2vh !important;
 }
 
 .descStyle {

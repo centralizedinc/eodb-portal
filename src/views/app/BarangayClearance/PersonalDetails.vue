@@ -238,7 +238,8 @@
               Region
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.residential_address.region"></a-input>
+            <!-- <a-select
               v-model="form.residential_address.region"
               showSearch
               @change="changeRegion"
@@ -253,7 +254,7 @@
                 :key="item.regCode"
                 :value="item.regCode"
               >{{ item.regDesc }}</a-select-option>
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -267,7 +268,8 @@
               Province
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.residential_address.province"></a-input>
+            <!-- <a-select
               v-model="form.residential_address.province"
               :disabled="!form.residential_address.region"
               showSearch
@@ -289,7 +291,7 @@
                 :key="item.provCode"
                 :value="item.provCode"
               >{{ item.provDesc }}</a-select-option>
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
       </a-row>
@@ -303,7 +305,8 @@
               City/Municipality
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.residential_address.city"></a-input>
+            <!-- <a-select
               v-model="form.residential_address.city"
               :disabled="!form.residential_address.province"
               @change="changeCity"
@@ -325,7 +328,7 @@
                 :key="item.citymunCode"
                 :value="item.citymunCode"
               >{{ item.citymunDesc }}</a-select-option>
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -339,7 +342,8 @@
               Barangay
               <i style="color: red">*</i>
             </span>
-            <a-select
+            <a-input v-model="form.residential_address.barangay"></a-input>
+            <!-- <a-select
               v-model="form.residential_address.barangay"
               :disabled="!form.residential_address.city"
               showSearch
@@ -360,7 +364,7 @@
                 :key="item.brgyCode"
                 :value="item.brgyCode"
               >{{ item.brgyDesc }}</a-select-option>
-            </a-select>
+            </a-select>-->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">

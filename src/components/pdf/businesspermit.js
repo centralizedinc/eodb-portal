@@ -230,51 +230,7 @@ function getContent(details) {
     }
 
 },
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-{
-    layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [300],
-        body: [
-            [
-                {
-                    text: "BUSINESS NAME",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, -2, 0, 0]
-                }
-            ]
-        ]
-    }
 
-},
-/////////////////////////////////////////////////////////////////////////////////////////////////////----Table3
-
-{
-    //layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [300],
-        body: [
-            [
-                {
-                    text: " Blk 17 Lot 10 Camella Homes SAN ANTONIO QUEZON",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'left',
-                    // right,down,left,up
-                    margin: [1, 1, 0, 0]
-                }
-            ]
-        ]
-    }
-
-},
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     layout: "noBorders",

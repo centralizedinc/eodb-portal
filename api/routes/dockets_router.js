@@ -147,7 +147,7 @@ router.route('/unclaim')
 router.route('/approve')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference, remarks, department_title } = req.body, docket = {}, approver = account_id;
+        var { docket_reference, remarks, department_title } = req.body, results = {}, approver = account_id;
         DocketsDao.modifyOne({
             reference_no: docket_reference,
             "activities.department": department
@@ -158,7 +158,7 @@ router.route('/approve')
         })
             .then((result) => {
                 console.log('DocketsDao result :', result);
-                docket = result;
+                results.docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -171,33 +171,35 @@ router.route('/approve')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
+                results.docket_activity = result;
                 console.log('DocketsActivityDao result :', result);
                 // Check if last approver
-                const activity_index = docket.activities.findIndex(v => v.status === 0);
+                const activity_index = results.docket.activities.findIndex(v => v.status === 0);
                 console.log('check if last approver :', activity_index);
                 if (activity_index === -1) {
-                    const activity_rejected_index = docket.activities.findIndex(v => v.status === 2);
+                    const activity_rejected_index = results.docket.activities.findIndex(v => v.status === 2);
                     console.log('check if rejected :', activity_rejected_index);
                     if (activity_rejected_index === -1) return processApprovedApplication(docket_reference);
                     else if (activity_rejected_index > -1) return processRejectedApplication(docket_reference);
                 }
             })
             .then((result) => {
+                results.permit = result
                 console.log('evaluated application result :', result);
                 console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
 
                 const notification_message = {
-                    title: `Your ${getPermitType(docket.permit)} Application has been approved.`,
-                    message: `Application with reference #${docket.reference_no} has been approved by ${department_title}.`
+                    title: `Your ${getPermitType(results.docket.permit)} Application has been approved.`,
+                    message: `Application with reference #${results.docket.reference_no} has been approved by ${department_title}.`
                 }
                 console.log('notification_message :', notification_message);
-                // return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscriptions/notify/${docket.account_id}`, notification_message)
-                return axios.post(`http://192.168.1.134:4000/subscriptions/notify/${docket.account_id}`, notification_message)
+                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscriptions/notify/${results.docket.account_id}`, notification_message)
+                // return axios.post(`http://192.168.1.134:4000/subscriptions/notify/${results.docket.account_id}`, notification_message)
             })
             .then((result) => {
                 console.log('notification result :', result);
-                console.log('results :', docket);
-                res.json(docket)
+                console.log('results :', results);
+                res.json(results)
             })
             .catch((errors) => {
                 res.json({ errors })
@@ -261,7 +263,7 @@ function processApprovedApplication(reference_no) {
 router.route('/reject')
     .post((req, res) => {
         const { department, account_id } = jwt.decode(req.headers.access_token);
-        var { docket_reference, remarks, department_title } = req.body, docket = {}, approver = account_id;
+        var { docket_reference, remarks, department_title } = req.body, results = {}, approver = account_id;
         console.log(`Rejecting application with reference #${docket_reference}`);
         DocketsDao.modifyOne({
             reference_no: docket_reference,
@@ -273,7 +275,7 @@ router.route('/reject')
         })
             .then((result) => {
                 console.log('DocketsDao result :', result);
-                docket = result;
+                results.docket = result;
                 const docket_activity = {
                     reference_no: result.reference_no,
                     application_id: result.application_id,
@@ -286,25 +288,27 @@ router.route('/reject')
                 return DocketsActivityDao.create(docket_activity)
             })
             .then((result) => {
+                results.docket_activity = result;
                 console.log('DocketsActivityDao result :', result);
                 // Check if last approver
-                const activity_index = docket.activities.findIndex(v => v.status === 0);
+                const activity_index = results.docket.activities.findIndex(v => v.status === 0);
                 if (activity_index === -1) return processRejectedApplication(docket_reference);
             })
             .then((result) => {
+                results.permit = result;
                 console.log('rejected application result :', result);
 
                 const notification_message = {
-                    title: `Your ${getPermitType(docket.permit)} Application has been declined.`,
-                    message: `Application with reference #${docket.reference_no} has been declined by ${department_title}.`
+                    title: `Your ${getPermitType(results.docket.permit)} Application has been declined.`,
+                    message: `Application with reference #${results.docket.reference_no} has been declined by ${department_title}.`
                 }
                 console.log('process.env.VUE_APP_BASE_API_URI :', process.env.VUE_APP_BASE_API_URI);
-                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscriptions/notify/${docket.account_id}`, notification_message)
+                return axios.post(`${process.env.VUE_APP_BASE_API_URI}/subscriptions/notify/${results.docket.account_id}`, notification_message)
             })
             .then((result) => {
                 console.log('Notification result :', result);
-                console.log('results :', docket);
-                res.json(docket)
+                console.log('results :', results);
+                res.json(results)
             })
             .catch((errors) => {
                 res.json({ errors })
