@@ -416,6 +416,9 @@ export default {
     current_step() {
       console.log("this.form step :", this.form);
     }
+    // prev_step(){
+
+    // }
   },
   computed: {
     required_documents() {
