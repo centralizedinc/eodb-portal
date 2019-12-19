@@ -17,13 +17,13 @@
     </a-row>
     <a-form>
       <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
-      <a-row>
+      <!-- <a-row>
         <a-col :xs="{ span: 24 }">
           <a-form-item>
             <a-checkbox @change="onChange">Check this box if the registrant is the applicant</a-checkbox>
           </a-form-item>
         </a-col>
-      </a-row>
+      </a-row>-->
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
@@ -270,10 +270,10 @@ export default {
         (this.form.tax.community.basic || 0) +
         (this.form.tax.community.business_income || 0) +
         (this.form.tax.community.profession_income || 0) +
-        (this.form.tax.taxable.property_income || 0);
+        (this.form.tax.community.property_income || 0);
       this.form.tax.interest = 0;
       this.form.tax.total_amount_paid =
-        this.form.tax.total + this.form.tax.interest;
+        (this.form.tax.total || 0) + (this.form.tax.interest || 0);
       console.log(
         "this.form.tax.taxable.property_income: " +
           this.form.tax.community.property_income

@@ -45,7 +45,7 @@
                             <a-form-item label="Enable two-factor Authentication (2FA)" extra="2FA is a security process to help protect your account. This a 2 step verification process where you will enter first your user crendentials, then portal will ask you to enter a One Time Pin (OTP) sent either thru your email or on yout mobile number.">
                                 <a-switch size="large" v-model="settings.tfa"></a-switch>
                             </a-form-item>
-                            <a-form-item label="One-Time Pin Channel" extra="The Channel where the One-Time Pin (OTP) will be sent. The pin sent every login attempt. Make sure you have access to your email or mobile number.">
+                            <a-form-item v-if="settings.tfa" label="One-Time Pin Channel" extra="The Channel where the One-Time Pin (OTP) will be sent. The pin sent every login attempt. Make sure you have access to your email or mobile number.">
                                 <a-select v-model="settings.tfa_email">
                                   <a-select-option key="1" value="1">Email Address</a-select-option>
                                   <a-select-option key="2" value="2" disabled="true">Phone Number (Not Yet Available)</a-select-option>
@@ -54,7 +54,7 @@
                             <a-form-item label="Enable Auto Lock Screen" extra="Enabling this feature will auto lock your session, during the time-out. This will protect your account from unauthorized acess.">
                                 <a-switch size="large" v-model="settings.als"></a-switch>
                             </a-form-item>
-                            <a-form-item label="Lock Screen Time-out" extra="Idle Time. When this time is reached, the portal will enable the auto lock screen feature. ">
+                            <a-form-item v-if="settings.als" label="Lock Screen Time-out" extra="Idle Time. When this time is reached, the portal will enable the auto lock screen feature. ">
                                 <a-select v-model="settings.als_timeout">    
                                   <a-select-option key="5" value="5">5 Minutes</a-select-option>  
                                   <a-select-option key="10" value="10">10 Minutes</a-select-option>                            
@@ -64,7 +64,7 @@
                                 </a-select>
                             </a-form-item>
                             <a-form-item>
-                                <a-button type="primary" icon="save" @click="saveSettings">Save Security Settings</a-button>
+                                <a-button :loading="loading" type="primary" icon="save" @click="saveSettings">Save Security Settings</a-button>
                             </a-form-item>
                         </a-form>
                     </a-card>
@@ -89,7 +89,9 @@ export default {
     },
     methods:{
         init(){
+            // console.log('USER:::', JSON.stringify(this.$store.state.admin_session.admin))
             this.account._id = this.$store.state.admin_session.admin._id
+            this.settings = this.$store.state.admin_session.admin.settings?this.$store.state.admin_session.admin.settings:{}
         },
         submit(){
             this.loading = true;
@@ -121,6 +123,7 @@ export default {
                     message:'Success!',
                     description:'Security Settings was saved.'
                 })
+                this.$router.push('/admin/app')
             })
             .catch(error=>{
                 this.loading = false;
