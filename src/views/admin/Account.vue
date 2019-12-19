@@ -3,12 +3,21 @@
         
           <a-col :span="18" >
               <a-card>
-              <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/300');"> 
-                <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">                
+              <div style="border: none; height: 25vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/300');"> 
+                <a-card style="border: none; height: 25vh; width: 100%; background:#000000a6">                
                 <a-row type="flex" justify="start" align="middle">
                     <a-col :span="4">
-                    <a-avatar style="border: 1px solid #FFFFFF" shape="square" :size="78" src="http://lorempixel.com/200/200/people/">
-                    </a-avatar>              
+                        <a-upload
+                            class="avatar-uploader"
+                            listType="picture-card"
+                            :showUploadList="false"
+                            :beforeUpload="beforeAvatarUpload"
+                            @change="showAvatar=true"
+                        >
+                            <img v-if="avatar" :src="avatar" alt="Avatar" />
+                            <a-avatar v-else shape="square" :size="86" src="http://lorempixel.com/200/200/people/"> -->
+                            </a-avatar> 
+                        </a-upload>             
                     </a-col>
                     <a-col :span="14">
                     <span style="font-size:24px; color: #FFFFFF; font-weight: bold">{{getFullName()}}</span><br>     
@@ -105,7 +114,10 @@ export default {
         return{
             admin:{},
             offices:[],
-            roles:[]
+            roles:[],
+            loading_avatar:false,
+            uploaded_avatar:{}, 
+            showAvatar:false
         }
     },
     created(){
@@ -141,6 +153,24 @@ export default {
                 return admin.email
             }
         },
+        beforeAvatarUpload(file) {
+            const isJPGorPNG =
+                file.type === "image/jpeg" || file.type === "image/png";
+            if (isJPGorPNG) {
+                this.loading_avatar = true;
+                this.uploaded_avatar = file;
+                this.getBase64(file, imageUrl => {
+                this.admin.avatar = imageUrl;
+                console.log('AVATAR::: ',this.admin.avatar)
+                this.loading_avatar = false;
+                });
+            } else this.$message.error("Invalid file type");
+            // const isLt2M = file.size / 1024 / 1024 < 2;
+            // if (!isLt2M) {
+            //   this.$message.error("Image must smaller than 2MB!");
+            // }
+            return isJPGorPNG;
+            },
         save(){
             var _self = this
             this.$confirm({
@@ -166,6 +196,11 @@ export default {
             onCancel() {},
             });
             
+        },
+        computed:{
+            avatar(){
+                return this.admin.avatar
+            }
         }
     }
 }
