@@ -108,10 +108,12 @@ class AdminAccountDao {
         return new Promise((resolve, reject)=>{
             model.findById(id).exec()
             .then(result=>{
+                console.log(':::: UPDATING: ', JSON.stringify(result))
                 result.settings = settings
                 return result.save()
             })
-            .then(result=>{                
+            .then(result=>{      
+                console.log(':::: UPDATED: ', JSON.stringify(result))          
                 resolve(result)
             })
             .catch(error=>{

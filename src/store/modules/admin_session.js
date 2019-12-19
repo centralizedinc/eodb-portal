@@ -1,5 +1,6 @@
 import AccountAPI from "../../api/AccountAPI"
 import DepartmentAPI from '../../api/DepartmentAPI';
+import RoleAPI from '../../api/RolesAPI';
 
 function initialState() {
     return {
@@ -7,7 +8,8 @@ function initialState() {
         token: "",
         locked:false, 
         for_review:{},
-        department: {}
+        department: {},
+        role:{}
     }
 }
 
@@ -37,6 +39,9 @@ const mutations = {
     },
     SET_DEPARTMENT(state, payload){
         state.department = payload;
+    },
+    SET_ROLE(state, payload){
+        state.role = payload;
     }
 }
 
@@ -56,6 +61,23 @@ const actions = {
                     reject(err);
                 });
             } else resolve(context.state.department)
+        })
+    },
+    GET_ADMIN_ROLE(context, refresh){
+        return new Promise((resolve, reject) => {
+            if(refresh || !context.state.role || !Object.keys(context.state.role).length) {
+                new RoleAPI(context.state.token).getRoleById(context.state.admin.role)
+                .then((result) => {
+                    console.log('GET_ADMIN_ROLE result :', result);
+                    if(!result.data.errors) {
+                        context.commit("SET_ROLE", result.data);
+                        resolve(result.data);
+                    } else reject(result.data.errors)
+                }).catch((err) => {
+                    console.log('GET_ADMIN_ROLE err :', err);
+                    reject(err);
+                });
+            } else resolve(context.state.role)
         })
     }
 }
