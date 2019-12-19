@@ -23,6 +23,9 @@ const mutations = {
     SET_PAYMENTS(state, payload) {
         state.payments = payload;
     },
+    SET_COMPUTATIONS(state, payload) {
+        state.fees_computations = payload;
+    },
     RESET(state){
         Object.keys(state).forEach(key => {
             state[key] = initialState()[key];
@@ -71,13 +74,13 @@ const actions = {
             if(refresh || !context.state.fees_computations || !context.state.fees_computations.length) {
                 new PaymentsAPI(context.rootState.user_session.token).getAllFeesComputation()
                     .then((result) => {
-                        console.log('GET_PAYMENTS result :', result);
+                        console.log('GET_ALL_FEES_COMPUTATION result :', result);
                         if(!result.data.errors) {
-                            context.commit("SET_PAYMENTS", result.data);
+                            context.commit("SET_COMPUTATIONS", result.data);
                             resolve(result.data);
                         } else reject(result.data.errors)
                     }).catch((err) => {
-                        console.log('GET_PAYMENTS err :', err);
+                        console.log('GET_ALL_FEES_COMPUTATION err :', err);
                         reject(err);
                     });
             } else resolve(context.state.fees_computations)

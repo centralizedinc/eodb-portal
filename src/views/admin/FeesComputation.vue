@@ -14,7 +14,8 @@
         >
           <span slot="permit_type" slot-scope="text">{{getPermitType(text)}}</span>
           <span slot="application_type" slot-scope="text">{{getAppType(text)}}</span>
-          <span slot="date" slot-scope="text">{{formatDate(text, 'time', true)}}</span>
+          <span slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</span>
+          <span slot="date_modified" slot-scope="text">{{formatDate(text, 'time', true)}}</span>
           <span slot="actions" slot-scope="text,record" style="font-align:center">
             <a-button-group>
               <a-button type="primary" icon="edit" @click="edit(record)"></a-button>
@@ -66,6 +67,16 @@
             :disabled="loading"
           ></a-textarea>
         </a-form-item>
+        <a-divider>Test Computation</a-divider>
+        <a-form-item label="Base Amount">
+          <a-input-number v-model="base_amount" style="width: 100%" />
+        </a-form-item>
+        <p>
+          <b>
+            Result:
+            <span>{{computed_base_amount}}</span>
+          </b>
+        </p>
         <a-form-item>
           <a-button type="primary" icon="save" :loading="loading" block @click="submit">Submit</a-button>
         </a-form-item>
@@ -102,12 +113,12 @@ export default {
         {
           title: "Date Created",
           dataIndex: "date_created",
-          scopedSlots: { customRender: "date" }
+          scopedSlots: { customRender: "date_created" }
         },
         {
-          title: "Date Modfied",
+          title: "Date Modified",
           dataIndex: "date_modified",
-          scopedSlots: { customRender: "date" }
+          scopedSlots: { customRender: "date_modified" }
         },
         {
           title: "Actions",
@@ -119,14 +130,15 @@ export default {
       application_types: [
         {
           name: "New",
-          value: 0
+          value: "0"
         },
         {
           name: "Renew",
-          value: 1
+          value: "1"
         }
       ],
-      edit_mode: false
+      edit_mode: false,
+      base_amount: 0
     };
   },
   computed: {
@@ -135,6 +147,15 @@ export default {
     },
     permit_types() {
       return this.$store.state.permits.permit_types;
+    },
+    computed_base_amount() {
+      if (this.base_amount && this.computation.computation) {
+        var computation_function = this.computation.computation.replace(
+          /{#amount}/g,
+          parseFloat(this.base_amount)
+        );
+        return eval(computation_function);
+      } else return 0;
     }
   },
   created() {
@@ -142,12 +163,15 @@ export default {
     this.$store
       .dispatch("GET_PERMIT_TYPES")
       .then(result => {
+        console.log("GET_PERMIT_TYPES result :", result);
         return this.$store.dispatch("GET_ALL_FEES_COMPUTATION");
       })
       .then(result => {
+        console.log("GET_ALL_FEES_COMPUTATION result :", result);
         this.loading = false;
       })
       .catch(err => {
+        console.log("GET_PERMIT_TYPES err :", err);
         this.loading = false;
       });
   },
@@ -160,9 +184,11 @@ export default {
     onClose() {
       this.visible = false;
       this.edit_mode = false;
+      this.base_amount = 0;
       this.computation = {};
     },
     submit() {
+      this.loading = true;
       if (this.edit_mode) {
         this.$store
           .dispatch("UPDATE_FEES_COMPUTATION", this.computation)
@@ -170,9 +196,16 @@ export default {
             console.log("result :", result);
             this.computation = {};
             this.visible = false;
+            this.loading = false;
+            this.edit_mode = false;
+            this.base_amount = 0;
+            return this.$store.dispatch("GET_ALL_FEES_COMPUTATION", true);
           })
           .catch(err => {
             console.log("err :", err);
+            this.loading = false;
+            this.edit_mode = false;
+            this.base_amount = 0;
           });
       } else {
         this.$store
@@ -181,9 +214,16 @@ export default {
             console.log("result :", result);
             this.computation = {};
             this.visible = false;
+            this.loading = false;
+            this.edit_mode = false;
+            this.base_amount = 0;
+            return this.$store.dispatch("GET_ALL_FEES_COMPUTATION", true);
           })
           .catch(err => {
             console.log("err :", err);
+            this.loading = false;
+            this.edit_mode = false;
+            this.base_amount = 0;
           });
       }
     },
@@ -191,7 +231,12 @@ export default {
       return this.permit_types.find(v => v._id === type).name;
     },
     getAppType(type) {
-      return this.application_types.find(v => v.value === type).name;
+      console.log("typ :", type);
+      const app = this.application_types.find(
+        v => parseInt(v.value) === parseInt(type)
+      );
+      console.log("app :", app);
+      return app.name;
     }
   }
 };
