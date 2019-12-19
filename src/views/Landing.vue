@@ -17,7 +17,7 @@
       v-if="$breakpoint.lgAndUp"
       style="background-image:url('https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/landing.png'); height:80%; background-repeat: no-repeat; background-size: cover"
     >
-      <a-row style="height:100vh">
+      <a-row style="height:700px">
         <a-row>
           <a-col :span="9"></a-col>
           <a-col :span="9">
@@ -36,6 +36,7 @@
         </a-col>
       </a-row>
     </div>
+
     <!-- mobile version -->
     <!-- <div v-else :style="`${constant_helper.login_background_mobile ? `background:url('${constant_helper.login_background_mobile}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
     <div
@@ -353,6 +354,7 @@ export default {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
   font-stretch: ultra-expanded !important;
+  font-size: 2vh !important;
 }
 
 .descStyle {
