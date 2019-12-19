@@ -3,15 +3,8 @@
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
-      <a-card
-        :bodyStyle="{ padding: '10px', height: '100%' }"
-        style="height: 100%;border: none;"
-      >
-        <a-steps
-          direction="vertical"
-          :current="current_step"
-          class="form-stepper"
-        >
+      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
+        <a-steps direction="vertical" :current="current_step" class="form-stepper">
           <a-step
             v-for="(item, index) in steps"
             :key="index"
@@ -25,9 +18,7 @@
 
     <!-- Fill up form -->
     <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
-      <h1 style="margin-top: 5vh;">
-        Barangay Clearance / Barangay Business Clearance Application
-      </h1>
+      <h1 style="margin-top: 5vh;">Barangay Clearance / Barangay Business Clearance Application</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
@@ -89,11 +80,7 @@
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon
-                      v-else
-                      type="close"
-                      style="color: red; font-weight: bold;"
-                    />
+                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -118,9 +105,10 @@
                   </a-row>
                 </template>
               </a-table>
-              <span v-if="checkErrors('attachments')" style="color: red">
-                {{ checkErrors("attachments") }}
-              </span>
+              <span
+                v-if="checkErrors('attachments')"
+                style="color: red"
+              >{{ checkErrors("attachments") }}</span>
             </a-card>
 
             <!-- Payment Details -->
@@ -155,40 +143,27 @@
                   <span
                     v-if="checkErrors('mode_of_payment')"
                     style="color: red"
-                    >{{ checkErrors("mode_of_payment") }}</span
-                  >
+                  >{{ checkErrors("mode_of_payment") }}</span>
                 </a-col>
               </a-row>
 
               <a-row type="flex" align="middle">
-                <a-col style="font-weight: bold;" :span="24"
-                  >Payment Breakdown</a-col
-                >
+                <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
                 <template v-for="(item, index) in payments_data_source">
-                  <a-col :span="15" :key="`a${index}`" class="row-border">
-                    {{ item.description }}
-                  </a-col>
+                  <a-col :span="15" :key="`a${index}`" class="row-border">{{ item.description }}</a-col>
                   <a-col
                     :span="9"
                     :key="`b${index}`"
                     class="row-border"
                     style="text-align: right;"
-                    >{{ formatCurrency(item.amount) }}</a-col
-                  >
+                  >{{ formatCurrency(item.amount) }}</a-col>
                 </template>
-                <a-col
-                  :span="15"
-                  class="row-border"
-                  style="color: #333;background: #d7d7d7"
-                  >Total</a-col
-                >
+                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
                 <a-col
                   :span="9"
                   class="row-border"
                   style="text-align: right; color: #333;background: #d7d7d7"
-                >
-                  {{ formatCurrency(this.transaction_details.total_payable) }}
-                </a-col>
+                >{{ formatCurrency(this.transaction_details.total_payable) }}</a-col>
               </a-row>
             </a-card>
           </a-affix>
@@ -201,6 +176,7 @@
       :show="show_payment"
       @pay="proceedToSubmit"
       @close="show_payment = false"
+      :payment_amount="installment ? installment.amount : total_payable"
     />
   </a-row>
 </template>
@@ -227,7 +203,7 @@ export default {
       show_payment: false,
       current_step: 0,
       form_components: [
-        ApplicationChecklist,
+        // ApplicationChecklist,
         Purpose,
         PersonalDetails,
         BusinessDetails,
@@ -280,7 +256,7 @@ export default {
         // request_for: "",
         attachments: [
           {
-            doc_type: "dti_sec_cda",
+            doc_type: "residence",
             files: []
           }
         ],
@@ -304,25 +280,26 @@ export default {
           scopedSlots: { customRender: "action" }
         }
       ],
-      document_data_source: [
-        {
-          title: "DTI/SEC/CDA Certificate",
-          status: 0,
-          keyword: "dti_sec_cda",
-          hidden: true
-        },
-        {
-          title: "Community Tax Certificate",
-          status: 0,
-          keyword: "residence"
-        }
-      ],
+      document_data_source: null,
+      // [
+      //   {
+      //     title: "DTI/SEC/CDA Certificate",
+      //     status: 0,
+      //     keyword: "dti_sec_cda",
+      //     hidden: true
+      //   },
+      //   {
+      //     title: "Community Tax Certificate",
+      //     status: 0,
+      //     keyword: "residence"
+      //   }
+      // ],
       steps: [
-        {
-          title: "Document Checklist",
-          description:
-            "Check all the documents you have and apply for lacking requirements instantly within this app."
-        },
+        // {
+        //   title: "Document Checklist",
+        //   description:
+        //     "Check all the documents you have and apply for lacking requirements instantly within this app."
+        // },
         {
           title: "Purpose",
           description:
@@ -397,30 +374,35 @@ export default {
       },
       card_details: {},
       payments_data_source: [
+        // {
+        //   description: "CTC or Cedula",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Barangay Clearance",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Police Clearance",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Business Permit Fee",
+        //   amount: 1000
+        // },
+        // {
+        //   description: "Fire Safety and Inspection Fee",
+        //   amount: 1000
+        // },
         {
-          description: "CTC or Cedula",
-          amount: 1000
-        },
-        {
-          description: "Barangay Clearance",
-          amount: 1000
-        },
-        {
-          description: "Police Clearance",
-          amount: 1000
-        },
-        {
-          description: "Business Permit Fee",
-          amount: 1000
-        },
-        {
-          description: "Fire Safety and Inspection Fee",
-          amount: 1000
+          description: "Application Fee",
+          fee_type: "application_fee",
+          amount: 100
         },
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
-          amount: 1000
+          amount: 100
         }
       ],
       loading: false,
@@ -438,13 +420,61 @@ export default {
   computed: {
     required_documents() {
       var docs = [];
+      console.log(
+        "document data source @ required documents: " +
+          JSON.stringify(this.document_data_source)
+      );
       this.form.attachments.forEach(attachment => {
         docs.push(
           this.document_data_source.find(v => v.keyword === attachment.doc_type)
         );
       });
+      console.log("required documents data docs: " + JSON.stringify(docs));
       return docs;
+    },
+    total_payable() {
+      console.log("total payable data: " + JSON.stringify(this.form.tax));
+      var total = this.payments_data_source
+        .map(v => v.amount)
+        .reduce((t, c) => parseFloat(t) + parseFloat(c));
+      console.log("total payable total value: " + JSON.stringify(total));
+      this.transaction_details.total_payable = total;
+      return total;
     }
+  },
+  mounted() {
+    // GET DEPARTMENTS
+    const departments = this.deepCopy(
+      this.$store.state.permits.filing_permit.approvers
+    );
+    console.log("departments :", departments);
+    this.departments = departments;
+    this.form.permit_code = this.$store.state.permits.filing_permit._id;
+
+    // GET REQUIREMENTS
+    console.log(
+      "get requirements: " +
+        JSON.stringify(this.$store.state.permits.filing_permit.requirements)
+    );
+    const requirements = this.deepCopy(
+      this.$store.state.permits.filing_permit.requirements
+    );
+    console.log("requirements :", JSON.stringify(requirements));
+    const doc_req = requirements.map(v => {
+      return {
+        title: v.name,
+        status: 0,
+        keyword: v.keyword,
+        hidden: v.required
+      };
+    });
+
+    console.log("doc rep data: " + JSON.stringify(doc_req));
+    this.document_data_source = doc_req;
+    console.log(
+      "document data soure: " + JSON.stringify(this.document_data_source)
+    );
+    // this.updateDocsPayment();
   },
   methods: {
     // init() {
@@ -474,10 +504,13 @@ export default {
 
       // if there is no errors
       if (!errors.length) {
-        if (this.current_step === 4) {
+        if (this.current_step === 3) {
           this.show_payment = true;
           // Proceed to payment
         } else {
+          if (this.form.purpose[0] == "pc" && this.current_step == 1) {
+            this.current_step++;
+          }
           this.current_step++;
           window.scrollTo(0, 0);
         }
@@ -592,7 +625,7 @@ export default {
     validation(validate_all) {
       var errors = [],
         jump_to = 0;
-      if (validate_all || this.current_step === 2) {
+      if (validate_all || this.current_step === 1) {
         if (!this.form.personal_details.name.last) {
           errors.push({
             field: "personal_details.name.last",
@@ -704,9 +737,12 @@ export default {
           });
         }
 
-        if (errors.length) jump_to = 2;
+        if (errors.length) jump_to = 1;
       }
-      if (validate_all || this.current_step === 3) {
+      if (
+        validate_all ||
+        (this.current_step === 2 && this.form.purpose[0] != "pc")
+      ) {
         if (!this.form.business_details.business_type) {
           errors.push({
             field: "business_details.business_type",
@@ -806,9 +842,9 @@ export default {
             });
           }
         }
-        if (errors.length) jump_to = 3;
+        if (errors.length) jump_to = 2;
       }
-      if (validate_all || this.current_step === 3) {
+      if (validate_all || this.current_step === 2) {
         if (
           !this.form.business_details.line_of_business ||
           !this.form.business_details.line_of_business.length
@@ -817,7 +853,7 @@ export default {
             field: "business_details.line_of_business",
             error: "Add atleast one line of business"
           });
-          jump_to = 3;
+          jump_to = 2;
         }
       }
 
