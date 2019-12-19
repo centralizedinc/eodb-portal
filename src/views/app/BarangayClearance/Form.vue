@@ -406,6 +406,7 @@ export default {
         }
       ],
       loading: false,
+      departments: [],
       errors: []
     };
   },
@@ -537,19 +538,64 @@ export default {
       } else this.transaction_details.payment_details = payment_details;
       this.submit();
     },
+    // submit() {
+    //   this.loading = true;
+    //   var files = null;
+    //   if (this.form.attachments.length) {
+    //     files = new FormData();
+    //     this.form.attachments.forEach(attachment => {
+    //       attachment.files.forEach(file => {
+    //         files.append(attachment.doc_type, file, file.name);
+    //       });
+    //     });
+    //   }
+    //   this.$store
+    //     .dispatch("CREATE_BUSINESS_PERMIT", {
+    //       details: {
+    //         payment: {
+    //           method: this.transaction_details.method,
+    //           mode_of_payment: this.transaction_details.mode_of_payment,
+    //           card: this.card_details,
+    //           transaction_details: this.transaction_details
+    //         },
+    //         data: this.form
+    //       },
+    //       files
+    //     })
+    //     .then(result => {
+    //       console.log("CREATE_BUSINESS_PERMIT result :", result);
+    //       this.$message.success("Successful Payment.");
+    //       this.$message.success("Your application has been received.");
+    //       this.loading = false;
+    //       this.$router.push("/app");
+    //     })
+    //     .catch(err => {
+    //       console.log("CREATE_BUSINESS_PERMIT err :", err);
+    //     });
+    // },
     submit() {
       this.loading = true;
       var files = null;
-      if (this.form.attachments.length) {
+      var upload_attachments = this.form.attachments.filter(
+        v => v.files && typeof v.files[0] === "object"
+      );
+      console.log("upload_attachments :", upload_attachments);
+      if (upload_attachments.length) {
         files = new FormData();
-        this.form.attachments.forEach(attachment => {
+        upload_attachments.forEach(attachment => {
           attachment.files.forEach(file => {
             files.append(attachment.doc_type, file, file.name);
           });
         });
       }
+
+      console.log(
+        "before saving this.form.attachments :",
+        this.form.attachments
+      );
+
       this.$store
-        .dispatch("CREATE_BUSINESS_PERMIT", {
+        .dispatch("CREATE_APPLICATION", {
           details: {
             payment: {
               method: this.transaction_details.method,
@@ -557,7 +603,8 @@ export default {
               card: this.card_details,
               transaction_details: this.transaction_details
             },
-            data: this.form
+            data: this.form,
+            departments: this.departments
           },
           files
         })
@@ -569,6 +616,7 @@ export default {
           this.$router.push("/app");
         })
         .catch(err => {
+          this.loading = false;
           console.log("CREATE_BUSINESS_PERMIT err :", err);
         });
     },
