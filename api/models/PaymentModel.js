@@ -11,6 +11,9 @@ var PaymentModelSchema = new mongoose.Schema({
     transaction_no: {
         type: String
     },
+    reference_no: { // 
+        type: String
+    },
     total_payable: { // Total Amount to be paid
         type: Number
     },

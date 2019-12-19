@@ -1,17 +1,8 @@
 <template>
-  <a-table :columns="cols" :dataSource="dockets" :loading="loading">
-    <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
-    <template slot="date_created" slot-scope="text">{{formatDate(text, null, true)}}</template>
-    <template slot="status" slot-scope="text">
-      <span
-        :style="`color: ${text === 0? 'blue' : text === 1? 'green' : text === 2 ? 'red' : ''}`"
-      >{{getStatus(text)}}</span>
-    </template>
-    <template slot="action" slot-scope="text, record">
-      <div v-if="record.status === 1">
-        <a @click="() => view_data(record)">Renew</a>
-      </div>
-    </template>
+  <a-table :columns="cols" :dataSource="payments" :loading="loading">
+    <span slot="payment_for" slot-scope="text">{{getPermitType(text)}}</span>
+    <span slot="method" slot-scope="text">{{getPermitMethod(text)}}</span>
+    <span slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</span>
   </a-table>
 </template>
 
@@ -23,28 +14,31 @@ export default {
       loading: false,
       cols: [
         {
+          title: "Transaction No",
+          dataIndex: "transaction_no"
+        },
+        {
           title: "Reference No",
           dataIndex: "reference_no"
         },
         {
-          title: "License/Permit Applied",
-          dataIndex: "permit",
-          scopedSlots: { customRender: "permit" }
+          title: "Amount",
+          dataIndex: "amount_paid"
         },
         {
-          title: "Date Submitted",
+          title: "Permit Type",
+          dataIndex: "payment_for",
+          scopedSlots: { customRender: "payment_for" }
+        },
+        {
+          title: "Method",
+          dataIndex: "method",
+          scopedSlots: { customRender: "method" }
+        },
+        {
+          title: "Payment Date",
           dataIndex: "date_created",
           scopedSlots: { customRender: "date_created" }
-        },
-        {
-          title: "Status",
-          dataIndex: "status",
-          scopedSlots: { customRender: "status" }
-        },
-        {
-          title: "",
-          dataIndex: "action",
-          scopedSlots: { customRender: "action" }
         }
       ]
     };
@@ -52,7 +46,7 @@ export default {
   created() {
     this.loading = true;
     this.$store
-      .dispatch("GET_DOCKETS")
+      .dispatch("GET_PAYMENTS")
       .then(result => {
         this.loading = false;
       })
@@ -61,8 +55,8 @@ export default {
       });
   },
   computed: {
-    dockets() {
-      return this.$store.state.dockets.dockets;
+    payments() {
+      return this.$store.state.payment.payments;
     },
     user() {
       return this.$store.state.user_session.user;
@@ -73,9 +67,11 @@ export default {
       if (type === "business") return "Business Permit";
       return "";
     },
-    getStatus(status) {
-      const status_desc = ["In Progress", "Approved", "Rejected"];
-      return status_desc[status];
+    getPermitMethod(method) {
+      if(method === "creditcard") return "Credit Card"
+      else if(method === "onlinebanking") return "Online Banking"
+      else if(method === "overcounter") return "Over the Counter"
+      return ""
     }
   }
 };

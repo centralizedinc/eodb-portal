@@ -173,6 +173,12 @@ export default new Router({
         component: () => import(/* webpackChunkName: "adminReference" */ './views/admin/References.vue'),
       },
       {
+        path: 'computations',
+        name: 'Fees Computations',
+        beforeEnter: isAuthenticated,
+        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/FeesComputation.vue'),
+      },
+      {
         path: 'account',
         name: 'Admin Account',
         beforeEnter: isAuthenticated,

@@ -68,6 +68,10 @@
             <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
             <span>References</span>
           </a-menu-item>          
+          <a-menu-item key="/admin/app/computations">
+            <a-icon type="table" :style="getMenuStyle('/admin/app/computations')" />
+            <span>Fees Computations</span>
+          </a-menu-item>  
         </a-sub-menu>
         <a-sub-menu key="6" :style="`background-color: #242B30`" >
           <span slot="title"><a-icon type="user" /><span>Account</span></span>          
@@ -153,6 +157,8 @@ export default {
   methods:{
     init(){
       console.log()
+      this.$store.dispatch("GET_ADMIN_DEPARTMENT")
+      this.$store.dispatch("GET_ADMIN_ROLE")
     },
     getMenuStyle(indx){
       if(this.$route.path===indx){
@@ -199,40 +205,46 @@ export default {
   computed:{
     active_menu(){
       return [this.$route.path]
+    },
+    department() {
+      return this.$store.state.admin_session.department;
+    },
+    role() {
+      return this.$store.state.admin_session.role;
     }
   },
   asyncComputed: {
-    role:{
-      get(){
-        return new Promise((resolve, reject)=>{
-          this.$http.get('/roles')
-          .then(result=>{
-            var role = result.data.find(x=>x._id === this.$store.state.admin_session.admin.role)
-            resolve(role)
-          })
-        })
-      },
-      default:{
-        name:''
-      }
+    // role:{
+    //   get(){
+    //     return new Promise((resolve, reject)=>{
+    //       this.$http.get('/roles')
+    //       .then(result=>{
+    //         var role = result.data.find(x=>x._id === this.$store.state.admin_session.admin.role)
+    //         resolve(role)
+    //       })
+    //     })
+    //   },
+    //   default:{
+    //     name:''
+    //   }
       
-    },
-    department:{
-      get(){
-        return new Promise((resolve, reject)=>{
-          this.$http.get('/departments')
-          .then(result=>{
-            var dept = result.data.find(x=>x._id === this.$store.state.admin_session.admin.department)
-            resolve(dept)
-          })
-        })
-      },
-      default:{
-        name:'',
-        admin:false
-      }
+    // },
+    // department:{
+    //   get(){
+    //     return new Promise((resolve, reject)=>{
+    //       this.$http.get('/departments')
+    //       .then(result=>{
+    //         var dept = result.data.find(x=>x._id === this.$store.state.admin_session.admin.department)
+    //         resolve(dept)
+    //       })
+    //     })
+    //   },
+    //   default:{
+    //     name:'',
+    //     admin:false
+    //   }
       
-    }
+    // }
   }
 }
 </script>

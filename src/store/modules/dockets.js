@@ -131,11 +131,11 @@ const actions = {
     UNCLAIM_DOCKET(context, docket_reference) {
         return new DocketsAPI(context.rootState.admin_session.token).unclaimDocket(docket_reference);
     },
-    APPROVE_DOCKET(context, { docket_reference, remarks }) {
-        return new DocketsAPI(context.rootState.admin_session.token).approveDocket({ docket_reference, remarks });
+    APPROVE_DOCKET(context, data) {
+        return new DocketsAPI(context.rootState.admin_session.token).approveDocket(data);
     },
-    REJECT_DOCKET(context, { docket_reference, remarks }) {
-        return new DocketsAPI(context.rootState.admin_session.token).rejectDocket({ docket_reference, remarks });
+    REJECT_DOCKET(context, data) {
+        return new DocketsAPI(context.rootState.admin_session.token).rejectDocket(data);
     }
 }
 

@@ -18,7 +18,7 @@
 
     <!-- Fill up form -->
     <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
-      <h1 style="margin-top: 5vh;">Barangay Clearance / Barangay Business Clearance Application</h1>
+      <h1 style="margin-top: 5vh;">Barangay/Business Clearance Application</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
         <a-col :xs="{ span: 24 }" :md="{ span: 16 }">

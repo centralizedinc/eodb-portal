@@ -55,6 +55,18 @@ router.route('/profile')
             });
     })
 
+router.route('/password/:id')
+    .post((req, res) => {
+        AccountDao.changePassword(req.params.id, req.body)
+        .then((account) => {
+            account.password = null;
+            res.json(account);
+        }).catch((err) => {
+            console.error(err)
+            res.sendStatus(500);
+        });
+    })
+
 router.route('/:id')
     .get((req, res) => {
         console.log("find one account id by one: " + JSON.stringify(req.params.id))
