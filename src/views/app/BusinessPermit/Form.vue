@@ -435,20 +435,24 @@ export default {
       errors: [],
       fetching_data: false,
       installment: null,
-      departments: []
+      departments: [],
+      computation_formula: ""
     };
   },
   created() {
     this.init();
   },
   mounted() {
-    console.log('this.$store.state.permits.filing_permit :', this.$store.state.permits.filing_permit);
-    
+    console.log(
+      "this.$store.state.permits.filing_permit :",
+      this.$store.state.permits.filing_permit
+    );
+
     // GET DEPARTMENTS
     const departments = this.deepCopy(
       this.$store.state.permits.filing_permit.approvers
     );
-    console.log('departments :', departments);
+    console.log("departments :", departments);
     this.departments = departments;
     this.form.permit_code = this.$store.state.permits.filing_permit._id;
 
@@ -465,7 +469,7 @@ export default {
         hidden: v.required
       };
     });
-    
+
     doc_req.forEach(v => {
       if (v.hidden)
         this.form.attachments.push({
@@ -473,7 +477,7 @@ export default {
           files: []
         });
     });
-    console.log('this.form :', this.form);
+    console.log("this.form :", this.form);
     this.document_data_source = doc_req;
 
     // To check payments needs to be pay
@@ -509,17 +513,42 @@ export default {
       if (mode && mode === "renewal" && ref_no) {
         this.fetching_data = true;
         this.$store
-          .dispatch("GET_APPLICATION_BY_REF", ref_no)
+          .dispatch("GET_FEES_COMPUTATION", {
+            permit_type: this.$store.state.permits.filing_permit._id,
+            app_type: 1
+          })
+          .then(result => {
+            console.log("GET_FEES_COMPUTATION result.data :", result.data);
+            if (!result.data.errors)
+              this.computation_formula = result.data.computation;
+            return this.$store.dispatch("GET_APPLICATION_BY_REF", ref_no);
+          })
           .then(app => {
             console.log("app :", app);
-            this.form.application_type = 1;
             this.form = app;
-            this.form._id = undefined;
             this.mapFormForRenewal();
             this.fetching_data = false;
           })
           .catch(err => {
-            console.log("GET_APPLICATION_BY_REF err :", err);
+            console.log("GET_FEES_COMPUTATION err :", err);
+            if (err && err.message) this.$message.error(err.message);
+            this.$router.push("/app");
+            this.fetching_data = false;
+          });
+      } else {
+        this.form.application_type = 0;
+        this.$store
+          .dispatch("GET_FEES_COMPUTATION", {
+            permit_type: this.$store.state.permits.filing_permit._id,
+            app_type: 0
+          })
+          .then(result => {
+            console.log("GET_FEES_COMPUTATION result.data :", result.data);
+            if (!result.data.errors)
+              this.computation_formula = result.data.computation;
+          })
+          .catch(err => {
+            console.log("GET_FEES_COMPUTATION err :", err);
             if (err && err.message) this.$message.error(err.message);
             this.$router.push("/app");
             this.fetching_data = false;
@@ -979,6 +1008,9 @@ export default {
       return { errors, jump_to };
     },
     mapFormForRenewal() {
+      this.form._id = undefined;
+      this.form.application_type = 1;
+
       // Map Attachments
       this.form.attachments.forEach(attachment => {
         const index = this.document_data_source.findIndex(
@@ -1001,11 +1033,39 @@ export default {
       const index = this.payments_data_source.findIndex(
         v => v.fee_type === "application_fee"
       );
-      const computed_amount = amount ? parseFloat(amount) / 100 / 20 : 0;
+      var computed_amount = 0;
+      if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
+        // computed_amount = parseFloat(amount) / 100 / 20;
+        var computation_function = this.computation_formula.replace(
+          "{#amount}",
+          parseFloat(amount)
+        );
+        computed_amount = eval(computation_function);
+      }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
     },
-    updateGross(amount) {},
+    updateGross(amount) {
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      var computed_amount = 0;
+      if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
+        // if (parseFloat(amount) >= 1000000)
+        //   computed_amount = (parseFloat(amount) - 1000000) * 0.01 + 8000;
+        // else if (parseFloat(amount) > 400000)
+        //   computed_amount = (parseFloat(amount) - 400000) * 0.015 + 8000;
+        // else computed_amount = parseFloat(amount) * 0.02;
+
+        var computation_function = this.computation_formula.replace(
+          "{#amount}",
+          parseFloat(amount)
+        );
+        computed_amount = eval(computation_function);
+      }
+      console.log("computed_amount :", computed_amount);
+      this.payments_data_source[index].amount = computed_amount;
+    },
     updateDocsPayment(values) {
       const payments = [
         {
@@ -1027,7 +1087,7 @@ export default {
       const data = this.deepCopy(
         this.$store.state.permits.filing_permit.requirements
       ).filter(v => !v.required);
-      console.log('data :', data);
+      console.log("data :", data);
       data.forEach(dt => {
         var is_included = values ? values.includes(dt.keyword) : false;
         if (!is_included)

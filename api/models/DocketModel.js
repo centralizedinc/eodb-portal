@@ -28,6 +28,10 @@ var DocketSchema = new mongoose.Schema({
     },
     payment_status: {
         type: String
+        /**
+         * paid
+         * partial
+         */
     },
     created_by: {
         type: String

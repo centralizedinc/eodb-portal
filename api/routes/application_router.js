@@ -52,12 +52,48 @@ router.route('/')
         ApplicationDao.create(app_data)
             .then((result) => {
                 console.log('application result :', result);
-                // PROCESS PAYMENTS
+
+                // Process Departments
                 results.application = result;
+                var activities = [];
+                console.log('departments :', departments);
+                if (departments && departments.length)
+                    departments.forEach(v => {
+                        activities.push({
+                            approver: "",
+                            department: v.department,
+                            status: 0,
+                            date_claimed: null,
+                            date_approved: null,
+                            date_rejected: null,
+                            for_compliance: false
+                        })
+                    })
+
+                // CREATE DOCKET
+                var details = {
+                    application_id: results.application._id,
+                    application_type: results.application.application_type,
+                    permit: data.permit_type,
+                    payment_status: payment.mode_of_payment === 'A' ? 'paid' : 'partial',
+                    created_by,
+                    account_id: created_by,
+                    activities
+                }
+                return DocketsDao.create(details)
+            })
+            .then((result) => {
+                console.log('docket result :', result);
+                results.docket = result;
+
+                // Process Payments
                 payment.transaction_details.payment_for = data.permit_type;
-                payment.transaction_details.application_id = result._id;
-                payment.created_by = created_by;
-                var payment_actions = [], loopCount = payment.mode_of_payment === 'SA' ? 2 : payment.mode_of_payment === 'Q' ? 4 : 1;
+                payment.transaction_details.application_id = results.application._id;
+                payment.transaction_details.reference_no = result.reference_no
+                payment.transaction_details.created_by = created_by;
+                var payment_actions = [],
+                    loopCount = payment.mode_of_payment === 'SA' ? 2 :
+                        payment.mode_of_payment === 'Q' ? 4 : 1;
                 for (let i = 0; i < loopCount; i++) {
                     if (i === 0) { //paid on first
                         payment.transaction_details.status = 'paid';
@@ -65,7 +101,6 @@ router.route('/')
                         if (payment.method === 'creditcard') {
                             payment_actions.push(PaymentDao.payUsingCreditCard(payment.card, { amount: payment.transaction_details.amount_paid, currency: "php" }, payment.transaction_details));
                         }
-
                     } else {
                         var unpaid_transaction = JSON.parse(JSON.stringify(payment.transaction_details));
                         unpaid_transaction.status = 'unpaid';
@@ -85,50 +120,8 @@ router.route('/')
                 console.log('payments results :', payments);
                 results.payment = payments[0];
 
-                var activities = [];
-                console.log('departments :', departments);
-                if (departments && departments.length)
-                    departments.forEach(v => {
-                        activities.push({
-                            approver: "",
-                            department: v.department,
-                            status: 0,
-                            date_claimed: null,
-                            date_approved: null,
-                            date_rejected: null,
-                            for_compliance: false
-                        })
-                    })
-                // activities = departments.map(v => {
-                //     console.log('deparments v :', v);
-                //     return {
-                //         approver: "",
-                //         department: v._id,
-                //         status: 0,
-                //         date_claimed: null,
-                //         date_approved: null,
-                //         date_rejected: null,
-                //         for_compliance: false
-                //     }
-                // });
-                // CREATE DOCKET
-                var details = {
-                    application_id: results.application._id,
-                    application_type: results.application.application_type,
-                    permit: data.permit_type,
-                    payment_status: results.payment.status,
-                    created_by,
-                    account_id: created_by,
-                    activities
-                }
-                return DocketsDao.create(details)
-            })
-            .then((result) => {
-                results.dockets = result;
-                console.log('docket result :', result);
-
                 // UPDATE BUSINESS PERMIT
-                return ApplicationDao.modifyById(results.application._id, { reference_no: result.reference_no, "details.reference_no": result.reference_no });
+                return ApplicationDao.modifyById(results.application._id, { reference_no: results.docket.reference_no, "details.reference_no": results.docket.reference_no });
             })
             .then((result) => {
                 results.application = result;

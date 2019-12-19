@@ -46,14 +46,16 @@ var AdminAccountModelSchema = new mongoose.Schema({
     },
     date_modified: {
         type: Date
-    }
+    },
+    settings:{}
 })
 
 AdminAccountModelSchema.pre('save', async function (callback) {
+    
     var account = this;
     account.date_created = new Date();
     account.date_modified = new Date();
-
+    if (!account.isModified('password')) return callback(); 
     if (account.password) {
         const salt = bcrypt.genSaltSync(5);
         const hash = bcrypt.hashSync(account.password, salt)
@@ -78,6 +80,17 @@ AdminAccountModelSchema.methods.isValidPassword = function (password) {
             else reject(err)
         });
     })
+}
+
+AdminAccountModelSchema.methods.updatePassword = function (password) {
+
+    console.log('old pass: ', password)
+    console.log('old hash: ', this.password)
+    const salt = bcrypt.genSaltSync(5);
+    const hash = bcrypt.hashSync(password, salt)
+    this.password = hash
+    console.log('hash: ', this.password)
+    return this.password
 }
 
 module.exports = mongoose.model('admin_accounts', AdminAccountModelSchema)

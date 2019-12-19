@@ -423,6 +423,15 @@ export default {
     }
   },
   mounted() {
+    // GET DEPARTMENTS
+    const departments = this.deepCopy(
+      this.$store.state.permits.filing_permit.approvers
+    );
+    console.log("departments :", departments);
+    this.departments = departments;
+    this.form.permit_code = this.$store.state.permits.filing_permit._id;
+
+    // GET REQUIREMENTS
     const requirements = this.deepCopy(
       this.$store.state.permits.filing_permit.requirements
     );
@@ -499,14 +508,27 @@ export default {
     submit() {
       this.loading = true;
       var files = null;
-      if (this.form.attachments.length) {
+      // if (this.form.attachments.length) {
+      //   files = new FormData();
+      //   this.form.attachments.forEach(attachment => {
+      //     attachment.files.forEach(file => {
+      //       files.append(attachment.doc_type, file, file.name);
+      //     });
+      //   });
+      // }
+      var upload_attachments = this.form.attachments.filter(
+        v => v.files && typeof v.files[0] === "object"
+      );
+      console.log("upload_attachments :", upload_attachments);
+      if (upload_attachments.length) {
         files = new FormData();
-        this.form.attachments.forEach(attachment => {
+        upload_attachments.forEach(attachment => {
           attachment.files.forEach(file => {
             files.append(attachment.doc_type, file, file.name);
           });
         });
       }
+
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -516,7 +538,8 @@ export default {
               card: this.card_details,
               transaction_details: this.transaction_details
             },
-            data: this.form
+            data: this.form,
+            departments: this.departments
           },
           files
         })
