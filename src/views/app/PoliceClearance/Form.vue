@@ -477,6 +477,10 @@ export default {
     this.form.permit_code = this.$store.state.permits.filing_permit._id;
 
     // GET REQUIREMENTS
+    console.log(
+      "get requirements: " +
+        JSON.stringify(this.$store.state.permits.filing_permit.requirements)
+    );
     const requirements = this.deepCopy(
       this.$store.state.permits.filing_permit.requirements
     );
