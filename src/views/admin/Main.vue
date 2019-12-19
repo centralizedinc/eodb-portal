@@ -158,6 +158,7 @@ export default {
     init(){
       console.log()
       this.$store.dispatch("GET_ADMIN_DEPARTMENT")
+      this.$store.dispatch("GET_ADMIN_ROLE")
     },
     getMenuStyle(indx){
       if(this.$route.path===indx){
@@ -207,24 +208,27 @@ export default {
     },
     department() {
       return this.$store.state.admin_session.department;
+    },
+    role() {
+      return this.$store.state.admin_session.role;
     }
   },
   asyncComputed: {
-    role:{
-      get(){
-        return new Promise((resolve, reject)=>{
-          this.$http.get('/roles')
-          .then(result=>{
-            var role = result.data.find(x=>x._id === this.$store.state.admin_session.admin.role)
-            resolve(role)
-          })
-        })
-      },
-      default:{
-        name:''
-      }
+    // role:{
+    //   get(){
+    //     return new Promise((resolve, reject)=>{
+    //       this.$http.get('/roles')
+    //       .then(result=>{
+    //         var role = result.data.find(x=>x._id === this.$store.state.admin_session.admin.role)
+    //         resolve(role)
+    //       })
+    //     })
+    //   },
+    //   default:{
+    //     name:''
+    //   }
       
-    },
+    // },
     // department:{
     //   get(){
     //     return new Promise((resolve, reject)=>{
