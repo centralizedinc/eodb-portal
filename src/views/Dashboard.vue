@@ -231,8 +231,8 @@
               <a-icon type="folder"></a-icon>
               My Documents
             </span>
-            <a-card v-for="item in ePermits" :key="item.epermit_attachment" style="margin-top: 2px; text-align: center">
-              <pdf  :src="item.epermit_attachment" style="display: inline-block; width: 100%"></pdf>
+            <a-card @click="view(item.epermit_attachment)" v-for="item in ePermits" :key="item.epermit_attachment" style="margin-top: 2px; text-align: center">
+              <pdf  :src="item.epermit_attachment" style="cursor:zoom;display: inline-block; width: 100%"></pdf>
               <p style="font-weight:bold">{{item.business_no}}</p>
               <span>{{item.business_details.business_name}}</span>
             </a-card>
@@ -376,6 +376,10 @@ export default {
       this.$store.dispatch('GET_BUSINESS_PERMIT')
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
     },
+    view(link){
+      alert(link)
+      window.open(link)
+    },
     nav(e) {
       console.log("this.$route :", this.$route);
       if (e.key === "logout") {
@@ -422,7 +426,6 @@ export default {
       });
     },
     handleCancel() {
-      console.log("Clicked cancel button");
       this.visible = false;
     }
   },
