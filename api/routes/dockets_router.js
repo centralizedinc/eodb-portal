@@ -14,7 +14,8 @@ const axios = require('axios');
 
 router.route('/')
     .get((req, res) => {
-        DocketsDao.find()
+        const { account_id } = jwt.decode(req.headers.access_token);
+        DocketsDao.find({ account_id })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {
@@ -324,6 +325,9 @@ router.route('/reject')
 
 function getPermitType(type) {
     if (type === "business") return "Business Permit";
+    else if (type === "cedula") return "Community Tax Certificate";
+    else if (type === "barangay") return "Barangay Clearance";
+    else if (type === "police") return "Police Clearance";
     return "";
 }
 

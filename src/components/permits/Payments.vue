@@ -4,6 +4,15 @@
     <span slot="payment_for" slot-scope="text">{{getPermitType(text)}}</span>
     <span slot="method" slot-scope="text">{{getPermitMethod(text)}}</span>
     <span slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</span>
+    <template slot="action" slot-scope="text, record">
+      <a-tooltip title="Print">
+        <a-icon
+          type="printer"
+          @click="print(record)"
+          style="cursor: pointer; color: #1890ff; font-weight: bold;"
+        />
+      </a-tooltip>
+    </template>
   </a-table>
 </template>
 
@@ -41,6 +50,11 @@ export default {
           title: "Payment Date",
           dataIndex: "date_created",
           scopedSlots: { customRender: "date_created" }
+        },
+        {
+          title: "Action",
+          dataIndex: "action",
+          scopedSlots: { customRender: "action" }
         }
       ]
     };
@@ -65,15 +79,15 @@ export default {
     }
   },
   methods: {
-    getPermitType(type) {
-      if (type === "business") return "Business Permit";
+    getPermitMethod(method) {
+      if (method === "creditcard") return "Credit Card";
+      else if (method === "onlinebanking") return "Online Banking";
+      else if (method === "overcounter") return "Over the Counter";
       return "";
     },
-    getPermitMethod(method) {
-      if(method === "creditcard") return "Credit Card"
-      else if(method === "onlinebanking") return "Online Banking"
-      else if(method === "overcounter") return "Over the Counter"
-      return ""
+    print(record) {
+      var w = window.open(record.attachment);
+      w.print();
     }
   }
 };

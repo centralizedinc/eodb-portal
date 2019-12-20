@@ -207,6 +207,10 @@
                 <a-icon type="user-add" />
                 <span>My Profile</span>
               </a-menu-item>
+              <a-menu-item key="logout">
+                <a-icon type="logout" />
+                <span>Logout</span>
+              </a-menu-item>
               <!-- <a-menu-item key>
                 <a-icon type="sound" />
                 <span>Citizen Report</span>
