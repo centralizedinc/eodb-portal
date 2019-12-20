@@ -283,54 +283,54 @@ export default {
       barangays: []
     };
   },
-  created() {
-    if (this.fixed_address) {
-      this.form.business_address.region = "04";
-      // this.changeRegion();
-      this.form.business_address.province = "0456";
-      // this.changeProvince();
-      this.form.business_address.city = "045641";
-      // this.changeCity();
+  // created() {
+  //   if (this.fixed_address) {
+  //     this.form.business_address.region = "04";
+  //     // this.changeRegion();
+  //     this.form.business_address.province = "0456";
+  //     // this.changeProvince();
+  //     this.form.business_address.city = "045641";
+  //     // this.changeCity();
 
-      this.form.business_address.rental_address.region = "04";
-      // this.changeRentalRegion();
-      this.form.business_address.rental_address.province = "0456";
-      // this.changeRentalProvince();
-      this.form.business_address.rental_address.city = "045641";
-      // this.changeRentalCity();
+  //     this.form.business_address.rental_address.region = "04";
+  //     // this.changeRentalRegion();
+  //     this.form.business_address.rental_address.province = "0456";
+  //     // this.changeRentalProvince();
+  //     this.form.business_address.rental_address.city = "045641";
+  //     // this.changeRentalCity();
 
-      import(
-        `../../../assets/references/cities/${this.form.business_address.province}.json`
-      )
-        .then(data => {
-          this.cities = data.default;
-          return import(
-            `../../../assets/references/barangay/${this.form.business_address.city}.json`
-          );
-        })
-        .then(data => {
-          this.barangays = data.default;
-          return import(
-            `../../../assets/references/cities/${this.form.business_address.rental_address.province}.json`
-          );
-        })
-        .then(data => {
-          this.rental_cities = data.default;
-          console.log("this.rental_cities :", this.rental_cities);
-          return import(
-            `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
-          );
-        })
-        .then(data => {
-          this.rental_barangays = data.default;
-          console.log("this.rental_barangays :", this.rental_barangays);
-        });
-    }
-    if (this.fixed_postal) {
-      this.form.business_address.postal_code = "4324";
-      this.form.business_address.rental_address.postal_code = "4324";
-    }
-  },
+  //     import(
+  //       `../../../assets/references/cities/${this.form.business_address.province}.json`
+  //     )
+  //       .then(data => {
+  //         this.cities = data.default;
+  //         return import(
+  //           `../../../assets/references/barangay/${this.form.business_address.city}.json`
+  //         );
+  //       })
+  //       .then(data => {
+  //         this.barangays = data.default;
+  //         return import(
+  //           `../../../assets/references/cities/${this.form.business_address.rental_address.province}.json`
+  //         );
+  //       })
+  //       .then(data => {
+  //         this.rental_cities = data.default;
+  //         console.log("this.rental_cities :", this.rental_cities);
+  //         return import(
+  //           `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
+  //         );
+  //       })
+  //       .then(data => {
+  //         this.rental_barangays = data.default;
+  //         console.log("this.rental_barangays :", this.rental_barangays);
+  //       });
+  //   }
+  //   if (this.fixed_postal) {
+  //     this.form.business_address.postal_code = "4324";
+  //     this.form.business_address.rental_address.postal_code = "4324";
+  //   }
+  // },
   computed: {
     regions() {
       console.log("regions_data: " + JSON.stringify(this.regions_data));
@@ -345,6 +345,9 @@ export default {
       );
       return provincesOnRegion;
     }
+  },
+  mounted() {
+    this.loadReferences();
   },
   methods: {
     checkErrors(field) {
@@ -383,6 +386,50 @@ export default {
           this.barangays = data.default;
         });
       }
+    },
+    loadReferences() {
+      const { mode, ref_no } = this.$route.query;
+      if (this.fixed_address && !mode && !ref_no) {
+        this.form.business_address.region = "04";
+        // this.changeRegion();
+        this.form.business_address.province = "0456";
+        // this.changeProvince();
+        this.form.business_address.city = "045641";
+        // this.changeCity();
+        import(
+          `../../../assets/references/cities/${this.form.business_address.province}.json`
+        )
+          .then(data => {
+            this.cities = data.default;
+            console.log("this.cities :", this.cities);
+            return import(
+              `../../../assets/references/barangay/${this.form.business_address.city}.json`
+            );
+          })
+          .then(data => {
+            this.barangays = data.default;
+            console.log("this.barangays :", this.barangays);
+          });
+      } else if (mode && ref_no) {
+        if (this.form.business_address.province)
+          import(
+            `../../../assets/references/cities/${this.form.business_address.province}.json`
+          )
+            .then(data => {
+              this.cities = data.default;
+              console.log("this.cities :", this.cities);
+              if (this.form.business_address.city)
+                return import(
+                  `../../../assets/references/barangay/${this.form.business_address.city}.json`
+                );
+            })
+            .then(data => {
+              this.barangays = data ? data.default : [];
+              console.log("this.barangays :", this.barangays);
+            });
+      }
+      if (this.fixed_postal && !mode && !ref_no)
+        this.form.business_address.postal_code = "4324";
     },
     filterReference(inputValue, option, array, code, description) {
       if (!option.key) return false;

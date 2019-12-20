@@ -76,14 +76,14 @@ export default {
       if (this.checkedList.length == 1) {
         console.log("checklist greater than 0");
         if (this.checkedList[0] == "b") {
-          this.checkedList = ["pc", "bp", "b"];
+          this.checkedList = ["bp", "b", "pc"];
         }
       } else if (this.checkedList.length >= 1) {
         console.log("this.checklist: " + JSON.stringify(this.checkedList));
         this.checkedList.forEach(element => {
           if (element == "b") {
             console.log("elment b: " + element);
-            this.checkedList = ["pc", "bp", "b"];
+            this.checkedList = ["bp", "b", "pc"];
           } else {
             this.checkedList = [];
           }

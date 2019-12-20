@@ -212,6 +212,8 @@ export default {
         ApplicationSummary
       ],
       form: {
+        application_type: 0,
+        permit_type: "barangay",
         residential_address: {
           bldg_no: "",
           unit_no: "",
@@ -484,8 +486,8 @@ export default {
     init() {
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
-      var data = this.$store.state.user_session.user
-    this.form.personal_details.name = data.name
+      var data = this.$store.state.user_session.user;
+      this.form.personal_details.name = data.name;
     },
     prev_step() {
       if (this.form.purpose[0] == "pc" && this.current_step == 3) {
@@ -505,7 +507,7 @@ export default {
       // var errors = [],
       //   jump_to = 0;
 
-      console.log("errors :", errors);
+      console.log("errors :", JSON.stringify(errors));
       this.errors = errors;
 
       // if there is error and validate all then jump to the step
@@ -727,24 +729,24 @@ export default {
             error: "CTC is a required field."
           });
         }
-        if (!this.form.personal_details.telno) {
-          errors.push({
-            field: "personal_details.telno",
-            error: "Tel No is a required field."
-          });
-        }
-        if (!this.form.personal_details.mobile) {
-          errors.push({
-            field: "personal_details.mobile",
-            error: "Mobile No is a required field."
-          });
-        }
-        if (!this.form.personal_details.email) {
-          errors.push({
-            field: "personal_details.email",
-            error: "Email Address is a required field."
-          });
-        }
+        // if (!this.form.personal_details.telno) {
+        //   errors.push({
+        //     field: "personal_details.telno",
+        //     error: "Tel No is a required field."
+        //   });
+        // }
+        // if (!this.form.personal_details.mobile) {
+        //   errors.push({
+        //     field: "personal_details.mobile",
+        //     error: "Mobile No is a required field."
+        //   });
+        // }
+        // if (!this.form.personal_details.email) {
+        //   errors.push({
+        //     field: "personal_details.email",
+        //     error: "Email Address is a required field."
+        //   });
+        // }
         if (!this.form.residential_address.region) {
           errors.push({
             field: "residential_address.region",
@@ -776,25 +778,25 @@ export default {
           });
         }
 
-        if (
-          this.checkDocsNeeded(["residence"]) ||
-          !this.form.required_documents.civil_status
-        ) {
-          errors.push({
-            field: "required_documents.civil_status",
-            error: "Civil Status is a required field."
-          });
-        }
+        // if (
+        //   this.checkDocsNeeded(["residence"]) ||
+        //   !this.form.required_documents.civil_status
+        // ) {
+        //   errors.push({
+        //     field: "required_documents.civil_status",
+        //     error: "Civil Status is a required field."
+        //   });
+        // }
 
-        if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
-          !this.form.required_documents.birthplace
-        ) {
-          errors.push({
-            field: "required_documents.birthplace",
-            error: "Place of Birth is a required field."
-          });
-        }
+        // if (
+        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   !this.form.required_documents.birthplace
+        // ) {
+        //   errors.push({
+        //     field: "required_documents.birthplace",
+        //     error: "Place of Birth is a required field."
+        //   });
+        // }
 
         if (errors.length) jump_to = 1;
       }
@@ -802,12 +804,12 @@ export default {
         validate_all ||
         (this.current_step === 2 && this.form.purpose[0] != "pc")
       ) {
-        if (!this.form.business_details.business_type) {
-          errors.push({
-            field: "business_details.business_type",
-            error: "Business Type is a required field."
-          });
-        }
+        // if (!this.form.business_details.business_type) {
+        //   errors.push({
+        //     field: "business_details.business_type",
+        //     error: "Business Type is a required field."
+        //   });
+        // }
         if (!this.form.business_details.business_name) {
           errors.push({
             field: "business_details.business_name",
@@ -904,16 +906,16 @@ export default {
         if (errors.length) jump_to = 2;
       }
       if (validate_all || this.current_step === 2) {
-        if (
-          !this.form.business_details.line_of_business ||
-          !this.form.business_details.line_of_business.length
-        ) {
-          errors.push({
-            field: "business_details.line_of_business",
-            error: "Add atleast one line of business"
-          });
-          jump_to = 2;
-        }
+        // if (
+        //   !this.form.business_details.line_of_business ||
+        //   !this.form.business_details.line_of_business.length
+        // ) {
+        //   errors.push({
+        //     field: "business_details.line_of_business",
+        //     error: "Add atleast one line of business"
+        //   });
+        //   jump_to = 2;
+        // }
       }
 
       if (
@@ -928,7 +930,7 @@ export default {
           error: "Please attach the required documents."
         });
         this.$message.error("Please attach the required documents");
-        jump_to = 4;
+        jump_to = 3;
       }
 
       // Validate Mode of Payment
