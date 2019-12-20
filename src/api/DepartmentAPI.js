@@ -16,4 +16,11 @@ export default class DepartmentAPI {
         console.log('getDepartmentById id :', id);
         return axios.get(`/departments/${id}`)
     }
+
+    /**
+     * @returns {Promise}
+     */
+    getDepartments(){
+        return axios.get('departments');
+    }
 }

@@ -74,30 +74,45 @@ export default {
       /**
        * To bypass the details override the `pdf_details`
        */
-      this.pdf_details = {
-        business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
-        business_no: "445433110",
-        business_address: "Unit 2320 Pasong Tamo Extension",
-        business_owner: "RICHARD BERMUDEZ",
-        plate_no: "1546238984",
-        ownership_type: "SINGLE PROPRIETORSHIP",
-        valid_until: new Date(2019, 11, 31),
-        area: "50 sq.m",
-        date_issued: new Date(2019, 3, 20),
-        application_type: "NEW",
-        mode_of_payment: "QUARTERLY",
-        transaction_no: "115498845612848",
-        transactions: [
-          {
+      if(this.keyword.toUpperCase() === 'BUSINESSPERMIT_SAN_ANTONIO'){
+        this.pdf_details = {
+          business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
+          business_no: "445433110",
+          business_address: "Unit 2320 Pasong Tamo Extension",
+          business_owner: "RICHARD BERMUDEZ",
+          plate_no: "1546238984",
+          ownership_type: "SINGLE PROPRIETORSHIP",
+          valid_until: new Date(2019, 11, 31),
+          area: "50 sq.m",
+          date_issued: new Date(2019, 3, 20),
+          application_type: "NEW",
+          mode_of_payment: "QUARTERLY",
+          transaction_no: "115498845612848",
+          transactions: [
+            {
+              description: "Application Fee",
+              amount: 1000
+            },
+            {
+              description: "Convenience Fee",
+              amount: 50
+            }
+          ]
+        };
+      } else if(this.keyword.toUpperCase() === 'RECEIPT'){
+        this.pdf_details = {
+          transaction_no: '1234567890',
+          date: new Date(),
+          payor: "Juan Delacruz",
+          payment_breakdown: [{
             description: "Application Fee",
             amount: 1000
-          },
-          {
+          },{
             description: "Convenience Fee",
-            amount: 50
-          }
-        ]
-      };
+            amount: 150
+          }]
+        }
+      }
 
       // Process PDF
       this.loading = true;

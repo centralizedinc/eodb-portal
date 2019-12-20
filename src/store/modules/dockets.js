@@ -1,13 +1,16 @@
 import DocketsAPI from '../../api/DocketsAPI';
 import BusinessPermitAPI from '../../api/BusinessPermitAPI';
 import ApplicationAPI from '../../api/ApplicationAPI';
+import DepartmentAPI from '../../api/DepartmentAPI';
 
 function initialState() {
     return {
         dockets: [],
         draft_apps: [],
         dockets_inbox: [],
-        dockets_outbox: []
+        dockets_outbox: [],
+        departments: [],
+        docket_activities: []
     }
 }
 
@@ -25,15 +28,23 @@ const mutations = {
         drafts.splice(index, 1);
         state.draft_apps = drafts;
     },
+    SET_DEPARTMENTS(state, data) {
+        state.departments = data;
+    },
+    SET_DOCKET_ACTIVITIES(state, data) {
+        state.docket_activities = data;
+    },
     RESET(state) {
         // Object.keys(state).forEach(key => {
         //     state[key] = initialState()[key];
         // })
         state.dockets = initialState().dockets;
+        state.departments = initialState().departments;
     },
     ADMIN_LOGOUT(state) {
         state.dockets_inbox = initialState().dockets_inbox;
         state.dockets_outbox = initialState().dockets_outbox;
+        state.departments = initialState().departments;
     },
     SET_DOCKETS_INBOX(state, data) {
         state.dockets_inbox = data;
@@ -136,6 +147,40 @@ const actions = {
     },
     REJECT_DOCKET(context, data) {
         return new DocketsAPI(context.rootState.admin_session.token).rejectDocket(data);
+    },
+    GET_DEPARTMENTS(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if(refresh || !context.state.departments || !context.state.departments.length) {
+                new DepartmentAPI(context.rootState.user_session.token).getDepartments()
+                .then((result) => {
+                    console.log('GET_DEPARTMENTS result.data :', result.data);
+                    if(!result.data.errors){
+                        context.commit('SET_DEPARTMENTS', result.data);
+                        resolve(result.data);
+                    } else reject(result.data.errors);
+                }).catch((err) => {
+                    console.log('GET_DEPARTMENTS err :', err);
+                    reject(err)
+                });
+            } else context.state.departments;
+        })
+    },
+    GET_DOCKET_ACTIVITIES(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if(refresh || !context.state.docket_activities || !context.state.docket_activities.length) {
+                new DocketsAPI(context.rootState.user_session.token).getDocketActivities()
+                .then((result) => {
+                    console.log('GET_DOCKET_ACTIVITIES result.data :', result.data);
+                    if(!result.data.errors){
+                        context.commit('SET_DOCKET_ACTIVITIES', result.data);
+                        resolve(result.data);
+                    } else reject(result.data.errors);
+                }).catch((err) => {
+                    console.log('GET_DOCKET_ACTIVITIES err :', err);
+                    reject(err)
+                });
+            } else context.state.docket_activities;
+        })
     }
 }
 

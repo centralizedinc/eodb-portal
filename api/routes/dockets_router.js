@@ -31,6 +31,23 @@ router.route('/')
             });
     })
 
+router.route('/activities')
+    .get((req, res) => {
+        const { account_id } = jwt.decode(req.headers.access_token);
+        DocketsDao.find({ account_id })
+            .then((results) => {
+                const references = results.map(v => {
+                    return { reference_no: v.reference_no }
+                });
+                return DocketsActivityDao.find({ $or: references })
+            })
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
 router.route('/inbox')
     .get((req, res) => {
         // const { department } = req.query; 
