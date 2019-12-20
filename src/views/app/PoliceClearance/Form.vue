@@ -465,6 +465,7 @@ export default {
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
       this.transaction_details.total_payable = total;
+      this.transaction_details.amount_paid = total;
       return total;
     }
   },
@@ -506,9 +507,9 @@ export default {
     init() {
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
-      var data = this.$store.state.user_session.user
-    this.form.personal_details.name = data.name
-    this.form.contact_details.email = data.email
+      var data = this.$store.state.user_session.user;
+      this.form.personal_details.name = data.name;
+      this.form.contact_details.email = data.email;
     },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
