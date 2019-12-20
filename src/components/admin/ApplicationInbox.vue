@@ -48,18 +48,42 @@
           <p>{{getDepartmentStatus(docket)}}</p>
         </a-col>
         <a-divider></a-divider>
-        <a-col :span="12">
-          <p style="font-weight:bold">BUSINESS NAME</p>
-          <p style="font-weight:bold">BUSINESS TYPE</p>
-          <p style="font-weight:bold">REGISTRATION NUMBER</p>
-          <p style="font-weight:bold">TIN</p>
-        </a-col>
-        <a-col :span="12">
-          <p>{{application_details.business_details.business_name}}</p>
-          <p>{{application_details.business_details.business_type}}</p>
-          <p>{{application_details.business_details.registration_no}}</p>
-          <p>{{application_details.business_details.tin}}</p>
-        </a-col>
+        <template v-if="application_details.permit_type == 'business'">
+          <a-col :span="12">
+            <p style="font-weight:bold">BUSINESS NAME</p>
+            <p style="font-weight:bold">BUSINESS TYPE</p>
+            <p style="font-weight:bold">REGISTRATION NUMBER</p>
+            <p style="font-weight:bold">TIN</p>
+          </a-col>
+          <a-col :span="12">
+            <p>{{application_details.business_details.business_name}}</p>
+            <p>{{application_details.business_details.business_type}}</p>
+            <p>{{application_details.business_details.registration_no}}</p>
+            <p>{{application_details.business_details.tin}}</p>
+          </a-col>
+        </template>
+        <template v-if="application_details.permit_type == 'cedula'">
+          <!-- <a-col :span="12">
+            <p style="font-weight:bold">BUSINESS NAME</p>
+            <p style="font-weight:bold">BUSINESS TYPE</p>
+            <p style="font-weight:bold">REGISTRATION NUMBER</p>
+            <p style="font-weight:bold">TIN</p>
+          </a-col>
+          <a-col :span="12">
+            <p>{{application_details}}</p>
+          </a-col>-->
+        </template>
+        <template v-if="application_details.permit_type == 'police'">
+          <!-- <a-col :span="12">
+            <p>{{application_details}}</p>
+          </a-col>-->
+        </template>
+        <template v-if="application_details.permit_type == 'barangay'">
+          <!-- <a-col :span="12">
+            <p>{{application_details}}</p>
+          </a-col>-->
+        </template>
+
         <a-divider></a-divider>
         <a-col :span="24">
           <a-button type="primary" block @click="claim(docket)" :loading="loading">CLAIM</a-button>
@@ -122,6 +146,10 @@ export default {
   },
   computed: {
     dockets() {
+      console.log(
+        "application inbox application details data: " +
+          JSON.stringify(this.application_details)
+      );
       return this.$store.state.dockets.dockets_inbox;
     },
     department() {
