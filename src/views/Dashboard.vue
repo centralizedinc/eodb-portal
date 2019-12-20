@@ -377,7 +377,6 @@ export default {
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
     },
     view(link){
-      alert(link)
       window.open(link)
     },
     nav(e) {
