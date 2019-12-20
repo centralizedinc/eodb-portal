@@ -62,4 +62,11 @@ export default class DocketsAPI {
     rejectDocket(data) {
         return axios.post('dockets/reject', data);
     }
+
+    /**
+     * @returns {Promise}
+     */
+    getDocketActivities(){
+        return axios.get('dockets/activities');
+    }
 }
