@@ -42,14 +42,14 @@ var PaymentModelSchema = new mongoose.Schema({
          * paid, unpaid
          */
     },
-    payment_for:{
+    payment_for: {
         /**
          * business
          * police_clearance
          * cedula
          * rpt
          */
-        type:String
+        type: String
     },
     payment_details: {}, // Any Details of payment
     due_date: {
@@ -80,6 +80,9 @@ var PaymentModelSchema = new mongoose.Schema({
         type: Date
     },
     modified_by: {
+        type: String
+    },
+    attachment: {
         type: String
     }
 })

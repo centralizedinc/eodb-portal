@@ -56,10 +56,6 @@ export default {
     }
   },
   methods: {
-    getPermitType(type) {
-      if (type === "business") return "Business Permit";
-      return "";
-    },
     continueApplication(record) {
         console.log('continueApplication record :', record);
     },

@@ -421,6 +421,7 @@ export default {
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
       console.log("total payable total value: " + JSON.stringify(total));
       this.transaction_details.total_payable = total;
+      this.transaction_details.amount_paid = total
       return total;
     }
   },

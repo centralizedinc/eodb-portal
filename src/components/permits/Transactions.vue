@@ -20,7 +20,7 @@
       <template slot="status" slot-scope="text">
         <span
           :style="`color: ${text === 0? 'blue' : text === 1? 'green' : text === 2 ? 'red' : ''}`"
-        >{{getStatus(text)}}</span>
+        >{{getDocketStatus(text)}}</span>
       </template>
       <template slot="action" slot-scope="text, record">
         <div v-if="record.status === 1">
@@ -554,14 +554,6 @@ export default {
       this.$store.commit("APPROVE_PERMIT", this.form.reference_no);
       this.draw_show = false;
       this.remarks = "";
-    },
-    getPermitType(type) {
-      if (type === "business") return "Business Permit";
-      return "";
-    },
-    getStatus(status) {
-      const status_desc = ["In Progress", "Approved", "Rejected"];
-      return status_desc[status];
     }
   }
 };

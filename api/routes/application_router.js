@@ -24,7 +24,9 @@ router.route('/')
                 res.json(result);
             }).catch((err) => {
                 console.log('findAll err :', err);
-                res.json({ errors: err });
+                res.json({
+                    errors: err
+                });
             });
     })
     .post((req, res) => {
@@ -87,19 +89,23 @@ router.route('/')
                 results.docket = result;
 
                 // Process Payments
+                console.log("payment details data: " + JSON.stringify(payment))
                 payment.transaction_details.payment_for = data.permit_type;
                 payment.transaction_details.application_id = results.application._id;
                 payment.transaction_details.reference_no = result.reference_no
                 payment.transaction_details.created_by = created_by;
                 var payment_actions = [],
                     loopCount = payment.mode_of_payment === 'SA' ? 2 :
-                        payment.mode_of_payment === 'Q' ? 4 : 1;
+                    payment.mode_of_payment === 'Q' ? 4 : 1;
                 for (let i = 0; i < loopCount; i++) {
                     if (i === 0) { //paid on first
                         payment.transaction_details.status = 'paid';
                         payment.transaction_details.due_date = new Date();
                         if (payment.method === 'creditcard') {
-                            payment_actions.push(PaymentDao.payUsingCreditCard(payment.card, { amount: payment.transaction_details.amount_paid, currency: "php" }, payment.transaction_details));
+                            payment_actions.push(PaymentDao.payUsingCreditCard(payment.card, {
+                                amount: payment.transaction_details.amount_paid,
+                                currency: "php"
+                            }, payment.transaction_details));
                         }
                     } else {
                         var unpaid_transaction = JSON.parse(JSON.stringify(payment.transaction_details));
@@ -107,13 +113,14 @@ router.route('/')
                         var due_date = loopCount === 2 ?
                             new Date(new Date().getFullYear(), new Date().getMonth() + 6, new Date().getDate()) :
                             loopCount === 4 ? new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate()) :
-                                new Date();
+                            new Date();
                         unpaid_transaction.due_date = due_date;
                         unpaid_transaction.method = '';
                         unpaid_transaction.due_date = null;
                         payment_actions.push(PaymentDao.create(unpaid_transaction))
                     }
                 }
+                console.log("payment actions data: " + JSON.stringify(payment_actions))
                 if (payment_actions && payment_actions.length) return Promise.all(payment_actions);
             })
             .then((payments) => {
@@ -121,7 +128,10 @@ router.route('/')
                 results.payment = payments[0];
 
                 // UPDATE BUSINESS PERMIT
-                return ApplicationDao.modifyById(results.application._id, { reference_no: results.docket.reference_no, "details.reference_no": results.docket.reference_no });
+                return ApplicationDao.modifyById(results.application._id, {
+                    reference_no: results.docket.reference_no,
+                    "details.reference_no": results.docket.reference_no
+                });
             })
             .then((result) => {
                 results.application = result;
@@ -141,7 +151,9 @@ router.route('/')
                 res.json(results);
             }).catch((errors) => {
                 console.log('errors :', errors);
-                res.json({ errors })
+                res.json({
+                    errors
+                })
             });
     })
 
@@ -153,7 +165,9 @@ router.route('/reference/:reference_no')
                 res.json(result);
             }).catch((err) => {
                 console.log('findOneByReference err :', err);
-                res.json({ errors: err });
+                res.json({
+                    errors: err
+                });
             });
     })
 
@@ -165,7 +179,9 @@ router.route('/:id')
                 res.json(result);
             }).catch((err) => {
                 console.log('findOneByID err :', err);
-                res.json({ errors: err });
+                res.json({
+                    errors: err
+                });
             });
     })
     .post((req, res) => {
@@ -175,7 +191,9 @@ router.route('/:id')
                 res.json(result);
             }).catch((err) => {
                 console.log('modifyById err :', err);
-                res.json({ errors: err });
+                res.json({
+                    errors: err
+                });
             });
     })
 

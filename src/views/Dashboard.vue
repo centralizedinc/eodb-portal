@@ -153,7 +153,7 @@
         <a-col :span="4" style="margin-right:1vw">
           <a-card style="margin-bottom:2vh; color: #f2f2f2">
             <a-row type="flex" justify="center">
-              <a-col :span="8">
+              <a-col :span="8" style="text-align: center">
                 <a-avatar
                   :src="user.avatar"
                   :size="54"
@@ -184,7 +184,7 @@
           <a-affix :offsetTop="100">
             <a-menu v-model="selected_menu" mode="inline" @click="nav">
               <a-menu-item key="/app">
-                <a-icon type="bars" />
+                <a-icon type="home" />
                 <span>Home</span>
               </a-menu-item>
               <a-menu-item key="/app/permits">
@@ -197,7 +197,7 @@
               </a-menu-item>
               <a-menu-item key="/app/realproperty">
                 <a-icon type="area-chart" />
-                <span>Real Property Tax</span>
+                <span>Real Property Tax <a-badge count="soon"/></span>
               </a-menu-item>
               <a-menu-item key="/app/tracker">
                 <a-icon type="compass" />
@@ -206,6 +206,10 @@
               <a-menu-item key="/app/account">
                 <a-icon type="user-add" />
                 <span>My Profile</span>
+              </a-menu-item>
+              <a-menu-item key="logout">
+                <a-icon type="logout" />
+                <span>Logout</span>
               </a-menu-item>
               <!-- <a-menu-item key>
                 <a-icon type="sound" />
@@ -216,7 +220,7 @@
         </a-col>
         <a-col :span="14" style="margin-right:1vw; margin-left:1vw">
           <img
-            style="width: 100%; height:30vh"
+            style="width: 100%; height:auto"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cover.png"
           />
           <router-view></router-view>

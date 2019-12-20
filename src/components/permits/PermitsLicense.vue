@@ -82,14 +82,6 @@ export default {
     }
   },
   methods: {
-    getPermitType(type) {
-      if (type === "business") return "Business Permit";
-      return "";
-    },
-    getStatus(status) {
-      const status_desc = ["In Progress", "Approved", "Rejected"];
-      return status_desc[status];
-    },
     renewApplication(record) {
       console.log("record :", record);
       const permit = this.permit_types.find(v => v._id === record.permit_code);
@@ -99,9 +91,8 @@ export default {
         `/permits/business?mode=renewal&ref_no=${record.reference_no}`
       );
     },
-    download(record) {},
     print(record) {
-      var w = window.open(record.epermit_attachment);
+      window.open(record.epermit_attachment);
       w.print();
     }
   }

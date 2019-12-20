@@ -1,5 +1,6 @@
 import CardValidator from "../../api/CardValidatorAPI"
 import PaymentsAPI from '../../api/PaymentsAPI';
+import UploadAPI from '../../api/UploadAPI'
 
 function initialState() {
     return {
@@ -84,6 +85,23 @@ const actions = {
                         reject(err);
                     });
             } else resolve(context.state.fees_computations)
+        })
+    },
+    SAVE_RECEIPT_ATTACHMENT(context, { transaction_no, reference_no, form_data }) {
+        console.log('#########  transaction_no :', transaction_no);
+        console.log('#########  reference_no :', reference_no);
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.rootState.user_session.token).uploadTransactionReceipt(transaction_no, reference_no, form_data)
+                .then((result) => {
+                    console.log('result.data :', result.data);
+                    if (result) return new PaymentsAPI(context.rootState.user_session.token).updatePaymentByTransNo(transaction_no, result.data.location)
+                })
+                .then((result) => {
+                    resolve(result);
+                }).catch((err) => {
+                    console.log('SAVE_RECEIPT_ATTACHMENT err :', err);
+                    reject(err)
+                });
         })
     }
 }
