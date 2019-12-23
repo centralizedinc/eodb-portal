@@ -22,7 +22,7 @@ if (workbox) {
     var payload = JSON.parse(data)
     self.registration.showNotification(payload.title, {
       body: payload.message,
-      icon: "/img/smartjuan-logo.png"
+      icon: "/smartjuan-logo.png"
     });
   });
   
