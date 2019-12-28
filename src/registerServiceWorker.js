@@ -145,9 +145,9 @@ window.eodb_pwa = {
    * 
    */
   sendWelcomeNofitication() {
-    this.registration.showNotification('EODB Portal', {
-      body: 'You are now subscribed to EODB Portal Notifications',
-      icon: '/img/icons/vue-logo.png'
+    this.registration.showNotification('SmartJuan24', {
+      body: 'You are now subscribed to SmartJuan24 Notifications',
+      icon: '/smartjuan-logo.png'
     });
   },
 
