@@ -126,7 +126,7 @@
             </a-col>
           </a-row>
         </a-layout-header>
-        <a-layout-content style="margin-left:2vh; margin-right:2vh; margin-top:2vh">
+        <a-layout-content style="margin-left:2vh; margin-right:2vh; margin-top:2vh; min-height:100vh">
           <a-row type="flex" align="middle" >
             <a-col :span="8">
               <h1>{{$route.name}}</h1>
@@ -139,7 +139,7 @@
           </a-row>
           <router-view/>
         </a-layout-content>
-        <a-layout-footer>Footer</a-layout-footer>
+        <!-- <a-layout-footer>Footer</a-layout-footer> -->
       </a-layout>
     </a-layout>
   </div>
