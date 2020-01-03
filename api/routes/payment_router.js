@@ -45,7 +45,19 @@ router.route('/client')
             created_by = decoded_data.account_id;
         console.log('decoded_data :', decoded_data);
         PaymentDao.find({ created_by, status: 'paid' })
-        // PaymentDao.findAll()
+            // PaymentDao.findAll()
+            .then((result) => {
+                console.log('result :', result);
+                res.json(result)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
+router.route('/receipt/:transaction_no')
+    .post((req, res) => {
+        PaymentDao.modifyOne({ transaction_no: req.params.transaction_no }, { attachment: req.body.attachment })
+            // PaymentDao.findAll()
             .then((result) => {
                 console.log('result :', result);
                 res.json(result)

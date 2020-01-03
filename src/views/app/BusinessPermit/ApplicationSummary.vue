@@ -12,28 +12,28 @@
     <a-row class="summary-row">
       <a-col :span="8">Last Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.owner_details.name.last}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.last}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">FIrst Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.owner_details.name.first}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.first}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Middle Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.owner_details.name.middle}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.middle}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Date of Birth</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
       <a-col :span="1">:</a-col>
       <a-col
-        :span="15"
+        :span="15" style="text-transform:uppercase"
       >{{form.owner_details.gender === 'M' ? 'Male' : form.owner_details.gender === 'F' ? 'Female' : ''}}</a-col>
     </a-row>
     <a-row class="summary-row">
@@ -44,12 +44,12 @@
     <a-row class="summary-row">
       <a-col :span="8">Email Address</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.owner_details.email}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.email}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Address</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{owner_address}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{owner_address}}</a-col>
     </a-row>
 
     <!-- Part II. Business Details -->
@@ -61,23 +61,23 @@
       <a-col :span="8">Application Type</a-col>
       <a-col :span="1">:</a-col>
       <a-col
-        :span="15"
+        :span="15" style="text-transform:uppercase"
       >{{form.application_type === 0 ? 'New' : form.application_type === 0 ? 'Renewal' : ''}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Type of Business</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{getBusinessType(form.business_details.business_type)}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{getBusinessType(form.business_details.business_type)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Business Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.business_name}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.business_name}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Trade Name/Franchise</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.franchise}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.franchise}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">{{`${reg_code} Registration No`}}</a-col>
@@ -87,7 +87,7 @@
     <a-row class="summary-row">
       <a-col :span="8">{{`${reg_code} Date of Registration`}}</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Tax Identification No.(TIN)</a-col>
@@ -107,7 +107,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Business Area(in sq m)</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.business_area}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.business_area}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">No of Employees in Establishment</a-col>
@@ -122,7 +122,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Business Address</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{business_address}}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{business_address}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Are you enjoying tax incentive from any Government Entity?</a-col>

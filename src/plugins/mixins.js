@@ -67,6 +67,13 @@ export default {
                     const reader = new FileReader();
                     reader.addEventListener('load', () => callback(reader.result));
                     reader.readAsDataURL(img);
+                },
+                getPermitType(type) {
+                    if (type === "business") return "Business Permit";
+                    else if (type === "cedula") return "Community Tax Certificate";
+                    else if (type === "barangay") return "Barangay Clearance";
+                    else if (type === "police") return "Police Clearance";
+                    return "";
                 }
             },
         })

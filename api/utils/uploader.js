@@ -172,6 +172,27 @@ class Uploader {
     return upload.single("file");
   }
 
+  static updateReceipt(reference_no, transaction_no) {
+    const upload = multer({
+      storage: multerS3({
+        s3: s3,
+        bucket: ApplicationSettings.getValue("AWS_BUCKET"),
+        acl: "public-read",
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        contentDisposition: "inline",
+        metadata: function (req, file, cb) {
+          cb(null, {
+            fieldName: file.fieldname
+          });
+        },
+        key: function (req, file, cb) {
+          cb(null, `receipts/${reference_no}/${transaction_no}-${Date.now().toString()}`);
+        }
+      })
+    });
+    return upload.single("receipt");
+  }
+
   /**
    *
    * @param {avatar_key} key

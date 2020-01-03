@@ -177,8 +177,16 @@
                 <a-icon type="home" />
                 <span>Home</span>
               </a-menu-item>
+              <a-menu-item key="/app/mayor_corner">
+                <a-icon type="star" />
+                <span>
+                  Mayor's Corner
+                  <a-badge count="soon" />
+                </span>
+              </a-menu-item>
+
               <a-menu-item key="/app/permits">
-                <a-icon type="file-exclamation" />
+                <a-icon type="file-ppt" />
                 <span>Permits & Licenses</span>
               </a-menu-item>
               <a-menu-item key="/app/forms">
@@ -222,6 +230,53 @@
           <router-view></router-view>
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
+          <a-affix :offsetTop="60">
+            <a-card
+              :headStyle="{
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)',
+                color: 'white',
+                'font-weight': 'bold',
+                'font-size': '15px',
+                padding: '5px 10px',
+                'min-height': '2vh'
+              }"
+              :bodyStyle="{ padding: 0 }"
+              class="document-card"
+            >
+              <a-row slot="title">
+                <a-col :span="22">My Documents</a-col>
+                <a-col :span="2">
+                  <a-tooltip placement="left">
+                    <span
+                      slot="title"
+                    >Displays a list of all the documents you have applied, both active and expired.</span>
+                    <a-icon type="folder" />
+                  </a-tooltip>
+                </a-col>
+              </a-row>
+            </a-card>
+          </a-affix>
+
+          <!-- <a-card>
+            <span slot="title">
+              <a-icon type="folder"></a-icon>My Documents
+            </span>
+            <a-card
+              @click="view(item.epermit_attachment)"
+              v-for="item in ePermits"
+              :key="item.epermit_attachment"
+              style="margin-top: 2px; text-align: center"
+            >
+              <pdf
+                :src="item.epermit_attachment"
+                style="cursor:zoom;display: inline-block; width: 100%"
+              ></pdf>
+              <p style="font-weight:bold">{{item.business_no}}</p>
+              <span>{{item.business_details.business_name}}</span>
+            </a-card>
+          </a-card>-->
+          <!-- <a-table :columns="doc_col" :dataSource="documents"></a-table> -->
+
           <!-- <a-affix :offsetTop="40">
             <a-card
               :headStyle="{
@@ -323,7 +378,10 @@
 </template>
 
 <script>
+import pdf from "vue-pdf";
+
 export default {
+  components: { pdf },
   data() {
     return {
       collapsed: false,
@@ -331,7 +389,8 @@ export default {
       visible: false,
       coordinates: { lat: 14.017685, lng: 121.417034 },
       animation: {},
-      selected_menu: [this.$route.fullPath]
+      selected_menu: [this.$route.fullPath],
+      documents: [{}]
     };
   },
   created() {
@@ -345,7 +404,11 @@ export default {
   methods: {
     init() {
       this.user = this.$store.state.user_session.user;
+      this.$store.dispatch("GET_BUSINESS_PERMIT");
       // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
+    },
+    view(link) {
+      window.open(link);
     },
     nav(e) {
       console.log("this.$route :", this.$route);
@@ -393,8 +456,20 @@ export default {
       });
     },
     handleCancel() {
-      console.log("Clicked cancel button");
       this.visible = false;
+    }
+  },
+  computed: {
+    ePermits() {
+      var permits = [];
+      if (this.$store.state.permits.permits) {
+        this.$store.state.permits.permits.forEach(permit => {
+          if (permit.epermit_attachment) {
+            permits.push(permit);
+          }
+        });
+      }
+      return permits;
     }
   }
 };

@@ -227,9 +227,6 @@ export default {
           });
       }
     },
-    getPermitType(type) {
-      return this.permit_types.find(v => v._id === type).name;
-    },
     getAppType(type) {
       console.log("typ :", type);
       const app = this.application_types.find(

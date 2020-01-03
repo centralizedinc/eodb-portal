@@ -14,7 +14,7 @@ function fillup(details) {
         background: function (page) {
             return [{
                 image: "form",
-                width: 400
+                width: 625
 
             }]
         },
@@ -539,6 +539,8 @@ function getContent(details) {
         })
     })
 
+    var total_amount = details.transactions.map(v => v.amount).reduce((t, c) => parseFloat(t) + parseFloat(c))
+
     // {
     //     //layout: "noBorders",
     //     table: {
@@ -678,7 +680,7 @@ function getContent(details) {
 
                         },
                         {
-                            text: "4317.00",
+                            text: formatAmount(total_amount),
                             fontSize: 6,
                             bold: true,
                             characterSpacing: 0,

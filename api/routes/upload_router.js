@@ -52,5 +52,18 @@ router.route('/epermit/:epermit_no')
         })
     })
 
+router.route('/receipt/:reference_no/:transaction_no')
+    .post((req, res) => {
+        console.log('uploading receipt reference_no...', req.params.reference_no);
+        console.log('uploading receipt transaction_no...', req.params.transaction_no);
+        const upload = Uploader.updateReceipt(req.params.reference_no, req.params.transaction_no)
+        upload(req, res, function (err, some) {
+            // console.log('some :', some);
+            console.log('err :', err);
+            console.log('req :', req.file);
+            res.json(req.file);
+        })
+    })
+
 
 module.exports = router;

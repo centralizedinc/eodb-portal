@@ -49,7 +49,16 @@ export default class PaymentsAPI {
     /**
      * @returns {Promise}
      */
-    getAllFeesComputation(){
+    getAllFeesComputation() {
         return axios.get('/fees/computation');
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} transaction_no 
+     * @param {String} attachment 
+     */
+    updatePaymentByTransNo(transaction_no, attachment) {
+        return axios.post(`/payments/receipt/${transaction_no}`, { attachment })
     }
 }

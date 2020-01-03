@@ -1,10 +1,23 @@
 <template>
   <a-row type="flex" :gutter="16">
     <a-col :span="14">
-      <application-summary :form="form" :read-only="true"></application-summary>
-      <a-card style="margin-top:2vh">
-        <h2>Requirements</h2>
-      </a-card>
+      <a-tabs>
+        <a-tab-pane key="1" >
+          <span slot="tab"><a-icon type="file-search"></a-icon> Details</span>
+          <application-summary :form="form" :read-only="true"></application-summary>
+        </a-tab-pane>
+        <a-tab-pane key="2">
+          <span slot="tab"><a-icon type="snippets"></a-icon> Attachments</span>
+          <a-card @click="view(item.epermit_attachment)" v-for="item in form.attachments" :key="item.doc_type" style="margin-top: 2px; text-align: center">
+              <div v-for="file in item.files" :key="file">
+                <!-- {{file}} -->
+                <!-- <img :src="file" style="width: 100%;" /> -->
+                <pdf :src="file" style="cursor:zoom; width: 100%"></pdf>
+              </div>
+          </a-card>
+        </a-tab-pane>
+      </a-tabs>
+    
     </a-col>
     <a-col :span="10">
       <a-affix :offsetTop="10">
@@ -28,8 +41,6 @@
           <a-divider></a-divider>
           <a-button-group>
             <a-button
-              size="large"
-              icon="issues-close"
               :disabled="rejecting_application || approving_application"
             >For Compliance</a-button>
             <a-popconfirm
@@ -39,8 +50,6 @@
             >
               <a-button
                 type="danger"
-                size="large"
-                icon="stop"
                 :disabled="approving_application"
                 :loading="rejecting_application"
               >Denied</a-button>
@@ -52,8 +61,6 @@
             >
               <a-button
                 type="primary"
-                size="large"
-                icon="check-circle"
                 :disabled="rejecting_application"
                 :loading="approving_application"
               >Approved</a-button>
@@ -68,10 +75,12 @@
 <script>
 import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary";
 import provinces_data from "../../assets/references/provinces.json";
+import pdf from 'vue-pdf'
 
 export default {
   components: {
-    ApplicationSummary
+    ApplicationSummary,
+    pdf
   },
   data() {
     return {
@@ -114,6 +123,7 @@ export default {
           console.log("checklists err :", err);
         });
       this.form = this.$store.state.admin_session.for_review;
+      console.log('this.form::: ',JSON.stringify(this.form))
     },
     getProvinceByCode(code) {
       const data = this.provinces_data.find(v => v.provCode === code);
@@ -289,6 +299,9 @@ export default {
       else if (mode === "SA") return "Semi Annual";
       else if (mode === "Q") return "Quarterly";
       else return "";
+    },
+    view(url){
+
     }
   }
 };

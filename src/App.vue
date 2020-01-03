@@ -50,6 +50,12 @@ export default {
         this.refreshing = true;
         window.location.reload();
       });
+      document.addEventListener("refresh_activities", e => {
+        this.title = "New Activity detected"
+        this.button = "Retry";
+        this.description =
+          "New Updates available";
+      });
     },
     showRefreshUI(e) {
       this.registration = e.detail;

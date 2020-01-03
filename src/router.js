@@ -93,6 +93,10 @@ export default new Router({
           component: () => import('./views/app/Home')
         },
         {
+          path: 'mayor_corner',
+          component: () => import('@/views/app/MayorsCorner')
+        },
+        {
           path: 'permits',
           component: () => import('@/views/app/Permits')
           // component: () => import('@/components/permits/Transactions')
