@@ -15,7 +15,7 @@
       <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.last}}</a-col>
     </a-row>
     <a-row class="summary-row">
-      <a-col :span="8">FIrst Name</a-col>
+      <a-col :span="8">First Name</a-col>
       <a-col :span="1">:</a-col>
       <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.first}}</a-col>
     </a-row>
