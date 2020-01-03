@@ -98,8 +98,12 @@ export default new Router({
           // component: () => import('@/components/permits/Transactions')
         },
         {
-          path: 'taxes',
-          component: () => import('@/components/taxes/Transactions')
+          path: 'forms',
+          component: () => import('@/views/app/CivilRegForms')
+        },
+        {
+          path: 'rpt',
+          component: () => import('@/views/app/RealProperty')
         },
         {
           path: 'tracker',

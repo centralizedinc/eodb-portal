@@ -7,10 +7,7 @@
     </a-back-top>
     <a-layout-header class="header">
       <a-row justify="start" :gutter="16">
-        <a-col
-          style="margin-left: -20px !important; text-align: left"
-          :span="4"
-        >
+        <a-col style="margin-left: -20px !important; text-align: left" :span="4">
           <img
             style="width: auto; height: 55px; margin-top: -8px;"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/smartjuan_logo.png"
@@ -25,7 +22,7 @@
         </a-col>-->
         <!-- <a-col :span="10">
           <a-input-search placeholder="Search" />
-        </a-col> -->
+        </a-col>-->
         <a-col :span="14"></a-col>
         <a-col :span="1" style="text-align: right">
           <img
@@ -47,28 +44,25 @@
               type="notification"
               style="color:#ffffff"
             ></a-icon> </a-tooltip
-        ></a-col> -->
+        ></a-col>-->
         <a-col :span="1" style="text-align: center">
           <a-dropdown>
             <a-menu slot="overlay">
-              <a-menu-item key="1"
-                ><a-icon type="notification" />Notification</a-menu-item
-              >
+              <a-menu-item key="1">
+                <a-icon type="notification" />Notification
+              </a-menu-item>
               <a-menu-divider />
-              <a-menu-item key="2"
-                ><a-icon type="lock" />Lock Screen</a-menu-item
-              >
-              <a-menu-item key="3" @click="logout"
-                ><a-icon type="logout" />Logout</a-menu-item
-              >
+              <a-menu-item key="2">
+                <a-icon type="lock" />Lock Screen
+              </a-menu-item>
+              <a-menu-item key="3" @click="logout">
+                <a-icon type="logout" />Logout
+              </a-menu-item>
             </a-menu>
             <a-tooltip placement="left">
-              <a-icon
-                type="setting"
-                style="color:#ffffff; padding-right:8px"
-              ></a-icon>
-              <a-icon type="caret-down" style="fontSize: 8px"
-            /></a-tooltip>
+              <a-icon type="setting" style="color:#ffffff; padding-right:8px"></a-icon>
+              <a-icon type="caret-down" style="fontSize: 8px" />
+            </a-tooltip>
           </a-dropdown>
         </a-col>
 
@@ -76,7 +70,7 @@
           <a-tooltip placement="left">
             <span slot="title">Lock Screen</span>
             <a-icon type="setting" style="color:#ffffff"></a-icon> </a-tooltip
-        ></a-col> -->
+        ></a-col>-->
 
         <!-- <a-col :span="1">
           <a-tooltip placement="left">
@@ -87,7 +81,7 @@
               style="color:#ffffff; cursor:pointer"
             ></a-icon>
           </a-tooltip>
-        </a-col> -->
+        </a-col>-->
       </a-row>
       <!-- mobile site -->
       <!-- <a-row v-else type="flex" justify="start">
@@ -145,10 +139,7 @@
       </a-drawer>-->
     </a-layout-header>
     <!-- ------------------------------------------------ -->
-    <a-layout-content
-      class="content"
-      style="margin-top:10vh; background-color: #EEEEEE"
-    >
+    <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
       <a-row type="flex" justify="center" style="margin-top: 10vh">
         <a-col :span="4" style="margin-right:1vw">
           <a-card style="margin-bottom:2vh; color: #f2f2f2">
@@ -158,12 +149,13 @@
                   :src="user.avatar"
                   :size="54"
                   style="margin-top:-10vh; border: 2px solid #ffffff; font-weight: bold;"
-                  >{{
-                    user && user.name && user.name.first
-                      ? user.name.first[0] + "" + user.name.last[0]
-                      : ""
-                  }}</a-avatar
                 >
+                  {{
+                  user && user.name && user.name.first
+                  ? user.name.first[0] + "" + user.name.last[0]
+                  : ""
+                  }}
+                </a-avatar>
               </a-col>
               <br />
               <a-col :span="24">
@@ -172,9 +164,7 @@
                     <h3
                       align="center"
                       style="color:black; font-size: 14px; text-transform: uppercase"
-                    >
-                      {{ user.name.first }} {{ user.name.last }}
-                    </h3>
+                    >{{ user.name.first }} {{ user.name.last }}</h3>
                   </a-col>
                 </a-row>
               </a-col>
@@ -189,15 +179,21 @@
               </a-menu-item>
               <a-menu-item key="/app/permits">
                 <a-icon type="file-exclamation" />
-                <span> Permits & Licenses</span>
+                <span>Permits & Licenses</span>
               </a-menu-item>
-              <a-menu-item key="/app/taxes" disabled>
+              <a-menu-item key="/app/forms">
                 <a-icon type="file-protect" />
-                <span>Civil Reg Forms <a-badge count="soon"/></span>
+                <span>
+                  Civil Reg Forms
+                  <a-badge count="soon" />
+                </span>
               </a-menu-item>
-              <a-menu-item key="/app/realproperty">
+              <a-menu-item key="/app/rpt">
                 <a-icon type="area-chart" />
-                <span>Real Property Tax <a-badge count="soon"/></span>
+                <span>
+                  Real Property Tax
+                  <a-badge count="soon" />
+                </span>
               </a-menu-item>
               <a-menu-item key="/app/tracker">
                 <a-icon type="compass" />
@@ -292,7 +288,7 @@
                 </a-col>
               </a-row>
             </a-card>
-          </a-affix> -->
+          </a-affix>-->
         </a-col>
       </a-row>
     </a-layout-content>
@@ -311,11 +307,7 @@
         draggable="true"
         style="width: 100%; height: 300px"
       >
-        <GmapMarker
-          :draggable="true"
-          :position="coordinates"
-          :animation="animation"
-        />
+        <GmapMarker :draggable="true" :position="coordinates" :animation="animation" />
       </GmapMap>
       <template slot="footer">
         <a-button
@@ -324,8 +316,7 @@
           type="primary"
           block
           @click="submitReport"
-          >Confirm and Submit</a-button
-        >
+        >Confirm and Submit</a-button>
       </template>
     </a-modal>
   </a-layout>

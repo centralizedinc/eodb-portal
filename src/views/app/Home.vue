@@ -1,7 +1,7 @@
 <template>
   <a-row>
     <a-col :span="24">
-      <a-card style="margin-top: 1vh" title="Activities" />
+      <a-card style="margin-top: 1vh" title="Mayor's Corner" />
     </a-col>
   </a-row>
 </template>
@@ -9,11 +9,9 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
