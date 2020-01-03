@@ -4,6 +4,9 @@ const router = require("express").Router();
 var DocketsDao = require('../dao/DocketsDao');
 var DocketsActivityDao = require('../dao/DocketsActivityDao');
 var BusinessPermitDao = require('../dao/BusinessPermitDao');
+var PolicePermitDao = require('../dao/PolicePermitDao');
+var BarangayPermitDao = require('../dao/BarangayPermitDao');
+var CedulaPermitDao = require('../dao/CedulaPermitDao');
 var AccountDao = require('../dao/AccountDao');
 var ApplicationDao = require('../dao/ApplicationDao');
 var PaymentDao = require('../dao/PaymentDao');
@@ -246,6 +249,9 @@ function processApprovedApplication(reference_no) {
             .then((application) => {
                 results.application = application;
                 if (application.permit_type === "business") return BusinessPermitDao.create(application.details);
+                else if (application.permit_type === "police") return PolicePermitDao.create(application.details);
+                else if (application.permit_type === "barangay") return BarangayPermitDao.create(application.details);
+                else if (application.permit_type === "cedula") return CedulaPermitDao.create(application.details);
             })
             // Create Permit based on permit type
             .then((permit) => {
@@ -261,7 +267,10 @@ function processApprovedApplication(reference_no) {
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
                 const permit_classification =
-                    results.application.permit_type === "business" ? "Business" : "";
+                    results.application.permit_type === "business" ? "Business" : 
+                    results.application.permit_type === "cedula" ? "Community Tax Certificate" : 
+                    results.application.permit_type === "barangay" ? "Barangay" : 
+                    results.application.permit_type === "police" ? "Police" : "";
 
                 const substitutions = {
                     name: user.name.first,
@@ -373,7 +382,10 @@ function processRejectedApplication(reference_no) {
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
                 const permit_classification =
-                    results.application.permit_type === "business" ? "Business" : "";
+                    results.application.permit_type === "business" ? "Business" :  
+                    results.application.permit_type === "cedula" ? "Community Tax Certificate" : 
+                    results.application.permit_type === "barangay" ? "Barangay" : 
+                    results.application.permit_type === "police" ? "Police" : "";
 
                 const substitutions = {
                     name: user.name.first,

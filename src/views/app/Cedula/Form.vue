@@ -386,7 +386,8 @@ export default {
         }
       ],
       loading: false,
-      errors: []
+      errors: [],
+      departments: []
     };
   },
   created() {
