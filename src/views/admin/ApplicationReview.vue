@@ -10,10 +10,11 @@
           <span slot="tab"><a-icon type="snippets"></a-icon> Attachments</span>
           <a-card @click="view(item.epermit_attachment)" v-for="item in form.attachments" :key="item.doc_type" style="margin-top: 2px; text-align: center">
               <div v-for="file in item.files" :key="file">
-                <pdf  :src="file" style="cursor:zoom;display: inline-block; width: 100%"></pdf>
+                <!-- {{file}} -->
+                <!-- <img :src="file" style="width: 100%;" /> -->
+                <pdf :src="file" style="cursor:zoom; width: 100%"></pdf>
               </div>
           </a-card>
-            
         </a-tab-pane>
       </a-tabs>
     
@@ -298,6 +299,9 @@ export default {
       else if (mode === "SA") return "Semi Annual";
       else if (mode === "Q") return "Quarterly";
       else return "";
+    },
+    view(url){
+
     }
   }
 };

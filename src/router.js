@@ -93,13 +93,21 @@ export default new Router({
           component: () => import('./views/app/Home')
         },
         {
+          path: 'mayor_corner',
+          component: () => import('@/views/app/MayorsCorner')
+        },
+        {
           path: 'permits',
           component: () => import('@/views/app/Permits')
           // component: () => import('@/components/permits/Transactions')
         },
         {
-          path: 'taxes',
-          component: () => import('@/components/taxes/Transactions')
+          path: 'forms',
+          component: () => import('@/views/app/CivilRegForms')
+        },
+        {
+          path: 'rpt',
+          component: () => import('@/views/app/RealProperty')
         },
         {
           path: 'tracker',
