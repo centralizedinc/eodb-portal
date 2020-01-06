@@ -1,4 +1,5 @@
 import constant_helper from './constant_helper';
+import moment from 'moment';
 
 export default {
 
@@ -74,6 +75,9 @@ export default {
                     else if (type === "barangay") return "Barangay Clearance";
                     else if (type === "police") return "Police Clearance";
                     return "";
+                },
+                disableDateInBirthdate(current){
+                    return current && current > moment().endOf('day');
                 }
             },
         })

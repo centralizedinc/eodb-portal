@@ -17,7 +17,7 @@
     </a-col>
 
     <!-- Fill up form -->
-    <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
+    <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
       <h1 style="margin-top: 5vh;">Community Tax Certificate</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
@@ -746,5 +746,10 @@ export default {
   border: 0.5px solid #888;
   font-size: 12px;
   font-weight: 600;
+}
+
+.fill-up-form .ant-input,
+.fill-up-form .ant-form-item-control-wrapper {
+  text-transform: uppercase;
 }
 </style>

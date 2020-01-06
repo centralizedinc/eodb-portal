@@ -19,7 +19,7 @@
       </a-col>
 
       <!-- Fill up form -->
-      <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
+      <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
         <h1 style="margin-top: 5vh;">Business Permit Application</h1>
         <h4>This information will help us assess your application.</h4>
         <a-row type="flex" justify="space-between">
@@ -1212,5 +1212,10 @@ export default {
 .documents-table th,
 .documents-table td {
   padding: 3px;
+}
+
+.fill-up-form .ant-input,
+.fill-up-form .ant-form-item-control-wrapper {
+  text-transform: uppercase;
 }
 </style>

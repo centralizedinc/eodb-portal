@@ -23,7 +23,7 @@
         </a-tabs>
       </a-col>-->
       <a-col :span="24">
-        <a-card>
+        <a-card class="fill-up-form">
           <component
             :is="current_option"
             :details="payment_details"
@@ -92,5 +92,10 @@ export default {
 
 .payment-total-affix .ant-affix {
   left: 0 !important;
+}
+
+.fill-up-form .ant-input,
+.fill-up-form .ant-form-item-control-wrapper {
+  text-transform: uppercase;
 }
 </style>

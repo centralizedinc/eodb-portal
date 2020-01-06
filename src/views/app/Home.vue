@@ -12,10 +12,15 @@
       style="margin-top: 1vh;"
       :key="index"
     >
-    <!--  :title="`Ref #${item.reference_no} - ${formatDate(item.date_created, null, true)}`" -->
+      <!--  :title="`Ref #${item.reference_no} - ${formatDate(item.date_created, null, true)}`" -->
       <a-card>
         <span slot="title">
-          Ref #<b style="cursor: pointer; color: blue;" @click="$router.push(`/app/tracker?ref_no=${item.reference_no}`)">{{item.reference_no}}</b> - {{formatDate(item.date_created, null, true)}}
+          Ref #
+          <b
+            style="cursor: pointer; color: blue;"
+            @click="$router.push(`/app/tracker?ref_no=${item.reference_no}`)"
+          >{{item.reference_no}}</b>
+          - {{formatDate(item.date_created, null, true)}}
         </span>
         <span>
           <b :style="`color: ${getActionColor(item.action)}`">{{getActionText(item.action)}}</b>
@@ -69,7 +74,10 @@ export default {
       return this.$store.state.dockets.departments;
     },
     docket_activities() {
-      return this.$store.state.dockets.docket_activities;
+      const sorted_activities = this.$store.state.dockets.docket_activities.sort(
+        (a, b) => new Date(b.date_created) - new Date(a.date_created)
+      );
+      return sorted_activities;
     }
   },
   created() {

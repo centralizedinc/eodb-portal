@@ -72,7 +72,7 @@
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" style="width: 100%;"></a-date-picker>
+            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate"style="width: 100%;"></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
