@@ -2,21 +2,43 @@
   <a-row type="flex" :gutter="16">
     <a-col :span="14">
       <a-tabs>
-        <a-tab-pane key="1" >
-          <span slot="tab"><a-icon type="file-search"></a-icon> Details</span>
-          <application-summary :form="form" :read-only="true"></application-summary>
+        <a-tab-pane key="1">
+          <span slot="tab">
+            <a-icon type="file-search"></a-icon>Details
+          </span>
+          <application-summary :form="form" :read-only="true" v-if="form.permit_type=='business'"></application-summary>
+          <application-summary-brgy
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='barangay'"
+          ></application-summary-brgy>
+          <application-summary-police
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='police'"
+          ></application-summary-police>
+          <application-summary-cedula
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='cedula'"
+          ></application-summary-cedula>
         </a-tab-pane>
         <a-tab-pane key="2">
-          <span slot="tab"><a-icon type="snippets"></a-icon> Attachments</span>
-          <a-card @click="view(item.epermit_attachment)" v-for="item in form.attachments" :key="item.doc_type" style="margin-top: 2px; text-align: center">
-              <div v-for="file in item.files" :key="file">
-                <pdf  :src="file" style="cursor:zoom;display: inline-block; width: 100%"></pdf>
-              </div>
+          <span slot="tab">
+            <a-icon type="snippets"></a-icon>Attachments
+          </span>
+          <a-card
+            @click="view(item.epermit_attachment)"
+            v-for="item in form.attachments"
+            :key="item.doc_type"
+            style="margin-top: 2px; text-align: center"
+          >
+            <div v-for="file in item.files" :key="file">
+              <pdf :src="file" style="cursor:zoom;display: inline-block; width: 100%"></pdf>
+            </div>
           </a-card>
-            
         </a-tab-pane>
       </a-tabs>
-    
     </a-col>
     <a-col :span="10">
       <a-affix :offsetTop="10">
@@ -39,9 +61,7 @@
           />
           <a-divider></a-divider>
           <a-button-group>
-            <a-button
-              :disabled="rejecting_application || approving_application"
-            >For Compliance</a-button>
+            <a-button :disabled="rejecting_application || approving_application">For Compliance</a-button>
             <a-popconfirm
               title="Click PROCEED to denied this application."
               okText="PROCEED"
@@ -73,12 +93,18 @@
 
 <script>
 import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary";
+import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary";
+import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary";
+import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary";
 import provinces_data from "../../assets/references/provinces.json";
-import pdf from 'vue-pdf'
+import pdf from "vue-pdf";
 
 export default {
   components: {
     ApplicationSummary,
+    ApplicationSummaryBrgy,
+    ApplicationSummaryPolice,
+    ApplicationSummaryCedula,
     pdf
   },
   data() {
@@ -122,7 +148,7 @@ export default {
           console.log("checklists err :", err);
         });
       this.form = this.$store.state.admin_session.for_review;
-      console.log('this.form::: ',JSON.stringify(this.form))
+      console.log("this.form::: ", JSON.stringify(this.form));
     },
     getProvinceByCode(code) {
       const data = this.provinces_data.find(v => v.provCode === code);

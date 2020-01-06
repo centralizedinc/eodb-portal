@@ -31,7 +31,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Birthday</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.personal_details.birthday}}</a-col>
+      <a-col :span="15">{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
