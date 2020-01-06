@@ -14,7 +14,7 @@ function fillup(details) {
         background: function (page) {
             return [{
                 image: "form",
-                width: 400
+                width: 625
 
             }]
         },

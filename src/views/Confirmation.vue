@@ -1,12 +1,7 @@
 <template>
   <div>
     <a-row>
-      <a-col
-        :xs="{ span: 24 }"
-        :md="{ span: 12 }"
-        :xl="{ span: 24 }"
-        v-if="platform === 'local'"
-      >
+      <a-col :xs="{ span: 24 }" :md="{ span: 12 }" :xl="{ span: 24 }" v-if="platform === 'local'">
         <a-row>
           <a-col :span="24" style="background-color:#66bb6a">
             <a-row>
@@ -25,9 +20,7 @@
                 :style="{ fontSize: '100px', color: '#FFF' }"
                 style="margin-top:80px"
               />
-              <h1 style="margin-top:30px; margin-bottom:50px">
-                Your account has been confirmed!
-              </h1>
+              <h1 style="margin-top:30px; margin-bottom:50px">Your account has been confirmed!</h1>
             </div>
           </a-col>
         </a-row>
@@ -44,8 +37,7 @@
     color: #FFF; margin-top:40px; width:20%; height:50px"
                 align="middle"
                 @click="$router.push('/')"
-                >LOGIN</a-button
-              >
+              >LOGIN</a-button>
             </a-col>
           </a-row>
         </a-card>
