@@ -135,9 +135,10 @@
     <!-- ease of doing business -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
-        <p align="center" style="font-size: 44px; font-weight: 100">
-          Ease of doing business in San Antonio Quezon
-        </p>
+        <p
+          align="center"
+          style="font-size: 44px; font-weight: 100"
+        >Ease of doing business in San Antonio Quezon</p>
         <!-- <p align="center" style="font-size: 24px; font-weight: 200">
           in San Antonio
         </p>-->
@@ -159,7 +160,7 @@
       <a-col :span="1"></a-col>
       <a-col :span="14" data-aos="fade-up">
         <p style="line-height: 220%; font-size: 16px; font-weight: 100">
-          SmartJuan is a One Stop Shop eGovernment Service of San Antonio,
+          SmartJuan24 is a One Stop Shop eGovernment Service of San Antonio,
           Quezon that expedites the application process for business
           registration, in compliance with the Ease of Doing Business Act under
           Republic Act No. 11032. San Antonio Quezon, under the leadership of
@@ -177,9 +178,7 @@
     <!-- permits & licenses -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="pl">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Permits & Licenses</a-divider
-        >
+        <a-divider orientation="left" class="titleDiv">Permits & Licenses</a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
@@ -187,7 +186,7 @@
           application of Permits and Licenses for all the constituents of San
           Antonio is now available online. Users can now apply for business
           permits anytime, anywhere. Apply, pay, view, track and manage ALL
-          application in one place through SmartJuan.
+          application in one place through SmartJuan24.
         </div>
       </a-col>
       <a-col :span="1"></a-col>
@@ -203,14 +202,14 @@
     <!-- Certificates -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="cert">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Civil Registry Forms
-        </a-divider>
+        <a-divider orientation="left" class="titleDiv">Civil Registry Forms</a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
           Request for issuance of certified copies of births, marriages and
-          deaths. <br /><a-badge count="This service will be available soon" />
+          deaths.
+          <br />
+          <a-badge count="This service will be available soon" />
         </div>
       </a-col>
       <a-col :span="1"></a-col>
@@ -225,16 +224,14 @@
     <!-- real property tax -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rpt">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Real Property Tax</a-divider
-        >
+        <a-divider orientation="left" class="titleDiv">Real Property Tax</a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
           Filing and Payment of Real Property Tax (RPT) will now be easier for
           the people of San Antonio Quezon. Regardless of where you are or just
           being in the comfort of your home, you can now file and pay your real
-          property tax obligations online using SmartJuan.
+          property tax obligations online using SmartJuan24.
         </div>
       </a-col>
       <a-col :span="1"></a-col>
@@ -249,13 +246,11 @@
     <!-- Report Emergency / Calamity -->
     <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rec">
       <a-col :span="24" data-aos="fade-up">
-        <a-divider orientation="left" class="titleDiv"
-          >Citizen Report
-        </a-divider>
+        <a-divider orientation="left" class="titleDiv">Citizen Report</a-divider>
       </a-col>
       <a-col :span="15" data-aos="fade-up">
         <div style="line-height: 220%; font-size: 16px; font-weight: 100">
-          Report crime, emergency, or calamity in San Antonio using SmartJuan.
+          Report crime, emergency, or calamity in San Antonio using SmartJuan24.
           This alert system tells the Command Center's server about the type of
           emergency, name and address of establishment, along with other
           important pieces of information.

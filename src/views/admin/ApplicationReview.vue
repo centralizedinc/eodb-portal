@@ -6,7 +6,22 @@
           <span slot="tab">
             <a-icon type="file-search"></a-icon>Details
           </span>
-          <application-summary :form="form" :read-only="true"></application-summary>
+          <application-summary :form="form" :read-only="true" v-if="form.permit_type=='business'"></application-summary>
+          <application-summary-brgy
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='barangay'"
+          ></application-summary-brgy>
+          <application-summary-police
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='police'"
+          ></application-summary-police>
+          <application-summary-cedula
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='cedula'"
+          ></application-summary-cedula>
         </a-tab-pane>
         <a-tab-pane key="2">
           <span slot="tab">
@@ -80,12 +95,18 @@
 
 <script>
 import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary";
+import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary";
+import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary";
+import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary";
 import provinces_data from "../../assets/references/provinces.json";
 import pdf from "vue-pdf";
 
 export default {
   components: {
     ApplicationSummary,
+    ApplicationSummaryBrgy,
+    ApplicationSummaryPolice,
+    ApplicationSummaryCedula,
     pdf
   },
   data() {

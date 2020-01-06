@@ -3,8 +3,15 @@
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
-      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
-        <a-steps direction="vertical" :current="current_step" class="form-stepper">
+      <a-card
+        :bodyStyle="{ padding: '10px', height: '100%' }"
+        style="height: 100%;border: none;"
+      >
+        <a-steps
+          direction="vertical"
+          :current="current_step"
+          class="form-stepper"
+        >
           <a-step
             v-for="(item, index) in steps"
             :key="index"
@@ -113,11 +120,11 @@
             <a-card
               title="Fees"
               style="margin-top: 1vh;"
-              :headStyle="{ 
-                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
-                color: 'white', 
-                'font-weight': 'bold', 
-                'font-size': '15px', 
+              :headStyle="{
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)',
+                color: 'white',
+                'font-weight': 'bold',
+                'font-size': '15px',
                 padding: '5px 10px',
                 'min-height': '2vh'
               }"
@@ -142,27 +149,41 @@
                   <span
                     v-if="checkErrors('mode_of_payment')"
                     style="color: red"
-                  >{{checkErrors('mode_of_payment')}}</span>
+                    >{{ checkErrors("mode_of_payment") }}</span
+                  >
                 </a-col>
               </a-row>
 
               <a-row type="flex" align="middle">
-                <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
+                <a-col style="font-weight: bold;" :span="24"
+                  >Payment Breakdown</a-col
+                >
                 <template v-for="(item, index) in payments_data_source">
-                  <a-col :span="15" :key="`a${index}`" class="row-border">{{item.description}}</a-col>
+                  <a-col :span="15" :key="`a${index}`" class="row-border">{{
+                    item.description
+                  }}</a-col>
                   <a-col
                     :span="9"
                     :key="`b${index}`"
                     class="row-border"
                     style="text-align: right;"
-                  >{{formatCurrency(item.amount)}}</a-col>
+                    >{{ formatCurrency(item.amount) }}</a-col
+                  >
                 </template>
-                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
+                <a-col
+                  :span="15"
+                  class="row-border"
+                  style="color: #333;background: #d7d7d7"
+                  >Total</a-col
+                >
                 <a-col
                   :span="9"
                   class="row-border"
                   style="text-align: right; color: #333;background: #d7d7d7"
-                >{{formatCurrency(this.transaction_details.total_payable)}}</a-col>
+                  >{{
+                    formatCurrency(this.transaction_details.total_payable)
+                  }}</a-col
+                >
               </a-row>
             </a-card>
           </a-affix>
@@ -174,7 +195,7 @@
       :loading="loading"
       :show="show_payment"
       @pay="proceedToSubmit"
-      @close="show_payment=false"
+      @close="show_payment = false"
       :payment_amount="installment ? installment.amount : total_payable"
     />
   </a-row>
@@ -422,7 +443,7 @@ export default {
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
       console.log("total payable total value: " + JSON.stringify(total));
       this.transaction_details.total_payable = total;
-      this.transaction_details.amount_paid = total
+      this.transaction_details.amount_paid = total;
       return total;
     }
   },
@@ -648,24 +669,24 @@ export default {
             error: "Birthplace is a required field."
           });
         }
-        if (!this.form.personal_details.height) {
-          errors.push({
-            field: "personal_details.height",
-            error: "Height is a required field."
-          });
-        }
-        if (!this.form.personal_details.weight) {
-          errors.push({
-            field: "personal_details.weight",
-            error: "Weight is a required field."
-          });
-        }
-        if (!this.form.personal_details.occupation) {
-          errors.push({
-            field: "personal_details.occupation",
-            error: "Occupation is a required field."
-          });
-        }
+        // if (!this.form.personal_details.height) {
+        //   errors.push({
+        //     field: "personal_details.height",
+        //     error: "Height is a required field."
+        //   });
+        // }
+        // if (!this.form.personal_details.weight) {
+        //   errors.push({
+        //     field: "personal_details.weight",
+        //     error: "Weight is a required field."
+        //   });
+        // }
+        // if (!this.form.personal_details.occupation) {
+        //   errors.push({
+        //     field: "personal_details.occupation",
+        //     error: "Occupation is a required field."
+        //   });
+        // }
 
         if (errors.length) jump_to = 0;
       }

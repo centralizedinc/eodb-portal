@@ -132,7 +132,9 @@ export default {
       ],
       owner_address: "",
       business_address: "",
-      rental_address: ""
+      rental_address: "",
+      residential_address: "",
+      business_address: ""
     };
   },
   computed: {

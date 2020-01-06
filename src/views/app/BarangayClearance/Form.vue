@@ -213,6 +213,8 @@ export default {
       ],
       form: {
         purpose: [],
+        application_type: 0,
+        permit_type: "barangay",
         residential_address: {
           bldg_no: "",
           unit_no: "",
@@ -523,7 +525,7 @@ export default {
       // var errors = [],
       //   jump_to = 0;
 
-      console.log("errors :", errors);
+      console.log("errors :", JSON.stringify(errors));
       this.errors = errors;
 
       // if there is error and validate all then jump to the step
@@ -827,12 +829,12 @@ export default {
         (validate_all || this.current_step === 2) &&
         this.form.purpose.includes("bp")
       ) {
-        if (!this.form.business_details.business_type) {
-          errors.push({
-            field: "business_details.business_type",
-            error: "Business Type is a required field."
-          });
-        }
+        // if (!this.form.business_details.business_type) {
+        //   errors.push({
+        //     field: "business_details.business_type",
+        //     error: "Business Type is a required field."
+        //   });
+        // }
         if (!this.form.business_details.business_name) {
           errors.push({
             field: "business_details.business_name",

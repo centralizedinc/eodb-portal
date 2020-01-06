@@ -52,15 +52,18 @@
                   :key="index"
                   style="border: 1px solid #00000010; margin-right:1vw; margin-left: 1vw"
                 >
-                  <img :src="image" width="100%" margin/>
+                  <img :src="image" width="100%" margin />
                 </a-col>
-                 <a-col
-                  :span="18"
-                  v-for="(link, index) in item.videos"
-                  :key="index"
-                >
+                <a-col :span="18" v-for="(link, index) in item.videos" :key="index">
                   <!-- <video width="100%"> -->
-                    <iframe width="100%" height="315" :src="link" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe
+                    width="100%"
+                    height="315"
+                    :src="link"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
                   <!-- </video> -->
                 </a-col>
               </a-row>
@@ -243,7 +246,9 @@ export default {
   },
   computed: {
     posts() {
-      return this.$store.state.mayor_corner.apps[this.constant_helper.app_index].posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+      return this.$store.state.mayor_corner.apps[
+        this.constant_helper.app_index
+      ].posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
   },
   methods: {

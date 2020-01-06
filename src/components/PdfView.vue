@@ -74,7 +74,7 @@ export default {
       /**
        * To bypass the details override the `pdf_details`
        */
-      if(this.keyword.toUpperCase() === 'BUSINESSPERMIT_SAN_ANTONIO'){
+      if (this.keyword.toUpperCase() === "RECEIPT") {
         this.pdf_details = {
           business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
           business_no: "445433110",
@@ -99,9 +99,9 @@ export default {
             }
           ]
         };
-      } else if(this.keyword.toUpperCase() === 'RECEIPT'){
+      } else if (this.keyword.toUpperCase() === "RECEIPT") {
         this.pdf_details = {
-          transaction_no: '1234567890',
+          transaction_no: "1234567890",
           date: new Date(),
           payor: "Juan Delacruz",
           payment_breakdown: [{

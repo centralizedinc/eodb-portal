@@ -1,6 +1,6 @@
 <template>
   <div id="loading-wrapper">
-    <div id="loading-text">SmartJuan</div>
+    <div id="loading-text">SmartJuan24</div>
     <!-- <div id="loading-subtext">Loading...</div> -->
     <div id="loading-content"></div>
   </div>
