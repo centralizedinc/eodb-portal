@@ -51,7 +51,7 @@
             <a-input v-model="form.owner_details.name.first" placeholder="First Name"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
+        <a-col :xs="{  }" :sm="{ span: 6 }">
           <a-form-item label="Middle Name">
             <a-input v-model="form.owner_details.name.middle" placeholder="Middle Name"></a-input>
           </a-form-item>
@@ -73,7 +73,11 @@
               Date of Birth
               <i style="color: red">*</i>
             </span>
-            <a-date-picker style="width: 100%;" v-model="form.owner_details.birthdate" :disabledDate="disableDateInBirthdate"></a-date-picker>
+            <a-date-picker
+              style="width: 100%;"
+              v-model="form.owner_details.birthdate"
+              :disabledDate="disableDateInBirthdate"
+            ></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -145,7 +149,11 @@
               Tel No
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.telno" placeholder="Tel No*"></a-input>
+            <a-input-number
+              v-model="form.owner_details.telno"
+              placeholder="Tel No*"
+              style="width:100%"
+            ></a-input-number>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -157,7 +165,11 @@
               Mobile No
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.mobile" placeholder="Mobile No*"></a-input>
+            <a-input-number
+              v-model="form.owner_details.mobile"
+              placeholder="Mobile No*"
+              style="width:100%"
+            ></a-input-number>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -193,13 +205,13 @@
 
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
-          <a-form-item style="font-weight: bold;" label="Height">
-            <a-input v-model="form.owner_details.height" placeholder="Height" />
+          <a-form-item style="font-weight: bold;" label="Height(cm)">
+            <a-input-number max="999" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
-          <a-form-item style="font-weight: bold;" label="Weight">
-            <a-input v-model="form.owner_details.weight" placeholder="Weight" />
+          <a-form-item style="font-weight: bold;" label="Weight(kg)">
+            <a-input-number max="999" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
