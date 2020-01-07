@@ -120,7 +120,7 @@ export default {
         business_details: {},
         business_address: {}
       },
-      checklist: ["Police Clearance", "Barangay Clearance"],
+      // checklist: ["Police Clearance", "Barangay Clearance"],
       remarks: "",
       rejecting_application: false,
       approving_application: false
@@ -137,9 +137,15 @@ export default {
   methods: {
     init() {
       this.$http
-        .get("/checklists")
+        .get("/permits")
+        // permits
+        // checklists
         .then(results => {
-          this.checklist = results.data;
+          console.log("result permits: " + JSON.stringify(results));
+          this.checklist = results.data.checklists;
+          console.log(
+            "result data checklist: " + JSON.stringify(this.checklist)
+          );
           return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
         })
         .then(result => {

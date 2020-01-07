@@ -1,13 +1,8 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-  >
+  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
     <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;"
-        >New Applicant Registration</a-col
-      >
+      <a-col :span="22" style="font-size: 25px;">New Applicant Registration</a-col>
       <a-col :span="2" style="text-align: right;">
         <!-- <a-tooltip placement="left">
           <span slot="title">
@@ -21,9 +16,7 @@
       </a-col>
     </a-row>
     <a-form>
-      <a-divider style="color: black;font-weight: bold;" orientation="left"
-        >Personal Details</a-divider
-      >
+      <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
       <!-- <a-row>
         <a-col :xs="{ span: 24 }">
           <a-form-item>
@@ -87,6 +80,7 @@
             </span>
             <a-date-picker
               v-model="form.personal_details.birthday"
+              :disabledDate="disableDateInBirthdate"
               style="width: 100%;"
             ></a-date-picker>
           </a-form-item>
@@ -102,10 +96,7 @@
               Birthplace
               <i style="color: red">*</i>
             </span>
-            <a-input
-              v-model="form.personal_details.birthplace"
-              placeholder="Enter Municipality"
-            ></a-input>
+            <a-input v-model="form.personal_details.birthplace" placeholder="Enter Municipality"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -149,17 +140,13 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
           <a-form-item>
-            <span slot="label">
-              Height(cm)
-            </span>
+            <span slot="label">Height(cm)</span>
             <a-input v-model="form.personal_details.height"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
           <a-form-item>
-            <span slot="label">
-              Weight(kg)
-            </span>
+            <span slot="label">Weight(kg)</span>
             <a-input v-model="form.personal_details.weight"></a-input>
           </a-form-item>
         </a-col>
@@ -189,8 +176,16 @@
 
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
-          <a-form-item>
-            <span slot="label">Basic Community Tax</span>
+          <a-form-item
+            :validate-status="
+              checkErrors('tax.taxable.basic') ? 'error' : ''
+            "
+            :help="checkErrors('tax.taxable.basic')"
+          >
+            <span slot="label">
+              Basic Community Tax
+              <i style="color: red">*</i>
+            </span>
             <a-select v-model="form.tax.taxable.basic" @change="computation">
               <a-select-option value="voluntary">Voluntary</a-select-option>
               <a-select-option value="exempted">Exempted</a-select-option>
@@ -202,10 +197,7 @@
           <a-form-item>
             <span slot="label">Income from Real Property</span>
 
-            <a-input
-              v-model="form.tax.taxable.property_income"
-              @change="computation"
-            ></a-input>
+            <a-input v-model="form.tax.taxable.property_income" @change="computation"></a-input>
           </a-form-item>
           <!-- <a-form-item>
             <span slot="label">Additional Community Tax</span>
@@ -216,38 +208,30 @@
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label"
-              >Gross Receipts or Earnings derived business during the preceding
-              year</span
-            >
+            <span slot="label">
+              Gross Receipts or Earnings derived business during the preceding
+              year
+            </span>
 
             <!-- <a-tooltip placement="bottom">
               <template slot="title">
                 <span>business during the preceding year</span>
-              </template> -->
-            <a-input
-              v-model="form.tax.taxable.business_income"
-              @change="computation"
-            ></a-input>
+            </template>-->
+            <a-input v-model="form.tax.taxable.business_income" @change="computation"></a-input>
             <!-- </a-tooltip> -->
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label"
-              >Salaries or Gross Receipts or Earnings derived
-            </span>
+            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
             <a-tooltip placement="bottom">
               <template slot="title">
                 <span>
                   Salaries or Gross Receipts or Earnings derived exercise of
-                  profession or pursuit of any occupation</span
-                >
+                  profession or pursuit of any occupation
+                </span>
               </template>
-              <a-input
-                v-model="form.tax.taxable.profession_income"
-                @change="computation"
-              ></a-input>
+              <a-input v-model="form.tax.taxable.profession_income" @change="computation"></a-input>
             </a-tooltip>
           </a-form-item>
         </a-col>
@@ -271,12 +255,7 @@
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col
-          :sm="{ span: 6 }"
-          :md="{ span: 12 }"
-          :xl="{ span: 18 }"
-          style="text-align: right;"
-        >
+        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
         </a-col>
       </a-row>

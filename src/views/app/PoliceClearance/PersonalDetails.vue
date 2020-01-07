@@ -72,7 +72,7 @@
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" style="width: 100%;"></a-date-picker>
+            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate" style="width: 100%;"></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -235,6 +235,21 @@
             </span>
 
             <a-input v-model="form.personal_details.occupation"></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item
+            :validate-status="checkErrors('personal_details.ctc_no') ? 'error': ''"
+            :help="checkErrors('personal_details.ctc_no')"
+          >
+            <span slot="label">
+              CTC No.
+              <i style="color: red">*</i>
+            </span>
+            
+            <a-input v-model="form.personal_details.ctc_no"></a-input>
           </a-form-item>
         </a-col>
       </a-row>

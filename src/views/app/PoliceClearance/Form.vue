@@ -17,7 +17,7 @@
     </a-col>
 
     <!-- Fill up form -->
-    <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
+    <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
       <h1 style="margin-top: 5vh;">Police Clearance Application</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
@@ -220,7 +220,8 @@ export default {
           identification_marks: "",
           complexion: "",
           educational_attainment: "",
-          occupation: ""
+          occupation: "",
+          ctc_no: ""
         },
         family_background: {
           father_info: {
@@ -599,14 +600,49 @@ export default {
           files
         })
         .then(result => {
-          console.log("CREATE_POLICE_CLEARANCE result :", result);
+          console.log("CREATE_APPLICATION result :", result);
+
+          // Create Payment Receipt
+          transaction_no = result.payment.transaction_no;
+          reference_no = result.payment.reference_no;
+          const payment_details = {
+            transaction_no: result.payment.transaction_no,
+            date: result.payment.date_created,
+            payor: this.getPayorName(result.payment),
+            payment_breakdown: result.payment.payment_breakdown
+          };
+          return this.$upload(payment_details, "RECEIPT");
+        })
+        .then(blob => {
+          console.log("blob :", blob);
+          if (blob) {
+            var file = new File(
+              [blob],
+              `payment-${transaction_no}-${Date.now()}-smart-juan.pdf`,
+              {
+                type: "application/pdf",
+                lastModified: Date.now()
+              }
+            );
+            var form_data = new FormData();
+            form_data.append("receipt", file);
+            return this.$store.dispatch("SAVE_RECEIPT_ATTACHMENT", {
+              transaction_no,
+              reference_no,
+              form_data
+            });
+          }
+        })
+        .then(result => {
+          console.log("Payment receipt result :", result);
+
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          this.$router.push("/app");
+          this.$router.push(`/app/tracker?ref_no=${reference_no}`);
         })
         .catch(err => {
-          console.log("CREATE_BUSINESS_PERMIT err :", err);
+          console.log("CREATE_APPLICATION err :", err);
         });
     },
     attachFile(keyword, file) {
@@ -731,6 +767,12 @@ export default {
           errors.push({
             field: "personal_details.occupation",
             error: "Occupation is a required field."
+          });
+        }
+        if (!this.form.personal_details.ctc_no) {
+          errors.push({
+            field: "personal_details.ctc_no",
+            error: "CTC No is a required field."
           });
         }
 
@@ -884,5 +926,10 @@ export default {
   border: 0.5px solid #888;
   font-size: 12px;
   font-weight: 600;
+}
+
+.fill-up-form .ant-input,
+.fill-up-form .ant-form-item-control-wrapper {
+  text-transform: uppercase;
 }
 </style>

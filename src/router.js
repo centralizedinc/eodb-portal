@@ -359,11 +359,6 @@ export default new Router({
           path: 'ctc',
           name: "Community Tax Certificate",
           component: () => import("./views/app/Cedula/Form.vue")
-        },
-        {
-          path: '/pdf',
-          name: 'PDF View',
-          component: () => import('./components/PdfView.vue')
         }
       ]
     },
