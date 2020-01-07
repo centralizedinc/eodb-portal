@@ -50,13 +50,11 @@ function isUserHomeAuthenticated(to, from, next) {
 }
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       component: Home,
       beforeEnter: isUserHomeAuthenticated,
-      children: [
-        {
+      children: [{
           path: '',
           name: 'home',
           component: Landing
@@ -64,33 +62,36 @@ export default new Router({
         {
           path: 'news',
           name: 'news',
-          component: () => import(/* webpackChunkName: "news" */ './views/News.vue'),
+          component: () => import( /* webpackChunkName: "news" */ './views/News.vue'),
         },
         {
           path: 'permit',
           name: 'Permits',
-          component: () => import(/* webpackChunkName: "news" */ './views/Permits.vue'),
+          component: () => import( /* webpackChunkName: "news" */ './views/Permits.vue'),
         },
         {
           path: 'taxes',
           name: 'taxes',
-          component: () => import(/* webpackChunkName: "news" */ './views/Taxes.vue'),
+          component: () => import( /* webpackChunkName: "news" */ './views/Taxes.vue'),
         }
       ]
     },
     {
       path: '/confirmation',
       name: 'Confirmation',
-      component: () => import(/* webpackChunkName: "auth" */ './views/Confirmation.vue'),
+      component: () => import( /* webpackChunkName: "auth" */ './views/Confirmation.vue'),
     },
     {
       path: '/app',
-      component: () => import(/* webpackChunkName: "dash" */ './views/Dashboard.vue'),
+      component: () => import( /* webpackChunkName: "dash" */ './views/Dashboard.vue'),
       beforeEnter: isUserAppAuthenticated,
-      children: [
-        {
+      children: [{
           path: '',
           component: () => import('./views/app/Home')
+        },
+        {
+          path: 'mayor_corner',
+          component: () => import('@/views/app/MayorsCorner')
         },
         {
           path: 'permits',
@@ -98,8 +99,12 @@ export default new Router({
           // component: () => import('@/components/permits/Transactions')
         },
         {
-          path: 'taxes',
-          component: () => import('@/components/taxes/Transactions')
+          path: 'forms',
+          component: () => import('@/views/app/CivilRegForms')
+        },
+        {
+          path: 'rpt',
+          component: () => import('@/views/app/RealProperty')
         },
         {
           path: 'tracker',
@@ -120,106 +125,107 @@ export default new Router({
       path: '/admin',
       name: 'admin',
       beforeEnter: checkSession,
-      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/Login.vue'),
+      component: () => import( /* webpackChunkName: "adminLogin" */ './views/admin/Login.vue'),
     },
     {
       path: '/admin/lock',
       name: 'lock screen',
-      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/LockScreen.vue'),
+      component: () => import( /* webpackChunkName: "adminLogin" */ './views/admin/LockScreen.vue'),
     },
     {
       path: '/admin/404',
       name: 'Unauthorized',
-      component: () => import(/* webpackChunkName: "adminLogin" */ './views/admin/UnAuthorized.vue'),
+      component: () => import( /* webpackChunkName: "adminLogin" */ './views/admin/UnAuthorized.vue'),
     },
     {
       path: '/admin/app',
       name: 'Main',
-      component: () => import(/* webpackChunkName: "adminMain" */ './views/admin/Main.vue'),
+      component: () => import( /* webpackChunkName: "adminMain" */ './views/admin/Main.vue'),
       children: [{
-        path: '',
-        name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "adminDashboard" */ './views/admin/Dashboard.vue'),
-        beforeEnter: isAuthenticated
-      },
-      {
-        path: 'applications',
-        name: 'Applications',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminApplications" */ './views/admin/Applications.vue'),
-      },
-      {
-        path: 'users',
-        name: 'Users',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminUsers" */ './views/admin/Users.vue'),
-      },
-      {
-        path: 'departments',
-        name: 'Departments',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/Departments.vue'),
-      },
-      {
-        path: 'roles',
-        name: 'User Roles',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminRoles" */ './views/admin/UserRoles.vue'),
-      },
-      {
-        path: 'references',
-        name: 'Application References',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminReference" */ './views/admin/References.vue'),
-      },
-      {
-        path: 'computations',
-        name: 'Fees Computations',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminDepartments" */ './views/admin/FeesComputation.vue'),
-      },
-      {
-        path: 'account',
-        name: 'Admin Account',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminAccounts" */ './views/admin/Account.vue'),
-      },
-      {
-        path: 'application',
-        name: 'Application Review',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminApplicationReview" */ './views/admin/ApplicationReview.vue'),
-      },
-      {
-        path: 'checklists',
-        name: 'Application Checklist',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminChecklists" */ './views/admin/Checklists.vue'),
-      },
-      {
-        path: 'emergency',
-        name: 'Incident Reports',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminReports" */ './views/admin/IncidentReports.vue'),
-      },
-      {
-        path: 'collections',
-        name: 'Collections',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminCollections" */ './views/admin/Collections.vue'),
-      },
-      {
-        path: 'permits',
-        name: 'Permit Types',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminPermits" */ './views/admin/PermitTypes.vue'),
-      },
-      {
-        path: 'security',
-        name: 'Security',
-        beforeEnter: isAuthenticated,
-        component: () => import(/* webpackChunkName: "adminSecurity" */ './views/admin/Security.vue'),
-      }]
+          path: '',
+          name: 'Dashboard',
+          component: () => import( /* webpackChunkName: "adminDashboard" */ './views/admin/Dashboard.vue'),
+          beforeEnter: isAuthenticated
+        },
+        {
+          path: 'applications',
+          name: 'Applications',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminApplications" */ './views/admin/Applications.vue'),
+        },
+        {
+          path: 'users',
+          name: 'Users',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminUsers" */ './views/admin/Users.vue'),
+        },
+        {
+          path: 'departments',
+          name: 'Departments',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminDepartments" */ './views/admin/Departments.vue'),
+        },
+        {
+          path: 'roles',
+          name: 'User Roles',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminRoles" */ './views/admin/UserRoles.vue'),
+        },
+        {
+          path: 'references',
+          name: 'Application References',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminReference" */ './views/admin/References.vue'),
+        },
+        {
+          path: 'computations',
+          name: 'Fees Computations',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminDepartments" */ './views/admin/FeesComputation.vue'),
+        },
+        {
+          path: 'account',
+          name: 'Admin Account',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminAccounts" */ './views/admin/Account.vue'),
+        },
+        {
+          path: 'application',
+          name: 'Application Review',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminApplicationReview" */ './views/admin/ApplicationReview.vue'),
+        },
+        {
+          path: 'checklists',
+          name: 'Application Checklist',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminChecklists" */ './views/admin/Checklists.vue'),
+        },
+        {
+          path: 'emergency',
+          name: 'Incident Reports',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminReports" */ './views/admin/IncidentReports.vue'),
+        },
+        {
+          path: 'collections',
+          name: 'Collections',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminCollections" */ './views/admin/Collections.vue'),
+        },
+        {
+          path: 'permits',
+          name: 'Permit Types',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminPermits" */ './views/admin/PermitTypes.vue'),
+        },
+        {
+          path: 'security',
+          name: 'Security',
+          beforeEnter: isAuthenticated,
+          component: () => import( /* webpackChunkName: "adminSecurity" */ './views/admin/Security.vue'),
+        }
+      ]
     },
     // {
     //   path: '/permits',
@@ -335,25 +341,30 @@ export default new Router({
       component: () => import('./views/Main.vue'),
       beforeEnter: isUserAppAuthenticated,
       children: [{
-        path: 'business',
-        name: "Business Permit",
-        component: () => import("./views/app/BusinessPermit/Form.vue")
-      },
-      {
-        path: 'barangay',
-        name: "Barangay Clearance",
-        component: () => import("./views/app/BarangayClearance/Form.vue")
-      },
-      {
-        path: 'police',
-        name: "Police Clearance",
-        component: () => import("./views/app/PoliceClearance/Form.vue")
-      },
-      {
-        path: 'ctc',
-        name: "Community Tax Certificate",
-        component: () => import("./views/app/Cedula/Form.vue")
-      }
+          path: 'business',
+          name: "Business Permit",
+          component: () => import("./views/app/BusinessPermit/Form.vue")
+        },
+        {
+          path: 'barangay',
+          name: "Barangay Clearance",
+          component: () => import("./views/app/BarangayClearance/Form.vue")
+        },
+        {
+          path: 'police',
+          name: "Police Clearance",
+          component: () => import("./views/app/PoliceClearance/Form.vue")
+        },
+        {
+          path: 'ctc',
+          name: "Community Tax Certificate",
+          component: () => import("./views/app/Cedula/Form.vue")
+        },
+        {
+          path: '/pdf',
+          name: 'PDF View',
+          component: () => import('./components/PdfView.vue')
+        }
       ]
     },
     {

@@ -15,7 +15,7 @@
       <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.last}}</a-col>
     </a-row>
     <a-row class="summary-row">
-      <a-col :span="8">FIrst Name</a-col>
+      <a-col :span="8">First Name</a-col>
       <a-col :span="1">:</a-col>
       <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.first}}</a-col>
     </a-row>
@@ -27,13 +27,17 @@
     <a-row class="summary-row">
       <a-col :span="8">Date of Birth</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform:uppercase"
+      >{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
       <a-col :span="1">:</a-col>
       <a-col
-        :span="15" style="text-transform:uppercase"
+        :span="15"
+        style="text-transform:uppercase"
       >{{form.owner_details.gender === 'M' ? 'Male' : form.owner_details.gender === 'F' ? 'Female' : ''}}</a-col>
     </a-row>
     <a-row class="summary-row">
@@ -61,13 +65,17 @@
       <a-col :span="8">Application Type</a-col>
       <a-col :span="1">:</a-col>
       <a-col
-        :span="15" style="text-transform:uppercase"
+        :span="15"
+        style="text-transform:uppercase"
       >{{form.application_type === 0 ? 'New' : form.application_type === 0 ? 'Renewal' : ''}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Type of Business</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{getBusinessType(form.business_details.business_type)}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform:uppercase"
+      >{{getBusinessType(form.business_details.business_type)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Business Name</a-col>
@@ -87,7 +95,10 @@
     <a-row class="summary-row">
       <a-col :span="8">{{`${reg_code} Date of Registration`}}</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform:uppercase"
+      >{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Tax Identification No.(TIN)</a-col>
@@ -248,10 +259,16 @@ export default {
   },
   methods: {
     getRegionByCode(code) {
+      console.log(
+        "get region by code business: " + JSON.stringify(this.regions_data)
+      );
       const data = this.regions_data.find(v => v.regCode === code);
       return data.regDesc;
     },
     getProvinceByCode(code) {
+      console.log(
+        "get province by code business: " + JSON.stringify(this.provinces_data)
+      );
       const data = this.provinces_data.find(v => v.provCode === code);
       return data.provDesc;
     },

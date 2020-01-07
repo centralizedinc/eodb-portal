@@ -2,22 +2,45 @@
   <a-row type="flex" :gutter="16">
     <a-col :span="14">
       <a-tabs>
-        <a-tab-pane key="1" >
-          <span slot="tab"><a-icon type="file-search"></a-icon> Details</span>
-          <application-summary :form="form" :read-only="true"></application-summary>
+        <a-tab-pane key="1">
+          <span slot="tab">
+            <a-icon type="file-search"></a-icon>Details
+          </span>
+          <application-summary :form="form" :read-only="true" v-if="form.permit_type=='business'"></application-summary>
+          <application-summary-brgy
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='barangay'"
+          ></application-summary-brgy>
+          <application-summary-police
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='police'"
+          ></application-summary-police>
+          <application-summary-cedula
+            :form="form"
+            :read-only="true"
+            v-if="form.permit_type=='cedula'"
+          ></application-summary-cedula>
         </a-tab-pane>
         <a-tab-pane key="2">
-          <span slot="tab"><a-icon type="snippets"></a-icon> Attachments</span>
-          <a-card @click="view(item.epermit_attachment)" v-for="item in form.attachments" :key="item.doc_type" style="margin-top: 2px; text-align: center">
-              <div v-for="file in item.files" :key="file">
-                <!-- {{file}} -->
-                <!-- <img :src="file" style="width: 100%;" /> -->
-                <pdf :src="file" style="cursor:zoom; width: 100%"></pdf>
-              </div>
+          <span slot="tab">
+            <a-icon type="snippets"></a-icon>Attachments
+          </span>
+          <a-card
+            @click="view(item.epermit_attachment)"
+            v-for="item in form.attachments"
+            :key="item.doc_type"
+            style="margin-top: 2px; text-align: center"
+          >
+            <div v-for="file in item.files" :key="file">
+              <!-- {{file}} -->
+              <!-- <img :src="file" style="width: 100%;" /> -->
+              <pdf :src="file" style="cursor:zoom; width: 100%"></pdf>
+            </div>
           </a-card>
         </a-tab-pane>
       </a-tabs>
-    
     </a-col>
     <a-col :span="10">
       <a-affix :offsetTop="10">
@@ -40,9 +63,7 @@
           />
           <a-divider></a-divider>
           <a-button-group>
-            <a-button
-              :disabled="rejecting_application || approving_application"
-            >For Compliance</a-button>
+            <a-button :disabled="rejecting_application || approving_application">For Compliance</a-button>
             <a-popconfirm
               title="Click PROCEED to denied this application."
               okText="PROCEED"
@@ -74,12 +95,18 @@
 
 <script>
 import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary";
+import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary";
+import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary";
+import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary";
 import provinces_data from "../../assets/references/provinces.json";
-import pdf from 'vue-pdf'
+import pdf from "vue-pdf";
 
 export default {
   components: {
     ApplicationSummary,
+    ApplicationSummaryBrgy,
+    ApplicationSummaryPolice,
+    ApplicationSummaryCedula,
     pdf
   },
   data() {
@@ -123,7 +150,7 @@ export default {
           console.log("checklists err :", err);
         });
       this.form = this.$store.state.admin_session.for_review;
-      console.log('this.form::: ',JSON.stringify(this.form))
+      console.log("this.form::: ", JSON.stringify(this.form));
     },
     getProvinceByCode(code) {
       const data = this.provinces_data.find(v => v.provCode === code);
@@ -171,12 +198,31 @@ export default {
             message: "Approve!",
             description: `You have approved Application #${this.form.reference_no}`
           });
-          if (results.permit)
-            return this.getAddress(results.permit.details.business_address);
+          if (results.permit) {
+            if (results.permit.details.permit_type === "business")
+              return this.getAddress(results.permit.details.business_address);
+            // else if(results.permit.details.permit_type === 'cedula') // Cedula has no address
+            // return this.getAddress(results.permit.details.business_address);
+            else if (results.permit.details.permit_type === "barangay") {
+              var getAddresses = [];
+              // If requesting for residential certificate
+              if (results.permit.details.purpose.includes("pc"))
+                getAddresses.push(
+                  this.getAddress(results.permit.details.residential_address)
+                );
+              // If requesting barangay clearance for business permit
+              if (results.permit.details.purpose.includes("bp"))
+                getAddresses.push(
+                  this.getAddress(results.permit.details.business_address)
+                );
+              if (getAddresses.length) return Promise.all(getAddresses);
+            } else if (results.permit.details.permit_type === "police")
+              return this.getAddress(results.permit.details.address_details);
+          }
         })
-        .then(business_address => {
-          console.log("getAddress result :", business_address);
-          if (results.permit && business_address) {
+        .then(address => {
+          console.log("getAddress result :", address);
+          if (results.permit) {
             if (results.permit.is_approve) {
               if (results.permit.details.permit_type === "business") {
                 const valid_until = new Date(
@@ -186,7 +232,7 @@ export default {
                   business_name:
                     results.permit.details.business_details.business_name,
                   business_no: results.permit.details.business_no,
-                  business_address,
+                  business_address: address,
                   business_owner: `${results.permit.details.owner_details.name.first} ${results.permit.details.owner_details.name.last}`,
                   plate_no: results.permit.details.reference_no,
                   ownership_type: this.getBusinessType(
@@ -205,27 +251,103 @@ export default {
                   transactions: results.permit.payments.payment_breakdown
                 };
                 return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
+              } else if (results.permit.details.permit_type === "cedula") {
+                // const details = {};
+                // return this.$upload(details, "CEDULA");
+              } else if (results.permit.details.permit_type === "barangay") {
+                const details = {
+                  business_name:
+                    results.permit.details.business_details.business_name,
+                  business_owner: "",
+                  business_address: address[0] || "",
+                  residential_address: address[1] || "",
+                  business_nature:
+                    results.permit.details.business_details.business_type,
+                  requestor: "",
+                  date_created: results.permit.details.date_created
+                };
+                return this.$upload(details, "BGYCLEARANCE");
+              } else if (results.permit.details.permit_type === "police") {
+                const details = {
+                  police_no: results.permit.details.police_no,
+                  name: `${results.permit.details.personal_details.name.first} ${results.permit.details.personal_details.name.last}`,
+                  address,
+                  birth_date: results.permit.details.personal_details.birthday,
+                  birth_place:
+                    results.permit.details.personal_details.birthplace,
+                  findings: "",
+                  purpose: "",
+                  validity: "",
+                  ctc_no: results.permit.details.personal_details.ctc_no,
+                  date_created: results.permit.details.date_created,
+                  verified_by_first: "",
+                  verified_by_second: ""
+                };
+                return this.$upload(details, "POLICECLEARANCE");
               }
             }
             // if(!results.permit.is_approve) return this.$upload(results.permit.details, "BUSINESSPERMIT_SAN_ANTONIO")
           }
         })
         .then(blob => {
-          if (blob && results.permit.details.permit_type === "business") {
-            var file = new File(
-              [blob],
-              `business-permit-${Date.now()}-smart-juan.pdf`,
-              {
+          if (blob) {
+            if (results.permit.details.permit_type === "business") {
+              var file = new File(
+                [blob],
+                `business-permit-${Date.now()}-smart-juan.pdf`,
+                {
+                  type: "application/pdf",
+                  lastModified: Date.now()
+                }
+              );
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
+                business_no: results.permit.details.business_no,
+                form_data
+              });
+            } else if (results.permit.details.permit_type === "cedula") {
+              var file = new File([blob], `ctc-${Date.now()}-smart-juan.pdf`, {
                 type: "application/pdf",
                 lastModified: Date.now()
-              }
-            );
-            var form_data = new FormData();
-            form_data.append("file", file);
-            return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
-              business_no: results.permit.details.business_no,
-              form_data
-            });
+              });
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_CEDULA_EPERMIT_ATTACHMENT", {
+                cedula_no: results.permit.details.cedula_no,
+                form_data
+              });
+            } else if (results.permit.details.permit_type === "police") {
+              var file = new File(
+                [blob],
+                `police-clearance-${Date.now()}-smart-juan.pdf`,
+                {
+                  type: "application/pdf",
+                  lastModified: Date.now()
+                }
+              );
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_POLICE_EPERMIT_ATTACHMENT", {
+                police_no: results.permit.details.police_no,
+                form_data
+              });
+            } else if (results.permit.details.permit_type === "barangay") {
+              var file = new File(
+                [blob],
+                `barangay-clearance-${Date.now()}-smart-juan.pdf`,
+                {
+                  type: "application/pdf",
+                  lastModified: Date.now()
+                }
+              );
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_BARANGAY_EPERMIT_ATTACHMENT", {
+                barangay_no: results.permit.details.barangay_no,
+                form_data
+              });
+            }
           }
         })
         .then(result => {
@@ -300,9 +422,7 @@ export default {
       else if (mode === "Q") return "Quarterly";
       else return "";
     },
-    view(url){
-
-    }
+    view(url) {}
   }
 };
 </script>

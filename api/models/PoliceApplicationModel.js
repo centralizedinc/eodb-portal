@@ -69,6 +69,9 @@ var PoliceApplication = new mongoose.Schema({
         occupation: {
             type: String
         },
+        ctc_no: {
+            type: String
+        }
     },
     family_background: {
         father_info: {

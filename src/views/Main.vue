@@ -29,38 +29,35 @@
           <a-col :span="1">
             <a-dropdown>
               <a-menu slot="overlay">
-                <a-menu-item key="1" @click="$router.push('/app')"
-                  ><a-icon type="home" />Home</a-menu-item
-                >
-                <a-menu-item key="2"
-                  ><a-icon type="lock" />Lock Screen</a-menu-item
-                >
+                <a-menu-item key="1" @click="$router.push('/app')">
+                  <a-icon type="home" />Home
+                </a-menu-item>
+                <a-menu-item key="2">
+                  <a-icon type="lock" />Lock Screen
+                </a-menu-item>
                 <!-- <a-menu-divider />
                 <a-menu-item key="3" @click="logout"
                   ><a-icon type="logout" />Logout</a-menu-item
-                > -->
+                >-->
               </a-menu>
               <a-tooltip placement="left">
-                <a-icon
-                  type="setting"
-                  style="color:#ffffff; padding-right:8px"
-                ></a-icon>
-                <a-icon type="caret-down" style="fontSize: 8px; color:#ffffff"
-              /></a-tooltip>
+                <a-icon type="setting" style="color:#ffffff; padding-right:8px"></a-icon>
+                <a-icon type="caret-down" style="fontSize: 8px; color:#ffffff" />
+              </a-tooltip>
             </a-dropdown>
           </a-col>
 
           <!-- <a-tooltip placement="bottom">
               <template slot="title">
                 <span>Home</span>
-              </template> -->
+          </template>-->
           <!-- <a-icon type="home"  @click="$router.push('/app')"/> -->
           <!-- <a-button
                 icon="home"
                 shape="circle"
                 @click="$router.push('/app')"
               />
-            </a-tooltip> -->
+          </a-tooltip>-->
         </a-row>
       </a-layout-header>
     </a-affix>

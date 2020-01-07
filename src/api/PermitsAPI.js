@@ -15,4 +15,34 @@ export default class BusinessPermitAPI {
     getPermitType(){
         return axios.get('permits');
     }
+
+    /**
+     * @returns {Promise}
+     * @param {String} cedula_no 
+     * @param {Object} data 
+     */
+    updatePermitByCedulaNo(cedula_no, data) {
+        console.log('cedula_no :', cedula_no);
+        return axios.post(`/permits/cedula/epermit/${cedula_no}`, data);
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} police_no 
+     * @param {Object} data 
+     */
+    updatePermitByPoliceNo(police_no, data) {
+        console.log('police_no :', police_no);
+        return axios.post(`/permits/police/epermit/${police_no}`, data);
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} barangay_no 
+     * @param {Object} data 
+     */
+    updatePermitByBarangayNo(barangay_no, data) {
+        console.log('barangay_no :', barangay_no);
+        return axios.post(`/permits/barangay/epermit/${barangay_no}`, data);
+    }
 }

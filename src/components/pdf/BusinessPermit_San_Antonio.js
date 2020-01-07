@@ -22,7 +22,7 @@ function fillup(details) {
         images: {
             form: form
         },
-        pageSize: 'LEGAL'
+        pageSize: 'A1'
     };
 
 }
@@ -39,17 +39,15 @@ function getContent(details) {
                 heights: [70],
                 widths: [300],
                 body: [
-                    [
-                        {
-                            text: " ",
-                            fontSize: 6,
-                            bold: true,
-                            characterSpacing: 0,
-                            alignment: 'left',
-                            // right,down,left,up
-                            margin: [1, -4, 0, 0]
-                        }
-                    ]
+                    [{
+                        text: " ",
+                        fontSize: 6,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'left',
+                        // right,down,left,up
+                        margin: [1, -4, 0, 0]
+                    }]
                 ]
             }
 
@@ -62,17 +60,15 @@ function getContent(details) {
                 heights: [8],
                 widths: [300],
                 body: [
-                    [
-                        {
-                            text: " ",
-                            fontSize: 6,
-                            bold: true,
-                            characterSpacing: 0,
-                            alignment: 'left',
-                            // right,down,left,up
-                            margin: [1, -13, 0, 0]
-                        }
-                    ]
+                    [{
+                        text: " ",
+                        fontSize: 6,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'left',
+                        // right,down,left,up
+                        margin: [1, -13, 0, 0]
+                    }]
                 ]
             }
 
@@ -85,17 +81,15 @@ function getContent(details) {
                 heights: [15],
                 widths: [300],
                 body: [
-                    [
-                        {
-                            text: "BUSINESS PERMIT OFFICE",
-                            fontSize: 10,
-                            bold: true,
-                            characterSpacing: 1,
-                            alignment: 'justify',
-                            // right,down,left,up
-                            margin: [94, -30, 0, 0]
-                        }
-                    ]
+                    [{
+                        text: "BUSINESS PERMIT OFFICE",
+                        fontSize: 10,
+                        bold: true,
+                        characterSpacing: 1,
+                        alignment: 'justify',
+                        // right,down,left,up
+                        margin: [94, -30, 0, 0]
+                    }]
                 ]
             }
 
@@ -107,17 +101,15 @@ function getContent(details) {
                 heights: [8],
                 widths: [300],
                 body: [
-                    [
-                        {
-                            text: "BUSINESS PERMIT   ",
-                            fontSize: 12,
-                            bold: true,
-                            characterSpacing: 1,
-                            alignment: 'justify',
-                            // right,down,left,up
-                            margin: [116, -20, 0, 0]
-                        }
-                    ]
+                    [{
+                        text: "BUSINESS PERMIT   ",
+                        fontSize: 12,
+                        bold: true,
+                        characterSpacing: 1,
+                        alignment: 'justify',
+                        // right,down,left,up
+                        margin: [116, -20, 0, 0]
+                    }]
                 ]
             }
 
@@ -130,17 +122,15 @@ function getContent(details) {
                 heights: [8],
                 widths: [300],
                 body: [
-                    [
-                        {
-                            text: checkText(details.business_name),
-                            fontSize: 8,
-                            bold: true,
-                            characterSpacing: 0,
-                            alignment: 'justify',
-                            // right,down,left,up
-                            margin: [118, 0, 0, 0]
-                        }
-                    ]
+                    [{
+                        text: checkText(details.business_name),
+                        fontSize: 8,
+                        bold: true,
+                        characterSpacing: 0,
+                        alignment: 'justify',
+                        // right,down,left,up
+                        margin: [118, 0, 0, 0]
+                    }]
                 ]
             }
 
@@ -152,8 +142,7 @@ function getContent(details) {
                 heights: [8],
                 widths: [170, 121],
                 body: [
-                    [
-                        {
+                    [{
                             text: "LICENSE NUMBER:",
                             fontSize: 6,
                             bold: true,
@@ -183,8 +172,7 @@ function getContent(details) {
                 heights: [8],
                 widths: [170, 121],
                 body: [
-                    [
-                        {
+                    [{
                             text: "ADDRESS:",
                             fontSize: 6,
                             bold: true,
@@ -214,8 +202,7 @@ function getContent(details) {
                 heights: [8],
                 widths: [170, 121],
                 body: [
-                    [
-                        {
+                    [{
                             text: "BUSINESS OWNER:",
                             fontSize: 6,
                             bold: true,
@@ -248,8 +235,7 @@ function getContent(details) {
                 heights: [6],
                 widths: [40, 80, 44, 50, 50],
                 body: [
-                    [
-                        {
+                    [{
                             text: checkText(details.plate_no),
                             fontSize: 5,
                             bold: true,
@@ -308,8 +294,7 @@ function getContent(details) {
                 heights: [6],
                 widths: [50, 70, 44, 50, 50],
                 body: [
-                    [
-                        {
+                    [{
                             text: "ACCOUNT NUMBER ",
                             fontSize: 4,
                             bold: true,
@@ -367,10 +352,9 @@ function getContent(details) {
             //layout: "noBorders",
             table: {
                 heights: [6],
-                widths: [124, 50, 50, 50,],
+                widths: [124, 50, 50, 50, ],
                 body: [
-                    [
-                        {
+                    [{
                             text: checkText(details.business_owner),
                             fontSize: 5,
                             bold: true,
@@ -419,10 +403,9 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [6],
-                widths: [124, 50, 50, 50,],
+                widths: [124, 50, 50, 50, ],
                 body: [
-                    [
-                        {
+                    [{
                             text: "TAX PAYER (OWNER)",
                             fontSize: 4,
                             bold: true,
@@ -473,8 +456,7 @@ function getContent(details) {
                 heights: [5],
                 widths: [213, 79],
                 body: [
-                    [
-                        {
+                    [{
                             text: "TAX DESCRIPTION",
                             fontSize: 6,
                             bold: true,
@@ -499,7 +481,8 @@ function getContent(details) {
                 ]
             }
 
-        }];
+        }
+    ];
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
     // Map transactions
@@ -510,8 +493,7 @@ function getContent(details) {
                 heights: [4],
                 widths: [213, 79],
                 body: [
-                    [
-                        {
+                    [{
                             text: checkText(trans.description),
                             fontSize: 6,
                             bold: true,
@@ -661,15 +643,13 @@ function getContent(details) {
 
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    const other_content = [
-        {
+    const other_content = [{
             //layout: "noBorders",
             table: {
                 heights: [4],
                 widths: [213, 79],
                 body: [
-                    [
-                        {
+                    [{
                             text: "TOTAL",
                             fontSize: 7,
                             bold: true,
@@ -701,17 +681,17 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [10,],
+                heights: [10, ],
                 body: [
                     [{
-                        text: "   ",
-                        fontSize: 9,
-                        Bold: true,
-                        alignment: 'justify',
-                        characterSpacing: [1],
-                        // right,down,left,up
-                        margin: [80, -2, 0, 0]
-                    },
+                            text: "   ",
+                            fontSize: 9,
+                            Bold: true,
+                            alignment: 'justify',
+                            characterSpacing: [1],
+                            // right,down,left,up
+                            margin: [80, -2, 0, 0]
+                        },
 
 
                     ]
@@ -724,16 +704,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [10,],
+                heights: [10, ],
                 body: [
                     [{
-                        text: "   ",
-                        fontSize: 6,
-                        alignment: 'justify',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [100, -2, 0, 0]
-                    },
+                            text: "   ",
+                            fontSize: 6,
+                            alignment: 'justify',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [100, -2, 0, 0]
+                        },
 
 
                     ]
@@ -748,16 +728,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2,],
+                heights: [2, ],
                 body: [
                     [{
-                        text: " Erick M Wagan ",
-                        fontSize: 10,
-                        alignment: 'left',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [115, 0, 0, 0]
-                    },
+                            text: " Erick M Wagan ",
+                            fontSize: 10,
+                            alignment: 'left',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [115, 0, 0, 0]
+                        },
 
 
                     ]
@@ -772,16 +752,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2,],
+                heights: [2, ],
                 body: [
                     [{
-                        text: " Minicipal Mayor ",
-                        fontSize: 10,
-                        alignment: 'left',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [114, -5, 0, 0]
-                    },
+                            text: " Minicipal Mayor ",
+                            fontSize: 10,
+                            alignment: 'left',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [114, -5, 0, 0]
+                        },
 
 
                     ]
@@ -797,14 +777,14 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [1,],
+                heights: [1, ],
                 body: [
                     [{
-                        text: " ",
-                        fontSize: 2,
+                            text: " ",
+                            fontSize: 2,
 
 
-                    },
+                        },
 
 
                     ]
@@ -817,16 +797,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2,],
+                heights: [2, ],
                 body: [
                     [{
-                        text: " DISPLAY IN PUBLIC VIEW",
-                        fontSize: 12,
-                        alignment: 'justify',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [80, 5, 0, 0]
-                    },
+                            text: " DISPLAY IN PUBLIC VIEW",
+                            fontSize: 12,
+                            alignment: 'justify',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [80, 5, 0, 0]
+                        },
 
 
                     ]
@@ -840,14 +820,14 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [1,],
+                heights: [1, ],
                 body: [
                     [{
-                        text: " ",
-                        fontSize: 2,
+                            text: " ",
+                            fontSize: 2,
 
 
-                    },
+                        },
 
 
                     ]
@@ -860,14 +840,14 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [30,],
+                heights: [30, ],
                 body: [
                     [{
-                        text: " ",
-                        fontSize: 2,
+                            text: " ",
+                            fontSize: 2,
 
 
-                    },
+                        },
 
 
                     ]
@@ -882,16 +862,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2,],
+                heights: [2, ],
                 body: [
                     [{
-                        text: " This electronic permit (ePermit) is computer generated and does not require signature",
-                        fontSize: 5,
-                        alignment: 'justify',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [45, -2, 0, 0]
-                    },
+                            text: " This electronic permit (ePermit) is computer generated and does not require signature",
+                            fontSize: 5,
+                            alignment: 'justify',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [45, -2, 0, 0]
+                        },
 
 
                     ]
@@ -904,16 +884,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2,],
+                heights: [2, ],
                 body: [
                     [{
-                        text: " Verify authenticity of this document at: ",
-                        fontSize: 5,
-                        alignment: 'justify',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [100, -2, 0, 0]
-                    },
+                            text: " Verify authenticity of this document at: ",
+                            fontSize: 5,
+                            alignment: 'justify',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [100, -2, 0, 0]
+                        },
 
 
                     ]
@@ -926,16 +906,16 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2,],
+                heights: [2, ],
                 body: [
                     [{
-                        text: " Thank you for your business ",
-                        fontSize: 5,
-                        alignment: 'justify',
-                        characterSpacing: [0],
-                        // right,down,left,up
-                        margin: [115, -2, 0, 0]
-                    },
+                            text: " Thank you for your business ",
+                            fontSize: 5,
+                            alignment: 'justify',
+                            characterSpacing: [0],
+                            // right,down,left,up
+                            margin: [115, -2, 0, 0]
+                        },
 
 
                     ]
@@ -969,9 +949,9 @@ function checkText(text) {
 }
 
 /**
-* @returns {String}
-* @param {Number} amount 
-*/
+ * @returns {String}
+ * @param {Number} amount 
+ */
 function formatAmount(amount) {
     if (!amount || isNaN(amount)) return "0.00";
     var parts = parseFloat(amount).toFixed(2).toString().split(".");
@@ -981,10 +961,10 @@ function formatAmount(amount) {
 
 
 /**
-* @returns {String}
-* @param {Date} date
-* @param {Object|String} type
-*/
+ * @returns {String}
+ * @param {Date} date
+ * @param {Object|String} type
+ */
 function formatDate(date, type) {
     var dt = new Date();
     if (date) {
