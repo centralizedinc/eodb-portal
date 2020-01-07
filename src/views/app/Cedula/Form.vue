@@ -542,7 +542,8 @@ export default {
           });
         });
       }
-
+      var transaction_no = "",
+        reference_no = "";
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -559,13 +560,48 @@ export default {
         })
         .then(result => {
           console.log("CREATE_APPLICATION result :", result);
+
+          // Create Payment Receipt
+          transaction_no = result.payment.transaction_no;
+          reference_no = result.payment.reference_no;
+          const payment_details = {
+            transaction_no: result.payment.transaction_no,
+            date: result.payment.date_created,
+            payor: this.getPayorName(result.payment),
+            payment_breakdown: result.payment.payment_breakdown
+          };
+          return this.$upload(payment_details, "RECEIPT");
+        })
+        .then(blob => {
+          console.log("blob :", blob);
+          if (blob) {
+            var file = new File(
+              [blob],
+              `payment-${transaction_no}-${Date.now()}-smart-juan.pdf`,
+              {
+                type: "application/pdf",
+                lastModified: Date.now()
+              }
+            );
+            var form_data = new FormData();
+            form_data.append("receipt", file);
+            return this.$store.dispatch("SAVE_RECEIPT_ATTACHMENT", {
+              transaction_no,
+              reference_no,
+              form_data
+            });
+          }
+        })
+        .then(result => {
+          console.log("Payment receipt result :", result);
+
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          this.$router.push("/app");
+          this.$router.push(`/app/tracker?ref_no=${reference_no}`);
         })
         .catch(err => {
-          console.log("CREATE_BUSINESS_PERMIT err :", err);
+          console.log("CREATE_APPLICATION err :", err);
         });
     },
     attachFile(keyword, file) {
@@ -711,6 +747,13 @@ export default {
       // }
       console.log("errors to return: " + JSON.stringify(errors));
       return { errors, jump_to };
+    },
+    getPayorName(payment){
+      if(payment.method === 'creditcard') {
+        return payment.payment_details.source.name;
+      } else {
+        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+      }
     }
   }
 };

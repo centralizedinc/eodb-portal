@@ -643,7 +643,7 @@ export default {
           files
         })
         .then(result => {
-          console.log("CREATE_BUSINESS_PERMIT result :", result);
+          console.log("CREATE_APPLICATION result :", result);
 
           // Create Payment Receipt
           transaction_no = result.payment.transaction_no;
@@ -681,11 +681,11 @@ export default {
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
-          this.$router.push("/app/tracker");
+          this.$router.push(`/app/tracker?ref_no=${reference_no}`);
         })
         .catch(err => {
           this.loading = false;
-          console.log("CREATE_BUSINESS_PERMIT err :", err);
+          console.log("CREATE_APPLICATION err :", err);
         });
     },
     getPayorName(payment){

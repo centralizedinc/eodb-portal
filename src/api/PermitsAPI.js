@@ -45,4 +45,12 @@ export default class BusinessPermitAPI {
         console.log('barangay_no :', barangay_no);
         return axios.post(`/permits/barangay/epermit/${barangay_no}`, data);
     }
+
+    /**
+     * @returns {Promise}
+     */
+    getPermits(){
+        console.log('getting permit records ....');
+        return axios.get("/permits/records");
+    }
 }
