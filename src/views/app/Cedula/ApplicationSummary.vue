@@ -25,7 +25,7 @@
       <!-- <a-col :span="15">{{ form.personal_details.name.middle }}</a-col> -->
       <a-col :span="15" style="text-transform:uppercase">
         {{
-        form.personal_details.name.middle == null|| form.personal_details.name.middle == ""
+        form.personal_details.name.middle == null || form.personal_details.name.suffix == "" || form.personal_details.name.suffix == undefined
         ? " - "
         : form.personal_details.name.middle
         }}
@@ -36,8 +36,8 @@
       <a-col :span="1">:</a-col>
       <a-col :span="15" style="text-transform:uppercase">
         {{
-        form.personal_details.name.suffix == null
-        ? " - " || form.personal_details.name.suffix == ""
+        form.personal_details.name.suffix == null || form.personal_details.name.suffix == ""
+        ? " - "
         : form.personal_details.name.suffix
         }}
       </a-col>
