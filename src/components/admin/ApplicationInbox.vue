@@ -146,11 +146,12 @@ export default {
   },
   computed: {
     dockets() {
-      console.log(
-        "application inbox application details data: " +
-          JSON.stringify(this.application_details)
+      const dockets = JSON.parse(
+        JSON.stringify(this.$store.state.dockets.dockets_inbox)
       );
-      return this.$store.state.dockets.dockets_inbox;
+      return dockets.sort(
+        (a, b) => new Date(b.date_created) - new Date(a.date_created)
+      );
     },
     department() {
       return this.$store.state.admin_session.department;

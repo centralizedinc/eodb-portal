@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pdf style="width:100%" :src="pdf_url" v-show="!loading"></pdf>
+    <pdf style="width:100%;" :src="pdf_url" v-show="!loading"></pdf>
     <a-row type="flex" justify="center" v-show="loading" style="height:100vh">
       <a-col :span="6">
         Please wait...
@@ -67,6 +67,7 @@ export default {
     pdf
   },
   created() {
+    console.log("this.keyword.toUpperCase() :", this.keyword.toUpperCase());
     this.loadPDF();
   },
   methods: {
@@ -74,7 +75,7 @@ export default {
       /**
        * To bypass the details override the `pdf_details`
        */
-      if (this.keyword.toUpperCase() === "RECEIPT") {
+      if (this.keyword.toUpperCase() === "BUSINESSPERMIT_SAN_ANTONIO") {
         this.pdf_details = {
           business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
           business_no: "445433110",
@@ -116,7 +117,7 @@ export default {
           ]
         };
       }
-
+      console.log("this.pdf_details :", this.pdf_details);
       // Process PDF
       this.loading = true;
       try {

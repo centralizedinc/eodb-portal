@@ -82,7 +82,12 @@ export default {
   },
   computed: {
     dockets() {
-      return this.$store.state.dockets.dockets_outbox;
+      const dockets = JSON.parse(
+        JSON.stringify(this.$store.state.dockets.dockets_outbox)
+      );
+      return dockets.sort(
+        (a, b) => new Date(b.date_created) - new Date(a.date_created)
+      );
     },
     department() {
       return this.$store.state.admin_session.department;

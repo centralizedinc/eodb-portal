@@ -3,15 +3,8 @@
     <!-- Steps -->
     <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
-      <a-card
-        :bodyStyle="{ padding: '10px', height: '100%' }"
-        style="height: 100%;border: none;"
-      >
-        <a-steps
-          direction="vertical"
-          :current="current_step"
-          class="form-stepper"
-        >
+      <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
+        <a-steps direction="vertical" :current="current_step" class="form-stepper">
           <a-step
             v-for="(item, index) in steps"
             :key="index"
@@ -149,41 +142,35 @@
                   <span
                     v-if="checkErrors('mode_of_payment')"
                     style="color: red"
-                    >{{ checkErrors("mode_of_payment") }}</span
-                  >
+                  >{{ checkErrors("mode_of_payment") }}</span>
                 </a-col>
               </a-row>
 
               <a-row type="flex" align="middle">
-                <a-col style="font-weight: bold;" :span="24"
-                  >Payment Breakdown</a-col
-                >
+                <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
                 <template v-for="(item, index) in payments_data_source">
-                  <a-col :span="15" :key="`a${index}`" class="row-border">{{
+                  <a-col :span="15" :key="`a${index}`" class="row-border">
+                    {{
                     item.description
-                  }}</a-col>
+                    }}
+                  </a-col>
                   <a-col
                     :span="9"
                     :key="`b${index}`"
                     class="row-border"
                     style="text-align: right;"
-                    >{{ formatCurrency(item.amount) }}</a-col
-                  >
+                  >{{ formatCurrency(item.amount) }}</a-col>
                 </template>
-                <a-col
-                  :span="15"
-                  class="row-border"
-                  style="color: #333;background: #d7d7d7"
-                  >Total</a-col
-                >
+                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
                 <a-col
                   :span="9"
                   class="row-border"
                   style="text-align: right; color: #333;background: #d7d7d7"
-                  >{{
-                    formatCurrency(this.transaction_details.total_payable)
-                  }}</a-col
                 >
+                  {{
+                  formatCurrency(this.transaction_details.total_payable)
+                  }}
+                </a-col>
               </a-row>
             </a-card>
           </a-affix>
@@ -403,7 +390,7 @@ export default {
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
-          amount: 100
+          amount: 150
         }
       ],
       loading: false,
@@ -667,6 +654,12 @@ export default {
           errors.push({
             field: "personal_details.birthplace",
             error: "Birthplace is a required field."
+          });
+        }
+        if (!this.form.tax.taxable.basic) {
+          erros.push({
+            field: "tax.taxable.basic",
+            error: "Basic Community Tax is a required field."
           });
         }
         // if (!this.form.personal_details.height) {
