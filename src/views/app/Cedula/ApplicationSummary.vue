@@ -7,127 +7,140 @@
     <a-divider
       style="color: black;font-weight: bold;margin-top: 5vh"
       orientation="left"
-      >Part I. Personal Details</a-divider
-    >
+    >Part I. Personal Details</a-divider>
     <a-row class="summary-row">
       <a-col :span="8">Last Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{ form.personal_details.name.last }}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{ form.personal_details.name.last }}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">First Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{ form.personal_details.name.first }}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{ form.personal_details.name.first }}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Middle Name</a-col>
       <a-col :span="1">:</a-col>
       <!-- <a-col :span="15">{{ form.personal_details.name.middle }}</a-col> -->
-      <a-col :span="15">{{
-        form.personal_details.name.middle == null
-          ? " - "
-          : form.personal_details.name.middle
-      }}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">
+        {{
+        form.personal_details.name.middle == null || form.personal_details.name.suffix == "" || form.personal_details.name.suffix == undefined
+        ? " - "
+        : form.personal_details.name.middle
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Suffix</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{
-        form.personal_details.name.suffix == null
-          ? " - " || form.personal_details.name.suffix == ""
-          : form.personal_details.name.suffix
-      }}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">
+        {{
+        form.personal_details.name.suffix == null || form.personal_details.name.suffix == ""
+        ? " - "
+        : form.personal_details.name.suffix
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Birthday</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform:uppercase"
+      >{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{ form.personal_details.gender }}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{ form.personal_details.gender }}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Civil Status</a-col>
       <a-col :span="1">:</a-col>
       <!-- <a-col :span="15">{{form.personal_details.civil_status}}</a-col> -->
-      <a-col :span="15">{{
+      <a-col :span="15" style="text-transform:uppercase">
+        {{
         form.personal_details.civil_status == null ||
         form.personal_details.civil_status == ""
-          ? " - "
-          : form.personal_details.civil_status
-      }}</a-col>
+        ? " - "
+        : form.personal_details.civil_status
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Birthplace</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{ form.personal_details.birthplace }}</a-col>
+      <a-col :span="15" style="text-transform:uppercase">{{ form.personal_details.birthplace }}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">If other country</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{
+      <a-col :span="15" style="text-transform:uppercase">
+        {{
         form.personal_details.other_country == null ||
         form.personal_details.other_country == ""
-          ? " - "
-          : form.personal_details.other_country
-      }}</a-col>
+        ? " - "
+        : form.personal_details.other_country
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">ICR No. (if alien)</a-col>
       <a-col :span="1">:</a-col>
       <!-- <a-col :span="15">{{ form.personal_details.icr }}</a-col> -->
-      <a-col :span="15">{{
+      <a-col :span="15" style="text-transform:uppercase">
+        {{
         form.personal_details.icr == null || form.personal_details.icr == ""
-          ? " - "
-          : form.personal_details.icr
-      }}</a-col>
+        ? " - "
+        : form.personal_details.icr
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Height (cm)</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{
+      <a-col :span="15">
+        {{
         form.personal_details.height == null ||
         form.personal_details.height == ""
-          ? " - "
-          : form.personal_details.height
-      }}</a-col>
+        ? " - "
+        : form.personal_details.height
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Weight (kg)</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{
+      <a-col :span="15">
+        {{
         form.personal_details.weight == null ||
         form.personal_details.weight == ""
-          ? " - "
-          : form.personal_details.weight
-      }}</a-col>
+        ? " - "
+        : form.personal_details.weight
+        }}
+      </a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Occupation</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{
+      <a-col :span="15" style="text-transform:uppercase">
+        {{
         form.personal_details.occupation == null ||
         form.personal_details.occupation == ""
-          ? " - "
-          : form.personal_details.occupation
-      }}</a-col>
+        ? " - "
+        : form.personal_details.occupation
+        }}
+      </a-col>
     </a-row>
     <a-divider></a-divider>
     <a-row>
       <a-col :span="24">
-        <a-table
-          :columns="columns"
-          :dataSource="data"
-          :pagination="pagination"
-          :loading="loading"
-        >
+        <a-table :columns="columns" :dataSource="data" :pagination="pagination" :loading="loading">
           <template slot="taxable_amount" slot-scope="text, record, index">
             <span v-if="index > 1 && index < 5">Php {{ text }}</span>
           </template>
           <template slot="community_tax" slot-scope="text, record, index">
-            <span v-if="index == 0 || index > 1">Php {{ text }} </span>
+            <span v-if="index == 0 || index > 1">Php {{ text }}</span>
           </template>
         </a-table>
       </a-col>
@@ -137,17 +150,10 @@
       <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
         <a-button-group>
           <a-button @click="$emit('prev')">Previous</a-button>
-          <a-button type="primary" @click="$emit('payment')"
-            >Proceed to Payment</a-button
-          >
+          <a-button type="primary" @click="$emit('payment')">Proceed to Payment</a-button>
         </a-button-group>
       </a-col>
-      <a-col
-        :sm="{ span: 6 }"
-        :md="{ span: 12 }"
-        :xl="{ span: 18 }"
-        style="text-align: right;"
-      >
+      <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
         <a-button>Save Draft</a-button>
       </a-col>
     </a-row>
