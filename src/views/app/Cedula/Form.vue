@@ -390,7 +390,7 @@ export default {
         {
           description: "Convenience Fee",
           fee_type: "application_fee",
-          amount: 100
+          amount: 150
         }
       ],
       loading: false,
@@ -690,6 +690,12 @@ export default {
           errors.push({
             field: "personal_details.birthplace",
             error: "Birthplace is a required field."
+          });
+        }
+        if (!this.form.tax.taxable.basic) {
+          erros.push({
+            field: "tax.taxable.basic",
+            error: "Basic Community Tax is a required field."
           });
         }
         // if (!this.form.personal_details.height) {

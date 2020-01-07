@@ -10,7 +10,7 @@
         </a-card>
       </a-affix>
       <application-summary :form="app_form" :read-only="true" />
-    </div> -->
+    </div>-->
     <a-table :columns="cols" :dataSource="dockets" :loading="loading">
       <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
       <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
@@ -31,7 +31,26 @@
       </template>
     </a-table>
     <a-drawer :visible="show_summary" @close="show_summary=false" :width="800">
-      <application-summary :form="app_form" :read-only="true" />
+      <application-summary
+        :form="app_form"
+        v-if="app_form.permit_type=='business'"
+        :read-only="true"
+      />
+      <application-summary-brgy
+        :form="app_form"
+        :read-only="true"
+        v-if="app_form.permit_type=='barangay'"
+      ></application-summary-brgy>
+      <application-summary-police
+        :form="app_form"
+        :read-only="true"
+        v-if="app_form.permit_type=='police'"
+      ></application-summary-police>
+      <application-summary-cedula
+        :form="app_form"
+        :read-only="true"
+        v-if="app_form.permit_type=='cedula'"
+      ></application-summary-cedula>
     </a-drawer>
     <!-- <a-modal :visible="show_summary" :width="1200" @cancel="show_summary=false" :footer="null">
       <a-row>
@@ -45,11 +64,17 @@
 
 <script>
 import ApplicationSummary from "../../views/app/BusinessPermit/ApplicationSummary";
+import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary";
+import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary";
+import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary";
 
 export default {
   props: ["admin"],
   components: {
-    ApplicationSummary
+    ApplicationSummary,
+    ApplicationSummaryBrgy,
+    ApplicationSummaryPolice,
+    ApplicationSummaryCedula
   },
   data() {
     return {
@@ -121,6 +146,7 @@ export default {
         .then(app => {
           console.log("GET_APPLICATION_BY_REF app :", app);
           this.app_form = app;
+          console.log("app form: " + JSON.stringify(this.app_form));
           this.show_summary = true;
           this.loading_index = -1;
         })
