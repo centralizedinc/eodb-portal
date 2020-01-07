@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="cols" :dataSource="payments" :loading="loading">
+  <a-table :columns="cols" :dataSource="payments" :loading="loading || loading_payments">
     <span slot="amount_paid" slot-scope="text">{{formatCurrency(text)}}</span>
     <span slot="payment_for" slot-scope="text">{{getPermitType(text)}}</span>
     <span slot="method" slot-scope="text">{{getPermitMethod(text)}}</span>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  props: ["admin"],
+  props: ["admin", "loading_payments"],
   data() {
     return {
       loading: false,
@@ -58,17 +58,6 @@ export default {
         }
       ]
     };
-  },
-  created() {
-    this.loading = true;
-    this.$store
-      .dispatch("GET_PAYMENTS")
-      .then(result => {
-        this.loading = false;
-      })
-      .catch(err => {
-        this.loading = false;
-      });
   },
   computed: {
     payments() {

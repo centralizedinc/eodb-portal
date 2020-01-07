@@ -2,6 +2,12 @@
 const router = require("express").Router();
 
 var PermitDao = require('../dao/PermitDao');
+var BarangayPermitDao = require('../dao/BarangayPermitDao');
+var BusinessPermitDao = require('../dao/BusinessPermitDao');
+var CedulaPermitDao = require('../dao/CedulaPermitDao');
+var PolicePermitDao = require('../dao/PolicePermitDao');
+
+const jwt = require('jsonwebtoken');
 
 router.route('/')
     .get((req, res) => {
@@ -19,6 +25,23 @@ router.route('/')
             }).catch((errors) => {
                 res.json({ errors })
             });
+    })
+
+router.route('/records')
+    .get((req, res) => {
+        const { account_id } = jwt.decode(req.headers.access_token);
+        Promise.all([
+            BusinessPermitDao.find({ account_id }),
+            BarangayPermitDao.find({ account_id }),
+            PolicePermitDao.find({ account_id }),
+            CedulaPermitDao.find({ account_id })
+        ]).then((results) => {
+            var records = results.reduce((items, item) => items.concat(item));
+            records.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
+            res.json(records);
+        }).catch((err) => {
+            res.json({ errors })
+        });
     })
 
 router.route('/:id')
