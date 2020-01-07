@@ -268,7 +268,7 @@ export default {
           weight: "",
           icr_no: ""
         },
-        owner_address: {
+        residential_address: {
           bldg_no: "",
           unit_no: "",
           bldg_name: "",

@@ -72,7 +72,11 @@
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate" style="width: 100%;"></a-date-picker>
+            <a-date-picker
+              v-model="form.personal_details.birthday"
+              :disabledDate="disableDateInBirthdate"
+              style="width: 100%;"
+            ></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -85,8 +89,8 @@
               <i style="color: red">*</i>
             </span>
             <a-select v-model="form.personal_details.gender">
-              <a-select-option value="male">Male</a-select-option>
-              <a-select-option value="female">Female</a-select-option>
+              <a-select-option value="Male">Male</a-select-option>
+              <a-select-option value="Female">Female</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -94,10 +98,10 @@
           <a-form-item>
             <span slot="label">Civil Status</span>
             <a-select v-model="form.personal_details.civil_status">
-              <a-select-option value="single">Single</a-select-option>
-              <a-select-option value="married">Married</a-select-option>
-              <a-select-option value="widowed">Widowed</a-select-option>
-              <a-select-option value="separated">Separated</a-select-option>
+              <a-select-option value="Single">Single</a-select-option>
+              <a-select-option value="Married">Married</a-select-option>
+              <a-select-option value="Widowed">Widowed</a-select-option>
+              <a-select-option value="Separated">Separated</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -248,7 +252,7 @@
               CTC No.
               <i style="color: red">*</i>
             </span>
-            
+
             <a-input v-model="form.personal_details.ctc_no"></a-input>
           </a-form-item>
         </a-col>
