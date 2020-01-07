@@ -18,6 +18,7 @@
       <a-col :span="1">:</a-col>
       <a-col :span="15" style="text-transform:uppercase">{{ form.personal_details.name.first }}</a-col>
     </a-row>
+
     <a-row class="summary-row">
       <a-col :span="8">Middle Name</a-col>
       <a-col :span="1">:</a-col>
@@ -99,7 +100,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Height (cm)</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">
+      <a-col :span="15" style="text-transform:uppercase">
         {{
         form.personal_details.height == null ||
         form.personal_details.height == ""
@@ -111,7 +112,7 @@
     <a-row class="summary-row">
       <a-col :span="8">Weight (kg)</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">
+      <a-col :span="15" style="text-transform:uppercase">
         {{
         form.personal_details.weight == null ||
         form.personal_details.weight == ""
