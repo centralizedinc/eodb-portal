@@ -91,6 +91,57 @@ const actions = {
                 });
         })
     },
+    SAVE_CEDULA_EPERMIT_ATTACHMENT(context, { cedula_no, form_data }) {
+        console.log('#########  cedula_no :', cedula_no);
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.rootState.user_session.token).uploadPermitDocument(cedula_no, form_data)
+                .then((result) => {
+                    console.log('result.data :', result.data);
+                    if (result) return new PermitsAPI(context.rootState.user_session.token)
+                        .updatePermitByCedulaNo(cedula_no, { attachment: result.data.location })
+                })
+                .then((result) => {
+                    resolve(result);
+                }).catch((err) => {
+                    console.log('SAVE_CEDULA_EPERMIT_ATTACHMENT err :', err);
+                    reject(err)
+                });
+        })
+    },
+    SAVE_BARANGAY_EPERMIT_ATTACHMENT(context, { barangay_no, form_data }) {
+        console.log('#########  barangay_no :', barangay_no);
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.rootState.user_session.token).uploadPermitDocument(barangay_no, form_data)
+                .then((result) => {
+                    console.log('result.data :', result.data);
+                    if (result) return new PermitsAPI(context.rootState.user_session.token)
+                        .updatePermitByBarangayNo(barangay_no, { attachment: result.data.location })
+                })
+                .then((result) => {
+                    resolve(result);
+                }).catch((err) => {
+                    console.log('SAVE_BARANGAY_EPERMIT_ATTACHMENT err :', err);
+                    reject(err)
+                });
+        })
+    },
+    SAVE_POLICE_EPERMIT_ATTACHMENT(context, { police_no, form_data }) {
+        console.log('#########  police_no :', police_no);
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.rootState.user_session.token).uploadPermitDocument(police_no, form_data)
+                .then((result) => {
+                    console.log('result.data :', result.data);
+                    if (result) return new PermitsAPI(context.rootState.user_session.token)
+                        .updatePermitByPoliceNo(police_no, { attachment: result.data.location })
+                })
+                .then((result) => {
+                    resolve(result);
+                }).catch((err) => {
+                    console.log('SAVE_POLICE_EPERMIT_ATTACHMENT err :', err);
+                    reject(err)
+                });
+        })
+    },
     CREATE_BUSINESS_PERMIT(context, { details, files }) {
         return new Promise((resolve, reject) => {
             var application = {};

@@ -17,7 +17,7 @@
     </a-col>
 
     <!-- Fill up form -->
-    <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
+    <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
       <h1 style="margin-top: 5vh;">Barangay/Business Clearance Application</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
@@ -32,6 +32,7 @@
             :loading="loading"
             :errors="errors"
             :documents="document_data_source"
+            @selectPurpose="onSelectPurpose"
           />
         </a-col>
         <!-- Attachments -->
@@ -178,7 +179,7 @@
       :show="show_payment"
       @pay="proceedToSubmit"
       @close="show_payment = false"
-      :payment_amount="installment ? installment.amount : total_payable"
+      :payment_amount="total_payable"
     />
   </a-row>
 </template>
@@ -206,12 +207,12 @@ export default {
       current_step: 0,
       form_components: [
         // ApplicationChecklist,
-        Purpose,
-        PersonalDetails,
-        BusinessDetails,
-        ApplicationSummary
+        "Purpose",
+        "PersonalDetails",
+        "ApplicationSummary"
       ],
       form: {
+        purpose: [],
         application_type: 0,
         permit_type: "barangay",
         residential_address: {
@@ -314,11 +315,6 @@ export default {
           description:
             "Details about the applicant, such as  name, address and other personal information"
         },
-        {
-          title: "Business Details",
-          description:
-            "For business permit applicants, this section must be filled in. It includes important details such as name, address and nature of business."
-        },
         // {
         //   title: "Additional Fields",
         //   description:
@@ -335,6 +331,11 @@ export default {
             "Pay application through Credit Card, Over-the-counter or at any 7-eleven outlets."
         }
       ],
+      business_step: {
+        title: "Business Details",
+        description:
+          "For business permit applicants, this section must be filled in. It includes important details such as name, address and nature of business."
+      },
       transaction_details: {
         total_payable: 5000,
         amount_payable: 0,
@@ -483,6 +484,21 @@ export default {
     // this.updateDocsPayment();
   },
   methods: {
+    onSelectPurpose() {
+      if (
+        this.form.purpose.includes("bp") &&
+        this.steps.findIndex(v => v.title === this.business_step.title) === -1
+      ) {
+        this.steps.splice(2, 0, this.business_step);
+        this.form_components.splice(2, 0, "BusinessDetails");
+      } else if (
+        !this.form.purpose.includes("bp") &&
+        this.steps.findIndex(v => v.title === this.business_step.title) > -1
+      ) {
+        this.steps.splice(2, 1);
+        this.form_components.splice(2, 1);
+      }
+    },
     init() {
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
@@ -490,9 +506,11 @@ export default {
       this.form.personal_details.name = data.name;
     },
     prev_step() {
-      if (this.form.purpose[0] == "pc" && this.current_step == 3) {
-        this.current_step--;
-      }
+      // if (this.current_step == 3) {
+      //   if (this.form.purpose.includes("bp")) {
+      //     this.current_step--;
+      //   } else this.current_step -= 2;
+      // } else
       this.current_step--;
     },
     validateStep(validate_all) {
@@ -518,13 +536,18 @@ export default {
 
       // if there is no errors
       if (!errors.length) {
-        if (this.current_step === 3) {
+        if (
+          this.current_step === 3 ||
+          (!this.form.purpose.includes("bp") && this.current_step === 2)
+        ) {
           this.show_payment = true;
           // Proceed to payment
         } else {
-          if (this.form.purpose[0] == "pc" && this.current_step == 1) {
-            this.current_step++;
-          }
+          // if (this.current_step == 1) {
+          //   if (this.form.purpose.includes("bp")) {
+          //     this.current_step++;
+          //   } else this.current_step += 2;
+          // } else
           this.current_step++;
           window.scrollTo(0, 0);
         }
@@ -717,12 +740,12 @@ export default {
             error: "Gender is a required field."
           });
         }
-        if (!this.form.personal_details.civil_status) {
-          errors.push({
-            field: "personal_details.civil_status",
-            error: "Civil Status is a required field."
-          });
-        }
+        // if (!this.form.personal_details.civil_status) {
+        //   errors.push({
+        //     field: "personal_details.civil_status",
+        //     error: "Civil Status is a required field."
+        //   });
+        // }
         if (!this.form.personal_details.ctc_no) {
           errors.push({
             field: "personal_details.ctc_no",
@@ -747,35 +770,37 @@ export default {
         //     error: "Email Address is a required field."
         //   });
         // }
-        if (!this.form.residential_address.region) {
-          errors.push({
-            field: "residential_address.region",
-            error: "Region is a required field."
-          });
-        }
-        if (!this.form.residential_address.province) {
-          errors.push({
-            field: "residential_address.province",
-            error: "Province is a required field."
-          });
-        }
-        if (!this.form.residential_address.barangay) {
-          errors.push({
-            field: "residential_address.barangay",
-            error: "Barangay is a required field."
-          });
-        }
-        if (!this.form.residential_address.city) {
-          errors.push({
-            field: "residential_address.city",
-            error: "City/Municipality is a required field."
-          });
-        }
-        if (!this.form.residential_address.postal_code) {
-          errors.push({
-            field: "residential_address.postal_code",
-            error: "Postal Code is a required field."
-          });
+        if (this.form.purpose.includes("pc")) {
+          if (!this.form.residential_address.region) {
+            errors.push({
+              field: "residential_address.region",
+              error: "Region is a required field."
+            });
+          }
+          if (!this.form.residential_address.province) {
+            errors.push({
+              field: "residential_address.province",
+              error: "Province is a required field."
+            });
+          }
+          if (!this.form.residential_address.barangay) {
+            errors.push({
+              field: "residential_address.barangay",
+              error: "Barangay is a required field."
+            });
+          }
+          if (!this.form.residential_address.city) {
+            errors.push({
+              field: "residential_address.city",
+              error: "City/Municipality is a required field."
+            });
+          }
+          if (!this.form.residential_address.postal_code) {
+            errors.push({
+              field: "residential_address.postal_code",
+              error: "Postal Code is a required field."
+            });
+          }
         }
 
         // if (
@@ -801,8 +826,8 @@ export default {
         if (errors.length) jump_to = 1;
       }
       if (
-        validate_all ||
-        (this.current_step === 2 && this.form.purpose[0] != "pc")
+        (validate_all || this.current_step === 2) &&
+        this.form.purpose.includes("bp")
       ) {
         // if (!this.form.business_details.business_type) {
         //   errors.push({
@@ -905,18 +930,18 @@ export default {
         }
         if (errors.length) jump_to = 2;
       }
-      if (validate_all || this.current_step === 2) {
-        // if (
-        //   !this.form.business_details.line_of_business ||
-        //   !this.form.business_details.line_of_business.length
-        // ) {
-        //   errors.push({
-        //     field: "business_details.line_of_business",
-        //     error: "Add atleast one line of business"
-        //   });
-        //   jump_to = 2;
-        // }
-      }
+      // if (validate_all || this.current_step === 2) {
+      //   if (
+      //     !this.form.business_details.line_of_business ||
+      //     !this.form.business_details.line_of_business.length
+      //   ) {
+      //     errors.push({
+      //       field: "business_details.line_of_business",
+      //       error: "Add atleast one line of business"
+      //     });
+      //     jump_to = 2;
+      //   }
+      // }
 
       if (
         validate_all &&
@@ -930,7 +955,7 @@ export default {
           error: "Please attach the required documents."
         });
         this.$message.error("Please attach the required documents");
-        jump_to = 3;
+        // jump_to = 2;
       }
 
       // Validate Mode of Payment
@@ -940,7 +965,7 @@ export default {
           error: "Please choose mode of payment."
         });
         this.$message.error("Please choose mode of payment.");
-        jump_to = 4;
+        // jump_to = 2;
       }
       return { errors, jump_to };
     }
@@ -992,5 +1017,10 @@ export default {
   border: 0.5px solid #888;
   font-size: 12px;
   font-weight: 600;
+}
+
+.fill-up-form .ant-input,
+.fill-up-form .ant-form-item-control-wrapper {
+  text-transform: uppercase;
 }
 </style>

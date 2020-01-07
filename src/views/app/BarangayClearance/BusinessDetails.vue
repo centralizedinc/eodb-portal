@@ -21,8 +21,21 @@
         <a-input v-model="form.business_details.business_name"></a-input>
       </a-form-item>
 
-      <a-form-item label="Business Type" style="font-weight: bold">
-        <a-input v-model="form.business_details.business_type"></a-input>
+      <a-form-item
+        style="font-weight: bold;"
+        :validate-status="checkErrors('business_details.business_type') ? 'error': ''"
+        :help="checkErrors('business_details.business_type')"
+      >
+        <span slot="label">
+          Business Type
+          <i style="color: red">*</i>
+        </span>
+        <a-radio-group buttonStyle="solid" v-model="form.business_details.business_type">
+          <a-radio-button value="SP">Single Proprietorship</a-radio-button>
+          <a-radio-button value="P">Partnership</a-radio-button>
+          <a-radio-button value="CE">Cooperative</a-radio-button>
+          <a-radio-button value="CN">Corporation</a-radio-button>
+        </a-radio-group>
       </a-form-item>
 
       <a-form-item label="Trade Name/Franchise" style="font-weight: bold">
@@ -34,7 +47,7 @@
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
       >Business Address</a-divider>
-      <a-form-item>
+      <a-form-item v-if="form.purpose.includes('pc')">
         <a-checkbox @change="resetRentedData">Check if the address is the same as residential</a-checkbox>
       </a-form-item>
       <a-row :gutter="15" style="font-weight: bold;">
@@ -261,9 +274,9 @@
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
+        </a-col> -->
       </a-row>
     </a-form>
   </a-card>
@@ -283,54 +296,38 @@ export default {
       barangays: []
     };
   },
-  // created() {
-  //   if (this.fixed_address) {
-  //     this.form.business_address.region = "04";
-  //     // this.changeRegion();
-  //     this.form.business_address.province = "0456";
-  //     // this.changeProvince();
-  //     this.form.business_address.city = "045641";
-  //     // this.changeCity();
+  created() {
+    console.log('this.fixed_address :', this.fixed_address);
+    if (this.fixed_address) {
+      this.form.business_address.region = "04";
+      // this.changeRegion();
+      this.form.business_address.province = "0456";
+      // this.changeProvince();
+      this.form.business_address.city = "045641";
+      // this.changeCity();
 
-  //     this.form.business_address.rental_address.region = "04";
-  //     // this.changeRentalRegion();
-  //     this.form.business_address.rental_address.province = "0456";
-  //     // this.changeRentalProvince();
-  //     this.form.business_address.rental_address.city = "045641";
-  //     // this.changeRentalCity();
-
-  //     import(
-  //       `../../../assets/references/cities/${this.form.business_address.province}.json`
-  //     )
-  //       .then(data => {
-  //         this.cities = data.default;
-  //         return import(
-  //           `../../../assets/references/barangay/${this.form.business_address.city}.json`
-  //         );
-  //       })
-  //       .then(data => {
-  //         this.barangays = data.default;
-  //         return import(
-  //           `../../../assets/references/cities/${this.form.business_address.rental_address.province}.json`
-  //         );
-  //       })
-  //       .then(data => {
-  //         this.rental_cities = data.default;
-  //         console.log("this.rental_cities :", this.rental_cities);
-  //         return import(
-  //           `../../../assets/references/barangay/${this.form.business_address.rental_address.city}.json`
-  //         );
-  //       })
-  //       .then(data => {
-  //         this.rental_barangays = data.default;
-  //         console.log("this.rental_barangays :", this.rental_barangays);
-  //       });
-  //   }
-  //   if (this.fixed_postal) {
-  //     this.form.business_address.postal_code = "4324";
-  //     this.form.business_address.rental_address.postal_code = "4324";
-  //   }
-  // },
+      import(
+        `../../../assets/references/cities/${this.form.business_address.province}.json`
+      )
+        .then(data => {
+          this.cities = data.default;
+          console.log('###### this.cities :', this.cities);
+          return import(
+            `../../../assets/references/barangay/${this.form.business_address.city}.json`
+          );
+        })
+        .then(data => {
+          this.barangays = data.default;
+          console.log('##### barangays data :', data);
+        })
+        .catch((errors) => {
+          console.log('### errors :', errors);
+        })
+    }
+    if (this.fixed_postal) {
+      this.form.business_address.postal_code = "4324";
+    }
+  },
   computed: {
     regions() {
       console.log("regions_data: " + JSON.stringify(this.regions_data));
@@ -438,6 +435,9 @@ export default {
         data[code].toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
         data[description].toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       );
+    },
+    resetRentedData(){
+      this.form.business_address = JSON.parse(JSON.stringify(this.form.residential_address));
     }
   }
 };

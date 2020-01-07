@@ -74,7 +74,10 @@ export default {
       return this.$store.state.dockets.departments;
     },
     docket_activities() {
-      return this.$store.state.dockets.docket_activities;
+      const sorted_activities = this.$store.state.dockets.docket_activities.sort(
+        (a, b) => new Date(b.date_created) - new Date(a.date_created)
+      );
+      return sorted_activities;
     }
   },
   created() {

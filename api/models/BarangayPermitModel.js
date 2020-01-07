@@ -30,6 +30,7 @@ var BarangayPermitSchema = new mongoose.Schema({
     application_type: {
         type: String //new || renewal
     },
+    purpose: [],
     personal_details: {
         name: {
             first: {

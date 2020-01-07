@@ -105,17 +105,40 @@ export default {
           transaction_no: "1234567890",
           date: new Date(),
           payor: "Juan Delacruz",
-          payment_breakdown: [
-            {
-              description: "Application Fee",
-              amount: 1000
-            },
-            {
-              description: "Convenience Fee",
-              amount: 150
-            }
-          ]
-        };
+          payment_breakdown: [{
+            description: "Application Fee",
+            amount: 1000
+          },{
+            description: "Convenience Fee",
+            amount: 150
+          }]
+        }
+      } else if(this.keyword.toUpperCase() === 'POLICECLEARANCE'){
+        this.pdf_details = {
+          police_no: "B 851852",
+          name: "Antonio Basas",
+          address: "San Antonio Quezon",
+          birth_date: "04/28/1984",
+          birth_place: "Marawi",
+          findings: "NO DEROGATORY RECORD / INFORMATION",
+          purpose: "INTERNATIONAL PASSPORT",
+          validity: "Six Months (6) from the Date of Issuance",
+          ctc_no: "2178545655",
+          date_created: new Date(),
+          verified_by_first: "Senior Police Officer Cesar Advincula",
+          verified_by_second: "Police Senior Inspector Godfrey Rivera"
+        }
+      } else if(this.keyword.toUpperCase() === 'BGYCLEARANCE'){
+        this.pdf_details = {
+          business_name: "Dell Laptop Inc.",
+          business_owner: "Godfrey Rivera",
+          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          business_nature: "Information Technology",
+          requestor: "Mark Quijom",
+          date_created: new Date()
+        }
+      } else if(this.keyword.toUpperCase() === 'CEDULA'){
+        this.pdf_details = {}
       }
       console.log("this.pdf_details :", this.pdf_details);
       // Process PDF

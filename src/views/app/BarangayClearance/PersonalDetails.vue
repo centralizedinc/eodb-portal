@@ -83,7 +83,7 @@
               Date of Birth
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" style="width: 100%;"></a-date-picker>
+            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate" style="width: 100%;"></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -95,7 +95,7 @@
               Place of Birth
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.personal_details.birthplace" placeholder="Enter Municipality"></a-input>
+            <a-input v-model="form.personal_details.birthplace" placeholder="Enter Birth Place"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -116,15 +116,7 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 15 }">
-          <a-form-item
-            style="font-weight: bold;"
-            :validate-status="checkErrors('personal_details.civil_status') ? 'error': ''"
-            :help="checkErrors('personal_details.civil_status')"
-          >
-            <span slot="label">
-              Civil Status
-              <i style="color: red">*</i>
-            </span>
+          <a-form-item style="font-weight: bold;" label="Civil Status">
             <a-radio-group v-model="form.personal_details.civil_status" buttonStyle="solid">
               <a-radio-button value="single">Single</a-radio-button>
               <a-radio-button value="married">Married</a-radio-button>
@@ -152,130 +144,131 @@
         </a-col>
       </a-row>
 
-      <!-- Owner Address -->
-      <a-divider
-        style="color: black;font-weight: bold;margin-top: 5vh"
-        orientation="left"
-      >Residential Address</a-divider>
-      <a-row :gutter="15" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-          <a-row :gutter="5">
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-              <a-form-item
-                :validate-status="checkErrors('residential_address.bldg_no') ? 'error': ''"
-                :help="checkErrors('residential_address.bldg_no')"
-                label="House/Bldg No"
-              >
-                <a-input v-model="form.residential_address.bldg_no"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-              <a-form-item
-                :validate-status="checkErrors('residential_address.unit_no') ? 'error': ''"
-                :help="checkErrors('residential_address.unit_no')"
-                label="Unit No"
-              >
-                <a-input v-model="form.residential_address.unit_no"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="24">
-              <a-form-item
-                :validate-status="checkErrors('residential_address.bldg_name') ? 'error': ''"
-                :help="checkErrors('residential_address.bldg_name')"
-                label="Building Name"
-              >
-                <a-input v-model="form.residential_address.bldg_name"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="24">
-              <a-form-item
-                :validate-status="checkErrors('residential_address.street') ? 'error': ''"
-                :help="checkErrors('residential_address.street')"
-                label="Street"
-              >
-                <a-input v-model="form.residential_address.street"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :span="24">
-              <a-form-item
-                :validate-status="checkErrors('residential_address.subd') ? 'error': ''"
-                :help="checkErrors('residential_address.subd')"
-                label="Subdivision"
-              >
-                <a-input v-model="form.residential_address.subd"></a-input>
-              </a-form-item>
-            </a-col>
-          </a-row>
-        </a-col>
-        <!-- Map -->
-        <a-col :xs="{ span: 24 }" :sm="{ span: 14 }">
-          <GmapMap
-            id="map"
-            ref="map"
-            :center="{ lat: 13.960837, lng: 121.591532 }"
-            :zoom="16"
-            map-type-id="terrain"
-            draggable="true"
-            style="width: 100%; height: 300px"
-            :options="{
+      <!-- Residential Address -->
+      <template v-if="form.purpose.includes('pc')">
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Residential Address</a-divider>
+        <a-row :gutter="15" style="font-weight: bold;">
+          <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
+            <a-row :gutter="5">
+              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+                <a-form-item
+                  :validate-status="checkErrors('residential_address.bldg_no') ? 'error': ''"
+                  :help="checkErrors('residential_address.bldg_no')"
+                  label="House/Bldg No"
+                >
+                  <a-input v-model="form.residential_address.bldg_no"></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+                <a-form-item
+                  :validate-status="checkErrors('residential_address.unit_no') ? 'error': ''"
+                  :help="checkErrors('residential_address.unit_no')"
+                  label="Unit No"
+                >
+                  <a-input v-model="form.residential_address.unit_no"></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :span="24">
+                <a-form-item
+                  :validate-status="checkErrors('residential_address.bldg_name') ? 'error': ''"
+                  :help="checkErrors('residential_address.bldg_name')"
+                  label="Building Name"
+                >
+                  <a-input v-model="form.residential_address.bldg_name"></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :span="24">
+                <a-form-item
+                  :validate-status="checkErrors('residential_address.street') ? 'error': ''"
+                  :help="checkErrors('residential_address.street')"
+                  label="Street"
+                >
+                  <a-input v-model="form.residential_address.street"></a-input>
+                </a-form-item>
+              </a-col>
+              <a-col :span="24">
+                <a-form-item
+                  :validate-status="checkErrors('residential_address.subd') ? 'error': ''"
+                  :help="checkErrors('residential_address.subd')"
+                  label="Subdivision"
+                >
+                  <a-input v-model="form.residential_address.subd"></a-input>
+                </a-form-item>
+              </a-col>
+            </a-row>
+          </a-col>
+          <!-- Map -->
+          <a-col :xs="{ span: 24 }" :sm="{ span: 14 }">
+            <GmapMap
+              id="map"
+              ref="map"
+              :center="{ lat: 13.960837, lng: 121.591532 }"
+              :zoom="16"
+              map-type-id="terrain"
+              draggable="true"
+              style="width: 100%; height: 300px"
+              :options="{
               mapTypeControl: false,
               scaleControl: false,
               streetViewControl: false,
               rotateControl: false
             }"
-          ></GmapMap>
-        </a-col>
-      </a-row>
-      <a-row style="font-weight: bold; margin-top: 1vh;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item
-            :validate-status="
+            ></GmapMap>
+          </a-col>
+        </a-row>
+        <a-row style="font-weight: bold; margin-top: 1vh;" :gutter="5">
+          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-form-item
+              :validate-status="
               checkErrors('residential_address.region') ? 'error' : ''
             "
-            :help="checkErrors('residential_address.region')"
-          >
-            <span slot="label">
-              Region
-              <i style="color: red">*</i>
-            </span>
-            <!-- <a-input v-model="form.residential_address.region"></a-input> -->
-            <a-select
-              v-model="form.residential_address.region"
-              showSearch
-              @change="changeRegion"
-              disabled
-              :filterOption="
+              :help="checkErrors('residential_address.region')"
+            >
+              <span slot="label">
+                Region
+                <i style="color: red">*</i>
+              </span>
+              <!-- <a-input v-model="form.residential_address.region"></a-input> -->
+              <a-select
+                v-model="form.residential_address.region"
+                showSearch
+                @change="changeRegion"
+                disabled
+                :filterOption="
                 (input, option) =>
                   filterReference(input, option, regions, 'regCode', 'regDesc')
               "
-            >
-              <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
-              <a-select-option
-                v-for="item in regions"
-                :key="item.regCode"
-                :value="item.regCode"
-              >{{ item.regDesc }}</a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item
-            :validate-status="
+              >
+                <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
+                <a-select-option
+                  v-for="item in regions"
+                  :key="item.regCode"
+                  :value="item.regCode"
+                >{{ item.regDesc }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-form-item
+              :validate-status="
               checkErrors('residential_address.province') ? 'error' : ''
             "
-            :help="checkErrors('residential_address.province')"
-          >
-            <span slot="label">
-              Province
-              <i style="color: red">*</i>
-            </span>
-            <!-- <a-input v-model="form.residential_address.province"></a-input> -->
-            <a-select
-              v-model="form.residential_address.province"
-              disabled
-              showSearch
-              @change="changeProvince"
-              :filterOption="
+              :help="checkErrors('residential_address.province')"
+            >
+              <span slot="label">
+                Province
+                <i style="color: red">*</i>
+              </span>
+              <!-- <a-input v-model="form.residential_address.province"></a-input> -->
+              <a-select
+                v-model="form.residential_address.province"
+                disabled
+                showSearch
+                @change="changeProvince"
+                :filterOption="
                 (input, option) =>
                   filterReference(
                     input,
@@ -285,34 +278,34 @@
                     'provDesc'
                   )
               "
+              >
+                <a-select-option :value="''" disabled>Select Province</a-select-option>
+                <a-select-option
+                  v-for="item in provinces"
+                  :key="item.provCode"
+                  :value="item.provCode"
+                >{{ item.provDesc }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row style="font-weight: bold" :gutter="5">
+          <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
+            <a-form-item
+              :validate-status="checkErrors('residential_address.city') ? 'error' : ''"
+              :help="checkErrors('residential_address.city')"
             >
-              <a-select-option :value="''" disabled>Select Province</a-select-option>
-              <a-select-option
-                v-for="item in provinces"
-                :key="item.provCode"
-                :value="item.provCode"
-              >{{ item.provDesc }}</a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row style="font-weight: bold" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-          <a-form-item
-            :validate-status="checkErrors('residential_address.city') ? 'error' : ''"
-            :help="checkErrors('residential_address.city')"
-          >
-            <span slot="label">
-              City/Municipality
-              <i style="color: red">*</i>
-            </span>
-            <!-- <a-input v-model="form.residential_address.city"></a-input> -->
-            <a-select
-              v-model="form.residential_address.city"
-              disabled
-              @change="changeCity"
-              showSearch
-              :filterOption="
+              <span slot="label">
+                City/Municipality
+                <i style="color: red">*</i>
+              </span>
+              <!-- <a-input v-model="form.residential_address.city"></a-input> -->
+              <a-select
+                v-model="form.residential_address.city"
+                disabled
+                @change="changeCity"
+                showSearch
+                :filterOption="
                 (input, option) =>
                   filterReference(
                     input,
@@ -322,32 +315,32 @@
                     'citymunDesc'
                   )
               "
-            >
-              <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
-              <a-select-option
-                v-for="item in cities"
-                :key="item.citymunCode"
-                :value="item.citymunCode"
-              >{{ item.citymunDesc }}</a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item
-            :validate-status="
+              >
+                <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
+                <a-select-option
+                  v-for="item in cities"
+                  :key="item.citymunCode"
+                  :value="item.citymunCode"
+                >{{ item.citymunDesc }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+            <a-form-item
+              :validate-status="
               checkErrors('residential_address.barangay') ? 'error' : ''
             "
-            :help="checkErrors('residential_address.barangay')"
-          >
-            <span slot="label">
-              Barangay
-              <i style="color: red">*</i>
-            </span>
-            <!-- <a-input v-model="form.residential_address.barangay"></a-input> -->
-            <a-select
-              v-model="form.residential_address.barangay"
-              showSearch
-              :filterOption="
+              :help="checkErrors('residential_address.barangay')"
+            >
+              <span slot="label">
+                Barangay
+                <i style="color: red">*</i>
+              </span>
+              <!-- <a-input v-model="form.residential_address.barangay"></a-input> -->
+              <a-select
+                v-model="form.residential_address.barangay"
+                showSearch
+                :filterOption="
                 (input, option) =>
                   filterReference(
                     input,
@@ -357,31 +350,33 @@
                     'brgyDesc'
                   )
               "
-            >
-              <a-select-option :value="''" disabled>Select Barangay</a-select-option>
-              <a-select-option
-                v-for="item in barangays"
-                :key="item.brgyCode"
-                :value="item.brgyCode"
-              >{{ item.brgyDesc }}</a-select-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-          <a-form-item
-            :validate-status="
+              >
+                <a-select-option :value="''" disabled>Select Barangay</a-select-option>
+                <a-select-option
+                  v-for="item in barangays"
+                  :key="item.brgyCode"
+                  :value="item.brgyCode"
+                >{{ item.brgyDesc }}</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
+            <a-form-item
+              :validate-status="
               checkErrors('residential_address.postal_code') ? 'error' : ''
             "
-            :help="checkErrors('residential_address.postal_code')"
-          >
-            <span slot="label">
-              Postal Code
-              <i style="color: red">*</i>
-            </span>
-            <a-input disabled v-model="form.residential_address.postal_code"></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
+              :help="checkErrors('residential_address.postal_code')"
+            >
+              <span slot="label">
+                Postal Code
+                <i style="color: red">*</i>
+              </span>
+              <a-input disabled v-model="form.residential_address.postal_code"></a-input>
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </template>
+
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
           <a-button-group>
@@ -389,9 +384,9 @@
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
+        </a-col> -->
       </a-row>
     </a-form>
   </a-card>

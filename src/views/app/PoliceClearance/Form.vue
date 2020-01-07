@@ -17,7 +17,7 @@
     </a-col>
 
     <!-- Fill up form -->
-    <a-col :xs="{ span: 24 }" :md="{ span: 18 }">
+    <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
       <h1 style="margin-top: 5vh;">Police Clearance Application</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
@@ -220,7 +220,8 @@ export default {
           identification_marks: "",
           complexion: "",
           educational_attainment: "",
-          occupation: ""
+          occupation: "",
+          ctc_no: ""
         },
         family_background: {
           father_info: {
@@ -733,6 +734,12 @@ export default {
             error: "Occupation is a required field."
           });
         }
+        if (!this.form.personal_details.ctc_no) {
+          errors.push({
+            field: "personal_details.ctc_no",
+            error: "CTC No is a required field."
+          });
+        }
 
         // if (
         //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
@@ -884,5 +891,10 @@ export default {
   border: 0.5px solid #888;
   font-size: 12px;
   font-weight: 600;
+}
+
+.fill-up-form .ant-input,
+.fill-up-form .ant-form-item-control-wrapper {
+  text-transform: uppercase;
 }
 </style>
