@@ -84,9 +84,9 @@ export default {
           plate_no: "1546238984",
           ownership_type: "SINGLE PROPRIETORSHIP",
           valid_until: new Date(2019, 11, 31),
-          area: "50 sq.m",
+          area: "5000000 sq.m",
           date_issued: new Date(2019, 3, 20),
-          application_type: "NEW",
+          application_type: "RENEWAL",
           mode_of_payment: "QUARTERLY",
           transaction_no: "115498845612848",
           transactions: [
