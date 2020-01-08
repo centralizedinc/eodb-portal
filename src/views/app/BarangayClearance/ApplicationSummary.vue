@@ -63,7 +63,7 @@
     <a-row class="summary-row" v-if="form.purpose.includes('pc')">
       <a-col :span="8">Address</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-trasndorm: uppercase">{{residential_address}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{residential_address}}</a-col>
     </a-row>
 
     <!-- Part II. Business Details -->
@@ -76,18 +76,18 @@
       <a-row class="summary-row">
         <a-col :span="8">Business Name</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15" style="text-trasndorm: uppercase">{{form.business_details.business_name}}</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{form.business_details.business_name}}</a-col>
       </a-row>
       <a-row class="summary-row">
         <a-col :span="8">Trade Name/Franchise</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15" style="text-trasndorm: uppercase">{{form.business_details.franchise}}</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{form.business_details.franchise}}</a-col>
       </a-row>
 
       <a-row class="summary-row">
         <a-col :span="8">Business Address</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15" style="text-trasndorm: uppercase">{{business_address}}</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{business_address}}</a-col>
       </a-row>
     </template>
 
