@@ -1,5 +1,10 @@
 <template>
   <div>
+    <a-row style="margin-bottom: 5px">
+      <a-col :span="8">
+        <a-input-search placeholder="Search by Reference No." v-model="search" />
+      </a-col>
+    </a-row>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
       <span
@@ -8,9 +13,9 @@
         :style="`color: ${getStatusColor(record)}; font-weight: bold;`"
       >{{getDepartmentStatus(record)}}</span>
       <span slot="mode" slot-scope="text">{{getDocketMode(text)}}</span>
-      <span slot="age" slot-scope="text" style="text-align:center">
-        <a-tooltip :title="computeAge(text).display">
-          <a-progress :percent="computeAge(text).percent" :showInfo="false"></a-progress>
+      <span slot="age" slot-scope="text, record" style="text-align:center">
+        <a-tooltip :title="computeAge(record.date_created).display">
+          <a-progress :percent="computeAge(record.date_created).percent" :showInfo="false"></a-progress>
         </a-tooltip>
       </span>
       <span slot="actions" slot-scope="text, record">
@@ -97,6 +102,7 @@
 export default {
   data() {
     return {
+      search: "",
       loading: false,
       visible: false,
       application_details: {
@@ -130,7 +136,7 @@ export default {
         },
         {
           title: "AGE",
-          dataIndex: "date_created",
+          dataIndex: "date_created_age",
           scopedSlots: { customRender: "age" }
         },
         {
@@ -146,9 +152,12 @@ export default {
   },
   computed: {
     dockets() {
-      const dockets = JSON.parse(
+      var dockets = JSON.parse(
         JSON.stringify(this.$store.state.dockets.dockets_inbox)
       );
+      if (this.search) {
+        dockets = dockets.filter(v => v.reference_no.indexOf(this.search) > -1);
+      }
       return dockets.sort(
         (a, b) => new Date(b.date_created) - new Date(a.date_created)
       );

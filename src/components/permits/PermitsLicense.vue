@@ -4,7 +4,7 @@
     <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
     <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
     <a-row slot="action" slot-scope="text, record">
-      <a-col :span="12">
+      <a-col :span="12" v-if="record.permit_type === 'business'" style="text-align: center;">
         <a-popconfirm
           title="Click PROCEED to redirect in Renewal Form."
           okText="Proceed"
@@ -16,7 +16,7 @@
           </a-tooltip>
         </a-popconfirm>
       </a-col>
-      <a-col :span="12">
+      <a-col :span="record.permit_type === 'business' ? 12 : 24" style="text-align: center;">
         <a-tooltip title="Print">
           <a-icon
             type="printer"
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  props: ["admin", "loading_permits"],
+  props: ["admin", "loading_permits", "search"],
   data() {
     return {
       loading: false,
@@ -61,9 +61,22 @@ export default {
   },
   computed: {
     permits() {
-      const permits = JSON.parse(
+      var permits = JSON.parse(
         JSON.stringify(this.$store.state.permits.permits_records)
       );
+      if (this.search) {
+        permits = permits.filter(permit => {
+          if (permit.permit_type === "business")
+            return permit.business_no.indexOf(this.search) > -1;
+          else if (permit.permit_type === "cedula")
+            return permit.cedula_no.indexOf(this.search) > -1;
+          else if (permit.permit_type === "barangay")
+            return permit.barangay_no.indexOf(this.search) > -1;
+          else if (permit.permit_type === "police")
+            return permit.police_no.indexOf(this.search) > -1;
+          return false;
+        });
+      }
       return permits.sort(
         (a, b) => new Date(b.date_created) - new Date(a.date_created)
       );
@@ -86,7 +99,7 @@ export default {
       );
     },
     print(record) {
-      window.open(record.epermit_attachment);
+      window.open(record.epermit_attachment.url);
       w.print();
     },
     getPermitNo(permit) {

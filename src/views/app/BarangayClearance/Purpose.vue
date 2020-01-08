@@ -60,27 +60,6 @@ export default {
       return form_error ? form_error.error : null;
     },
     onChange(data) {
-      // this.show_next = false;
-      // if (this.checkedList.length == 1) {
-      //   console.log("checklist greater than 0");
-      //   if (this.checkedList[0] == "b") {
-      //     this.checkedList = ["pc", "bp", "b"];
-      //   }
-      // } else if (this.checkedList.length >= 1) {
-      //   console.log("this.checklist: " + JSON.stringify(this.checkedList));
-      //   this.checkedList.forEach(element => {
-      //     if (element == "b") {
-      //       console.log("elment b: " + element);
-      //       this.checkedList = ["pc", "bp", "b"];
-      //     } else {
-      //       this.checkedList = [];
-      //     }
-      //   });
-      // } else if (this.checkedList) {
-      //   this.show_next = true;
-      // }
-      // if(this.form.purpose && this.form.purpose.length) this.show_next = true;
-      // this.form.purpose = this.checkedList;
       this.$emit("selectPurpose");
       console.log("onChange data: " + JSON.stringify(this.form.purpose));
     }

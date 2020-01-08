@@ -28,15 +28,20 @@
             <a-icon type="snippets"></a-icon>Attachments
           </span>
           <a-card
-            @click="view(item.epermit_attachment)"
             v-for="item in form.attachments"
             :key="item.doc_type"
             style="margin-top: 2px; text-align: center"
           >
             <div v-for="file in item.files" :key="file">
               <!-- {{file}} -->
-              <!-- <img :src="file" style="width: 100%;" /> -->
-              <pdf :src="file" style="cursor:zoom; width: 100%"></pdf>
+              <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
+              <img v-if="file.type.indexOf('image') > -1" :src="file.url" style="width: 100%;" />
+              <pdf
+                v-else-if="file.type==='application/pdf'"
+                :src="file.url"
+                style="cursor:zoom; width: 100%"
+              ></pdf>
+              <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
             </div>
           </a-card>
         </a-tab-pane>

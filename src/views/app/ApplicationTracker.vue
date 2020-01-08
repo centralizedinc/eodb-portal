@@ -7,8 +7,16 @@
       <a-divider class="permit-divider" />
     </a-col>
     <a-col :span="24">
+      <a-row style="margin-bottom: 5px">
+        <a-col :span="8">
+          <a-input-search placeholder="Search by Reference No." v-model="search" />
+        </a-col>
+        <a-col :span="2" :push="13">
+          <a-button type="primary" @click="init(true)" icon="reload">Refresh</a-button>
+        </a-col>
+      </a-row>
       <a-card :bodyStyle="{ padding: 0 }" class="permits-tables">
-        <applied />
+        <applied :loading="loading" :search="search" />
       </a-card>
     </a-col>
   </a-row>
@@ -23,9 +31,26 @@ export default {
   },
   data() {
     return {
+      loading: false,
+      search: ""
     };
   },
-  methods: {}
+  created() {
+    this.init();
+  },
+  methods: {
+    init(refresh) {
+      this.loading = true;
+      this.$store
+        .dispatch("GET_DOCKETS", refresh)
+        .then(result => {
+          this.loading = false;
+        })
+        .catch(err => {
+          this.loading = false;
+        });
+    }
+  }
 };
 </script>
 

@@ -60,7 +60,7 @@ router.route('/epermit/:cedula_no')
             });
     })
     .post((req, res) => {
-        CedulaPermitDao.modifyOne({ cedula_no: req.params.cedula_no }, { epermit_attachment: req.body.attachment })
+        CedulaPermitDao.modifyOne({ cedula_no: req.params.cedula_no }, { epermit_attachment: req.body })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {

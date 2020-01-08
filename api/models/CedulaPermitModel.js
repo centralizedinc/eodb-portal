@@ -122,11 +122,30 @@ var CedulaPermitSchema = new mongoose.Schema({
         doc_type: {
             type: String
         },
-        files: []
+        files: [{
+            url: {
+                type: String
+            },
+            type: {
+                type: String
+            }
+        }]
     }],
-    compliance_attachments: [],
+    compliance_attachments: [{
+        url: {
+            type: String
+        },
+        type: {
+            type: String
+        }
+    }],
     epermit_attachment: {
-        type: String
+        url: {
+            type: String
+        },
+        type: {
+            type: String
+        }
     }
 })
 

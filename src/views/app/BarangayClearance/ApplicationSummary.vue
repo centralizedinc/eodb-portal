@@ -60,37 +60,36 @@
       <a-col :span="15" style="text-transform: uppercase">{{form.personal_details.ctc_no}}</a-col>
     </a-row>
 
-    <a-row class="summary-row">
+    <a-row class="summary-row" v-if="form.purpose.includes('pc')">
       <a-col :span="8">Address</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-trasndorm: uppercase">{{residential_address}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{residential_address}}</a-col>
     </a-row>
 
     <!-- Part II. Business Details -->
-    <a-divider
-      style="color: black;font-weight: bold;margin-top: 5vh"
-      orientation="left"
-    >Part II. Business Details</a-divider>
+    <template v-if="form.purpose.includes('bp')">
+      <a-divider
+        style="color: black;font-weight: bold;margin-top: 5vh"
+        orientation="left"
+      >Part II. Business Details</a-divider>
 
-    <a-row class="summary-row">
-      <a-col :span="8">Business Name</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform: uppercase">{{form.business_details.business_name}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Trade Name/Franchise</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-        style="text-transform: uppercase"
-      >{{form.business_details.franchise == null || form.business_details.franchise == "" ? "-" : form.business_details.franchise}}</a-col>
-    </a-row>
+      <a-row class="summary-row">
+        <a-col :span="8">Business Name</a-col>
+        <a-col :span="1">:</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{form.business_details.business_name}}</a-col>
+      </a-row>
+      <a-row class="summary-row">
+        <a-col :span="8">Trade Name/Franchise</a-col>
+        <a-col :span="1">:</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{form.business_details.franchise}}</a-col>
+      </a-row>
 
-    <a-row class="summary-row">
-      <a-col :span="8">Business Address</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform: uppercase">{{business_address}}</a-col>
-    </a-row>
+      <a-row class="summary-row">
+        <a-col :span="8">Business Address</a-col>
+        <a-col :span="1">:</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{business_address}}</a-col>
+      </a-row>
+    </template>
 
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly">
       <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
@@ -138,9 +137,6 @@ export default {
           dataIndex: "non_essential"
         }
       ],
-      owner_address: "",
-      business_address: "",
-      rental_address: "",
       residential_address: "",
       business_address: ""
     };
@@ -158,7 +154,7 @@ export default {
     }
   },
   created() {
-    this.getRentalAddress();
+    console.log('this.form :', this.form);
     this.getBusinessAddress();
     this.getOwnerAddress();
   },
@@ -183,7 +179,7 @@ export default {
         city,
         region,
         postal_code
-      } = this.form.owner_address;
+      } = this.form.residential_address;
       var city_desc = "";
       import(`../../../assets/references/cities/${province}.json`)
         .then(data => {
@@ -208,7 +204,7 @@ export default {
           if (city) result_address += ` ${city_desc}`;
           if (region) result_address += `, ${this.getRegionByCode(region)}`;
           if (postal_code) result_address += `, ${postal_code}`;
-          this.owner_address = result_address.toUpperCase();
+          this.residential_address = result_address.toUpperCase();
         });
     },
     getBusinessAddress() {
@@ -249,49 +245,6 @@ export default {
           if (region) result_address += `, ${this.getRegionByCode(region)}`;
           if (postal_code) result_address += `, ${postal_code}`;
           this.business_address = result_address.toUpperCase();
-        });
-    },
-    getRentalAddress() {
-      const {
-        unit_no,
-        bldg_no,
-        bldg_name,
-        subdivision,
-        street,
-        barangay,
-        province,
-        city,
-        region,
-        postal_code
-      } = this.form.business_address.rental_address;
-      var city_desc = "";
-      import(`../../../assets/references/cities/${province}.json`)
-        .then(data => {
-          const cities = data.default;
-          var city_data = cities.find(v => v.citymunCode === city);
-          city_desc = city_data.citymunDesc;
-          return import(`../../../assets/references/barangay/${city}.json`);
-        })
-        .then(data => {
-          const barangays = data.default;
-          var brgy_data = barangays.find(v => v.brgyCode === barangay);
-          var brgy_desc = brgy_data.brgyDesc;
-          var result_address = "";
-          if (unit_no) result_address += `Unit ${unit_no},`;
-          if (bldg_no) result_address += ` ${bldg_no}`;
-          if (bldg_name) result_address += ` ${bldg_name}`;
-          if (subdivision) result_address += ` ${subdivision}`;
-          if (street) result_address += ` ${street}`;
-          if (barangay) result_address += ` ${brgy_desc}`;
-          if (province)
-            result_address += ` ${this.getProvinceByCode(province)}`;
-          if (city) result_address += ` ${city_desc}`;
-          if (region) result_address += `, ${this.getRegionByCode(region)}`;
-          if (postal_code) result_address += `, ${postal_code}`;
-          this.rental_address = result_address.toUpperCase();
-        })
-        .catch(err => {
-          console.log("err :", err);
         });
     },
     getBusinessType(type) {

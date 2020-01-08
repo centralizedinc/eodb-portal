@@ -80,7 +80,9 @@
             </span>
             <a-date-picker
               v-model="form.personal_details.birthday"
-              :disabledDate="disableDateInBirthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
+              :showToday="false"
               style="width: 100%;"
             ></a-date-picker>
           </a-form-item>
@@ -263,6 +265,8 @@
   </a-card>
 </template>
 <script>
+import moment from 'moment';
+
 export default {
   props: ["form", "step", "errors"],
   data() {
@@ -270,6 +274,17 @@ export default {
   },
   mounted() {
     // this.form.tax.taxable.basic = "exempted";
+  },
+  computed: {
+    defaultBdayPickerValue() {
+      return moment(
+        new Date(
+          new Date().getFullYear() - 18,
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+      );
+    }
   },
   methods: {
     checkErrors(field) {

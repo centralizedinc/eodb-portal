@@ -40,7 +40,7 @@ router.route('/epermit/:police_no')
             });
     })
     .post((req, res) => {
-        PolicePermitDao.modifyOne({ police_no: req.params.police_no }, { epermit_attachment: req.body.attachment })
+        PolicePermitDao.modifyOne({ police_no: req.params.police_no }, { epermit_attachment: req.body })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {

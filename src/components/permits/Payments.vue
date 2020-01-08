@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  props: ["admin", "loading_payments"],
+  props: ["admin", "loading_payments", "search"],
   data() {
     return {
       loading: false,
@@ -61,7 +61,12 @@ export default {
   },
   computed: {
     payments() {
-      return this.$store.state.payment.payments;
+      var payments = this.$store.state.payment.payments;
+      if(this.search) {
+        console.log('payments :', payments);
+        payments = payments.filter(v => v.reference_no.indexOf(this.search) > -1);
+      }
+      return payments
     },
     user() {
       return this.$store.state.user_session.user;
