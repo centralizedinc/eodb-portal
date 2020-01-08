@@ -464,7 +464,7 @@ export default {
       var permits = [];
       if (this.$store.state.permits.permits) {
         this.$store.state.permits.permits.forEach(permit => {
-          if (permit.epermit_attachment) {
+          if (permit.epermit_attachment && permit.epermit_attachment.url) {
             permits.push(permit);
           }
         });

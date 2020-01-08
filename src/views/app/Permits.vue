@@ -36,12 +36,17 @@
           <a-tab-pane tab="Permits & Licenses" :key="0" />
           <!-- <a-tab-pane tab="Drafts" :key="1" /> -->
           <a-tab-pane tab="Payments" :key="1" />
+          <a-button slot="tabBarExtraContent" @click="refreshData" type="primary">Refresh</a-button>
         </a-tabs>
       </a-card>
     </a-col>
     <a-col :span="24">
       <a-card :bodyStyle="{ padding: 0 }" class="permits-tables">
-        <component :is="view_components[current_view]" />
+        <component
+          :is="view_components[current_view]"
+          :loadingPermits="loading_permits"
+          :loadingPayments="loading_payments"
+        />
       </a-card>
     </a-col>
   </a-row>
@@ -80,7 +85,9 @@ export default {
           title: "Police Clearance",
           path: "/permits/police"
         }
-      ]
+      ],
+      loading_permits: false,
+      loading_payments: false
     };
   },
   computed: {
@@ -88,11 +95,18 @@ export default {
       return this.$store.state.permits.permit_types;
     }
   },
+  watch: {
+    current_view(val) {
+      if (val === 0) this.loadPermits();
+      else if (val === 1) this.loadPayments();
+    }
+  },
   created() {
     this.$store
       .dispatch("GET_PERMIT_TYPES")
       .then(result => {
         console.log("GET_PERMIT_TYPES result :", result);
+        this.loadPermits();
       })
       .catch(err => {
         console.log("GET_PERMIT_TYPES err :", err);
@@ -102,6 +116,33 @@ export default {
     openPath(item) {
       this.$store.commit("SET_FILING_PERMIT", item);
       this.$router.push(item.path);
+    },
+    loadPermits(refresh) {
+      this.loading_permits = true;
+      this.$store
+        .dispatch("GET_PERMITS", refresh)
+        .then(result => {
+          console.log("GET_PERMITS result :", result);
+          this.loading_permits = false;
+        })
+        .catch(err => {
+          this.loading_permits = false;
+        });
+    },
+    loadPayments(refresh) {
+      this.loading_payments = true;
+      this.$store
+        .dispatch("GET_PAYMENTS", refresh)
+        .then(result => {
+          this.loading_payments = false;
+        })
+        .catch(err => {
+          this.loading_payments = false;
+        });
+    },
+    refreshData() {
+      if (this.current_view === 0) this.loadPermits(true);
+      else if (this.current_view === 1) this.loadPayments(true);
     }
   }
 };

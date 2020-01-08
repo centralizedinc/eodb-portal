@@ -48,6 +48,7 @@ router.route('/client')
             // PaymentDao.findAll()
             .then((result) => {
                 console.log('result :', result);
+                result.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
                 res.json(result)
             }).catch((errors) => {
                 res.json({ errors })

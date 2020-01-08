@@ -8,7 +8,7 @@
     </a-col>
     <a-col :span="24">
       <a-card :bodyStyle="{ padding: 0 }" class="permits-tables">
-        <applied />
+            <applied />
       </a-card>
     </a-col>
   </a-row>
@@ -22,8 +22,7 @@ export default {
     Applied
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {}
 };

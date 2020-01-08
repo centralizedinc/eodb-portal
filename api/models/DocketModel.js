@@ -17,6 +17,9 @@ var DocketSchema = new mongoose.Schema({
     permit: {
         type: String
     },
+    permit_code: {
+        type: String
+    },
     status: {
         type: Number,
         default: 0

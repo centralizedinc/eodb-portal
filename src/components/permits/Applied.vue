@@ -1,16 +1,5 @@
 <template>
   <div>
-    <!-- <div v-if="show_summary">
-      <a-affix :offsetTop="60">
-        <a-card :bodyStyle="{ padding: 0, 'text-align': 'right', 'padding-right': '1vw' }">
-          <span style="cursor: pointer;font-size: 25px;color: blue;" @click="show_summary=false">
-            Go Back
-            <a-icon type="rollback" />
-          </span>
-        </a-card>
-      </a-affix>
-      <application-summary :form="app_form" :read-only="true" />
-    </div> -->
     <a-table :columns="cols" :dataSource="dockets" :loading="loading">
       <template slot="permit" slot-scope="text">{{getPermitType(text)}}</template>
       <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
@@ -31,7 +20,55 @@
       </template>
     </a-table>
     <a-drawer :visible="show_summary" @close="show_summary=false" :width="800">
-      <application-summary :form="app_form" :read-only="true" />
+      <a-tabs>
+        <a-tab-pane key="1">
+          <span slot="tab">
+            <a-icon type="file-search"></a-icon>Details
+          </span>
+          <application-summary
+            :form="app_form"
+            v-if="app_form.permit_type=='business'"
+            :read-only="true"
+          />
+          <application-summary-brgy
+            :form="app_form"
+            :read-only="true"
+            v-if="app_form.permit_type=='barangay'"
+          ></application-summary-brgy>
+          <application-summary-police
+            :form="app_form"
+            :read-only="true"
+            v-if="app_form.permit_type=='police'"
+          ></application-summary-police>
+          <application-summary-cedula
+            :form="app_form"
+            :read-only="true"
+            v-if="app_form.permit_type=='cedula'"
+          ></application-summary-cedula>
+        </a-tab-pane>
+        <a-tab-pane key="2">
+          <span slot="tab">
+            <a-icon type="snippets"></a-icon>Attachments
+          </span>
+          <a-card
+            v-for="item in app_form.attachments"
+            :key="item.doc_type"
+            style="margin-top: 2px; text-align: center"
+          >
+            <div v-for="file in item.files" :key="file">
+              <!-- {{file}} -->
+              <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
+              <img v-if="file && file.type && file.type.indexOf('image') > -1" :src="file.url" style="width: 100%;" />
+              <pdf
+                v-else-if="file && file.type && file.type==='application/pdf'"
+                :src="file.url"
+                style="cursor:zoom; width: 100%"
+              ></pdf>
+              <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
+            </div>
+          </a-card>
+        </a-tab-pane>
+      </a-tabs>
     </a-drawer>
     <!-- <a-modal :visible="show_summary" :width="1200" @cancel="show_summary=false" :footer="null">
       <a-row>
@@ -45,11 +82,19 @@
 
 <script>
 import ApplicationSummary from "../../views/app/BusinessPermit/ApplicationSummary";
+import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary";
+import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary";
+import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary";
+import pdf from "vue-pdf";
 
 export default {
   props: ["admin"],
   components: {
-    ApplicationSummary
+    ApplicationSummary,
+    ApplicationSummaryBrgy,
+    ApplicationSummaryPolice,
+    ApplicationSummaryCedula,
+    pdf
   },
   data() {
     return {
@@ -121,6 +166,7 @@ export default {
         .then(app => {
           console.log("GET_APPLICATION_BY_REF app :", app);
           this.app_form = app;
+          console.log("app form: " + JSON.stringify(this.app_form));
           this.show_summary = true;
           this.loading_index = -1;
         })

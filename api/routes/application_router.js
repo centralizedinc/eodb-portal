@@ -77,6 +77,7 @@ router.route('/')
                     application_id: results.application._id,
                     application_type: results.application.application_type,
                     permit: data.permit_type,
+                    permit_code: data.permit_code,
                     payment_status: payment.mode_of_payment === 'A' ? 'paid' : 'partial',
                     created_by,
                     account_id: created_by,

@@ -176,8 +176,16 @@
 
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
-          <a-form-item>
-            <span slot="label">Basic Community Tax</span>
+          <a-form-item
+            :validate-status="
+              checkErrors('tax.taxable.basic') ? 'error' : ''
+            "
+            :help="checkErrors('tax.taxable.basic')"
+          >
+            <span slot="label">
+              Basic Community Tax
+              <i style="color: red">*</i>
+            </span>
             <a-select v-model="form.tax.taxable.basic" @change="computation">
               <a-select-option value="voluntary">Voluntary</a-select-option>
               <a-select-option value="exempted">Exempted</a-select-option>
