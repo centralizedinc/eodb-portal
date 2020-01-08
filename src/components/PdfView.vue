@@ -149,6 +149,15 @@ export default {
         const document = printer.fillup(this.pdf_details),
           pdfGenerator = pdfMake.createPdf(document);
 
+          // ---------------for pdf testing---------------------
+          // pdfMake.createPdf(document).open(err =>{
+          //   if (err){
+          //     reject(err)
+          //   } else{
+          //     resolve();
+          //   }
+          // })
+          // ------------for quick testing------------------
         pdfGenerator.getBuffer(buffer => {
           var file = new Blob([buffer], {
               type: "application/pdf"
