@@ -21,7 +21,7 @@ import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
-import COMMUNITYTAXCERT_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
+import CEDULA_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
 
 var printers = {
   BGYCLEARANCE,
@@ -30,7 +30,7 @@ var printers = {
   POLICECLEARANCE,
   RECEIPT,
   BUSINESSPERMIT_SAN_ANTONIO,
-  COMMUNITYTAXCERT_SAN_ANTONI
+  CEDULA_SAN_ANTONIO
 };
 
 // var printers = {
@@ -139,7 +139,7 @@ export default {
           requestor: "Mark Quijom",
           date_created: new Date()
         }
-      } else if(this.keyword.toUpperCase() === 'CEDULA'){
+      } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
         this.pdf_details = {}
       }
       console.log("this.pdf_details :", this.pdf_details);
