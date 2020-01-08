@@ -25,7 +25,7 @@
       </a-row>
     </a-col>
     <a-col :span="24">
-      <h3 style="font-weight: bold; color:black">My Permit Application</h3>
+      <h3 style="font-weight: bold; color:black">My Permit and Licenses</h3>
     </a-col>
     <a-col :span="24">
       <a-divider class="permit-divider" />
@@ -33,19 +33,27 @@
     <a-col :span="24">
       <a-card :bodyStyle="{ padding: '5px' }" class="permits-tabs">
         <a-tabs v-model="current_view">
-          <a-tab-pane tab="Permits & Licenses" :key="0" />
+          <a-tab-pane tab="Applied" :key="0" />
           <!-- <a-tab-pane tab="Drafts" :key="1" /> -->
           <a-tab-pane tab="Payments" :key="1" />
-          <a-button slot="tabBarExtraContent" @click="refreshData" type="primary">Refresh</a-button>
         </a-tabs>
       </a-card>
     </a-col>
     <a-col :span="24">
+      <a-row style="margin-bottom: 5px">
+        <a-col :span="8">
+          <a-input-search placeholder="Search by Reference No." v-model="search" />
+        </a-col>
+        <a-col :span="2" :push="13">
+          <a-button @click="refreshData" type="primary" icon="reload">Refresh</a-button>
+        </a-col>
+      </a-row>
       <a-card :bodyStyle="{ padding: 0 }" class="permits-tables">
         <component
           :is="view_components[current_view]"
           :loadingPermits="loading_permits"
           :loadingPayments="loading_payments"
+          :search="search"
         />
       </a-card>
     </a-col>
@@ -87,7 +95,8 @@ export default {
         }
       ],
       loading_permits: false,
-      loading_payments: false
+      loading_payments: false,
+      search: ""
     };
   },
   computed: {
@@ -97,6 +106,7 @@ export default {
   },
   watch: {
     current_view(val) {
+      this.search = "";
       if (val === 0) this.loadPermits();
       else if (val === 1) this.loadPayments();
     }

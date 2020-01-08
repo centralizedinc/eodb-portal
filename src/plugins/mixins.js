@@ -76,8 +76,12 @@ export default {
                     else if (type === "police") return "Police Clearance";
                     return "";
                 },
-                disableDateInBirthdate(current){
-                    return current && current > moment().endOf('day');
+                disableDateInBirthdate(current, mustAbove18) {
+                    console.log('test');
+                    if (mustAbove18) {
+                        var dateAbove18 = new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate());
+                        return current && current > moment(dateAbove18).endOf('day');
+                    } else return current && current > moment().endOf('day');
                 }
             },
         })

@@ -22,7 +22,10 @@
     <a-row class="summary-row">
       <a-col :span="8">Middle Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.middle}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform:uppercase"
+      >{{form.owner_details.name.middle == null || form.owner_details.name.middle == "" ? "-" : form.owner_details.name.middle}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Date of Birth</a-col>
@@ -85,7 +88,10 @@
     <a-row class="summary-row">
       <a-col :span="8">Trade Name/Franchise</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.franchise}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform:uppercase"
+      >{{form.business_details.franchise == null || form.business_details.franchise == "" ? "-" : form.business_details.franchise}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">{{`${reg_code} Registration No`}}</a-col>
@@ -108,12 +114,16 @@
     <a-row class="summary-row">
       <a-col :span="8">CTC No.</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.ctc_no}}</a-col>
+      <a-col
+        :span="15"
+      >{{form.business_details.ctc_no == null || form.business_details.ctc_no == "" ? "-" : form.business_details.ctc_no}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Property Index Number(PIN)</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.pin}}</a-col>
+      <a-col
+        :span="15"
+      >{{form.business_details.pin == null || form.business_details.pin == "" ? "-" : form.business_details.pin}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Business Area(in sq m)</a-col>
@@ -128,7 +138,9 @@
     <a-row class="summary-row">
       <a-col :span="8">No of Employees Residing in LGU</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.employees_residing}}</a-col>
+      <a-col
+        :span="15"
+      >{{form.business_details.employees_residing == null || form.business_details.employees_residing == "" ? "-" : form.business_details.employees_residing}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Business Address</a-col>

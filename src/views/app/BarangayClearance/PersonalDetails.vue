@@ -85,8 +85,10 @@
             </span>
             <a-date-picker
               v-model="form.personal_details.birthday"
-              :disabledDate="disableDateInBirthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
               style="width: 100%;"
+              :showToday="false"
             ></a-date-picker>
           </a-form-item>
         </a-col>
@@ -99,7 +101,7 @@
               Place of Birth
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.personal_details.birthplace"></a-input>
+            <a-input placeholder="Enter Municipality" v-model="form.personal_details.birthplace"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -400,6 +402,8 @@
 <script>
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
+import moment from 'moment';
+
 export default {
   props: ["form", "step", "errors"],
   data() {
@@ -412,6 +416,9 @@ export default {
     };
   },
   computed: {
+    defaultBdayPickerValue(){
+      return moment(new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate()))
+    },
     regions() {
       console.log("regions_data: " + JSON.stringify(this.regions_data));
       return this.regions_data;
