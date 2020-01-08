@@ -268,7 +268,7 @@ export default {
           weight: "",
           icr_no: ""
         },
-        residential_address: {
+        owner_address: {
           bldg_no: "",
           unit_no: "",
           bldg_name: "",
@@ -992,6 +992,17 @@ export default {
             errors.push({
               field: "business_address.email",
               error: "Email Address is a required field."
+            });
+          }
+          if (
+            this.form.business_address.email &&
+            !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.form.business_address.email
+            )
+          ) {
+            errors.push({
+              field: "business_address.email",
+              error: "Enter valid Email Address."
             });
           }
           if (!this.form.business_address.rental_address.region) {

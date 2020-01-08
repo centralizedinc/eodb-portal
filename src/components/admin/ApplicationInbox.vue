@@ -1,5 +1,10 @@
 <template>
   <div>
+    <a-row style="margin-bottom: 5px">
+      <a-col :span="8">
+        <a-input-search placeholder="Search by Reference No." v-model="search" />
+      </a-col>
+    </a-row>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
       <span
@@ -97,6 +102,7 @@
 export default {
   data() {
     return {
+      search: "",
       loading: false,
       visible: false,
       application_details: {
@@ -146,9 +152,12 @@ export default {
   },
   computed: {
     dockets() {
-      const dockets = JSON.parse(
+      var dockets = JSON.parse(
         JSON.stringify(this.$store.state.dockets.dockets_inbox)
       );
+      if (this.search) {
+        dockets = dockets.filter(v => v.reference_no.indexOf(this.search) > -1);
+      }
       return dockets.sort(
         (a, b) => new Date(b.date_created) - new Date(a.date_created)
       );
