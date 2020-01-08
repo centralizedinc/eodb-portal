@@ -263,6 +263,10 @@ export default {
           {
             doc_type: "residence",
             files: []
+          },
+          {
+            doc_type: "dti_sec_cda",
+            files: []
           }
         ],
         required_documents: {}
@@ -482,9 +486,11 @@ export default {
       "document data soure: " + JSON.stringify(this.document_data_source)
     );
     // this.updateDocsPayment();
+    this.onSelectPurpose();
   },
   methods: {
     onSelectPurpose() {
+      // Add or remove business details/residential address
       if (
         this.form.purpose.includes("bp") &&
         this.steps.findIndex(v => v.title === this.business_step.title) === -1
@@ -497,6 +503,21 @@ export default {
       ) {
         this.steps.splice(2, 1);
         this.form_components.splice(2, 1);
+      }
+
+      // add dti/sec/cda attachment
+      var index = this.form.attachments.findIndex(
+        v => v.doc_type === "dti_sec_cda"
+      );
+      console.log("index :", index);
+      console.log("test :", !this.form.purpose.includes("bp") && index > -1);
+      if (this.form.purpose.includes("bp") && index === -1) {
+        this.form.attachments.push({
+          doc_type: "dti_sec_cda",
+          files: []
+        });
+      } else if (!this.form.purpose.includes("bp") && index > -1) {
+        this.form.attachments.splice(index, 1);
       }
     },
     init() {
@@ -530,7 +551,7 @@ export default {
 
       // if there is error and validate all then jump to the step
       if (errors.length && validate_all) {
-        this.current_step = jump_to;
+        if (jump_to !== null) this.current_step = jump_to;
         window.scrollTo(0, 0);
       }
 
@@ -591,7 +612,8 @@ export default {
         "before saving this.form.attachments :",
         this.form.attachments
       );
-      var transaction_no = "", reference_no = "";
+      var transaction_no = "",
+        reference_no = "";
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -617,11 +639,11 @@ export default {
             date: result.payment.date_created,
             payor: this.getPayorName(result.payment),
             payment_breakdown: result.payment.payment_breakdown
-          }
+          };
           return this.$upload(payment_details, "RECEIPT");
         })
         .then(blob => {
-          console.log('blob :', blob);
+          console.log("blob :", blob);
           if (blob) {
             var file = new File(
               [blob],
@@ -642,7 +664,7 @@ export default {
         })
         .then(result => {
           console.log("Payment receipt result :", result);
-          
+
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
@@ -708,7 +730,7 @@ export default {
     // validation
     validation(validate_all) {
       var errors = [],
-        jump_to = 0;
+        jump_to = null;
       if (validate_all || this.current_step === 1) {
         if (!this.form.personal_details.name.last) {
           errors.push({
@@ -969,11 +991,13 @@ export default {
       }
       return { errors, jump_to };
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     }
   }

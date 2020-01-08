@@ -76,7 +76,9 @@
             <a-date-picker
               style="width: 100%;"
               v-model="form.owner_details.birthdate"
-              :disabledDate="disableDateInBirthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
+              :showToday="false"
             ></a-date-picker>
           </a-form-item>
         </a-col>
@@ -407,6 +409,7 @@
 <script>
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
+import moment from 'moment';
 
 export default {
   props: ["form", "step", "errors", "documents"],
@@ -420,6 +423,9 @@ export default {
     };
   },
   computed: {
+    defaultBdayPickerValue(){
+      return moment(new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate()))
+    },
     user() {
       return this.$store.state.user_session.user;
     },

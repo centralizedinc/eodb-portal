@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  props: ["admin", "loading_permits"],
+  props: ["admin", "loading_permits", "search"],
   data() {
     return {
       loading: false,
@@ -61,9 +61,22 @@ export default {
   },
   computed: {
     permits() {
-      const permits = JSON.parse(
+      var permits = JSON.parse(
         JSON.stringify(this.$store.state.permits.permits_records)
       );
+      if (this.search) {
+        permits = permits.filter(permit => {
+          if (permit.permit_type === "business")
+            return permit.business_no.indexOf(this.search) > -1;
+          else if (permit.permit_type === "cedula")
+            return permit.cedula_no.indexOf(this.search) > -1;
+          else if (permit.permit_type === "barangay")
+            return permit.barangay_no.indexOf(this.search) > -1;
+          else if (permit.permit_type === "police")
+            return permit.police_no.indexOf(this.search) > -1;
+          return false;
+        });
+      }
       return permits.sort(
         (a, b) => new Date(b.date_created) - new Date(a.date_created)
       );
