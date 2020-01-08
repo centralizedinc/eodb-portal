@@ -12,53 +12,58 @@
     <a-row class="summary-row">
       <a-col :span="8">Last Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.personal_details.name.last}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{form.personal_details.name.last}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">First Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.personal_details.name.first}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{form.personal_details.name.first}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Middle Name</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.personal_details.name.middle}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform: uppercase"
+      >{{form.personal_details.name.middle == null || form.personal_details.name.middle == "" ? "-" : form.personal_details.name.middle}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Date of Birth</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
+      <a-col
+        :span="15"
+        style="text-transform: uppercase"
+      >{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Place of Birth</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.personal_details.birthplace}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{form.personal_details.birthplace}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
       <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-      >{{form.personal_details.gender === 'M' ? 'Male' : form.personal_details.gender === 'F' ? 'Female' : ''}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{form.personal_details.gender}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Civil Status</a-col>
       <a-col :span="1">:</a-col>
       <a-col
         :span="15"
-      >{{form.personal_details.civil_status === 'S' ? 'Single' : form.personal_details.civil_status === 'M' ? 'Married' : form.personal_details.civil_status === 'W' ? 'Widowed' : form.personal_details.civil_status === 'Sep' ? 'Separated' : ''}}</a-col>
+        style="text-transform: uppercase"
+      >{{form.personal_details.civil_status == null || form.personal_details.civil_status == "" ? "-" : form.personal_details.civil_status}}</a-col>
     </a-row>
 
     <a-row class="summary-row">
       <a-col :span="8">CTC No.</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.ctc_no}}</a-col>
+      <a-col :span="15" style="text-transform: uppercase">{{form.personal_details.ctc_no}}</a-col>
     </a-row>
 
     <a-row class="summary-row" v-if="form.purpose.includes('pc')">
       <a-col :span="8">Address</a-col>
       <a-col :span="1">:</a-col>
-      <a-col :span="15">{{residential_address}}</a-col>
+      <a-col :span="15" style="text-trasndorm: uppercase">{{residential_address}}</a-col>
     </a-row>
 
     <!-- Part II. Business Details -->
@@ -71,18 +76,18 @@
       <a-row class="summary-row">
         <a-col :span="8">Business Name</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15">{{form.business_details.business_name}}</a-col>
+        <a-col :span="15" style="text-trasndorm: uppercase">{{form.business_details.business_name}}</a-col>
       </a-row>
       <a-row class="summary-row">
         <a-col :span="8">Trade Name/Franchise</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15">{{form.business_details.franchise}}</a-col>
+        <a-col :span="15" style="text-trasndorm: uppercase">{{form.business_details.franchise}}</a-col>
       </a-row>
 
       <a-row class="summary-row">
         <a-col :span="8">Business Address</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15">{{business_address}}</a-col>
+        <a-col :span="15" style="text-trasndorm: uppercase">{{business_address}}</a-col>
       </a-row>
     </template>
 

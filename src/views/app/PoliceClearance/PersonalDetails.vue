@@ -24,7 +24,7 @@
           </a-form-item>-->
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.name.last') ? 'error': ''"
@@ -62,7 +62,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
@@ -72,7 +72,11 @@
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate" style="width: 100%;"></a-date-picker>
+            <a-date-picker
+              v-model="form.personal_details.birthday"
+              :disabledDate="disableDateInBirthdate"
+              style="width: 100%;"
+            ></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -85,8 +89,8 @@
               <i style="color: red">*</i>
             </span>
             <a-select v-model="form.personal_details.gender">
-              <a-select-option value="male">Male</a-select-option>
-              <a-select-option value="female">Female</a-select-option>
+              <a-select-option value="Male">Male</a-select-option>
+              <a-select-option value="Female">Female</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -94,15 +98,15 @@
           <a-form-item>
             <span slot="label">Civil Status</span>
             <a-select v-model="form.personal_details.civil_status">
-              <a-select-option value="single">Single</a-select-option>
-              <a-select-option value="married">Married</a-select-option>
-              <a-select-option value="widowed">Widowed</a-select-option>
-              <a-select-option value="separated">Separated</a-select-option>
+              <a-select-option value="Single">Single</a-select-option>
+              <a-select-option value="Married">Married</a-select-option>
+              <a-select-option value="Widowed">Widowed</a-select-option>
+              <a-select-option value="Separated">Separated</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.birthplace') ? 'error': ''"
@@ -128,7 +132,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.height') ? 'error': ''"
@@ -163,12 +167,21 @@
               Blood Type
               <i style="color: red">*</i>
             </span>
-
-            <a-input v-model="form.personal_details.blood_type"></a-input>
+            <a-select v-model="form.personal_details.blood_type">
+              <a-select-option value="A+">A+</a-select-option>
+              <a-select-option value="A-">A-</a-select-option>
+              <a-select-option value="B+">B+</a-select-option>
+              <a-select-option value="B-">B-</a-select-option>
+              <a-select-option value="AB+">AB+</a-select-option>
+              <a-select-option value="AB-">AB-</a-select-option>
+              <a-select-option value="O+">O+</a-select-option>
+              <a-select-option value="O-">O-</a-select-option>
+              <a-select-option value="Unknown">Unknown</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Identification Marks</span>
@@ -184,12 +197,17 @@
               Complexion
               <i style="color: red">*</i>
             </span>
-
-            <a-input v-model="form.personal_details.complexion"></a-input>
+            <a-select v-model="form.personal_details.complexion">
+              <a-select-option value="Light">Light</a-select-option>
+              <a-select-option value="Fair">Fair</a-select-option>
+              <a-select-option value="Medium">Medium</a-select-option>
+              <a-select-option value="Olive">Olive</a-select-option>
+              <a-select-option value="Brown">Brown</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.educational_attainment') ? 'error': ''"
@@ -234,14 +252,14 @@
               CTC No.
               <i style="color: red">*</i>
             </span>
-            
+
             <a-input v-model="form.personal_details.ctc_no"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
       <a-divider style="color: black;font-weight: bold;" orientation="left">Family Background</a-divider>
 
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">Father Last Name</span>
@@ -267,7 +285,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Father Birth Place</span>
@@ -284,7 +302,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">Mother Last Name</span>
@@ -310,7 +328,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Mother Birth Place</span>
@@ -327,7 +345,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">Spouse Last Name</span>
@@ -353,7 +371,7 @@
           </a-form-item>
         </a-col>
       </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item>
             <span slot="label">Spouse Birth Place</span>

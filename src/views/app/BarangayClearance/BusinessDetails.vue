@@ -268,7 +268,7 @@
       </a-row>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
@@ -276,7 +276,7 @@
         </a-col>
         <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col> -->
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
@@ -297,7 +297,7 @@ export default {
     };
   },
   created() {
-    console.log('this.fixed_address :', this.fixed_address);
+    console.log("this.fixed_address :", this.fixed_address);
     if (this.fixed_address) {
       this.form.business_address.region = "04";
       // this.changeRegion();
@@ -311,18 +311,18 @@ export default {
       )
         .then(data => {
           this.cities = data.default;
-          console.log('###### this.cities :', this.cities);
+          console.log("###### this.cities :", this.cities);
           return import(
             `../../../assets/references/barangay/${this.form.business_address.city}.json`
           );
         })
         .then(data => {
           this.barangays = data.default;
-          console.log('##### barangays data :', data);
+          console.log("##### barangays data :", data);
         })
-        .catch((errors) => {
-          console.log('### errors :', errors);
-        })
+        .catch(errors => {
+          console.log("### errors :", errors);
+        });
     }
     if (this.fixed_postal) {
       this.form.business_address.postal_code = "4324";
@@ -436,8 +436,10 @@ export default {
         data[description].toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       );
     },
-    resetRentedData(){
-      this.form.business_address = JSON.parse(JSON.stringify(this.form.residential_address));
+    resetRentedData() {
+      this.form.business_address = JSON.parse(
+        JSON.stringify(this.form.residential_address)
+      );
     }
   }
 };

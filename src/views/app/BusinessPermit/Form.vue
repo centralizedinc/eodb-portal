@@ -268,7 +268,7 @@ export default {
           weight: "",
           icr_no: ""
         },
-        owner_address: {
+        residential_address: {
           bldg_no: "",
           unit_no: "",
           bldg_name: "",
@@ -506,7 +506,7 @@ export default {
       this.transaction_details.total_payable = total;
       return total;
     },
-    user(){
+    user() {
       return this.$store.state.user_session.user;
     }
   },
@@ -627,7 +627,8 @@ export default {
         "before saving this.form.attachments :",
         this.form.attachments
       );
-      var transaction_no = "", reference_no = "";
+      var transaction_no = "",
+        reference_no = "";
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -653,11 +654,11 @@ export default {
             date: result.payment.date_created,
             payor: this.getPayorName(result.payment),
             payment_breakdown: result.payment.payment_breakdown
-          }
+          };
           return this.$upload(payment_details, "RECEIPT");
         })
         .then(blob => {
-          console.log('blob :', blob);
+          console.log("blob :", blob);
           if (blob) {
             var file = new File(
               [blob],
@@ -688,11 +689,13 @@ export default {
           console.log("CREATE_APPLICATION err :", err);
         });
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     },
     attachFile(keyword, file) {
@@ -807,6 +810,17 @@ export default {
           errors.push({
             field: "owner_details.email",
             error: "Email Address is a required field."
+          });
+        }
+        if (
+          this.form.owner_details.email &&
+          !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+            this.form.owner_details.email
+          )
+        ) {
+          errors.push({
+            field: "owner_details.email",
+            error: "Enter valid Email Address."
           });
         }
         if (!this.form.owner_address.region) {
