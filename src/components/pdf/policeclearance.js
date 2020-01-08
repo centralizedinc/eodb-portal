@@ -22,7 +22,7 @@ function fillup(details) {
         images: {
             form: form
         },
-        pageSize: 'LEGAL'
+        pageSize: 'A4'
     };
 
 

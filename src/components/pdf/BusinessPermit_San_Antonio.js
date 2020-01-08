@@ -88,7 +88,7 @@ function getContent(details) {
                     {
                         text: "BUSINESS PERMIT OFFICE",
                         // text: '',
-                        fontSize: 12,
+                        fontSize: 14,
                         bold: true,
                         characterSpacing: 1,
                         alignment: 'center',
@@ -108,7 +108,7 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [8],
-                widths: [150,'*',145],
+                widths: [140,'*',135],
                 body: [
                     [
                         {
@@ -116,7 +116,7 @@ function getContent(details) {
                         },
                         {
                         text: "BUSINESS PERMIT   ",
-                        fontSize: 12,
+                        fontSize: 14,
                         bold: true,
                         characterSpacing: 1,
                         alignment: 'center',
@@ -146,7 +146,7 @@ function getContent(details) {
                         },
                         {
                         text: checkText(details.business_name),
-                        fontSize: 8,
+                        fontSize: 12,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'center',
@@ -175,7 +175,7 @@ function getContent(details) {
                         },
                         {
                             text: "LICENSE NUMBER:",
-                            fontSize: 6,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
@@ -184,7 +184,7 @@ function getContent(details) {
                         },
                         {
                             text: checkText(details.business_no),
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
@@ -213,7 +213,7 @@ function getContent(details) {
                         },
                         {
                             text: "ADDRESS:",
-                            fontSize: 6,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
@@ -223,7 +223,7 @@ function getContent(details) {
                         },
                         {
                             text: checkText(details.business_address),
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
@@ -253,7 +253,7 @@ function getContent(details) {
                         },
                         {
                             text: "BUSINESS OWNER:",
-                            fontSize: 6,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
@@ -263,7 +263,7 @@ function getContent(details) {
                         },
                         {
                             text: checkText(details.business_owner),
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
@@ -287,7 +287,7 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [6],
-                widths: [95,'*',90],
+                widths: [30,'*',50],
                 body: [
                     [
                         {
@@ -296,12 +296,12 @@ function getContent(details) {
                         {
                             table: {
                                 heights: [6],
-                                widths: [40, 80, 44, 50, 50],
+                                widths: [72, 150, 60, 70, 60],
                                 body: [
                                     [
                                         {
                                             text: checkText(details.plate_no),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -312,7 +312,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: checkText(details.ownership_type),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -322,7 +322,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: formatDate(details.valid_until),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -332,7 +332,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: checkText(details.area),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -342,7 +342,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: formatDate(details.date_issued),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -368,7 +368,7 @@ function getContent(details) {
             layout: "noBorders",
             table:{
                 // heights: [6],
-                widths: [95,'*',90],
+                widths: [35,'*',50],
                 body: [
                     [
                         {
@@ -379,12 +379,12 @@ function getContent(details) {
                             table: {
                                 // heights: [6],
                                 // widths: [50, 70, 44, 50, 50],
-                                widths: [40, 80, 44, 50, 50],
+                                widths: [72, 150, 60, 70, 60],
                                 body: [
                                     [
                                         {
                                             text: "ACCOUNT NUMBER ",
-                                            fontSize: 4,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -395,7 +395,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: "OWNERSHIP TYPE",
-                                            fontSize: 4,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -405,7 +405,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: "VALID UNTIL",
-                                            fontSize: 4,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -415,7 +415,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: "AREA (sq.m)",
-                                            fontSize: 4,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -425,7 +425,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: "DATE ISSUED ",
-                                            fontSize: 4,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -451,7 +451,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table:{
-                widths: [95,'*',90],
+                widths: [30,'*',50],
                 body:[
                     [
                         {
@@ -460,11 +460,11 @@ function getContent(details) {
                         {
                             table: {
                                 heights: [6],
-                                widths: [124, 50, 50, 50, ],
+                                widths: [227, 50, 55, 90],
                                 body: [
                                     [{
                                             text: checkText(details.business_owner),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -474,7 +474,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: checkText(details.application_type),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -484,7 +484,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: checkText(details.mode_of_payment),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -494,7 +494,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: checkText(details.transaction_no),
-                                            fontSize: 5,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -520,7 +520,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table:{
-                widths: [95, '*', 90],
+                widths: [30,'*',50],
                 body:[
                     [
                         {
@@ -530,44 +530,44 @@ function getContent(details) {
                             layout: "noBorders",
                             table: {
                                 heights: [6],
-                                widths: [124, 50, 50, 50, ],
+                                widths: [227, 50, 55, 90],
                                 body: [
                                     [{
                                             text: "TAX PAYER (OWNER)",
-                                            fontSize: 4,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
-                                            alignment: 'justify',
+                                            alignment: 'center',
                                             // right,down,left,up
-                                            margin: [50, -2, 0, 0]
+                                            margin: [0, 0, 0, 0]
                 
                                         },
                                         {
                                             text: "STATUS",
-                                            fontSize: 4,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
-                                            alignment: 'left',
+                                            alignment: 'center',
                                             // right,down,left,up
-                                            margin: [24, -2, 0, 0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: "MODE OF PAYMENT",
-                                            fontSize: 4,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
-                                            alignment: 'left',
+                                            alignment: 'center',
                                             // right,down,left,up
-                                            margin: [12, -2, 0, 0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: " O.R NUMBER",
-                                            fontSize: 4,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
-                                            alignment: 'left',
+                                            alignment: 'center',
                                             // right,down,left,up
-                                            margin: [20, -2, 0, 0]
+                                            margin: [0, 0, 0, 0]
                                         },
                 
                                     ]
@@ -600,7 +600,7 @@ function getContent(details) {
                                 body: [
                                     [{
                                             text: "TAX DESCRIPTION",
-                                            fontSize: 6,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -611,7 +611,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: "AMOUNT DUE",
-                                            fontSize: 6,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
@@ -654,7 +654,7 @@ function getContent(details) {
                                 body: [
                                     [{
                                             text: checkText(trans.description),
-                                            fontSize: 6,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'justify',
@@ -664,7 +664,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: formatAmount(trans.amount),
-                                            fontSize: 6,
+                                            fontSize: 10,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'right',
@@ -706,7 +706,7 @@ function getContent(details) {
                                 body: [
                                     [{
                                             text: "TOTAL",
-                                            fontSize: 7,
+                                            fontSize: 12,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'right',
@@ -716,7 +716,7 @@ function getContent(details) {
                                         },
                                         {
                                             text: formatAmount(total_amount),
-                                            fontSize: 6,
+                                            fontSize: 12,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'right',
@@ -767,7 +767,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',145],
+                widths: [150,'*',150],
                 heights: [2],
                 body: [
                     [
@@ -776,7 +776,7 @@ function getContent(details) {
                         },
                         {
                             text: " Erick M Wagan ",
-                            fontSize: 10,
+                            fontSize: 14,
                             alignment: 'center',
                             characterSpacing: [0],
                             // right,down,left,up
@@ -797,7 +797,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',145],
+                widths: [150,'*',150],
                 heights: [2],
                 body: [
                     [
@@ -806,7 +806,7 @@ function getContent(details) {
                         },
                         {
                             text: " Minicipal Mayor ",
-                            fontSize: 10,
+                            fontSize: 14,
                             alignment: 'center',
                             characterSpacing: [0],
                             // right,down,left,up
@@ -848,7 +848,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',145],
+                widths: [150,'*',150],
                 heights: [2, ],
                 body: [
                     [
@@ -877,7 +877,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',145],
+                widths: [150,'*',150],
                 heights: [2, ],
                 body: [
                     [
@@ -886,7 +886,7 @@ function getContent(details) {
                         },
                         {
                             text: " This electronic permit (ePermit) is computer generated and does not require signature",
-                            fontSize: 5,
+                            fontSize: 10,
                             alignment: 'center',
                             characterSpacing: [0],
                             // right,down,left,up
@@ -904,7 +904,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',145],
+                widths: [150,'*',150],
                 heights: [2,],
                 body: [
                     [
@@ -913,7 +913,7 @@ function getContent(details) {
                         },
                         {
                             text: " Verify authenticity of this document at: ",
-                            fontSize: 5,
+                            fontSize: 10,
                             alignment: 'center',
                             characterSpacing: [0],
                             // right,down,left,up
@@ -932,7 +932,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',145],
+                widths: [150,'*',150],
                 heights: [2],
                 body: [
                     [
@@ -941,7 +941,7 @@ function getContent(details) {
                         },
                         {
                             text: " Thank you for your business ",
-                            fontSize: 5,
+                            fontSize: 10,
                             alignment: 'center',
                             characterSpacing: [0],
                             // right,down,left,up
