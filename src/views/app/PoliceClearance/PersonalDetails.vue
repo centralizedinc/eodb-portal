@@ -142,7 +142,7 @@
               Height(cm)
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.personal_details.height"></a-input>
+            <a-input maxlength="3" v-model="form.personal_details.height"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -155,7 +155,7 @@
               <i style="color: red">*</i>
             </span>
 
-            <a-input v-model="form.personal_details.weight"></a-input>
+            <a-input maxlength="3" v-model="form.personal_details.weight"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -222,7 +222,7 @@
               <a-select-option value="primary">Primary</a-select-option>
               <a-select-option value="secondary">Secondary</a-select-option>
               <a-select-option value="vocational">Vocational</a-select-option>
-              <a-select-option value="tertiary">Tertiary</a-select-option>
+              <a-select-option value="tertiary">Bachelor's Degree</a-select-option>
               <a-select-option value="master">Master's Degree</a-select-option>
               <a-select-option value="doctorate">Doctorate Degree</a-select-option>
             </a-select>
@@ -243,7 +243,7 @@
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.ctc_no') ? 'error': ''"
             :help="checkErrors('personal_details.ctc_no')"

@@ -128,7 +128,7 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" justify="space-between">
+              <!-- <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
@@ -148,7 +148,7 @@
                     style="color: red"
                   >{{ checkErrors("mode_of_payment") }}</span>
                 </a-col>
-              </a-row>
+              </a-row>-->
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -591,7 +591,8 @@ export default {
         "before saving this.form.attachments :",
         this.form.attachments
       );
-      var transaction_no = "", reference_no = "";
+      var transaction_no = "",
+        reference_no = "";
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -617,11 +618,11 @@ export default {
             date: result.payment.date_created,
             payor: this.getPayorName(result.payment),
             payment_breakdown: result.payment.payment_breakdown
-          }
+          };
           return this.$upload(payment_details, "RECEIPT");
         })
         .then(blob => {
-          console.log('blob :', blob);
+          console.log("blob :", blob);
           if (blob) {
             var file = new File(
               [blob],
@@ -642,7 +643,7 @@ export default {
         })
         .then(result => {
           console.log("Payment receipt result :", result);
-          
+
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
@@ -897,6 +898,17 @@ export default {
               error: "Email Address is a required field."
             });
           }
+          if (
+            this.form.business_address.email &&
+            !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.form.business_address.email
+            )
+          ) {
+            errors.push({
+              field: "business_address.email",
+              error: "Enter valid Email Address."
+            });
+          }
           if (!this.form.business_address.rental_address.region) {
             errors.push({
               field: "business_address.rental_address.region",
@@ -969,11 +981,13 @@ export default {
       }
       return { errors, jump_to };
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     }
   }

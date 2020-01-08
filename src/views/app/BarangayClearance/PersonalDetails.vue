@@ -99,7 +99,7 @@
               Place of Birth
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.personal_details.birthplace"></a-input>
+            <a-input placeholder="Enter Municipality" v-model="form.personal_details.birthplace"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
