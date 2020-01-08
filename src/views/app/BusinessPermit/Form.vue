@@ -1043,6 +1043,17 @@ export default {
               error: "Email Address is a required field."
             });
           }
+          if (
+            this.form.business_address.email &&
+            !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.form.business_address.email
+            )
+          ) {
+            errors.push({
+              field: "business_address.email",
+              error: "Enter valid Email Address."
+            });
+          }
           if (!this.form.business_address.rental_address.region) {
             errors.push({
               field: "business_address.rental_address.region",

@@ -47,11 +47,11 @@
           Business Name
           <i style="color: red">*</i>
         </span>
-        <a-input v-model="form.business_details.business_name" placeholder="Business Name*"></a-input>
+        <a-input v-model="form.business_details.business_name"></a-input>
       </a-form-item>
 
       <a-form-item label="Trade Name/Franchise" style="font-weight: bold">
-        <a-input v-model="form.business_details.franchise" placeholder="Trade Name/Franchise"></a-input>
+        <a-input v-model="form.business_details.franchise"></a-input>
       </a-form-item>
 
       <template v-if="form.application_type===0">
@@ -67,8 +67,9 @@
           <a-input-number
             v-model="form.business_details.capital_investment"
             @change="$emit('updateCapital', form.business_details.capital_investment)"
+            :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
             style="width: 100%;"
-            placeholder="Capital Investment"
           ></a-input-number>
         </a-form-item>
       </template>
@@ -84,10 +85,11 @@
             <i style="color: red">*</i>
           </span>
           <a-input-number
+            :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
             v-model="form.business_details.gross_sales"
             @change="$emit('updateGross', form.business_details.gross_sales)"
             style="width: 100%;"
-            placeholder="Annual Gross Sales"
           ></a-input-number>
         </a-form-item>
       </template>
@@ -132,17 +134,12 @@
               Tax Identification No
               <i style="color: red">*</i>
             </span>
-            <a-input
-              style="width:100%"
-              maxlength="13"
-              placeholder="Tax Identification Number"
-              v-model="form.business_details.tin"
-            ></a-input>
+            <a-input style="width:100%" maxlength="13" v-model="form.business_details.tin"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item label="CTC No.">
-            <a-input placeholder="CTC No." v-model="form.business_details.ctc_no"></a-input>
+            <a-input v-model="form.business_details.ctc_no"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -162,22 +159,19 @@
               Business Area (in sq m)
               <i style="color: red">*</i>
             </span>
-            <a-input
-              placeholder="Business Area (in sq m)*"
-              v-model="form.business_details.business_area"
-            ></a-input>
+            <a-input v-model="form.business_details.business_area"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="checkErrors('business_details.employees_establishment') ? 'error': ''"
             :help="checkErrors('business_details.employees_establishment')"
           >
             <span slot="label">
-              No. of Employees in Establishment (in sq m)
+              No. of Employees in Establishment
               <i style="color: red">*</i>
             </span>
             <a-input-number
@@ -187,8 +181,8 @@
             ></a-input-number>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item label="No. of Employees Residing in LGU">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item label="No. of Employees Residing within LGU">
             <a-input-number
               style="width: 100%"
               placeholder="No. of Employees in Residing in LGU"
@@ -413,7 +407,7 @@
 
       <template v-if="form.business_details.is_rented">
         <a-row style="font-weight: bold" :gutter="5">
-          <a-col :xs="{ span: 24 }">
+          <a-col :xs="{ span: 24}">
             <a-form-item
               :validate-status="checkErrors('business_address.rental') ? 'error': ''"
               :help="checkErrors('business_address.rental')"
@@ -422,9 +416,15 @@
                 Monthly Rental
                 <i style="color: red">*</i>
               </span>
-              <a-input v-model="form.business_address.rental" placeholder="Monthly Rental*"></a-input>
+              <a-input-number
+                style="width: 100%;"
+                :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
+                v-model="form.business_address.rental"
+              ></a-input-number>
             </a-form-item>
           </a-col>
+
           <a-col :xs="{ span: 24 }">
             <a-form-item
               :validate-status="checkErrors('business_address.lessor_name') ? 'error': ''"
@@ -434,7 +434,7 @@
                 Lessor Name
                 <i style="color: red">*</i>
               </span>
-              <a-input v-model="form.business_address.lessor_name" placeholder="Lessor Name*"></a-input>
+              <a-input v-model="form.business_address.lessor_name"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xs="{ span: 24 }">
@@ -446,7 +446,7 @@
                 Contact Number
                 <i style="color: red">*</i>
               </span>
-              <a-input v-model="form.business_address.contact_no" placeholder="Contact Number*"></a-input>
+              <a-input maxlength="11" v-model="form.business_address.contact_no"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xs="{ span: 24 }">

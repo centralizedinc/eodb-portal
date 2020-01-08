@@ -36,7 +36,7 @@
               Last Name
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.name.last" placeholder="Last Name"></a-input>
+            <a-input v-model="form.owner_details.name.last"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7}">
@@ -48,23 +48,23 @@
               First Name
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.name.first" placeholder="First Name"></a-input>
+            <a-input v-model="form.owner_details.name.first"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{  }" :sm="{ span: 6 }">
           <a-form-item label="Middle Name">
-            <a-input v-model="form.owner_details.name.middle" placeholder="Middle Name"></a-input>
+            <a-input v-model="form.owner_details.name.middle"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
           <a-form-item label="Suffix">
-            <a-input v-model="form.owner_details.name.suffix" placeholder="Suffix"></a-input>
+            <a-input v-model="form.owner_details.name.suffix"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.birthdate') ? 'error': ''"
             :help="checkErrors('owner_details.birthdate')"
@@ -82,44 +82,46 @@
             ></a-date-picker>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item
-            :validate-status="checkErrors('owner_details.gender') ? 'error': ''"
-            :help="checkErrors('owner_details.gender')"
-          >
-            <span slot="label">
-              Gender
-              <i style="color: red">*</i>
-            </span>
-            <a-radio-group buttonStyle="solid" v-model="form.owner_details.gender">
-              <a-radio-button value="M">Male</a-radio-button>
-              <a-radio-button value="F">Female</a-radio-button>
-            </a-radio-group>
-          </a-form-item>
-        </a-col>
-      </a-row>
 
-      <a-row style="font-weight: bold;" :gutter="5">
-        <a-col
-          :xs="{ span: 24 }"
-          :sm="{ span: 10 }"
-          v-if="checkDocsNeeded(['residence','barangay','police'])"
-        >
-          <a-form-item
-            style="font-weight: bold;"
-            :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
-            :help="checkErrors('required_documents.birthplace')"
+        <a-row style="font-weight: bold;" :gutter="5">
+          <a-col
+            :xs="{ span: 24 }"
+            :sm="{ span: 8 }"
+            v-if="checkDocsNeeded(['residence','barangay','police'])"
           >
-            <span slot="label">
-              Place of Birth
-              <i style="color: red">*</i>
-            </span>
-            <a-input v-model="form.owner_details.birthplace" placeholder="Place of Birth" />
-          </a-form-item>
-        </a-col>
+            <a-form-item
+              style="font-weight: bold;"
+              :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
+              :help="checkErrors('required_documents.birthplace')"
+            >
+              <span slot="label">
+                Place of Birth
+                <i style="color: red">*</i>
+              </span>
+              <a-input v-model="form.owner_details.birthplace" />
+            </a-form-item>
+          </a-col>
+
+          <a-col :xs="{ span: 24 }" :sm="{ span:8  }">
+            <a-form-item
+              :validate-status="checkErrors('owner_details.gender') ? 'error': ''"
+              :help="checkErrors('owner_details.gender')"
+            >
+              <span slot="label">
+                Gender
+                <i style="color: red">*</i>
+              </span>
+              <a-radio-group buttonStyle="solid" v-model="form.owner_details.gender">
+                <a-radio-button value="M">Male</a-radio-button>
+                <a-radio-button value="F">Female</a-radio-button>
+              </a-radio-group>
+            </a-form-item>
+          </a-col>
+        </a-row>
+
         <a-col
           :xs="{ span: 24 }"
-          :sm="{ span: 14 }"
+          :sm="{ span: 24 }"
           v-if="checkDocsNeeded(['residence','barangay','police'])"
         >
           <a-form-item
@@ -142,7 +144,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.telno') ? 'error': ''"
             :help="checkErrors('owner_details.telno')"
@@ -151,14 +153,15 @@
               Tel No
               <i style="color: red">*</i>
             </span>
-            <a-input-number
+            <a-input
               v-model="form.owner_details.telno"
-              placeholder="Tel No*"
+              placeholder="Area code + 8-digit number (i.e. 046xxxxxxxx)"
+              maxlength="11"
               style="width:100%"
-            ></a-input-number>
+            ></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.mobile') ? 'error': ''"
             :help="checkErrors('owner_details.mobile')"
@@ -167,14 +170,15 @@
               Mobile No
               <i style="color: red">*</i>
             </span>
-            <a-input-number
+            <a-input
               v-model="form.owner_details.mobile"
-              placeholder="Mobile No*"
+              placeholder="11-digit mobile number (i.e. 09xxxxxxxxx"
+              maxlength="11"
               style="width:100%"
-            ></a-input-number>
+            ></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.email') ? 'error': ''"
             :help="checkErrors('owner_details.email')"
@@ -191,16 +195,24 @@
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col
           :xs="{ span: 24 }"
-          :sm="{ span: 12 }"
+          :sm="{ span: 24 }"
           v-if="checkDocsNeeded(['residence', 'barangay'])"
         >
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
-            <a-input v-model="form.owner_details.occupation" placeholder="Occupation/Profession" />
+            <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['residence'])">
+
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['residence'])">
           <a-form-item style="font-weight: bold;" label="Monthly Salary">
-            <a-input v-model="form.owner_details.monthly_salary" placeholder="Monthly Salary" />
+            <a-select v-model="form.owner_details.monthly_salary">
+              <a-select-option value="₱250,000 and below">₱250,000 and below</a-select-option>
+              <a-select-option value=">₱250,000 to ₱400,000">> ₱250,000 to ₱400,000</a-select-option>
+              <a-select-option value=">₱400,000 to ₱800,000 ">> ₱400,000 to ₱800,000</a-select-option>
+              <a-select-option value=">₱800,000 to ₱2,000,000">> ₱800,000 to ₱2,000,000</a-select-option>
+              <a-select-option value=">₱2,000,000 to ₱8,000,000">> ₱2,000,000 to ₱8,000,000</a-select-option>
+              <a-select-option value=">Above ₱8,000,000">Above ₱8,000,000</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
@@ -208,17 +220,17 @@
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
           <a-form-item style="font-weight: bold;" label="Height(cm)">
-            <a-input-number max="999" style="width:100%" v-model="form.owner_details.height" />
+            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
           <a-form-item style="font-weight: bold;" label="Weight(kg)">
-            <a-input-number max="999" style="width:100%" v-model="form.owner_details.weight" />
+            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
           <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
-            <a-input v-model="form.owner_details.icr_no" placeholder="ICR No(if Alien)" />
+            <a-input v-model="form.owner_details.icr_no" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -233,27 +245,27 @@
           <a-row :gutter="5">
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="House/Bldg No">
-                <a-input v-model="form.owner_address.bldg_no" placeholder="House/Bldg No"></a-input>
+                <a-input v-model="form.owner_address.bldg_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="Unit No">
-                <a-input v-model="form.owner_address.unit_no" placeholder="Unit No"></a-input>
+                <a-input v-model="form.owner_address.unit_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="24">
               <a-form-item label="Building Name">
-                <a-input v-model="form.owner_address.bldg_name" placeholder="Building Name"></a-input>
+                <a-input v-model="form.owner_address.bldg_name"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="24">
               <a-form-item label="Street">
-                <a-input v-model="form.owner_address.street" placeholder="Street"></a-input>
+                <a-input v-model="form.owner_address.street"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="24">
               <a-form-item label="Subdivision">
-                <a-input v-model="form.owner_address.subdivision" placeholder="Subdivision"></a-input>
+                <a-input v-model="form.owner_address.subdivision"></a-input>
               </a-form-item>
             </a-col>
           </a-row>
@@ -385,7 +397,7 @@
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_address.postal_code" placeholder="Postal Code*"></a-input>
+            <a-input v-model="form.owner_address.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>

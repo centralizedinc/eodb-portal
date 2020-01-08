@@ -124,7 +124,7 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" justify="space-between">
+              <!-- <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
@@ -144,7 +144,7 @@
                     style="color: red"
                   >{{ checkErrors("mode_of_payment") }}</span>
                 </a-col>
-              </a-row>
+              </a-row>-->
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -751,11 +751,13 @@ export default {
       console.log("errors to return: " + JSON.stringify(errors));
       return { errors, jump_to };
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     }
   }

@@ -25,7 +25,7 @@
       </a-row>
     </a-col>
     <a-col :span="24">
-      <h3 style="font-weight: bold; color:black">My Permit Application</h3>
+      <h3 style="font-weight: bold; color:black">My Permit and Licenses</h3>
     </a-col>
     <a-col :span="24">
       <a-divider class="permit-divider" />
@@ -33,7 +33,7 @@
     <a-col :span="24">
       <a-card :bodyStyle="{ padding: '5px' }" class="permits-tabs">
         <a-tabs v-model="current_view">
-          <a-tab-pane tab="Permits & Licenses" :key="0" />
+          <a-tab-pane tab="Applied" :key="0" />
           <!-- <a-tab-pane tab="Drafts" :key="1" /> -->
           <a-tab-pane tab="Payments" :key="1" />
         </a-tabs>
