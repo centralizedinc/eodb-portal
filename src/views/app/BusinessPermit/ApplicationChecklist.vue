@@ -17,7 +17,7 @@
     </a-row>
     <a-form>
       <a-form-item label="Check all your lacking documents">
-        <a-checkbox-group v-model="selected_documents" @change="onDocumentSelect">
+        <a-checkbox-group v-model="lack_documents" @change="onDocumentSelect">
           <a-row>
             <a-col :span="24" v-for="(item, index) in documents" :key="index">
               <a-checkbox :value="item.keyword" v-if="!item.hidden">{{item.title}}</a-checkbox>
@@ -46,30 +46,53 @@ export default {
   props: ["form", "documents", "checkSelectedDocs"],
   data() {
     return {
-      selected_documents: []
+      lack_documents: []
     };
   },
-  created() {
-    // var docs = [];
-    // this.form.attachments.forEach(attachment => {
-    //   docs.push(attachment.doc_type);
-    // });
-    // this.selected_documents = docs;
-    // console.log('this.form.attachments :', this.form.attachments);
-    // var attachments = this.form.attachments.map(v => v.doc_type),
-    //   selected_documents = [];
-    //   console.log('attachments :', attachments);
-    // this.documents.forEach(doc => {
-    //   console.log('doc.keyword :', doc.keyword);
-    //   if (!attachments.includes(doc.keyword))
-    //     selected_documents.push(doc.keyword);
-    // });
-    // console.log("selected_documents :", selected_documents);
-    // this.selected_documents = selected_documents;
+  mounted() {
+    this.lack_documents = JSON.parse(JSON.stringify(this.selected_documents));
   },
   watch: {
-    checkSelectedDocs() {
-      console.log("this.form.attachments :", this.form.attachments);
+    selected_documents() {
+      this.lack_documents = JSON.parse(JSON.stringify(this.selected_documents));
+    }
+  },
+  // created() {
+  // var docs = [];
+  // this.form.attachments.forEach(attachment => {
+  //   docs.push(attachment.doc_type);
+  // });
+  // this.selected_documents = docs;
+  // console.log('this.form.attachments :', this.form.attachments);
+  // var attachments = this.form.attachments.map(v => v.doc_type),
+  //   selected_documents = [];
+  //   console.log('attachments :', attachments);
+  // this.documents.forEach(doc => {
+  //   console.log('doc.keyword :', doc.keyword);
+  //   if (!attachments.includes(doc.keyword))
+  //     selected_documents.push(doc.keyword);
+  // });
+  // console.log("selected_documents :", selected_documents);
+  // this.selected_documents = selected_documents;
+  // },
+  // watch: {
+  //   checkSelectedDocs() {
+  //     console.log("this.form.attachments :", this.form.attachments);
+  //     var attachments = this.form.attachments.map(v => v.doc_type),
+  //       selected_documents = [];
+  //     console.log("attachments :", attachments);
+  //     this.documents.forEach(doc => {
+  //       console.log("doc.keyword :", doc.keyword);
+  //       if (!attachments.includes(doc.keyword))
+  //         selected_documents.push(doc.keyword);
+  //     });
+  //     console.log("selected_documents :", selected_documents);
+  //     this.selected_documents = selected_documents;
+  //     this.$emit("updateDocsPayment", this.selected_documents);
+  //   }
+  // },
+  computed: {
+    selected_documents() {
       var attachments = this.form.attachments.map(v => v.doc_type),
         selected_documents = [];
       console.log("attachments :", attachments);
@@ -79,8 +102,8 @@ export default {
           selected_documents.push(doc.keyword);
       });
       console.log("selected_documents :", selected_documents);
-      this.selected_documents = selected_documents;
-      this.$emit("updateDocsPayment", this.selected_documents);
+      this.$emit("updateDocsPayment", selected_documents);
+      return selected_documents;
     }
   },
   methods: {
