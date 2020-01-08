@@ -82,7 +82,7 @@
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    <a-icon v-else type="close-circle" style="color: red; font-weight: bold;" />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -451,6 +451,9 @@ export default {
       this.transaction_details.total_payable = total;
       this.transaction_details.amount_paid = total;
       return total;
+    },
+    user() {
+      return this.$store.state.user_session.user;
     }
   },
   mounted() {
@@ -774,24 +777,7 @@ export default {
             error: "CTC is a required field."
           });
         }
-        // if (!this.form.personal_details.telno) {
-        //   errors.push({
-        //     field: "personal_details.telno",
-        //     error: "Tel No is a required field."
-        //   });
-        // }
-        // if (!this.form.personal_details.mobile) {
-        //   errors.push({
-        //     field: "personal_details.mobile",
-        //     error: "Mobile No is a required field."
-        //   });
-        // }
-        // if (!this.form.personal_details.email) {
-        //   errors.push({
-        //     field: "personal_details.email",
-        //     error: "Email Address is a required field."
-        //   });
-        // }
+        
         if (this.form.purpose.includes("pc")) {
           if (!this.form.residential_address.region) {
             errors.push({
@@ -893,62 +879,6 @@ export default {
             field: "business_address.postal_code",
             error: "Postal Code is a required field."
           });
-        }
-        if (this.form.business_details.is_rented) {
-          if (!this.form.business_address.rental) {
-            errors.push({
-              field: "business_address.rental",
-              error: "Monthly Rental is a required field."
-            });
-          }
-          if (!this.form.business_address.lessor_name) {
-            errors.push({
-              field: "business_address.lessor_name",
-              error: "Lessor Name is a required field."
-            });
-          }
-          if (!this.form.business_address.contact_no) {
-            errors.push({
-              field: "business_address.contact_no",
-              error: "Contact No is a required field."
-            });
-          }
-          if (!this.form.business_address.email) {
-            errors.push({
-              field: "business_address.email",
-              error: "Email Address is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.region) {
-            errors.push({
-              field: "business_address.rental_address.region",
-              error: "Region is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.province) {
-            errors.push({
-              field: "business_address.rental_address.province",
-              error: "Province is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.barangay) {
-            errors.push({
-              field: "business_address.rental_address.barangay",
-              error: "Barangay is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.city) {
-            errors.push({
-              field: "business_address.rental_address.city",
-              error: "City/Municipality is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.postal_code) {
-            errors.push({
-              field: "business_address.rental_address.postal_code",
-              error: "Postal Code is a required field."
-            });
-          }
         }
         if (errors.length) jump_to = 2;
       }
@@ -1054,4 +984,11 @@ export default {
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
 }
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
+}
+
 </style>

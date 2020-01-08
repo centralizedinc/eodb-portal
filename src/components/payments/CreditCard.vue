@@ -121,6 +121,7 @@ export default {
     validateCard() {
       this.$emit("validCard", false);
       this.errors.card = "";
+      console.log('this.details.number :', this.details.number.length);
       if (!this.details.number)
         this.errors.card = "Please fill up Credit Card Number.";
       else {

@@ -78,7 +78,7 @@
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    <a-icon v-else type="close-circle" style="color: red; font-weight: bold;" />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -183,7 +183,7 @@
       :show="show_payment"
       @pay="proceedToSubmit"
       @close="show_payment = false"
-      :payment_amount="installment ? installment.amount : total_payable"
+      :payment_amount="total_payable"
     />
   </a-row>
 </template>
@@ -432,6 +432,9 @@ export default {
       this.transaction_details.total_payable = total;
       this.transaction_details.amount_paid = total;
       return total;
+    },
+    user() {
+      return this.$store.state.user_session.user;
     }
   },
   mounted() {
@@ -809,4 +812,11 @@ export default {
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
 }
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
+}
+
 </style>

@@ -458,7 +458,7 @@
                 Email Address
                 <i style="color: red">*</i>
               </span>
-              <a-input v-model="form.business_address.email" placeholder="Email Address*"></a-input>
+              <a-input style="text-transform: none;" v-model="form.business_address.email" placeholder="Email Address*"></a-input>
             </a-form-item>
           </a-col>
         </a-row>
