@@ -245,7 +245,7 @@
               Email Address
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.contact_details.email"></a-input>
+            <a-input style="text-transform: none;" v-model="form.contact_details.email"></a-input>
           </a-form-item>
         </a-col>
       </a-row>

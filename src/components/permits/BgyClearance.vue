@@ -148,6 +148,7 @@
                   :wrapper-col="{ span: 16 }"
                 >
                   <a-input
+                    style="text-transform: none;"
                     placeholder="Applicant's/Owner's/Manager's Email"
                     v-model="form.business.amo.email"
                   ></a-input>

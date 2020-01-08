@@ -25,6 +25,7 @@
           <span slot="tab">
             <a-icon type="snippets"></a-icon>Activities
           </span>
+          <p v-if="!activities || !activities.length" style="text-align: center; font-size: 20px;"><i>No Activity.</i></p>
           <a-card
             v-for="item in activities"
             :key="item.doc_type"

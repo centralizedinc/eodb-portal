@@ -36,6 +36,7 @@
               @updateGross="updateGross"
               @updateCapital="updateCapital"
               @updateDocsPayment="updateDocsPayment"
+              :checkSelectedDocs="checkSelectedDocs"
             />
           </a-col>
           <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
@@ -84,7 +85,7 @@
                         type="loading"
                         style="color: green; font-weight: bold;"
                       />
-                      <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                      <a-icon v-else type="close-circle" style="color: red; font-weight: bold;" />
                     </div>
                   </template>
                   <template slot="action" slot-scope="text, record">
@@ -328,7 +329,8 @@ export default {
           contact_no: "",
           email: ""
         },
-        attachments: []
+        attachments: [],
+        lack_documents: []
       },
       document_columns: [
         {
@@ -437,53 +439,54 @@ export default {
       fetching_data: false,
       installment: null,
       departments: [],
-      computation_formula: ""
+      computation_formula: "",
+      checkSelectedDocs: false
     };
   },
   created() {
     this.init();
   },
-  mounted() {
-    console.log(
-      "this.$store.state.permits.filing_permit :",
-      this.$store.state.permits.filing_permit
-    );
+  // mounted() {
+  //   console.log(
+  //     "this.$store.state.permits.filing_permit :",
+  //     this.$store.state.permits.filing_permit
+  //   );
 
-    // GET DEPARTMENTS
-    const departments = this.deepCopy(
-      this.$store.state.permits.filing_permit.approvers
-    );
-    console.log("departments :", departments);
-    this.departments = departments;
-    this.form.permit_code = this.$store.state.permits.filing_permit._id;
+  //   // GET DEPARTMENTS
+  //   const departments = this.deepCopy(
+  //     this.$store.state.permits.filing_permit.approvers
+  //   );
+  //   console.log("departments :", departments);
+  //   this.departments = departments;
+  //   this.form.permit_code = this.$store.state.permits.filing_permit._id;
 
-    // GET REQUIREMENTS
-    const requirements = this.deepCopy(
-      this.$store.state.permits.filing_permit.requirements
-    );
-    console.log("requirements :", requirements);
-    const doc_req = requirements.map(v => {
-      return {
-        title: v.name,
-        status: 0,
-        keyword: v.keyword,
-        hidden: v.required
-      };
-    });
+  //   // GET REQUIREMENTS
+  //   const requirements = this.deepCopy(
+  //     this.$store.state.permits.filing_permit.requirements
+  //   );
+  //   console.log("requirements :", requirements);
+  //   const doc_req = requirements.map(v => {
+  //     return {
+  //       title: v.name,
+  //       status: 0,
+  //       keyword: v.keyword,
+  //       hidden: v.required
+  //     };
+  //   });
 
-    doc_req.forEach(v => {
-      if (v.hidden)
-        this.form.attachments.push({
-          doc_type: v.keyword,
-          files: []
-        });
-    });
-    console.log("this.form :", this.form);
-    this.document_data_source = doc_req;
+  //   doc_req.forEach(v => {
+  //     // if (v.hidden)
+  //     this.form.attachments.push({
+  //       doc_type: v.keyword,
+  //       files: []
+  //     });
+  //   });
+  //   console.log("this.form :", this.form);
+  //   this.document_data_source = doc_req;
 
-    // To check payments needs to be pay
-    this.updateDocsPayment();
-  },
+  //   // To check payments needs to be pay
+  //   this.updateDocsPayment();
+  // },
   watch: {
     current_step() {
       console.log("this.form step :", this.form);
@@ -512,6 +515,18 @@ export default {
   },
   methods: {
     init() {
+      console.log(
+        "this.$store.state.permits.filing_permit :",
+        this.$store.state.permits.filing_permit
+      );
+
+      // GET DEPARTMENTS
+      const departments = this.deepCopy(
+        this.$store.state.permits.filing_permit.approvers
+      );
+      console.log("departments :", departments);
+      this.departments = departments;
+
       const { mode, ref_no } = this.$route.query;
       console.log("this.$route.query :", this.$route.query);
       if (mode && mode === "renewal" && ref_no) {
@@ -532,6 +547,10 @@ export default {
             this.form = app;
             this.mapFormForRenewal();
             this.fetching_data = false;
+
+            // To check payments needs to be pay
+            this.checkSelectedDocs = true;
+            // this.updateDocsPayment();
           })
           .catch(err => {
             console.log("GET_FEES_COMPUTATION err :", err);
@@ -550,6 +569,36 @@ export default {
             console.log("GET_FEES_COMPUTATION result.data :", result.data);
             if (!result.data.errors)
               this.computation_formula = result.data.computation;
+
+            this.form.permit_code = this.$store.state.permits.filing_permit._id;
+
+            // GET REQUIREMENTS
+            const requirements = this.deepCopy(
+              this.$store.state.permits.filing_permit.requirements
+            );
+            console.log("requirements :", requirements);
+            const doc_req = requirements.map(v => {
+              return {
+                title: v.name,
+                status: 0,
+                keyword: v.keyword,
+                hidden: v.required
+              };
+            });
+
+            doc_req.forEach(v => {
+              // if (v.hidden)
+              this.form.attachments.push({
+                doc_type: v.keyword,
+                files: []
+              });
+            });
+            console.log("this.form :", this.form);
+            this.document_data_source = doc_req;
+
+            // To check payments needs to be pay
+            this.checkSelectedDocs = true;
+            // this.updateDocsPayment();
           })
           .catch(err => {
             console.log("GET_FEES_COMPUTATION err :", err);
@@ -1148,6 +1197,8 @@ export default {
       this.payments_data_source[fire_index].amount = computed_amount * 0.15;
     },
     updateDocsPayment(values) {
+      console.log("values :", values);
+      this.form.lack_documents = values;
       const payments = [
         {
           description: "Business Permit Fee",
@@ -1172,7 +1223,7 @@ export default {
       console.log("data :", data);
       data.forEach(dt => {
         var is_included = values ? values.includes(dt.keyword) : false;
-        if (!is_included)
+        if (is_included)
           payments.push({
             description: dt.name,
             fee_type: dt.fee_type,
@@ -1243,5 +1294,11 @@ export default {
 .fill-up-form .ant-input,
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
+}
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
 }
 </style>

@@ -187,7 +187,7 @@
               Email Address
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.email"></a-input>
+            <a-input style="text-transform: none;" v-model="form.owner_details.email" placeholder="Email Address*"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
