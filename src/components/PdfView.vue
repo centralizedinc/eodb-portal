@@ -21,6 +21,7 @@ import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
+import COMMUNITYTAXCERT_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
 
 var printers = {
   BGYCLEARANCE,
@@ -28,7 +29,8 @@ var printers = {
   BUSINESSPERMIT,
   POLICECLEARANCE,
   RECEIPT,
-  BUSINESSPERMIT_SAN_ANTONIO
+  BUSINESSPERMIT_SAN_ANTONIO,
+  COMMUNITYTAXCERT_SAN_ANTONI
 };
 
 // var printers = {
