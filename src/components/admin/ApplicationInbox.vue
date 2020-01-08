@@ -8,9 +8,9 @@
         :style="`color: ${getStatusColor(record)}; font-weight: bold;`"
       >{{getDepartmentStatus(record)}}</span>
       <span slot="mode" slot-scope="text">{{getDocketMode(text)}}</span>
-      <span slot="age" slot-scope="text" style="text-align:center">
-        <a-tooltip :title="computeAge(text).display">
-          <a-progress :percent="computeAge(text).percent" :showInfo="false"></a-progress>
+      <span slot="age" slot-scope="text, record" style="text-align:center">
+        <a-tooltip :title="computeAge(record.date_created).display">
+          <a-progress :percent="computeAge(record.date_created).percent" :showInfo="false"></a-progress>
         </a-tooltip>
       </span>
       <span slot="actions" slot-scope="text, record">
@@ -130,7 +130,7 @@ export default {
         },
         {
           title: "AGE",
-          dataIndex: "date_created",
+          dataIndex: "date_created_age",
           scopedSlots: { customRender: "age" }
         },
         {

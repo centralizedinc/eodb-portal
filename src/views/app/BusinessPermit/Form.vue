@@ -1058,6 +1058,7 @@ export default {
 
       // Map Attachments
       this.form.attachments.forEach(attachment => {
+        attachment.files = attachment.files.map(v => v.url);
         const index = this.document_data_source.findIndex(
           v => v.keyword === attachment.doc_type
         );

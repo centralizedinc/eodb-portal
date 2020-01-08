@@ -497,8 +497,9 @@ router.route('/:id')
             });
     })
 
-router.route('/applications/business/:ref_no')
+router.route('/applications/:permit_type/:ref_no')
     .get((req, res) => {
+        console.log('req.params.permit_type :', req.params.permit_type);
         // BussinessApplicationDao.findOneByReference(req.params.ref_no)
         ApplicationDao.findOneByReference(req.params.ref_no)
             .then((result) => {

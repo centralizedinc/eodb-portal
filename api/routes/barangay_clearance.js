@@ -38,7 +38,7 @@ router.route('/epermit/:barangay_no')
             });
     })
     .post((req, res) => {
-        BarangayPermitDao.modifyOne({ barangay_no: req.params.barangay_no }, { epermit_attachment: req.body.attachment })
+        BarangayPermitDao.modifyOne({ barangay_no: req.params.barangay_no }, { epermit_attachment: req.body })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {

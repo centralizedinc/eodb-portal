@@ -4,7 +4,7 @@
     <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
     <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
     <a-row slot="action" slot-scope="text, record">
-      <a-col :span="12">
+      <a-col :span="12" v-if="record.permit_type === 'business'" style="text-align: center;">
         <a-popconfirm
           title="Click PROCEED to redirect in Renewal Form."
           okText="Proceed"
@@ -16,7 +16,7 @@
           </a-tooltip>
         </a-popconfirm>
       </a-col>
-      <a-col :span="12">
+      <a-col :span="record.permit_type === 'business' ? 12 : 24" style="text-align: center;">
         <a-tooltip title="Print">
           <a-icon
             type="printer"
@@ -86,7 +86,7 @@ export default {
       );
     },
     print(record) {
-      window.open(record.epermit_attachment);
+      window.open(record.epermit_attachment.url);
       w.print();
     },
     getPermitNo(permit) {
