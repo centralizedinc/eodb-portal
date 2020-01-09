@@ -101,7 +101,7 @@ function getContent(details){
                     text: ""
                   },
                   {
-                text: "BARANGAY CLEARANCE",
+                text: "BARANGAY CLEARANCE FOR BUSINESS",
                 fontSize: 14,
                 characterSpacing: 2,
                 alignment: 'center',

@@ -29,23 +29,6 @@ function fillup(details) {
 
 
     // const form = require("./template/policeclearance_template").template;
-
-
-    // import { IoTAnalytics } from "aws-sdk";
-
-    // /**
-    //  *
-    //  * @param {Object} details
-    //  * @returns {Object} document
-    //  */
-    // function fillup(details) {
-    //     console.log("fillup details printer: " + JSON.stringify(details))
-    //     var content = getContent(details);
-    //     console.log('get content ###### :', content);
-    //     return {
-    //         content: content,
-    //         pageSize: 'LEGAL'
-    //     };
 }
 /**
  * 
@@ -358,6 +341,7 @@ function getContent(details) {
                             text: ""
                         },
                         {
+                            // layout: "noBorders", 
                             table: {
                                 widths: [110, 231,],
                                 body: [
