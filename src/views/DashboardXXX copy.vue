@@ -64,7 +64,7 @@
           />
         </a-col>
         <a-col
-          :xs="{span: 14}"
+          :xs="{span: 15}"
           :sm="{span: 16}"
           :md="{span: 14}"
           :lg="{span: 2}"
@@ -172,14 +172,13 @@
         </a-menu>
       </a-drawer>-->
     </a-layout-header>
-
     <!-- ------------------------------------------------ -->
     <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
       <a-row type="flex" justify="center" style="margin-top: 10vh">
         <a-col :span="4" style="margin-right:1vw">
           <a-card style="margin-bottom:2vh; color: #f2f2f2">
             <a-row type="flex" justify="center">
-              <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 8}" style="text-align: center">
+              <a-col :span="8" style="text-align: center">
                 <a-avatar
                   :src="user.avatar"
                   :size="54"
@@ -193,7 +192,7 @@
                 </a-avatar>
               </a-col>
               <br />
-              <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 24}">
+              <a-col :span="24">
                 <a-row type="flex" justify="center">
                   <a-col :span="24">
                     <h3
@@ -257,27 +256,14 @@
             </a-menu>
           </a-affix>
         </a-col>
-
-        <a-col
-          :xs="{span: 14}"
-          :sm="{span: 14}"
-          :md="{span: 14}"
-          :lg="{span: 14}"
-          style="margin-right:1vw; margin-left:1vw"
-        >
+        <a-col :span="14" style="margin-right:1vw; margin-left:1vw">
           <img
             style="width: 100%; height:auto"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cover.png"
           />
           <router-view></router-view>
         </a-col>
-        <a-col
-          :xs="{span: 20}"
-          :sm="{span: 20}"
-          :md="{span: 4}"
-          :lg="{span: 4}"
-          style="margin-left:1vw"
-        >
+        <a-col :span="4" style="margin-left:1vw">
           <a-affix :offsetTop="60">
             <a-card
               :headStyle="{
