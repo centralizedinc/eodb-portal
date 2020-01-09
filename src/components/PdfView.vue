@@ -23,6 +23,7 @@ import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
 import CEDULA_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
 
+
 var printers = {
   BGYCLEARANCE,
   FIREANDSAFETY,
@@ -31,6 +32,7 @@ var printers = {
   RECEIPT,
   BUSINESSPERMIT_SAN_ANTONIO,
   CEDULA_SAN_ANTONIO
+
 };
 
 // var printers = {
@@ -139,8 +141,15 @@ export default {
           requestor: "Mark Quijom",
           date_created: new Date()
         }
-      } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
-        this.pdf_details = {}
+      // } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
+      //   this.pdf_details = {
+      //      business_name: "Dell Laptop Inc.",
+      //     business_owner: "Godfrey Rivera",
+      //     business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+      //     business_nature: "Information Technology",
+      //     requestor: "Mark Quijom",
+      //     date_created: new Date()
+      //   }
       }
       console.log("this.pdf_details :", this.pdf_details);
       // Process PDF
