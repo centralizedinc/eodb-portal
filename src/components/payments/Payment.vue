@@ -98,4 +98,11 @@ export default {
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
 }
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
+}
+
 </style>

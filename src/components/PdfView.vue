@@ -88,9 +88,9 @@ export default {
           plate_no: "1546238984",
           ownership_type: "SINGLE PROPRIETORSHIP",
           valid_until: new Date(2019, 11, 31),
-          area: "50 sq.m",
+          area: "5000000 sq.m",
           date_issued: new Date(2019, 3, 20),
-          application_type: "NEW",
+          application_type: "RENEWAL",
           mode_of_payment: "QUARTERLY",
           transaction_no: "115498845612848",
           transactions: [
@@ -160,6 +160,15 @@ export default {
         const document = printer.fillup(this.pdf_details),
           pdfGenerator = pdfMake.createPdf(document);
 
+          // ---------------for pdf testing---------------------
+          // pdfMake.createPdf(document).open(err =>{
+          //   if (err){
+          //     reject(err)
+          //   } else{
+          //     resolve();
+          //   }
+          // })
+          // ------------for quick testing------------------
         pdfGenerator.getBuffer(buffer => {
           var file = new Blob([buffer], {
               type: "application/pdf"

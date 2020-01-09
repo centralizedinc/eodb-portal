@@ -209,12 +209,31 @@ export default {
             message: "Approve!",
             description: `You have approved Application #${this.form.reference_no}`
           });
-          if (results.permit)
-            return this.getAddress(results.permit.details.business_address);
+          if (results.permit) {
+            if (results.permit.details.permit_type === "business")
+              return this.getAddress(results.permit.details.business_address);
+            // else if(results.permit.details.permit_type === 'cedula') // Cedula has no address
+            // return this.getAddress(results.permit.details.business_address);
+            else if (results.permit.details.permit_type === "barangay") {
+              var getAddresses = [];
+              // If requesting for residential certificate
+              if (results.permit.details.purpose.includes("pc"))
+                getAddresses.push(
+                  this.getAddress(results.permit.details.residential_address)
+                );
+              // If requesting barangay clearance for business permit
+              if (results.permit.details.purpose.includes("bp"))
+                getAddresses.push(
+                  this.getAddress(results.permit.details.business_address)
+                );
+              if (getAddresses.length) return Promise.all(getAddresses);
+            } else if (results.permit.details.permit_type === "police")
+              return this.getAddress(results.permit.details.address_details);
+          }
         })
-        .then(business_address => {
-          console.log("getAddress result :", business_address);
-          if (results.permit && business_address) {
+        .then(address => {
+          console.log("getAddress result :", address);
+          if (results.permit) {
             if (results.permit.is_approve) {
               if (results.permit.details.permit_type === "business") {
                 const valid_until = new Date(
@@ -224,7 +243,7 @@ export default {
                   business_name:
                     results.permit.details.business_details.business_name,
                   business_no: results.permit.details.business_no,
-                  business_address,
+                  business_address: address,
                   business_owner: `${results.permit.details.owner_details.name.first} ${results.permit.details.owner_details.name.last}`,
                   plate_no: results.permit.details.reference_no,
                   ownership_type: this.getBusinessType(
@@ -243,27 +262,102 @@ export default {
                   transactions: results.permit.payments.payment_breakdown
                 };
                 return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
+              } else if (results.permit.details.permit_type === "cedula") {
+                // const details = {};
+                // return this.$upload(details, "CEDULA");
+              } else if (results.permit.details.permit_type === "barangay") {
+                const details = {
+                  business_name:
+                    results.permit.details.business_details.business_name,
+                  business_owner: "",
+                  business_address: address[0] || "",
+                  residential_address: address[1] || "",
+                  business_nature:
+                    results.permit.details.business_details.business_type,
+                  requestor: "",
+                  date_created: results.permit.details.date_created
+                };
+                return this.$upload(details, "BGYCLEARANCE");
+              } else if (results.permit.details.permit_type === "police") {
+                const details = {
+                  police_no: results.permit.details.police_no,
+                  name: `${results.permit.details.personal_details.name.first} ${results.permit.details.personal_details.name.last}`,
+                  address,
+                  birth_date: results.permit.details.personal_details.birthday,
+                  birth_place:
+                    results.permit.details.personal_details.birthplace,
+                  findings: "",
+                  purpose: "",
+                  validity: "",
+                  ctc_no: results.permit.details.personal_details.ctc_no,
+                  date_created: results.permit.details.date_created,
+                  verified_by_first: "",
+                  verified_by_second: ""
+                };
+                return this.$upload(details, "POLICECLEARANCE");
               }
             }
-            // if(!results.permit.is_approve) return this.$upload(results.permit.details, "BUSINESSPERMIT_SAN_ANTONIO")
           }
         })
         .then(blob => {
-          if (blob && results.permit.details.permit_type === "business") {
-            var file = new File(
-              [blob],
-              `business-permit-${Date.now()}-smart-juan.pdf`,
-              {
+          if (blob) {
+            if (results.permit.details.permit_type === "business") {
+              var file = new File(
+                [blob],
+                `business-permit-${Date.now()}-smart-juan.pdf`,
+                {
+                  type: "application/pdf",
+                  lastModified: Date.now()
+                }
+              );
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
+                business_no: results.permit.details.business_no,
+                form_data
+              });
+            } else if (results.permit.details.permit_type === "cedula") {
+              var file = new File([blob], `ctc-${Date.now()}-smart-juan.pdf`, {
                 type: "application/pdf",
                 lastModified: Date.now()
-              }
-            );
-            var form_data = new FormData();
-            form_data.append("file", file);
-            return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
-              business_no: results.permit.details.business_no,
-              form_data
-            });
+              });
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_CEDULA_EPERMIT_ATTACHMENT", {
+                cedula_no: results.permit.details.cedula_no,
+                form_data
+              });
+            } else if (results.permit.details.permit_type === "police") {
+              var file = new File(
+                [blob],
+                `police-clearance-${Date.now()}-smart-juan.pdf`,
+                {
+                  type: "application/pdf",
+                  lastModified: Date.now()
+                }
+              );
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_POLICE_EPERMIT_ATTACHMENT", {
+                police_no: results.permit.details.police_no,
+                form_data
+              });
+            } else if (results.permit.details.permit_type === "barangay") {
+              var file = new File(
+                [blob],
+                `barangay-clearance-${Date.now()}-smart-juan.pdf`,
+                {
+                  type: "application/pdf",
+                  lastModified: Date.now()
+                }
+              );
+              var form_data = new FormData();
+              form_data.append("file", file);
+              return this.$store.dispatch("SAVE_BARANGAY_EPERMIT_ATTACHMENT", {
+                barangay_no: results.permit.details.barangay_no,
+                form_data
+              });
+            }
           }
         })
         .then(result => {
@@ -278,6 +372,9 @@ export default {
           console.log("APPROVE_DOCKET err :", err);
           this.approving_application = false;
         });
+    },
+    generateDocsForBusiness(application) {
+      // if(application.permit)
     },
     getAddress(address) {
       return new Promise((resolve, reject) => {
