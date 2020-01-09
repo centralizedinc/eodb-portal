@@ -46,50 +46,6 @@ function getContent(details){
                 ]
             }
         },
-        // {
-        //   layout: "noBorders",
-        //   table: {
-        //     heights: [10],
-        //     widths: [400],
-        //     body: [
-        //       [
-        //         {
-        //           text: "REPUBLIC OF THE PHILIPPINES",
-        //           fontSize: 14,
-        //           bold: true,
-        //           characterSpacing: 1,
-        //           alignment: 'center',
-        //           // right,down,left,up
-        //           margin: [1, -2, 0, 0]
-        //         }
-        //       ]
-        //     ]
-        //   }
-    
-        // },
-        /////////////////////////////////////////////////////////////////////// municipality
-        // {
-        //   layout: "noBorders",
-        //   table: {
-        //     widths: [400],
-        //     heights: [6,],
-        //     body: [
-        //       [{
-        //         text: "(Municipality)",
-        //         fontSize: 7,
-        //         characterSpacing: 2,
-        //         alignment: 'center',
-        //         // right,down,left,up
-        //         margin: [1, -4, 0, 0]
-        //       },
-    
-    
-        //       ]
-    
-        //     ]
-        //   }
-        // },
-        /////////////////////////////////////////////////////////// brgy clearance
         {
           layout: "noBorders",
           table: {
@@ -187,8 +143,9 @@ function getContent(details){
             heights: [6,],
             body: [
               [{
-                text: ` This is to certify that ${checkText(details.business_name)} owned and operated by ${checkText(details.business_owner)} with business address located ${checkText(details.business_address)}, after complying with the requirements prescribed by his Office, is hereby issued a BARANGAY CLEARANCE for the purpose of securing a Mayor’s Permit in order to ${checkText(details.business_nature)} in accordance with Barangay  Revenue Ordinance of 2008. However, the Barangay Clearance may be cancelled or revoked anytime if public safety and interest so require.`,
-                fontSize: 10,
+                text: ` This is to certify that ${checkText(details.name)} ${getAge(details.birth_date)} years old, has been a resident of/at ${checkText(details.address)}.
+                This CERTIFICATION is being issued upon the request of this ${formatDate(details.date_created, { day: '2-digit' })} day of ${formatDate(details.date_created, { month: 'long' })},  ${formatDate(details.date_created, { year: 'numeric' })} for whatever legal purpose it may serve`,
+                fontSize: 12,
                 alignment: 'justify',
                 // right,down,left,up
                 margin: [20, 0, 0, 0]
@@ -223,44 +180,44 @@ function getContent(details){
         },
     
         //////////////////////////////////////////////////////////////// request
-        {
-          layout: "noBorders",
-          table: {
-            widths: [400],
-            heights: [6,],
-            body: [
-              [{
-                text: " This Barangay Clearance is hereby issued upon request of ",
-                fontSize: 10,
-                alignment: 'justify',
-                // right,down,left,up
-                margin: [20, 0, 0, 0]
-              },
-              ]
+        // {
+        //   layout: "noBorders",
+        //   table: {
+        //     widths: [400],
+        //     heights: [6,],
+        //     body: [
+        //       [{
+        //         text: " This Barangay Clearance is hereby issued upon request of ",
+        //         fontSize: 10,
+        //         alignment: 'justify',
+        //         // right,down,left,up
+        //         margin: [20, 0, 0, 0]
+        //       },
+        //       ]
     
-            ]
-          }
-        },
+        //     ]
+        //   }
+        // },
         ////////////////////////////////////////////////////////////////  requestor
         // requestor
-        {
-          layout: "noBorders",
-          table: {
-            widths: [400],
-            heights: [6,],
-            body: [
-              [{
-                text: checkText(details.requestor),
-                fontSize: 12,
-                alignment: 'justify',
-                // right,down,left,up
-                margin: [20, 0, 0, 0]
-              },
-              ]
+        // {
+        //   layout: "noBorders",
+        //   table: {
+        //     widths: [400],
+        //     heights: [6,],
+        //     body: [
+        //       [{
+        //         text: checkText(details.requestor),
+        //         fontSize: 12,
+        //         alignment: 'justify',
+        //         // right,down,left,up
+        //         margin: [20, 0, 0, 0]
+        //       },
+        //       ]
     
-            ]
-          }
-        },
+        //     ]
+        //   }
+        // },
     
         /////////////////////////////////////////////////////////////// Space
         {
@@ -282,24 +239,24 @@ function getContent(details){
         },
         ////////////////////////////////////////////////////////////////  issued
         // date_created
-        {
-          layout: "noBorders",
-          table: {
-            widths: [400],
-            heights: [6,],
-            body: [
-              [{
-                text: ` Issued this ${formatDate(details.date_created, { day: '2-digit' })} day of ${formatDate(details.date_created, { month: 'long' })},  ${formatDate(details.date_created, { year: 'numeric' })}. `,
-                fontSize: 10,
-                alignment: 'justify',
-                // right,down,left,up
-                margin: [20, 0, 0, 0]
-              },
-              ]
+        // {
+        //   layout: "noBorders",
+        //   table: {
+        //     widths: [400],
+        //     heights: [6,],
+        //     body: [
+        //       [{
+        //         text: ` Issued this ${formatDate(details.date_created, { day: '2-digit' })} day of ${formatDate(details.date_created, { month: 'long' })},  ${formatDate(details.date_created, { year: 'numeric' })}. `,
+        //         fontSize: 10,
+        //         alignment: 'justify',
+        //         // right,down,left,up
+        //         margin: [20, 0, 0, 0]
+        //       },
+        //       ]
     
-            ]
-          }
-        },/////////////////////////////////////////////////////////////// Space
+        //     ]
+        //   }
+        // },/////////////////////////////////////////////////////////////// Space
         {
           layout: "noBorders",
           table: {
@@ -378,6 +335,19 @@ function getContent(details){
 function checkText(text) {
     if (!text) return " ";
     return text.toUpperCase();
+}
+
+
+function getAge(DOB) {
+  var today = new Date();
+  var birthDate = new Date(DOB);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age = age - 1;
+  }
+
+  return age;
 }
 
 /**
