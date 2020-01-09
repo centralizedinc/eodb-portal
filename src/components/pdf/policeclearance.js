@@ -1,4 +1,4 @@
-const form = require("./template/businesspermit_template").template;
+const form = require("./template/policeclearance_template").template;
 
 
 /**
@@ -14,7 +14,7 @@ function fillup(details) {
         background: function (page) {
             return [{
                 image: "form",
-                width: 370
+                width: 600
 
             }]
         },
@@ -57,7 +57,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                heights: [70],
+                heights: [100],
                 widths: [300],
                 body: [
                     [
@@ -68,7 +68,7 @@ function getContent(details) {
                             characterSpacing: 0,
                             alignment: 'center',
                             // right,down,left,up
-                            margin: [1, -20, 0, 0]
+                            margin: [0, 0, 0, 0]
                         }
                     ]
                 ]
@@ -80,62 +80,57 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                heights: [1],
-                widths: [300],
+                widths: [100,'*',100],
                 body: [
                     [
+                        {
+                            text: ""
+                        },
                         {
                             text: "National Police Commission",
-                            fontSize: 8,
+                            fontSize: 14,
                             bold: true,
                             characterSpacing: 0,
-                            alignment: 'left',
+                            alignment: 'center',
                             // right,down,left,up
-                            margin: [95, -20, 0, 0]
+                            margin: [0,0, 0, 0]
+                        },
+                        {
+                            text: ""
                         }
-                    ]
-                ]
-            }
-
-        },
-        ////////////////////////////////////////////////////////////////////////////////////
-        {
-            layout: "noBorders",
-            table: {
-                heights: [1],
-                widths: [300],
-                body: [
+                    ],
                     [
+                        {
+                            text: ""
+                        },
                         {
                             text: "Quezon Police Provincial Office",
-                            fontSize: 8,
+                            fontSize: 14,
                             bold: true,
                             characterSpacing: 0,
-                            alignment: 'left',
+                            alignment: 'center',
                             // right,down,left,up
-                            margin: [92, -16, 0, 0]
+                            margin: [0, 0, 0, 0]
+                        },
+                        {
+                            text: ""
                         }
-                    ]
-                ]
-            }
-
-        },
-        ////////////////////////////////////////////////////////////////////////////////////
-        {
-            layout: "noBorders",
-            table: {
-                heights: [1],
-                widths: [300],
-                body: [
+                    ],
                     [
                         {
+                            text: ""
+                        },
+                        {
                             text: "San Antonio Police Station",
-                            fontSize: 8,
+                            fontSize: 14,
                             bold: true,
                             characterSpacing: 0,
-                            alignment: 'left',
+                            alignment: 'center',
                             // right,down,left,up
-                            margin: [100, -12, 0, 0]
+                            margin: [0, 0, 0, 0]
+                        },
+                        {
+                            text: ""
                         }
                     ]
                 ]
@@ -143,21 +138,20 @@ function getContent(details) {
 
         },
         /////////////////////////////////////////////////////////////////////////////////////
+        //spacing
         {
             layout: "noBorders",
             table: {
-                heights: [1],
-                widths: [300],
                 body: [
                     [
                         {
                             text: " ",
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
                             // right,down,left,up
-                            margin: [1, -20, 0, 0]
+                            margin: [0, 0, 0, 0]
                         }
                     ]
                 ]
@@ -171,7 +165,7 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [1],
-                widths: [300],
+                widths: [500],
                 body: [
                     [
                         {
@@ -180,12 +174,12 @@ function getContent(details) {
                                 month: "2-digit",
                                 day: "2-digit"
                             }),
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'right',
                             // right,down,left,up
-                            margin: [1, -20, 2, 0]
+                            margin: [0, 0, 0, 0]
                         }
                     ]
                 ]
@@ -197,17 +191,17 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [1],
-                widths: [300],
+                widths: [502],
                 body: [
                     [
                         {
                             text: "_____________",
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'right',
                             // right,down,left,up
-                            margin: [1, -24, 0, 0]
+                            margin: [5, -15, 0, 0]
                         }
                     ]
                 ]
@@ -219,17 +213,17 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [1],
-                widths: [300],
+                widths: [500],
                 body: [
                     [
                         {
                             text: "Date",
-                            fontSize: 5,
+                            fontSize: 10,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'right',
                             // right,down,left,up
-                            margin: [1, -24, 9, 0]
+                            margin: [0, -10,18, 0]
                         }
                     ]
                 ]
@@ -242,20 +236,26 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [1],
-                widths: [300],
+                widths: [100,'*',100],
                 body: [
                     [
                         {
+                            text: ""
+                        },
+                        {
                             text: "POLICE CLEARANCE CERTIFICATE",
-                            fontSize: 9,
+                            fontSize: 14,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
                             // right,down,left,up
-                            margin: [1, -16, 9, 0]
+                            margin: [0, 10, 0, 20]
+                        },
+                        {
+                            text: ""
                         }
-                    ]
                 ]
+            ]
             }
 
         },
@@ -265,27 +265,30 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [4],
-                widths: [213, 79,],
+                widths: [75,180, 150],
                 body: [
                     [
                         {
+                            text: ""
+                        },
+                        {
                             text: "TO WHOM IT MAY CONCERN:",
-                            fontSize: 7,
+                            fontSize: 12,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
                             // right,down,left,up
-                            margin: [1, -8, 0, 0]
+                            margin: [0, 0, 0, 0]
 
                         },
                         {
                             text: ` No. ${checkText(details.police_no)}`,
-                            fontSize: 6,
+                            fontSize: 14,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'right',
                             // right,down,left,up
-                            margin: [1, -10, 0, 0]
+                            margin: [0, 0, 0, 0]
                         },
 
                     ]
@@ -298,17 +301,20 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [1],
-                widths: [300],
+                widths: [75,"*",100],
                 body: [
                     [
                         {
-                            text: "This is to certify that the person whose personal details below, has passed",
-                            fontSize: 5,
+                            text: ""
+                        },
+                        {
+                            text: " This is to certify that the person whose personal details below, has passed the records verification which was conducted by this station. The result(s) of which is/are listed below:",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
                             // right,down,left,up
-                            margin: [8, -6, 0, 0]
+                            margin: [0, 10, 0, 5]
                         }
                     ]
                 ]
@@ -316,288 +322,233 @@ function getContent(details) {
 
         },
         ////////////////////////////////////////////////////////////////////////////////////////
-        {
-            layout: "noBorders",
-            table: {
-                heights: [1],
-                widths: [300],
-                body: [
-                    [
-                        {
-                            text: "the records verification which was conducted by this station. The result(s) of which is/are listed below:",
-                            fontSize: 5,
-                            bold: true,
-                            characterSpacing: 0,
-                            alignment: 'left',
-                            // right,down,left,up
-                            margin: [1, -6, 0, 0]
-                        }
-                    ]
-                ]
-            }
+        // {
+        //     layout: "noBorders",
+        //     table: {
+        //         heights: [1],
+        //         widths: [100,'*',100],
+        //         body: [
+        //             [
+        //                 {
+        //                     text: ""
+        //                 },
+        //                 {
+        //                     text: "the records verification which was conducted by this station. The result(s) of which is/are listed below:",
+        //                     fontSize: 8,
+        //                     bold: true,
+        //                     characterSpacing: 0,
+        //                     alignment: 'left',
+        //                     // right,down,left,up
+        //                     margin: [0, 0, 0, 0]
+        //                 }
+        //             ]
+        //         ]
+        //     }
 
-        },
+        // },
         //////////////////////////////////////////////////////////////////////////////////////////
         // name
         {
-            //layout: "noBorders",        
+            layout: "noBorders",     
             table: {
-                widths: [60, 231,],
-                heights: [6,],
+                widths: [70, '*', 100],
                 body: [
-                    [{
-                        text: "NAME                      :",
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-                    {
-                        text: checkText(details.name),
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
+                    [
+                        {
+                            text: ""
+                        },
+                        {
+                            table: {
+                                widths: [110, 231,],
+                                body: [
+                                    [{
+                                        text: "NAME                      :",
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                                    {
+                                        text: checkText(details.name),
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    }
+                                    ],
+                                    [{
+                                        text: "ADDRESS                :",
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                                    {
+                                        text: checkText(details.address),
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                
+                
+                
+                                    ],
+                                    [{
+                                        text: "DATE OF BIRTH      :",
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                                    {
+                                        text: formatDate(details.birth_date),
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                
+                
+                
+                                    ],
+                                    [{
+                                        text: "PLACE OF BIRTH   :",
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                                    {
+                                        text: checkText(details.birth_place),
+                                        fontSize: 12,
+                                        alignment: 'left',
+                                        // right,down,left,up
+                                        margin: [0, 0, 0, 0]
+                                    },
+                
+                
+                
+                                    ]
+                
+                                ]
+                            }
+                        },
+                        {
+                            text: ""
+                        }
                     ]
-
                 ]
-            }
+            }   
+            
         },
-        ////////////////////////////////////////////////////////////////////////////////////////
-        // address
-        {
-            //layout: "noBorders",        
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "ADDRESS                :",
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-                    {
-                        text: checkText(details.address),
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-        ////////////////////////////////////////////////////////////////////////////////
-        // birth_date
-        {
-            //layout: "noBorders",        
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "DATE OF BIRTH     :",
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-                    {
-                        text: formatDate(details.birth_date),
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-        // birth_place
-        {
-            //layout: "noBorders",        
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "PLACE OF BIRTH  :",
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-                    {
-                        text: checkText(details.birth_place),
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-
         ////////////////////////////////////////////////////////////////////////////////////////
         // findings
         {
 
             layout: "noBorders",
             table: {
-                widths: [60, 231,],
+                widths: [70, 110, '*',40],
                 heights: [6,],
                 body: [
-                    [{
-                        text: "FINDINGS                  :",
-                        fontSize: 6,
+                    [
+                        {
+                            text: ""
+                        },
+                        {
+                        text: "FINDINGS                 :",
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
                     {
                         text: checkText(details.findings),
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-        // purpose
-        {
-
-            layout: "noBorders",
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "PURPOSE                  :",
-                        fontSize: 6,
+                    {
+                        text: ""
+                    }
+                    ],
+                    [
+                        {
+                            text: ""
+                        },
+                        {
+                        text: "PURPOSE                 :",
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
                     {
                         text: checkText(details.purpose),
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-
-        ///////////////////////////////////////////////////////////////////////////////////////
-        // validity
-        {
-            layout: "noBorders",
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "VALID FOR                :",
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
                     {
-                        text: checkText(details.validity),
-                        fontSize: 6,
+                        text: ""
+                    }
+                    ],
+                    [
+                        {
+                            text: ""
+                        },
+                        {
+                        text: "VALID FOR               :",
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-        ///////////////////////////////////////////////////////////////////////////////////////
-        // ctc_no
-        {
-            layout: "noBorders",
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "Res. Cert. No.           :",
-                        fontSize: 6,
+                    {
+                        text: "SIX MONTHS (6) FROM THE DATE OF ISSUANCE",
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
+                    },
+                    {
+                        text: ""
+                    }
+                    ],
+                    [
+                        {
+                            text: ""
+                        },
+                        {
+                        text: "Res. Cert. No.          :",
+                        fontSize: 12,
+                        alignment: 'left',
+                        // right,down,left,up
+                        margin: [0, 0, 0, 0]
                     },
                     {
                         text: checkText(details.ctc_no),
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-        ///////////////////////////////////////////////////////////////////////////////////////
-        // date_created
-        {
-
-            layout: "noBorders",
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
+                    {
+                        text: ""
+                    }
+                    ],
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: "Date Issued              :",
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
                     {
                         text: formatDate(details.date_created, {
@@ -605,78 +556,38 @@ function getContent(details) {
                             month: "2-digit",
                             day: "2-digit"
                         }),
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-        ////////////////////////////////////////////////////////////////////////////////////////
-        // verified_by_first
-        {
-
-            layout: "noBorders",
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
+                    {
+                        text: ""
+                    }
+                    ],
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: "Verified by                :",
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
                     {
                         text: checkText(details.verified_by_first),
-                        fontSize: 6,
+                        fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
-                    ]
-
-                ]
-            }
-        },
-        ///////////////////////////////////////////////////////////////////////////////////////
-        // verified_by_second
-        {
-
-            layout: "noBorders",
-            table: {
-                widths: [60, 231,],
-                heights: [6,],
-                body: [
-                    [{
-                        text: "Verified by                :",
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
                     {
-                        text: checkText(details.verified_by_second),
-                        fontSize: 6,
-                        alignment: 'left',
-                        // right,down,left,up
-                        margin: [1, -1, 0, 0]
-                    },
-
-
-
-                    ]
-
+                        text: ""
+                    }
+                    ],
+                    
                 ]
             }
         },
@@ -685,18 +596,24 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [300],
-                heights: [2,],
+                widths: [100, '*', 100],
                 body: [
-                    [{
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: " Thank you for your payment!  ",
-                        fontSize: 9,
+                        fontSize: 14,
                         Bold: true,
-                        alignment: 'justify',
+                        alignment: 'center',
                         characterSpacing: [1],
                         // right,down,left,up
-                        margin: [80, -2, 0, 0]
+                        margin: [0, 10, 0, 0]
                     },
+                    {
+                        text: ""
+                    }
 
 
                     ]
@@ -708,106 +625,51 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [300],
-                heights: [2,],
+                widths: [100,'*',100],
                 body: [
-                    [{
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: " Here's your auto generated  certificate  ",
-                        fontSize: 6,
-                        alignment: 'justify',
+                        fontSize: 12,
+                        alignment: 'center',
                         characterSpacing: [0],
                         // right,down,left,up
-                        margin: [100, -2, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
-
-
+                    {
+                        text: ""
+                    }
                     ]
 
                 ]
             }
         },
 
-        ///////////////////////////////////////////////////////////////////////////////
-
-        {
-            layout: "noBorders",
-            table: {
-                widths: [300],
-                heights: [1,],
-                body: [
-                    [{
-                        text: " ",
-                        fontSize: 2,
-
-
-                    },
-
-
-                    ]
-
-                ]
-            }
-        },
-        ///////////////////////////////////////////////////////////////////////////////
-        // {
-        //     layout: "noBorders",
-        //     table: {
-        //         widths: [300],
-        //         heights: [2,],
-        //         body: [
-        //             [{
-        //                 text: "[  PRINT BUTTON   ] ",
-        //                 fontSize: 6,
-        //                 alignment: 'justify',
-        //                 characterSpacing: [0],
-        //                 // right,down,left,up
-        //                 margin: [120, -2, 0, 0]
-        //             },
-
-
-        //             ]
-
-        //         ]
-        //     }
-        // },
-        /////////////////////////////////////////////////////////////////////////////////////
-
-        {
-            layout: "noBorders",
-            table: {
-                widths: [300],
-                heights: [1,],
-                body: [
-                    [{
-                        text: " ",
-                        fontSize: 2,
-
-
-                    },
-
-
-                    ]
-
-                ]
-            }
-        },
         //////////////////////////////////////////////////////////////////////////////////////
 
         {
             layout: "noBorders",
             table: {
-                widths: [300],
-                heights: [2,],
+                widths: [100, '*', 100],
                 body: [
-                    [{
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: " This is only an electronic copy. You can get your official  certificate upon claiming your",
-                        fontSize: 5,
-                        alignment: 'justify',
+                        fontSize: 10,
+                        alignment: 'center',
                         characterSpacing: [0],
                         // right,down,left,up
-                        margin: [45, -2, 0, 0]
+                        margin: [0, 20, 0, 0]
                     },
-
+                    {
+                        text: ""
+                    }
 
                     ]
 
@@ -818,17 +680,23 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [300],
-                heights: [2,],
+                widths: [100, '*', 100],
                 body: [
-                    [{
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: " Police Clearance at the Municipal Hall. ",
-                        fontSize: 5,
-                        alignment: 'justify',
+                        fontSize: 10,
+                        alignment: 'center',
                         characterSpacing: [0],
                         // right,down,left,up
-                        margin: [100, -2, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
+                    {
+                        text: ""
+                    }
 
 
                     ]
@@ -840,17 +708,23 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [300],
-                heights: [2,],
+                widths: [100, '*', 100],
                 body: [
-                    [{
+                    [
+                        {
+                            text: ""
+                        },
+                        {
                         text: " Thank you for your business ",
-                        fontSize: 5,
-                        alignment: 'justify',
+                        fontSize: 10,
+                        alignment: 'center',
                         characterSpacing: [0],
                         // right,down,left,up
-                        margin: [115, -2, 0, 0]
+                        margin: [0, 0, 0, 0]
                     },
+                    {
+                        text: ""
+                    }
 
 
                     ]
