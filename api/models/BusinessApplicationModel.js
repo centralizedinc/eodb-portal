@@ -303,7 +303,8 @@ var BusinessPermitApplication = new mongoose.Schema({
     compliance_attachments: [],
     account_id: {
         type: String
-    }
+    },
+    lack_documents: []
 })
 
 BusinessPermitApplication.pre('save', async function (callback) {
