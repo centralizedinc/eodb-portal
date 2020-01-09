@@ -132,17 +132,25 @@ export default {
         }
       } else if(this.keyword.toUpperCase() === 'BGYCLEARANCE'){
         this.pdf_details = {
-          business_name: "Dell Laptop Inc.",
-          business_owner: "Godfrey Rivera",
-          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
-          business_nature: "Information Technology",
-          requestor: "Mark Quijom",
-          date_created: new Date()
+          name: "Godfrey Rivera",
+          birth_date:"1996-11-23",
+          address: "Tehran",
+          date_created: new Date(),
+
+          // business_name: "Dell Laptop Inc.",
+          // business_owner: "Godfrey Rivera",
+          // business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          // business_nature: "Information Technology",
+          // requestor: "Mark Quijom",
+          // date_created: new Date()
         }
       }else if(this.keyword.toUpperCase() === 'BRGY_BUSINESS_CLEARANCE'){
         this.pdf_details = {
           business_name: "MyPhone",
           requestor: "Berna Yango",
+          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          business_nature: "Manufacturing Technology Devices",
+          requestor: "Kris Yango",
           date_created: new Date(),
 
         }
@@ -159,22 +167,22 @@ export default {
           pdfGenerator = pdfMake.createPdf(document);
 
           // ---------------for pdf testing---------------------
-          pdfMake.createPdf(document).open(err =>{
-            if (err){
-              reject(err)
-            } else{
-              resolve();
-            }
-          })
+          // pdfMake.createPdf(document).open(err =>{
+          //   if (err){
+          //     reject(err)
+          //   } else{
+          //     resolve();
+          //   }
+          // })
           // ------------for quick testing------------------
-        // pdfGenerator.getBuffer(buffer => {
-        //   var file = new Blob([buffer], {
-        //       type: "application/pdf"
-        //     }),
-        //     dataUrl = URL.createObjectURL(file);
-        //   self.pdf_url = dataUrl;
-        //   self.loading = false;
-        // });
+        pdfGenerator.getBuffer(buffer => {
+          var file = new Blob([buffer], {
+              type: "application/pdf"
+            }),
+            dataUrl = URL.createObjectURL(file);
+          self.pdf_url = dataUrl;
+          self.loading = false;
+        });
       } catch (error) {
         console.log("error :", error);
         this.loading = false;
