@@ -489,7 +489,11 @@ export default {
   // },
   watch: {
     current_step() {
-      console.log("this.form step :", this.form);
+      console.log("this.form step :", this.current_step);
+      if(this.current_step === 0) {
+        this.checkSelectedDocs = !this.checkSelectedDocs;
+        console.log('this.checkSelectedDocs :', this.checkSelectedDocs);
+      }
     }
   },
   computed: {
@@ -549,7 +553,7 @@ export default {
             this.fetching_data = false;
 
             // To check payments needs to be pay
-            this.checkSelectedDocs = true;
+            this.checkSelectedDocs = !this.checkSelectedDocs;
             // this.updateDocsPayment();
           })
           .catch(err => {
@@ -597,7 +601,7 @@ export default {
             this.document_data_source = doc_req;
 
             // To check payments needs to be pay
-            this.checkSelectedDocs = true;
+            this.checkSelectedDocs = !this.checkSelectedDocs;
             // this.updateDocsPayment();
           })
           .catch(err => {
