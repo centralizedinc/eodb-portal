@@ -377,7 +377,7 @@ export default {
         {
           title: "Document Checklist",
           description:
-            "Check all the documents you have and apply for lacking requirements instantly within this app."
+            "Upload all the documents you have and apply for lacking requirements instantly within this app."
         },
         {
           title: "Business Owner Information",
@@ -490,9 +490,9 @@ export default {
   watch: {
     current_step() {
       console.log("this.form step :", this.current_step);
-      if(this.current_step === 0) {
+      if (this.current_step === 0) {
         this.checkSelectedDocs = !this.checkSelectedDocs;
-        console.log('this.checkSelectedDocs :', this.checkSelectedDocs);
+        console.log("this.checkSelectedDocs :", this.checkSelectedDocs);
       }
     }
   },
