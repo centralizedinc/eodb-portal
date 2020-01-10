@@ -311,7 +311,8 @@ export default {
         taxable_property_income = this.form.tax.taxable.property_income,
         total = 0,
         interest = 0,
-        total_amount_paid = 0;
+        total_amount_paid = 0,
+        month = new Date().getMonth();
 
       try {
         if (this.computation_formula) eval(this.computation_formula);
