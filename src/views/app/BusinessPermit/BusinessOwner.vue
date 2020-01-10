@@ -195,11 +195,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col
-          :xs="{ span: 24 }"
-          :sm="{ span: 24 }"
-          v-if="checkDocsNeeded(['cedula', 'barangay'])"
-        >
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula', 'barangay'])">
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
             <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
@@ -208,12 +204,10 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Monthly Salary">
             <a-select v-model="form.owner_details.monthly_salary">
-              <a-select-option value="₱250,000 and below">₱250,000 and below</a-select-option>
-              <a-select-option value=">₱250,000 to ₱400,000">> ₱250,000 to ₱400,000</a-select-option>
-              <a-select-option value=">₱400,000 to ₱800,000 ">> ₱400,000 to ₱800,000</a-select-option>
-              <a-select-option value=">₱800,000 to ₱2,000,000">> ₱800,000 to ₱2,000,000</a-select-option>
-              <a-select-option value=">₱2,000,000 to ₱8,000,000">> ₱2,000,000 to ₱8,000,000</a-select-option>
-              <a-select-option value=">Above ₱8,000,000">Above ₱8,000,000</a-select-option>
+              <a-select-option value="Below ₱20,000">Below ₱20,000</a-select-option>
+              <a-select-option value=">₱21,000 to ₱50,000">> ₱21,000 to ₱50,000</a-select-option>
+              <a-select-option value=">₱51,000 to ₱200,000 ">> ₱51,000 to ₱100,000</a-select-option>
+              <a-select-option value=">Above ₱100,000">Above ₱100,000</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
