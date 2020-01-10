@@ -1,9 +1,10 @@
 <template>
   <a-drawer placement="left" :closable="false" :width="450" @close="$emit('close')" :visible="show">
     <a-row type="flex">
-      <!-- <a-col :span="24">
-        <a-card style="background: linear-gradient(to right, #000046, #1cb5e0)">
-          <h2 style="color: #FFFFFF">Payment Options</h2>
+      <!-- options -->
+      <a-col :span="24">
+        <a-card>
+          <h2>Payment Options</h2>
         </a-card>
         <a-tabs @change="navigate">
           <a-tab-pane key="0">
@@ -12,17 +13,63 @@
                 <a-icon type="credit-card" style="font-size: 24px"></a-icon>
               </a-tooltip>
             </template>
+            <a-col :span="24">
+              <a-card class="fill-up-form">
+                <component
+                  :is="current_option"
+                  :details="payment_details"
+                  @validCard="v => is_valid_card=v"
+                  @validName="v => is_valid_name=v"
+                  @validExpiry="v => is_valid_expiry=v"
+                  @validCVC="v => is_valid_cvc=v"
+                />
+              </a-card>
+            </a-col>
+
+            <a-col :span="24">
+              <a-affix :offsetBottom="0" class="payment-total-affix">
+                <a-card :bodyStyle="{ padding: '1vh' }">
+                  <h3>
+                    <i>
+                      Amount to be paid:
+                      <b>{{formatCurrency(payment_amount)}}</b>
+                    </i>
+                  </h3>
+                  <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
+                  <a-button
+                    type="primary"
+                    block
+                    @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
+                    :loading="loading"
+                  >Submit</a-button>
+                </a-card>
+              </a-affix>
+            </a-col>
           </a-tab-pane>
+
           <a-tab-pane key="1">
             <template slot="tab">
-              <a-tooltip title="Online Banking">
-                <a-icon type="bank" style="font-size: 24px"></a-icon>
+              <a-tooltip title="Over-the-counter">
+                <a-icon type="barcode" style="font-size: 24px"></a-icon>
               </a-tooltip>
+              <a-badge count="soon" />
             </template>
+            <div align="center">
+              <a-icon
+                type="smile"
+                :style="{ fontSize: '100px', color: '#faad14' }"
+                style="margin-top:80px"
+              />
+              <h1 style="margin-top:30px; margin-bottom:50px">
+                7-11 Payment
+                <br />service will be available very soon!
+              </h1>
+            </div>
           </a-tab-pane>
         </a-tabs>
-      </a-col>-->
-      <a-col :span="24">
+      </a-col>
+
+      <!-- <a-col :span="24">
         <a-card class="fill-up-form">
           <component
             :is="current_option"
@@ -34,14 +81,18 @@
           />
         </a-card>
       </a-col>
-      <a-col :span="24">
+
+      <a-col :span="24" >
         <a-affix :offsetBottom="0" class="payment-total-affix">
           <a-card :bodyStyle="{ padding: '1vh' }">
             <h3>
-              <i>Amount to be paid: <b>{{formatCurrency(payment_amount)}}</b></i>
+              <i>
+                Amount to be paid:
+                <b>{{formatCurrency(payment_amount)}}</b>
+              </i>
             </h3>
             <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
-            <a-button
+            <a-button 
               type="primary"
               block
               @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
@@ -49,18 +100,20 @@
             >Submit</a-button>
           </a-card>
         </a-affix>
-      </a-col>
+      </a-col>-->
     </a-row>
   </a-drawer>
 </template>
 
 <script>
 import CreditCard from "./CreditCard";
+import SevenEleven from "./711";
 
 export default {
   props: ["show", "loading", "payment_amount"],
   components: {
-    CreditCard
+    CreditCard,
+    SevenEleven
   },
   data() {
     return {
@@ -71,7 +124,7 @@ export default {
       card: null,
       payment_details: {},
       current_option: "CreditCard",
-      tabs: ["CreditCard", "OnlineBanking", "OverCounter"]
+      tabs: ["CreditCard", "SevenEleven", "OverCounter"]
     };
   },
   mounted() {
@@ -104,5 +157,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>

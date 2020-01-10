@@ -171,7 +171,13 @@
               TIN
               <i>(if any)</i>
             </span>
-            <input type="number" class="ant-input" v-model="form.personal_details.tin" />
+            <input
+              type="text"
+              name="number"
+              class="ant-input"
+              maxlength="11"
+              v-model="form.personal_details.tin"
+            />
           </a-form-item>
         </a-col>
       </a-row>
@@ -264,6 +270,8 @@
     </a-form>
   </a-card>
 </template>
+
+
 <script>
 import moment from "moment";
 
@@ -286,6 +294,7 @@ export default {
       );
     }
   },
+
   methods: {
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
