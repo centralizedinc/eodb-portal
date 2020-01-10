@@ -21,6 +21,8 @@ import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
+import CEDULA_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
+
 import BRGY_BUSINESS_CLEARANCE from "./pdf/brgy_business_clearance";
 
 var printers = {
@@ -30,6 +32,7 @@ var printers = {
   POLICECLEARANCE,
   RECEIPT,
   BUSINESSPERMIT_SAN_ANTONIO,
+  CEDULA_SAN_ANTONIO,
   BRGY_BUSINESS_CLEARANCE
 };
 
@@ -154,8 +157,15 @@ export default {
           date_created: new Date(),
 
         }
-      }else if(this.keyword.toUpperCase() === 'CEDULA'){
-        this.pdf_details = {}
+      } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
+        this.pdf_details = {
+           business_name: "Dell Laptop Inc.",
+          business_owner: "Godfrey Rivera",
+          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          business_nature: "Information Technology",
+          requestor: "Mark Quijom",
+          date_created: new Date()
+        }
       }
       console.log("this.pdf_details :", this.pdf_details);
       // Process PDF
@@ -164,7 +174,7 @@ export default {
         const self = this,
           printer = printers[this.keyword.toUpperCase()];
         const document = printer.fillup(this.pdf_details),
-          pdfGenerator = pdfMake.createPdf(document);
+         pdfGenerator = pdfMake.createPdf(document);
 
           // ---------------for pdf testing---------------------
           // pdfMake.createPdf(document).open(err =>{
@@ -175,6 +185,8 @@ export default {
           //   }
           // })
           // ------------for quick testing------------------
+
+           
         pdfGenerator.getBuffer(buffer => {
           var file = new Blob([buffer], {
               type: "application/pdf"
