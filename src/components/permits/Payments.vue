@@ -25,7 +25,8 @@ export default {
       cols: [
         {
           title: "Transaction No",
-          dataIndex: "transaction_no"
+          dataIndex: "transaction_no",
+          fixed: "left"
         },
         {
           title: "Reference No",
@@ -62,11 +63,13 @@ export default {
   computed: {
     payments() {
       var payments = this.$store.state.payment.payments;
-      if(this.search) {
-        console.log('payments :', payments);
-        payments = payments.filter(v => v.reference_no.indexOf(this.search) > -1);
+      if (this.search) {
+        console.log("payments :", payments);
+        payments = payments.filter(
+          v => v.reference_no.indexOf(this.search) > -1
+        );
       }
-      return payments
+      return payments;
     },
     user() {
       return this.$store.state.user_session.user;
