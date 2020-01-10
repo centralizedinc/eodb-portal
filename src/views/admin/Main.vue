@@ -1,99 +1,119 @@
 <template>
-  <div id="components-layout-demo-basic">    
+  <div id="components-layout-demo-basic">
     <a-layout>
-      <a-layout-sider :trigger="null" collapsible v-model="collapsed" theme="dark"  :width="220" style="background-color: #242B30">
-        <div style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/2000?greyscale');"> 
-        <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">
-          
-          <a-row type="flex" justify="start" align="middle">
-            <a-col :span="10">
-              <a-avatar style="border: 1px solid #FFFFFF" shape="square" :size="64" src="http://lorempixel.com/200/200/people/">
-              </a-avatar>              
-            </a-col>
-            <a-col :span="14">
-              <span style="color: #FFFFFF; font-weight: bold">{{getFullName()}}</span><br>    
-              <span style="font-size:10px; color: #FFFFFF">{{role.name}}</span><br>           
-              <span style="font-size:10px; color: #01ACAC;">{{department.name}}</span><br>  
-            </a-col>
-          </a-row>
-          
-        </a-card>
+      <a-layout-sider
+        :trigger="null"
+        collapsible
+        v-model="collapsed"
+        theme="dark"
+        :width="220"
+        style="background-color: #242B30"
+      >
+        <div
+          style="border: none; height: 20vh; width: 100%; background:center;background-repeat: no-repeat;background-size: cover; background-image: url('https://picsum.photos/2000?greyscale');"
+        >
+          <a-card style="border: none; height: 20vh; width: 100%; background:#000000a6">
+            <a-row type="flex" justify="start" align="middle">
+              <a-col :span="10">
+                <a-avatar
+                  style="border: 1px solid #FFFFFF"
+                  shape="square"
+                  :size="64"
+                  src="http://lorempixel.com/200/200/people/"
+                ></a-avatar>
+              </a-col>
+              <a-col :span="14">
+                <span style="color: #FFFFFF; font-weight: bold">{{getFullName()}}</span>
+                <br />
+                <span style="font-size:10px; color: #FFFFFF">{{role.name}}</span>
+                <br />
+                <span style="font-size:10px; color: #01ACAC;">{{department.name}}</span>
+                <br />
+              </a-col>
+            </a-row>
+          </a-card>
         </div>
-         <a-menu 
-              @click="navigate"
-              theme="dark" 
-              mode="inline" 
-              :selectedKeys="active_menu"
-
-              style="background-color: #242B30; margin-top:2vh"  >
-        <a-menu-item key="/admin/app">
-          <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
-          <span>Dashboard</span>
-        </a-menu-item>
-        <a-menu-item key="/admin/app/applications">
-          <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')"/>
-          <span>Applications</span>
-        </a-menu-item>
-        <a-menu-item key="/admin/app/collections" v-if="department.admin">
-          <a-icon type="reconciliation" :style="getMenuStyle('/admin/app/collections')" />
-          <span>Collections</span>
-        </a-menu-item>
-        <a-menu-item key="/admin/app/emergency">
-          <a-icon type="safety" :style="getMenuStyle('/admin/app/emergency')" />
-          <span>Emergency</span>
-        </a-menu-item>
-        <a-menu-item key="/admin/app/users" v-if="department.admin">
-          <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
-          <span>Users</span>
-        </a-menu-item>
-        <a-sub-menu key="5" :style="`background-color: #242B30`" v-if="department.admin">
-          <span slot="title"><a-icon type="setting" /><span>Settings</span></span>          
-          <a-menu-item key="/admin/app/departments">
-             <a-icon type="bank" :style="getMenuStyle('/admin/app/departments')" />
-            <span>Departments</span>
-          </a-menu-item>          
-          <a-menu-item key="/admin/app/permits">
-            <a-icon type="file-search" :style="getMenuStyle('/admin/app/permits')" />
-            <span>Permit Types</span>
+        <a-menu
+          @click="navigate"
+          theme="dark"
+          mode="inline"
+          :selectedKeys="active_menu"
+          style="background-color: #242B30; margin-top:2vh"
+        >
+          <a-menu-item key="/admin/app">
+            <a-icon type="appstore" :style="getMenuStyle('/admin/app')" />
+            <span>Dashboard</span>
           </a-menu-item>
-          <a-menu-item key="/admin/app/roles">
-            <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
-            <span>User Roles</span>
+          <a-menu-item key="/admin/app/applications">
+            <a-icon type="snippets" :style="getMenuStyle('/admin/app/applications')" />
+            <span>Applications</span>
           </a-menu-item>
-          <!-- <a-menu-item key="/admin/app/checklists">
+          <a-menu-item key="/admin/app/collections" v-if="department.admin">
+            <a-icon type="reconciliation" :style="getMenuStyle('/admin/app/collections')" />
+            <span>Collections</span>
+          </a-menu-item>
+          <a-menu-item key="/admin/app/emergency">
+            <a-icon type="safety" :style="getMenuStyle('/admin/app/emergency')" />
+            <span>Emergency</span>
+          </a-menu-item>
+          <a-menu-item key="/admin/app/users" v-if="department.admin">
+            <a-icon type="team" :style="getMenuStyle('/admin/app/users')" />
+            <span>Users</span>
+          </a-menu-item>
+          <a-sub-menu key="5" :style="`background-color: #242B30`" v-if="department.admin">
+            <span slot="title">
+              <a-icon type="setting" />
+              <span>Settings</span>
+            </span>
+            <a-menu-item key="/admin/app/departments">
+              <a-icon type="bank" :style="getMenuStyle('/admin/app/departments')" />
+              <span>Departments</span>
+            </a-menu-item>
+            <a-menu-item key="/admin/app/permits">
+              <a-icon type="file-search" :style="getMenuStyle('/admin/app/permits')" />
+              <span>Permit Types</span>
+            </a-menu-item>
+            <a-menu-item key="/admin/app/roles">
+              <a-icon type="cluster" :style="getMenuStyle('/admin/app/roles')" />
+              <span>User Roles</span>
+            </a-menu-item>
+            <!-- <a-menu-item key="/admin/app/checklists">
             <a-icon type="bars" :style="getMenuStyle('/admin/app/checklists')" />
             <span>Application Checklist</span>
-          </a-menu-item> -->
-          <a-menu-item key="/admin/app/references">
-            <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
-            <span>References</span>
-          </a-menu-item>          
-          <a-menu-item key="/admin/app/computations">
-            <a-icon type="table" :style="getMenuStyle('/admin/app/computations')" />
-            <span>Fees Computations</span>
-          </a-menu-item>  
-        </a-sub-menu>
-        <a-sub-menu key="6" :style="`background-color: #242B30`" >
-          <span slot="title"><a-icon type="user" /><span>Account</span></span>          
-          <a-menu-item key="/admin/app/account">
-             <a-icon type="user" :style="getMenuStyle('/admin/app/account')" />
-            <span>Profile</span>
-          </a-menu-item>
-          <a-menu-item key="/admin/app/security">
-          <a-icon type="lock" :style="getMenuStyle('/admin/app/security')" />
-          <span>Security</span>
-        </a-menu-item>
-        </a-sub-menu>
-        <!-- <a-menu-item key="/admin/app/account">
+            </a-menu-item>-->
+            <a-menu-item key="/admin/app/references">
+              <a-icon type="table" :style="getMenuStyle('/admin/app/references')" />
+              <span>References</span>
+            </a-menu-item>
+            <a-menu-item key="/admin/app/computations">
+              <a-icon type="table" :style="getMenuStyle('/admin/app/computations')" />
+              <span>Fees Computations</span>
+            </a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="6" :style="`background-color: #242B30`">
+            <span slot="title">
+              <a-icon type="user" />
+              <span>Account</span>
+            </span>
+            <a-menu-item key="/admin/app/account">
+              <a-icon type="user" :style="getMenuStyle('/admin/app/account')" />
+              <span>Profile</span>
+            </a-menu-item>
+            <a-menu-item key="/admin/app/security">
+              <a-icon type="lock" :style="getMenuStyle('/admin/app/security')" />
+              <span>Security</span>
+            </a-menu-item>
+          </a-sub-menu>
+          <!-- <a-menu-item key="/admin/app/account">
           <a-icon type="user" :style="getMenuStyle('/admin/app/account')"/>
           <span>Account</span>
-        </a-menu-item> -->
-        
-        <a-menu-item key="logout">
-          <a-icon type="logout" :style="getMenuStyle('logout')" />
-          <span>Logout</span>
-        </a-menu-item>
-         </a-menu>          
+          </a-menu-item>-->
+
+          <a-menu-item key="logout">
+            <a-icon type="logout" :style="getMenuStyle('logout')" />
+            <span>Logout</span>
+          </a-menu-item>
+        </a-menu>
       </a-layout-sider>
       <a-layout>
         <a-layout-header theme="dark" style="background-color: #242B30">
@@ -105,16 +125,24 @@
             <a-col :span="1">
               <a-icon style="color:#FFFFFF;" type="mail"></a-icon>
             </a-col>
-             <a-col :span="1">
+            <a-col :span="1">
               <a-icon style="color:#FFFFFF;" type="setting"></a-icon>
             </a-col>
             <a-col :span="1">
               <a-icon style="color:#FFFFFF; cursor:pointer" type="lock" @click="lock"></a-icon>
             </a-col>
             <a-col :span="2">
-              <a-popover  trigger="click" >
-                <span style="margin-top: 2vh;font-weight:bold" slot="title">{{$store.state.admin_session.admin.email}}</span>
-                <a-avatar style="cursor:pointer; border: 1px solid #FFFFFF; margin-left: 20px" shape="square" :size="36" src="http://lorempixel.com/200/200/people/"/>              
+              <a-popover trigger="click">
+                <span
+                  style="margin-top: 2vh;font-weight:bold"
+                  slot="title"
+                >{{$store.state.admin_session.admin.email}}</span>
+                <a-avatar
+                  style="cursor:pointer; border: 1px solid #FFFFFF; margin-left: 20px"
+                  shape="square"
+                  :size="36"
+                  src="http://lorempixel.com/200/200/people/"
+                />
                 <template slot="content">
                   <a-menu>
                     <a-menu-item @click="$router.push('/admin/app/account')">Profile</a-menu-item>
@@ -126,18 +154,22 @@
             </a-col>
           </a-row>
         </a-layout-header>
-        <a-layout-content style="margin-left:2vh; margin-right:2vh; margin-top:2vh; min-height:100vh">
-          <a-row type="flex" align="middle" >
+        <a-layout-content
+          style="margin-left:2vh; margin-right:2vh; margin-top:2vh; min-height:100vh"
+        >
+          <a-row type="flex" align="middle">
             <a-col :span="8">
               <h1>{{$route.name}}</h1>
             </a-col>
             <a-col :span="16" style="text-align:right">
               <a-breadcrumb>
-                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item"><a-button type="link" @click="$router.push(item.path)">{{item.name}}</a-button></a-breadcrumb-item>
+                <a-breadcrumb-item v-for="item in $store.state.screens.breadcrumbs" :key="item">
+                  <a-button type="link" @click="$router.push(item.path)">{{item.name}}</a-button>
+                </a-breadcrumb-item>
               </a-breadcrumb>
             </a-col>
           </a-row>
-          <router-view/>
+          <router-view />
         </a-layout-content>
         <!-- <a-layout-footer>Footer</a-layout-footer> -->
       </a-layout>
@@ -147,64 +179,63 @@
 
 <script>
 export default {
-  data(){
-    return{
-    }
+  data() {
+    return {};
   },
-  created(){
-    this.init()
+  created() {
+    this.init();
   },
-  methods:{
-    init(){
-      console.log()
-      this.$store.dispatch("GET_ADMIN_DEPARTMENT")
-      this.$store.dispatch("GET_ADMIN_ROLE")
+  methods: {
+    init() {
+      console.log();
+      this.$store.dispatch("GET_ADMIN_DEPARTMENT");
+      this.$store.dispatch("GET_ADMIN_ROLE");
     },
-    getMenuStyle(indx){
-      if(this.$route.path===indx){
-        return 'font-size:24px; color:#01acac'
-      }else{
-        return 'font-size:12px; color:#FFFFFF'
-      }
-      
-    },
-    getFullName(){
-      var admin = this.$store.state.admin_session.admin
-      if(admin.name){
-        return `${admin.name.last}, ${admin.name.first} ${admin.name.middle?admin.name.middle.substring(0,1)+'.':''}`
-      }else{
-        return admin.email
+    getMenuStyle(indx) {
+      if (this.$route.path === indx) {
+        return "font-size:24px; color:#01acac";
+      } else {
+        return "font-size:12px; color:#FFFFFF";
       }
     },
-    navigate(e){
+    getFullName() {
+      var admin = this.$store.state.admin_session.admin;
+      if (admin.name) {
+        return `${admin.name.last}, ${admin.name.first} ${
+          admin.name.middle ? admin.name.middle.substring(0, 1) + "." : ""
+        }`;
+      } else {
+        return admin.email;
+      }
+    },
+    navigate(e) {
       if (e.key === "logout") {
-        var _self = this
+        var _self = this;
         this.$confirm({
-          title: 'Are you sure you want to logout?',
-          content: 'Please make sure you saved you work before logging out.',
+          title: "Are you sure you want to logout?",
+          content: "Please make sure you saved you work before logging out.",
           onOk() {
-            _self.logout()
+            _self.logout();
           },
-          onCancel() {},
+          onCancel() {}
         });
-      }else {
+      } else {
         this.$router.push(e.key);
       }
     },
-    logout(){
-      this.$store.commit('ADMIN_LOGOUT')
-      this.$router.push('/admin')
+    logout() {
+      this.$store.commit("ADMIN_LOGOUT");
+      this.$router.push("/admin");
     },
-    lock(){
-
-      this.$store.commit('LOCK_SCREEN')
-      this.$store.commit('SAVE_SCREEN', this.$route.path)
-      this.$router.push('/admin/lock')
+    lock() {
+      this.$store.commit("LOCK_SCREEN");
+      this.$store.commit("SAVE_SCREEN", this.$route.path);
+      this.$router.push("/admin/lock");
     }
   },
-  computed:{
-    active_menu(){
-      return [this.$route.path]
+  computed: {
+    active_menu() {
+      return [this.$route.path];
     },
     department() {
       return this.$store.state.admin_session.department;
@@ -227,7 +258,6 @@ export default {
     //   default:{
     //     name:''
     //   }
-      
     // },
     // department:{
     //   get(){
@@ -243,14 +273,13 @@ export default {
     //     name:'',
     //     admin:false
     //   }
-      
     // }
   }
-}
+};
 </script>
 
 <style>
- .ant-menu-dark .ant-menu-inline.ant-menu-sub{
-   background: #242B30;
- }
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+  background: #242b30;
+}
 </style>

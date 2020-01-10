@@ -31,6 +31,7 @@
             :loading="loading"
             :errors="errors"
             :documents="document_data_source"
+            :computation_formula="computation_formula"
           />
         </a-col>
         <!-- Attachments -->
@@ -214,10 +215,10 @@ export default {
             last: "",
             suffix: ""
           },
-          birthday: "",
+          birthdate: "",
           birthplace: "",
           other_country: "",
-          icr: null,
+          icr_no: null,
           gender: "",
           civil_status: "",
           height: null,
@@ -290,7 +291,7 @@ export default {
       //   {
       //     title: "Residence Certificate",
       //     status: 0,
-      //     keyword: "residence"
+      //     keyword: "cedula"
       //   },
       //   {
       //     title: "Barangay Clearance",
@@ -395,7 +396,8 @@ export default {
       ],
       loading: false,
       errors: [],
-      departments: []
+      departments: [],
+      computation_formula: ""
     };
   },
   created() {
@@ -403,6 +405,7 @@ export default {
   },
   watch: {
     current_step() {
+       window.scrollTo(0, 0);
       console.log("this.form step :", this.form);
     }
   },
@@ -423,8 +426,7 @@ export default {
     },
     total_payable() {
       console.log("total payable data: " + JSON.stringify(this.form.tax));
-      this.payments_data_source[0].amount =
-        this.form.tax.total_amount_paid + 50;
+      this.payments_data_source[0].amount = this.form.tax.total_amount_paid;
       var total = this.payments_data_source
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
@@ -473,6 +475,20 @@ export default {
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
+
+      this.$store
+        .dispatch("GET_FEES_COMPUTATION", {
+          permit_type: this.$store.state.permits.filing_permit._id,
+          app_type: 0
+        })
+        .then(result => {
+          console.log("GET_FEES_COMPUTATION result.data :", result.data);
+          if (!result.data.errors)
+            this.computation_formula = result.data.computation;
+        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
@@ -480,6 +496,7 @@ export default {
       console.log("this.form :", this.form);
 
       var { errors, jump_to } = this.validation(validate_all);
+       window.scrollTo(0, 0);
       // var errors = [],
       //   jump_to = 0;
 
@@ -677,9 +694,9 @@ export default {
             error: "First Name is a required field."
           });
         }
-        if (!this.form.personal_details.birthday) {
+        if (!this.form.personal_details.birthdate) {
           errors.push({
-            field: "personal_details.birthday",
+            field: "personal_details.birthdate",
             error: "Date of Birth is a required field."
           });
         }
@@ -696,7 +713,7 @@ export default {
           });
         }
         if (!this.form.tax.taxable.basic) {
-          erros.push({
+          errors.push({
             field: "tax.taxable.basic",
             error: "Basic Community Tax is a required field."
           });
@@ -820,5 +837,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>

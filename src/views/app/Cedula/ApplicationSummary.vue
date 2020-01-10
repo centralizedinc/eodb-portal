@@ -48,7 +48,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
+      >{{formatDate(form.personal_details.birthdate, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Gender</a-col>
@@ -88,12 +88,12 @@
     <a-row class="summary-row">
       <a-col :span="8">ICR No. (if alien)</a-col>
       <a-col :span="1">:</a-col>
-      <!-- <a-col :span="15">{{ form.personal_details.icr }}</a-col> -->
+      <!-- <a-col :span="15">{{ form.personal_details.icr_no }}</a-col> -->
       <a-col :span="15" style="text-transform:uppercase">
         {{
-        form.personal_details.icr == null || form.personal_details.icr == ""
+        form.personal_details.icr_no == null || form.personal_details.icr_no == ""
         ? " - "
-        : form.personal_details.icr
+        : form.personal_details.icr_no
         }}
       </a-col>
     </a-row>
@@ -148,15 +148,15 @@
     </a-row>
     <!-- button -->
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-      <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+      <a-col :sm="{ span: 24 }" :md="{ span: 24 }" :xl="{ span: 24 }">
         <a-button-group>
           <a-button @click="$emit('prev')">Previous</a-button>
           <a-button type="primary" @click="$emit('payment')">Proceed to Payment</a-button>
         </a-button-group>
       </a-col>
-      <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+      <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
         <a-button>Save Draft</a-button>
-      </a-col>
+      </a-col>-->
     </a-row>
   </a-card>
 </template>

@@ -106,7 +106,7 @@ function getContent(details) {
 
                         {
             table: {
-                heights: [8],
+                heights: [7],
                 widths: [170,40,90],
                 
                 body: [
@@ -167,7 +167,7 @@ function getContent(details) {
 
 
         table: {
-            heights: [6],
+            heights: [5],
             widths: [90,'*',50],
             body: [
                 [
@@ -179,7 +179,7 @@ function getContent(details) {
 
 
             table: {
-            heights: [6],
+            heights: [5],
             widths: [40,121,40,90],
             
             body: [
@@ -204,7 +204,7 @@ function getContent(details) {
                         fontSize: 5,
                         bold: true,
                         characterSpacing: 0,
-                        alignment: 'left',
+                        alignment: 'center',
                         // right,down,left,up
                         margin: [0, 0, 0, 0]
 
@@ -253,7 +253,7 @@ function getContent(details) {
         
 
         table: {
-            heights: [5],
+            heights: [3],
             widths: [140,121,40,90],
             
             body: [
@@ -268,7 +268,7 @@ function getContent(details) {
                         characterSpacing: 0,
                         alignment: 'center',
                         // right,down,left,up
-                        margin: [105, 0, 0, 0]
+                        margin: [105, -3, 0, 0]
 
     },
     {
@@ -280,7 +280,7 @@ function getContent(details) {
                         characterSpacing: 0,
                         alignment: 'center',
                         // right,down,left,up
-                        margin: [2, 0, 0, 0]
+                        margin: [2, -3, 0, 0]
 
     },
     {
@@ -292,7 +292,7 @@ function getContent(details) {
         characterSpacing: 0,
         alignment: 'center',
         // right,down,left,up
-        margin: [9, 0, 0, 0]
+        margin: [9, -3, 0, 0]
 
 },
     {
@@ -340,7 +340,7 @@ function getContent(details) {
     fontSize: 5,
     bold: true,
     characterSpacing: 0,
-    alignment: 'left',
+    alignment: 'center',
     // right,down,left,up
     margin: [8, 0, 0, 0]
 
@@ -351,7 +351,7 @@ function getContent(details) {
     fontSize: 5,
     bold: true,
     characterSpacing: 0,
-    alignment: 'left',
+    alignment: 'center',
     // right,down,left,up
     margin: [1, 0, 0, 0]
 }
@@ -378,7 +378,7 @@ function getContent(details) {
     
     table: {
         heights: [6],
-        widths: [219,90,],
+        widths: [317,90,],
         
         body: [
             [
@@ -390,7 +390,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [8, 0, 0, 0]
+    margin: [140, -3, 0, 0]
 
 },
 {
@@ -401,7 +401,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [8, -3, 0, 0]
 }
 ]
 ]
@@ -413,8 +413,22 @@ function getContent(details) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////------Table 4
 
 {
-    //layout: "noBorders",
-    table: {
+    layout: "noBorders",
+      
+        table: {
+        heights: [6],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+
+
+
+        table: {
         heights: [6],
         widths: [219,40,41],
         
@@ -459,12 +473,21 @@ function getContent(details) {
 
 },
 
+{
+    text: ""
+}
+]
+]
+}
+
+},
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////------Table 4.B
 {
     layout: "noBorders",
     table: {
         heights: [5],
-        widths: [219,40,41],
+        widths: [318,40,41],
         
         body: [
             [
@@ -474,20 +497,20 @@ function getContent(details) {
     fontSize: 4,
     bold: true,
     characterSpacing: 0,
-    alignment: 'center',
+    alignment: 'left',
     // right,down,left,up
-    margin: [8, 0, 0, 0]
+    margin: [200, -3, 0, 0]
 
 },
 {
         
-    text: "SEX:         MALE",
+    text: "SEX:       MALE",
     fontSize: 4,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [4, 0, 0, 0]
+    margin: [4, -3, 0, 0]
 },
 
 {
@@ -498,7 +521,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [4, 0, 0, 0]
+    margin: [4, -3, 0, 0]
 }
 
 ]
@@ -509,8 +532,20 @@ function getContent(details) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////----------Table 5
 
 {
-    //layout: "noBorders",
+    layout: "noBorders",
+
     table: {
+        heights: [6],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+
+        table: {
         heights: [5],
         widths: [60,70,72,40,40],
         
@@ -522,7 +557,7 @@ function getContent(details) {
     fontSize: 5,
     bold: true,
     characterSpacing: 0,
-    alignment: 'left',
+    alignment: 'center',
     // right,down,left,up
     margin: [8, 0, 0, 0]
 
@@ -577,13 +612,23 @@ function getContent(details) {
 
 },
 
+{
+    text: ""
+}
+]
+]
+}
+
+},
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////------------Table 5.B
 {
     layout: "noBorders",
     table: {
         heights: [5],
-        widths: [60,70,70,40,40],
+        widths: [158,70,72,40,40],
         
         body: [
             [
@@ -593,9 +638,9 @@ function getContent(details) {
     fontSize: 4,
     bold: true,
     characterSpacing: 0,
-    alignment: 'center',
+    alignment: 'left',
     // right,down,left,up
-    margin: [8, 0, 0, 0]
+    margin: [125, -3, 0, 0]
 
 },
 {
@@ -606,7 +651,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [8, -3, 0, 0]
 },
 
 {
@@ -617,7 +662,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [5, -3, 0, 0]
 },
 
 {
@@ -628,7 +673,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [10, -3, 0, 0]
 },
 
 {
@@ -639,7 +684,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [8, -3, 0, 0]
 }
 
 ]
@@ -651,8 +696,21 @@ function getContent(details) {
 //////////////////////////////////////////////////////////////////////////////////////////---Civil Status
 
 {
-    //layout: "noBorders",
+    layout: "noBorders",
+
     table: {
+        heights: [5],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+ 
+
+        table: {
         heights: [5],
         widths: [36,4,35,4,35,4,35,4,89],
         
@@ -764,13 +822,25 @@ function getContent(details) {
 
 },
 
+{
+    text: ""
+}
+]
+]
+}
+
+},
+
+
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////----------Civil Status.B
 {
     layout: "noBorders",
     table: {
         heights: [5],
-        widths: [51,51,51,51,78],
+        widths: [148,48,48,48,88],
         
         body: [
             [
@@ -782,7 +852,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [0, 0, 0, 0]
+    margin: [99, -3, 0, 0]
 
 },
 {
@@ -793,18 +863,18 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [14, -3, 0, 0]
 },
 
 {
       
     text: " WIDOW/ WIDOWER/ LEGALLY SEPARATED ",
-    fontSize: 3,
+    fontSize: 4,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [0, 0, 0, 0]
+    margin: [0, -3, 0, 0]
 },
 
 {
@@ -815,7 +885,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [0, 0, 0, 0]
+    margin: [15, -3, 0, 0]
 },
 
 {
@@ -826,7 +896,7 @@ function getContent(details) {
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [14, -3, 0, 0]
 }
 
 ]
@@ -836,41 +906,43 @@ function getContent(details) {
 },
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-{
-    layout: "noBorders",
-    table: {
-        heights: [2],
-        widths: [318],
+// {
+//     layout: "noBorders",
+//     table: {
+//         heights: [2],
+//         widths: [318],
         
-        body: [
-            [
+//         body: [
+//             [
                 
-{
+// {
     
                 
-                    text: " ",
-                    fontSize: 1,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [8, 0, 0, 0]
+//                     text: " ",
+//                     fontSize: 1,
+//                     bold: true,
+//                     characterSpacing: 0,
+//                     alignment: 'center',
+//                     // right,down,left,up
+//                     margin: [8, 0, 0, 0]
 
-}
-]
-]
-}
+// }
+// ]
+// ]
+// }
 
-},
+// },
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 {
     layout: "noBorders",
+    
     table: {
         heights: [5],
-        widths: [318],
+        widths: [416],
         
         body: [
             [
+            
                 
 {
     
@@ -881,21 +953,34 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [0, 0, 0, 0]
+                    margin: [100, 5, 0, 0]
 
 }
-]
+],
+
 ]
 }
 
 },
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////-------------Profession
+/////////////////////////////////////////////////////////////////////////////////////////////////-------------MAIN--------
 
 {
-    //layout: "noBorders",
+    layout: "noBorders",
+
     table: {
+        heights: [6],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+
+        table: {
         heights: [6],
         widths: [160,70,70],
         
@@ -936,275 +1021,289 @@ function getContent(details) {
                     // right,down,left,up
                     margin: [1, 0, 0, 0]
                 }
-            ]
+            ],
+            [
+                
+                {
+                    
+                                
+                                    text: "A. BASIC COMMINITY TAX (P5.00) VOLUNTARY or EXEMPTED (P1.00) ",
+                                    fontSize: 5,
+                                    bold: true,
+                                    characterSpacing: 0,
+                                    alignment: 'left',
+                                    // right,down,left,up
+                                    margin: [0, 0, 0, 0]
+                
+                },
+                {
+                    
+                                
+                                    text: " ",
+                                    fontSize: 5,
+                                    bold: true,
+                                    characterSpacing: 0,
+                                    alignment: 'center',
+                                    // right,down,left,up
+                                    margin: [1, 0, 0, 0]
+                
+                },
+                {
+                    
+                                    text: " P 5.00 ",
+                                    fontSize: 5,
+                                    bold: true,
+                                    characterSpacing: 0,
+                                    alignment: 'center',
+                                    // right,down,left,up
+                                    margin: [1, 0, 0, 0]
+                                }
+                            ],
+                            [
+                
+                                {
+                                    
+                                                
+                                                    text: "B. ADDITIONAL COMMINITY TAX (tax not to exceed P5,000.00)", 
+                                                    fontSize: 5,
+                                                    bold: true,
+                                                    characterSpacing: 0,
+                                                    alignment: 'left',
+                                                    // right,down,left,up
+                                                    margin: [0, 0, 0, 0]
+                                
+                                },
+                                {
+                                    
+                                                
+                                                    text: " ",
+                                                    fontSize: 5,
+                                                    bold: true,
+                                                    characterSpacing: 0,
+                                                    alignment: 'center',
+                                                    // right,down,left,up
+                                                    margin: [1, 0, 0, 0]
+                                
+                                },
+                                {
+                                    
+                                                    text: "  ",
+                                                    fontSize: 5,
+                                                    bold: true,
+                                                    characterSpacing: 0,
+                                                    alignment: 'center',
+                                                    // right,down,left,up
+                                                    margin: [1, 0, 0, 0]
+                                                }
+                                            ],
+                                            [
+                
+                                                {
+                                                    
+                                                                
+                                                                    text: "1. GROSS RECEIPTS OR ERNINGS DERIVED FOR BUSINESS DURING THE PRECEDING YEAR (P1.00 for every P1000.00)  ", 
+                                                                    fontSize: 4,
+                                                                    bold: true,
+                                                                    characterSpacing: 0,
+                                                                    alignment: 'left',
+                                                                    // right,down,left,up
+                                                                    margin: [0, 0, 0, 0]
+                                                
+                                                },
+                                                {
+                                                    
+                                                                
+                                                                    text: "P ",
+                                                                    fontSize: 5,
+                                                                    bold: true,
+                                                                    characterSpacing: 0,
+                                                                    alignment: 'center',
+                                                                    // right,down,left,up
+                                                                    margin: [1, 0, 0, 0]
+                                                
+                                                },
+                                                {
+                                                    
+                                                                    text: "  ",
+                                                                    fontSize: 5,
+                                                                    bold: true,
+                                                                    characterSpacing: 0,
+                                                                    alignment: 'center',
+                                                                    // right,down,left,up
+                                                                    margin: [1, 0, 0, 0]
+                                                                }
+                                                            ],
+                                                            [
+                
+                                                                {
+                                                                    
+                                                                                
+                                                                                    text: "2. SALARIES OR GROSS RECEIPT OR EARNINGS DERIVED FROM EXERCISE OF PROFESSION OR PURSUIT OF ANY OCCUPATION (P1.00 for every P1000.00)  ", 
+                                                                                    fontSize: 4,
+                                                                                    bold: true,
+                                                                                    characterSpacing: 0,
+                                                                                    alignment: 'left',
+                                                                                    // right,down,left,up
+                                                                                    margin: [0, 0, 0, 0]
+                                                                
+                                                                },
+                                                                {
+                                                                    
+                                                                                
+                                                                                    text: " ",
+                                                                                    fontSize: 5,
+                                                                                    bold: true,
+                                                                                    characterSpacing: 0,
+                                                                                    alignment: 'center',
+                                                                                    // right,down,left,up
+                                                                                    margin: [1, 0, 0, 0]
+                                                                
+                                                                },
+                                                                {
+                                                                    
+                                                                                    text: "P45.00  ",
+                                                                                    fontSize: 5,
+                                                                                    bold: true,
+                                                                                    characterSpacing: 0,
+                                                                                    alignment: 'center',
+                                                                                    // right,down,left,up
+                                                                                    margin: [1, 0, 0, 0]
+                                                                                }
+                                                                            ],
+                                                                            [
+                
+                                                                                {
+                                                                                    
+                                                                                                
+                                                                                                    text: "3. INCOME FROM REAL PROPERTY (P1.00 for every P1000.00)  ", 
+                                                                                                    fontSize: 4,
+                                                                                                    bold: true,
+                                                                                                    characterSpacing: 0,
+                                                                                                    alignment: 'left',
+                                                                                                    // right,down,left,up
+                                                                                                    margin: [0, 0, 0, 0]
+                                                                                
+                                                                                },
+                                                                                {
+                                                                                    
+                                                                                                
+                                                                                                    text: " ",
+                                                                                                    fontSize: 5,
+                                                                                                    bold: true,
+                                                                                                    characterSpacing: 0,
+                                                                                                    alignment: 'center',
+                                                                                                    // right,down,left,up
+                                                                                                    margin: [1, 0, 0, 0]
+                                                                                
+                                                                                },
+                                                                                {
+                                                                                    
+                                                                                                    text: "  ",
+                                                                                                    fontSize: 5,
+                                                                                                    bold: true,
+                                                                                                    characterSpacing: 0,
+                                                                                                    alignment: 'center',
+                                                                                                    // right,down,left,up
+                                                                                                    margin: [1, 0, 0, 0]
+                                                                                                }
+                                                                                            ],
         ]
     }
+
+},
+
+{
+    text: ""
+}
+]
+]
+}
 
 },
 
 /////////////////////////////////////////////////////////////////////////////////////////////////---------Basic Community TAx
-{
-    //layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [160,70,70],
+// {
+//     //layout: "noBorders",
+//     table: {
+//         heights: [6],
+//         widths: [160,70,70],
         
-        body: [
-            [
-                
-{
-    
-                
-                    text: "A. BASIC COMMINITY TAX (P5.00) VOLUNTARY or EXEMPTED (P1.00) ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'left',
-                    // right,down,left,up
-                    margin: [0, 0, 0, 0]
+//         body: [
+           
+//         ]
+//     }
 
-},
-{
-    
-                
-                    text: " ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-
-},
-{
-    
-                    text: " P 5.00 ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-                }
-            ]
-        ]
-    }
-
-},
+// },
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////-------addtional community tax
 
-{
-    //layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [160,70,70],
+// {
+//     //layout: "noBorders",
+//     table: {
+//         heights: [6],
+//         widths: [160,70,70],
         
-        body: [
-            [
-                
-{
-    
-                
-                    text: "B. ADDITIONAL COMMINITY TAX (tax not to exceed P5,000.00)", 
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'left',
-                    // right,down,left,up
-                    margin: [0, 0, 0, 0]
+//         body: [
+           
+//         ]
+//     }
 
-},
-{
-    
-                
-                    text: " ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-
-},
-{
-    
-                    text: "  ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-                }
-            ]
-        ]
-    }
-
-},
+// },
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////--------gross receipts
 
-{
-    //layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [160,70,70],
+// {
+//     //layout: "noBorders",
+//     table: {
+//         heights: [6],
+//         widths: [160,70,70],
         
-        body: [
-            [
-                
-{
-    
-                
-                    text: "1. GROSS RECEIPTS OR ERNINGS DERIVED FOR BUSINESS DURING THE PRECEDING YEAR (P1.00 for every P1000.00)  ", 
-                    fontSize: 4,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'left',
-                    // right,down,left,up
-                    margin: [0, 0, 0, 0]
+//         body: [
+            
+//         ]
+//     }
 
-},
-{
-    
-                
-                    text: "P ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-
-},
-{
-    
-                    text: "  ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-                }
-            ]
-        ]
-    }
-
-},
+// },
 
 /////////////////////////////////////////////////////////////////////////////////////////////----------salaries or gross
 
-{
-    //layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [160,70,70],
+// {
+//     //layout: "noBorders",
+//     table: {
+//         heights: [6],
+//         widths: [160,70,70],
         
-        body: [
-            [
-                
-{
-    
-                
-                    text: "2. SALARIES OR GROSS RECEIPT OR EARNINGS DERIVED FROM EXERCISE OF PROFESSION OR PURSUIT OF ANY OCCUPATION (P1.00 for every P1000.00)  ", 
-                    fontSize: 4,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'left',
-                    // right,down,left,up
-                    margin: [0, 0, 0, 0]
+//         body: [
+            
+//         ]
+//     }
 
-},
-{
-    
-                
-                    text: " ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-
-},
-{
-    
-                    text: "P45.00  ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-                }
-            ]
-        ]
-    }
-
-},
+// },
 
 ///////////////////////////////////////////////////////////////////////////////////////////////------INCOME FROM REAL PROPERTY
 
-{
-    //layout: "noBorders",
-    table: {
-        heights: [6],
-        widths: [160,70,70],
+// {
+//     //layout: "noBorders",
+//     table: {
+//         heights: [6],
+//         widths: [160,70,70],
         
-        body: [
-            [
-                
-{
-    
-                
-                    text: "3. INCOME FROM REAL PROPERTY (P1.00 for every P1000.00)  ", 
-                    fontSize: 4,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'left',
-                    // right,down,left,up
-                    margin: [0, 0, 0, 0]
+//         body: [
+           
+//         ]
+//     }
 
-},
-{
-    
-                
-                    text: " ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-
-},
-{
-    
-                    text: "  ",
-                    fontSize: 5,
-                    bold: true,
-                    characterSpacing: 0,
-                    alignment: 'center',
-                    // right,down,left,up
-                    margin: [1, 0, 0, 0]
-                }
-            ]
-        ]
-    }
-
-},
+// },
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 
 {
     layout: "noBorders",
     table: {
-        heights: [8],
-        widths: [318],
+        heights: [6],
+        widths: [416],
         
         body: [
             [
@@ -1218,7 +1317,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [0, 3, 0, 0]
+                    margin: [100, 0, 0, 0]
 
 }
 ]
@@ -1230,7 +1329,19 @@ function getContent(details) {
 ////////////////////////////////////////////////////////////////////////////////////////////------Signature / total 
 
 {
-    //layout: "noBorders",
+    layout: "noBorders",
+
+    table: {
+        heights: [6],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+
     table: {
         heights: [5],
         widths: [160,70,70],
@@ -1277,13 +1388,22 @@ function getContent(details) {
     }
 
 },
+
+{
+    text: ""
+}
+]
+]
+}
+
+},
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 {
     layout: "noBorders",
     table: {
         heights: [5],
-        widths: [318],
+        widths: [416],
         
         body: [
             [
@@ -1297,7 +1417,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [0, 3, 0, 0]
+                    margin: [100, 0, 0, 0]
 
 }
 ]
@@ -1310,7 +1430,20 @@ function getContent(details) {
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 {
-    //layout: "noBorders",
+    layout: "noBorders",
+
+    table: {
+        heights: [6],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+
+
     table: {
         heights: [5],
         widths: [160,70,70],
@@ -1357,13 +1490,24 @@ function getContent(details) {
     }
 
 },
+
+{
+    text: ""
+}
+]
+]
+}
+
+},
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 {
-    layout: "noBorders",
+     layout: "noBorders",
     table: {
         heights: [5],
-        widths: [318],
+        widths: [416],
         
         body: [
             [
@@ -1377,7 +1521,7 @@ function getContent(details) {
                     characterSpacing: 0,
                     alignment: 'left',
                     // right,down,left,up
-                    margin: [0, 3, 0, 0]
+                    margin: [100, 0, 0, 0]
 
 }
 ]
@@ -1390,7 +1534,19 @@ function getContent(details) {
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 {
-    //layout: "noBorders",
+    layout: "noBorders",
+
+    table: {
+        heights: [6],
+        widths: [90,'*',50],
+        body: [
+            [
+                {
+                    text: ""
+                },
+
+                {
+
     table: {
         heights: [5],
         widths: [160,70,70],
@@ -1438,8 +1594,242 @@ function getContent(details) {
 
 },
 
-////////////////////////////////////////////////////////////////////////////////////////////
 
+{
+    text: ""
+}
+]
+]
+}
+
+},
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////----------Thank You
+
+{
+    layout: "noBorders",
+    table: {
+        // widths: [300],
+        heights: [20, ],
+        body: [
+            [{
+                    text: "   ",
+                    fontSize: 9,
+                    Bold: true,
+                    alignment: 'justify',
+                    characterSpacing: [1],
+                    // right,down,left,up
+                    margin: [80, -2, 0, 0]
+                },
+
+
+            ]
+
+        ]
+    }
+},
+///////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",
+    table: {
+        widths: [150,'*',150],
+        heights: [2],
+        body: [
+            [
+                {
+                    text: ""
+                },
+                {
+                    text: " Erick M Wagan ",
+                    fontSize: 8,
+                    alignment: 'center',
+                    characterSpacing: [0],
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                },
+                {
+                    text: ""
+                }
+
+            ]
+
+        ]
+    }
+},
+
+/////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",
+    table: {
+        widths: [150,'*',150],
+        heights: [2],
+        body: [
+            [
+                {
+                    text: ""
+                },
+                {
+                    text: " Minicipal Mayor ",
+                    fontSize: 8,
+                    alignment: 'center',
+                    characterSpacing: [0],
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                },
+                {
+                    text: ""
+                }
+
+            ]
+
+        ]
+    }
+},
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",
+    table: {
+        widths: [300],
+        heights: [2],
+        body: [
+            [{
+                    text: " ",
+                    fontSize: 2,
+
+
+                },
+
+
+            ]
+
+        ]
+    }
+},
+///////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",
+    table: {
+        widths: [150,'*',150],
+        heights: [2, ],
+        body: [
+            [
+                {
+                    text: ""
+                },
+                {
+                    text: " DISPLAY IN PUBLIC VIEW",
+                    fontSize: 6,
+                    alignment: 'center',
+                    characterSpacing: [0],
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                },
+                {
+                    text: ""
+                }
+
+            ]
+
+        ]
+    }
+},
+/////////////////////////////////////////////////////////////////////////////////////
+
+{
+    layout: "noBorders",
+    table: {
+        widths: [150,'*',150],
+        heights: [2, ],
+        body: [
+            [
+                {
+                    text: ""
+                },
+                {
+                    text: " This electronic permit (ePermit) is computer generated and does not require signature",
+                    fontSize: 6,
+                    alignment: 'center',
+                    characterSpacing: [0],
+                    // right,down,left,up
+                    margin: [0, 15, 0, 0]
+                },
+                {
+                    text: ""
+                }
+            ]
+
+        ]
+    }
+},
+//////////////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",
+    table: {
+        widths: [150,'*',150],
+        heights: [2,],
+        body: [
+            [
+                {
+                    text: ""
+                },
+                {
+                    text: " Verify authenticity of this document at: ",
+                    fontSize: 6,
+                    alignment: 'center',
+                    characterSpacing: [0],
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                },
+                {
+                    text: ""
+                }
+
+            ]
+
+        ]
+    }
+},
+/////////////////////////////////////////////////////////////////////////////////////
+{
+    layout: "noBorders",
+    table: {
+        widths: [150,'*',150],
+        heights: [2],
+        body: [
+            [
+                {
+                    text: ""
+                },
+                {
+                    text: " Thank you for your business ",
+                    fontSize: 6,
+                    alignment: 'center',
+                    characterSpacing: [0],
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                },
+                {
+                    text: ""
+                }
+
+            ]
+
+        ]
+    }
+},
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////-------End
     
 ]
 

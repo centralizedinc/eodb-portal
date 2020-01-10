@@ -141,7 +141,7 @@ class Uploader {
       name: "dti_sec_cda"
     },
     {
-      name: "residence"
+      name: "cedula"
     },
     {
       name: "barangay"

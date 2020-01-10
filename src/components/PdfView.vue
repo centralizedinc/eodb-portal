@@ -23,6 +23,7 @@ import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
 import CEDULA_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
 
+import BRGY_BUSINESS_CLEARANCE from "./pdf/brgy_business_clearance";
 
 var printers = {
   BGYCLEARANCE,
@@ -31,8 +32,8 @@ var printers = {
   POLICECLEARANCE,
   RECEIPT,
   BUSINESSPERMIT_SAN_ANTONIO,
-  CEDULA_SAN_ANTONIO
-
+  CEDULA_SAN_ANTONIO,
+  BRGY_BUSINESS_CLEARANCE
 };
 
 // var printers = {
@@ -134,12 +135,27 @@ export default {
         }
       } else if(this.keyword.toUpperCase() === 'BGYCLEARANCE'){
         this.pdf_details = {
-          business_name: "Dell Laptop Inc.",
-          business_owner: "Godfrey Rivera",
+          name: "Godfrey Rivera",
+          birth_date:"1996-11-23",
+          address: "Tehran",
+          date_created: new Date(),
+
+          // business_name: "Dell Laptop Inc.",
+          // business_owner: "Godfrey Rivera",
+          // business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          // business_nature: "Information Technology",
+          // requestor: "Mark Quijom",
+          // date_created: new Date()
+        }
+      }else if(this.keyword.toUpperCase() === 'BRGY_BUSINESS_CLEARANCE'){
+        this.pdf_details = {
+          business_name: "MyPhone",
+          requestor: "Berna Yango",
           business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
-          business_nature: "Information Technology",
-          requestor: "Mark Quijom",
-          date_created: new Date()
+          business_nature: "Manufacturing Technology Devices",
+          requestor: "Kris Yango",
+          date_created: new Date(),
+
         }
       } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
         this.pdf_details = {
