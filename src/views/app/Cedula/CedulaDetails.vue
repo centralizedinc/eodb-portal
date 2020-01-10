@@ -79,11 +79,11 @@
               <i style="color: red">*</i>
             </span>
             <a-date-picker
+              style="width: 100%;"
               v-model="form.personal_details.birthday"
               :disabledDate="v => disableDateInBirthdate(v, true)"
               :defaultPickerValue="defaultBdayPickerValue"
               :showToday="false"
-              style="width: 100%;"
             ></a-date-picker>
           </a-form-item>
         </a-col>
@@ -171,7 +171,7 @@
               TIN
               <i>(if any)</i>
             </span>
-            <a-input v-model="form.personal_details.tin"></a-input>
+            <input type="number" class="ant-input" v-model="form.personal_details.tin" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -265,7 +265,7 @@
   </a-card>
 </template>
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   props: ["form", "step", "errors"],

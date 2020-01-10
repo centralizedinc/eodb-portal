@@ -696,7 +696,7 @@ export default {
           });
         }
         if (!this.form.tax.taxable.basic) {
-          erros.push({
+          errors.push({
             field: "tax.taxable.basic",
             error: "Basic Community Tax is a required field."
           });
@@ -820,5 +820,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>
