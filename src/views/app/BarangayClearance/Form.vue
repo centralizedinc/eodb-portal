@@ -550,7 +550,7 @@ export default {
 
       // comment to validate
       var { errors, jump_to } = this.validation(validate_all);
-
+      window.scrollTo(0, 0);
       // comment to  bypass
       // var errors = [],
       //   jump_to = 0;
