@@ -65,15 +65,15 @@
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
-            :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
-            :help="checkErrors('personal_details.birthday')"
+            :validate-status="checkErrors('personal_details.birthdate') ? 'error': ''"
+            :help="checkErrors('personal_details.birthdate')"
           >
             <span slot="label">
               Birthday
               <i style="color: red">*</i>
             </span>
             <a-date-picker
-              v-model="form.personal_details.birthday"
+              v-model="form.personal_details.birthdate"
               :disabledDate="v => disableDateInBirthdate(v, true)"
               :defaultPickerValue="defaultBdayPickerValue"
               :showToday="false"
@@ -130,7 +130,7 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">ICR No. (if alien)</span>
-            <a-input v-model="form.personal_details.icr"></a-input>
+            <a-input v-model="form.personal_details.icr_no"></a-input>
           </a-form-item>
         </a-col>
       </a-row>

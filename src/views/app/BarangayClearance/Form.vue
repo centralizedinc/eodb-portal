@@ -236,6 +236,12 @@ export default {
           }
         },
         business_details: {
+          business_owner_name:{
+            first: "",
+            middle: "",
+            last: "",
+            suffix: ""
+          },
           business_name: "",
           business_type: "",
           franchise: ""
@@ -261,7 +267,7 @@ export default {
         // request_for: "",
         attachments: [
           {
-            doc_type: "residence",
+            doc_type: "cedula",
             files: []
           },
           {
@@ -300,7 +306,7 @@ export default {
       //   {
       //     title: "Community Tax Certificate",
       //     status: 0,
-      //     keyword: "residence"
+      //     keyword: "cedula"
       //   }
       // ],
       steps: [
@@ -544,7 +550,7 @@ export default {
 
       // comment to validate
       var { errors, jump_to } = this.validation(validate_all);
-
+      window.scrollTo(0, 0);
       // comment to  bypass
       // var errors = [],
       //   jump_to = 0;
@@ -747,9 +753,9 @@ export default {
             error: "First Name is a required field."
           });
         }
-        if (!this.form.personal_details.birthday) {
+        if (!this.form.personal_details.birthdate) {
           errors.push({
-            field: "personal_details.birthday",
+            field: "personal_details.birthdate",
             error: "Date of Birth is a required field."
           });
         }
@@ -812,7 +818,7 @@ export default {
         }
 
         // if (
-        //   this.checkDocsNeeded(["residence"]) ||
+        //   this.checkDocsNeeded(["cedula"]) ||
         //   !this.form.required_documents.civil_status
         // ) {
         //   errors.push({
@@ -822,7 +828,7 @@ export default {
         // }
 
         // if (
-        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
         //   !this.form.required_documents.birthplace
         // ) {
         //   errors.push({
@@ -843,6 +849,18 @@ export default {
         //     error: "Business Type is a required field."
         //   });
         // }
+        if(!this.form.business_details.business_owner_name.last){
+          errors.push({
+            field: "owner_details.name.last",
+            error: "Business Owner Last Name is a required field."
+          })
+        }
+        if(!this.form.business_details.business_owner_name.first){
+          errors.push({
+            field: "owner_details.name.first",
+            error: "Business Owner First Name is required field"
+          })
+        }
         if (!this.form.business_details.business_name) {
           errors.push({
             field: "business_details.business_name",

@@ -165,7 +165,7 @@ const actions = {
     },
     GET_PERMIT_TYPES(context, refresh) {
         return new Promise((resolve, reject) => {
-            if (refresh || !context.state.filing_permit || !context.state.filing_permit.length) {
+            if (refresh || !context.state.permit_types || !context.state.permit_types.length) {
                 new PermitsAPI(context.rootState.user_session.token).getPermitType()
                     .then((result) => {
                         console.log('GET_PERMIT_TYPES result :', result);
@@ -177,7 +177,7 @@ const actions = {
                         console.log('GET_PERMIT_TYPES err :', err);
                         reject({ errors: err })
                     });
-            } resolve(context.state.filing_permit)
+            } else resolve(context.state.permit_types)
         });
     },
     GET_PERMITS(context, refresh) {

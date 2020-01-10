@@ -76,8 +76,23 @@ export default {
                     else if (type === "police") return "Police Clearance";
                     return "";
                 },
+                getPermitCode(code) {
+                    const permit_types = this.$store.state.permits.permit_types;
+                    return permit_types.find(v => v._id.toString() === code.toString()) || {}
+                },
+                getBusinessType(type) {
+                    if (type === "SP") return "Single Proprietorship";
+                    else if (type === "P") return "Partnership";
+                    else if (type === "CE") return "Cooperative";
+                    else if (type === "CN") return "Corporation";
+                },
+                getPaymentMode(mode) {
+                    if (mode === "A") return "Annual";
+                    else if (mode === "SA") return "Semi Annual";
+                    else if (mode === "Q") return "Quarterly";
+                    else return "";
+                },
                 disableDateInBirthdate(current, mustAbove18) {
-                    console.log('test');
                     if (mustAbove18) {
                         var dateAbove18 = new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate());
                         return current && current > moment(dateAbove18).endOf('day');

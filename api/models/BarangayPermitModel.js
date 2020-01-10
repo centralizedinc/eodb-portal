@@ -30,6 +30,9 @@ var BarangayPermitSchema = new mongoose.Schema({
     application_type: {
         type: String //new || renewal
     },
+    barangay_type: {
+        type: String //business || residential
+    },
     purpose: [],
     personal_details: {
         name: {
@@ -46,7 +49,7 @@ var BarangayPermitSchema = new mongoose.Schema({
                 type: String
             }
         },
-        birthday: {
+        birthdate: {
             type: String
         },
         birthplace: {
@@ -101,6 +104,9 @@ var BarangayPermitSchema = new mongoose.Schema({
     // business details
     business_details: {
         business_name: {
+            type: String
+        },
+        business_owner: {
             type: String
         },
         business_type: {
