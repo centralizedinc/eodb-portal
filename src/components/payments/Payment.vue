@@ -3,9 +3,7 @@
     <a-row type="flex">
       <!-- options -->
       <a-col :span="24">
-        <a-card>
-          <h2>Payment Options</h2>
-        </a-card>
+        <a-card size="small" title="Payment Options"></a-card>
         <a-tabs @change="navigate">
           <a-tab-pane key="0">
             <template slot="tab">
