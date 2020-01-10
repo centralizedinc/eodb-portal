@@ -13,43 +13,11 @@
                 <a-icon type="credit-card" style="font-size: 24px"></a-icon>
               </a-tooltip>
             </template>
-            <a-col :span="24">
-              <a-card class="fill-up-form">
-                <component
-                  :is="current_option"
-                  :details="payment_details"
-                  @validCard="v => is_valid_card=v"
-                  @validName="v => is_valid_name=v"
-                  @validExpiry="v => is_valid_expiry=v"
-                  @validCVC="v => is_valid_cvc=v"
-                />
-              </a-card>
-            </a-col>
-
-            <a-col :span="24">
-              <a-affix :offsetBottom="0" class="payment-total-affix">
-                <a-card :bodyStyle="{ padding: '1vh' }">
-                  <h3>
-                    <i>
-                      Amount to be paid:
-                      <b>{{formatCurrency(payment_amount)}}</b>
-                    </i>
-                  </h3>
-                  <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
-                  <a-button
-                    type="primary"
-                    block
-                    @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
-                    :loading="loading"
-                  >Submit</a-button>
-                </a-card>
-              </a-affix>
-            </a-col>
           </a-tab-pane>
 
-          <a-tab-pane key="1">
+          <a-tab-pane key="1" disabled>
             <template slot="tab">
-              <a-tooltip title="Over-the-counter">
+              <a-tooltip title="7-11 (Over the Counter)">
                 <a-icon type="barcode" style="font-size: 24px"></a-icon>
               </a-tooltip>
               <a-badge count="soon" />
@@ -69,7 +37,7 @@
         </a-tabs>
       </a-col>
 
-      <!-- <a-col :span="24">
+      <a-col :span="24">
         <a-card class="fill-up-form">
           <component
             :is="current_option"
@@ -82,7 +50,7 @@
         </a-card>
       </a-col>
 
-      <a-col :span="24" >
+      <a-col :span="24">
         <a-affix :offsetBottom="0" class="payment-total-affix">
           <a-card :bodyStyle="{ padding: '1vh' }">
             <h3>
@@ -92,7 +60,7 @@
               </i>
             </h3>
             <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
-            <a-button 
+            <a-button
               type="primary"
               block
               @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
@@ -100,7 +68,7 @@
             >Submit</a-button>
           </a-card>
         </a-affix>
-      </a-col>-->
+      </a-col>
     </a-row>
   </a-drawer>
 </template>

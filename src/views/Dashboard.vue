@@ -292,35 +292,35 @@
                   <span
                     slot="title"
                   >Displays a list of all the documents you have applied, both active and expired.</span>
-                  <a-icon type="folder" />
+                  <a-icon type="info-circle" />
                 </a-tooltip>
               </a-col>
-
-              <a-card>
-                <a-card
-                  @click="view(item.epermit_attachment)"
-                  v-for="(item, index) in permits"
-                  :key="index"
-                  style="margin-top: 2px; text-align: center"
-                >
-                  <img
-                    v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
-                    :src="item.epermit_attachment.url"
-                    style="width: 100%;"
-                  />
-                  <pdf
-                    v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
-                    :src="item.epermit_attachment.url"
-                    style="cursor:zoom; width: 100%"
-                  ></pdf>
-                  <pdf v-else :src="item.epermit_attachment" style="cursor:zoom; width: 100%"></pdf>
-                  <p
-                    style="font-weight:bold"
-                  >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</p>
-                  <span>{{getPermitType(item.permit_type)}}</span>
-                </a-card>
-              </a-card>
             </a-row>
+          </a-card>
+
+          <a-card>
+            <a-card
+              @click="view(item.epermit_attachment)"
+              v-for="(item, index) in permits"
+              :key="index"
+              style="margin-top: 2px; text-align: center"
+            >
+              <img
+                v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
+                :src="item.epermit_attachment.url"
+                style="width: 100%;"
+              />
+              <pdf
+                v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
+                :src="item.epermit_attachment.url"
+                style="cursor:zoom; width: 100%"
+              ></pdf>
+              <pdf v-else :src="item.epermit_attachment" style="cursor:zoom; width: 100%"></pdf>
+              <p
+                style="font-weight:bold ;     font-size: 12px"
+              >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</p>
+              <span>{{getPermitType(item.permit_type)}}</span>
+            </a-card>
           </a-card>
           <!-- </a-affix> -->
 

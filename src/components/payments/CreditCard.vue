@@ -1,6 +1,9 @@
 <template>
   <div>
     <h2>Credit Card Payment</h2>
+    <span
+      style="font-size: 12px; font-weight: bold"
+    >Please use a Visa, MasterCard, or American Express card</span>
     <a-divider></a-divider>
     <div class="card-wrapper" style="margin-bottom: 2vh"></div>
     <a-divider></a-divider>
@@ -18,6 +21,7 @@
           placeholder="•••• •••• •••• ••••"
           type="text"
           name="number"
+          maxlength="19"
           class="ant-input"
           v-model="details.number"
           @blur="validateCard"
@@ -85,7 +89,7 @@ export default {
   data() {
     return {
       card: null,
-      cvc_max: 3,
+      cvc_max: 4,
       errors: {
         card: "",
         name: "",
@@ -121,7 +125,7 @@ export default {
     validateCard() {
       this.$emit("validCard", false);
       this.errors.card = "";
-      console.log('this.details.number :', this.details.number.length);
+      console.log("this.details.number :", this.details.number.length);
       if (!this.details.number)
         this.errors.card = "Please fill up Credit Card Number.";
       else {

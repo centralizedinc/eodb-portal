@@ -23,29 +23,6 @@
       <a-tabs>
         <a-tab-pane key="1">
           <span slot="tab">
-            <a-icon type="snippets"></a-icon>Activities
-          </span>
-          <p v-if="!activities || !activities.length" style="text-align: center; font-size: 20px;"><i>No Activity.</i></p>
-          <a-card
-            v-for="item in activities"
-            :key="item.doc_type"
-            style="margin-top: 2px; text-align: center; border: none;"
-            class="activities-cards"
-          >
-            <span slot="title">
-              <b :style="`color: ${getActionColor(item.action)}`">{{getActionText(item.action)}}</b>
-              by {{getDepartmentTitle(item.department)}}
-              <i>as of {{formatDate(item.date_created, 'time', true)}}</i>
-            </span>
-            <p>
-              <i v-if="item.remarks">{{item.remarks}}</i>
-              <i v-else>No comment.</i>
-            </p>
-            <a-divider style="margin: 5px 0;" />
-          </a-card>
-        </a-tab-pane>
-        <a-tab-pane key="2">
-          <span slot="tab">
             <a-icon type="file-search"></a-icon>Details
           </span>
           <application-summary
@@ -69,6 +46,32 @@
             v-if="app_form.permit_type=='cedula'"
           ></application-summary-cedula>
         </a-tab-pane>
+        <a-tab-pane key="2">
+          <span slot="tab">
+            <a-icon type="snippets"></a-icon>Activities
+          </span>
+          <p v-if="!activities || !activities.length" style="text-align: center; font-size: 20px;">
+            <i>No Activity.</i>
+          </p>
+          <a-card
+            v-for="item in activities"
+            :key="item.doc_type"
+            style="margin-top: 2px; text-align: center; border: none;"
+            class="activities-cards"
+          >
+            <span slot="title">
+              <b :style="`color: ${getActionColor(item.action)}`">{{getActionText(item.action)}}</b>
+              by {{getDepartmentTitle(item.department)}}
+              <i>as of {{formatDate(item.date_created, 'time', true)}}</i>
+            </span>
+            <p>
+              <i v-if="item.remarks">{{item.remarks}}</i>
+              <i v-else>No comment.</i>
+            </p>
+            <a-divider style="margin: 5px 0;" />
+          </a-card>
+        </a-tab-pane>
+
         <a-tab-pane key="3">
           <span slot="tab">
             <a-icon type="snippets"></a-icon>Attachments
