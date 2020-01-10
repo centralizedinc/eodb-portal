@@ -64,7 +64,7 @@
           />
         </a-col>
         <a-col
-          :xs="{span: 14}"
+          :xs="{span: 15}"
           :sm="{span: 16}"
           :md="{span: 14}"
           :lg="{span: 2}"
@@ -172,14 +172,13 @@
         </a-menu>
       </a-drawer>-->
     </a-layout-header>
-
     <!-- ------------------------------------------------ -->
     <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
       <a-row type="flex" justify="center" style="margin-top: 10vh">
         <a-col :span="4" style="margin-right:1vw">
           <a-card style="margin-bottom:2vh; color: #f2f2f2">
             <a-row type="flex" justify="center">
-              <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 8}" style="text-align: center">
+              <a-col :span="8" style="text-align: center">
                 <a-avatar
                   :src="user.avatar"
                   :size="54"
@@ -193,7 +192,7 @@
                 </a-avatar>
               </a-col>
               <br />
-              <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 24}">
+              <a-col :span="24">
                 <a-row type="flex" justify="center">
                   <a-col :span="24">
                     <h3
@@ -257,14 +256,7 @@
             </a-menu>
           </a-affix>
         </a-col>
-
-        <a-col
-          :xs="{span: 14}"
-          :sm="{span: 14}"
-          :md="{span: 14}"
-          :lg="{span: 14}"
-          style="margin-right:1vw; margin-left:1vw"
-        >
+        <a-col :span="14" style="margin-right:1vw; margin-left:1vw">
           <img
             style="width: 100%; height:auto"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cover.png"
@@ -272,57 +264,32 @@
           <router-view></router-view>
         </a-col>
         <a-col :span="4" style="margin-left:1vw">
-          <!-- <a-affix :offsetTop="60"> -->
-          <a-card
-            :headStyle="{
-                background: 'linear-gradient(to bottom, #3D6FB5, #56C9EE)',
+          <a-affix :offsetTop="60">
+            <a-card
+              :headStyle="{
+                background: 'linear-gradient(to bottom, #56caef, #3c6cb4)',
                 color: 'white',
                 'font-weight': 'bold',
                 'font-size': '15px',
                 padding: '5px 10px',
                 'min-height': '2vh'
               }"
-            :bodyStyle="{ padding: 0 }"
-            class="document-card"
-          >
-            <a-row slot="title">
-              <a-col :span="22">My Documents</a-col>
-              <a-col :span="2">
-                <a-tooltip placement="left">
-                  <span
-                    slot="title"
-                  >Displays a list of all the documents you have applied, both active and expired.</span>
-                  <a-icon type="folder" />
-                </a-tooltip>
-              </a-col>
-
-              <a-card>
-                <a-card
-                  @click="view(item.epermit_attachment)"
-                  v-for="(item, index) in permits"
-                  :key="index"
-                  style="margin-top: 2px; text-align: center"
-                >
-                  <img
-                    v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
-                    :src="item.epermit_attachment.url"
-                    style="width: 100%;"
-                  />
-                  <pdf
-                    v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
-                    :src="item.epermit_attachment.url"
-                    style="cursor:zoom; width: 100%"
-                  ></pdf>
-                  <pdf v-else :src="item.epermit_attachment" style="cursor:zoom; width: 100%"></pdf>
-                  <p
-                    style="font-weight:bold"
-                  >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</p>
-                  <span>{{getPermitType(item.permit_type)}}</span>
-                </a-card>
-              </a-card>
-            </a-row>
-          </a-card>
-          <!-- </a-affix> -->
+              :bodyStyle="{ padding: 0 }"
+              class="document-card"
+            >
+              <a-row slot="title">
+                <a-col :span="22">My Documents</a-col>
+                <a-col :span="2">
+                  <a-tooltip placement="left">
+                    <span
+                      slot="title"
+                    >Displays a list of all the documents you have applied, both active and expired.</span>
+                    <a-icon type="folder" />
+                  </a-tooltip>
+                </a-col>
+              </a-row>
+            </a-card>
+          </a-affix>
 
           <!-- <a-card>
             <span slot="title">
@@ -537,14 +504,6 @@ export default {
         });
       }
       return permits;
-    },
-    permits() {
-      var permits = JSON.parse(
-        JSON.stringify(this.$store.state.permits.permits_records)
-      );
-      return permits.sort(
-        (a, b) => new Date(b.date_created) - new Date(a.date_created)
-      );
     }
   }
 };

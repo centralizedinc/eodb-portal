@@ -15,8 +15,17 @@
         </a-tooltip>
       </a-col>
     </a-row>
-    <a-form>
-      <a-form-item label="Check all your lacking documents">
+
+    <a-form layout="vertical">
+      <a-form-item>
+        <span slot="label" style="text-align: left !important">
+          Below are the list of requirements needed to apply for a business permit.
+          <br />Check ✅ each of the requirement you
+          <b>
+            <u>DO NOT HAVE</u>
+          </b> to instantly apply within this app.
+        </span>
+        <a-form-item label></a-form-item>
         <a-checkbox-group v-model="lack_documents" @change="onDocumentSelect">
           <a-row>
             <a-col :span="24" v-for="(item, index) in documents" :key="index">
@@ -26,6 +35,7 @@
         </a-checkbox-group>
       </a-form-item>
     </a-form>
+
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
       <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }"> -->
       <a-col :span="24">

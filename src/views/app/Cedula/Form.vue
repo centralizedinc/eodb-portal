@@ -405,6 +405,7 @@ export default {
   },
   watch: {
     current_step() {
+       window.scrollTo(0, 0);
       console.log("this.form step :", this.form);
     }
   },
@@ -495,6 +496,7 @@ export default {
       console.log("this.form :", this.form);
 
       var { errors, jump_to } = this.validation(validate_all);
+       window.scrollTo(0, 0);
       // var errors = [],
       //   jump_to = 0;
 
@@ -711,7 +713,7 @@ export default {
           });
         }
         if (!this.form.tax.taxable.basic) {
-          erros.push({
+          errors.push({
             field: "tax.taxable.basic",
             error: "Basic Community Tax is a required field."
           });

@@ -236,6 +236,12 @@ export default {
           }
         },
         business_details: {
+          business_owner_name:{
+            first: "",
+            middle: "",
+            last: "",
+            suffix: ""
+          },
           business_name: "",
           business_type: "",
           franchise: ""
@@ -544,7 +550,7 @@ export default {
 
       // comment to validate
       var { errors, jump_to } = this.validation(validate_all);
-
+      window.scrollTo(0, 0);
       // comment to  bypass
       // var errors = [],
       //   jump_to = 0;
@@ -843,6 +849,18 @@ export default {
         //     error: "Business Type is a required field."
         //   });
         // }
+        if(!this.form.business_details.business_owner_name.last){
+          errors.push({
+            field: "owner_details.name.last",
+            error: "Business Owner Last Name is a required field."
+          })
+        }
+        if(!this.form.business_details.business_owner_name.first){
+          errors.push({
+            field: "owner_details.name.first",
+            error: "Business Owner First Name is required field"
+          })
+        }
         if (!this.form.business_details.business_name) {
           errors.push({
             field: "business_details.business_name",

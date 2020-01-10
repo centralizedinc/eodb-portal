@@ -21,6 +21,7 @@ import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
+import BRGY_BUSINESS_CLEARANCE from "./pdf/brgy_business_clearance";
 
 var printers = {
   BGYCLEARANCE,
@@ -28,7 +29,8 @@ var printers = {
   BUSINESSPERMIT,
   POLICECLEARANCE,
   RECEIPT,
-  BUSINESSPERMIT_SAN_ANTONIO
+  BUSINESSPERMIT_SAN_ANTONIO,
+  BRGY_BUSINESS_CLEARANCE
 };
 
 // var printers = {
@@ -130,14 +132,29 @@ export default {
         }
       } else if(this.keyword.toUpperCase() === 'BGYCLEARANCE'){
         this.pdf_details = {
-          business_name: "Dell Laptop Inc.",
-          business_owner: "Godfrey Rivera",
-          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
-          business_nature: "Information Technology",
-          requestor: "Mark Quijom",
-          date_created: new Date()
+          name: "Godfrey Rivera",
+          birth_date:"1996-11-23",
+          address: "Tehran",
+          date_created: new Date(),
+
+          // business_name: "Dell Laptop Inc.",
+          // business_owner: "Godfrey Rivera",
+          // business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          // business_nature: "Information Technology",
+          // requestor: "Mark Quijom",
+          // date_created: new Date()
         }
-      } else if(this.keyword.toUpperCase() === 'CEDULA'){
+      }else if(this.keyword.toUpperCase() === 'BRGY_BUSINESS_CLEARANCE'){
+        this.pdf_details = {
+          business_name: "MyPhone",
+          requestor: "Berna Yango",
+          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          business_nature: "Manufacturing Technology Devices",
+          requestor: "Kris Yango",
+          date_created: new Date(),
+
+        }
+      }else if(this.keyword.toUpperCase() === 'CEDULA'){
         this.pdf_details = {}
       }
       console.log("this.pdf_details :", this.pdf_details);
