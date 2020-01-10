@@ -171,7 +171,13 @@
               TIN
               <i>(if any)</i>
             </span>
-            <input type="number" class="ant-input" v-model="form.personal_details.tin" />
+            <input
+              type="text"
+              name="number"
+              class="ant-input"
+              maxlength="11"
+              v-model="form.personal_details.tin"
+            />
           </a-form-item>
         </a-col>
       </a-row>
@@ -251,19 +257,21 @@
       <!-- table -->
 
       <a-row type="flex" justify="space-around" style="margin-top: 5vh;">
-        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 24 }" :md="{ span: 24 }" :xl="{ span: 24 }">
           <a-button-group>
             <!-- <a-button @click="$emit('prev')">Previous</a-button> -->
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
 </template>
+
+
 <script>
 import moment from "moment";
 
@@ -286,6 +294,7 @@ export default {
       );
     }
   },
+
   methods: {
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);

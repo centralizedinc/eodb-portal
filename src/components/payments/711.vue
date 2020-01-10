@@ -1,9 +1,6 @@
 <template>
   <div>
-    <h2>Credit Card Payment</h2>
-    <span
-      style="font-size: 12px; font-weight: bold"
-    >Please use a Visa, MasterCard, or American Express card</span>
+    <h2>7-11 Payment</h2>
     <a-divider></a-divider>
     <div class="card-wrapper" style="margin-bottom: 2vh"></div>
     <a-divider></a-divider>
@@ -21,7 +18,6 @@
           placeholder="•••• •••• •••• ••••"
           type="text"
           name="number"
-          maxlength="19"
           class="ant-input"
           v-model="details.number"
           @blur="validateCard"
@@ -89,7 +85,7 @@ export default {
   data() {
     return {
       card: null,
-      cvc_max: 4,
+      cvc_max: 3,
       errors: {
         card: "",
         name: "",
@@ -188,7 +184,7 @@ export default {
       }
     },
     validateCvc() {
-      this.$emit("validCVC", false);
+      this.$emit("validCVC", true);
       this.errors.cvc = "";
       if (!this.details.cvc) this.errors.cvc = "Please fill up CVC.";
       else {
@@ -203,7 +199,7 @@ export default {
             console.log("result cvc :", result);
             if (result.data.isValid) {
               this.success_cvc = true;
-              this.$emit("validCVC", true);
+              this.$emit("validCVC", false);
             } else this.errors.cvc = "Input CVC is not valid.";
             this.loading_cvc = false;
           })
