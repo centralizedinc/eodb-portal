@@ -171,7 +171,7 @@
               TIN
               <i>(if any)</i>
             </span>
-            <a-input v-model="form.personal_details.tin"></a-input>
+            <input type="number" class="ant-input" v-model="form.personal_details.tin" />
           </a-form-item>
         </a-col>
       </a-row>
