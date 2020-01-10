@@ -141,15 +141,15 @@ export default {
           requestor: "Mark Quijom",
           date_created: new Date()
         }
-      // } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
-      //   this.pdf_details = {
-      //      business_name: "Dell Laptop Inc.",
-      //     business_owner: "Godfrey Rivera",
-      //     business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
-      //     business_nature: "Information Technology",
-      //     requestor: "Mark Quijom",
-      //     date_created: new Date()
-      //   }
+      } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
+        this.pdf_details = {
+           business_name: "Dell Laptop Inc.",
+          business_owner: "Godfrey Rivera",
+          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          business_nature: "Information Technology",
+          requestor: "Mark Quijom",
+          date_created: new Date()
+        }
       }
       console.log("this.pdf_details :", this.pdf_details);
       // Process PDF
@@ -158,7 +158,7 @@ export default {
         const self = this,
           printer = printers[this.keyword.toUpperCase()];
         const document = printer.fillup(this.pdf_details),
-          pdfGenerator = pdfMake.createPdf(document);
+         pdfGenerator = pdfMake.createPdf(document);
 
           // ---------------for pdf testing---------------------
           // pdfMake.createPdf(document).open(err =>{
@@ -169,6 +169,8 @@ export default {
           //   }
           // })
           // ------------for quick testing------------------
+
+           
         pdfGenerator.getBuffer(buffer => {
           var file = new Blob([buffer], {
               type: "application/pdf"
