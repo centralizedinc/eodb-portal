@@ -208,10 +208,10 @@ export default {
             // last: "",
             // suffix: ""
           },
-          birthday: "",
+          birthdate: "",
           birthplace: "",
           other_country: "",
-          icr: null,
+          icr_no: null,
           gender: "",
           civil_status: "",
           height: null,
@@ -303,7 +303,7 @@ export default {
       //   {
       //     title: "Residence Certificate",
       //     status: 0,
-      //     keyword: "residence"
+      //     keyword: "cedula"
       //   },
       //   {
       //     title: "Barangay Clearance",
@@ -718,9 +718,9 @@ export default {
             error: "First Name is a required field."
           });
         }
-        if (!this.form.personal_details.birthday) {
+        if (!this.form.personal_details.birthdate) {
           errors.push({
-            field: "personal_details.birthday",
+            field: "personal_details.birthdate",
             error: "Date of Birth is a required field."
           });
         }
@@ -780,7 +780,7 @@ export default {
         }
 
         // if (
-        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
         //   !this.form.required_documents.civil_status
         // ) {
         //   errors.push({
@@ -790,7 +790,7 @@ export default {
         // }
 
         // if (
-        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
         //   !this.form.required_documents.birthplace
         // ) {
         //   errors.push({

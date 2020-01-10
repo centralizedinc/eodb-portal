@@ -30,7 +30,7 @@ var BarangayApplication = new mongoose.Schema({
                 type: String
             }
         },
-        birthday: {
+        birthdate: {
             type: String
         },
         birthplace: {

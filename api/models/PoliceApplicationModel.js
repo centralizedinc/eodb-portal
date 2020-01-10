@@ -30,7 +30,7 @@ var PoliceApplication = new mongoose.Schema({
                 type: String
             }
         },
-        birthday: {
+        birthdate: {
             type: Date
         },
         birthplace: {
@@ -39,7 +39,7 @@ var PoliceApplication = new mongoose.Schema({
         other_country: {
             type: String
         },
-        icr: {
+        icr_no: {
             type: Number
         },
         gender: {

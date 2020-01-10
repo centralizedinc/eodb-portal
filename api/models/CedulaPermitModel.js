@@ -45,7 +45,7 @@ var CedulaPermitSchema = new mongoose.Schema({
                 type: String
             }
         },
-        birthday: {
+        birthdate: {
             type: Date
         },
         gender: {
@@ -57,7 +57,7 @@ var CedulaPermitSchema = new mongoose.Schema({
         birthplace: {
             type: String
         },
-        icr: {
+        icr_no: {
             type: Number
         },
         height: {

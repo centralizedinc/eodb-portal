@@ -360,7 +360,7 @@ export default {
         {
           title: "Residence Certificate",
           status: 0,
-          keyword: "residence"
+          keyword: "cedula"
         },
         {
           title: "Barangay Clearance",
@@ -908,7 +908,7 @@ export default {
         }
 
         if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
           !this.form.owner_details.civil_status
         ) {
           errors.push({
@@ -918,7 +918,7 @@ export default {
         }
 
         if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
           !this.form.owner_details.birthplace
         ) {
           errors.push({

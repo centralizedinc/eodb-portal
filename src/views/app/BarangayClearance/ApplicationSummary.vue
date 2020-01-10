@@ -33,7 +33,7 @@
       <a-col
         :span="15"
         style="text-transform: uppercase"
-      >{{formatDate(form.personal_details.birthday, null, true)}}</a-col>
+      >{{formatDate(form.personal_details.birthdate, null, true)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Place of Birth</a-col>

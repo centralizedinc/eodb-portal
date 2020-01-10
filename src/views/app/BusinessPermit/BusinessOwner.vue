@@ -87,7 +87,7 @@
           <a-col
             :xs="{ span: 24 }"
             :sm="{ span: 8 }"
-            v-if="checkDocsNeeded(['residence','barangay','police'])"
+            v-if="checkDocsNeeded(['cedula','barangay','police'])"
           >
             <a-form-item
               style="font-weight: bold;"
@@ -122,7 +122,7 @@
         <a-col
           :xs="{ span: 24 }"
           :sm="{ span: 24 }"
-          v-if="checkDocsNeeded(['residence','barangay','police'])"
+          v-if="checkDocsNeeded(['cedula','barangay','police'])"
         >
           <a-form-item
             style="font-weight: bold;"
@@ -196,14 +196,14 @@
         <a-col
           :xs="{ span: 24 }"
           :sm="{ span: 24 }"
-          v-if="checkDocsNeeded(['residence', 'barangay'])"
+          v-if="checkDocsNeeded(['cedula', 'barangay'])"
         >
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
             <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
         </a-col>
 
-        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Monthly Salary">
             <a-select v-model="form.owner_details.monthly_salary">
               <a-select-option value="₱250,000 and below">₱250,000 and below</a-select-option>
@@ -218,17 +218,17 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Height(cm)">
             <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Weight(kg)">
             <a-input maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
             <a-input v-model="form.owner_details.icr_no" />
           </a-form-item>
