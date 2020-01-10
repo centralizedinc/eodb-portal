@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <a-alert
-      :message="title"
-      :description="description"
-      type="info"
-      showIcon
-      v-if="show"
-      :banner="true"
-      :closeText="button"
-      :closable="true"
-      :afterClose="refreshApp"
-    />
+    <a-affix :offsetTop="0">
+      <a-alert
+        :message="title"
+        :description="description"
+        type="info"
+        showIcon
+        v-if="show"
+        :banner="true"
+        :closeText="button"
+        :closable="true"
+        :afterClose="refreshApp"
+      />
+    </a-affix>
     <transition name="fade">
       <router-view></router-view>
     </transition>
@@ -20,24 +22,24 @@
 <script>
 export default {
   name: "app",
-  data(){
-    return{
+  data() {
+    return {
       refreshing: false,
       registration: null,
-      title:"",
+      title: "",
       description: "",
       button: "",
       show: false,
       timeout: 0
-    }
+    };
   },
   created() {
     this.init();
   },
-  methods:{
-  init() {
+  methods: {
+    init() {
       document.addEventListener("swoffline", e => {
-        this.title = "No Connection"
+        this.title = "No Connection";
         this.button = "Retry";
         this.description =
           "No internet connection found. App is running in offline mode.";
@@ -51,17 +53,16 @@ export default {
         window.location.reload();
       });
       document.addEventListener("refresh_activities", e => {
-        this.title = "New Activity detected"
+        this.title = "New Activity detected";
         this.button = "Retry";
-        this.description =
-          "New Updates available";
+        this.description = "New Updates available";
       });
     },
     showRefreshUI(e) {
       this.registration = e.detail;
       this.button = "Refresh";
-      this.title = "New Version Available"
-      this.description ="New version is already available! Please refresh.";
+      this.title = "New Version Available";
+      this.description = "New version is already available! Please refresh.";
       this.show = true;
     },
     refreshApp() {
@@ -70,7 +71,7 @@ export default {
         return;
       }
       this.registration.waiting.postMessage("skipWaiting");
-    }  
+    }
   }
 };
 </script>

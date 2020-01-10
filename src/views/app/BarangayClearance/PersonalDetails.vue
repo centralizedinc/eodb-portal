@@ -76,15 +76,15 @@
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
-            :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
-            :help="checkErrors('personal_details.birthday')"
+            :validate-status="checkErrors('personal_details.birthdate') ? 'error': ''"
+            :help="checkErrors('personal_details.birthdate')"
           >
             <span slot="label">
               Date of Birth
               <i style="color: red">*</i>
             </span>
             <a-date-picker
-              v-model="form.personal_details.birthday"
+              v-model="form.personal_details.birthdate"
               :disabledDate="v => disableDateInBirthdate(v, true)"
               :defaultPickerValue="defaultBdayPickerValue"
               style="width: 100%;"

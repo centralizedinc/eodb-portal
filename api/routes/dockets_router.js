@@ -250,27 +250,38 @@ function processApprovedApplication(reference_no) {
                 results.application = application;
                 if (application.permit_type === "business") return BusinessPermitDao.create(application.details);
                 else if (application.permit_type === "police") return PolicePermitDao.create(application.details);
-                else if (application.permit_type === "barangay") return BarangayPermitDao.create(application.details);
+                else if (application.permit_type === "barangay") {
+                    var promises = []
+                    if (application.details.purpose.includes('pc')) {
+                        application.details.barangay_type = "residential";
+                        promises.push(BarangayPermitDao.create(application.details));
+                    }
+                    if (application.details.purpose.includes('bp')) {
+                        application.details.barangay_type = "business";
+                        promises.push(BarangayPermitDao.create(application.details));
+                    }
+                    return Promise.all(promises);
+                }
                 else if (application.permit_type === "cedula") return CedulaPermitDao.create(application.details);
             })
             // Create Permit based on permit type
             .then((permit) => {
                 results.details = permit;
-                return PaymentDao.findOne({ reference_no: results.details.reference_no })
+                return PaymentDao.findOne({ reference_no: results.application.reference_no })
             })
             // GET FIRST PAYMENT
             .then((payments) => {
                 results.payments = payments;
-                return AccountDao.findOneByID(results.details.account_id);
+                return AccountDao.findOneByID(results.application.account_id);
             })
             // Find the user
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
                 const permit_classification =
-                    results.application.permit_type === "business" ? "Business" : 
-                    results.application.permit_type === "cedula" ? "Community Tax Certificate" : 
-                    results.application.permit_type === "barangay" ? "Barangay" : 
-                    results.application.permit_type === "police" ? "Police" : "";
+                    results.application.permit_type === "business" ? "Business" :
+                        results.application.permit_type === "cedula" ? "Community Tax Certificate" :
+                            results.application.permit_type === "barangay" ? "Barangay" :
+                                results.application.permit_type === "police" ? "Police" : "";
 
                 const substitutions = {
                     name: user.name.first,
@@ -285,6 +296,19 @@ function processApprovedApplication(reference_no) {
             .then((result) => {
                 console.log('sendgrid result :', result);
                 console.log('processApprovedApplication results :', results);
+
+                // check if business and has a lack documents
+                if (results.application.permit_type === "business" &&
+                    results.application.details.lack_documents &&
+                    results.application.details.lack_documents.length) {
+                    var promises = [];
+                    results.application.details.lack_documents.forEach(doc => {
+                        promises.push(createOtherPermit(doc, results.application))
+                    })
+                    return Promise.all(promises);
+                }
+            })
+            .then(result => {
                 resolve(results)
             })
             .catch((err) => {
@@ -292,6 +316,73 @@ function processApprovedApplication(reference_no) {
                 reject(err);
             });
     })
+}
+
+function createOtherPermit(type, application) {
+    if (type === "police") {
+        const application_details = {
+            reference_no: application.reference_no,
+            account_id: application.account_id,
+            application_type: 0,
+            personal_details: {
+                name: application.details.owner_details.name,
+                birthdate: application.details.owner_details.birthdate,
+                birthplace: application.details.owner_details.birthplace,
+                icr_no: application.details.owner_details.icr_no,
+                gender: application.details.owner_details.gender,
+                civil_status: application.details.owner_details.civil_status,
+                height: application.details.owner_details.height,
+                weight: application.details.owner_details.weight,
+                blood_type: application.details.owner_details.blood_type,
+                complexion: application.details.owner_details.complexion,
+                educational_attainment: application.details.owner_details.educational_attainment,
+                occupation: application.details.owner_details.occupation,
+                ctc_no: application.details.owner_details.ctc_no
+            },
+            address_details: application.details.owner_address,
+            contact_details: {
+                tel_no: application.details.owner_details.tel_no,
+                mobile: application.details.owner_details.mobile,
+                email: application.details.owner_details.email
+            }
+        }
+        return PolicePermitDao.create(application_details);
+    }
+    else if (type === "barangay") {
+        const application_details = {
+            reference_no: application.reference_no,
+            account_id: application.account_id,
+            application_type: 0,
+            barangay_type: "business",
+            permit_code: ""
+        }
+        return BarangayPermitDao.create(application_details);
+    }
+    else if (type === "cedula") {
+        const application_details = {
+            reference_no: application.reference_no,
+            account_id: application.account_id,
+            application_type: 0,
+            personal_details: {
+                name: application.details.owner_details.name,
+                birthdate: application.details.owner_details.birthdate,
+                birthplace: application.details.owner_details.birthplace,
+                icr_no: application.details.owner_details.icr_no,
+                gender: application.details.owner_details.gender,
+                civil_status: application.details.owner_details.civil_status,
+                height: application.details.owner_details.height,
+                weight: application.details.owner_details.weight,
+                occupation: application.details.owner_details.occupation,
+                tin: application.details.owner_details.tin
+            },
+            tax: {
+                taxable: {
+                    basic: application.details.owner_details.basic_community_tax
+                }
+            }
+        }
+        return CedulaPermitDao.create(application_details);
+    }
 }
 
 router.route('/reject')
@@ -382,10 +473,10 @@ function processRejectedApplication(reference_no) {
             .then((user) => {
                 // GET PERMIT CLASSIFICATION
                 const permit_classification =
-                    results.application.permit_type === "business" ? "Business" :  
-                    results.application.permit_type === "cedula" ? "Community Tax Certificate" : 
-                    results.application.permit_type === "barangay" ? "Barangay" : 
-                    results.application.permit_type === "police" ? "Police" : "";
+                    results.application.permit_type === "business" ? "Business" :
+                        results.application.permit_type === "cedula" ? "Community Tax Certificate" :
+                            results.application.permit_type === "barangay" ? "Barangay" :
+                                results.application.permit_type === "police" ? "Police" : "";
 
                 const substitutions = {
                     name: user.name.first,

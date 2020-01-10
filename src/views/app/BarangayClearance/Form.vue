@@ -267,7 +267,7 @@ export default {
         // request_for: "",
         attachments: [
           {
-            doc_type: "residence",
+            doc_type: "cedula",
             files: []
           },
           {
@@ -306,7 +306,7 @@ export default {
       //   {
       //     title: "Community Tax Certificate",
       //     status: 0,
-      //     keyword: "residence"
+      //     keyword: "cedula"
       //   }
       // ],
       steps: [
@@ -753,9 +753,9 @@ export default {
             error: "First Name is a required field."
           });
         }
-        if (!this.form.personal_details.birthday) {
+        if (!this.form.personal_details.birthdate) {
           errors.push({
-            field: "personal_details.birthday",
+            field: "personal_details.birthdate",
             error: "Date of Birth is a required field."
           });
         }
@@ -818,7 +818,7 @@ export default {
         }
 
         // if (
-        //   this.checkDocsNeeded(["residence"]) ||
+        //   this.checkDocsNeeded(["cedula"]) ||
         //   !this.form.required_documents.civil_status
         // ) {
         //   errors.push({
@@ -828,7 +828,7 @@ export default {
         // }
 
         // if (
-        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
         //   !this.form.required_documents.birthplace
         // ) {
         //   errors.push({
