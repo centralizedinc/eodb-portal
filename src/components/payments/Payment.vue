@@ -38,14 +38,18 @@
         <a-affix :offsetBottom="0" class="payment-total-affix">
           <a-card :bodyStyle="{ padding: '1vh' }">
             <h3>
-              <i>Amount to be paid: <b>{{formatCurrency(payment_amount)}}</b></i>
+              <i>
+                Amount to be paid:
+                <b>{{formatCurrency(payment_amount)}}</b>
+              </i>
             </h3>
             <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
             <a-button
               type="primary"
               block
-              @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
+              @click="submit"
               :loading="loading"
+              :disabled="!is_valid_card || !is_valid_name || !is_valid_expiry || !is_valid_cvc"
             >Submit</a-button>
           </a-card>
         </a-affix>
@@ -80,6 +84,20 @@ export default {
   methods: {
     navigate(e) {
       this.current_option = this.tabs[e];
+    },
+    submit() {
+      console.log('this.is_valid_card :', this.is_valid_card);
+      console.log('this.is_valid_name :', this.is_valid_name);
+      console.log('this.is_valid_expiry :', this.is_valid_expiry);
+      console.log('this.is_valid_cvc :', this.is_valid_cvc);
+      if (
+        this.is_valid_card &&
+        this.is_valid_name &&
+        this.is_valid_expiry &&
+        this.is_valid_cvc
+      ) {
+        $emit("pay", { payment_details, method: current_option.toLowerCase() });
+      } 
     }
   }
 };
@@ -104,5 +122,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>

@@ -184,7 +184,7 @@ export default {
       }
     },
     validateCvc() {
-      this.$emit("validCVC", true);
+      this.$emit("validCVC", false);
       this.errors.cvc = "";
       if (!this.details.cvc) this.errors.cvc = "Please fill up CVC.";
       else {
@@ -199,7 +199,7 @@ export default {
             console.log("result cvc :", result);
             if (result.data.isValid) {
               this.success_cvc = true;
-              this.$emit("validCVC", false);
+              this.$emit("validCVC", true);
             } else this.errors.cvc = "Input CVC is not valid.";
             this.loading_cvc = false;
           })
