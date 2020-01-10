@@ -353,7 +353,8 @@ function createOtherPermit(type, application) {
             reference_no: application.reference_no,
             account_id: application.account_id,
             application_type: 0,
-            barangay_type: "business"
+            barangay_type: "business",
+            permit_code: ""
         }
         return BarangayPermitDao.create(application_details);
     }
