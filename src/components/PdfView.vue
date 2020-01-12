@@ -76,44 +76,47 @@ export default {
        * To bypass the details override the `pdf_details`
        */
       if (this.keyword.toUpperCase() === "BUSINESSPERMIT_SAN_ANTONIO") {
+        // this.pdf_details = {
+        //   business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
+        //   business_no: "445433110",
+        //   business_address: "Unit 2320 Pasong Tamo Extension",
+        //   business_owner: "RICHARD BERMUDEZ",
+        //   plate_no: "1546238984",
+        //   ownership_type: "SINGLE PROPRIETORSHIP",
+        //   valid_until: new Date(2019, 11, 31),
+        //   area: "50 sq.m",
+        //   date_issued: new Date(2019, 3, 20),
+        //   application_type: "NEW",
+        //   mode_of_payment: "QUARTERLY",
+        //   transaction_no: "115498845612848",
+        //   transactions: [
+        //     {
+        //       description: "Application Fee",
+        //       amount: 1000
+        //     },
+        //     {
+        //       description: "Convenience Fee",
+        //       amount: 50
+        //     }
+        //   ]
+        // };
+      } else if (this.keyword.toUpperCase() === "RECEIPT") {
         this.pdf_details = {
-          business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
-          business_no: "445433110",
-          business_address: "Unit 2320 Pasong Tamo Extension",
-          business_owner: "RICHARD BERMUDEZ",
-          plate_no: "1546238984",
-          ownership_type: "SINGLE PROPRIETORSHIP",
-          valid_until: new Date(2019, 11, 31),
-          area: "50 sq.m",
-          date_issued: new Date(2019, 3, 20),
-          application_type: "NEW",
-          mode_of_payment: "QUARTERLY",
-          transaction_no: "115498845612848",
-          transactions: [
+          transaction_no: "1234567890",
+          date: new Date(),
+          payor: "Juan Delacruz",
+          payment_breakdown: [
             {
               description: "Application Fee",
               amount: 1000
             },
             {
               description: "Convenience Fee",
-              amount: 50
+              amount: 150
             }
           ]
         };
-      } else if (this.keyword.toUpperCase() === "RECEIPT") {
-        this.pdf_details = {
-          transaction_no: "1234567890",
-          date: new Date(),
-          payor: "Juan Delacruz",
-          payment_breakdown: [{
-            description: "Application Fee",
-            amount: 1000
-          },{
-            description: "Convenience Fee",
-            amount: 150
-          }]
-        }
-      } else if(this.keyword.toUpperCase() === 'POLICECLEARANCE'){
+      } else if (this.keyword.toUpperCase() === "POLICECLEARANCE") {
         this.pdf_details = {
           police_no: "B 851852",
           name: "Antonio Basas",
@@ -127,8 +130,8 @@ export default {
           date_created: new Date(),
           verified_by_first: "Senior Police Officer Cesar Advincula",
           verified_by_second: "Police Senior Inspector Godfrey Rivera"
-        }
-      } else if(this.keyword.toUpperCase() === 'BGYCLEARANCE'){
+        };
+      } else if (this.keyword.toUpperCase() === "BGYCLEARANCE") {
         this.pdf_details = {
           business_name: "Dell Laptop Inc.",
           business_owner: "Godfrey Rivera",
@@ -136,9 +139,9 @@ export default {
           business_nature: "Information Technology",
           requestor: "Mark Quijom",
           date_created: new Date()
-        }
-      } else if(this.keyword.toUpperCase() === 'CEDULA'){
-        this.pdf_details = {}
+        };
+      } else if (this.keyword.toUpperCase() === "CEDULA") {
+        this.pdf_details = {};
       }
       console.log("this.pdf_details :", this.pdf_details);
       // Process PDF
@@ -149,13 +152,21 @@ export default {
         const document = printer.fillup(this.pdf_details),
           pdfGenerator = pdfMake.createPdf(document);
 
-        pdfGenerator.getBuffer(buffer => {
-          var file = new Blob([buffer], {
-              type: "application/pdf"
-            }),
-            dataUrl = URL.createObjectURL(file);
-          self.pdf_url = dataUrl;
-          self.loading = false;
+        // pdfGenerator.getBuffer(buffer => {
+        //   var file = new Blob([buffer], {
+        //       type: "application/pdf"
+        //     }),
+        //     dataUrl = URL.createObjectURL(file);
+        //   self.pdf_url = dataUrl;
+        //   self.loading = false;
+        // });
+
+        pdfMake.createPdf(document).open(err => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
         });
       } catch (error) {
         console.log("error :", error);
