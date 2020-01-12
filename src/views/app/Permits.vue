@@ -67,7 +67,7 @@
               size="small"
               style="margin-left: 20px"
               @click="refreshData"
-              type="primary"
+              type="secondary"
               icon="reload"
             ></a-button>
           </a-tooltip>

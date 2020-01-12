@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading-content v-if="fetching_data" />
-    <a-row type="flex" v-else justify="space-between">
+    <a-row type="flex" v-else justify="spa">
       <!-- Steps -->
       <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
@@ -20,16 +20,17 @@
 
       <!-- Fill up form -->
       <a-col
-        style="padding: 1%"
+        style="padding: 10px"
         :xs="{ span: 24 }"
         :md="{ span: 16 }"
-        :xl="{span: 18}"
+        :lg="{span: 18}"
         class="fill-up-form"
       >
         <h1 style="margin-top: 20px;">Business Permit Application</h1>
         <h4>This information will help us assess your application.</h4>
+
         <a-row type="flex" justify="space-between">
-          <a-col :xs="{span: 24}" :md="{span: 24}" :xl="{span: 16}">
+          <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 17}">
             <component
               :is="form_components[current_step]"
               :form="form"
@@ -46,7 +47,7 @@
             />
           </a-col>
 
-          <a-col :xs="{ span: 24 }" :md="{ span:  24}" :xl="{ span: 7 }">
+          <a-col :xs="{ span: 24 }" :md="{ span:  24}" :lg="{ span: 7 }">
             <a-affix :offsetTop="60">
               <!-- Attachments -->
               <a-card
