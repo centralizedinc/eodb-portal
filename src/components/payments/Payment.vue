@@ -102,10 +102,10 @@ export default {
       this.current_option = this.tabs[e];
     },
     submit() {
-      console.log('this.is_valid_card :', this.is_valid_card);
-      console.log('this.is_valid_name :', this.is_valid_name);
-      console.log('this.is_valid_expiry :', this.is_valid_expiry);
-      console.log('this.is_valid_cvc :', this.is_valid_cvc);
+      console.log("this.is_valid_card :", this.is_valid_card);
+      console.log("this.is_valid_name :", this.is_valid_name);
+      console.log("this.is_valid_expiry :", this.is_valid_expiry);
+      console.log("this.is_valid_cvc :", this.is_valid_cvc);
       if (
         this.is_valid_card &&
         this.is_valid_name &&
@@ -113,7 +113,7 @@ export default {
         this.is_valid_cvc
       ) {
         $emit("pay", { payment_details, method: current_option.toLowerCase() });
-      } 
+      }
     }
   }
 };

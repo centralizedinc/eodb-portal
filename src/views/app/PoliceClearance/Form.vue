@@ -264,15 +264,6 @@ export default {
             files: []
           }
         ]
-        // required_documents: {
-        //   civil_status: "",
-        //   birthplace: "",
-        //   monthly_salary: "",
-        //   occupation: "",
-        //   height: "",
-        //   weight: "",
-        //   icr_no: ""
-        // }
       },
       document_columns: [
         {
@@ -293,55 +284,7 @@ export default {
         }
       ],
       document_data_source: null,
-      // [
-      //   {
-      //     title: "DTI/SEC/CDA Certificate!!!!!",
-      //     status: 0,
-      //     keyword: "dti_sec_cda",
-      //     hidden: true
-      //   },
-      //   {
-      //     title: "Residence Certificate",
-      //     status: 0,
-      //     keyword: "cedula"
-      //   },
-      //   {
-      //     title: "Barangay Clearance",
-      //     status: 0,
-      //     keyword: "barangay"
-      //   },
-      //   {
-      //     title: "Police Clearance",
-      //     status: 0,
-      //     keyword: "police"
-      //   }
-      // ],
       steps: [
-        // {
-        //   title: "Document Checklist",
-        //   description:
-        //     "Check all the documents you have and apply for lacking requirements instantly within this app."
-        // },
-        // {
-        //   title: "Business Owner Information",
-        //   description:
-        //     "Individual or entity who owns a business. Check all corresponding details for any errors."
-        // },
-        // {
-        //   title: "Business Details",
-        //   description:
-        //     "Includes important details such as Business Name and Business Address. Provide the updated contact number and email."
-        // },
-        // {
-        //   title: "Business Activity",
-        //   description:
-        //     "NOTE: For Business Codes, please refer to BIR Registration. Line of business cannot be blank."
-        // },
-        // {
-        //   title: "Additional Fields",
-        //   description:
-        //     "This is the additional fields for the not provided required documents."
-        // },
         {
           title: "Personal Details",
           description:
@@ -367,38 +310,7 @@ export default {
         total_payable: 5000,
         amount_payable: 0,
         amount_paid: 0,
-        payment_breakdown: [
-          {
-            description: "CTC or Cedula",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Barangay Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Police Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Business Permit Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Fire Safety and Inspection Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Convenience Fee",
-            fee_type: "application_fee",
-            amount: 1000
-          }
-        ],
+        payment_breakdown: [],
         status: "unpaid",
         method: "",
         mode_of_payment: "A",
@@ -406,35 +318,21 @@ export default {
       },
       card_details: {},
       payments_data_source: [
-        // {
-        //   description: "CTC or Cedula",
-        //   amount: 1000
-        // },
         {
           description: "Application Fee",
-          amount: 100
+          amount: 100,
+          fee_type: "application_fee"
         },
-        // {
-        //   description: "Police Clearance",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Business Permit Fee",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Fire Safety and Inspection Fee",
-        //   amount: 1000
-        // },
         {
           description: "Convenience Fee",
-          fee_type: "application_fee",
+          fee_type: "convenience_fee",
           amount: 100
         }
       ],
       loading: false,
       errors: [],
-      departments: []
+      departments: [],
+      computation_formula: ""
     };
   },
   created() {
@@ -463,6 +361,18 @@ export default {
       return docs;
     },
     total_payable() {
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      var amount = 0,
+        computed_amount = 0;
+      try {
+        computed_amount = eval(this.computation_formula);
+      } catch (error) {
+        console.log("error :", error);
+        computed_amount = 0;
+      }
+      this.payments_data_source[index].amount = computed_amount;
       var total = this.payments_data_source
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
@@ -515,6 +425,20 @@ export default {
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
       this.form.contact_details.email = data.email;
+
+      this.$store
+        .dispatch("GET_FEES_COMPUTATION", {
+          permit_type: this.$store.state.permits.filing_permit._id,
+          app_type: 0
+        })
+        .then(result => {
+          console.log("GET_FEES_COMPUTATION result.data :", result.data);
+          if (!result.data.errors)
+            this.computation_formula = result.data.computation;
+        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
@@ -588,7 +512,8 @@ export default {
           });
         });
       }
-      var transaction_no = "", reference_no = "";
+      var transaction_no = "",
+        reference_no = "";
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -893,11 +818,13 @@ export default {
       console.log("errors to return: " + JSON.stringify(errors));
       return { errors, jump_to };
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     }
   }
@@ -960,5 +887,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>

@@ -1,7 +1,12 @@
 <template>
-  <a-row>
+  <a-row type="flex" justify="start">
     <a-col :xs="{span: 24}" :sm="{span:24}" :md="{span:24}" :lg="{span:24}" :xl="{span:24}">
-      <a-table :columns="cols" :dataSource="permits" :loading="loading || loading_permits">
+      <a-table
+        :scroll="{ x: 800, y: 300 }"
+        :columns="cols"
+        :dataSource="permits"
+        :loading="loading || loading_permits"
+      >
         <template slot="permit_no" slot-scope="text, record">{{getPermitNo(record)}}</template>
         <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
         <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
@@ -59,7 +64,8 @@ export default {
           title: "Actions",
           dataIndex: "action",
           scopedSlots: { customRender: "action" },
-          fixed: "right"
+          fixed: "right",
+          width: 100
         }
       ]
     };

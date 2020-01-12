@@ -236,7 +236,7 @@ export default {
           }
         },
         business_details: {
-          business_owner_name:{
+          business_owner_name: {
             first: "",
             middle: "",
             last: "",
@@ -350,38 +350,7 @@ export default {
         total_payable: 5000,
         amount_payable: 0,
         amount_paid: 0,
-        payment_breakdown: [
-          {
-            description: "CTC or Cedula",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Barangay Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Police Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Business Permit Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Fire Safety and Inspection Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Convenience Fee",
-            fee_type: "application_fee",
-            amount: 1000
-          }
-        ],
+        payment_breakdown: [],
         status: "unpaid",
         method: "",
         mode_of_payment: "A",
@@ -416,13 +385,14 @@ export default {
         },
         {
           description: "Convenience Fee",
-          fee_type: "application_fee",
-          amount: 100
+          fee_type: "convenience_fee",
+          amount: 150
         }
       ],
       loading: false,
       departments: [],
-      errors: []
+      errors: [],
+      computation_formula: ""
     };
   },
   created() {
@@ -450,6 +420,18 @@ export default {
     },
     total_payable() {
       console.log("total payable data: " + JSON.stringify(this.form.tax));
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      var amount = 0,
+        computed_amount = 0;
+      try {
+        computed_amount = eval(this.computation_formula);
+      } catch (error) {
+        console.log("error :", error);
+        computed_amount = 0;
+      }
+      this.payments_data_source[index].amount = computed_amount;
       var total = this.payments_data_source
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
@@ -534,6 +516,20 @@ export default {
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
+
+      this.$store
+        .dispatch("GET_FEES_COMPUTATION", {
+          permit_type: this.$store.state.permits.filing_permit._id,
+          app_type: 0
+        })
+        .then(result => {
+          console.log("GET_FEES_COMPUTATION result.data :", result.data);
+          if (!result.data.errors)
+            this.computation_formula = result.data.computation;
+        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     prev_step() {
       // if (this.current_step == 3) {
@@ -783,7 +779,7 @@ export default {
             error: "CTC is a required field."
           });
         }
-        
+
         if (this.form.purpose.includes("pc")) {
           if (!this.form.residential_address.region) {
             errors.push({
@@ -849,17 +845,17 @@ export default {
         //     error: "Business Type is a required field."
         //   });
         // }
-        if(!this.form.business_details.business_owner_name.last){
+        if (!this.form.business_details.business_owner_name.last) {
           errors.push({
             field: "owner_details.name.last",
             error: "Business Owner Last Name is a required field."
-          })
+          });
         }
-        if(!this.form.business_details.business_owner_name.first){
+        if (!this.form.business_details.business_owner_name.first) {
           errors.push({
             field: "owner_details.name.first",
             error: "Business Owner First Name is required field"
-          })
+          });
         }
         if (!this.form.business_details.business_name) {
           errors.push({
@@ -1008,5 +1004,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>

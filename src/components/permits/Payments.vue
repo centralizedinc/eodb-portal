@@ -1,5 +1,10 @@
 <template>
-  <a-table :columns="cols" :dataSource="payments" :loading="loading || loading_payments">
+  <a-table
+    :scroll="{ x: 850, y: 300 }"
+    :columns="cols"
+    :dataSource="payments"
+    :loading="loading || loading_payments"
+  >
     <span slot="amount_paid" slot-scope="text">{{formatCurrency(text)}}</span>
     <span slot="payment_for" slot-scope="text">{{getPermitType(text)}}</span>
     <span slot="method" slot-scope="text">{{getPermitMethod(text)}}</span>
@@ -25,8 +30,7 @@ export default {
       cols: [
         {
           title: "Transaction No",
-          dataIndex: "transaction_no",
-          fixed: "left"
+          dataIndex: "transaction_no"
         },
         {
           title: "Reference No",
@@ -55,7 +59,9 @@ export default {
         {
           title: "Action",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" }
+          scopedSlots: { customRender: "action" },
+          fixed: "right",
+          width: 100
         }
       ]
     };

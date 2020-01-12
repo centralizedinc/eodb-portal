@@ -3,7 +3,7 @@
     <loading-content v-if="fetching_data" />
     <a-row type="flex" v-else justify="space-between">
       <!-- Steps -->
-      <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
+      <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
         <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
           <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -19,11 +19,17 @@
       </a-col>
 
       <!-- Fill up form -->
-      <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
-        <h1 style="margin-top: 5vh;">Business Permit Application</h1>
+      <a-col
+        style="padding: 1%"
+        :xs="{ span: 24 }"
+        :md="{ span: 16 }"
+        :xl="{span: 18}"
+        class="fill-up-form"
+      >
+        <h1 style="margin-top: 20px;">Business Permit Application</h1>
         <h4>This information will help us assess your application.</h4>
         <a-row type="flex" justify="space-between">
-          <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
+          <a-col :xs="{span: 24}" :md="{span: 24}" :xl="{span: 16}">
             <component
               :is="form_components[current_step]"
               :form="form"
@@ -39,7 +45,8 @@
               :checkSelectedDocs="checkSelectedDocs"
             />
           </a-col>
-          <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
+
+          <a-col :xs="{ span: 24 }" :md="{ span:  24}" :xl="{ span: 7 }">
             <a-affix :offsetTop="60">
               <!-- Attachments -->
               <a-card
@@ -446,47 +453,6 @@ export default {
   created() {
     this.init();
   },
-  // mounted() {
-  //   console.log(
-  //     "this.$store.state.permits.filing_permit :",
-  //     this.$store.state.permits.filing_permit
-  //   );
-
-  //   // GET DEPARTMENTS
-  //   const departments = this.deepCopy(
-  //     this.$store.state.permits.filing_permit.approvers
-  //   );
-  //   console.log("departments :", departments);
-  //   this.departments = departments;
-  //   this.form.permit_code = this.$store.state.permits.filing_permit._id;
-
-  //   // GET REQUIREMENTS
-  //   const requirements = this.deepCopy(
-  //     this.$store.state.permits.filing_permit.requirements
-  //   );
-  //   console.log("requirements :", requirements);
-  //   const doc_req = requirements.map(v => {
-  //     return {
-  //       title: v.name,
-  //       status: 0,
-  //       keyword: v.keyword,
-  //       hidden: v.required
-  //     };
-  //   });
-
-  //   doc_req.forEach(v => {
-  //     // if (v.hidden)
-  //     this.form.attachments.push({
-  //       doc_type: v.keyword,
-  //       files: []
-  //     });
-  //   });
-  //   console.log("this.form :", this.form);
-  //   this.document_data_source = doc_req;
-
-  //   // To check payments needs to be pay
-  //   this.updateDocsPayment();
-  // },
   watch: {
     current_step() {
       console.log("this.form step :", this.current_step);
@@ -1159,12 +1125,12 @@ export default {
       );
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
-        // computed_amount = parseFloat(amount) / 100 / 20;
-        var computation_function = this.computation_formula.replace(
-          /{#amount}/g,
-          parseFloat(amount)
-        );
-        computed_amount = eval(computation_function);
+        try {
+          computed_amount = eval(this.computation_formula);
+        } catch (error) {
+          console.log("error :", error);
+          computed_amount = 0;
+        }
       }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
@@ -1180,17 +1146,12 @@ export default {
       );
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
-        // if (parseFloat(amount) >= 1000000)
-        //   computed_amount = (parseFloat(amount) - 1000000) * 0.01 + 8000;
-        // else if (parseFloat(amount) > 400000)
-        //   computed_amount = (parseFloat(amount) - 400000) * 0.015 + 8000;
-        // else computed_amount = parseFloat(amount) * 0.02;
-
-        var computation_function = this.computation_formula.replace(
-          /{#amount}/g,
-          parseFloat(amount)
-        );
-        computed_amount = eval(computation_function);
+        try {
+          computed_amount = eval(this.computation_formula);
+        } catch (error) {
+          console.log("error :", error);
+          computed_amount = 0;
+        }
       }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;

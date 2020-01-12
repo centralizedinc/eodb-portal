@@ -325,38 +325,7 @@ export default {
         total_payable: 0,
         amount_payable: 0,
         amount_paid: 0,
-        payment_breakdown: [
-          {
-            description: "CTC or Cedula",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Barangay Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Police Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Business Permit Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Fire Safety and Inspection Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Convenience Fee",
-            fee_type: "application_fee",
-            amount: 1000
-          }
-        ],
+        payment_breakdown: [],
         status: "unpaid",
         method: "",
         mode_of_payment: "A",
@@ -366,31 +335,12 @@ export default {
       payments_data_source: [
         {
           description: "Application Fee",
-          amount: 1000
+          amount: 0,
+          fee_type: "application_fee"
         },
-        // {
-        //   description: "CTC or Cedula",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Barangay Clearance",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Police Clearance",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Business Permit Fee",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Fire Safety and Inspection Fee",
-        //   amount: 1000
-        // },
         {
           description: "Convenience Fee",
-          fee_type: "application_fee",
+          fee_type: "convenience_fee",
           amount: 150
         }
       ],
@@ -405,7 +355,7 @@ export default {
   },
   watch: {
     current_step() {
-       window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
       console.log("this.form step :", this.form);
     }
   },
@@ -426,7 +376,10 @@ export default {
     },
     total_payable() {
       console.log("total payable data: " + JSON.stringify(this.form.tax));
-      this.payments_data_source[0].amount = this.form.tax.total_amount_paid;
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      this.payments_data_source[index].amount = this.form.tax.total_amount_paid;
       var total = this.payments_data_source
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
@@ -496,7 +449,7 @@ export default {
       console.log("this.form :", this.form);
 
       var { errors, jump_to } = this.validation(validate_all);
-       window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
       // var errors = [],
       //   jump_to = 0;
 
@@ -513,6 +466,7 @@ export default {
       if (!errors.length) {
         if (this.current_step === 1) {
           // this.submit();
+          this.transaction_details.payment_breakdown = this.payments_data_source;
           this.show_payment = true;
           // Proceed to payment
         } else {
