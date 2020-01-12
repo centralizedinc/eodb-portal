@@ -84,7 +84,7 @@
                     <div style="text-align: center;">
                       <a-icon
                         v-if="text===2"
-                        type="check-circle"
+                        type="file-done"
                         style="color: green; font-weight: bold;"
                       />
                       <a-icon
@@ -92,7 +92,7 @@
                         type="loading"
                         style="color: green; font-weight: bold;"
                       />
-                      <a-icon v-else type="close-circle" style="color: red; font-weight: bold;" />
+                      <a-icon v-else type="exception" style="color: red; font-weight: bold;" />
                     </div>
                   </template>
                   <template slot="action" slot-scope="text, record">
