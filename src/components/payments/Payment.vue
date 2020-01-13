@@ -112,15 +112,10 @@ export default {
         this.is_valid_expiry &&
         this.is_valid_cvc
       ) {
-<<<<<<< HEAD
         this.$emit("pay", {
-          payment_details,
-          method: current_option.toLowerCase()
+          payment_details: this.payment_details,
+          method: this.current_option.toLowerCase()
         });
-        r;
-=======
-        this.$emit("pay", { payment_details: this.payment_details, method: this.current_option.toLowerCase() });
->>>>>>> b0a8c911624ebf2cd7e29d93d15209b80429c752
       }
     }
   }
