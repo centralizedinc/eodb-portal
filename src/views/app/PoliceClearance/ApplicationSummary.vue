@@ -138,7 +138,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.name.last == null || form.family_background.father_info.name.last == "" ? "-" : form.family_background.father_info.name.last}}</a-col>
+      >{{(form.family_background.father_info.name.last == null || form.family_background.father_info.name.last == "" ? "-" : form.family_background.father_info.name.last)}}</a-col>
     </a-row>
 
     <a-row class="summary-row">
@@ -147,7 +147,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.name.first == null || form.family_background.father_info.name.first == "" ? "-" : family_background.father_info.name.first}}</a-col>
+      >{{(form.family_background.father_info.name.first == null || form.family_background.father_info.name.first == "" ? "-" : family_background.father_info.name.first)}}</a-col>
     </a-row>
 
     <a-row class="summary-row">
@@ -156,7 +156,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.name.middle == null || form.family_background.father_info.name.middle == "" ? "-": form.family_background.father_info.name.middle}}</a-col>
+      >{{(form.family_background.father_info.name.middle == null || form.family_background.father_info.name.middle == "" ? "-": form.family_background.father_info.name.middle)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Suffix</a-col>
@@ -164,7 +164,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.name.suffix == null || form.family_background.father_info.name.suffix == "" ? "-" : form.family_background.father_info.name.suffix}}</a-col>
+      >{{(form.family_background.father_info.name.suffix == null || form.family_background.father_info.name.suffix == "" ? "-" : form.family_background.father_info.name.suffix)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Birth Place</a-col>
@@ -172,7 +172,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.birthplace == null || form.family_background.father_info.birthplace == "" ? "-" : form.family_background.father_info.birthplace}}</a-col>
+      >{{(form.family_background.father_info.birthplace == null || form.family_background.father_info.birthplace == "" ? "-" : form.family_background.father_info.birthplace)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">If other country</a-col>
@@ -180,7 +180,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.other_country == null || form.family_background.father_info.other_country == "" ? "-" : form.family_background.father_info.other_country}}</a-col>
+      >{{(form.family_background.father_info.other_country == null || form.family_background.father_info.other_country == "" ? "-" : form.family_background.father_info.other_country)}}</a-col>
     </a-row>
     <!-- mother -->
     <br />
@@ -190,7 +190,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.mother_info.name.last == null || form.family_background.mother_info.name.last == "" ? "-" : form.family_background.mother_info.name.last}}</a-col>
+      >{{(form.family_background.mother_info.name.last == null || form.family_background.mother_info.name.last == "" ? "-" : form.family_background.mother_info.name.last)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">First Name</a-col>
@@ -198,7 +198,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.mother_info.name.first == null || form.family_background.mother_info.name.first =="" || form.family_background.mother_info.name.first == " " || form.family_background.mother_infor.name.first == undefined ? "-" : form.family_background.mother_info.name.first}}</a-col>
+      >{{(form.family_background.mother_info.name.first == null || form.family_background.mother_info.name.first =="" || form.family_background.mother_info.name.first == " " || form.family_background.mother_infor.name.first == undefined ? "-" : form.family_background.mother_info.name.first)}}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Middle Name</a-col>

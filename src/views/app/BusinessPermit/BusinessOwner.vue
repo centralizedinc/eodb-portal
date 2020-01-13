@@ -327,7 +327,7 @@
             ></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
+        <!-- <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.occupation') ? 'error': ''"
             :help="checkErrors('police_required.occupation')"
@@ -339,7 +339,7 @@
 
             <a-input v-model="form.owner_details.occupation"></a-input>
           </a-form-item>
-        </a-col>
+        </a-col>-->
       </a-row>
 
       <!-- Cedula Details -->
