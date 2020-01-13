@@ -124,7 +124,7 @@
 
         <a-col
           :xs="{ span: 24 }"
-          :sm="{ span: 24 }"
+          :sm="{ span: 16 }"
           v-if="checkDocsNeeded(['cedula','barangay','police'])"
         >
           <a-form-item
@@ -144,6 +144,30 @@
             </a-radio-group>
           </a-form-item>
         </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }"
+        v-if="checkDocsNeeded(['police'])"
+        >
+          <a-form-item
+            :validate-status="checkErrors('police_required.blood_type') ? 'error': ''"
+            :help="checkErrors('police_required.blood_type')"
+          >         
+            <span slot="label">
+              Blood Type
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.owner_details.blood_type">
+              <a-select-option value="A+">A+</a-select-option>
+              <a-select-option value="A-">A-</a-select-option>
+              <a-select-option value="B+">B+</a-select-option>
+              <a-select-option value="B-">B-</a-select-option>
+              <a-select-option value="AB+">AB+</a-select-option>
+              <a-select-option value="AB-">AB-</a-select-option>
+              <a-select-option value="O+">O+</a-select-option>
+              <a-select-option value="O-">O-</a-select-option>
+              <a-select-option value="Unknown">Unknown</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col> 
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
@@ -219,19 +243,86 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
-          <a-form-item style="font-weight: bold;" label="Height(cm)">
-            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
+          <a-form-item style="font-weight: bold;"
+          :validate-status="checkErrors('police_required.height') ? 'error': ''"
+            :help="checkErrors('police_required.height')"
+          >
+           <span slot="label">
+              Height(cm)
+              <i style="color: red">*</i>
+            </span>
+           <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
-          <a-form-item style="font-weight: bold;" label="Weight(kg)">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
+          <a-form-item style="font-weight: bold;"
+          :validate-status="checkErrors('police_required.weight') ? 'error': ''"
+            :help="checkErrors('police_required.weight')"
+          >
+            <span slot="label">
+              Weight(kg)
+              <i style="color: red">*</i>
+            </span>
             <a-input maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
             <a-input v-model="form.owner_details.icr_no" />
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item
+            :validate-status="checkErrors('police_required.complexion') ? 'error': ''"
+            :help="checkErrors('personal_details.complexion')"
+          >
+            <span slot="label">
+              Complexion
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.owner_details.complexion">
+              <a-select-option value="Light">Light</a-select-option>
+              <a-select-option value="Fair">Fair</a-select-option>
+              <a-select-option value="Medium">Medium</a-select-option>
+              <a-select-option value="Olive">Olive</a-select-option>
+              <a-select-option value="Brown">Brown</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item
+            :validate-status="checkErrors('police_required.educational_attainment') ? 'error': ''"
+            :help="checkErrors('police_required.educational_attainment')"
+          >
+            <span slot="label">
+              Educational Attainment
+              <i style="color: red">*</i>
+            </span>
+
+            <a-select v-model="form.owner_details.educational_attainment">
+              <a-select-option value="primary">Primary</a-select-option>
+              <a-select-option value="secondary">Secondary</a-select-option>
+              <a-select-option value="vocational">Vocational</a-select-option>
+              <a-select-option value="tertiary">Bachelor's Degree</a-select-option>
+              <a-select-option value="master">Master's Degree</a-select-option>
+              <a-select-option value="doctorate">Doctorate Degree</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+          <a-form-item
+            :validate-status="checkErrors('police_required.occupation') ? 'error': ''"
+            :help="checkErrors('police_required.occupation')"
+          >
+            <span slot="label">
+              Occupation
+              <i style="color: red">*</i>
+            </span>
+
+            <a-input v-model="form.owner_details.occupation"></a-input>
           </a-form-item>
         </a-col>
       </a-row>

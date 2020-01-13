@@ -49,6 +49,7 @@ router.route('/')
             details: data,
             account_id: created_by,
             created_by,
+            permit_code: data.permit_code,
             permit_type: data.permit_type
         }
         ApplicationDao.create(app_data)
