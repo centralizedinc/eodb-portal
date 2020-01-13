@@ -44,6 +44,7 @@
               @updateCapital="updateCapital"
               @updateDocsPayment="updateDocsPayment"
               :checkSelectedDocs="checkSelectedDocs"
+              :computation_formula="computation_formula"
             />
           </a-col>
 
