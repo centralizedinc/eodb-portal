@@ -1,10 +1,9 @@
 <template>
   <a-drawer placement="left" :closable="false" :width="450" @close="$emit('close')" :visible="show">
     <a-row type="flex">
-      <!-- <a-col :span="24">
-        <a-card style="background: linear-gradient(to right, #000046, #1cb5e0)">
-          <h2 style="color: #FFFFFF">Payment Options</h2>
-        </a-card>
+      <!-- options -->
+      <a-col :span="24">
+        <a-card size="small" title="Payment Options"></a-card>
         <a-tabs @change="navigate">
           <a-tab-pane key="0">
             <template slot="tab">
@@ -13,15 +12,29 @@
               </a-tooltip>
             </template>
           </a-tab-pane>
-          <a-tab-pane key="1">
+
+          <a-tab-pane key="1" disabled>
             <template slot="tab">
-              <a-tooltip title="Online Banking">
-                <a-icon type="bank" style="font-size: 24px"></a-icon>
+              <a-tooltip title="7-11 (Over the Counter)">
+                <a-icon type="barcode" style="font-size: 24px"></a-icon>
               </a-tooltip>
+              <a-badge count="soon" />
             </template>
+            <div align="center">
+              <a-icon
+                type="smile"
+                :style="{ fontSize: '100px', color: '#faad14' }"
+                style="margin-top:80px"
+              />
+              <h1 style="margin-top:30px; margin-bottom:50px">
+                7-11 Payment
+                <br />service will be available very soon!
+              </h1>
+            </div>
           </a-tab-pane>
         </a-tabs>
-      </a-col>-->
+      </a-col>
+
       <a-col :span="24">
         <a-card class="fill-up-form">
           <component
@@ -34,18 +47,23 @@
           />
         </a-card>
       </a-col>
+
       <a-col :span="24">
         <a-affix :offsetBottom="0" class="payment-total-affix">
           <a-card :bodyStyle="{ padding: '1vh' }">
             <h3>
-              <i>Amount to be paid: <b>{{formatCurrency(payment_amount)}}</b></i>
+              <i>
+                Amount to be paid:
+                <b>{{formatCurrency(payment_amount)}}</b>
+              </i>
             </h3>
             <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
             <a-button
               type="primary"
               block
-              @click="$emit('pay', {payment_details, method: current_option.toLowerCase()})"
+              @click="submit"
               :loading="loading"
+              :disabled="!is_valid_card || !is_valid_name || !is_valid_expiry || !is_valid_cvc"
             >Submit</a-button>
           </a-card>
         </a-affix>
@@ -56,11 +74,13 @@
 
 <script>
 import CreditCard from "./CreditCard";
+import SevenEleven from "./711";
 
 export default {
   props: ["show", "loading", "payment_amount"],
   components: {
-    CreditCard
+    CreditCard,
+    SevenEleven
   },
   data() {
     return {
@@ -71,7 +91,7 @@ export default {
       card: null,
       payment_details: {},
       current_option: "CreditCard",
-      tabs: ["CreditCard", "OnlineBanking", "OverCounter"]
+      tabs: ["CreditCard", "SevenEleven", "OverCounter"]
     };
   },
   mounted() {
@@ -80,6 +100,20 @@ export default {
   methods: {
     navigate(e) {
       this.current_option = this.tabs[e];
+    },
+    submit() {
+      console.log("this.is_valid_card :", this.is_valid_card);
+      console.log("this.is_valid_name :", this.is_valid_name);
+      console.log("this.is_valid_expiry :", this.is_valid_expiry);
+      console.log("this.is_valid_cvc :", this.is_valid_cvc);
+      if (
+        this.is_valid_card &&
+        this.is_valid_name &&
+        this.is_valid_expiry &&
+        this.is_valid_cvc
+      ) {
+        $emit("pay", { payment_details, method: current_option.toLowerCase() });
+      }
     }
   }
 };
@@ -104,5 +138,4 @@ export default {
   text-transform: none;
   font-weight: bold;
 }
-
 </style>

@@ -376,8 +376,20 @@ function createOtherPermit(type, application) {
                 tin: application.details.owner_details.tin
             },
             tax: {
+                total: application.details.tax.total,
+                interest: application.details.tax.interest,
+                total_amount_paid: application.details.tax.total_amount_paid,
                 taxable: {
-                    basic: application.details.owner_details.basic_community_tax
+                    basic: application.details.tax.taxable.basic,
+                    business_income: application.details.tax.taxable.business_income,
+                    profession_income: application.details.tax.taxable.profession_income,
+                    property_income: application.details.tax.taxable.property_income,
+                },
+                community: {
+                    basic: application.details.tax.community.basic,
+                    business_income: application.details.tax.community.business_income,
+                    profession_income: application.details.tax.community.profession_income,
+                    property_income: application.details.tax.community.property_income,
                 }
             }
         }

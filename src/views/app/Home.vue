@@ -1,7 +1,7 @@
 <template>
   <a-row>
     <a-col :span="24">
-      <h1 style="font-weight: bold; margin: 1vh 0;">Welcome, {{user_name}}</h1>
+      <h1 style="font-weight: 100; letter-spacing:0.1em; margin: 1vh 0;">Welcome, {{user_name}}!</h1>
     </a-col>
     <a-col :span="24">
       <a-card title="Activities" style="margin-top: 2vh;" />

@@ -1,8 +1,11 @@
 <template>
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
-    <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Document Checklist</a-col>
+    <a-row slot="title" type="flex" justify="space-between">
+      <a-col :xs="{span: 21}" :md="{span: 14}" :xl="{span: 7}">
+        <h1 style="font-size:25px;">Document Checklist</h1>
+      </a-col>
+
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
@@ -18,13 +21,20 @@
 
     <a-form layout="vertical">
       <a-form-item>
-        <span slot="label" style="text-align: left !important">
-          Below are the list of requirements needed to apply for a business permit.
-          <br />Check ✅ each of the requirement you
-          <b>
-            <u>DO NOT HAVE</u>
-          </b> to instantly apply within this app.
-        </span>
+        <a-col :xs="{span: 24}" :md="{span: 24}" :xl="{span: 24}">
+          <span style="text-align: left !important ; text-transform: initial !important">
+            Below are the list of requirements needed to apply for a business permit.
+            Select ✅ each of the requirement you
+            <b>
+              <u style="color: black">DO NOT HAVE</u>
+            </b>.
+            <br />
+            <br />
+            <i
+              style="font-weight: bold; color: red; font-size: 12px"
+            >(Note: Selected requirement (except DTI/SEC/CDA certificate) will be instantly applied within this app)</i>
+          </span>
+        </a-col>
         <a-form-item label></a-form-item>
         <a-checkbox-group v-model="lack_documents" @change="onDocumentSelect">
           <a-row>

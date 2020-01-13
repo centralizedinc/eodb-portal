@@ -6,80 +6,63 @@
       </a-avatar>
     </a-back-top>
     <a-layout-header class="header">
-      <a-row justify="start" :gutter="16">
+      <a-row type="flex" justify="space-between" :gutter="16">
         <a-col
-          style="padding-left: 0px !important"
-          :xs="{span: 4}"
-          :sm="{span: 4}"
-          :md="{span: 4}"
-          :lg="{span: 4}"
+          style="margin-left: -30px "
+          :xs="{span: 10}"
+          :sm="{span: 10}"
+          :md="{span: 10}"
+          :lg="{span: 16}"
+          :xl="{span: 16}"
+          :xxl="{span: 16}"
         >
           <img
             style="width: auto; height: 55px; margin-top: -8px;"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/smartjuan_logo.png"
           />
-          <!-- <a-avatar
-            src="https://i.postimg.cc/J47Nvpfn/Dolores-log.png"
-            :size="50"
-          ></a-avatar>-->
         </a-col>
-        <!-- <a-col :span="10">
-          <h3 style="color:#ffffff; margin-left:20px ">Bayan ng Dolores</h3>
-        </a-col>-->
-        <!-- <a-col :span="10">
-          <a-input-search placeholder="Search" />
-        </a-col>-->
+
+        <!-- navbutton for smaller screen -->
         <a-col
-          :xs="{span: 1}"
-          :sm="{span: 2}"
-          :md="{span: 10}"
-          :lg="{span: 16}"
-          :xl="{span: 14}"
-          :xxl="{span: 14}"
-        ></a-col>
+          :push="2"
+          :xs="{span: 3}"
+          :sm="{span: 3}"
+          :md="{span: 3}"
+          :lg="{span: 0}"
+          :xl="{span: 0}"
+          :xxl="{span: 0}"
+        >
+          <a-button shape="circle" icon="menu-fold" @click="show_drawer=true" />
+        </a-col>
+
+        <!-- desktop -->
         <a-col
           :xs="{span: 0}"
           :sm="{span: 0}"
           :md="{span: 0}"
-          :lg="{span: 1}"
-          :xl="{span: 1}"
-          :xxl="{span: 1}"
+          :lg="{span: 7, push: 1}"
+          :xl="{span: 7, push: 2}"
+          :xxl="{span: 7, push: 3}"
         >
           <img
-            style="width: auto; height: 50px; margin-top: -5px;"
+            style="width: auto; height: 50px; margin-top: -5px"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/SA_logo.png"
           />
-        </a-col>
-        <a-col
-          :xs="{span: 0}"
-          :sm="{span: 0}"
-          :md="{span: 0}"
-          :lg="{span: 0}"
-          :xl="{span: 2}"
-          :xxl="{span: 2}"
-        >
           <img
-            style="width: auto; height: 35px; margin-top: -5px; "
+            style="width: auto; height: 35px; margin-top: -5px"
             src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/slogan.png"
           />
         </a-col>
+
         <a-col
-          :xs="{span: 14}"
-          :sm="{span: 16}"
-          :md="{span: 14}"
-          :lg="{span: 2}"
-          :xl="{span: 2}"
-          :xxl="{span: 2}"
-        ></a-col>
-        <!-- <a-col :span="1">
-          <a-tooltip placement="left">
-            <span slot="title">Notification</span>
-            <a-icon
-              type="notification"
-              style="color:#ffffff"
-            ></a-icon> </a-tooltip
-        ></a-col>-->
-        <a-col style="text-align: center">
+          :xs="{span: 0}"
+          :sm="{span: 0}"
+          :md="{span: 0}"
+          :lg="{span: 1, pull: .5}"
+          :xl="{span: 1, }"
+          :xxl="{span: 1}"
+          style="text-align: left"
+        >
           <a-dropdown>
             <a-menu slot="overlay">
               <a-menu-item key="1">
@@ -94,120 +77,147 @@
               </a-menu-item>
             </a-menu>
             <a-tooltip placement="left">
-              <a-icon type="setting" style="color:#ffffff; padding-right:8px"></a-icon>
-              <a-icon type="caret-down" style="fontSize: 8px" />
+              <a-icon type="home" style="color:#ffffff; margin-right:1px"></a-icon>
+              <a-icon style="fontSize: 8px; margin-left: 5px" type="caret-down" />
             </a-tooltip>
           </a-dropdown>
         </a-col>
-
         <!-- <a-col :span="1">
-          <a-tooltip placement="left">
-            <span slot="title">Lock Screen</span>
-            <a-icon type="setting" style="color:#ffffff"></a-icon> </a-tooltip
+            <a-tooltip placement="left">
+              <span slot="title">Lock Screen</span>
+              <a-icon type="setting" style="color:#ffffff"></a-icon> </a-tooltip
         ></a-col>-->
-
         <!-- <a-col :span="1">
-          <a-tooltip placement="left">
-            <span slot="title">Logout</span>
-            <a-icon
-              @click="logout"
-              type="logout"
-              style="color:#ffffff; cursor:pointer"
-            ></a-icon>
-          </a-tooltip>
+            <a-tooltip placement="left">
+              <span slot="title">Logout</span>
+              <a-icon
+                @click="logout"
+                type="logout"
+                style="color:#ffffff; cursor:pointer"
+              ></a-icon>
+            </a-tooltip>
         </a-col>-->
       </a-row>
       <!-- mobile site -->
       <!-- <a-row v-else type="flex" justify="start">
-        <a-col :xs="3" :sm="2" :md="2">
-          <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>          
-        </a-col>
-        <a-col :xs="20" :sm="21" :md="21">
-            <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
+          <a-col :xs="3" :sm="2" :md="2">
+            <a-avatar :src="constant_helper.home_header.logo" :size="50"></a-avatar>          
           </a-col>
-        <a-col :span="1">
-          <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
-        </a-col> 
-      </a-row>
-      <a-drawer
-        placement="left"
-        :visible="visible_menu"
-        @close="visible_menu=false"
-        :closable="false"
-      >
-      <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
-        <a-col :xs="6" :sm="6" :md="6">
-          <a-avatar :src="user.avatar" :size="54" shape="square" style="border: 2px solid #ffffff" ></a-avatar>
-        </a-col>
-        <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
-          <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
-        </a-col>
-       
-      </a-row>
-        <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
-        <a-menu-item key="/app">
-            <a-icon type="layout" />
-            <span>Home</span>
-          </a-menu-item>
-          <a-menu-item key="report">
-            <a-icon type="alert" />
-            <span>Emergency</span>
-          </a-menu-item>
-          <a-menu-item key="/app/permits">
-            <a-icon type="file-exclamation" />
-            <span>My Permits</span>
-          </a-menu-item>
-          <a-menu-item key="/app/taxes">
-            <a-icon type="file-protect" />
-            <span>My Taxes</span>
-          </a-menu-item>
-          <a-menu-item key="/app/accounts">
-            <a-icon type="user-add" />
-            <span>My Account</span>
-          </a-menu-item>
-          <a-menu-item key="logout">
-            <a-icon type="logout" />
-            <span>Logout</span>
-          </a-menu-item>
-        </a-menu>
+          <a-col :xs="20" :sm="21" :md="21">
+              <h3 style="color:#ffffff;margin-left:20px ">{{constant_helper.home_header.label}}</h3>
+            </a-col>
+          <a-col :span="1">
+            <a-icon :type="visible_menu?'close':'menu'" style="cursor:pointer" @click="visible_menu=true"></a-icon>
+          </a-col> 
+        </a-row>
+        <a-drawer
+          placement="left"
+          :visible="visible_menu"
+          @close="visible_menu=false"
+          :closable="false"
+        >
+        <a-row type="flex" align="middle" :gutter="16" :style="`${menuStyle};height: 20vh`">
+          <a-col :xs="6" :sm="6" :md="6">
+            <a-avatar :src="user.avatar" :size="54" shape="square" style="border: 2px solid #ffffff" ></a-avatar>
+          </a-col>
+          <a-col :xs="17" :sm="17" :md="17" style="text-align:left">
+            <h3 style="color:#FFFFFF">{{user.fname}} {{user.lname}}</h3>
+          </a-col>
+         
+        </a-row>
+          <a-menu :defaultSelectedKeys="['/app']" mode="inline" @click="nav">
+          <a-menu-item key="/app">
+              <a-icon type="layout" />
+              <span>Home</span>
+            </a-menu-item>
+            <a-menu-item key="report">
+              <a-icon type="alert" />
+              <span>Emergency</span>
+            </a-menu-item>
+            <a-menu-item key="/app/permits">
+              <a-icon type="file-exclamation" />
+              <span>My Permits</span>
+            </a-menu-item>
+            <a-menu-item key="/app/taxes">
+              <a-icon type="file-protect" />
+              <span>My Taxes</span>
+            </a-menu-item>
+            <a-menu-item key="/app/accounts">
+              <a-icon type="user-add" />
+              <span>My Account</span>
+            </a-menu-item>
+            <a-menu-item key="logout">
+              <a-icon type="logout" />
+              <span>Logout</span>
+            </a-menu-item>
+          </a-menu>
       </a-drawer>-->
     </a-layout-header>
 
     <!-- ------------------------------------------------ -->
-    <a-layout-content class="content" style="margin-top:10vh; background-color: #EEEEEE">
-      <a-row type="flex" justify="center" style="margin-top: 10vh">
-        <a-col :span="4" style="margin-right:1vw">
-          <a-card style="margin-bottom:2vh; color: #f2f2f2">
-            <a-row type="flex" justify="center">
-              <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 8}" style="text-align: center">
+    <a-layout-content class="content" style="margin-top:4%; background-color: #EEEEEE">
+      <a-row type="flex" justify="space-around" style="margin-top: 45px">
+        <!--  -->
+        <a-col
+          :xs="{ span: 0 }"
+          :sm="{ span: 0 }"
+          :md="{ span: 0 }"
+          :lg="{ span: 4 }"
+          :xl="{ span: 4 }"
+          :xxl="{ span: 4 }"
+          style="margin-right:2px"
+        >
+          <a-card
+            style="margin-bottom:10px; color: #f2f2f2; margin-top: 5% ; border: 0px; background-color: transparent"
+          >
+            <a-row type="flex" justify="space-between">
+              <a-col
+                :xs="{ span: 8}"
+                :sm="{ span: 8}"
+                :md="{ span: 8}"
+                :lg="{ span: 8}"
+                :xl="{ span: 10}"
+                :xxl="{ span: 10}"
+              ></a-col>
+              <a-col
+                :xs="{ span: 8}"
+                :sm="{ span: 8}"
+                :md="{ span: 8}"
+                :lg="{ span: 8}"
+                :xl="{ span: 4}"
+                :xxl="{ span: 4}"
+              >
                 <a-avatar
                   :src="user.avatar"
                   :size="54"
-                  style="margin-top:-10vh; border: 2px solid #ffffff; font-weight: bold;"
-                >
-                  {{
-                  user && user.name && user.name.first
-                  ? user.name.first[0] + "" + user.name.last[0]
-                  : ""
-                  }}
-                </a-avatar>
+                  style="margin-top:-100%; border: 2px solid #ffffff; font-weight: bold;"
+                >{{ user && user.name && user.name.first ? user.name.first[0] + "" + user.name.last[0] : "" }}</a-avatar>
               </a-col>
-              <br />
-              <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 24}">
-                <a-row type="flex" justify="center">
-                  <a-col :span="24">
-                    <h3
-                      align="center"
-                      style="color:black; font-size: 14px; text-transform: uppercase"
-                    >{{ user.name.first }} {{ user.name.last }}</h3>
-                  </a-col>
-                </a-row>
-              </a-col>
+              <a-col
+                :xs="{ span: 8}"
+                :sm="{ span: 8}"
+                :md="{ span: 8}"
+                :lg="{ span: 8}"
+                :xl="{ span: 10}"
+                :xxl="{ span: 10}"
+              ></a-col>
             </a-row>
+            <br />
+            <a-col>
+              <h3
+                align="center"
+                style="color:black; font-size: 14px; text-transform: uppercase"
+              >{{ user.name.first }} {{ user.name.last }}</h3>
+            </a-col>
           </a-card>
 
           <a-affix :offsetTop="100">
-            <a-menu v-model="selected_menu" mode="inline" @click="nav">
+            <a-menu
+              style="background-color: transparent; margin-top: 10px"
+              v-model="selected_menu"
+              mode="inline"
+              @click="nav"
+            >
               <a-menu-item key="/app">
                 <a-icon type="home" />
                 <span>Home</span>
@@ -219,7 +229,6 @@
                   <a-badge count="soon" />
                 </span>
               </a-menu-item>
-
               <a-menu-item key="/app/permits">
                 <a-icon type="file-ppt" />
                 <span>Permits & Licenses</span>
@@ -251,19 +260,135 @@
                 <span>Logout</span>
               </a-menu-item>
               <!-- <a-menu-item key>
-                <a-icon type="sound" />
-                <span>Citizen Report</span>
+                  <a-icon type="sound" />
+                  <span>Citizen Report</span>
               </a-menu-item>-->
             </a-menu>
           </a-affix>
         </a-col>
 
+        <!-- mobile -->
+        <a-drawer
+          style="background-color: snow"
+          placement="left"
+          @close="show_drawer=!show_drawer"
+          :visible="show_drawer"
+          :closable="false"
+        >
+          <a-card
+            style="margin-bottom:2vh; color: #f2f2f2; margin-top: 40px ; border: 0px; background-color: transparent"
+          >
+            <a-row type="flex" justify="center">
+              <a-col
+                :xs="{span:8}"
+                :sm="{span:8}"
+                :md="{span:8}"
+                :lg="{span:8}"
+                :xl="{span:8}"
+                :xxl="{span:8}"
+              ></a-col>
+              <a-col
+                :xs="{span:8}"
+                :sm="{span:8}"
+                :md="{span:8}"
+                :lg="{span:8}"
+                :xl="{span:8}"
+                :xxl="{span:8}"
+              >
+                <a-avatar
+                  :src="user.avatar"
+                  :size="54"
+                  style="margin-top:-100%; border: 2px solid #ffffff; font-weight: bold;"
+                >{{ user && user.name && user.name.first ? user.name.first[0] + "" + user.name.last[0] : "" }}</a-avatar>
+              </a-col>
+              <a-col
+                :xs="{span:8}"
+                :sm="{span:8}"
+                :md="{span:8}"
+                :lg="{span:8}"
+                :xl="{span:8}"
+                :xxl="{span:8}"
+              ></a-col>
+              <br />
+              <a-row type="flex" justify="center">
+                <a-col
+                  :xs="{span:24}"
+                  :sm="{span:24}"
+                  :md="{span:24}"
+                  :lg="{span:24}"
+                  :xl="{span:24}"
+                  :xxl="{span:24}"
+                >
+                  <h3
+                    align="center"
+                    style="color:black; font-size: 14px; text-transform: uppercase"
+                  >{{ user.name.first }} {{ user.name.last }}</h3>
+                </a-col>
+              </a-row>
+            </a-row>
+          </a-card>
+          <a-menu
+            style="background-color: transparent"
+            v-model="selected_menu"
+            mode="inline"
+            @click="nav"
+          >
+            <a-menu-item key="/app">
+              <a-icon type="home" />
+              <span>Home</span>
+            </a-menu-item>
+            <a-menu-item key="/app/mayor_corner">
+              <a-icon type="star" />
+              <span>
+                Mayor's Corner
+                <a-badge count="soon" />
+              </span>
+            </a-menu-item>
+            <a-menu-item key="/app/permits">
+              <a-icon type="file-ppt" />
+              <span>Permits & Licenses</span>
+            </a-menu-item>
+            <a-menu-item key="/app/forms">
+              <a-icon type="file-protect" />
+              <span>
+                Civil Reg Forms
+                <a-badge count="soon" />
+              </span>
+            </a-menu-item>
+            <a-menu-item key="/app/rpt">
+              <a-icon type="area-chart" />
+              <span>
+                Real Property Tax
+                <a-badge count="soon" />
+              </span>
+            </a-menu-item>
+            <a-menu-item key="/app/tracker">
+              <a-icon type="compass" />
+              <span>Application Tracker</span>
+            </a-menu-item>
+            <a-menu-item key="/app/account">
+              <a-icon type="user-add" />
+              <span>My Profile</span>
+            </a-menu-item>
+            <a-menu-item key="logout">
+              <a-icon type="logout" />
+              <span>Logout</span>
+            </a-menu-item>
+            <!-- <a-menu-item key>
+                <a-icon type="sound" />
+                <span>Citizen Report</span>
+            </a-menu-item>-->
+          </a-menu>
+        </a-drawer>
+        <!--  -->
         <a-col
-          :xs="{span: 14}"
-          :sm="{span: 14}"
-          :md="{span: 14}"
+          :xs="{span: 24}"
+          :sm="{span: 24}"
+          :md="{span: 24}"
           :lg="{span: 14}"
-          style="margin-right:1vw; margin-left:1vw"
+          :xl="{span: 14}"
+          :xxl="{span: 14}"
+          style="padding-right: 20px; padding-left:20px"
         >
           <img
             style="width: 100%; height:auto"
@@ -271,17 +396,29 @@
           />
           <router-view></router-view>
         </a-col>
-        <a-col :span="4" style="margin-left:1vw">
+
+        <!--  -->
+        <a-col
+          :xs="{span: 22}"
+          :sm="{span: 22}"
+          :md="{span: 22}"
+          :lg="{span: 4}"
+          :xl="{span: 4}"
+          :xxl="{span: 4}"
+          style="margin-left:10px"
+        >
           <!-- <a-affix :offsetTop="60"> -->
+
           <a-card
             :headStyle="{
-                background: 'linear-gradient(to bottom, #3D6FB5, #56C9EE)',
-                color: 'white',
-                'font-weight': 'bold',
-                'font-size': '15px',
-                padding: '5px 10px',
-                'min-height': '2vh'
-              }"
+                  background: 'linear-gradient(to bottom, #3D6FB5, #56C9EE)',
+                  color: 'white',
+                  'font-weight': 'bold',
+                  'font-size': '100%',
+                  padding: '5px 10px',
+                  'min-height': '2%',
+                  'border-radius': '8px 8px 0px 0px'
+                }"
             :bodyStyle="{ padding: 0 }"
             class="document-card"
           >
@@ -292,133 +429,131 @@
                   <span
                     slot="title"
                   >Displays a list of all the documents you have applied, both active and expired.</span>
-                  <a-icon type="folder" />
+                  <a-icon type="info-circle" />
                 </a-tooltip>
               </a-col>
-
-              <a-card>
-                <a-card
-                  @click="view(item.epermit_attachment)"
-                  v-for="(item, index) in permits"
-                  :key="index"
-                  style="margin-top: 2px; text-align: center"
-                >
-                  <img
-                    v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
-                    :src="item.epermit_attachment.url"
-                    style="width: 100%;"
-                  />
-                  <pdf
-                    v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
-                    :src="item.epermit_attachment.url"
-                    style="cursor:zoom; width: 100%"
-                  ></pdf>
-                  <pdf v-else :src="item.epermit_attachment" style="cursor:zoom; width: 100%"></pdf>
-                  <p
-                    style="font-weight:bold"
-                  >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</p>
-                  <span>{{getPermitType(item.permit_type)}}</span>
-                </a-card>
-              </a-card>
             </a-row>
           </a-card>
-          <!-- </a-affix> -->
-
-          <!-- <a-card>
-            <span slot="title">
-              <a-icon type="folder"></a-icon>My Documents
-            </span>
+          <!-- my docs -->
+          <a-card>
             <a-card
               @click="view(item.epermit_attachment)"
-              v-for="item in ePermits"
-              :key="item.epermit_attachment"
+              v-for="(item, index) in permits"
+              :key="index"
               style="margin-top: 2px; text-align: center"
             >
+              <img
+                v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
+                :src="item.epermit_attachment.url"
+                style="width: 100%;"
+              />
               <pdf
-                :src="item.epermit_attachment"
-                style="cursor:zoom;display: inline-block; width: 100%"
+                v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
+                :src="item.epermit_attachment.url"
+                style="cursor:zoom; width: 100%"
               ></pdf>
-              <p style="font-weight:bold">{{item.business_no}}</p>
-              <span>{{item.business_details.business_name}}</span>
+              <pdf v-else :src="item.epermit_attachment" style="cursor:zoom; width: auto"></pdf>
+
+              <p
+                style="font-weight:bold;font-size: 10px"
+              >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</p>
+
+              <span>{{getPermitType(item.permit_type)}}</span>
             </a-card>
+          </a-card>
+          <!-- </a-affix> -->
+          <!-- <a-card>
+              <span slot="title">
+                <a-icon type="folder"></a-icon>My Documents
+              </span>
+              <a-card
+                @click="view(item.epermit_attachment)"
+                v-for="item in ePermits"
+                :key="item.epermit_attachment"
+                style="margin-top: 2px; text-align: center"
+              >
+                <pdf
+                  :src="item.epermit_attachment"
+                  style="cursor:zoom;display: inline-block; width: 100%"
+                ></pdf>
+                <p style="font-weight:bold">{{item.business_no}}</p>
+                <span>{{item.business_details.business_name}}</span>
+              </a-card>
           </a-card>-->
           <!-- <a-table :columns="doc_col" :dataSource="documents"></a-table> -->
-
           <!-- <a-affix :offsetTop="40">
-            <a-card
-              :headStyle="{
-                'background-image': 'linear-gradient(#56CAEF, #3C6CB4)',
-                color: 'white'
-              }"
-            >
-              <a-row slot="title">
-                <a-col :span="21">Citizen Report</a-col>
-                <a-col :span="2">
-                  <a-tooltip placement="left">
-                    <span slot="title">
-                      Report an emergency, calamity or crime and the alert
-                      system tells the Command Center's server about the type of
-                      emergency, name and address of establishment, contact
-                      number of reporter (if any), along with other important
-                      pieces of information
-                    </span>
-                    <a-icon type="info-circle" />
-                  </a-tooltip>
-                </a-col>
-              </a-row>
-
-              <a-row>
-                <a-col :span="24">
-                  <a-card class="emergency_btn btnStyle hoverFire">
-                    <a-row type="flex" justify="center">
-                      <a-col :span="26">
-                        <h4 style="color:#FFF">Fire</h4>
-                      </a-col>
-                    </a-row>
-                  </a-card>
-                </a-col>
-                <a-col :span="24">
-                  <a-card class="emergency_btn btnStyle hoverFlood">
-                    <a-row type="flex" justify="center">
-                      <a-col :span="26">
-                        <h4 style="color:#FFF">Flood</h4>
-                      </a-col>
-                    </a-row>
-                  </a-card>
-                </a-col>
-                <a-col :span="24">
-                  <a-card class="emergency_btn btnStyle hoverDisturbance">
-                    <a-row type="flex" justify="center">
-                      <a-col :span="26">
-                        <h4 style="color:#FFF">Civil Disturbance</h4>
-                      </a-col>
-                    </a-row>
-                  </a-card>
-                </a-col>
-                <a-col :span="24">
-                  <a-card class="emergency_btn btnStyle hoverCrime">
-                    <a-row type="flex" justify="center">
-                      <a-col :span="26">
-                        <h4 style="color:#FFF">Crime</h4>
-                      </a-col>
-                    </a-row>
-                  </a-card>
-                </a-col>
-                <a-col :span="24" style="margin-top:2vh">
-                  <a-divider style="color: #D7D7D7"></a-divider>
-                  <a-button type="danger" block>View Reports</a-button>
-                </a-col>
-              </a-row>
-            </a-card>
+              <a-card
+                :headStyle="{
+                  'background-image': 'linear-gradient(#56CAEF, #3C6CB4)',
+                  color: 'white'
+                }"
+              >
+                <a-row slot="title">
+                  <a-col :span="21">Citizen Report</a-col>
+                  <a-col :span="2">
+                    <a-tooltip placement="left">
+                      <span slot="title">
+                        Report an emergency, calamity or crime and the alert
+                        system tells the Command Center's server about the type of
+                        emergency, name and address of establishment, contact
+                        number of reporter (if any), along with other important
+                        pieces of information
+                      </span>
+                      <a-icon type="info-circle" />
+                    </a-tooltip>
+                  </a-col>
+                </a-row>
+                <a-row>
+                  <a-col :span="24">
+                    <a-card class="emergency_btn btnStyle hoverFire">
+                      <a-row type="flex" justify="center">
+                        <a-col :span="26">
+                          <h4 style="color:#FFF">Fire</h4>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-col>
+                  <a-col :span="24">
+                    <a-card class="emergency_btn btnStyle hoverFlood">
+                      <a-row type="flex" justify="center">
+                        <a-col :span="26">
+                          <h4 style="color:#FFF">Flood</h4>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-col>
+                  <a-col :span="24">
+                    <a-card class="emergency_btn btnStyle hoverDisturbance">
+                      <a-row type="flex" justify="center">
+                        <a-col :span="26">
+                          <h4 style="color:#FFF">Civil Disturbance</h4>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-col>
+                  <a-col :span="24">
+                    <a-card class="emergency_btn btnStyle hoverCrime">
+                      <a-row type="flex" justify="center">
+                        <a-col :span="26">
+                          <h4 style="color:#FFF">Crime</h4>
+                        </a-col>
+                      </a-row>
+                    </a-card>
+                  </a-col>
+                  <a-col :span="24" style="margin-top:2vh">
+                    <a-divider style="color: #D7D7D7"></a-divider>
+                    <a-button type="danger" block>View Reports</a-button>
+                  </a-col>
+                </a-row>
+              </a-card>
           </a-affix>-->
         </a-col>
       </a-row>
     </a-layout-content>
     <!-- ------------------------------------------------ -->
     <!-- <a-layout-footer
-      style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
+        style="background: linear-gradient(to bottom, #469a25, #154102); color: #ffffff"
     >San Antonio, Quezon City</a-layout-footer>-->
-
     <a-modal :visible="visible" title="Report Incident" @cancel="handleCancel">
       <GmapMap
         id="map"
@@ -446,15 +581,20 @@
 
 <script>
 import pdf from "vue-pdf";
-
 export default {
-  components: { pdf },
+  components: {
+    pdf
+  },
   data() {
     return {
+      show_drawer: false,
       collapsed: false,
       user: {},
       visible: false,
-      coordinates: { lat: 14.017685, lng: 121.417034 },
+      coordinates: {
+        lat: 14.017685,
+        lng: 121.417034
+      },
       animation: {},
       selected_menu: [this.$route.fullPath],
       documents: [{}]
@@ -559,26 +699,32 @@ export default {
   background: linear-gradient(to bottom, #ff000c, #ab020a);
   transform: scale(0.95);
 }
+
 .emergencyButton {
   background-color: #ff000c !important;
   border-color: #ff000c !important;
   color: #000000 !important;
 }
+
 .btnStyle {
   background-color: #ff000c;
   cursor: pointer;
   border-radius: 5px !important;
 }
+
 .hoverFire:hover {
   background: url("https://is5-ssl.mzstatic.com/image/thumb/Purple71/v4/71/db/0d/71db0da5-57b3-7197-8e9c-1813cc06e6e7/source/256x256bb.jpg")
     no-repeat;
 }
+
 .hoverFlood:hover {
   background: url("https://i.postimg.cc/xdC52XCm/flood.jpg") no-repeat;
 }
+
 .hoverDisturbance:hover {
   background: url("https://i.postimg.cc/bwLgWxz8/disturb.jpg") no-repeat;
 }
+
 .hoverCrime:hover {
   background: url("https://i.postimg.cc/WbGX6RCd/crime.jpg") no-repeat;
 }

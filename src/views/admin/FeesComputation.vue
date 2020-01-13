@@ -50,7 +50,11 @@
         </a-form-item>
         <a-form-item label="Computation">
           <template slot="extra">
-            <span>- Use `{#amount}` for the replacement of base amount</span>
+            <span>
+              - Use
+              `
+              <code>amount</code>` keyword as the amount to be computed
+            </span>
             <br />
             <span>
               - CTC or Cedula, use these keywords for computation:
@@ -98,13 +102,13 @@
           </a-form-item>
           <a-form-item label="Income from Real Property">
             <span slot="extra">Equivalent Amount: {{cedula_tax.community_property_income}}</span>
-            <a-input v-model="cedula_tax.taxable_property_income" @change="computeCedula" />
+            <a-input-number v-model="cedula_tax.taxable_property_income" @change="computeCedula" />
           </a-form-item>
           <a-form-item
             label="Gross Receipts or Earnings derived business during the preceding year"
           >
             <span slot="extra">Equivalent Amount: {{cedula_tax.community_business_income}}</span>
-            <a-input v-model="cedula_tax.taxable_business_income" @change="computeCedula" />
+            <a-input-number v-model="cedula_tax.taxable_business_income" @change="computeCedula" />
           </a-form-item>
           <a-form-item label="Salaries or Gross Receipts or Earnings derived">
             <span slot="extra">Equivalent Amount: {{cedula_tax.community_profession_income}}</span>
@@ -115,7 +119,7 @@
                   profession or pursuit of any occupation
                 </span>
               </template>
-              <a-input v-model="cedula_tax.taxable_profession_income" @change="computeCedula"></a-input>
+              <a-input-number v-model="cedula_tax.taxable_profession_income" @change="computeCedula" />
             </a-tooltip>
           </a-form-item>
           <p>
@@ -166,18 +170,18 @@ export default {
           title: "Permit Type",
           dataIndex: "permit_type",
           scopedSlots: { customRender: "permit_type" },
-          width: '2%'
+          width: "2%"
         },
         {
           title: "Application Type",
           dataIndex: "application_type",
           scopedSlots: { customRender: "application_type" },
-          width: '0.5%'
+          width: "0.5%"
         },
         {
           title: "Computation",
           dataIndex: "computation",
-          width: '10%'
+          width: "10%"
         },
         {
           title: "Remarks",
@@ -259,6 +263,10 @@ export default {
         {
           code: "total_amount_paid",
           description: "(Total amount - Interest)"
+        },
+        {
+          code: "month",
+          description: "Current Month"
         }
       ],
       computation_mode: 0,
@@ -274,11 +282,18 @@ export default {
     },
     computed_base_amount() {
       if (this.base_amount && this.computation.computation) {
-        var computation_function = this.computation.computation.replace(
-          /{#amount}/g,
-          parseFloat(this.base_amount)
-        );
-        return eval(computation_function);
+        // var computation_function = this.computation.computation.replace(
+        //   /{#amount}/g,
+        //   parseFloat(this.base_amount)
+        // );
+        // return eval(computation_function);
+        var amount = this.base_amount;
+        try {
+          return eval(this.computation.computation);
+        } catch (error) {
+          console.log("error :", error);
+          return 0;
+        }
       } else return 0;
     }
   },
@@ -325,6 +340,8 @@ export default {
             this.loading = false;
             this.edit_mode = false;
             this.base_amount = 0;
+            this.cedula_tax = {};
+            this.computation_mode = 0;
             return this.$store.dispatch("GET_ALL_FEES_COMPUTATION", true);
           })
           .catch(err => {
@@ -332,6 +349,8 @@ export default {
             this.loading = false;
             this.edit_mode = false;
             this.base_amount = 0;
+            this.cedula_tax = {};
+            this.computation_mode = 0;
           });
       } else {
         this.$store
@@ -343,6 +362,8 @@ export default {
             this.loading = false;
             this.edit_mode = false;
             this.base_amount = 0;
+            this.cedula_tax = {};
+            this.computation_mode = 0;
             return this.$store.dispatch("GET_ALL_FEES_COMPUTATION", true);
           })
           .catch(err => {
@@ -350,6 +371,8 @@ export default {
             this.loading = false;
             this.edit_mode = false;
             this.base_amount = 0;
+            this.cedula_tax = {};
+            this.computation_mode = 0;
           });
       }
     },
@@ -372,7 +395,8 @@ export default {
         taxable_property_income = this.cedula_tax.taxable_property_income,
         total = 0,
         interest = 0,
-        total_amount_paid = 0;
+        total_amount_paid = 0,
+        month = 0;
 
       try {
         if (this.computation.computation) eval(this.computation.computation);
@@ -394,5 +418,9 @@ export default {
 <style>
 .ant-tooltip {
   max-width: 25vw;
+}
+
+.ant-drawer-header {
+  background: #242b30 !important;
 }
 </style>

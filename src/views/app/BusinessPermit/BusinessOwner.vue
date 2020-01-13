@@ -1,8 +1,13 @@
 <template>
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
-    <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Business Owner Information</a-col>
+    <a-row slot="title" type="flex" justify="space-between">
+      <a-col :xs="{span: 0}" :md="{span: 21}" :xl="{span: 21}">
+        <h1 style="font-size:25px; color: #7e7e7e">Business Owner Information</h1>
+      </a-col>
+      <a-col :xs="{span: 21}" :md="{span: 0}" :xl="{span: 0}">
+        <h1 style="font-size:25px; color: #7e7e7e">Business Owner Info</h1>
+      </a-col>
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
@@ -26,7 +31,7 @@
         </a-col>
       </a-row>-->
 
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.name.last') ? 'error': ''"
@@ -51,7 +56,7 @@
             <a-input v-model="form.owner_details.name.first"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{  }" :sm="{ span: 6 }">
+        <a-col :xs="{ span:24 }" :sm="{ span: 6 }">
           <a-form-item label="Middle Name">
             <a-input v-model="form.owner_details.name.middle"></a-input>
           </a-form-item>
@@ -64,7 +69,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.birthdate') ? 'error': ''"
             :help="checkErrors('owner_details.birthdate')"
@@ -83,25 +88,7 @@
           </a-form-item>
         </a-col>
 
-        <a-col
-          :xs="{ span: 24 }"
-          :sm="{ span: 7 }"
-          v-if="checkDocsNeeded(['cedula','barangay','police'])"
-        >
-          <a-form-item
-            style="font-weight: bold;"
-            :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
-            :help="checkErrors('required_documents.birthplace')"
-          >
-            <span slot="label">
-              Place of Birth
-              <i style="color: red">*</i>
-            </span>
-            <a-input placeholder="Enter Municipality" v-model="form.owner_details.birthplace" />
-          </a-form-item>
-        </a-col>
-
-        <a-col :xs="{ span: 24 }" :sm="{ span:8  }">
+        <a-col :xs="{ span: 24 }" :sm="{ span:13  }">
           <a-form-item
             :validate-status="checkErrors('owner_details.gender') ? 'error': ''"
             :help="checkErrors('owner_details.gender')"
@@ -114,6 +101,24 @@
               <a-radio-button value="M">Male</a-radio-button>
               <a-radio-button value="F">Female</a-radio-button>
             </a-radio-group>
+          </a-form-item>
+        </a-col>
+
+        <a-col
+          :xs="{ span: 24 }"
+          :sm="{ span: 24 }"
+          v-if="checkDocsNeeded(['cedula','barangay','police'])"
+        >
+          <a-form-item
+            style="font-weight: bold;"
+            :validate-status="checkErrors('required_documents.birthplace') ? 'error': ''"
+            :help="checkErrors('required_documents.birthplace')"
+          >
+            <span slot="label">
+              Place of Birth
+              <i style="color: red">*</i>
+            </span>
+            <a-input placeholder="Enter Municipality" v-model="form.owner_details.birthplace" />
           </a-form-item>
         </a-col>
 
@@ -219,11 +224,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col
-          :xs="{ span: 24 }"
-          :sm="{ span: 24 }"
-          v-if="checkDocsNeeded(['cedula', 'barangay'])"
-        >
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula', 'barangay'])">
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
             <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
@@ -232,12 +233,10 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Monthly Salary">
             <a-select v-model="form.owner_details.monthly_salary">
-              <a-select-option value="₱250,000 and below">₱250,000 and below</a-select-option>
-              <a-select-option value=">₱250,000 to ₱400,000">> ₱250,000 to ₱400,000</a-select-option>
-              <a-select-option value=">₱400,000 to ₱800,000 ">> ₱400,000 to ₱800,000</a-select-option>
-              <a-select-option value=">₱800,000 to ₱2,000,000">> ₱800,000 to ₱2,000,000</a-select-option>
-              <a-select-option value=">₱2,000,000 to ₱8,000,000">> ₱2,000,000 to ₱8,000,000</a-select-option>
-              <a-select-option value=">Above ₱8,000,000">Above ₱8,000,000</a-select-option>
+              <a-select-option value="Below ₱20,000">Below ₱20,000</a-select-option>
+              <a-select-option value=">₱21,000 to ₱50,000">> ₱21,000 to ₱50,000</a-select-option>
+              <a-select-option value=">₱51,000 to ₱200,000 ">> ₱51,000 to ₱100,000</a-select-option>
+              <a-select-option value=">Above ₱100,000">Above ₱100,000</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
