@@ -1,7 +1,7 @@
 <template>
   <a-row type="flex" justify="space-between">
     <!-- Steps -->
-    <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
+    <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
       <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
         <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -17,11 +17,17 @@
     </a-col>
 
     <!-- Fill up form -->
-    <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
+    <a-col
+      style="padding: 10px"
+      :xs="{ span: 24 }"
+      :md="{ span: 16 }"
+      :lg="{span: 18}"
+      class="fill-up-form"
+    >
       <h1 style="margin-top: 5vh;">Community Tax Certificate</h1>
       <h4>This information will help us assess your application.</h4>
       <a-row type="flex" justify="space-between">
-        <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
+        <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 16}">
           <component
             :is="form_components[current_step]"
             :form="form"
@@ -35,8 +41,8 @@
           />
         </a-col>
         <!-- Attachments -->
-        <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
-          <a-affix :offsetTop="60">
+        <a-col :xs="{ span: 24 }" :md="{ span:  24}" :lg="{ span: 7 }">
+          <a-affix :offsetTop="65">
             <!-- <a-card
               :headStyle="{ 
                 background: 'linear-gradient(to bottom, #56caef, #3c6cb4)', 
@@ -162,7 +168,11 @@
                     style="text-align: right;"
                   >{{ formatCurrency(item.amount) }}</a-col>
                 </template>
-                <a-col :span="15" class="row-border" style="color: #333;background: #d7d7d7">Total</a-col>
+                <a-col
+                  :span="15"
+                  class="row-border"
+                  style="color: #333;background: #d7d7d7"
+                >Total Amount</a-col>
                 <a-col
                   :span="9"
                   class="row-border"
