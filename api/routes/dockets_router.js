@@ -349,12 +349,39 @@ function createOtherPermit(type, application) {
         return PolicePermitDao.create(application_details);
     }
     else if (type === "barangay") {
+        console.log('requirements :', application.details.requirements);
+        const required_doc = application.details.requirements.find(v => v.keyword === "barangay") || {};
+        console.log('required_doc :', required_doc);
+        function calculateAge(birthdate) {
+            var today = new Date(),
+                birthDate = new Date(birthdate),
+                age = today.getFullYear() - birthDate.getFullYear(),
+                m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+            return age
+        }
         const application_details = {
             reference_no: application.reference_no,
             account_id: application.account_id,
             application_type: 0,
             barangay_type: "business",
-            permit_code: ""
+            permit_code: required_doc._id,
+            personal_details: {
+                name: application.details.owner_details.name,
+                birthdate: application.details.owner_details.birthdate,
+                birthplace: application.details.owner_details.birthplace,
+                gender: application.details.owner_details.gender,
+                civil_status: application.details.owner_details.civil_status,
+                ctc_no: application.details.owner_details.ctc_no,
+                age: calculateAge(application.details.owner_details.birthdate)
+            },
+            business_address: application.details.business_address,
+            business_details: {
+                business_name: business_details.business_name,
+                business_owner: `${application.details.owner_details.name.first} ${application.details.owner_details.name.last} ${(", " + application.details.owner_details.name.suffix) || ""}`,
+                business_type: business_details.business_owner,
+                franchise: business_details.franchise
+            }
         }
         return BarangayPermitDao.create(application_details);
     }

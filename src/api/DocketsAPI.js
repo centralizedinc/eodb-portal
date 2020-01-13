@@ -69,4 +69,8 @@ export default class DocketsAPI {
     getDocketActivities(){
         return axios.get('dockets/activities');
     }
+
+    getChecklistByDepartment(){
+        return axios.get('permits/checklist/department')
+    }
 }

@@ -64,6 +64,9 @@ const actions = {
     GET_FEES_COMPUTATION(context, { permit_type, app_type }) {
         return new PaymentsAPI(context.rootState.user_session.token).getFeesComputation(permit_type, app_type);
     },
+    GET_FEES_COMPUTATIONS(context, conditions) {
+        return new PaymentsAPI(context.rootState.user_session.token).getFeesComputations(conditions);
+    },
     CREATE_FEES_COMPUTATION(context, data) {
         return new PaymentsAPI(context.rootState.user_session.token).createFeesComputation(data);
     },

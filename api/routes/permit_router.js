@@ -62,4 +62,25 @@ router.route('/:id')
             });
     })
 
+router.route('/checklist/department')
+    .get((req, res) => {
+        const department = jwt.decode(req.headers.access_token).department;
+        console.log('###checklist department :', department)
+        PermitDao.find({ "approvers.department": department })
+            .then((permits) => {
+                console.log("###permits ;", permits)
+                var results = [];
+                permits.forEach(permit => {
+                    results.push({
+                        permit_type: permit.keyword,
+                        checklist: permit.checklists.filter(v => v.department === department)
+                    })
+                })
+                console.log("#results checklist :", results)
+                res.json(results);
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
 module.exports = router
