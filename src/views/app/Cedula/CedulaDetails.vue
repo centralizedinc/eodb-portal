@@ -1,18 +1,15 @@
 <template>
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
-    <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">New Applicant Registration</a-col>
-      <a-col :span="2" style="text-align: right;">
-        <!-- <a-tooltip placement="left">
-          <span slot="title">
-            Secure Business Permit in 6 steps (all fields marked with an asterisk
-            <i
-              style="color: red;"
-            >*</i> is required.)
-          </span>
-          <a-icon type="info-circle" />
-        </a-tooltip>-->
+    <a-row slot="title" type="flex" justify="space-between">
+      <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 21}" :xl="{span: 21}">
+        <h1 style="font-size:25px; color: #7e7e7e">New Applicant Registration</h1>
+      </a-col>
+      <a-col :xs="{span: 21}" :sm="{span: 21}" :md="{span: 0}" :xl="{span: 0}">
+        <h1 style="font-size:25px; color: #7e7e7e">
+          New Applicant
+          <br />Registration
+        </h1>
       </a-col>
     </a-row>
     <a-form>
@@ -216,22 +213,19 @@
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label">
-              Gross Receipts or Earnings derived business during the preceding
-              year
-            </span>
+            <span slot="label">Gross Receipts or Earnings</span>
 
-            <!-- <a-tooltip placement="bottom">
+            <a-tooltip placement="bottom">
               <template slot="title">
-                <span>business during the preceding year</span>
-            </template>-->
-            <a-input v-model="form.tax.taxable.business_income" @change="computation"></a-input>
-            <!-- </a-tooltip> -->
+                <span>Gross Receipts or Earnings derived business during the preceding year</span>
+              </template>
+              <a-input v-model="form.tax.taxable.business_income" @change="computation"></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
+            <span slot="label">Salaries/Gross Receipts/Earnings</span>
             <a-tooltip placement="bottom">
               <template slot="title">
                 <span>
@@ -256,7 +250,7 @@
       </a-row>-->
       <!-- table -->
 
-      <a-row type="flex" justify="space-around" style="margin-top: 5vh;">
+      <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
         <a-col :sm="{ span: 24 }" :md="{ span: 24 }" :xl="{ span: 24 }">
           <a-button-group>
             <!-- <a-button @click="$emit('prev')">Previous</a-button> -->

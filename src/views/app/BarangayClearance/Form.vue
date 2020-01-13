@@ -316,9 +316,11 @@ export default {
         //     "Check all the documents you have and apply for lacking requirements instantly within this app."
         // },
         {
-          title: "Purpose",
+          title: "Type of Clearance",
+          // description:
+          //   "State the reason or the purpose of your request (i.e., local employment, police clearance, business permit, loan purposes, etc.) "
           description:
-            "State the reason or the purpose of your request (i.e., local employment, police clearance, business permit, loan purposes, etc.) "
+            "Barangay Certificate for local employment, police clearance, etc. And Barangay Business Clearance for Business Clearance application"
         },
         {
           title: "Personal Details",
