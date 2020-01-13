@@ -16,8 +16,8 @@
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
-            :validate-status="checkErrors('owner_details.last') ? 'error': ''"
-            :help="checkErrors('owner_details.name.last')"
+            :validate-status="checkErrors('business_details.business_owner_name.last') ? 'error': ''"
+            :help="checkErrors('business_details.business_owner_name.last')"
           >
             <span slot="label">
              Owner Last Name
@@ -28,8 +28,8 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7}">
           <a-form-item
-            :validate-status="checkErrors('owner_details.first') ? 'error': ''"
-            :help="checkErrors('owner_details.name.first')"
+            :validate-status="checkErrors('business_details.business_owner_name.first') ? 'error': ''"
+            :help="checkErrors('business_details.business_owner_name.first')"
           >
             <span slot="label">
               First Name

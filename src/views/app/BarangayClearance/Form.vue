@@ -851,13 +851,13 @@ export default {
         // }
         if(!this.form.business_details.business_owner_name.last){
           errors.push({
-            field: "owner_details.name.last",
+            field: "business_details.business_owner_name.last",
             error: "Business Owner Last Name is a required field."
           })
         }
         if(!this.form.business_details.business_owner_name.first){
           errors.push({
-            field: "owner_details.name.first",
+            field: "business_details.business_owner_name.first",
             error: "Business Owner First Name is required field"
           })
         }
