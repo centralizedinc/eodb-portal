@@ -1,206 +1,233 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-    title="Application Summary"
-  >
-    <!-- Part I. Business Owner Information -->
-    <a-divider
-      style="color: black;font-weight: bold;margin-top: 5vh"
-      orientation="left"
-    >Part I. Business Owner Information</a-divider>
-    <a-row class="summary-row">
-      <a-col :span="8">Last Name</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.last}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">First Name</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.first}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Middle Name</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.middle}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Date of Birth</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-        style="text-transform:uppercase"
-      >{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Gender</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-        style="text-transform:uppercase"
-      >{{form.owner_details.gender === 'M' ? 'Male' : form.owner_details.gender === 'F' ? 'Female' : ''}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Telephone Number</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.owner_details.telno}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Email Address</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.email}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Address</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{owner_address}}</a-col>
-    </a-row>
+  <a-row type="flex" justify="start">
+    <a-col :xs="{span: 24}" :md="{span:24}" :xl="{span:24}">
+      <a-card
+        :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
+        :bodyStyle="{ 'padding-top': 0 }"
+        title="Application Summary"
+      >
+        <!-- Part I. Business Owner Information -->
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Part I. Business Owner Information</a-divider>
+        <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
+          <a-row class="summary-row">
+            <a-col :span="8">Last Name</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.last}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">First Name</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.name.first}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Middle Name</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col
+              :span="15"
+              style="text-transform:uppercase"
+            >{{form.owner_details.name.middle == null || form.owner_details.name.middle == "" ? "-" : form.owner_details.name.middle}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Date of Birth</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col
+              :span="15"
+              style="text-transform:uppercase"
+            >{{formatDate(form.owner_details.birthdate, null, true)}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Gender</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col
+              :span="15"
+              style="text-transform:uppercase"
+            >{{form.owner_details.gender === 'M' ? 'Male' : form.owner_details.gender === 'F' ? 'Female' : ''}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Telephone Number</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15">{{form.owner_details.telno}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Email Address</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15" style="text-transform:uppercase">{{form.owner_details.email}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Address</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15" style="text-transform:uppercase">{{owner_address}}</a-col>
+          </a-row>
+        </a-col>
 
-    <!-- Part II. Business Details -->
-    <a-divider
-      style="color: black;font-weight: bold;margin-top: 5vh"
-      orientation="left"
-    >Part II. Business Details</a-divider>
-    <a-row class="summary-row">
-      <a-col :span="8">Application Type</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-        style="text-transform:uppercase"
-      >{{form.application_type === 0 ? 'New' : form.application_type === 0 ? 'Renewal' : ''}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Type of Business</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-        style="text-transform:uppercase"
-      >{{getBusinessType(form.business_details.business_type)}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Business Name</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.business_name}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Trade Name/Franchise</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.franchise}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">{{`${reg_code} Registration No`}}</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.registration_no}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">{{`${reg_code} Date of Registration`}}</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col
-        :span="15"
-        style="text-transform:uppercase"
-      >{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Tax Identification No.(TIN)</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.tin}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">CTC No.</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.ctc_no}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Property Index Number(PIN)</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.pin}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Business Area(in sq m)</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{form.business_details.business_area}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">No of Employees in Establishment</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.employees_establishment}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">No of Employees Residing in LGU</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.employees_residing}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Business Address</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">{{business_address}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Are you enjoying tax incentive from any Government Entity?</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_details.enjoying_tax_incentive ? 'YES':'NO'}}</a-col>
-    </a-row>
-    <a-row class="summary-row">
-      <a-col :span="8">Is the place of business rented?</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15">{{form.business_address.is_rented ? 'YES':'NO'}}</a-col>
-    </a-row>
+        <!-- Part II. Business Details -->
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Part II. Business Details</a-divider>
+        <a-row class="summary-row">
+          <a-col :span="8">Application Type</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+            style="text-transform:uppercase"
+          >{{form.application_type === 0 ? 'New' : form.application_type === 0 ? 'Renewal' : ''}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Type of Business</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+            style="text-transform:uppercase"
+          >{{getBusinessType(form.business_details.business_type)}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Business Name</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15" style="text-transform:uppercase">{{form.business_details.business_name}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Trade Name/Franchise</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+            style="text-transform:uppercase"
+          >{{form.business_details.franchise == null || form.business_details.franchise == "" ? "-" : form.business_details.franchise}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">{{`${reg_code} Registration No`}}</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15">{{form.business_details.registration_no}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">{{`${reg_code} Date of Registration`}}</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+            style="text-transform:uppercase"
+          >{{formatDate(form.business_details.registration_date, null, true)}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Tax Identification No.(TIN)</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15">{{form.business_details.tin}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">CTC No.</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+          >{{form.business_details.ctc_no == null || form.business_details.ctc_no == "" ? "-" : form.business_details.ctc_no}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Property Index Number(PIN)</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+          >{{form.business_details.pin == null || form.business_details.pin == "" ? "-" : form.business_details.pin}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Business Area(in sq m)</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15" style="text-transform:uppercase">{{form.business_details.business_area}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">No of Employees in Establishment</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15">{{form.business_details.employees_establishment}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">No of Employees Residing in LGU</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col
+            :span="15"
+          >{{form.business_details.employees_residing == null || form.business_details.employees_residing == "" ? "-" : form.business_details.employees_residing}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Business Address</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15" style="text-transform:uppercase">{{business_address}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Are you enjoying tax incentive from any Government Entity?</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15">{{form.business_details.enjoying_tax_incentive ? 'YES':'NO'}}</a-col>
+        </a-row>
+        <a-row class="summary-row">
+          <a-col :span="8">Is the place of business rented?</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15">{{form.business_address.is_rented ? 'YES':'NO'}}</a-col>
+        </a-row>
 
-    <template v-if="form.business_address.is_rented">
-      <a-divider
-        style="color: black;font-weight: bold;margin-top: 5vh"
-        orientation="left"
-      >Part IIA. Rental Details</a-divider>
-      <a-row class="summary-row">
-        <a-col :span="8">Monthly Rental</a-col>
-        <a-col :span="1">:</a-col>
-        <a-col :span="15">{{formatCurrency(form.business_address.rental)}}</a-col>
-      </a-row>
-      <a-row class="summary-row">
-        <a-col :span="8">Lessor Name</a-col>
-        <a-col :span="1">:</a-col>
-        <a-col :span="15">{{form.business_address.lessor_name}}</a-col>
-      </a-row>
-      <a-row class="summary-row">
-        <a-col :span="8">Contact Number</a-col>
-        <a-col :span="1">:</a-col>
-        <a-col :span="15">{{form.business_address.contact_no}}</a-col>
-      </a-row>
-      <a-row class="summary-row">
-        <a-col :span="8">Email Address</a-col>
-        <a-col :span="1">:</a-col>
-        <a-col :span="15">{{form.business_address.email}}</a-col>
-      </a-row>
-      <a-row class="summary-row">
-        <a-col :span="8">Business Rental Address</a-col>
-        <a-col :span="1">:</a-col>
-        <a-col :span="15">{{rental_address}}</a-col>
-      </a-row>
-    </template>
+        <template v-if="form.business_address.is_rented">
+          <a-divider
+            style="color: black;font-weight: bold;margin-top: 5vh"
+            orientation="left"
+          >Part IIA. Rental Details</a-divider>
+          <a-row class="summary-row">
+            <a-col :span="8">Monthly Rental</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15">{{formatCurrency(form.business_address.rental)}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Lessor Name</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15">{{form.business_address.lessor_name}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Contact Number</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15">{{form.business_address.contact_no}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Email Address</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15">{{form.business_address.email}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="8">Business Rental Address</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="15">{{rental_address}}</a-col>
+          </a-row>
+        </template>
 
-    <!-- Part III. Business Activity -->
-    <a-divider
-      style="color: black;font-weight: bold;margin-top: 5vh"
-      orientation="left"
-    >Part III. Business Activity</a-divider>
-    <a-table
-      :dataSource="form.business_details.line_of_business"
-      :columns="line_of_business_columns"
-    ></a-table>
+        <!-- Part III. Business Activity -->
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Part III. Business Activity</a-divider>
+        <a-row type="flex" justify="start">
+          <a-col :xs="{span: 24}" :sm="{span:24}" :md="{span:24}" :lg="{span:24}" :xl="{span:24}">
+            <a-table
+              :scroll="{ x: 800, y: 300 }"
+              :dataSource="form.business_details.line_of_business"
+              :columns="line_of_business_columns"
+            ></a-table>
+          </a-col>
+        </a-row>
 
-    <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly">
-      <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }"> -->
-      <a-col :span="24">
-        <a-button-group>
-          <a-button @click="$emit('prev')" :disabled="loading">Previous</a-button>
-          <a-button type="primary" @click="$emit('payment')" :disabled="loading">Proceed to Payment</a-button>
-        </a-button-group>
-      </a-col>
-      <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 6 }" style="text-align: right;">
+        <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly">
+          <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }"> -->
+          <a-col :span="24">
+            <a-button-group>
+              <a-button @click="$emit('prev')" :disabled="loading">Previous</a-button>
+              <a-button
+                type="primary"
+                @click="$emit('payment')"
+                :disabled="loading"
+              >Proceed to Payment</a-button>
+            </a-button-group>
+          </a-col>
+          <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 6 }" style="text-align: right;">
         <a-button :disabled="loading">Save Draft</a-button>
-      </a-col>-->
-    </a-row>
-  </a-card>
+          </a-col>-->
+        </a-row>
+      </a-card>
+    </a-col>
+  </a-row>
 </template>
 
 <script>
@@ -216,7 +243,9 @@ export default {
       line_of_business_columns: [
         {
           title: "Line of Business",
-          dataIndex: "description"
+          dataIndex: "description",
+          fixed: "left",
+          width: 100
         },
         {
           title: "No of Units",

@@ -65,14 +65,20 @@
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
-            :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
-            :help="checkErrors('personal_details.birthday')"
+            :validate-status="checkErrors('personal_details.birthdate') ? 'error': ''"
+            :help="checkErrors('personal_details.birthdate')"
           >
             <span slot="label">
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate" style="width: 100%;"></a-date-picker>
+            <a-date-picker
+              v-model="form.personal_details.birthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
+              :showToday="false"
+              style="width: 100%;"
+            ></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -85,8 +91,8 @@
               <i style="color: red">*</i>
             </span>
             <a-select v-model="form.personal_details.gender">
-              <a-select-option value="male">Male</a-select-option>
-              <a-select-option value="female">Female</a-select-option>
+              <a-select-option value="Male">Male</a-select-option>
+              <a-select-option value="Female">Female</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -94,10 +100,10 @@
           <a-form-item>
             <span slot="label">Civil Status</span>
             <a-select v-model="form.personal_details.civil_status">
-              <a-select-option value="single">Single</a-select-option>
-              <a-select-option value="married">Married</a-select-option>
-              <a-select-option value="widowed">Widowed</a-select-option>
-              <a-select-option value="separated">Separated</a-select-option>
+              <a-select-option value="Single">Single</a-select-option>
+              <a-select-option value="Married">Married</a-select-option>
+              <a-select-option value="Widowed">Widowed</a-select-option>
+              <a-select-option value="Separated">Separated</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -124,7 +130,7 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item>
             <span slot="label">ICR No. (if alien)</span>
-            <a-input v-model="form.personal_details.icr"></a-input>
+            <a-input v-model="form.personal_details.icr_no"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -138,7 +144,7 @@
               Height(cm)
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.personal_details.height"></a-input>
+            <a-input maxlength="3" v-model="form.personal_details.height"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -151,7 +157,7 @@
               <i style="color: red">*</i>
             </span>
 
-            <a-input v-model="form.personal_details.weight"></a-input>
+            <a-input maxlength="3" v-model="form.personal_details.weight"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -218,7 +224,7 @@
               <a-select-option value="primary">Primary</a-select-option>
               <a-select-option value="secondary">Secondary</a-select-option>
               <a-select-option value="vocational">Vocational</a-select-option>
-              <a-select-option value="tertiary">Tertiary</a-select-option>
+              <a-select-option value="tertiary">Bachelor's Degree</a-select-option>
               <a-select-option value="master">Master's Degree</a-select-option>
               <a-select-option value="doctorate">Doctorate Degree</a-select-option>
             </a-select>
@@ -239,7 +245,7 @@
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="checkErrors('personal_details.ctc_no') ? 'error': ''"
             :help="checkErrors('personal_details.ctc_no')"
@@ -248,7 +254,7 @@
               CTC No.
               <i style="color: red">*</i>
             </span>
-            
+
             <a-input v-model="form.personal_details.ctc_no"></a-input>
           </a-form-item>
         </a-col>
@@ -400,10 +406,23 @@
   </a-card>
 </template>
 <script>
+import moment from "moment";
+
 export default {
   props: ["form", "step", "errors"],
   data() {
     return {};
+  },
+  computed: {
+    defaultBdayPickerValue() {
+      return moment(
+        new Date(
+          new Date().getFullYear() - 18,
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+      );
+    }
   },
   methods: {
     checkErrors(field) {

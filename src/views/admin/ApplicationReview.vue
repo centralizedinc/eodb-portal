@@ -28,15 +28,20 @@
             <a-icon type="snippets"></a-icon>Attachments
           </span>
           <a-card
-            @click="view(item.epermit_attachment)"
             v-for="item in form.attachments"
             :key="item.doc_type"
             style="margin-top: 2px; text-align: center"
           >
             <div v-for="file in item.files" :key="file">
               <!-- {{file}} -->
-              <!-- <img :src="file" style="width: 100%;" /> -->
-              <pdf :src="file" style="cursor:zoom; width: 100%"></pdf>
+              <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
+              <img v-if="file.type.indexOf('image') > -1" :src="file.url" style="width: 100%;" />
+              <pdf
+                v-else-if="file.type==='application/pdf'"
+                :src="file.url"
+                style="cursor:zoom; width: 100%"
+              ></pdf>
+              <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
             </div>
           </a-card>
         </a-tab-pane>
@@ -204,65 +209,23 @@ export default {
             message: "Approve!",
             description: `You have approved Application #${this.form.reference_no}`
           });
-          if (results.permit)
-            return this.getAddress(results.permit.details.business_address);
-        })
-        .then(business_address => {
-          console.log("getAddress result :", business_address);
-          if (results.permit && business_address) {
-            if (results.permit.is_approve) {
-              if (results.permit.details.permit_type === "business") {
-                const valid_until = new Date(
-                  results.permit.details.date_created
-                );
-                const details = {
-                  business_name:
-                    results.permit.details.business_details.business_name,
-                  business_no: results.permit.details.business_no,
-                  business_address,
-                  business_owner: `${results.permit.details.owner_details.name.first} ${results.permit.details.owner_details.name.last}`,
-                  plate_no: results.permit.details.reference_no,
-                  ownership_type: this.getBusinessType(
-                    results.permit.details.business_details.business_type
-                  ),
-                  valid_until,
-                  area: `${results.permit.details.business_details.business_area} sq.m`,
-                  date_issued: new Date(valid_until.getFullYear() + 1, 11, 31),
-                  application_type: this.getApplicationType(
-                    results.permit.details.business_details.application_types
-                  ),
-                  mode_of_payment: this.getPaymentMode(
-                    results.permit.payments.mode_of_payment
-                  ),
-                  transaction_no: results.permit.payments.transaction_no,
-                  transactions: results.permit.payments.payment_breakdown
-                };
-                return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
-              }
-            }
-            // if(!results.permit.is_approve) return this.$upload(results.permit.details, "BUSINESSPERMIT_SAN_ANTONIO")
+          if (results.permit) {
+            if (Array.isArray(results.permit.details))
+              return this.processBarangay(results.permit.details);
+            //barangay
+            else if (results.permit.details.permit_type === "business")
+              return this.processBusiness(results.permit.details);
+            //business
+            else if (results.permit.details.permit_type === "cedula")
+              return this.processCedula(results.permit.details);
+            //cedula
+            else if (results.permit.details.permit_type === "police")
+              return this.processPolice(results.permit.details); //police
           }
-        })
-        .then(blob => {
-          if (blob && results.permit.details.permit_type === "business") {
-            var file = new File(
-              [blob],
-              `business-permit-${Date.now()}-smart-juan.pdf`,
-              {
-                type: "application/pdf",
-                lastModified: Date.now()
-              }
-            );
-            var form_data = new FormData();
-            form_data.append("file", file);
-            return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
-              business_no: results.permit.details.business_no,
-              form_data
-            });
-          }
+          // return this.getPermitsAddress(results.permit.details);
         })
         .then(result => {
-          console.log("SAVE_EPERMIT_ATTACHMENT result :", result);
+          console.log("result of other permits :", result);
           return this.$store.dispatch("GET_DOCKETS_OUTBOX", true);
         })
         .then(result => {
@@ -273,6 +236,225 @@ export default {
           console.log("APPROVE_DOCKET err :", err);
           this.approving_application = false;
         });
+    },
+    processBarangay(details) {
+      var promises = [];
+      details.forEach(detail => {
+        promises.push(function() {
+          return new Promise((resolve, reject) => {
+            this.getPermitsAddress(detail)
+              .then(address => {
+                return this.uploadBarangayPermit(detail, address);
+              })
+              .then(blob => {
+                if (blob) return this.saveEpermit(blob, detail);
+              })
+              .then(result => {
+                resolve(result);
+              })
+              .catch(err => {
+                reject(err);
+              });
+          });
+        });
+      });
+      return Promise.all(promises);
+    },
+    processBusiness() {
+      return new Promise((resolve, reject) => {
+        this.getPermitsAddress(results.permit.details)
+          .then(address => {
+            const valid_until = new Date(results.permit.details.date_created);
+            const details = {
+              business_name:
+                results.permit.details.business_details.business_name,
+              business_no: results.permit.details.business_no,
+              business_address: address,
+              business_owner: `${results.permit.details.owner_details.name.first} ${results.permit.details.owner_details.name.last}`,
+              plate_no: results.permit.details.reference_no,
+              ownership_type: this.getBusinessType(
+                results.permit.details.business_details.business_type
+              ),
+              valid_until,
+              area: `${results.permit.details.business_details.business_area} sq.m`,
+              date_issued: new Date(valid_until.getFullYear() + 1, 11, 31),
+              application_type: this.getDocketMode(
+                results.permit.details.business_details.application_types
+              ),
+              mode_of_payment: this.getPaymentMode(
+                results.permit.payments.mode_of_payment
+              ),
+              transaction_no: results.permit.payments.transaction_no,
+              transactions: results.permit.payments.payment_breakdown
+            };
+            return this.$upload(details, "BUSINESSPERMIT_SAN_ANTONIO");
+          })
+          .then(blob => {
+            return this.saveEpermit(blob, results.permit.details);
+          })
+          .then(result => {
+            if (
+              results.permit.details.permit_type === "business" &&
+              results.permit.application.details.lack_documents &&
+              results.permit.application.details.lack_documents.length &&
+              results.permit.other_permits &&
+              results.permit.other_permits.length
+            ) {
+              return this.generateOtherDocsForBusiness(
+                results.permit.other_permits
+              );
+            }
+          })
+          .then(result => {
+            resolve(result);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    },
+    processCedula(details) {
+      return new Promise((resolve, reject) => {
+        const permit_details = {};
+        this.$upload(permit_details, "CEDULA")
+          .then(blob => {
+            return this.saveEpermit(blob, details);
+          })
+          .then(result => {
+            resolve(result);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    },
+    processPolice(details) {
+      return new Promise((resolve, reject) => {
+        this.getPermitsAddress(details)
+          .then(address => {
+            return this.uploadPolicePermit(results.permit.details, address);
+          })
+          .then(blob => {
+            if (blob) return this.saveEpermit(blob, results.permit.details);
+          })
+          .then(result => {
+            resolve(result);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      });
+    },
+    saveEpermit(blob, details) {
+      var file_name =
+          details.permit_type === "business"
+            ? `business-permit-${Date.now()}-smart-juan.pdf`
+            : details.permit_type === "cedula"
+            ? `ctc-${Date.now()}-smart-juan.pdf`
+            : details.permit_type === "police"
+            ? `police-clearance-${Date.now()}-smart-juan.pdf`
+            : details.permit_type === "barangay"
+            ? `barangay-clearance-${Date.now()}-smart-juan.pdf`
+            : "",
+        file = new File([blob], file_name, {
+          type: "application/pdf",
+          lastModified: Date.now()
+        });
+      var form_data = new FormData();
+      form_data.append("file", file);
+      if (details.permit_type === "business")
+        return this.$store.dispatch("SAVE_EPERMIT_ATTACHMENT", {
+          business_no: details.business_no,
+          form_data
+        });
+      else if (details.permit_type === "cedula")
+        return this.$store.dispatch("SAVE_CEDULA_EPERMIT_ATTACHMENT", {
+          cedula_no: details.cedula_no,
+          form_data
+        });
+      else if (details.permit_type === "police")
+        return this.$store.dispatch("SAVE_POLICE_EPERMIT_ATTACHMENT", {
+          police_no: details.police_no,
+          form_data
+        });
+      else if (details.permit_type === "barangay")
+        return this.$store.dispatch("SAVE_BARANGAY_EPERMIT_ATTACHMENT", {
+          barangay_no: details.barangay_no,
+          form_data
+        });
+    },
+    uploadBarangayPermit(details, address) {
+      if (details.barangay_type === "residential") {
+        const permit_details = {
+          business_name: details.business_details.business_name,
+          business_owner: "",
+          business_address: address[0] || "",
+          residential_address: address[1] || "",
+          business_nature: details.business_details.business_type,
+          requestor: "",
+          date_created: details.date_created
+        };
+        return this.$upload(permit_details, "BGYCLEARANCE");
+      } else if (details.barangay_type === "business") {
+        const permit_details = {
+          business_name: details.business_details.business_name,
+          business_owner: "",
+          business_address: address[0] || "",
+          residential_address: address[1] || "",
+          business_nature: details.business_details.business_type,
+          requestor: "",
+          date_created: details.date_created
+        };
+        return this.$upload(permit_details, "BRGY_BUSINESS_CLEARANCE");
+      }
+    },
+    uploadPolicePermit(details, address) {
+      const permit_details = {
+        police_no: details.police_no,
+        name: `${details.personal_details.name.first} ${details.personal_details.name.last}`,
+        address,
+        birth_date: details.personal_details.birthdate,
+        birth_place: details.personal_details.birthplace,
+        findings: "",
+        purpose: "",
+        validity: "",
+        ctc_no: details.personal_details.ctc_no,
+        date_created: details.date_created,
+        verified_by_first: "",
+        verified_by_second: ""
+      };
+      return this.$upload(permit_details, "POLICECLEARANCE");
+    },
+    getPermitsAddress(details) {
+      if (details.permit_type === "business")
+        return this.getAddress(details.business_address);
+      // else if(details.permit_type === 'cedula') // Cedula has no address
+      // return this.getAddress(details.business_address);
+      else if (details.permit_type === "barangay") {
+        var getAddresses = [];
+        // If requesting for residential certificate
+        if (details.purpose.includes("pc"))
+          getAddresses.push(this.getAddress(details.residential_address));
+        // If requesting barangay clearance for business permit
+        if (details.purpose.includes("bp"))
+          getAddresses.push(this.getAddress(details.business_address));
+        if (getAddresses.length) return Promise.all(getAddresses);
+      } else if (details.permit_type === "police")
+        return this.getAddress(details.address_details);
+    },
+    generateOtherDocsForBusiness(permits) {
+      var promises = [];
+      permits.forEach(permit => {
+        // get address, generate and upload epermit, save
+        if (Array.isArray(permit)) return this.processBarangay(permit);
+        //barangay
+        else if (permit.permit_type === "cedula")
+          return this.processCedula(permit);
+        //cedula
+        else if (permit.permit_type === "police")
+          return this.processPolice(permit); //police
+      });
+      return Promise.all(promises);
     },
     getAddress(address) {
       return new Promise((resolve, reject) => {
@@ -316,22 +498,6 @@ export default {
             reject(err);
           });
       });
-    },
-    getBusinessType(type) {
-      if (type === "SP") return "Single Proprietorship";
-      else if (type === "P") return "Partnership";
-      else if (type === "CE") return "Cooperative";
-      else if (type === "CN") return "Corporation";
-    },
-    getApplicationType(type) {
-      const types = ["NEW", "RENEWAL"];
-      return types[type];
-    },
-    getPaymentMode(mode) {
-      if (mode === "A") return "Annual";
-      else if (mode === "SA") return "Semi Annual";
-      else if (mode === "Q") return "Quarterly";
-      else return "";
     },
     view(url) {}
   }

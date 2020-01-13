@@ -58,7 +58,7 @@ const actions = {
                             console.log('result.data[doc_type] :', result.data[doc_type]);
                             details.data.attachments.push({
                                 doc_type,
-                                files: result.data[doc_type].map(v => v.location)
+                                files: result.data[doc_type].map(v => { return { url: v.location, type: v.contentType } })
                             })
                         })
                     }
@@ -85,7 +85,7 @@ const actions = {
             new UploadAPI(context.rootState.user_session.token).uploadPermitDocument(business_no, form_data)
                 .then((result) => {
                     console.log('result.data :', result.data);
-                    if (result) return new BusinessPermitAPI(context.rootState.user_session.token).updatePermitByBusinessNo(business_no, { attachment: result.data.location })
+                    if (result) return new BusinessPermitAPI(context.rootState.user_session.token).updatePermitByBusinessNo(business_no, { url: result.data.location, type: result.data.contentType })
                 })
                 .then((result) => {
                     resolve(result);
@@ -102,7 +102,7 @@ const actions = {
                 .then((result) => {
                     console.log('result.data :', result.data);
                     if (result) return new PermitsAPI(context.rootState.user_session.token)
-                        .updatePermitByCedulaNo(cedula_no, { attachment: result.data.location })
+                        .updatePermitByCedulaNo(cedula_no, { url: result.data.location, type: result.data.contentType })
                 })
                 .then((result) => {
                     resolve(result);
@@ -119,7 +119,7 @@ const actions = {
                 .then((result) => {
                     console.log('result.data :', result.data);
                     if (result) return new PermitsAPI(context.rootState.user_session.token)
-                        .updatePermitByBarangayNo(barangay_no, { attachment: result.data.location })
+                        .updatePermitByBarangayNo(barangay_no, { url: result.data.location, type: result.data.contentType })
                 })
                 .then((result) => {
                     resolve(result);
@@ -136,7 +136,7 @@ const actions = {
                 .then((result) => {
                     console.log('result.data :', result.data);
                     if (result) return new PermitsAPI(context.rootState.user_session.token)
-                        .updatePermitByPoliceNo(police_no, { attachment: result.data.location })
+                        .updatePermitByPoliceNo(police_no, { url: result.data.location, type: result.data.contentType })
                 })
                 .then((result) => {
                     resolve(result);
@@ -165,7 +165,7 @@ const actions = {
     },
     GET_PERMIT_TYPES(context, refresh) {
         return new Promise((resolve, reject) => {
-            if (refresh || !context.state.filing_permit || !context.state.filing_permit.length) {
+            if (refresh || !context.state.permit_types || !context.state.permit_types.length) {
                 new PermitsAPI(context.rootState.user_session.token).getPermitType()
                     .then((result) => {
                         console.log('GET_PERMIT_TYPES result :', result);
@@ -177,10 +177,10 @@ const actions = {
                         console.log('GET_PERMIT_TYPES err :', err);
                         reject({ errors: err })
                     });
-            } resolve(context.state.filing_permit)
+            } else resolve(context.state.permit_types)
         });
     },
-    GET_PERMITS(context, refresh){
+    GET_PERMITS(context, refresh) {
         return new Promise((resolve, reject) => {
             if (refresh || !context.state.permits_records || !context.state.permits_records.length) {
                 new PermitsAPI(context.rootState.user_session.token).getPermits()

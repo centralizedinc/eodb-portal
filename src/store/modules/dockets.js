@@ -149,6 +149,7 @@ const actions = {
         return new DocketsAPI(context.rootState.admin_session.token).rejectDocket(data);
     },
     GET_DEPARTMENTS(context, refresh) {
+        console.log('is refresh :', refresh);
         return new Promise((resolve, reject) => {
             if(refresh || !context.state.departments || !context.state.departments.length) {
                 new DepartmentAPI(context.rootState.user_session.token).getDepartments()
@@ -162,7 +163,7 @@ const actions = {
                     console.log('GET_DEPARTMENTS err :', err);
                     reject(err)
                 });
-            } else context.state.departments;
+            } else resolve(context.state.departments);
         })
     },
     GET_DOCKET_ACTIVITIES(context, refresh) {
@@ -179,7 +180,7 @@ const actions = {
                     console.log('GET_DOCKET_ACTIVITIES err :', err);
                     reject(err)
                 });
-            } else context.state.docket_activities;
+            } else resolve(context.state.docket_activities);
         })
     }
 }

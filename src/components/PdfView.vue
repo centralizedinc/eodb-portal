@@ -21,6 +21,9 @@ import FIREANDSAFETY from "./pdf/fireandsafety";
 import POLICECLEARANCE from "./pdf/policeclearance";
 import RECEIPT from "./pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "./pdf/BusinessPermit_San_Antonio";
+import CEDULA_SAN_ANTONIO from "./pdf/CommunityTaxCert_San_Antonio";
+
+import BRGY_BUSINESS_CLEARANCE from "./pdf/brgy_business_clearance";
 
 var printers = {
   BGYCLEARANCE,
@@ -28,7 +31,9 @@ var printers = {
   BUSINESSPERMIT,
   POLICECLEARANCE,
   RECEIPT,
-  BUSINESSPERMIT_SAN_ANTONIO
+  BUSINESSPERMIT_SAN_ANTONIO,
+  CEDULA_SAN_ANTONIO,
+  BRGY_BUSINESS_CLEARANCE
 };
 
 // var printers = {
@@ -102,10 +107,19 @@ export default {
         // };
       } else if (this.keyword.toUpperCase() === "RECEIPT") {
         this.pdf_details = {
-          transaction_no: "1234567890",
-          date: new Date(),
-          payor: "Juan Delacruz",
-          payment_breakdown: [
+          business_name: "REPUBLIC OF GAMERS COMPUTER CAFE",
+          business_no: "445433110",
+          business_address: "Unit 2320 Pasong Tamo Extension",
+          business_owner: "RICHARD BERMUDEZ",
+          plate_no: "1546238984",
+          ownership_type: "SINGLE PROPRIETORSHIP",
+          valid_until: new Date(2019, 11, 31),
+          area: "5000000 sq.m",
+          date_issued: new Date(2019, 3, 20),
+          application_type: "RENEWAL",
+          mode_of_payment: "QUARTERLY",
+          transaction_no: "115498845612848",
+          transactions: [
             {
               description: "Application Fee",
               amount: 1000
@@ -133,15 +147,37 @@ export default {
         };
       } else if (this.keyword.toUpperCase() === "BGYCLEARANCE") {
         this.pdf_details = {
-          business_name: "Dell Laptop Inc.",
+          name: "Godfrey Rivera",
+          birth_date:"1996-11-23",
+          address: "Tehran",
+          date_created: new Date(),
+
+          // business_name: "Dell Laptop Inc.",
+          // business_owner: "Godfrey Rivera",
+          // business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          // business_nature: "Information Technology",
+          // requestor: "Mark Quijom",
+          // date_created: new Date()
+        }
+      }else if(this.keyword.toUpperCase() === 'BRGY_BUSINESS_CLEARANCE'){
+        this.pdf_details = {
+          business_name: "MyPhone",
+          requestor: "Berna Yango",
+          business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
+          business_nature: "Manufacturing Technology Devices",
+          requestor: "Kris Yango",
+          date_created: new Date(),
+
+        }
+      } else if(this.keyword.toUpperCase() === 'CEDULA_SAN_ANTONIO'){
+        this.pdf_details = {
+           business_name: "Dell Laptop Inc.",
           business_owner: "Godfrey Rivera",
           business_address: "Unit 603 Tritan Bldg. Magallanes Makati City.",
           business_nature: "Information Technology",
           requestor: "Mark Quijom",
           date_created: new Date()
-        };
-      } else if (this.keyword.toUpperCase() === "CEDULA") {
-        this.pdf_details = {};
+        }
       }
       console.log("this.pdf_details :", this.pdf_details);
       // Process PDF
@@ -150,23 +186,26 @@ export default {
         const self = this,
           printer = printers[this.keyword.toUpperCase()];
         const document = printer.fillup(this.pdf_details),
-          pdfGenerator = pdfMake.createPdf(document);
+         pdfGenerator = pdfMake.createPdf(document);
 
-        // pdfGenerator.getBuffer(buffer => {
-        //   var file = new Blob([buffer], {
-        //       type: "application/pdf"
-        //     }),
-        //     dataUrl = URL.createObjectURL(file);
-        //   self.pdf_url = dataUrl;
-        //   self.loading = false;
-        // });
+          // ---------------for pdf testing---------------------
+          // pdfMake.createPdf(document).open(err =>{
+          //   if (err){
+          //     reject(err)
+          //   } else{
+          //     resolve();
+          //   }
+          // })
+          // ------------for quick testing------------------
 
-        pdfMake.createPdf(document).open(err => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve();
-          }
+           
+        pdfGenerator.getBuffer(buffer => {
+          var file = new Blob([buffer], {
+              type: "application/pdf"
+            }),
+            dataUrl = URL.createObjectURL(file);
+          self.pdf_url = dataUrl;
+          self.loading = false;
         });
       } catch (error) {
         console.log("error :", error);

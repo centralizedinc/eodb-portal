@@ -6,7 +6,50 @@
     </a-row>
     <a-form class="business-form">
       <!-- Business Data -->
+      <!-- <a-form-item
+        style="font-weight: bold">
+        <span slot="label">
+          Business Owner
+        </span>
+         </a-form-item> -->
 
+      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+          <a-form-item
+            :validate-status="checkErrors('owner_details.last') ? 'error': ''"
+            :help="checkErrors('owner_details.name.last')"
+          >
+            <span slot="label">
+             Owner Last Name
+              <i style="color: red">*</i>
+            </span>
+            <a-input v-model="form.business_details.business_owner_name.last"></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7}">
+          <a-form-item
+            :validate-status="checkErrors('owner_details.first') ? 'error': ''"
+            :help="checkErrors('owner_details.name.first')"
+          >
+            <span slot="label">
+              First Name
+              <i style="color: red">*</i>
+            </span>
+            <a-input v-model="form.business_details.business_owner_name.first"></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{  }" :sm="{ span: 6 }">
+          <a-form-item label="Middle Name">
+            <a-input v-model="form.business_details.business_owner_name.middle"></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
+          <a-form-item label="Suffix">
+            <a-input v-model="form.business_details.business_owner_name.suffix"></a-input>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <!-- --------------------------------------------------------- -->
       <a-form-item
         style="font-weight: bold"
         :validate-status="
@@ -268,7 +311,7 @@
       </a-row>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
@@ -276,7 +319,7 @@
         </a-col>
         <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col> -->
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
@@ -297,7 +340,7 @@ export default {
     };
   },
   created() {
-    console.log('this.fixed_address :', this.fixed_address);
+    console.log("this.fixed_address :", this.fixed_address);
     if (this.fixed_address) {
       this.form.business_address.region = "04";
       // this.changeRegion();
@@ -311,18 +354,18 @@ export default {
       )
         .then(data => {
           this.cities = data.default;
-          console.log('###### this.cities :', this.cities);
+          console.log("###### this.cities :", this.cities);
           return import(
             `../../../assets/references/barangay/${this.form.business_address.city}.json`
           );
         })
         .then(data => {
           this.barangays = data.default;
-          console.log('##### barangays data :', data);
+          console.log("##### barangays data :", data);
         })
-        .catch((errors) => {
-          console.log('### errors :', errors);
-        })
+        .catch(errors => {
+          console.log("### errors :", errors);
+        });
     }
     if (this.fixed_postal) {
       this.form.business_address.postal_code = "4324";
@@ -436,8 +479,10 @@ export default {
         data[description].toLowerCase().indexOf(inputValue.toLowerCase()) > -1
       );
     },
-    resetRentedData(){
-      this.form.business_address = JSON.parse(JSON.stringify(this.form.residential_address));
+    resetRentedData() {
+      this.form.business_address = JSON.parse(
+        JSON.stringify(this.form.residential_address)
+      );
     }
   }
 };

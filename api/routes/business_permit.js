@@ -161,7 +161,7 @@ router.route('/epermit/:business_no')
             });
     })
     .post((req, res) => {
-        BusinessPermitDao.modifyOne({ business_no: req.params.business_no }, { epermit_attachment: req.body.attachment })
+        BusinessPermitDao.modifyOne({ business_no: req.params.business_no }, { epermit_attachment: req.body })
             .then((result) => {
                 res.json(result)
             }).catch((errors) => {

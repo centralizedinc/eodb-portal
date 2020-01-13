@@ -22,39 +22,43 @@
     >Line of Business</a-divider>
     <a-button type="primary" @click="showLineBusiness">Add</a-button>
     <a-form>
-      <a-form-item
-        :validate-status="checkFormErrors('business_details.line_of_business') ? 'error': ''"
-        :help="checkFormErrors('business_details.line_of_business')"
-      >
-        <a-table
-          :dataSource="form.business_details.line_of_business"
-          :columns="line_of_business_columns"
+      <a-col :xs="{span: 24}" :md="{span:24}" :xl="{span:24}">
+        <a-form-item
+          :validate-status="checkFormErrors('business_details.line_of_business') ? 'error': ''"
+          :help="checkFormErrors('business_details.line_of_business')"
         >
-          <template slot="action" slot-scope="text, record, index">
-            <a-tooltip>
-              <span slot="title">Remove</span>
-              <a-icon
-                type="delete"
-                style="color: red; cursor: pointer;"
-                @click="removeLineBusiness(index)"
-              />
-            </a-tooltip>
-          </template>
-          <template slot="units" slot-scope="text, record, index">
-            <a-input v-model="form.business_details.line_of_business[index].units" />
-          </template>
-          <template slot="capital_investment" slot-scope="text, record, index">
-            <a-input v-model="form.business_details.line_of_business[index].capital_investment" />
-          </template>
-          <template slot="essential" slot-scope="text, record, index">
-            <a-input v-model="form.business_details.line_of_business[index].essential" />
-          </template>
-          <template slot="non_essential" slot-scope="text, record, index">
-            <a-input v-model="form.business_details.line_of_business[index].non_essential" />
-          </template>
-        </a-table>
-      </a-form-item>
+          <a-table
+            :scroll="{ x: 800, y: 300 }"
+            :dataSource="form.business_details.line_of_business"
+            :columns="line_of_business_columns"
+          >
+            <template slot="action" slot-scope="text, record, index">
+              <a-tooltip>
+                <span slot="title">Remove</span>
+                <a-icon
+                  type="delete"
+                  style="color: red; cursor: pointer;"
+                  @click="removeLineBusiness(index)"
+                />
+              </a-tooltip>
+            </template>
+            <template slot="units" slot-scope="text, record, index">
+              <a-input v-model="form.business_details.line_of_business[index].units" />
+            </template>
+            <template slot="capital_investment" slot-scope="text, record, index">
+              <a-input v-model="form.business_details.line_of_business[index].capital_investment" />
+            </template>
+            <template slot="essential" slot-scope="text, record, index">
+              <a-input v-model="form.business_details.line_of_business[index].essential" />
+            </template>
+            <template slot="non_essential" slot-scope="text, record, index">
+              <a-input v-model="form.business_details.line_of_business[index].non_essential" />
+            </template>
+          </a-table>
+        </a-form-item>
+      </a-col>
     </a-form>
+
     <a-modal
       :visible="show_line_of_business"
       @cancel="show_line_of_business=false"
@@ -97,22 +101,31 @@
       orientation="left"
     >Measure or Pax</a-divider>
     <a-button type="primary" @click="showMeasureOrPax">Add Measure or Pax</a-button>
-    <a-table :dataSource="form.business_details.measure_or_pax" :columns="measure_or_pax_columns">
-      <template slot="action" slot-scope="text, record, index">
-        <a-tooltip>
-          <span slot="title">Remove</span>
-          <a-icon
-            type="delete"
-            style="color: red; cursor: pointer;"
-            @click="removeMeasureOrPax(index)"
-          />
-        </a-tooltip>
-      </template>
-      <template
-        slot="line_of_business"
-        slot-scope="text"
-      >{{line_of_business.find(v=>v.code === text).description}}</template>
-    </a-table>
+    <a-row type="flex" justify="start">
+      <a-col :xs="{span: 24}" :md="{span:24}" :xl="{span:24}">
+        <a-table
+          :scroll="{ x: 800, y: 300 }"
+          :dataSource="form.business_details.measure_or_pax"
+          :columns="measure_or_pax_columns"
+        >
+          <template slot="action" slot-scope="text, record, index">
+            <a-tooltip>
+              <span slot="title">Remove</span>
+              <a-icon
+                type="delete"
+                style="color: red; cursor: pointer;"
+                @click="removeMeasureOrPax(index)"
+              />
+            </a-tooltip>
+          </template>
+          <template
+            slot="line_of_business"
+            slot-scope="text"
+          >{{line_of_business.find(v=>v.code === text).description}}</template>
+        </a-table>
+      </a-col>
+    </a-row>
+
     <a-modal
       :visible="show_measure_or_pax"
       @cancel="show_measure_or_pax=false"
@@ -184,7 +197,7 @@
       </a-col>
       <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
         <a-button>Save Draft</a-button>
-      </a-col> -->
+      </a-col>-->
     </a-row>
   </a-card>
 </template>
@@ -200,7 +213,9 @@ export default {
       line_of_business_columns: [
         {
           title: "Code",
-          dataIndex: "code"
+          dataIndex: "code",
+          fixed: "left",
+          width: 100
         },
         {
           title: "Description",
@@ -227,7 +242,7 @@ export default {
           scopedSlots: { customRender: "non_essential" }
         },
         {
-          title: "",
+          title: "Action",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }
@@ -242,7 +257,9 @@ export default {
       measure_or_pax_columns: [
         {
           title: "Number of Unit",
-          dataIndex: "unit"
+          dataIndex: "unit",
+          fixed: "left",
+          width: 100
         },
         {
           title: "Capacity",
@@ -258,7 +275,7 @@ export default {
           scopedSlots: { customRender: "line_of_business" }
         },
         {
-          title: "",
+          title: "Action",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }

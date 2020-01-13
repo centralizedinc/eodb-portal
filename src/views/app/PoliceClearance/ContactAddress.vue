@@ -221,7 +221,7 @@
               Telephone No.
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.contact_details.tel_no"></a-input>
+            <a-input maxlength="11" v-model="form.contact_details.tel_no"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -233,7 +233,7 @@
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.contact_details.mobile"></a-input>
+            <a-input maxlength="11" v-model="form.contact_details.mobile"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -245,7 +245,7 @@
               Email Address
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.contact_details.email"></a-input>
+            <a-input style="text-transform: none;" v-model="form.contact_details.email"></a-input>
           </a-form-item>
         </a-col>
       </a-row>

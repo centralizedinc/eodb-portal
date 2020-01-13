@@ -45,7 +45,7 @@ var PolicePermitSchema = new mongoose.Schema({
                 type: String
             }
         },
-        birthday: {
+        birthdate: {
             type: Date
         },
         birthplace: {
@@ -54,7 +54,7 @@ var PolicePermitSchema = new mongoose.Schema({
         other_country: {
             type: String
         },
-        icr: {
+        icr_no: {
             type: Number
         },
         gender: {
@@ -209,11 +209,30 @@ var PolicePermitSchema = new mongoose.Schema({
         doc_type: {
             type: String
         },
-        files: []
+        files: [{
+            url: {
+                type: String
+            },
+            type: {
+                type: String
+            }
+        }]
     }],
-    compliance_attachments: [],
+    compliance_attachments: [{
+        url: {
+            type: String
+        },
+        type: {
+            type: String
+        }
+    }],
     epermit_attachment: {
-        type: String
+        url: {
+            type: String
+        },
+        type: {
+            type: String
+        }
     }
 })
 

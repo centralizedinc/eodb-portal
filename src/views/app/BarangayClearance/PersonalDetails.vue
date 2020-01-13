@@ -76,14 +76,20 @@
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
-            :validate-status="checkErrors('personal_details.birthday') ? 'error': ''"
-            :help="checkErrors('personal_details.birthday')"
+            :validate-status="checkErrors('personal_details.birthdate') ? 'error': ''"
+            :help="checkErrors('personal_details.birthdate')"
           >
             <span slot="label">
               Date of Birth
               <i style="color: red">*</i>
             </span>
-            <a-date-picker v-model="form.personal_details.birthday" :disabledDate="disableDateInBirthdate" style="width: 100%;"></a-date-picker>
+            <a-date-picker
+              v-model="form.personal_details.birthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
+              style="width: 100%;"
+              :showToday="false"
+            ></a-date-picker>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -95,7 +101,7 @@
               Place of Birth
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.personal_details.birthplace" placeholder="Enter Birth Place"></a-input>
+            <a-input placeholder="Enter Municipality" v-model="form.personal_details.birthplace"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -109,20 +115,21 @@
               Gender
               <i style="color: red">*</i>
             </span>
-            <a-radio-group v-model="form.personal_details.gender" buttonStyle="solid">
-              <a-radio-button value="M">Male</a-radio-button>
-              <a-radio-button value="F">Female</a-radio-button>
-            </a-radio-group>
+            <a-select v-model="form.personal_details.gender">
+              <a-select-option value="Male">Male</a-select-option>
+              <a-select-option value="Female">Female</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 15 }">
-          <a-form-item style="font-weight: bold;" label="Civil Status">
-            <a-radio-group v-model="form.personal_details.civil_status" buttonStyle="solid">
-              <a-radio-button value="single">Single</a-radio-button>
-              <a-radio-button value="married">Married</a-radio-button>
-              <a-radio-button value="widowed">Widowed</a-radio-button>
-              <a-radio-button value="separated">Separated</a-radio-button>
-            </a-radio-group>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 14 }">
+          <a-form-item>
+            <span slot="label">Civil Status</span>
+            <a-select v-model="form.personal_details.civil_status">
+              <a-select-option value="Single">Single</a-select-option>
+              <a-select-option value="Married">Married</a-select-option>
+              <a-select-option value="Widowed">Widowed</a-select-option>
+              <a-select-option value="Separated">Separated</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
@@ -378,7 +385,7 @@
       </template>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
@@ -386,7 +393,7 @@
         </a-col>
         <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col> -->
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
@@ -395,6 +402,8 @@
 <script>
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
+import moment from 'moment';
+
 export default {
   props: ["form", "step", "errors"],
   data() {
@@ -407,6 +416,9 @@ export default {
     };
   },
   computed: {
+    defaultBdayPickerValue(){
+      return moment(new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate()))
+    },
     regions() {
       console.log("regions_data: " + JSON.stringify(this.regions_data));
       return this.regions_data;

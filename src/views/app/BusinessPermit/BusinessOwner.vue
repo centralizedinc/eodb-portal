@@ -1,8 +1,13 @@
 <template>
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
-    <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Business Owner Information</a-col>
+    <a-row slot="title" type="flex" justify="space-between">
+      <a-col :xs="{span: 0}" :md="{span: 21}" :xl="{span: 21}">
+        <h1 style="font-size:25px; color: #7e7e7e">Business Owner Information</h1>
+      </a-col>
+      <a-col :xs="{span: 21}" :md="{span: 0}" :xl="{span: 0}">
+        <h1 style="font-size:25px; color: #7e7e7e">Business Owner Info</h1>
+      </a-col>
       <a-col :span="2" style="text-align: right;">
         <a-tooltip placement="left">
           <span slot="title">
@@ -26,7 +31,7 @@
         </a-col>
       </a-row>-->
 
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.name.last') ? 'error': ''"
@@ -36,7 +41,7 @@
               Last Name
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.name.last" placeholder="Last Name"></a-input>
+            <a-input v-model="form.owner_details.name.last"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7}">
@@ -48,23 +53,23 @@
               First Name
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.name.first" placeholder="First Name"></a-input>
+            <a-input v-model="form.owner_details.name.first"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{  }" :sm="{ span: 6 }">
+        <a-col :xs="{ span:24 }" :sm="{ span: 6 }">
           <a-form-item label="Middle Name">
-            <a-input v-model="form.owner_details.name.middle" placeholder="Middle Name"></a-input>
+            <a-input v-model="form.owner_details.name.middle"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 3 }">
           <a-form-item label="Suffix">
-            <a-input v-model="form.owner_details.name.suffix" placeholder="Suffix"></a-input>
+            <a-input v-model="form.owner_details.name.suffix"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.birthdate') ? 'error': ''"
             :help="checkErrors('owner_details.birthdate')"
@@ -76,11 +81,14 @@
             <a-date-picker
               style="width: 100%;"
               v-model="form.owner_details.birthdate"
-              :disabledDate="disableDateInBirthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
+              :showToday="false"
             ></a-date-picker>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+
+        <a-col :xs="{ span: 24 }" :sm="{ span:13  }">
           <a-form-item
             :validate-status="checkErrors('owner_details.gender') ? 'error': ''"
             :help="checkErrors('owner_details.gender')"
@@ -95,13 +103,11 @@
             </a-radio-group>
           </a-form-item>
         </a-col>
-      </a-row>
 
-      <a-row style="font-weight: bold;" :gutter="5">
         <a-col
           :xs="{ span: 24 }"
-          :sm="{ span: 10 }"
-          v-if="checkDocsNeeded(['residence','barangay','police'])"
+          :sm="{ span: 24 }"
+          v-if="checkDocsNeeded(['cedula','barangay','police'])"
         >
           <a-form-item
             style="font-weight: bold;"
@@ -112,13 +118,14 @@
               Place of Birth
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.birthplace" placeholder="Place of Birth" />
+            <a-input placeholder="Enter Municipality" v-model="form.owner_details.birthplace" />
           </a-form-item>
         </a-col>
+
         <a-col
           :xs="{ span: 24 }"
-          :sm="{ span: 14 }"
-          v-if="checkDocsNeeded(['residence','barangay','police'])"
+          :sm="{ span: 24 }"
+          v-if="checkDocsNeeded(['cedula','barangay','police'])"
         >
           <a-form-item
             style="font-weight: bold;"
@@ -140,7 +147,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.telno') ? 'error': ''"
             :help="checkErrors('owner_details.telno')"
@@ -149,14 +156,15 @@
               Tel No
               <i style="color: red">*</i>
             </span>
-            <a-input-number
+            <a-input
               v-model="form.owner_details.telno"
-              placeholder="Tel No*"
+              placeholder="Area code + 8-digit number (i.e. 046xxxxxxxx)"
+              maxlength="11"
               style="width:100%"
-            ></a-input-number>
+            ></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.mobile') ? 'error': ''"
             :help="checkErrors('owner_details.mobile')"
@@ -165,14 +173,15 @@
               Mobile No
               <i style="color: red">*</i>
             </span>
-            <a-input-number
+            <a-input
               v-model="form.owner_details.mobile"
-              placeholder="Mobile No*"
+              placeholder="11-digit mobile number (i.e. 09xxxxxxxxx"
+              maxlength="11"
               style="width:100%"
-            ></a-input-number>
+            ></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="checkErrors('owner_details.email') ? 'error': ''"
             :help="checkErrors('owner_details.email')"
@@ -181,42 +190,48 @@
               Email Address
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_details.email" placeholder="Email Address*"></a-input>
+            <a-input
+              style="text-transform: none;"
+              v-model="form.owner_details.email"
+              placeholder="Email Address*"
+            ></a-input>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col
-          :xs="{ span: 24 }"
-          :sm="{ span: 12 }"
-          v-if="checkDocsNeeded(['residence', 'barangay'])"
-        >
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula', 'barangay'])">
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
-            <a-input v-model="form.owner_details.occupation" placeholder="Occupation/Profession" />
+            <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['residence'])">
+
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Monthly Salary">
-            <a-input v-model="form.owner_details.monthly_salary" placeholder="Monthly Salary" />
+            <a-select v-model="form.owner_details.monthly_salary">
+              <a-select-option value="Below ₱20,000">Below ₱20,000</a-select-option>
+              <a-select-option value=">₱21,000 to ₱50,000">> ₱21,000 to ₱50,000</a-select-option>
+              <a-select-option value=">₱51,000 to ₱200,000 ">> ₱51,000 to ₱100,000</a-select-option>
+              <a-select-option value=">Above ₱100,000">Above ₱100,000</a-select-option>
+            </a-select>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Height(cm)">
-            <a-input-number max="999" style="width:100%" v-model="form.owner_details.height" />
+            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="Weight(kg)">
-            <a-input-number max="999" style="width:100%" v-model="form.owner_details.weight" />
+            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['residence'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
           <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
-            <a-input v-model="form.owner_details.icr_no" placeholder="ICR No(if Alien)" />
+            <a-input v-model="form.owner_details.icr_no" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -231,27 +246,27 @@
           <a-row :gutter="5">
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="House/Bldg No">
-                <a-input v-model="form.owner_address.bldg_no" placeholder="House/Bldg No"></a-input>
+                <a-input v-model="form.owner_address.bldg_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="Unit No">
-                <a-input v-model="form.owner_address.unit_no" placeholder="Unit No"></a-input>
+                <a-input v-model="form.owner_address.unit_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="24">
               <a-form-item label="Building Name">
-                <a-input v-model="form.owner_address.bldg_name" placeholder="Building Name"></a-input>
+                <a-input v-model="form.owner_address.bldg_name"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="24">
               <a-form-item label="Street">
-                <a-input v-model="form.owner_address.street" placeholder="Street"></a-input>
+                <a-input v-model="form.owner_address.street"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="24">
               <a-form-item label="Subdivision">
-                <a-input v-model="form.owner_address.subdivision" placeholder="Subdivision"></a-input>
+                <a-input v-model="form.owner_address.subdivision"></a-input>
               </a-form-item>
             </a-col>
           </a-row>
@@ -383,7 +398,7 @@
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input v-model="form.owner_address.postal_code" placeholder="Postal Code*"></a-input>
+            <a-input v-model="form.owner_address.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -407,6 +422,7 @@
 <script>
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
+import moment from "moment";
 
 export default {
   props: ["form", "step", "errors", "documents"],
@@ -420,6 +436,15 @@ export default {
     };
   },
   computed: {
+    defaultBdayPickerValue() {
+      return moment(
+        new Date(
+          new Date().getFullYear() - 18,
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+      );
+    },
     user() {
       return this.$store.state.user_session.user;
     },

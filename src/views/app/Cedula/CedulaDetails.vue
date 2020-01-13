@@ -70,18 +70,20 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="
-              checkErrors('personal_details.birthday') ? 'error' : ''
+              checkErrors('personal_details.birthdate') ? 'error' : ''
             "
-            :help="checkErrors('personal_details.birthday')"
+            :help="checkErrors('personal_details.birthdate')"
           >
             <span slot="label">
               Birthday
               <i style="color: red">*</i>
             </span>
             <a-date-picker
-              v-model="form.personal_details.birthday"
-              :disabledDate="disableDateInBirthdate"
               style="width: 100%;"
+              v-model="form.personal_details.birthdate"
+              :disabledDate="v => disableDateInBirthdate(v, true)"
+              :defaultPickerValue="defaultBdayPickerValue"
+              :showToday="false"
             ></a-date-picker>
           </a-form-item>
         </a-col>
@@ -105,7 +107,7 @@
               ICR No.
               <i>(if alien)</i>
             </span>
-            <a-input v-model="form.personal_details.icr"></a-input>
+            <a-input v-model="form.personal_details.icr_no"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -169,7 +171,13 @@
               TIN
               <i>(if any)</i>
             </span>
-            <a-input v-model="form.personal_details.tin"></a-input>
+            <input
+              type="text"
+              name="number"
+              class="ant-input"
+              maxlength="11"
+              v-model="form.personal_details.tin"
+            />
           </a-form-item>
         </a-col>
       </a-row>
@@ -249,55 +257,99 @@
       <!-- table -->
 
       <a-row type="flex" justify="space-around" style="margin-top: 5vh;">
-        <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }">
+        <a-col :sm="{ span: 24 }" :md="{ span: 24 }" :xl="{ span: 24 }">
           <a-button-group>
             <!-- <a-button @click="$emit('prev')">Previous</a-button> -->
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
+        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col>
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
 </template>
+
+
 <script>
+import moment from "moment";
+
 export default {
-  props: ["form", "step", "errors"],
+  props: ["form", "step", "errors", "computation_formula"],
   data() {
     return {};
   },
   mounted() {
     // this.form.tax.taxable.basic = "exempted";
   },
+  computed: {
+    defaultBdayPickerValue() {
+      return moment(
+        new Date(
+          new Date().getFullYear() - 18,
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+      );
+    }
+  },
+
   methods: {
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
     },
     computation() {
-      this.form.tax.taxable.basic == "voluntary"
-        ? (this.form.tax.community.basic = 5)
-        : (this.form.tax.community.basic = 1);
-      this.form.tax.community.business_income =
-        (this.form.tax.taxable.business_income || 0) / 1000;
-      this.form.tax.community.profession_income =
-        (this.form.tax.taxable.profession_income || 0) / 1000;
-      this.form.tax.community.property_income =
-        (this.form.tax.taxable.property_income || 0) / 1000;
-      this.form.tax.total =
-        (this.form.tax.community.basic || 0) +
-        (this.form.tax.community.business_income || 0) +
-        (this.form.tax.community.profession_income || 0) +
-        (this.form.tax.community.property_income || 0);
-      this.form.tax.interest = 0;
-      this.form.tax.total_amount_paid =
-        (this.form.tax.total || 0) + (this.form.tax.interest || 0);
-      console.log(
-        "this.form.tax.taxable.property_income: " +
-          this.form.tax.community.property_income
-      );
+      var taxable_basic = this.form.tax.taxable.basic,
+        community_basic = 0,
+        community_business_income = 0,
+        taxable_business_income = this.form.tax.taxable.business_income,
+        community_profession_income = 0,
+        taxable_profession_income = this.form.tax.taxable.profession_income,
+        community_property_income = 0,
+        taxable_property_income = this.form.tax.taxable.property_income,
+        total = 0,
+        interest = 0,
+        total_amount_paid = 0,
+        month = new Date().getMonth();
+
+      try {
+        if (this.computation_formula) eval(this.computation_formula);
+      } catch (error) {
+        console.log("computation_formula ctc :", error);
+      }
+      this.form.tax.community.basic = community_basic;
+      this.form.tax.community.business_income = community_business_income;
+      this.form.tax.community.profession_income = community_profession_income;
+      this.form.tax.community.property_income = community_property_income;
+      this.form.tax.total = total;
+      this.form.tax.interest = interest;
+      this.form.tax.total_amount_paid = total_amount_paid;
+
+      // taxable_basic==='voluntary'?(community_basic=5):(community_basic=1);community_business_income=(parseFloat(taxable_business_income)||0)/1000;community_profession_income=(parseFloat(taxable_profession_income)||0)/1000;community_property_income=(parseFloat(taxable_property_income)||0)/1000;total=community_basic+community_business_income+community_profession_income+community_property_income;interest=0;total_amount_paid=total+parseFloat(interest);
+
+      // this.form.tax.taxable.basic == "voluntary"
+      //   ? (this.form.tax.community.basic = 5)
+      //   : (this.form.tax.community.basic = 1);
+      // this.form.tax.community.business_income =
+      //   (this.form.tax.taxable.business_income || 0) / 1000;
+      // this.form.tax.community.profession_income =
+      //   (this.form.tax.taxable.profession_income || 0) / 1000;
+      // this.form.tax.community.property_income =
+      //   (this.form.tax.taxable.property_income || 0) / 1000;
+      // this.form.tax.total =
+      //   (this.form.tax.community.basic || 0) +
+      //   (this.form.tax.community.business_income || 0) +
+      //   (this.form.tax.community.profession_income || 0) +
+      //   (this.form.tax.community.property_income || 0);
+      // this.form.tax.interest = 0;
+      // this.form.tax.total_amount_paid =
+      //   (this.form.tax.total || 0) + (this.form.tax.interest || 0);
+      // console.log(
+      //   "this.form.tax.taxable.property_income: " +
+      //     this.form.tax.community.property_income
+      // );
       console.log("computation of tax: " + JSON.stringify(this.form.tax));
     }
   }

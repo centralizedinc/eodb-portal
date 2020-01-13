@@ -82,7 +82,7 @@
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    <a-icon v-else type="close-circle" style="color: red; font-weight: bold;" />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -128,7 +128,7 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" justify="space-between">
+              <!-- <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
@@ -148,7 +148,7 @@
                     style="color: red"
                   >{{ checkErrors("mode_of_payment") }}</span>
                 </a-col>
-              </a-row>
+              </a-row>-->
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -236,6 +236,12 @@ export default {
           }
         },
         business_details: {
+          business_owner_name: {
+            first: "",
+            middle: "",
+            last: "",
+            suffix: ""
+          },
           business_name: "",
           business_type: "",
           franchise: ""
@@ -261,7 +267,11 @@ export default {
         // request_for: "",
         attachments: [
           {
-            doc_type: "residence",
+            doc_type: "cedula",
+            files: []
+          },
+          {
+            doc_type: "dti_sec_cda",
             files: []
           }
         ],
@@ -296,7 +306,7 @@ export default {
       //   {
       //     title: "Community Tax Certificate",
       //     status: 0,
-      //     keyword: "residence"
+      //     keyword: "cedula"
       //   }
       // ],
       steps: [
@@ -340,38 +350,7 @@ export default {
         total_payable: 5000,
         amount_payable: 0,
         amount_paid: 0,
-        payment_breakdown: [
-          {
-            description: "CTC or Cedula",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Barangay Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Police Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Business Permit Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Fire Safety and Inspection Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Convenience Fee",
-            fee_type: "application_fee",
-            amount: 1000
-          }
-        ],
+        payment_breakdown: [],
         status: "unpaid",
         method: "",
         mode_of_payment: "A",
@@ -406,13 +385,14 @@ export default {
         },
         {
           description: "Convenience Fee",
-          fee_type: "application_fee",
-          amount: 100
+          fee_type: "convenience_fee",
+          amount: 150
         }
       ],
       loading: false,
       departments: [],
-      errors: []
+      errors: [],
+      computation_formula: ""
     };
   },
   created() {
@@ -440,6 +420,18 @@ export default {
     },
     total_payable() {
       console.log("total payable data: " + JSON.stringify(this.form.tax));
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      var amount = 0,
+        computed_amount = 0;
+      try {
+        computed_amount = eval(this.computation_formula);
+      } catch (error) {
+        console.log("error :", error);
+        computed_amount = 0;
+      }
+      this.payments_data_source[index].amount = computed_amount;
       var total = this.payments_data_source
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
@@ -447,6 +439,9 @@ export default {
       this.transaction_details.total_payable = total;
       this.transaction_details.amount_paid = total;
       return total;
+    },
+    user() {
+      return this.$store.state.user_session.user;
     }
   },
   mounted() {
@@ -482,9 +477,11 @@ export default {
       "document data soure: " + JSON.stringify(this.document_data_source)
     );
     // this.updateDocsPayment();
+    this.onSelectPurpose();
   },
   methods: {
     onSelectPurpose() {
+      // Add or remove business details/residential address
       if (
         this.form.purpose.includes("bp") &&
         this.steps.findIndex(v => v.title === this.business_step.title) === -1
@@ -498,12 +495,41 @@ export default {
         this.steps.splice(2, 1);
         this.form_components.splice(2, 1);
       }
+
+      // add dti/sec/cda attachment
+      var index = this.form.attachments.findIndex(
+        v => v.doc_type === "dti_sec_cda"
+      );
+      console.log("index :", index);
+      console.log("test :", !this.form.purpose.includes("bp") && index > -1);
+      if (this.form.purpose.includes("bp") && index === -1) {
+        this.form.attachments.push({
+          doc_type: "dti_sec_cda",
+          files: []
+        });
+      } else if (!this.form.purpose.includes("bp") && index > -1) {
+        this.form.attachments.splice(index, 1);
+      }
     },
     init() {
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
+
+      this.$store
+        .dispatch("GET_FEES_COMPUTATION", {
+          permit_type: this.$store.state.permits.filing_permit._id,
+          app_type: 0
+        })
+        .then(result => {
+          console.log("GET_FEES_COMPUTATION result.data :", result.data);
+          if (!result.data.errors)
+            this.computation_formula = result.data.computation;
+        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     prev_step() {
       // if (this.current_step == 3) {
@@ -520,7 +546,7 @@ export default {
 
       // comment to validate
       var { errors, jump_to } = this.validation(validate_all);
-
+      window.scrollTo(0, 0);
       // comment to  bypass
       // var errors = [],
       //   jump_to = 0;
@@ -530,7 +556,7 @@ export default {
 
       // if there is error and validate all then jump to the step
       if (errors.length && validate_all) {
-        this.current_step = jump_to;
+        if (jump_to !== null) this.current_step = jump_to;
         window.scrollTo(0, 0);
       }
 
@@ -591,7 +617,8 @@ export default {
         "before saving this.form.attachments :",
         this.form.attachments
       );
-      var transaction_no = "", reference_no = "";
+      var transaction_no = "",
+        reference_no = "";
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -617,11 +644,11 @@ export default {
             date: result.payment.date_created,
             payor: this.getPayorName(result.payment),
             payment_breakdown: result.payment.payment_breakdown
-          }
+          };
           return this.$upload(payment_details, "RECEIPT");
         })
         .then(blob => {
-          console.log('blob :', blob);
+          console.log("blob :", blob);
           if (blob) {
             var file = new File(
               [blob],
@@ -642,7 +669,7 @@ export default {
         })
         .then(result => {
           console.log("Payment receipt result :", result);
-          
+
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
@@ -708,7 +735,7 @@ export default {
     // validation
     validation(validate_all) {
       var errors = [],
-        jump_to = 0;
+        jump_to = null;
       if (validate_all || this.current_step === 1) {
         if (!this.form.personal_details.name.last) {
           errors.push({
@@ -722,9 +749,9 @@ export default {
             error: "First Name is a required field."
           });
         }
-        if (!this.form.personal_details.birthday) {
+        if (!this.form.personal_details.birthdate) {
           errors.push({
-            field: "personal_details.birthday",
+            field: "personal_details.birthdate",
             error: "Date of Birth is a required field."
           });
         }
@@ -752,24 +779,7 @@ export default {
             error: "CTC is a required field."
           });
         }
-        // if (!this.form.personal_details.telno) {
-        //   errors.push({
-        //     field: "personal_details.telno",
-        //     error: "Tel No is a required field."
-        //   });
-        // }
-        // if (!this.form.personal_details.mobile) {
-        //   errors.push({
-        //     field: "personal_details.mobile",
-        //     error: "Mobile No is a required field."
-        //   });
-        // }
-        // if (!this.form.personal_details.email) {
-        //   errors.push({
-        //     field: "personal_details.email",
-        //     error: "Email Address is a required field."
-        //   });
-        // }
+
         if (this.form.purpose.includes("pc")) {
           if (!this.form.residential_address.region) {
             errors.push({
@@ -804,7 +814,7 @@ export default {
         }
 
         // if (
-        //   this.checkDocsNeeded(["residence"]) ||
+        //   this.checkDocsNeeded(["cedula"]) ||
         //   !this.form.required_documents.civil_status
         // ) {
         //   errors.push({
@@ -814,7 +824,7 @@ export default {
         // }
 
         // if (
-        //   this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+        //   this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
         //   !this.form.required_documents.birthplace
         // ) {
         //   errors.push({
@@ -835,6 +845,18 @@ export default {
         //     error: "Business Type is a required field."
         //   });
         // }
+        if (!this.form.business_details.business_owner_name.last) {
+          errors.push({
+            field: "owner_details.name.last",
+            error: "Business Owner Last Name is a required field."
+          });
+        }
+        if (!this.form.business_details.business_owner_name.first) {
+          errors.push({
+            field: "owner_details.name.first",
+            error: "Business Owner First Name is required field"
+          });
+        }
         if (!this.form.business_details.business_name) {
           errors.push({
             field: "business_details.business_name",
@@ -871,62 +893,6 @@ export default {
             field: "business_address.postal_code",
             error: "Postal Code is a required field."
           });
-        }
-        if (this.form.business_details.is_rented) {
-          if (!this.form.business_address.rental) {
-            errors.push({
-              field: "business_address.rental",
-              error: "Monthly Rental is a required field."
-            });
-          }
-          if (!this.form.business_address.lessor_name) {
-            errors.push({
-              field: "business_address.lessor_name",
-              error: "Lessor Name is a required field."
-            });
-          }
-          if (!this.form.business_address.contact_no) {
-            errors.push({
-              field: "business_address.contact_no",
-              error: "Contact No is a required field."
-            });
-          }
-          if (!this.form.business_address.email) {
-            errors.push({
-              field: "business_address.email",
-              error: "Email Address is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.region) {
-            errors.push({
-              field: "business_address.rental_address.region",
-              error: "Region is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.province) {
-            errors.push({
-              field: "business_address.rental_address.province",
-              error: "Province is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.barangay) {
-            errors.push({
-              field: "business_address.rental_address.barangay",
-              error: "Barangay is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.city) {
-            errors.push({
-              field: "business_address.rental_address.city",
-              error: "City/Municipality is a required field."
-            });
-          }
-          if (!this.form.business_address.rental_address.postal_code) {
-            errors.push({
-              field: "business_address.rental_address.postal_code",
-              error: "Postal Code is a required field."
-            });
-          }
         }
         if (errors.length) jump_to = 2;
       }
@@ -969,11 +935,13 @@ export default {
       }
       return { errors, jump_to };
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     }
   }
@@ -1029,5 +997,11 @@ export default {
 .fill-up-form .ant-input,
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
+}
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
 }
 </style>

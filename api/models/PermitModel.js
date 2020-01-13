@@ -6,24 +6,29 @@ var PermitModelSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    keyword: {
+        type: String
+    },
     approvers: [],
     checklists: [{
         department: String,
         name: String,
         description: String
     }],
-    requirements: [{
-        name: String,
-        keyword: String,
-        required: {
-            type: Boolean,
-            default: false
-        },
-        amount: {
-            type: Number
-        },
-        application_type: String
-    }],
+    requirements: [
+        // {
+        //     name: String,
+        //     keyword: String,
+        //     required: {
+        //         type: Boolean,
+        //         default: false
+        //     },
+        //     amount: {
+        //         type: Number
+        //     },
+        //     application_type: String
+        // }
+    ],
     primary: {
         type: Boolean,
         default: false

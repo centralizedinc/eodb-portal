@@ -1,9 +1,9 @@
 <template>
   <div>
     <loading-content v-if="fetching_data" />
-    <a-row type="flex" v-else justify="space-between">
+    <a-row type="flex" v-else justify="spa">
       <!-- Steps -->
-      <a-col :xs="{ span: 0 }" :md="{ span: 5 }" style="background: white;">
+      <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
         <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
           <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -19,11 +19,18 @@
       </a-col>
 
       <!-- Fill up form -->
-      <a-col :xs="{ span: 24 }" :md="{ span: 18 }" class="fill-up-form">
-        <h1 style="margin-top: 5vh;">Business Permit Application</h1>
+      <a-col
+        style="padding: 10px"
+        :xs="{ span: 24 }"
+        :md="{ span: 16 }"
+        :lg="{span: 18}"
+        class="fill-up-form"
+      >
+        <h1 style="margin-top: 20px;">Business Permit Application</h1>
         <h4>This information will help us assess your application.</h4>
+
         <a-row type="flex" justify="space-between">
-          <a-col :xs="{ span: 24 }" :md="{ span: 16 }">
+          <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 17}">
             <component
               :is="form_components[current_step]"
               :form="form"
@@ -36,9 +43,11 @@
               @updateGross="updateGross"
               @updateCapital="updateCapital"
               @updateDocsPayment="updateDocsPayment"
+              :checkSelectedDocs="checkSelectedDocs"
             />
           </a-col>
-          <a-col :xs="{ span: 24 }" :md="{ span: 7 }">
+
+          <a-col :xs="{ span: 24 }" :md="{ span:  24}" :lg="{ span: 7 }">
             <a-affix :offsetTop="60">
               <!-- Attachments -->
               <a-card
@@ -76,7 +85,7 @@
                     <div style="text-align: center;">
                       <a-icon
                         v-if="text===2"
-                        type="check-circle"
+                        type="file-done"
                         style="color: green; font-weight: bold;"
                       />
                       <a-icon
@@ -84,7 +93,7 @@
                         type="loading"
                         style="color: green; font-weight: bold;"
                       />
-                      <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                      <a-icon v-else type="exception" style="color: red; font-weight: bold;" />
                     </div>
                   </template>
                   <template slot="action" slot-scope="text, record">
@@ -328,7 +337,8 @@ export default {
           contact_no: "",
           email: ""
         },
-        attachments: []
+        attachments: [],
+        lack_documents: []
       },
       document_columns: [
         {
@@ -358,7 +368,7 @@ export default {
         {
           title: "Residence Certificate",
           status: 0,
-          keyword: "residence"
+          keyword: "cedula"
         },
         {
           title: "Barangay Clearance",
@@ -375,7 +385,7 @@ export default {
         {
           title: "Document Checklist",
           description:
-            "Check all the documents you have and apply for lacking requirements instantly within this app."
+            "Upload all the documents you have and apply for lacking requirements instantly within this app."
         },
         {
           title: "Business Owner Information",
@@ -437,56 +447,20 @@ export default {
       fetching_data: false,
       installment: null,
       departments: [],
-      computation_formula: ""
+      computation_formula: "",
+      checkSelectedDocs: false
     };
   },
   created() {
     this.init();
   },
-  mounted() {
-    console.log(
-      "this.$store.state.permits.filing_permit :",
-      this.$store.state.permits.filing_permit
-    );
-
-    // GET DEPARTMENTS
-    const departments = this.deepCopy(
-      this.$store.state.permits.filing_permit.approvers
-    );
-    console.log("departments :", departments);
-    this.departments = departments;
-    this.form.permit_code = this.$store.state.permits.filing_permit._id;
-
-    // GET REQUIREMENTS
-    const requirements = this.deepCopy(
-      this.$store.state.permits.filing_permit.requirements
-    );
-    console.log("requirements :", requirements);
-    const doc_req = requirements.map(v => {
-      return {
-        title: v.name,
-        status: 0,
-        keyword: v.keyword,
-        hidden: v.required
-      };
-    });
-
-    doc_req.forEach(v => {
-      if (v.hidden)
-        this.form.attachments.push({
-          doc_type: v.keyword,
-          files: []
-        });
-    });
-    console.log("this.form :", this.form);
-    this.document_data_source = doc_req;
-
-    // To check payments needs to be pay
-    this.updateDocsPayment();
-  },
   watch: {
     current_step() {
-      console.log("this.form step :", this.form);
+      console.log("this.form step :", this.current_step);
+      if (this.current_step === 0) {
+        this.checkSelectedDocs = !this.checkSelectedDocs;
+        console.log("this.checkSelectedDocs :", this.checkSelectedDocs);
+      }
     }
   },
   computed: {
@@ -512,6 +486,18 @@ export default {
   },
   methods: {
     init() {
+      console.log(
+        "this.$store.state.permits.filing_permit :",
+        this.$store.state.permits.filing_permit
+      );
+
+      // GET DEPARTMENTS
+      const departments = this.deepCopy(
+        this.$store.state.permits.filing_permit.approvers
+      );
+      console.log("departments :", departments);
+      this.departments = departments;
+
       const { mode, ref_no } = this.$route.query;
       console.log("this.$route.query :", this.$route.query);
       if (mode && mode === "renewal" && ref_no) {
@@ -532,6 +518,10 @@ export default {
             this.form = app;
             this.mapFormForRenewal();
             this.fetching_data = false;
+
+            // To check payments needs to be pay
+            this.checkSelectedDocs = !this.checkSelectedDocs;
+            // this.updateDocsPayment();
           })
           .catch(err => {
             console.log("GET_FEES_COMPUTATION err :", err);
@@ -550,6 +540,36 @@ export default {
             console.log("GET_FEES_COMPUTATION result.data :", result.data);
             if (!result.data.errors)
               this.computation_formula = result.data.computation;
+
+            this.form.permit_code = this.$store.state.permits.filing_permit._id;
+
+            // GET REQUIREMENTS
+            const requirements = this.deepCopy(
+              this.$store.state.permits.filing_permit.requirements
+            );
+            console.log("requirements :", requirements);
+            const doc_req = requirements.map(v => {
+              return {
+                title: v.name,
+                status: 0,
+                keyword: v.keyword,
+                hidden: v.required
+              };
+            });
+
+            doc_req.forEach(v => {
+              // if (v.hidden)
+              this.form.attachments.push({
+                doc_type: v.keyword,
+                files: []
+              });
+            });
+            console.log("this.form :", this.form);
+            this.document_data_source = doc_req;
+
+            // To check payments needs to be pay
+            this.checkSelectedDocs = !this.checkSelectedDocs;
+            // this.updateDocsPayment();
           })
           .catch(err => {
             console.log("GET_FEES_COMPUTATION err :", err);
@@ -855,7 +875,7 @@ export default {
         }
 
         if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
           !this.form.owner_details.civil_status
         ) {
           errors.push({
@@ -865,7 +885,7 @@ export default {
         }
 
         if (
-          this.checkDocsNeeded(["residence", "barangay", "police"]) &&
+          this.checkDocsNeeded(["cedula", "barangay", "police"]) &&
           !this.form.owner_details.birthplace
         ) {
           errors.push({
@@ -994,6 +1014,17 @@ export default {
               error: "Email Address is a required field."
             });
           }
+          if (
+            this.form.business_address.email &&
+            !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              this.form.business_address.email
+            )
+          ) {
+            errors.push({
+              field: "business_address.email",
+              error: "Enter valid Email Address."
+            });
+          }
           if (!this.form.business_address.rental_address.region) {
             errors.push({
               field: "business_address.rental_address.region",
@@ -1072,6 +1103,7 @@ export default {
 
       // Map Attachments
       this.form.attachments.forEach(attachment => {
+        attachment.files = attachment.files.map(v => v.url);
         const index = this.document_data_source.findIndex(
           v => v.keyword === attachment.doc_type
         );
@@ -1094,12 +1126,12 @@ export default {
       );
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
-        // computed_amount = parseFloat(amount) / 100 / 20;
-        var computation_function = this.computation_formula.replace(
-          /{#amount}/g,
-          parseFloat(amount)
-        );
-        computed_amount = eval(computation_function);
+        try {
+          computed_amount = eval(this.computation_formula);
+        } catch (error) {
+          console.log("error :", error);
+          computed_amount = 0;
+        }
       }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
@@ -1115,17 +1147,12 @@ export default {
       );
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
-        // if (parseFloat(amount) >= 1000000)
-        //   computed_amount = (parseFloat(amount) - 1000000) * 0.01 + 8000;
-        // else if (parseFloat(amount) > 400000)
-        //   computed_amount = (parseFloat(amount) - 400000) * 0.015 + 8000;
-        // else computed_amount = parseFloat(amount) * 0.02;
-
-        var computation_function = this.computation_formula.replace(
-          /{#amount}/g,
-          parseFloat(amount)
-        );
-        computed_amount = eval(computation_function);
+        try {
+          computed_amount = eval(this.computation_formula);
+        } catch (error) {
+          console.log("error :", error);
+          computed_amount = 0;
+        }
       }
       console.log("computed_amount :", computed_amount);
       this.payments_data_source[index].amount = computed_amount;
@@ -1136,6 +1163,8 @@ export default {
       this.payments_data_source[fire_index].amount = computed_amount * 0.15;
     },
     updateDocsPayment(values) {
+      console.log("values :", values);
+      this.form.lack_documents = values;
       const payments = [
         {
           description: "Business Permit Fee",
@@ -1160,7 +1189,7 @@ export default {
       console.log("data :", data);
       data.forEach(dt => {
         var is_included = values ? values.includes(dt.keyword) : false;
-        if (!is_included)
+        if (is_included)
           payments.push({
             description: dt.name,
             fee_type: dt.fee_type,
@@ -1231,5 +1260,11 @@ export default {
 .fill-up-form .ant-input,
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
+}
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
 }
 </style>

@@ -31,6 +31,7 @@
             :loading="loading"
             :errors="errors"
             :documents="document_data_source"
+            :computation_formula="computation_formula"
           />
         </a-col>
         <!-- Attachments -->
@@ -78,7 +79,7 @@
                       type="loading"
                       style="color: green; font-weight: bold;"
                     />
-                    <a-icon v-else type="close" style="color: red; font-weight: bold;" />
+                    <a-icon v-else type="close-circle" style="color: red; font-weight: bold;" />
                   </div>
                 </template>
                 <template slot="action" slot-scope="text, record">
@@ -124,7 +125,7 @@
               :bodyStyle="{ padding: '1vh' }"
               class="document-card"
             >
-              <a-row type="flex" align="middle" justify="space-between">
+              <!-- <a-row type="flex" align="middle" justify="space-between">
                 <a-col :span="11">
                   <span style="font-weight: bold;">Mode of Payment</span>
                 </a-col>
@@ -144,7 +145,7 @@
                     style="color: red"
                   >{{ checkErrors("mode_of_payment") }}</span>
                 </a-col>
-              </a-row>
+              </a-row>-->
 
               <a-row type="flex" align="middle">
                 <a-col style="font-weight: bold;" :span="24">Payment Breakdown</a-col>
@@ -183,7 +184,7 @@
       :show="show_payment"
       @pay="proceedToSubmit"
       @close="show_payment = false"
-      :payment_amount="installment ? installment.amount : total_payable"
+      :payment_amount="total_payable"
     />
   </a-row>
 </template>
@@ -214,10 +215,10 @@ export default {
             last: "",
             suffix: ""
           },
-          birthday: "",
+          birthdate: "",
           birthplace: "",
           other_country: "",
-          icr: null,
+          icr_no: null,
           gender: "",
           civil_status: "",
           height: null,
@@ -290,7 +291,7 @@ export default {
       //   {
       //     title: "Residence Certificate",
       //     status: 0,
-      //     keyword: "residence"
+      //     keyword: "cedula"
       //   },
       //   {
       //     title: "Barangay Clearance",
@@ -324,38 +325,7 @@ export default {
         total_payable: 0,
         amount_payable: 0,
         amount_paid: 0,
-        payment_breakdown: [
-          {
-            description: "CTC or Cedula",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Barangay Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Police Clearance",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Business Permit Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Fire Safety and Inspection Fee",
-            fee_type: "local_taxes",
-            amount: 1000
-          },
-          {
-            description: "Convenience Fee",
-            fee_type: "application_fee",
-            amount: 1000
-          }
-        ],
+        payment_breakdown: [],
         status: "unpaid",
         method: "",
         mode_of_payment: "A",
@@ -365,37 +335,19 @@ export default {
       payments_data_source: [
         {
           description: "Application Fee",
-          amount: 1000
+          amount: 0,
+          fee_type: "application_fee"
         },
-        // {
-        //   description: "CTC or Cedula",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Barangay Clearance",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Police Clearance",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Business Permit Fee",
-        //   amount: 1000
-        // },
-        // {
-        //   description: "Fire Safety and Inspection Fee",
-        //   amount: 1000
-        // },
         {
           description: "Convenience Fee",
-          fee_type: "application_fee",
+          fee_type: "convenience_fee",
           amount: 150
         }
       ],
       loading: false,
       errors: [],
-      departments: []
+      departments: [],
+      computation_formula: ""
     };
   },
   created() {
@@ -403,6 +355,7 @@ export default {
   },
   watch: {
     current_step() {
+      window.scrollTo(0, 0);
       console.log("this.form step :", this.form);
     }
   },
@@ -423,8 +376,10 @@ export default {
     },
     total_payable() {
       console.log("total payable data: " + JSON.stringify(this.form.tax));
-      this.payments_data_source[0].amount =
-        this.form.tax.total_amount_paid + 50;
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "application_fee"
+      );
+      this.payments_data_source[index].amount = this.form.tax.total_amount_paid;
       var total = this.payments_data_source
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
@@ -432,6 +387,9 @@ export default {
       this.transaction_details.total_payable = total;
       this.transaction_details.amount_paid = total;
       return total;
+    },
+    user() {
+      return this.$store.state.user_session.user;
     }
   },
   mounted() {
@@ -470,6 +428,20 @@ export default {
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
+
+      this.$store
+        .dispatch("GET_FEES_COMPUTATION", {
+          permit_type: this.$store.state.permits.filing_permit._id,
+          app_type: 0
+        })
+        .then(result => {
+          console.log("GET_FEES_COMPUTATION result.data :", result.data);
+          if (!result.data.errors)
+            this.computation_formula = result.data.computation;
+        })
+        .catch(err => {
+          console.log("err :", err);
+        });
     },
     validateStep(validate_all) {
       console.log("validate_all :", validate_all);
@@ -477,6 +449,7 @@ export default {
       console.log("this.form :", this.form);
 
       var { errors, jump_to } = this.validation(validate_all);
+      window.scrollTo(0, 0);
       // var errors = [],
       //   jump_to = 0;
 
@@ -493,6 +466,7 @@ export default {
       if (!errors.length) {
         if (this.current_step === 1) {
           // this.submit();
+          this.transaction_details.payment_breakdown = this.payments_data_source;
           this.show_payment = true;
           // Proceed to payment
         } else {
@@ -674,9 +648,9 @@ export default {
             error: "First Name is a required field."
           });
         }
-        if (!this.form.personal_details.birthday) {
+        if (!this.form.personal_details.birthdate) {
           errors.push({
-            field: "personal_details.birthday",
+            field: "personal_details.birthdate",
             error: "Date of Birth is a required field."
           });
         }
@@ -693,7 +667,7 @@ export default {
           });
         }
         if (!this.form.tax.taxable.basic) {
-          erros.push({
+          errors.push({
             field: "tax.taxable.basic",
             error: "Basic Community Tax is a required field."
           });
@@ -748,11 +722,13 @@ export default {
       console.log("errors to return: " + JSON.stringify(errors));
       return { errors, jump_to };
     },
-    getPayorName(payment){
-      if(payment.method === 'creditcard') {
+    getPayorName(payment) {
+      if (payment.method === "creditcard") {
         return payment.payment_details.source.name;
       } else {
-        return this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}`: '';
+        return this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
       }
     }
   }
@@ -808,5 +784,11 @@ export default {
 .fill-up-form .ant-input,
 .fill-up-form .ant-form-item-control-wrapper {
   text-transform: uppercase;
+}
+
+.fill-up-form .ant-form-explain {
+  font-size: 10px;
+  text-transform: none;
+  font-weight: bold;
 }
 </style>
