@@ -144,13 +144,11 @@
             </a-radio-group>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }"
-        v-if="checkDocsNeeded(['police'])"
-        >
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.blood_type') ? 'error': ''"
             :help="checkErrors('police_required.blood_type')"
-          >         
+          >
             <span slot="label">
               Blood Type
               <i style="color: red">*</i>
@@ -167,7 +165,7 @@
               <a-select-option value="Unknown">Unknown</a-select-option>
             </a-select>
           </a-form-item>
-        </a-col> 
+        </a-col>
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
@@ -244,20 +242,22 @@
 
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
-          <a-form-item style="font-weight: bold;"
-          :validate-status="checkErrors('police_required.height') ? 'error': ''"
+          <a-form-item
+            style="font-weight: bold;"
+            :validate-status="checkErrors('police_required.height') ? 'error': ''"
             :help="checkErrors('police_required.height')"
           >
-           <span slot="label">
+            <span slot="label">
               Height(cm)
               <i style="color: red">*</i>
             </span>
-           <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
+            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
-          <a-form-item style="font-weight: bold;"
-          :validate-status="checkErrors('police_required.weight') ? 'error': ''"
+          <a-form-item
+            style="font-weight: bold;"
+            :validate-status="checkErrors('police_required.weight') ? 'error': ''"
             :help="checkErrors('police_required.weight')"
           >
             <span slot="label">
@@ -272,7 +272,7 @@
             <a-input v-model="form.owner_details.icr_no" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.complexion') ? 'error': ''"
             :help="checkErrors('personal_details.complexion')"
@@ -292,7 +292,7 @@
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.educational_attainment') ? 'error': ''"
             :help="checkErrors('police_required.educational_attainment')"
@@ -312,7 +312,22 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police', 'barangay'])">
+          <a-form-item
+            :validate-status="checkErrors('brgy_police_required.ctc_no') ? 'error': ''"
+            :help="checkErrors('brgy_police_required.ctc_no')"
+          >
+            <span slot="label">
+              Community Tax Certificate Number
+              <i style="color: red">*</i>
+            </span>
+            <a-input
+              v-model="form.owner_details.ctc_no"
+              placeholder="Found at the upper right corner. (i.e., CCI2### ########)"
+            ></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.occupation') ? 'error': ''"
             :help="checkErrors('police_required.occupation')"
@@ -327,6 +342,75 @@
         </a-col>
       </a-row>
 
+      <!-- Cedula Details -->
+      <a-row
+        type="flex"
+        justify="space-between"
+        style="font-weight: bold;"
+        v-if="checkDocsNeeded(['cedula'])"
+      >
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item
+            :validate-status="
+              checkErrors('owner_details.tax.taxable.basic') ? 'error' : ''
+            "
+            :help="checkErrors('owner_details.tax.taxable.basic')"
+          >
+            <span slot="label">
+              Basic Community Tax
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.owner_details.tax.taxable.basic" @change="computation">
+              <a-select-option value="voluntary">Voluntary</a-select-option>
+              <a-select-option value="exempted">Exempted</a-select-option>
+            </a-select>
+            <!-- <a-input v-model="form.tax.basic"></a-input> -->
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item>
+            <span slot="label">Income from Real Property</span>
+
+            <a-input v-model="form.owner_details.tax.taxable.property_income" @change="computation"></a-input>
+          </a-form-item>
+          <!-- <a-form-item>
+            <span slot="label">Additional Community Tax</span>
+            <a-input v-model="form.tax.taxable.additional" @change="computation"></a-input>
+          </a-form-item>-->
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item>
+            <span slot="label">
+              Gross Receipts or Earnings derived business during the preceding
+              year
+            </span>
+
+            <!-- <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>business during the preceding year</span>
+            </template>-->
+            <a-input v-model="form.owner_details.tax.taxable.business_income" @change="computation"></a-input>
+            <!-- </a-tooltip> -->
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item>
+            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
+            <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>
+                  Salaries or Gross Receipts or Earnings derived exercise of
+                  profession or pursuit of any occupation
+                </span>
+              </template>
+              <a-input
+                v-model="form.owner_details.tax.taxable.profession_income"
+                @change="computation"
+              ></a-input>
+            </a-tooltip>
+          </a-form-item>
+        </a-col>
+      </a-row>
       <!-- Owner Address -->
       <a-divider
         style="color: black;font-weight: bold;margin-top: 5vh"
@@ -516,7 +600,7 @@ import provinces_data from "../../../assets/references/provinces.json";
 import moment from "moment";
 
 export default {
-  props: ["form", "step", "errors", "documents"],
+  props: ["form", "step", "errors", "documents", "computation_formula"],
   data() {
     return {
       regions_data,
@@ -675,6 +759,37 @@ export default {
       }
       if (this.fixed_postal && !mode && !ref_no)
         this.form.owner_address.postal_code = "4324";
+    },
+    computation() {
+      var taxable_basic = this.form.tax.taxable.basic,
+        community_basic = 0,
+        community_business_income = 0,
+        taxable_business_income = this.form.tax.taxable.business_income,
+        community_profession_income = 0,
+        taxable_profession_income = this.form.tax.taxable.profession_income,
+        community_property_income = 0,
+        taxable_property_income = this.form.tax.taxable.property_income,
+        total = 0,
+        interest = 0,
+        total_amount_paid = 0,
+        month = new Date().getMonth();
+
+      try {
+        if (this.computation_formula) eval(this.computation_formula);
+      } catch (error) {
+        console.log("computation_formula ctc :", error);
+      }
+      this.form.owner_details.tax.community.basic = community_basic;
+      this.form.owner_details.tax.community.business_income = community_business_income;
+      this.form.owner_details.tax.community.profession_income = community_profession_income;
+      this.form.owner_details.tax.community.property_income = community_property_income;
+      this.form.owner_details.tax.total = total;
+      this.form.owner_details.tax.interest = interest;
+      this.form.owner_details.tax.total_amount_paid = total_amount_paid;
+
+      console.log(
+        "computation of tax: " + JSON.stringify(this.form.owner_details.tax)
+      );
     }
   }
 };
