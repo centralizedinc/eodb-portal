@@ -48,7 +48,7 @@
           </a-col>
 
           <a-col :xs="{ span: 24 }" :md="{ span:  24}" :lg="{ span: 7 }">
-            <a-affix :offsetTop="60">
+            <a-affix :offsetTop="65">
               <!-- Attachments -->
               <a-card
                 :headStyle="{ 
