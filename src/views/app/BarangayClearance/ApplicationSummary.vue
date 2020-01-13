@@ -72,7 +72,11 @@
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
       >Part II. Business Details</a-divider>
-
+      <a-row>
+        <a-col :span="8">Business Owner Name</a-col>
+        <a-col :span="1">:</a-col>
+        <a-col :span="15" style="text-transform: uppercase">{{form.business_details.business_owner_name.last}}, {{form.business_details.business_owner_name.first}} {{form.business_details.business_owner_name.middle}} {{form.business_details.business_owner_name.suffix}}</a-col>
+      </a-row>
       <a-row class="summary-row">
         <a-col :span="8">Business Name</a-col>
         <a-col :span="1">:</a-col>
