@@ -279,7 +279,27 @@ export default {
           blood_type: "",
           completion: "",
           educational_attainment: "",
-          ctc_no: ""
+          ctc_no: "",
+          tax: {
+            taxable: {
+              basic: "",
+              additional: 0,
+              business_income: 0,
+              profession_income: 0,
+              property_income: 0
+            },
+            community: {
+              basic: 0,
+              additional: 0,
+              business_income: 0,
+              profession_income: 0,
+              property_income: 0
+            },
+
+            total: 0,
+            interest: 0,
+            total_amount_paid: 0
+          }
         },
         owner_address: {
           bldg_no: "",
@@ -888,53 +908,81 @@ export default {
           });
         }
 
-        if(this.checkDocsNeeded(["police"]) && !this.form.owner_details.blood_type){
+        if (
+          this.checkDocsNeeded(["police"]) &&
+          !this.form.owner_details.blood_type
+        ) {
           errors.push({
             field: "police_required.blood_type",
             error: "Blood Type is a required field."
-          })
+          });
         }
 
-        if(this.checkDocsNeeded(["police"]) && !this.form.owner_details.complexion){
+        if (
+          this.checkDocsNeeded(["police"]) &&
+          !this.form.owner_details.complexion
+        ) {
           errors.push({
             field: "police_required.complexion",
             error: "Completion is a required field."
-          })
+          });
         }
 
-        if(this.checkDocsNeeded(["police"]) && !this.form.owner_details.educational_attainment){
+        if (
+          this.checkDocsNeeded(["police"]) &&
+          !this.form.owner_details.educational_attainment
+        ) {
           errors.push({
             field: "police_required.educational_attainment",
             error: "Educational Attainment is a required field."
-          })
+          });
         }
 
-        if(this.checkDocsNeeded(["police"]) && !this.form.owner_details.occupation){
+        if (!this.form.owner_details.tax.taxable.basic) {
+          errors.push({
+            field: "owner_details.tax.taxable.basic",
+            error: "Basic Community Tax is a required field."
+          });
+        }
+
+        if (
+          this.checkDocsNeeded(["police"]) &&
+          !this.form.owner_details.occupation
+        ) {
           errors.push({
             field: "police_required.occupation",
             error: "Occupation is a required field."
-          })
+          });
         }
 
-        if(this.checkDocsNeeded(["police", "barangay"]) && !this.form.owner_details.ctc_no){
+        if (
+          this.checkDocsNeeded(["police", "barangay"]) &&
+          !this.form.owner_details.ctc_no
+        ) {
           errors.push({
             field: "brgy_police_required.ctc_no",
             error: "Community Tax Certificate is required field."
-          })
+          });
         }
 
-        if(this.checkDocsNeeded(["police"]) && !this.form.owner_details.height){
+        if (
+          this.checkDocsNeeded(["police"]) &&
+          !this.form.owner_details.height
+        ) {
           errors.push({
             field: "police_required.height",
             error: "Height is a required field."
-          })
+          });
         }
 
-        if(this.checkDocsNeeded(["police"]) && !this.form.owner_details.weight){
+        if (
+          this.checkDocsNeeded(["police"]) &&
+          !this.form.owner_details.weight
+        ) {
           errors.push({
             field: "police_required.weight",
             error: "Weight is a required field."
-          })
+          });
         }
 
         if (

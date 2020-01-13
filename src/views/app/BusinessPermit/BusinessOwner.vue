@@ -272,7 +272,7 @@
             <a-input v-model="form.owner_details.icr_no" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.complexion') ? 'error': ''"
             :help="checkErrors('personal_details.complexion')"
@@ -292,7 +292,7 @@
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.educational_attainment') ? 'error': ''"
             :help="checkErrors('police_required.educational_attainment')"
@@ -312,7 +312,22 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police', 'barangay'])">
+          <a-form-item
+            :validate-status="checkErrors('brgy_police_required.ctc_no') ? 'error': ''"
+            :help="checkErrors('brgy_police_required.ctc_no')"
+          >
+            <span slot="label">
+              Community Tax Certificate Number
+              <i style="color: red">*</i>
+            </span>
+            <a-input
+              v-model="form.owner_details.ctc_no"
+              placeholder="Found at the upper right corner. (i.e., CCI2### ########)"
+            ></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.occupation') ? 'error': ''"
             :help="checkErrors('police_required.occupation')"
@@ -327,6 +342,69 @@
         </a-col>
       </a-row>
 
+      <!-- Cedula Details -->
+      <a-row type="flex" justify="space-between" style="font-weight: bold;" v-if="checkDocsNeeded(['cedula'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item
+            :validate-status="
+              checkErrors('owner_details.tax.taxable.basic') ? 'error' : ''
+            "
+            :help="checkErrors('owner_details.tax.taxable.basic')"
+          >
+            <span slot="label">
+              Basic Community Tax
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.owner_details.tax.taxable.basic" @change="computation">
+              <a-select-option value="voluntary">Voluntary</a-select-option>
+              <a-select-option value="exempted">Exempted</a-select-option>
+            </a-select>
+            <!-- <a-input v-model="form.tax.basic"></a-input> -->
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item>
+            <span slot="label">Income from Real Property</span>
+
+            <a-input v-model="form.owner_details.tax.taxable.property_income" @change="computation"></a-input>
+          </a-form-item>
+          <!-- <a-form-item>
+            <span slot="label">Additional Community Tax</span>
+            <a-input v-model="form.tax.taxable.additional" @change="computation"></a-input>
+          </a-form-item>-->
+        </a-col>
+      </a-row>
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item>
+            <span slot="label">
+              Gross Receipts or Earnings derived business during the preceding
+              year
+            </span>
+
+            <!-- <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>business during the preceding year</span>
+            </template>-->
+            <a-input v-model="form.owner_details.tax.taxable.business_income" @change="computation"></a-input>
+            <!-- </a-tooltip> -->
+          </a-form-item>
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
+          <a-form-item>
+            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
+            <a-tooltip placement="bottom">
+              <template slot="title">
+                <span>
+                  Salaries or Gross Receipts or Earnings derived exercise of
+                  profession or pursuit of any occupation
+                </span>
+              </template>
+              <a-input v-model="form.owner_details.tax.taxable.profession_income" @change="computation"></a-input>
+            </a-tooltip>
+          </a-form-item>
+        </a-col>
+      </a-row>
       <!-- Owner Address -->
       <a-divider
         style="color: black;font-weight: bold;margin-top: 5vh"
