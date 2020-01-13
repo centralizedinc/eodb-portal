@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading-content v-if="fetching_data" />
-    <a-row type="flex" v-else justify="spa">
+    <a-row type="flex" v-else justify="space-between">
       <!-- Steps -->
       <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
@@ -44,11 +44,13 @@
               @updateCapital="updateCapital"
               @updateDocsPayment="updateDocsPayment"
               :checkSelectedDocs="checkSelectedDocs"
+              :computation_formulas="computation_formulas"
+              @updateCedulaPayment="updateCedulaPayment"
             />
           </a-col>
 
           <a-col :xs="{ span: 24 }" :md="{ span:  24}" :lg="{ span: 7 }">
-            <a-affix :offsetTop="60">
+            <a-affix :offsetTop="65">
               <!-- Attachments -->
               <a-card
                 :headStyle="{ 
@@ -279,7 +281,27 @@ export default {
           blood_type: "",
           completion: "",
           educational_attainment: "",
-          ctc_no: ""
+          ctc_no: "",
+          tax: {
+            taxable: {
+              basic: "",
+              additional: 0,
+              business_income: 0,
+              profession_income: 0,
+              property_income: 0
+            },
+            community: {
+              basic: 0,
+              additional: 0,
+              business_income: 0,
+              profession_income: 0,
+              property_income: 0
+            },
+
+            total: 0,
+            interest: 0,
+            total_amount_paid: 0
+          }
         },
         owner_address: {
           bldg_no: "",
@@ -490,6 +512,13 @@ export default {
     }
   },
   methods: {
+    updateCedulaPayment(){
+      const index = this.payments_data_source.findIndex(v=>v.fee_type==='cedula');
+      console.log('this.form.owner_details.tax :', this.form.owner_details.tax);
+      if(index > -1) {
+        this.payments_data_source[index].amount = this.form.owner_details.tax.total_amount_paid;
+      }
+    },
     getComputation(permit_code) {
       if (
         this.computation_formulas &&
@@ -940,6 +969,13 @@ export default {
           });
         }
 
+        if (this.checkDocsNeeded(["cedula"]) && !this.form.owner_details.tax.taxable.basic) {
+          errors.push({
+            field: "owner_details.tax.taxable.basic",
+            error: "Basic Community Tax is a required field."
+          });
+        }
+
         if (
           this.checkDocsNeeded(["police"]) &&
           !this.form.owner_details.occupation
@@ -1246,6 +1282,9 @@ export default {
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
         try {
+          console.log('#####');
+          console.log(this.$store.state.permits.filing_permit._id);
+          console.log(this.getComputation(this.$store.state.permits.filing_permit._id));
           computed_amount = eval(
             this.getComputation(this.$store.state.permits.filing_permit._id)
           );
@@ -1306,7 +1345,7 @@ export default {
           amount: 3000
         }
       ];
-      const data = this.deepCopy(
+      var data = this.deepCopy(
         this.$store.state.permits.filing_permit.requirements
       ).filter(v => !v.required);
       console.log("data :", data);
@@ -1318,6 +1357,7 @@ export default {
 
           try {
             if (dt.keyword === "cedula") {
+              dt.fee_type = 'cedula';
               var taxable_basic = 0,
                 community_basic = 0,
                 community_business_income = 0,
@@ -1332,17 +1372,17 @@ export default {
                 month = new Date().getMonth();
 
               try {
-                if (this.computation_formula) eval(this.computation_formula);
+                eval(this.getComputation(dt._id));
               } catch (error) {
                 console.log("computation_formula ctc :", error);
               }
-              // this.form.tax.community.basic = community_basic;
-              // this.form.tax.community.business_income = community_business_income;
-              // this.form.tax.community.profession_income = community_profession_income;
-              // this.form.tax.community.property_income = community_property_income;
-              // this.form.tax.total = total;
-              // this.form.tax.interest = interest;
-              // this.form.tax.total_amount_paid = total_amount_paid;
+              this.form.owner_details.tax.community.basic = community_basic;
+              this.form.owner_details.tax.community.business_income = community_business_income;
+              this.form.owner_details.tax.community.profession_income = community_profession_income;
+              this.form.owner_details.tax.community.property_income = community_property_income;
+              this.form.owner_details.tax.total = total;
+              this.form.owner_details.tax.interest = interest;
+              this.form.owner_details.tax.total_amount_paid = total_amount_paid;
               amount = total_amount_paid;
             } else amount = this.getComputation(dt._id);
           } catch (error) {}

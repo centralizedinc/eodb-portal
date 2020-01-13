@@ -309,6 +309,7 @@ function processApprovedApplication(reference_no) {
                 }
             })
             .then(result => {
+                results.other_permits = result;
                 resolve(results)
             })
             .catch((err) => {
@@ -377,10 +378,10 @@ function createOtherPermit(type, application) {
             },
             business_address: application.details.business_address,
             business_details: {
-                business_name: business_details.business_name,
+                business_name: application.details.business_details.business_name,
                 business_owner: `${application.details.owner_details.name.first} ${application.details.owner_details.name.last} ${(", " + application.details.owner_details.name.suffix) || ""}`,
-                business_type: business_details.business_owner,
-                franchise: business_details.franchise
+                business_type: application.details.business_details.business_owner,
+                franchise: application.details.business_details.franchise
             }
         }
         return BarangayPermitDao.create(application_details);
@@ -403,20 +404,20 @@ function createOtherPermit(type, application) {
                 tin: application.details.owner_details.tin
             },
             tax: {
-                total: application.details.tax.total,
-                interest: application.details.tax.interest,
-                total_amount_paid: application.details.tax.total_amount_paid,
+                total: application.details.owner_details.tax.total,
+                interest: application.details.owner_details.tax.interest,
+                total_amount_paid: application.details.owner_details.tax.total_amount_paid,
                 taxable: {
-                    basic: application.details.tax.taxable.basic,
-                    business_income: application.details.tax.taxable.business_income,
-                    profession_income: application.details.tax.taxable.profession_income,
-                    property_income: application.details.tax.taxable.property_income,
+                    basic: application.details.owner_details.tax.taxable.basic,
+                    business_income: application.details.owner_details.tax.taxable.business_income,
+                    profession_income: application.details.owner_details.tax.taxable.profession_income,
+                    property_income: application.details.owner_details.tax.taxable.property_income,
                 },
                 community: {
-                    basic: application.details.tax.community.basic,
-                    business_income: application.details.tax.community.business_income,
-                    profession_income: application.details.tax.community.profession_income,
-                    property_income: application.details.tax.community.property_income,
+                    basic: application.details.owner_details.tax.community.basic,
+                    business_income: application.details.owner_details.tax.community.business_income,
+                    profession_income: application.details.owner_details.tax.community.profession_income,
+                    property_income: application.details.owner_details.tax.community.property_income,
                 }
             }
         }
