@@ -378,8 +378,6 @@
             <a-input v-model="form.tax.taxable.additional" @change="computation"></a-input>
           </a-form-item>-->
         </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
             <span slot="label">

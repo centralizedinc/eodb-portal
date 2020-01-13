@@ -1,7 +1,7 @@
 <template>
   <div>
     <loading-content v-if="fetching_data" />
-    <a-row type="flex" v-else justify="spa">
+    <a-row type="flex" v-else justify="space-between">
       <!-- Steps -->
       <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
@@ -49,7 +49,7 @@
           </a-col>
 
           <a-col :xs="{ span: 24 }" :md="{ span:  24}" :lg="{ span: 7 }">
-            <a-affix :offsetTop="60">
+            <a-affix :offsetTop="65">
               <!-- Attachments -->
               <a-card
                 :headStyle="{ 

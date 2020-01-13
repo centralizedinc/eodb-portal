@@ -257,9 +257,7 @@ export default {
       measure_or_pax_columns: [
         {
           title: "Number of Unit",
-          dataIndex: "unit",
-          fixed: "left",
-          width: 100
+          dataIndex: "unit"
         },
         {
           title: "Capacity",
@@ -277,7 +275,9 @@ export default {
         {
           title: "Action",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" }
+          scopedSlots: { customRender: "action" },
+          fixed: "right",
+          width: 100
         }
       ],
       new_measure_or_pax: {

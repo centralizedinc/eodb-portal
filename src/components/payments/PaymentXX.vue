@@ -126,7 +126,7 @@ export default {
         this.is_valid_expiry &&
         this.is_valid_cvc
       ) {
-        $emit("pay", { payment_details, method: current_option.toLowerCase() });
+        this.$emit("pay", { payment_details: this.payment_details, method: this.current_option.toLowerCase() });
       }
     }
   }
