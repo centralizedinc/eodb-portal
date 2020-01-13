@@ -8,7 +8,7 @@
     <a-form>
       <a-row>
         <a-col :span="24">
-          <a-form-item label="What is the purpose of getting this certificate?">
+          <a-form-item label="What type of clearance are you getting?">
             <a-checkbox-group v-model="form.purpose" @change="onChange">
               <a-row>
                 <a-col :span="24" v-for="(item, index) in plainOptions" :key="index">
@@ -32,7 +32,7 @@
         </a-col>
         <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
           <a-button>Save Draft</a-button>
-        </a-col> -->
+        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
@@ -49,8 +49,8 @@ export default {
       check_pc: false,
       check_bp: false,
       plainOptions: [
-        { label: "Police Clearance", value: "pc" },
-        { label: "Business Permit", value: "bp" }
+        { label: "Barangay Clearance", value: "pc" },
+        { label: "Business Clearance", value: "bp" }
       ]
     };
   },
