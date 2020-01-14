@@ -107,7 +107,7 @@ function getContent(details) {
                         {
             table: {
                 heights: [7],
-                widths: [170,40,90],
+                widths: [170,48,83],
                 
                 body: [
                     [
@@ -116,7 +116,7 @@ function getContent(details) {
             
                         
                             text: "COMMUNITY TAX CERTIFICATE ",
-                            fontSize: 7,
+                            fontSize: 9,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
@@ -128,7 +128,7 @@ function getContent(details) {
             
                         
                             text: "INDIVIDUAL ",
-                            fontSize: 6,
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
@@ -139,7 +139,7 @@ function getContent(details) {
         {
             
                             text: "CCI2017 06218601 ",
-                            fontSize: 6,
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
@@ -437,18 +437,18 @@ function getContent(details) {
                 
 {
     text: " Blk 17 Lot 10 Jones Village San Antonio Quezon ",
-    fontSize: 5,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [8, 0, 0, 0]
+    margin: [0, 0, 0, 0]
 
 },
 {
     ///////////------Male    
     text: " X ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -459,7 +459,7 @@ function getContent(details) {
 {
     ///////////-------Female    
     text: "  ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -494,7 +494,7 @@ function getContent(details) {
                 
 {
     text: " ADDRESS ",
-    fontSize: 4,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
@@ -504,19 +504,19 @@ function getContent(details) {
 },
 {
         
-    text: "SEX:       MALE",
-    fontSize: 4,
+    text: "SEX:  MALE",
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [4, -3, 0, 0]
+    margin: [2, -3, 0, 0]
 },
 
 {
         
     text: "FEMALE",
-    fontSize: 4,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -554,7 +554,7 @@ function getContent(details) {
                 
 {
     text: " FILIPINO ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -565,7 +565,7 @@ function getContent(details) {
 {
     
     text: " 111111111 ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -576,18 +576,18 @@ function getContent(details) {
 {
       
     text: " SAN ANTONIO QUEZON ",
-    fontSize: 5,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
-    alignment: 'center',
+    alignment: 'left',
     // right,down,left,up
-    margin: [1, 0, 0, 0]
+    margin: [0, 0, 0, 0]
 },
 
 {
     
     text: " 5,7  ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -598,7 +598,7 @@ function getContent(details) {
 {
     
     text: " 70 KGS  ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -635,29 +635,29 @@ function getContent(details) {
                 
 {
     text: " CITIZENSHIP ",
-    fontSize: 4,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [125, -3, 0, 0]
+    margin: [110, -3, 0, 0]
 
 },
 {
     
     text: " ICR NO (IF AN ALIEN) ",
-    fontSize: 4,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
-    alignment: 'center',
+    alignment: 'left',
     // right,down,left,up
-    margin: [8, -3, 0, 0]
+    margin: [2, -3, 0, 0]
 },
 
 {
       
     text: "PLACE OF BIRTH",
-    fontSize: 4,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -668,7 +668,7 @@ function getContent(details) {
 {
     
     text: "        HEIGHT  ",
-    fontSize: 4,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -678,13 +678,13 @@ function getContent(details) {
 
 {
     
-    text: "       WEIGHT  ",
-    fontSize: 4,
+    text: " WEIGHT  ",
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
-    alignment: 'center',
+    alignment: 'left',
     // right,down,left,up
-    margin: [8, -3, 0, 0]
+    margin: [10, -3, 0, 0]
 }
 
 ]
@@ -720,7 +720,7 @@ function getContent(details) {
 {
     ///////-----single
     text: "  ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -742,7 +742,7 @@ function getContent(details) {
 {
     /////////------married  
     text: " X ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -764,7 +764,7 @@ function getContent(details) {
 {
     ////////------widow
     text: "  ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -786,7 +786,7 @@ function getContent(details) {
 {
      ///////////----divorce 
     text: "  ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -808,7 +808,7 @@ function getContent(details) {
 {
     
     text: " SEPTEMBER 04 1985 ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -847,56 +847,56 @@ function getContent(details) {
                 
 {
     text: "CIVIL STATUS: SINGLE ",
-    fontSize: 4,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [99, -3, 0, 0]
+    margin: [98, -3, 0, 0]
 
 },
 {
     
     text: " MARRIED ",
-    fontSize: 4,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [14, -3, 0, 0]
+    margin: [4, -3, 0, 0]
 },
 
 {
       
     text: " WIDOW/ WIDOWER/ LEGALLY SEPARATED ",
-    fontSize: 4,
+    fontSize: 7,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [0, -3, 0, 0]
+    margin: [5, -3, 0, 0]
 },
 
 {
     
     text: " DIVORCED  ",
-    fontSize: 4,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [15, -3, 0, 0]
+    margin: [5, -3, 0, 0]
 },
 
 {
     
     text: " DATE OF BIRTH  ",
-    fontSize: 4,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
     // right,down,left,up
-    margin: [14, -3, 0, 0]
+    margin: [2, -3, 0, 0]
 }
 
 ]
@@ -948,7 +948,7 @@ function getContent(details) {
     
                 
                     text: "PROFESSION / OCCUPATION / BUSINESS ",
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'left',
@@ -964,7 +964,7 @@ function getContent(details) {
 },
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////-------------MAIN--------
+/////////////////////////////////////////////////////////////////////////////////////////////////-------------__MAIN___--------
 
 {
     layout: "noBorders",
@@ -991,7 +991,7 @@ function getContent(details) {
     
                 
                     text: "IT OFFICER ",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'left',
@@ -1003,23 +1003,23 @@ function getContent(details) {
     
                 
                     text: "TAXABLE AMOUNT",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
                     // right,down,left,up
-                    margin: [1, 0, 0, 0]
+                    margin: [0, 0, 0, 0]
 
 },
 {
     
                     text: "COMMUNITY TAX DUE ",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
                     // right,down,left,up
-                    margin: [1, 0, 0, 0]
+                    margin: [0, 0, 0, 0]
                 }
             ],
             [
@@ -1028,7 +1028,7 @@ function getContent(details) {
                     
                                 
                                     text: "A. BASIC COMMINITY TAX (P5.00) VOLUNTARY or EXEMPTED (P1.00) ",
-                                    fontSize: 5,
+                                    fontSize: 8,
                                     bold: true,
                                     characterSpacing: 0,
                                     alignment: 'left',
@@ -1040,7 +1040,7 @@ function getContent(details) {
                     
                                 
                                     text: " ",
-                                    fontSize: 5,
+                                    fontSize: 8,
                                     bold: true,
                                     characterSpacing: 0,
                                     alignment: 'center',
@@ -1051,7 +1051,7 @@ function getContent(details) {
                 {
                     
                                     text: " P 5.00 ",
-                                    fontSize: 5,
+                                    fontSize: 8,
                                     bold: true,
                                     characterSpacing: 0,
                                     alignment: 'center',
@@ -1065,7 +1065,7 @@ function getContent(details) {
                                     
                                                 
                                                     text: "B. ADDITIONAL COMMINITY TAX (tax not to exceed P5,000.00)", 
-                                                    fontSize: 5,
+                                                    fontSize: 8,
                                                     bold: true,
                                                     characterSpacing: 0,
                                                     alignment: 'left',
@@ -1077,7 +1077,7 @@ function getContent(details) {
                                     
                                                 
                                                     text: " ",
-                                                    fontSize: 5,
+                                                    fontSize: 8,
                                                     bold: true,
                                                     characterSpacing: 0,
                                                     alignment: 'center',
@@ -1088,7 +1088,7 @@ function getContent(details) {
                                 {
                                     
                                                     text: "  ",
-                                                    fontSize: 5,
+                                                    fontSize: 8,
                                                     bold: true,
                                                     characterSpacing: 0,
                                                     alignment: 'center',
@@ -1102,7 +1102,7 @@ function getContent(details) {
                                                     
                                                                 
                                                                     text: "1. GROSS RECEIPTS OR ERNINGS DERIVED FOR BUSINESS DURING THE PRECEDING YEAR (P1.00 for every P1000.00)  ", 
-                                                                    fontSize: 4,
+                                                                    fontSize: 8,
                                                                     bold: true,
                                                                     characterSpacing: 0,
                                                                     alignment: 'left',
@@ -1114,7 +1114,7 @@ function getContent(details) {
                                                     
                                                                 
                                                                     text: "P ",
-                                                                    fontSize: 5,
+                                                                    fontSize: 8,
                                                                     bold: true,
                                                                     characterSpacing: 0,
                                                                     alignment: 'center',
@@ -1125,7 +1125,7 @@ function getContent(details) {
                                                 {
                                                     
                                                                     text: "  ",
-                                                                    fontSize: 5,
+                                                                    fontSize: 8,
                                                                     bold: true,
                                                                     characterSpacing: 0,
                                                                     alignment: 'center',
@@ -1139,7 +1139,7 @@ function getContent(details) {
                                                                     
                                                                                 
                                                                                     text: "2. SALARIES OR GROSS RECEIPT OR EARNINGS DERIVED FROM EXERCISE OF PROFESSION OR PURSUIT OF ANY OCCUPATION (P1.00 for every P1000.00)  ", 
-                                                                                    fontSize: 4,
+                                                                                    fontSize: 8,
                                                                                     bold: true,
                                                                                     characterSpacing: 0,
                                                                                     alignment: 'left',
@@ -1151,7 +1151,7 @@ function getContent(details) {
                                                                     
                                                                                 
                                                                                     text: " ",
-                                                                                    fontSize: 5,
+                                                                                    fontSize: 8,
                                                                                     bold: true,
                                                                                     characterSpacing: 0,
                                                                                     alignment: 'center',
@@ -1162,7 +1162,7 @@ function getContent(details) {
                                                                 {
                                                                     
                                                                                     text: "P45.00  ",
-                                                                                    fontSize: 5,
+                                                                                    fontSize: 8,
                                                                                     bold: true,
                                                                                     characterSpacing: 0,
                                                                                     alignment: 'center',
@@ -1176,7 +1176,7 @@ function getContent(details) {
                                                                                     
                                                                                                 
                                                                                                     text: "3. INCOME FROM REAL PROPERTY (P1.00 for every P1000.00)  ", 
-                                                                                                    fontSize: 4,
+                                                                                                    fontSize: 8,
                                                                                                     bold: true,
                                                                                                     characterSpacing: 0,
                                                                                                     alignment: 'left',
@@ -1188,7 +1188,7 @@ function getContent(details) {
                                                                                     
                                                                                                 
                                                                                                     text: " ",
-                                                                                                    fontSize: 5,
+                                                                                                    fontSize: 8,
                                                                                                     bold: true,
                                                                                                     characterSpacing: 0,
                                                                                                     alignment: 'center',
@@ -1199,7 +1199,7 @@ function getContent(details) {
                                                                                 {
                                                                                     
                                                                                                     text: "  ",
-                                                                                                    fontSize: 5,
+                                                                                                    fontSize: 8,
                                                                                                     bold: true,
                                                                                                     characterSpacing: 0,
                                                                                                     alignment: 'center',
@@ -1312,7 +1312,7 @@ function getContent(details) {
     
                 
                     text: "TAXPAYER'S SIGNATURE",
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'left',
@@ -1353,7 +1353,7 @@ function getContent(details) {
     
                 
                     text: "  ", 
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'left',
@@ -1365,7 +1365,7 @@ function getContent(details) {
     
                 
                     text: "TOTAL ",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1376,7 +1376,7 @@ function getContent(details) {
 {
     
                     text: " P50 ",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1412,7 +1412,7 @@ function getContent(details) {
     
                 
                     text: "MINICIPAL / CITY TREASURER",
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'left',
@@ -1455,7 +1455,7 @@ function getContent(details) {
     
                 
                     text: "  ", 
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1467,7 +1467,7 @@ function getContent(details) {
     
                 
                     text: "INTEREST",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1478,7 +1478,7 @@ function getContent(details) {
 {
     
                     text: " P50 ",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1516,7 +1516,7 @@ function getContent(details) {
     
                 
                     text: "TOTAL AMOUNT PAID IN WORDS",
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'left',
@@ -1558,7 +1558,7 @@ function getContent(details) {
     
                 
                     text: "  ", 
-                    fontSize: 4,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1570,7 +1570,7 @@ function getContent(details) {
     
                 
                     text: "TOTAL AMOUNT PAID",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1581,7 +1581,7 @@ function getContent(details) {
 {
     
                     text: " P50 ",
-                    fontSize: 5,
+                    fontSize: 8,
                     bold: true,
                     characterSpacing: 0,
                     alignment: 'center',
@@ -1611,8 +1611,8 @@ function getContent(details) {
 {
     layout: "noBorders",
     table: {
-        // widths: [300],
-        heights: [20, ],
+        widths: [300],
+        heights: [5, ],
         body: [
             [{
                     text: "   ",
@@ -1633,9 +1633,9 @@ function getContent(details) {
 ///////////////////////////////////////////////////////////////////////////////
 
 {
-    layout: "noBorders",
+   layout: "noBorders",
     table: {
-        widths: [150,'*',150],
+        widths: [150,'*',170],
         heights: [2],
         body: [
             [
@@ -1650,9 +1650,9 @@ function getContent(details) {
                     // right,down,left,up
                     margin: [0, 0, 0, 0]
                 },
-                {
-                    text: ""
-                }
+                // {
+                //     text: ""
+                // }
 
             ]
 
@@ -1663,9 +1663,9 @@ function getContent(details) {
 /////////////////////////////////////////////////////////////////////////////
 
 {
-    layout: "noBorders",
+   layout: "noBorders",
     table: {
-        widths: [150,'*',150],
+        widths: [150,'*',170],
         heights: [2],
         body: [
             [
@@ -1693,59 +1693,59 @@ function getContent(details) {
 
 /////////////////////////////////////////////////////////////////////////////
 
-{
-    layout: "noBorders",
-    table: {
-        widths: [300],
-        heights: [2],
-        body: [
-            [{
-                    text: " ",
-                    fontSize: 2,
+// {
+//     //layout: "noBorders",
+//     table: {
+//         widths: [300],
+//         heights: [2],
+//         body: [
+//             [{
+//                     text: " ",
+//                     fontSize: 2,
 
 
-                },
+//                 },
 
 
-            ]
+//             ]
 
-        ]
-    }
-},
+//         ]
+//     }
+// },
 ///////////////////////////////////////////////////////////////////////////////
-{
-    layout: "noBorders",
-    table: {
-        widths: [150,'*',150],
-        heights: [2, ],
-        body: [
-            [
-                {
-                    text: ""
-                },
-                {
-                    text: " DISPLAY IN PUBLIC VIEW",
-                    fontSize: 6,
-                    alignment: 'center',
-                    characterSpacing: [0],
-                    // right,down,left,up
-                    margin: [0, 0, 0, 0]
-                },
-                {
-                    text: ""
-                }
+// {
+//     layout: "noBorders",
+//     table: {
+//         widths: [150,'*',150],
+//         heights: [2, ],
+//         body: [
+//             [
+//                 {
+//                     text: ""
+//                 },
+//                 {
+//                     text: " DISPLAY IN PUBLIC VIEW",
+//                     fontSize: 6,
+//                     alignment: 'center',
+//                     characterSpacing: [0],
+//                     // right,down,left,up
+//                     margin: [0, 0, 0, 0]
+//                 },
+//                 // {
+//                 //     text: ""
+//                 // }
 
-            ]
+//             ]
 
-        ]
-    }
-},
+//         ]
+//     }
+// },
 /////////////////////////////////////////////////////////////////////////////////////
 
 {
     layout: "noBorders",
     table: {
-        widths: [150,'*',150],
+        widths: [130,230],
         heights: [2, ],
         body: [
             [
@@ -1755,14 +1755,14 @@ function getContent(details) {
                 {
                     text: " This electronic permit (ePermit) is computer generated and does not require signature",
                     fontSize: 6,
-                    alignment: 'center',
+                    alignment: 'left',
                     characterSpacing: [0],
                     // right,down,left,up
-                    margin: [0, 15, 0, 0]
+                    margin: [0, 8, 0, 0]
                 },
-                {
-                    text: ""
-                }
+                // {
+                //     text: ""
+                // }
             ]
 
         ]
@@ -1772,7 +1772,7 @@ function getContent(details) {
 {
     layout: "noBorders",
     table: {
-        widths: [150,'*',150],
+        widths: [150,'*',170],
         heights: [2,],
         body: [
             [
@@ -1787,9 +1787,9 @@ function getContent(details) {
                     // right,down,left,up
                     margin: [0, 0, 0, 0]
                 },
-                {
-                    text: ""
-                }
+                // {
+                //     text: ""
+                // }
 
             ]
 
@@ -1800,7 +1800,7 @@ function getContent(details) {
 {
     layout: "noBorders",
     table: {
-        widths: [150,'*',150],
+        widths: [150,'*',170],
         heights: [2],
         body: [
             [
