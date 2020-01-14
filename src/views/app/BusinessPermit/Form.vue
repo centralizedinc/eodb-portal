@@ -44,7 +44,8 @@
               @updateCapital="updateCapital"
               @updateDocsPayment="updateDocsPayment"
               :checkSelectedDocs="checkSelectedDocs"
-              :computation_formula="computation_formula"
+              :computation_formulas="computation_formulas"
+              @updateCedulaPayment="updateCedulaPayment"
             />
           </a-col>
 
@@ -253,6 +254,7 @@ export default {
         "ApplicationSummary"
       ],
       form: {
+        requestor: "",
         application_type: 0,
         permit_type: "business",
         owner_details: {
@@ -362,6 +364,7 @@ export default {
           contact_no: "",
           email: ""
         },
+        requirements: [],
         attachments: [],
         lack_documents: []
       },
@@ -472,7 +475,7 @@ export default {
       fetching_data: false,
       installment: null,
       departments: [],
-      computation_formula: "",
+      computation_formulas: [],
       checkSelectedDocs: false
     };
   },
@@ -510,11 +513,39 @@ export default {
     }
   },
   methods: {
+    updateCedulaPayment() {
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "cedula"
+      );
+      console.log("this.form.owner_details.tax :", this.form.owner_details.tax);
+      if (index > -1) {
+        this.payments_data_source[
+          index
+        ].amount = this.form.owner_details.tax.total_amount_paid;
+      }
+    },
+    getComputation(permit_code) {
+      if (
+        this.computation_formulas &&
+        this.computation_formulas.length &&
+        permit_code
+      ) {
+        var fees_computation = this.computation_formulas.find(
+          v => v.permit_type === permit_code
+        );
+        return fees_computation ? fees_computation.computation : "";
+      }
+    },
     init() {
       console.log(
         "this.$store.state.permits.filing_permit :",
         this.$store.state.permits.filing_permit
       );
+
+      this.form.requestor =
+        this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
 
       // GET DEPARTMENTS
       const departments = this.deepCopy(
@@ -525,17 +556,25 @@ export default {
 
       const { mode, ref_no } = this.$route.query;
       console.log("this.$route.query :", this.$route.query);
+      var conditions = [];
+      this.$store.state.permits.filing_permit.requirements.forEach(val => {
+        if (val._id)
+          conditions.push({
+            permit_type: val._id,
+            application_type: val.application_type
+          });
+      });
       if (mode && mode === "renewal" && ref_no) {
         this.fetching_data = true;
+        conditions.push({
+          permit_type: this.$store.state.permits.filing_permit._id,
+          application_type: 1
+        });
         this.$store
-          .dispatch("GET_FEES_COMPUTATION", {
-            permit_type: this.$store.state.permits.filing_permit._id,
-            app_type: 1
-          })
+          .dispatch("GET_FEES_COMPUTATIONS", conditions)
           .then(result => {
-            console.log("GET_FEES_COMPUTATION result.data :", result.data);
-            if (!result.data.errors)
-              this.computation_formula = result.data.computation;
+            console.log("GET_FEES_COMPUTATIONS result.data :", result.data);
+            if (!result.data.errors) this.computation_formulas = result.data;
             return this.$store.dispatch("GET_APPLICATION_BY_REF", ref_no);
           })
           .then(app => {
@@ -556,15 +595,15 @@ export default {
           });
       } else {
         this.form.application_type = 0;
+        conditions.push({
+          permit_type: this.$store.state.permits.filing_permit._id,
+          application_type: 0
+        });
         this.$store
-          .dispatch("GET_FEES_COMPUTATION", {
-            permit_type: this.$store.state.permits.filing_permit._id,
-            app_type: 0
-          })
+          .dispatch("GET_FEES_COMPUTATIONS", conditions)
           .then(result => {
-            console.log("GET_FEES_COMPUTATION result.data :", result.data);
-            if (!result.data.errors)
-              this.computation_formula = result.data.computation;
+            console.log("GET_FEES_COMPUTATIONS result.data :", result.data);
+            if (!result.data.errors) this.computation_formulas = result.data;
 
             this.form.permit_code = this.$store.state.permits.filing_permit._id;
 
@@ -572,6 +611,7 @@ export default {
             const requirements = this.deepCopy(
               this.$store.state.permits.filing_permit.requirements
             );
+            this.form.requirements = requirements;
             console.log("requirements :", requirements);
             const doc_req = requirements.map(v => {
               return {
@@ -939,7 +979,10 @@ export default {
           });
         }
 
-        if (!this.form.owner_details.tax.taxable.basic) {
+        if (
+          this.checkDocsNeeded(["cedula"]) &&
+          !this.form.owner_details.tax.taxable.basic
+        ) {
           errors.push({
             field: "owner_details.tax.taxable.basic",
             error: "Basic Community Tax is a required field."
@@ -1204,13 +1247,36 @@ export default {
       this.form.application_type = 1;
 
       // Map Attachments
-      this.form.attachments.forEach(attachment => {
-        attachment.files = attachment.files.map(v => v.url);
-        const index = this.document_data_source.findIndex(
-          v => v.keyword === attachment.doc_type
-        );
-        this.document_data_source[index].status = 2;
+      // this.form.attachments.forEach(attachment => {
+      //   attachment.files = attachment.files.map(v => v.url);
+      //   const index = this.document_data_source.findIndex(
+      //     v => v.keyword === attachment.doc_type
+      //   );
+      //   this.document_data_source[index].status = 2;
+      // });
+      const requirements = this.deepCopy(
+        this.$store.state.permits.filing_permit.requirements
+      );
+      this.form.requirements = requirements;
+      console.log("requirements :", requirements);
+      const doc_req = requirements.map(v => {
+        return {
+          title: v.name,
+          status: 0,
+          keyword: v.keyword,
+          hidden: v.required
+        };
       });
+
+      doc_req.forEach(v => {
+        // if (v.hidden)
+        this.form.attachments.push({
+          doc_type: v.keyword,
+          files: []
+        });
+      });
+      console.log("this.form :", this.form);
+      this.document_data_source = doc_req;
 
       // Map Dates
       this.form.owner_details.birthdate = moment(
@@ -1229,7 +1295,14 @@ export default {
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
         try {
-          computed_amount = eval(this.computation_formula);
+          console.log("#####");
+          console.log(this.$store.state.permits.filing_permit._id);
+          console.log(
+            this.getComputation(this.$store.state.permits.filing_permit._id)
+          );
+          computed_amount = eval(
+            this.getComputation(this.$store.state.permits.filing_permit._id)
+          );
         } catch (error) {
           console.log("error :", error);
           computed_amount = 0;
@@ -1250,7 +1323,9 @@ export default {
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
         try {
-          computed_amount = eval(this.computation_formula);
+          computed_amount = eval(
+            this.getComputation(this.$store.state.permits.filing_permit._id)
+          );
         } catch (error) {
           console.log("error :", error);
           computed_amount = 0;
@@ -1285,18 +1360,54 @@ export default {
           amount: 3000
         }
       ];
-      const data = this.deepCopy(
+      var data = this.deepCopy(
         this.$store.state.permits.filing_permit.requirements
       ).filter(v => !v.required);
       console.log("data :", data);
       data.forEach(dt => {
+        console.log("dt :", dt);
         var is_included = values ? values.includes(dt.keyword) : false;
-        if (is_included)
+        if (is_included) {
+          var amount = 0;
+
+          try {
+            if (dt.keyword === "cedula") {
+              dt.fee_type = "cedula";
+              var taxable_basic = 0,
+                community_basic = 0,
+                community_business_income = 0,
+                taxable_business_income = 0,
+                community_profession_income = 0,
+                taxable_profession_income = 0,
+                community_property_income = 0,
+                taxable_property_income = 0,
+                total = 0,
+                interest = 0,
+                total_amount_paid = 0,
+                month = new Date().getMonth();
+
+              try {
+                eval(this.getComputation(dt._id));
+              } catch (error) {
+                console.log("computation_formula ctc :", error);
+              }
+              this.form.owner_details.tax.community.basic = community_basic;
+              this.form.owner_details.tax.community.business_income = community_business_income;
+              this.form.owner_details.tax.community.profession_income = community_profession_income;
+              this.form.owner_details.tax.community.property_income = community_property_income;
+              this.form.owner_details.tax.total = total;
+              this.form.owner_details.tax.interest = interest;
+              this.form.owner_details.tax.total_amount_paid = total_amount_paid;
+              amount = total_amount_paid;
+            } else amount = this.getComputation(dt._id);
+          } catch (error) {}
+
           payments.push({
             description: dt.name,
             fee_type: dt.fee_type,
-            amount: dt.amount
+            amount
           });
+        }
       });
       this.payments_data_source = payments;
     }

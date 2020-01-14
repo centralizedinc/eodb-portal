@@ -431,6 +431,7 @@ export default {
   },
   methods: {
     init() {
+      console.log("form data: " + JSON.stringify(this.form))
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;

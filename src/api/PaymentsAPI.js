@@ -29,6 +29,15 @@ export default class PaymentsAPI {
 
     /**
      * @returns {Promise}
+     * @param {Array} conditions
+     */
+    getFeesComputations(conditions) {
+        console.log(`getting fees computations ${conditions}`);
+        return axios.post("/fees/computation/multiple", conditions);
+    }
+
+    /**
+     * @returns {Promise}
      * @param {Object} data
      */
     createFeesComputation(data) {

@@ -50,14 +50,16 @@
     <a-col :span="10">
       <a-affix :offsetTop="10">
         <a-card style="background-color: #242B30;border-radius:10px">
-          <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
-            <a-list-item slot="renderItem" slot-scope="item">
-              <a-list-item-meta :title="item.name" :description="item.description">
-                <a-checkbox slot="avatar"></a-checkbox>
-              </a-list-item-meta>
-            </a-list-item>
-            <h2 slot="header">Application Checklist</h2>
-          </a-list>
+          <a-checkbox-group v-model="selected_checklist" style="width: 100%;">
+            <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
+              <a-list-item slot="renderItem" slot-scope="item">
+                <a-list-item-meta :title="item.name" :description="item.description">
+                  <a-checkbox slot="avatar" :value="item.name"></a-checkbox>
+                </a-list-item-meta>
+              </a-list-item>
+              <h2 slot="header">Application Checklist</h2>
+            </a-list>
+          </a-checkbox-group>
 
           <a-textarea
             style="margin-top: 1vh"
@@ -87,7 +89,7 @@
             >
               <a-button
                 type="primary"
-                :disabled="rejecting_application"
+                :disabled="rejecting_application || selected_checklist.length !== checklist.length"
                 :loading="approving_application"
               >Approved</a-button>
             </a-popconfirm>
@@ -116,6 +118,7 @@ export default {
   },
   data() {
     return {
+      selected_checklist: [],
       provinces_data,
       form: {
         owner_details: {
@@ -137,24 +140,22 @@ export default {
   computed: {
     department() {
       return this.$store.state.admin_session.department;
+    },
+    checklist() {
+      var data = this.$store.state.admin_session.checklist.find(
+        v => v.permit_type === this.form.permit_type
+      );
+      return data ? data.checklist : [];
     }
   },
   methods: {
     init() {
-      this.$http
-        .get("/permits")
-        // permits
-        // checklists
+      this.$store
+        .dispatch("GET_CHECKLIST_BY_DEPARTMENT")
         .then(results => {
-          console.log("result permits: " + JSON.stringify(results));
-          this.checklist = results.data.checklists;
-          console.log(
-            "result data checklist: " + JSON.stringify(this.checklist)
-          );
           return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
         })
         .then(result => {
-          console.log("GET_ADMIN_DEPARTMENT result :", result);
           this.loading = false;
         })
         .catch(err => {
@@ -210,11 +211,15 @@ export default {
             description: `You have approved Application #${this.form.reference_no}`
           });
           if (results.permit) {
-            if (Array.isArray(results.permit.details))
+            if (
+              (Array.isArray(results.permit.details) &&
+                results.permit.details[0].permit_type === "barangay") ||
+              results.permit.details.permit_type === "barangay"
+            )
               return this.processBarangay(results.permit.details);
             //barangay
             else if (results.permit.details.permit_type === "business")
-              return this.processBusiness(results.permit.details);
+              return this.processBusiness(results);
             //business
             else if (results.permit.details.permit_type === "cedula")
               return this.processCedula(results.permit.details);
@@ -239,9 +244,13 @@ export default {
     },
     processBarangay(details) {
       var promises = [];
+      details = Array.isArray(details) ? details : [details];
+      console.log("##details :", details);
       details.forEach(detail => {
-        promises.push(function() {
-          return new Promise((resolve, reject) => {
+        console.log("#detail :", detail);
+        promises.push(
+          new Promise((resolve, reject) => {
+            console.log("##check barangayss");
             this.getPermitsAddress(detail)
               .then(address => {
                 return this.uploadBarangayPermit(detail, address);
@@ -255,12 +264,13 @@ export default {
               .catch(err => {
                 reject(err);
               });
-          });
-        });
+          })
+        );
+        console.log("###promises :", promises);
       });
       return Promise.all(promises);
     },
-    processBusiness() {
+    processBusiness(results) {
       return new Promise((resolve, reject) => {
         this.getPermitsAddress(results.permit.details)
           .then(address => {
@@ -314,9 +324,13 @@ export default {
       });
     },
     processCedula(details) {
+      console.log("###process cedula");
+      console.log("details :", details);
       return new Promise((resolve, reject) => {
-        const permit_details = {};
-        this.$upload(permit_details, "CEDULA")
+        this.getPermitsAddress(details)
+          .then(address => {
+            return this.uploadCedula(details, address);
+          })
           .then(blob => {
             return this.saveEpermit(blob, details);
           })
@@ -332,10 +346,10 @@ export default {
       return new Promise((resolve, reject) => {
         this.getPermitsAddress(details)
           .then(address => {
-            return this.uploadPolicePermit(results.permit.details, address);
+            return this.uploadPolicePermit(details, address);
           })
           .then(blob => {
-            if (blob) return this.saveEpermit(blob, results.permit.details);
+            if (blob) return this.saveEpermit(blob, details);
           })
           .then(result => {
             resolve(result);
@@ -384,27 +398,29 @@ export default {
         });
     },
     uploadBarangayPermit(details, address) {
+      console.log("###uploadBarangayPermit details :", details);
       if (details.barangay_type === "residential") {
         const permit_details = {
-          business_name: details.business_details.business_name,
-          business_owner: "",
-          business_address: address[0] || "",
-          residential_address: address[1] || "",
-          business_nature: details.business_details.business_type,
-          requestor: "",
+          name:
+            details.personal_details && details.personal_details.name
+              ? `${details.personal_details.name.first} ${details.personal_details.name.last}`
+              : "",
+          birth_date: details.personal_details.birthdate,
+          address: address[0] || "",
           date_created: details.date_created
         };
+        console.log("BGYCLEARANCE permit_details :", permit_details);
         return this.$upload(permit_details, "BGYCLEARANCE");
       } else if (details.barangay_type === "business") {
         const permit_details = {
           business_name: details.business_details.business_name,
-          business_owner: "",
-          business_address: address[0] || "",
-          residential_address: address[1] || "",
+          business_owner: details.business_details.business_owner,
+          business_address: address[1] || "",
           business_nature: details.business_details.business_type,
-          requestor: "",
+          requestor: details.business_details.requestor,
           date_created: details.date_created
         };
+        console.log("BRGY_BUSINESS_CLEARANCE permit_details :", permit_details);
         return this.$upload(permit_details, "BRGY_BUSINESS_CLEARANCE");
       }
     },
@@ -416,47 +432,87 @@ export default {
         birth_date: details.personal_details.birthdate,
         birth_place: details.personal_details.birthplace,
         findings: "",
-        purpose: "",
-        validity: "",
+        purpose: details.purpose,
         ctc_no: details.personal_details.ctc_no,
         date_created: details.date_created,
-        verified_by_first: "",
-        verified_by_second: ""
+        verified_by: ""
       };
       return this.$upload(permit_details, "POLICECLEARANCE");
     },
+    uploadCedula(details, address) {
+      const permit_details = {
+        issued_to: details.issued_to,
+        cedula_no: details.cedula_no,
+        date_created: details.date_created,
+        name:
+          details.personal_details && details.personal_details.name
+            ? `${details.personal_details.name.first} ${details.personal_details.name.last}`
+            : "",
+        tin: details.personal_details.tin,
+        address,
+        gender: details.personal_details.gender,
+        citizenship: details.personal_details.citizenship,
+        icr_no: details.personal_details.icr_no,
+        birthplace: details.personal_details.birthplace,
+        height: details.height,
+        weight: details.weight,
+        civil_status: details.civil_status,
+        birthdate: details.birthdate,
+        basic_community: details.tax.community.basic,
+        taxable_business_income: details.tax.taxable.business_income,
+        community_business_income: details.tax.community.business_income,
+        taxable_profession_income: details.tax.taxable.profession_income,
+        community_profession_income: details.tax.community.profession_income,
+        taxable_property_income: details.tax.taxable.property_income,
+        community_property_income: details.tax.community.property_income,
+        total: details.tax.total,
+        interest: details.tax.interest,
+        total_amount_paid: details.tax.total_amount_paid
+      };
+      return this.$upload(permit_details, "CEDULA_SAN_ANTONIO");
+    },
     getPermitsAddress(details) {
+      console.log("###getPermitsAddress details :", details);
       if (details.permit_type === "business")
         return this.getAddress(details.business_address);
-      // else if(details.permit_type === 'cedula') // Cedula has no address
-      // return this.getAddress(details.business_address);
+      else if (details.permit_type === "cedula")
+        // Cedula has no address
+        return this.getAddress(details.address);
       else if (details.permit_type === "barangay") {
         var getAddresses = [];
         // If requesting for residential certificate
         if (details.purpose.includes("pc"))
           getAddresses.push(this.getAddress(details.residential_address));
+        else getAddresses.push(null);
         // If requesting barangay clearance for business permit
         if (details.purpose.includes("bp"))
           getAddresses.push(this.getAddress(details.business_address));
+        else getAddresses.push(null);
         if (getAddresses.length) return Promise.all(getAddresses);
       } else if (details.permit_type === "police")
         return this.getAddress(details.address_details);
     },
     generateOtherDocsForBusiness(permits) {
+      console.log("permits :", permits);
       var promises = [];
       permits.forEach(permit => {
         // get address, generate and upload epermit, save
-        if (Array.isArray(permit)) return this.processBarangay(permit);
+        if (
+          (Array.isArray(permit) && permit[0].permit_type === "barangay") ||
+          permit.permit_type === "barangay"
+        )
+          promises.push(this.processBarangay(permit));
         //barangay
         else if (permit.permit_type === "cedula")
-          return this.processCedula(permit);
+          promises.push(this.processCedula(permit));
         //cedula
         else if (permit.permit_type === "police")
-          return this.processPolice(permit); //police
+          promises.push(this.processPolice(permit)); //police
       });
       return Promise.all(promises);
     },
     getAddress(address) {
+      if (!address) return Promise.resolve();
       return new Promise((resolve, reject) => {
         const {
           unit_no,

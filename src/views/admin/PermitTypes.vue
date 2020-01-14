@@ -224,6 +224,9 @@
                   :dataSource="permit.checklists"
                 >
                   <span slot="department" slot-scope="text">{{getDepartment(text)}}</span>
+                  <span slot="action" slot-scope="text, record">
+                    <a-button type="danger" icon="delete" @click="removeChecklist(record)"></a-button>
+                  </span>
                 </a-table>
               </a-tab-pane>
             </a-tabs>
@@ -273,6 +276,11 @@ export default {
         {
           title: "Description",
           dataIndex: "description"
+        },
+        {
+          title: "",
+          dataIndex: "action",
+          scopedSlots: { customRender: "action" }
         }
       ],
       cols_app: [
@@ -390,7 +398,14 @@ export default {
       this.permit.checklists.push(this.deepCopy(this.checklist));
       this.checklist = {};
 
-      this.$notification.success({ message: "Requirement Added!" });
+      this.$notification.success({ message: "Checklist Added!" });
+    },
+    removeChecklist(item) {
+      console.log('item :', item);
+      console.log('this.permit :', this.permit);
+      this.permit.checklists.splice(this.permit.checklists.indexOf(item), 1);
+
+      this.$notification.error({ message: "Checklist Removed!" });
     },
     getDepartment(id) {
       return this.offices.find(x => x._id === id).description;
@@ -416,6 +431,7 @@ export default {
     },
     submit() {
       this.loading = true;
+      console.log('###this.permit :', this.permit);
       if (this.edit_mode) {
         this.$http
           .post(`/permits/${this.permit._id}`, this.permit)

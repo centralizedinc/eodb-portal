@@ -30,6 +30,19 @@ router.route('/')
             });
     })
 
+router.route('/multiple')
+    .post((req, res) => {
+        var conditions = req.body;
+        dao.find({ $or: conditions })
+            .then((result) => {
+                res.json(result)
+            }).catch((errors) => {
+                res.json({
+                    errors
+                })
+            });
+    })
+
 router.route('/:permit_type/:app_type')
     .get((req, res) => {
         dao.findOne({ permit_type: req.params.permit_type, application_type: req.params.app_type })

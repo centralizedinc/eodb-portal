@@ -142,8 +142,7 @@ export default {
           validity: "Six Months (6) from the Date of Issuance",
           ctc_no: "2178545655",
           date_created: new Date(),
-          verified_by_first: "Senior Police Officer Cesar Advincula",
-          verified_by_second: "Police Senior Inspector Godfrey Rivera"
+          verified_by: "Senior Police Officer Cesar Advincula"
         };
       } else if (this.keyword.toUpperCase() === "BGYCLEARANCE") {
         this.pdf_details = {
@@ -189,6 +188,8 @@ export default {
          pdfGenerator = pdfMake.createPdf(document);
 
           // ---------------for pdf testing---------------------
+
+////////////////////////////////////////////////////////////-----> uncomment this for testing          
           // pdfMake.createPdf(document).open(err =>{
           //   if (err){
           //     reject(err)
@@ -196,9 +197,10 @@ export default {
           //     resolve();
           //   }
           // })
+///////////////////////////////////////////////////////////------->uncomment until here          
           // ------------for quick testing------------------
 
-           
+/////////////////////////////////////////////////////////  ------> comment this for testing
         pdfGenerator.getBuffer(buffer => {
           var file = new Blob([buffer], {
               type: "application/pdf"
@@ -207,6 +209,8 @@ export default {
           self.pdf_url = dataUrl;
           self.loading = false;
         });
+
+////////////////////////////////////////////////////--------> uncomment until here
       } catch (error) {
         console.log("error :", error);
         this.loading = false;

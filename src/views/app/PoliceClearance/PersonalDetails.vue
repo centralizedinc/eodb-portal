@@ -259,11 +259,20 @@
             :help="checkErrors('personal_details.ctc_no')"
           >
             <span slot="label">
-              CTC No.
+              Community Tax Certificate Number
               <i style="color: red">*</i>
             </span>
+            <a-tooltip>
+              <span
+                slot="title"
+              >Enter without spaces. Found at the upper right corner (CCI2###########)</span>
 
-            <a-input v-model="form.personal_details.ctc_no"></a-input>
+              <a-input
+                v-model="form.personal_details.ctc_no"
+                placeholder="CC•••• ••••••••"
+                maxlength="15"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
       </a-row>

@@ -222,6 +222,7 @@ export default {
         "ApplicationSummary"
       ],
       form: {
+        requestor: "",
         purpose: [],
         application_type: 0,
         permit_type: "barangay",
@@ -528,6 +529,8 @@ export default {
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
+
+      this.form.requestor = this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}` : "";
 
       this.$store
         .dispatch("GET_FEES_COMPUTATION", {
