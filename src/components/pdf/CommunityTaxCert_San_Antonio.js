@@ -441,7 +441,7 @@ function getContent(details) {
                                         },
                                         {
                                             ///////////------Male    
-                                            text: checkText(details.gender) === "MALE" ? " X ":" ",
+                                            text: checkText(details.gender) === "MALE" ? " X " : " ",
                                             fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
@@ -452,7 +452,7 @@ function getContent(details) {
 
                                         {
                                             ///////////-------Female    
-                                            text: checkText(details.gender) === "FEMALE" ? " X ":" ",
+                                            text: checkText(details.gender) === "FEMALE" ? " X " : " ",
                                             fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
@@ -712,7 +712,7 @@ function getContent(details) {
 
                                         {
                                             ///////-----single
-                                            text: checkText(details.civil_status) === "SINGLE" ? " X ": " ",
+                                            text: checkText(details.civil_status) === "SINGLE" ? " X " : " ",
                                             fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
@@ -734,7 +734,7 @@ function getContent(details) {
 
                                         {
                                             /////////------married  
-                                            text: checkText(details.civil_status) === "MARRIED" ? " X ": " ",
+                                            text: checkText(details.civil_status) === "MARRIED" ? " X " : " ",
                                             fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
@@ -756,7 +756,7 @@ function getContent(details) {
 
                                         {
                                             ////////------widow
-                                            text: checkText(details.civil_status) === "WIDOWED" ? " X ": " ",
+                                            text: checkText(details.civil_status) === "WIDOWED" ? " X " : " ",
                                             fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
@@ -778,7 +778,7 @@ function getContent(details) {
 
                                         {
                                             ///////////----separated 
-                                            text: checkText(details.civil_status) === "SEPARATED" ? " X ": " ",
+                                            text: checkText(details.civil_status) === "SEPARATED" ? " X " : " ",
                                             fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
