@@ -34,6 +34,9 @@ var ApplicationSchema = new mongoose.Schema({
     },
     permit_type: {
         type: String
+    },
+    permit_code: {
+        type: String
     }
 })
 
