@@ -30,7 +30,9 @@ export default {
       cols: [
         {
           title: "Transaction No",
-          dataIndex: "transaction_no"
+          dataIndex: "transaction_no",
+          fixed: "left",
+          width: 100
         },
         {
           title: "Reference No",
@@ -59,9 +61,7 @@ export default {
         {
           title: "Action",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" },
-          fixed: "right",
-          width: 100
+          scopedSlots: { customRender: "action" }
         }
       ]
     };

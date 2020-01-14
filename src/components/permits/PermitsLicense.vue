@@ -48,7 +48,9 @@ export default {
         {
           title: "Permit Number",
           dataIndex: "permit_no",
-          scopedSlots: { customRender: "permit_no" }
+          scopedSlots: { customRender: "permit_no" },
+          fixed: "left",
+          width: 150
         },
         {
           title: "License/Permit Applied",
@@ -63,9 +65,7 @@ export default {
         {
           title: "Actions",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" },
-          fixed: "right",
-          width: 100
+          scopedSlots: { customRender: "action" }
         }
       ]
     };
