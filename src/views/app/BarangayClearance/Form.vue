@@ -316,9 +316,11 @@ export default {
         //     "Check all the documents you have and apply for lacking requirements instantly within this app."
         // },
         {
-          title: "Purpose",
+          title: "Type of Clearance",
+          // description:
+          //   "State the reason or the purpose of your request (i.e., local employment, police clearance, business permit, loan purposes, etc.) "
           description:
-            "State the reason or the purpose of your request (i.e., local employment, police clearance, business permit, loan purposes, etc.) "
+            "Barangay Certificate for local employment, police clearance, etc. And Barangay Business Clearance for Business Clearance application"
         },
         {
           title: "Personal Details",
@@ -847,13 +849,13 @@ export default {
         // }
         if (!this.form.business_details.business_owner_name.last) {
           errors.push({
-            field: "owner_details.name.last",
+            field: "business_details.business_owner_name.last",
             error: "Business Owner Last Name is a required field."
           });
         }
         if (!this.form.business_details.business_owner_name.first) {
           errors.push({
-            field: "owner_details.name.first",
+            field: "business_details.business_owner_name.first",
             error: "Business Owner First Name is required field"
           });
         }

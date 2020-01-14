@@ -1,32 +1,41 @@
 <template>
-  <a-table :columns="cols" :dataSource="permits" :loading="loading || loading_permits">
-    <template slot="permit_no" slot-scope="text, record">{{getPermitNo(record)}}</template>
-    <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
-    <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
-    <a-row slot="action" slot-scope="text, record">
-      <a-col :span="12" v-if="record.permit_type === 'business'" style="text-align: center;">
-        <a-popconfirm
-          title="Click PROCEED to redirect in Renewal Form."
-          okText="Proceed"
-          cancelText="Cancel"
-          @confirm="renewApplication(record)"
-        >
-          <a-tooltip title="Renew">
-            <a-icon type="reload" style="cursor: pointer; color: #1890ff; font-weight: bold;" />
-          </a-tooltip>
-        </a-popconfirm>
-      </a-col>
-      <a-col :span="record.permit_type === 'business' ? 12 : 24" style="text-align: center;">
-        <a-tooltip title="Print">
-          <a-icon
-            type="printer"
-            @click="print(record)"
-            style="cursor: pointer; color: #1890ff; font-weight: bold;"
-          />
-        </a-tooltip>
-      </a-col>
-    </a-row>
-  </a-table>
+  <a-row type="flex" justify="start">
+    <a-col :xs="{span: 24}" :sm="{span:24}" :md="{span:24}" :lg="{span:24}" :xl="{span:24}">
+      <a-table
+        :scroll="{ x: 800, y: 300 }"
+        :columns="cols"
+        :dataSource="permits"
+        :loading="loading || loading_permits"
+      >
+        <template slot="permit_no" slot-scope="text, record">{{getPermitNo(record)}}</template>
+        <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
+        <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
+        <a-row slot="action" slot-scope="text, record">
+          <a-col :span="12" v-if="record.permit_type === 'business'" style="text-align: center;">
+            <a-popconfirm
+              title="Click PROCEED to redirect in Renewal Form."
+              okText="Proceed"
+              cancelText="Cancel"
+              @confirm="renewApplication(record)"
+            >
+              <a-tooltip title="Renew">
+                <a-icon type="reload" style="cursor: pointer; color: #1890ff; font-weight: bold;" />
+              </a-tooltip>
+            </a-popconfirm>
+          </a-col>
+          <a-col :span="record.permit_type === 'business' ? 12 : 24" style="text-align: center;">
+            <a-tooltip title="Print">
+              <a-icon
+                type="printer"
+                @click="print(record)"
+                style="cursor: pointer; color: #1890ff; font-weight: bold;"
+              />
+            </a-tooltip>
+          </a-col>
+        </a-row>
+      </a-table>
+    </a-col>
+  </a-row>
 </template>
 
 <script>
@@ -54,7 +63,9 @@ export default {
         {
           title: "Actions",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" }
+          scopedSlots: { customRender: "action" },
+          fixed: "right",
+          width: 100
         }
       ]
     };

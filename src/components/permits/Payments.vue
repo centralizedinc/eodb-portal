@@ -1,5 +1,10 @@
 <template>
-  <a-table :columns="cols" :dataSource="payments" :loading="loading || loading_payments">
+  <a-table
+    :scroll="{ x: 850, y: 300 }"
+    :columns="cols"
+    :dataSource="payments"
+    :loading="loading || loading_payments"
+  >
     <span slot="amount_paid" slot-scope="text">{{formatCurrency(text)}}</span>
     <span slot="payment_for" slot-scope="text">{{getPermitType(text)}}</span>
     <span slot="method" slot-scope="text">{{getPermitMethod(text)}}</span>
@@ -54,7 +59,9 @@ export default {
         {
           title: "Action",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" }
+          scopedSlots: { customRender: "action" },
+          fixed: "right",
+          width: 100
         }
       ]
     };
@@ -62,11 +69,13 @@ export default {
   computed: {
     payments() {
       var payments = this.$store.state.payment.payments;
-      if(this.search) {
-        console.log('payments :', payments);
-        payments = payments.filter(v => v.reference_no.indexOf(this.search) > -1);
+      if (this.search) {
+        console.log("payments :", payments);
+        payments = payments.filter(
+          v => v.reference_no.indexOf(this.search) > -1
+        );
       }
-      return payments
+      return payments;
     },
     user() {
       return this.$store.state.user_session.user;

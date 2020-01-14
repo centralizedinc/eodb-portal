@@ -79,26 +79,25 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [15],
-                widths: [150,'*',145],
+                widths: [150, '*', 145],
                 body: [
-                    [
-                    {
-                        text: '',
-                    },
-                    {
-                        text: "BUSINESS PERMIT OFFICE",
-                        // text: '',
-                        fontSize: 14,
-                        bold: true,
-                        characterSpacing: 1,
-                        alignment: 'center',
-                        // right,down,left,up
-                        margin: [0, 50, 0, 0]
-                    },
-                    {
-                        text: '',
-                    }
-                ]
+                    [{
+                            text: '',
+                        },
+                        {
+                            text: "BUSINESS PERMIT OFFICE",
+                            // text: '',
+                            fontSize: 14,
+                            bold: true,
+                            characterSpacing: 1,
+                            alignment: 'center',
+                            // right,down,left,up
+                            margin: [0, 50, 0, 0]
+                        },
+                        {
+                            text: '',
+                        }
+                    ]
                 ]
             }
 
@@ -108,26 +107,25 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [8],
-                widths: [140,'*',135],
+                widths: [140, '*', 135],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
-                        text: "BUSINESS PERMIT   ",
-                        fontSize: 14,
-                        bold: true,
-                        characterSpacing: 1,
-                        alignment: 'center',
-                        // right,down,left,up
-                        margin: [0,10,0,0]
-                        // margin: [116, 0, 0, 0]
-                    },
-                    {
-                        text: ""
-                    }
-                ]
+                            text: "BUSINESS PERMIT   ",
+                            fontSize: 14,
+                            bold: true,
+                            characterSpacing: 1,
+                            alignment: 'center',
+                            // right,down,left,up
+                            margin: [0, 10, 0, 0]
+                            // margin: [116, 0, 0, 0]
+                        },
+                        {
+                            text: ""
+                        }
+                    ]
                 ]
             }
 
@@ -138,25 +136,24 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [8],
-                widths: [150,'*',145],
+                widths: [150, '*', 145],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
-                        text: checkText(details.business_name),
-                        fontSize: 12,
-                        bold: true,
-                        characterSpacing: 0,
-                        alignment: 'center',
-                        // right,down,left,up
-                        margin: [0, 0, 0, 0]
-                    },
-                    {
-                        text: ""
-                    }
-                ]
+                            text: checkText(details.business_name),
+                            fontSize: 12,
+                            bold: true,
+                            characterSpacing: 0,
+                            alignment: 'center',
+                            // right,down,left,up
+                            margin: [0, 0, 0, 0]
+                        },
+                        {
+                            text: ""
+                        }
+                    ]
                 ]
             }
 
@@ -167,10 +164,9 @@ function getContent(details) {
             table: {
                 heights: [8],
                 // widths: [170, 121],
-                widths: [170,'*','*',135],
+                widths: [170, '*', '*', 135],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -205,10 +201,9 @@ function getContent(details) {
             table: {
                 heights: [8],
                 // widths: [170, 121],
-                widths: [170,'*','*',135],
+                widths: [170, '*', '*', 135],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -245,10 +240,9 @@ function getContent(details) {
             table: {
                 heights: [8],
                 // widths: [170, 121],
-                widths: [170,'*','*',135],
+                widths: [170, '*', '*', 135],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -287,10 +281,9 @@ function getContent(details) {
             layout: "noBorders",
             table: {
                 heights: [6],
-                widths: [30,'*',50],
+                widths: [30, '*', 50],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -298,8 +291,7 @@ function getContent(details) {
                                 heights: [6],
                                 widths: [72, 150, 60, 70, 60],
                                 body: [
-                                    [
-                                        {
+                                    [{
                                             text: checkText(details.plate_no),
                                             fontSize: 10,
                                             bold: true,
@@ -307,8 +299,8 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [1, 0, 0, 0]
-                                            margin: [0,0,0,0]
-                
+                                            margin: [0, 0, 0, 0]
+
                                         },
                                         {
                                             text: checkText(details.ownership_type),
@@ -318,7 +310,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [5, 0, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: formatDate(details.valid_until),
@@ -328,7 +320,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [9, 0, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: checkText(details.area),
@@ -338,7 +330,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [10, 0, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: formatDate(details.date_issued),
@@ -348,7 +340,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [10, 0, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         }
                                     ]
                                 ]
@@ -366,12 +358,11 @@ function getContent(details) {
         ////////////////////////////////////////////////////////////////////////////////////////
         {
             layout: "noBorders",
-            table:{
+            table: {
                 // heights: [6],
-                widths: [35,'*',50],
+                widths: [35, '*', 50],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -381,8 +372,7 @@ function getContent(details) {
                                 // widths: [50, 70, 44, 50, 50],
                                 widths: [72, 150, 60, 70, 60],
                                 body: [
-                                    [
-                                        {
+                                    [{
                                             text: "ACCOUNT NUMBER ",
                                             fontSize: 8,
                                             bold: true,
@@ -390,8 +380,8 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [6, -2, 0, 0]
-                                            margin: [0,0,0,0]
-                
+                                            margin: [0, 0, 0, 0]
+
                                         },
                                         {
                                             text: "OWNERSHIP TYPE",
@@ -401,7 +391,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [15, -2, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: "VALID UNTIL",
@@ -411,7 +401,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [17, -2, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: "AREA (sq.m)",
@@ -421,7 +411,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [20, -2, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: "DATE ISSUED ",
@@ -431,7 +421,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [18, -2, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         }
                                     ]
                                 ]
@@ -450,11 +440,10 @@ function getContent(details) {
         ///////////////////////////////////////////////////////////////////////////////////////////////////////---------Table4
         {
             layout: "noBorders",
-            table:{
-                widths: [30,'*',50],
-                body:[
-                    [
-                        {
+            table: {
+                widths: [30, '*', 50],
+                body: [
+                    [{
                             text: ""
                         },
                         {
@@ -470,7 +459,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [1, 1, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: checkText(details.application_type),
@@ -480,7 +469,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [1, 1, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: checkText(details.mode_of_payment),
@@ -490,7 +479,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [1, 1, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
                                         {
                                             text: checkText(details.transaction_no),
@@ -500,9 +489,9 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [1, 1, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
-                
+
                                     ]
                                 ]
                             }
@@ -519,11 +508,10 @@ function getContent(details) {
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         {
             layout: "noBorders",
-            table:{
-                widths: [30,'*',50],
-                body:[
-                    [
-                        {
+            table: {
+                widths: [30, '*', 50],
+                body: [
+                    [{
                             text: ""
                         },
                         {
@@ -540,7 +528,7 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             margin: [0, 0, 0, 0]
-                
+
                                         },
                                         {
                                             text: "STATUS",
@@ -569,7 +557,7 @@ function getContent(details) {
                                             // right,down,left,up
                                             margin: [0, 0, 0, 0]
                                         },
-                
+
                                     ]
                                 ]
                             }
@@ -586,11 +574,10 @@ function getContent(details) {
         ////////////////////////////////////////////////////////////////////////////////////////////////////------Table5---- Fee's
         {
             layout: "noBorders",
-            table:{
-                widths: [95,"*",90],
-                body:[
-                    [
-                        {
+            table: {
+                widths: [95, "*", 90],
+                body: [
+                    [{
                             text: ""
                         },
                         {
@@ -606,8 +593,8 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [40, 1, 0, 0]
-                                            margin: [0,0,0,0]
-                
+                                            margin: [0, 0, 0, 0]
+
                                         },
                                         {
                                             text: "AMOUNT DUE",
@@ -617,10 +604,10 @@ function getContent(details) {
                                             alignment: 'center',
                                             // right,down,left,up
                                             // margin: [20, 1, 0, 0]
-                                            margin: [0,0,0,0]
+                                            margin: [0, 0, 0, 0]
                                         },
-                
-                
+
+
                                     ]
                                 ]
                             }
@@ -640,11 +627,10 @@ function getContent(details) {
     details.transactions.forEach(trans => {
         content.push({
             layout: "noBorders",
-            table:{
-                widths: [95,'*',90],
-                body:[
-                    [
-                        {
+            table: {
+                widths: [95, '*', 90],
+                body: [
+                    [{
                             text: ""
                         },
                         {
@@ -660,7 +646,7 @@ function getContent(details) {
                                             alignment: 'justify',
                                             // right,down,left,up
                                             margin: [1, -1, 0, 0]
-                
+
                                         },
                                         {
                                             text: formatAmount(trans.amount),
@@ -671,8 +657,8 @@ function getContent(details) {
                                             // right,down,left,up
                                             margin: [1, -1, 0, 0]
                                         },
-                
-                
+
+
                                     ]
                                 ]
                             }
@@ -692,11 +678,10 @@ function getContent(details) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     const other_content = [{
             layout: "noBorders",
-            table:{
-                widths:[95,'*',90],
-                body:[
-                    [
-                        {
+            table: {
+                widths: [95, '*', 90],
+                body: [
+                    [{
                             text: "",
                         },
                         {
@@ -712,7 +697,7 @@ function getContent(details) {
                                             alignment: 'right',
                                             // right,down,left,up
                                             margin: [1, -1, 0, 0]
-                
+
                                         },
                                         {
                                             text: formatAmount(total_amount),
@@ -723,7 +708,7 @@ function getContent(details) {
                                             // right,down,left,up
                                             margin: [1, -1, 0, 0]
                                         },
-                
+
                                     ]
                                 ]
                             }
@@ -734,7 +719,7 @@ function getContent(details) {
                     ]
                 ]
             }
-            
+
         },
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -767,11 +752,10 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',150],
+                widths: [150, '*', 150],
                 heights: [2],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -797,11 +781,10 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',150],
+                widths: [150, '*', 150],
                 heights: [2],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -848,11 +831,10 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',150],
+                widths: [150, '*', 150],
                 heights: [2, ],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -877,11 +859,10 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',150],
+                widths: [150, '*', 150],
                 heights: [2, ],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -904,11 +885,10 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',150],
-                heights: [2,],
+                widths: [150, '*', 150],
+                heights: [2, ],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {
@@ -932,11 +912,10 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150,'*',150],
+                widths: [150, '*', 150],
                 heights: [2],
                 body: [
-                    [
-                        {
+                    [{
                             text: ""
                         },
                         {

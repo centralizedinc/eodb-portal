@@ -73,7 +73,7 @@ var BusinessPermitSchema = new mongoose.Schema({
             type: String
         },
         monthly_salary: {
-            type: Number
+            type: String
         },
         height: {
             type: Number

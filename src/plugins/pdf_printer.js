@@ -9,9 +9,11 @@ import FIREANDSAFETY from "../components/pdf/fireandsafety";
 import POLICECLEARANCE from "../components/pdf/policeclearance";
 import RECEIPT from "../components/pdf/receipt";
 import BUSINESSPERMIT_SAN_ANTONIO from "../components/pdf/BusinessPermit_San_Antonio";
+import CEDULA_SAN_ANTONIO from "../components/pdf/CommunityTaxCert_San_Antonio";
+import BRGY_BUSINESS_CLEARANCE from "../components/pdf/brgy_business_clearance";
 
 const printers = {
-    BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT, BUSINESSPERMIT_SAN_ANTONIO
+    BGYCLEARANCE, FIREANDSAFETY, BUSINESSPERMIT, POLICECLEARANCE, RECEIPT, BUSINESSPERMIT_SAN_ANTONIO, CEDULA_SAN_ANTONIO, BRGY_BUSINESS_CLEARANCE
 }
 
 export default {

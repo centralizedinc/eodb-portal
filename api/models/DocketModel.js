@@ -43,12 +43,10 @@ var DocketSchema = new mongoose.Schema({
         type: String
     },
     date_approved: {
-        type: Date,
-        default: new Date()
+        type: Date
     },
     date_rejected: {
-        type: Date,
-        default: new Date()
+        type: Date
     },
     date_created: {
         type: Date,

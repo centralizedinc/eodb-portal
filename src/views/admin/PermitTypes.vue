@@ -35,8 +35,8 @@
         <a-form-item label="Path">
           <a-input placeholder="Path" v-model="permit.path" />
         </a-form-item>
-        <a-form-item label="API Route">
-          <a-input placeholder="API Route" v-model="permit.api_route" />
+        <a-form-item label="Keyword">
+          <a-input placeholder="Enter Keyword" v-model="permit.keyword"></a-input>
         </a-form-item>
         <a-form-item>
           <a-checkbox :v-model="permit.primary">Check if this is a primary</a-checkbox>
@@ -47,39 +47,97 @@
               <a-tab-pane key="1" tab="REQUIREMENTS">
                 <a-row type="flex" justify="end">
                   <a-col :span="24">
-                    <a-row type="flex" justify="end" :gutter="16">
-                      <a-col :span="12">
-                        <a-input v-model="requirement.name" placeholder="Requirement"></a-input>
-                      </a-col>
-                      <a-col :span="12">
-                        <a-select
-                          v-model="requirement.application_type"
-                          placeholder="Select Application Type"
-                        >
-                          <a-select-option key="0" value="NEW">New</a-select-option>
-                          <a-select-option key="1" value="RENEWAL">Renewal</a-select-option>
-                        </a-select>
-                      </a-col>
-                      <a-col :span="12">
+                    <a-form>
+                      <a-form-item>
+                        <a-radio-group v-model="creation_mode" buttonStyle="solid">
+                          <a-radio-button :value="0">New</a-radio-button>
+                          <a-radio-button :value="1">Select from Permits</a-radio-button>
+                        </a-radio-group>
+                      </a-form-item>
+                      <template v-if="creation_mode===1">
+                        <a-form-item>
+                          <a-select
+                            placeholder="Select Permit"
+                            v-model="selection_requirement._id"
+                            @change="setPermitRequirement"
+                            notFoundContent="No Result"
+                            style="width: 100%;"
+                          >
+                            <a-select-option :key="''" :value="''" disabled>Select Permit</a-select-option>
+                            <a-select-option
+                              v-for="item in permits"
+                              :key="item._id"
+                              :value="item._id"
+                            >{{item.name}}</a-select-option>
+                          </a-select>
+                        </a-form-item>
+                        <a-form-item>
+                          <a-select
+                            v-model="selection_requirement.application_type"
+                            placeholder="Select Application Type"
+                            style="width: 100%;"
+                          >
+                            <a-select-option key="0" :value="0">New</a-select-option>
+                            <a-select-option key="1" :value="1">Renewal</a-select-option>
+                          </a-select>
+                        </a-form-item>
+                        <a-form-item>
+                          <a-input
+                            v-model="selection_requirement.keyword"
+                            placeholder="Keyword"
+                            :disabled="true"
+                          />
+                        </a-form-item>
+                        <a-form-item>
+                          <a-checkbox
+                            :v-model="selection_requirement.required"
+                          >Check if this must be attach and cannot be instantly apply.</a-checkbox>
+                        </a-form-item>
+                        <a-form-item>
+                          <a-button
+                            type="primary"
+                            block
+                            icon="plus"
+                            ghost
+                            @click="addRequirement"
+                            :disabled="!selection_requirement._id || selection_requirement.application_type === null || !selection_requirement.keyword"
+                          >Add</a-button>
+                        </a-form-item>
+                      </template>
+                      <template v-else>
+                        <a-form-item>
+                          <a-input v-model="requirement.name" placeholder="Requirement Name" />
+                        </a-form-item>
+                        <a-form-item>
+                          <a-select
+                            v-model="requirement.application_type"
+                            placeholder="Select Application Type"
+                            style="width: 100%;"
+                          >
+                            <a-select-option key="0" :value="0">New</a-select-option>
+                            <a-select-option key="1" :value="1">Renewal</a-select-option>
+                          </a-select>
+                        </a-form-item>
+                        <a-form-item>
                           <a-input v-model="requirement.keyword" placeholder="Keyword" />
-                      </a-col>
-                      <a-col :span="12">
-                          <a-input-number v-model="requirement.amount" placeholder="Amount" />
-                      </a-col>
-                      <a-col :span="12">
-                          <a-checkbox :v-model="requirement.required">Check if this is a required</a-checkbox>
-                      </a-col>
-                      <a-col style="margin-top:2vh" :span="6">
-                        <a-button
-                          type="primary"
-                          block
-                          icon="plus"
-                          ghost
-                          @click="addRequirement"
-                          :disabled="!requirement.name || !requirement.application_type"
-                        >Add</a-button>
-                      </a-col>
-                    </a-row>
+                        </a-form-item>
+                        <a-form-item>
+                          <a-checkbox
+                            :v-model="requirement.required"
+                          >Check if this must be attach and cannot be instantly apply.</a-checkbox>
+                        </a-form-item>
+                        <a-form-item>
+                          <a-button
+                            type="primary"
+                            block
+                            icon="plus"
+                            ghost
+                            @click="addRequirement"
+                            :disabled="!requirement.name || requirement.application_type === null || !requirement.keyword"
+                          >Add</a-button>
+                        </a-form-item>
+                      </template>
+                    </a-form>
                   </a-col>
                 </a-row>
                 <a-table
@@ -88,6 +146,9 @@
                   :bordered="true"
                   :dataSource="permit.requirements"
                 >
+                  <span slot="application_type" slot-scope="text">
+                    <span>{{["NEW", "RENEWAL"][text]}}</span>
+                  </span>
                   <span slot="action" slot-scope="text, record">
                     <a-button type="danger" icon="delete" @click="removeRequirement(record)"></a-button>
                   </span>
@@ -163,6 +224,9 @@
                   :dataSource="permit.checklists"
                 >
                   <span slot="department" slot-scope="text">{{getDepartment(text)}}</span>
+                  <span slot="action" slot-scope="text, record">
+                    <a-button type="danger" icon="delete" @click="removeChecklist(record)"></a-button>
+                  </span>
                 </a-table>
               </a-tab-pane>
             </a-tabs>
@@ -212,6 +276,11 @@ export default {
         {
           title: "Description",
           dataIndex: "description"
+        },
+        {
+          title: "",
+          dataIndex: "action",
+          scopedSlots: { customRender: "action" }
         }
       ],
       cols_app: [
@@ -233,7 +302,8 @@ export default {
         },
         {
           title: "Application Type",
-          dataIndex: "application_type"
+          dataIndex: "application_type",
+          scopedSlots: { customRender: "application_type" }
         },
         {
           title: "Remove",
@@ -265,7 +335,10 @@ export default {
           dataIndex: "_id",
           scopedSlots: { customRender: "actions" }
         }
-      ]
+      ],
+      selection_requirement: {},
+      disable_keyword: false,
+      creation_mode: 0
     };
   },
   created() {
@@ -296,12 +369,28 @@ export default {
       this.$notification.error({ message: "Appover Removed!" });
     },
     addRequirement() {
-      this.permit.requirements.push(this.deepCopy(this.requirement));
-      this.requirement = {};
-      this.$notification.success({ message: "Requirement Added!" });
+        //New
+      if (this.creation_mode === 0) {
+        this.permit.requirements.push(this.deepCopy(this.requirement));
+        this.requirement = {};
+        this.$notification.success({ message: "Requirement Added!" });
+      } else if (this.creation_mode === 1) {
+        this.permit.requirements.push(this.deepCopy(this.selection_requirement));
+        this.selection_requirement = {};
+        this.$notification.success({ message: "Requirement Added!" });
+      }
+    },
+    setPermitRequirement(value){
+      const permit = this.permits.find(v => v._id.toString() === value);
+      if(permit) {
+        this.selection_requirement = permit;
+        console.log('this.selection_requirement :', this.selection_requirement);
+      }
     },
     removeRequirement(item) {
-      this.permit.requirements.splice(this.permit.approvers.indexOf(item), 1);
+      console.log('item :', item);
+      console.log('this.permit :', this.permit);
+      this.permit.requirements.splice(this.permit.requirements.indexOf(item), 1);
 
       this.$notification.error({ message: "Requirement Removed!" });
     },
@@ -309,7 +398,14 @@ export default {
       this.permit.checklists.push(this.deepCopy(this.checklist));
       this.checklist = {};
 
-      this.$notification.success({ message: "Requirement Added!" });
+      this.$notification.success({ message: "Checklist Added!" });
+    },
+    removeChecklist(item) {
+      console.log('item :', item);
+      console.log('this.permit :', this.permit);
+      this.permit.checklists.splice(this.permit.checklists.indexOf(item), 1);
+
+      this.$notification.error({ message: "Checklist Removed!" });
     },
     getDepartment(id) {
       return this.offices.find(x => x._id === id).description;
@@ -323,6 +419,8 @@ export default {
       this.checklist = {};
       this.approver = {};
       this.requirement = {};
+      this.selection_requirement = {};
+      this.creation_mode = 0;
       this.visible = false;
       this.edit_mode = false;
     },
@@ -333,6 +431,7 @@ export default {
     },
     submit() {
       this.loading = true;
+      console.log('###this.permit :', this.permit);
       if (this.edit_mode) {
         this.$http
           .post(`/permits/${this.permit._id}`, this.permit)
@@ -352,6 +451,8 @@ export default {
             this.checklist = {};
             this.approver = {};
             this.requirement = {};
+            this.selection_requirement = {};
+            this.creation_mode = 0;
             this.init();
           })
           .catch(error => {
@@ -376,6 +477,8 @@ export default {
             this.checklist = {};
             this.approver = {};
             this.requirement = {};
+            this.selection_requirement = {};
+            this.creation_mode = 0;
             this.init();
           })
           .catch(error => {

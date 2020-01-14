@@ -309,6 +309,7 @@ function processApprovedApplication(reference_no) {
                 }
             })
             .then(result => {
+                results.other_permits = result;
                 resolve(results)
             })
             .catch((err) => {
@@ -349,12 +350,39 @@ function createOtherPermit(type, application) {
         return PolicePermitDao.create(application_details);
     }
     else if (type === "barangay") {
+        console.log('requirements :', application.details.requirements);
+        const required_doc = application.details.requirements.find(v => v.keyword === "barangay") || {};
+        console.log('required_doc :', required_doc);
+        function calculateAge(birthdate) {
+            var today = new Date(),
+                birthDate = new Date(birthdate),
+                age = today.getFullYear() - birthDate.getFullYear(),
+                m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+            return age
+        }
         const application_details = {
             reference_no: application.reference_no,
             account_id: application.account_id,
             application_type: 0,
             barangay_type: "business",
-            permit_code: ""
+            permit_code: required_doc._id,
+            personal_details: {
+                name: application.details.owner_details.name,
+                birthdate: application.details.owner_details.birthdate,
+                birthplace: application.details.owner_details.birthplace,
+                gender: application.details.owner_details.gender,
+                civil_status: application.details.owner_details.civil_status,
+                ctc_no: application.details.owner_details.ctc_no,
+                age: calculateAge(application.details.owner_details.birthdate)
+            },
+            business_address: application.details.business_address,
+            business_details: {
+                business_name: application.details.business_details.business_name,
+                business_owner: `${application.details.owner_details.name.first} ${application.details.owner_details.name.last} ${(", " + application.details.owner_details.name.suffix) || ""}`,
+                business_type: application.details.business_details.business_owner,
+                franchise: application.details.business_details.franchise
+            }
         }
         return BarangayPermitDao.create(application_details);
     }
@@ -376,8 +404,20 @@ function createOtherPermit(type, application) {
                 tin: application.details.owner_details.tin
             },
             tax: {
+                total: application.details.owner_details.tax.total,
+                interest: application.details.owner_details.tax.interest,
+                total_amount_paid: application.details.owner_details.tax.total_amount_paid,
                 taxable: {
-                    basic: application.details.owner_details.basic_community_tax
+                    basic: application.details.owner_details.tax.taxable.basic,
+                    business_income: application.details.owner_details.tax.taxable.business_income,
+                    profession_income: application.details.owner_details.tax.taxable.profession_income,
+                    property_income: application.details.owner_details.tax.taxable.property_income,
+                },
+                community: {
+                    basic: application.details.owner_details.tax.community.basic,
+                    business_income: application.details.owner_details.tax.community.business_income,
+                    profession_income: application.details.owner_details.tax.community.profession_income,
+                    property_income: application.details.owner_details.tax.community.property_income,
                 }
             }
         }

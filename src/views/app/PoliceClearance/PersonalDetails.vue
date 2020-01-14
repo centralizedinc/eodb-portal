@@ -1,8 +1,16 @@
 <template>
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
-    <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">New Applicant Registration</a-col>
+    <a-row slot="title" type="flex" justify="space-between">
+      <a-col :xs="{span: 0}" :sm="{span: 0}" :md="{span: 21}" :xl="{span: 21}">
+        <h1 style="font-size:25px; color: #7e7e7e">New Applicant Registration</h1>
+      </a-col>
+      <a-col :xs="{span: 21}" :sm="{span: 21}" :md="{span: 0}" :xl="{span: 0}">
+        <h1 style="font-size:25px; color: #7e7e7e">
+          New Applicant
+          <br />Registration
+        </h1>
+      </a-col>
       <a-col :span="2" style="text-align: right;">
         <!-- <a-tooltip placement="left">
           <span slot="title">
@@ -406,7 +414,7 @@
   </a-card>
 </template>
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   props: ["form", "step", "errors"],

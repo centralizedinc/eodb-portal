@@ -50,14 +50,16 @@
     <a-col :span="10">
       <a-affix :offsetTop="10">
         <a-card style="background-color: #242B30;border-radius:10px">
-          <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
-            <a-list-item slot="renderItem" slot-scope="item">
-              <a-list-item-meta :title="item.name" :description="item.description">
-                <a-checkbox slot="avatar"></a-checkbox>
-              </a-list-item-meta>
-            </a-list-item>
-            <h2 slot="header">Application Checklist</h2>
-          </a-list>
+          <a-checkbox-group v-model="selected_checklist" style="width: 100%;">
+            <a-list size="large" bordered :dataSource="checklist" style="background-color: #FFFFFF">
+              <a-list-item slot="renderItem" slot-scope="item">
+                <a-list-item-meta :title="item.name" :description="item.description">
+                  <a-checkbox slot="avatar" :value="item.name"></a-checkbox>
+                </a-list-item-meta>
+              </a-list-item>
+              <h2 slot="header">Application Checklist</h2>
+            </a-list>
+          </a-checkbox-group>
 
           <a-textarea
             style="margin-top: 1vh"
@@ -87,7 +89,7 @@
             >
               <a-button
                 type="primary"
-                :disabled="rejecting_application"
+                :disabled="rejecting_application || selected_checklist.length !== checklist.length"
                 :loading="approving_application"
               >Approved</a-button>
             </a-popconfirm>
@@ -116,6 +118,7 @@ export default {
   },
   data() {
     return {
+      selected_checklist: [],
       provinces_data,
       form: {
         owner_details: {
@@ -137,24 +140,22 @@ export default {
   computed: {
     department() {
       return this.$store.state.admin_session.department;
+    },
+    checklist() {
+      var data = this.$store.state.admin_session.checklist.find(
+        v => v.permit_type === this.form.permit_type
+      );
+      return data ? data.checklist : [];
     }
   },
   methods: {
     init() {
-      this.$http
-        .get("/permits")
-        // permits
-        // checklists
+      this.$store
+        .dispatch("GET_CHECKLIST_BY_DEPARTMENT")
         .then(results => {
-          console.log("result permits: " + JSON.stringify(results));
-          this.checklist = results.data.checklists;
-          console.log(
-            "result data checklist: " + JSON.stringify(this.checklist)
-          );
           return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
         })
         .then(result => {
-          console.log("GET_ADMIN_DEPARTMENT result :", result);
           this.loading = false;
         })
         .catch(err => {
@@ -214,7 +215,7 @@ export default {
               return this.processBarangay(results.permit.details);
             //barangay
             else if (results.permit.details.permit_type === "business")
-              return this.processBusiness(results.permit.details);
+              return this.processBusiness(results);
             //business
             else if (results.permit.details.permit_type === "cedula")
               return this.processCedula(results.permit.details);
@@ -260,7 +261,7 @@ export default {
       });
       return Promise.all(promises);
     },
-    processBusiness() {
+    processBusiness(results) {
       return new Promise((resolve, reject) => {
         this.getPermitsAddress(results.permit.details)
           .then(address => {
@@ -315,8 +316,7 @@ export default {
     },
     processCedula(details) {
       return new Promise((resolve, reject) => {
-        const permit_details = {};
-        this.$upload(permit_details, "CEDULA")
+        this.$upload(details, "CEDULA_SAN_ANTONIO")
           .then(blob => {
             return this.saveEpermit(blob, details);
           })
@@ -332,10 +332,10 @@ export default {
       return new Promise((resolve, reject) => {
         this.getPermitsAddress(details)
           .then(address => {
-            return this.uploadPolicePermit(results.permit.details, address);
+            return this.uploadPolicePermit(details, address);
           })
           .then(blob => {
-            if (blob) return this.saveEpermit(blob, results.permit.details);
+            if (blob) return this.saveEpermit(blob, details);
           })
           .then(result => {
             resolve(result);

@@ -3,9 +3,7 @@
     <a-row type="flex">
       <!-- options -->
       <a-col :span="24">
-        <a-card>
-          <h2>Payment Options</h2>
-        </a-card>
+        <a-card size="small" title="Payment Options"></a-card>
         <a-tabs @change="navigate">
           <a-tab-pane key="0">
             <template slot="tab">
@@ -104,18 +102,21 @@ export default {
       this.current_option = this.tabs[e];
     },
     submit() {
-      console.log('this.is_valid_card :', this.is_valid_card);
-      console.log('this.is_valid_name :', this.is_valid_name);
-      console.log('this.is_valid_expiry :', this.is_valid_expiry);
-      console.log('this.is_valid_cvc :', this.is_valid_cvc);
+      console.log("this.is_valid_card :", this.is_valid_card);
+      console.log("this.is_valid_name :", this.is_valid_name);
+      console.log("this.is_valid_expiry :", this.is_valid_expiry);
+      console.log("this.is_valid_cvc :", this.is_valid_cvc);
       if (
         this.is_valid_card &&
         this.is_valid_name &&
         this.is_valid_expiry &&
         this.is_valid_cvc
       ) {
-        $emit("pay", { payment_details, method: current_option.toLowerCase() });
-      } 
+        this.$emit("pay", {
+          payment_details: this.payment_details,
+          method: this.current_option.toLowerCase()
+        });
+      }
     }
   }
 };

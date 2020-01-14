@@ -147,7 +147,7 @@
       <a-row style="font-weight: bold" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item label="Property Index Number(PIN)">
-            <a-input placeholder="Property Index Number(PIN)" v-model="form.business_details.pin"></a-input>
+            <a-input v-model="form.business_details.pin"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -176,18 +176,13 @@
             </span>
             <a-input-number
               style="width: 100%"
-              placeholder="No. of Employees in Establishment*"
               v-model="form.business_details.employees_establishment"
             ></a-input-number>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item label="No. of Employees Residing within LGU">
-            <a-input-number
-              style="width: 100%"
-              placeholder="No. of Employees in Residing in LGU"
-              v-model="form.business_details.employees_residing"
-            ></a-input-number>
+            <a-input-number style="width: 100%" v-model="form.business_details.employees_residing"></a-input-number>
           </a-form-item>
         </a-col>
       </a-row>
@@ -458,7 +453,11 @@
                 Email Address
                 <i style="color: red">*</i>
               </span>
-              <a-input style="text-transform: none;" v-model="form.business_address.email" placeholder="Email Address*"></a-input>
+              <a-input
+                style="text-transform: none;"
+                v-model="form.business_address.email"
+                placeholder="Email Address*"
+              ></a-input>
             </a-form-item>
           </a-col>
         </a-row>
