@@ -141,18 +141,20 @@
           <GmapMap
             id="map"
             ref="map"
-            :center="{ lat: 13.960837, lng: 121.591532 }"
+            :center="form.business_address.coordinates"
             :zoom="16"
             map-type-id="terrain"
             draggable="true"
             style="width: 100%; height: 300px"
-            :options="{
-              mapTypeControl: false,
-              scaleControl: false,
-              streetViewControl: false,
-              rotateControl: false
-            }"
-          ></GmapMap>
+            :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
+            @click="mapClick"
+          >
+            <GmapMarker
+              :position="form.business_address.coordinates"
+              :animation="marker_animation"
+              @animation_changed="resetAnimation"
+            />
+          </GmapMap>
         </a-col>
       </a-row>
 
@@ -345,6 +347,7 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {
+      marker_animation: 0,
       regions_data,
       provinces_data,
       cities: [],
@@ -352,6 +355,9 @@ export default {
     };
   },
   created() {
+    this.$getLocation().then(coordinates => {
+      this.form.business_address.coordinates = coordinates;
+    });
     console.log("this.fixed_address :", this.fixed_address);
     if (this.fixed_address) {
       this.form.business_address.region = "04";
@@ -402,6 +408,17 @@ export default {
     this.loadReferences();
   },
   methods: {
+    mapClick(e) {
+      console.log("e :", e);
+      this.form.business_address.coordinates.lat = e.latLng.lat();
+      this.form.business_address.coordinates.lng = e.latLng.lng();
+      this.marker_animation = 4;
+    },
+    resetAnimation(e) {
+      setTimeout(function(params) {
+        this.marker_animation = 0;
+      }, 1000);
+    },
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;

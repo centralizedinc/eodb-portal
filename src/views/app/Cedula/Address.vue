@@ -47,17 +47,23 @@
         </a-col>
         <!-- Map -->
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-          <a-button type="primary">Pin Location</a-button>
           <GmapMap
             id="map"
             ref="map"
-            :center="{ lat: 13.960837, lng: 121.591532 }"
+            :center="form.address.coordinates"
             :zoom="16"
             map-type-id="terrain"
             draggable="true"
-            style="width: 100%; height: 350px"
+            style="width: 100%; height: 300px"
             :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
-          ></GmapMap>
+            @click="mapClick"
+          >
+            <GmapMarker
+              :position="form.address.coordinates"
+              :animation="marker_animation"
+              @animation_changed="resetAnimation"
+            />
+          </GmapMap>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
@@ -227,6 +233,7 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {
+      marker_animation: 0,
       regions_data,
       provinces_data,
       cities: [],
@@ -251,7 +258,23 @@ export default {
   mounted() {
     this.loadReferences();
   },
+  created() {
+    this.$getLocation().then(coordinates => {
+      this.form.address.coordinates = coordinates;
+    });
+  },
   methods: {
+    mapClick(e) {
+      console.log("e :", e);
+      this.form.address.coordinates.lat = e.latLng.lat();
+      this.form.address.coordinates.lng = e.latLng.lng();
+      this.marker_animation = 4;
+    },
+    resetAnimation(e) {
+      setTimeout(function(params) {
+        this.marker_animation = 0;
+      }, 1000);
+    },
     checkErrors(field) {
       var form_error = this.errors.find(v => v.field === field);
       return form_error ? form_error.error : null;
