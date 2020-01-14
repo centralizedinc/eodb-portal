@@ -2,7 +2,7 @@
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
     <a-row slot="title">
-      <a-col :span="22" style="font-size: 25px;">Purpose</a-col>
+      <a-col :span="22" style="font-size: 25px;">Type of Clearance</a-col>
     </a-row>
     <!-- form start -->
     <a-form>
@@ -50,7 +50,7 @@ export default {
       check_bp: false,
       plainOptions: [
         { label: "Barangay Clearance", value: "pc" },
-        { label: "Business Clearance", value: "bp" }
+        { label: "Barangay Business Clearance", value: "bp" }
       ]
     };
   },

@@ -187,7 +187,7 @@ function getContent(details){
             heights: [6,],
             body: [
               [{
-                text: ` This is to certify that ${checkText(details.business_name)} owned and operated by ${checkText(details.business_owner)} with business address located ${checkText(details.business_address)}, after complying with the requirements prescribed by his Office, is hereby issued a BARANGAY CLEARANCE for the purpose of securing a Mayor’s Permit in order to ${checkText(details.business_nature)} in accordance with Barangay  Revenue Ordinance of 2008. However, the Barangay Clearance may be cancelled or revoked anytime if public safety and interest so require.`,
+                text: ` This is to certify that ${checkText(details.business_name)} owned and operated by ${checkText(details.business_owner)} with business address located ${checkText(details.business_address)}, after complying with the requirements prescribed by his Office, is hereby issued a BARANGAY BUSINESS CLEARANCE for the purpose of securing the necessary Business Permit and License from the office of the Mayor.`,
                 fontSize: 10,
                 alignment: 'justify',
                 // right,down,left,up

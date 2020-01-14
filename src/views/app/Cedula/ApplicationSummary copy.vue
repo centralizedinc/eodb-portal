@@ -1,4 +1,45 @@
 <template>
+<<<<<<< HEAD
+  <a-row type="flex" justify="start">
+    <a-col :xs="{span: 24}" :md="{span:24}" :xl="{span:24}">
+      <a-card
+        :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
+        :bodyStyle="{ 'padding-top': 0 }"
+        title="Application Summary"
+      >
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Part I. Personal Details</a-divider>
+        <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
+          <a-row class="summary-row">
+            <a-col :span="12">Issued To</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{form.issued_to}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Citizenship</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{form.personal_details.citizenship}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Last Name</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{ form.personal_details.name.last }}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">First Name</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col
+              :span="10"
+              style="text-transform:uppercase"
+            >{{ form.personal_details.name.first }}</a-col>
+          </a-row>
+=======
   <a-card
     :headStyle="{ border: 'none', color: '#7f7f7f', 'font-size': '25px' }"
     :bodyStyle="{ 'padding-top': 0 }"
@@ -8,28 +49,166 @@
       style="color: black;font-weight: bold;margin-top: 5vh"
       orientation="left"
     >Part I. Personal Details</a-divider>
-    <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
-          <a-row class="summary-row">
-            <a-col :span="8">Issued To</a-col>
-            <a-col :span="1">:</a-col>
-            <a-col :span="15" style="text-transform:uppercase">{{form.issued_to}}</a-col>
-          </a-row>
-          <a-row class="summary-row">
-            <a-col :span="8">Citizenship</a-col>
-            <a-col :span="1">:</a-col>
-            <a-col :span="15" style="text-transform:uppercase">{{form.personal_details.citizenship}}</a-col>
-          </a-row>
+>>>>>>> 677d5cbdc3acdc871f94cbc0de0dd5abdbcd8b20
+
     <a-row class="summary-row">
       <a-col :span="8">Last Name</a-col>
       <a-col :span="1">:</a-col>
 
-      <a-col :span="15" style="text-transform:uppercase">{{form.personal_details.name.last}}</a-col>
+<<<<<<< HEAD
+            <!-- <a-col :span="15">{{ form.personal_details.name.middle }}</a-col> -->
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.name.middle == null || form.personal_details.name.suffix == "" || form.personal_details.name.suffix == undefined
+              ? " - "
+              : form.personal_details.name.middle
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Suffix</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.name.suffix == null || form.personal_details.name.suffix == ""
+              ? " - "
+              : form.personal_details.name.suffix
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Birthday</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col
+              :span="10"
+              style="text-transform:uppercase"
+            >{{formatDate(form.personal_details.birthdate, null, true)}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Gender</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{ form.personal_details.gender }}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Civil Status</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <!-- <a-col :span="15">{{form.personal_details.civil_status}}</a-col> -->
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.civil_status == null ||
+              form.personal_details.civil_status == ""
+              ? " - "
+              : form.personal_details.civil_status
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Birthplace</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col
+              :span="10"
+              style="text-transform:uppercase"
+            >{{ form.personal_details.birthplace }}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">If other country</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.other_country == null ||
+              form.personal_details.other_country == ""
+              ? " - "
+              : form.personal_details.other_country
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">ICR No. (if alien)</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <!-- <a-col :span="15">{{ form.personal_details.icr_no }}</a-col> -->
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.icr_no == null || form.personal_details.icr_no == ""
+              ? " - "
+              : form.personal_details.icr_no
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Height (cm)</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.height == null ||
+              form.personal_details.height == ""
+              ? " - "
+              : form.personal_details.height
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Weight (kg)</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.weight == null ||
+              form.personal_details.weight == ""
+              ? " - "
+              : form.personal_details.weight
+              }}
+            </a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Occupation</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">
+              {{
+              form.personal_details.occupation == null ||
+              form.personal_details.occupation == ""
+              ? " - "
+              : form.personal_details.occupation
+              }}
+            </a-col>
+          </a-row>
+          <br />
+        </a-col>
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Part II. Address</a-divider>
+        <a-row type="flex" justify="start">
+          <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
+            <a-row class="summary-row">
+              <a-col :xs="{span: 18}" :md="{span: 12}">Address</a-col>
+              <a-col :span="1">:</a-col>
+              <a-col :span="1"></a-col>
+              <a-col :xs="{span: 4}" :md="{span: 10}" style="text-transform:uppercase">
+                {{address}}
+                <!-- {{form.address.region}}{{form.address.province}}
+                {{form.address.city}}{{form.address.barangay}}{{form.address.postal_code}}-->
+              </a-col>
+            </a-row>
+          </a-col>
+        </a-row>
+=======
+      <a-col :span="15" style="text-transform:uppercase">{{ form.personal_details.name.last }}</a-col>
     </a-row>
     <a-row class="summary-row">
       <a-col :span="8">First Name</a-col>
       <a-col :span="1">:</a-col>
+>>>>>>> 677d5cbdc3acdc871f94cbc0de0dd5abdbcd8b20
 
-      <a-col :span="10" style="text-transform:uppercase">{{form.personal_details.name.first}}</a-col>
+      <a-col :span="10" style="text-transform:uppercase">{{ form.personal_details.name.first }}</a-col>
     </a-row>
 
     <a-row class="summary-row">
@@ -158,23 +337,7 @@
       </a-col>
     </a-row>
     <br />
-  <a-divider
-          style="color: black;font-weight: bold;margin-top: 5vh"
-          orientation="left"
-        >Part II. Address</a-divider>
-        <a-row type="flex" justify="start">
-          <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
-            <a-row class="summary-row">
-              <a-col :span="8">Address</a-col>
-              <a-col :span="1">:</a-col>
-              <a-col :span="15" style="text-transform:uppercase">
-                {{address}}!
-                <!-- {{form.address.region}}{{form.address.province}}
-                {{form.address.city}}{{form.address.barangay}}{{form.address.postal_code}}-->
-              </a-col>
-            </a-row>
-          </a-col>
-        </a-row>
+
     <a-divider></a-divider>
     <a-row type="flex" justify="start">
       <a-col :xs="{span: 24}" :sm="{span:24}" :md="{span:24}" :lg="{span:24}" :xl="{span:24}">
@@ -206,7 +369,6 @@
         <a-button>Save Draft</a-button>
       </a-col>-->
     </a-row>
-    </a-col>
   </a-card>
 </template>
 <script>
@@ -217,6 +379,7 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {
+      address: "",
       data: [
         {
           name: "Basic Community Tax (P5.00) Voluntary or Exempted (P1.00)",
@@ -315,7 +478,7 @@ export default {
       this.data[5].community_tax + this.data[6].community_tax;
     this.form.tax.total_amount_paid = this.data[7].community_tax;
   },
-  created() {
+   created() {
     console.log("this.regions_datasss :", regions_data);
     this.getAddress();
   },
@@ -378,7 +541,7 @@ export default {
         });
     }
   }
+
 };
 </script>
 <style></style>
-

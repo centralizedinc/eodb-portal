@@ -1,7 +1,7 @@
 <template>
   <a-row type="flex" justify="space-between">
     <!-- Steps -->
-    <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
+    <a-col :xs="{ span: 0 }" :lg="{span: 5}" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
       <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
         <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -20,7 +20,7 @@
     <a-col
       style="padding: 10px"
       :xs="{ span: 24 }"
-      :md="{ span: 16 }"
+      :md="{ span: 24 }"
       :lg="{span: 18}"
       class="fill-up-form"
     >
@@ -432,7 +432,7 @@ export default {
   },
   methods: {
     init() {
-      console.log("form data: " + JSON.stringify(this.form))
+      console.log("form data: " + JSON.stringify(this.form));
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
@@ -527,6 +527,7 @@ export default {
       }
       var transaction_no = "",
         reference_no = "";
+      this.transaction_details.payment_breakdown = this.payments_data_source;
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {

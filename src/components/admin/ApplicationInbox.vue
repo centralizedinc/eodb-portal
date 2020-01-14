@@ -4,6 +4,9 @@
       <a-col :span="8">
         <a-input-search placeholder="Search by Reference No." v-model="search" />
       </a-col>
+      <a-col :push="14" :span="2">
+        <a-button @click="init(true)" type="secondary" icon="reload">Refresh</a-button>
+      </a-col>
     </a-row>
     <a-table :dataSource="dockets" :columns="cols" :loading="loading" :bordered="true">
       <span slot="date" slot-scope="text">{{formatDate(text, 'time')}}</span>
@@ -167,7 +170,7 @@ export default {
     }
   },
   methods: {
-    init() {
+    init(refresh) {
       console.log(
         "this.$store.state.admin_session.admin :",
         this.$store.state.admin_session.admin
@@ -176,7 +179,7 @@ export default {
       this.loading = true;
 
       this.$store
-        .dispatch("GET_DOCKETS_INBOX")
+        .dispatch("GET_DOCKETS_INBOX", refresh)
         .then(result => {
           console.log("GET_DOCKETS_INBOX result :", result);
           // this.dockets = results.data;

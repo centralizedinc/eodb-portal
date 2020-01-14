@@ -340,10 +340,16 @@
               Community Tax Certificate Number
               <i style="color: red">*</i>
             </span>
-            <a-input
-              v-model="form.owner_details.ctc_no"
-              placeholder="Found at the upper right corner. (i.e., CCI2### ########)"
-            ></a-input>
+            <a-tooltip>
+              <span
+                slot="title"
+              >Enter without spaces. Found at the upper right corner (CCI2###########)</span>
+              <a-input
+                v-model="form.owner_details.ctc_no"
+                placeholder="CC•••• ••••••••"
+                maxlength="15"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <!-- <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
@@ -421,8 +427,8 @@
           <a-form-item>
             <span slot="label">Income from Real Property</span>
 
-            <a-input-number 
-              v-model="form.owner_details.tax.taxable.property_income" 
+            <a-input-number
+              v-model="form.owner_details.tax.taxable.property_income"
               @change="computation"
               :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
               :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
@@ -442,30 +448,30 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label">
-              Gross Receipts or Earnings derived business during the preceding
-              year
-            </span>
-
-            <a-input-number 
-              v-model="form.owner_details.tax.taxable.business_income" 
-              @change="computation"
-              :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-              :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
-              style="width: 100%;"
-            />
+            <span slot="label">Gross Receipts or Earnings</span>
+            <a-tooltip placement="bottom">
+              <span
+                slot="title"
+              >Gross Receipts or Earnings derived business durung the preceding year</span>
+              <!-- Use to format number into currency -->
+              <a-input-number
+                v-model="form.owner_details.tax.taxable.business_income"
+                @change="computation"
+                :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
+                style="width: 100%;"
+              />
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
+            <span slot="label">Salaries/Gross Receipts/Earnings</span>
             <a-tooltip placement="bottom">
-              <template slot="title">
-                <span>
-                  Salaries or Gross Receipts or Earnings derived exercise of
-                  profession or pursuit of any occupation
-                </span>
-              </template>
+              <span slot="title">
+                Salaries or Gross Receipts or Earnings derived exercise of
+                profession or pursuit of any occupation
+              </span>
               <a-input-number
                 v-model="form.owner_details.tax.taxable.profession_income"
                 @change="computation"
@@ -835,20 +841,30 @@ export default {
       var taxable_basic = this.form.owner_details.tax.taxable.basic,
         community_basic = 0,
         community_business_income = 0,
-        taxable_business_income = this.form.owner_details.tax.taxable.business_income,
+        taxable_business_income = this.form.owner_details.tax.taxable
+          .business_income,
         community_profession_income = 0,
-        taxable_profession_income = this.form.owner_details.tax.taxable.profession_income,
+        taxable_profession_income = this.form.owner_details.tax.taxable
+          .profession_income,
         community_property_income = 0,
-        taxable_property_income = this.form.owner_details.tax.taxable.property_income,
+        taxable_property_income = this.form.owner_details.tax.taxable
+          .property_income,
         total = 0,
         interest = 0,
         total_amount_paid = 0,
         month = new Date().getMonth();
-      console.log('this.$store.state.permits.filing_permit :', this.$store.state.permits.filing_permit);
+      console.log(
+        "this.$store.state.permits.filing_permit :",
+        this.$store.state.permits.filing_permit
+      );
       try {
-        const data = this.deepCopy(this.$store.state.permits.filing_permit.requirements).find(v => v.keyword === 'cedula');
-        var computation_formula = this.computation_formulas.find(v=> v.permit_type === data._id);
-        console.log('computation_formula :', computation_formula);
+        const data = this.deepCopy(
+          this.$store.state.permits.filing_permit.requirements
+        ).find(v => v.keyword === "cedula");
+        var computation_formula = this.computation_formulas.find(
+          v => v.permit_type === data._id
+        );
+        console.log("computation_formula :", computation_formula);
         if (computation_formula) eval(computation_formula.computation);
       } catch (error) {
         console.log("computation_formula ctc :", error);
@@ -860,7 +876,7 @@ export default {
       this.form.owner_details.tax.total = total;
       this.form.owner_details.tax.interest = interest;
       this.form.owner_details.tax.total_amount_paid = total_amount_paid;
-      this.$emit('updateCedulaPayment', total_amount_paid)
+      this.$emit("updateCedulaPayment", total_amount_paid);
       console.log(
         "computation of tax: " + JSON.stringify(this.form.owner_details.tax)
       );

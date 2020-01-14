@@ -1,9 +1,9 @@
 <template>
   <div>
     <loading-content v-if="fetching_data" />
-    <a-row type="flex" v-else justify="spa">
+    <a-row type="flex" justify="space-between" v-else>
       <!-- Steps -->
-      <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
+      <a-col :xs="{ span: 0 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
         <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
           <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -22,7 +22,7 @@
       <a-col
         style="padding: 10px"
         :xs="{ span: 24 }"
-        :md="{ span: 16 }"
+        :md="{ span: 24 }"
         :lg="{span: 18}"
         class="fill-up-form"
       >
@@ -30,7 +30,7 @@
         <h4>This information will help us assess your application.</h4>
 
         <a-row type="flex" justify="space-between">
-          <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 17}">
+          <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 16}">
             <component
               :is="form_components[current_step]"
               :form="form"
@@ -254,6 +254,7 @@ export default {
         "ApplicationSummary"
       ],
       form: {
+        requestor: "",
         application_type: 0,
         permit_type: "business",
         police_purpose: "",
@@ -515,11 +516,15 @@ export default {
     }
   },
   methods: {
-    updateCedulaPayment(){
-      const index = this.payments_data_source.findIndex(v=>v.fee_type==='cedula');
-      console.log('this.form.owner_details.tax :', this.form.owner_details.tax);
-      if(index > -1) {
-        this.payments_data_source[index].amount = this.form.owner_details.tax.total_amount_paid;
+    updateCedulaPayment() {
+      const index = this.payments_data_source.findIndex(
+        v => v.fee_type === "cedula"
+      );
+      console.log("this.form.owner_details.tax :", this.form.owner_details.tax);
+      if (index > -1) {
+        this.payments_data_source[
+          index
+        ].amount = this.form.owner_details.tax.total_amount_paid;
       }
     },
     getComputation(permit_code) {
@@ -539,6 +544,11 @@ export default {
         "this.$store.state.permits.filing_permit :",
         this.$store.state.permits.filing_permit
       );
+
+      this.form.requestor =
+        this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
 
       // GET DEPARTMENTS
       const departments = this.deepCopy(
@@ -587,6 +597,7 @@ export default {
             this.fetching_data = false;
           });
       } else {
+        this.fetching_data = true;
         this.form.application_type = 0;
         conditions.push({
           permit_type: this.$store.state.permits.filing_permit._id,
@@ -628,6 +639,7 @@ export default {
             // To check payments needs to be pay
             this.checkSelectedDocs = !this.checkSelectedDocs;
             // this.updateDocsPayment();
+            this.fetching_data = false;
           })
           .catch(err => {
             console.log("GET_FEES_COMPUTATION err :", err);
@@ -980,7 +992,10 @@ export default {
           });
         }
 
-        if (this.checkDocsNeeded(["cedula"]) && !this.form.owner_details.tax.taxable.basic) {
+        if (
+          this.checkDocsNeeded(["cedula"]) &&
+          !this.form.owner_details.tax.taxable.basic
+        ) {
           errors.push({
             field: "owner_details.tax.taxable.basic",
             error: "Basic Community Tax is a required field."
@@ -1278,7 +1293,7 @@ export default {
           hidden: v.required
         };
       });
-
+      this.form.attachments = [];
       doc_req.forEach(v => {
         // if (v.hidden)
         this.form.attachments.push({
@@ -1306,9 +1321,11 @@ export default {
       var computed_amount = 0;
       if (amount || !isNaN(amount) || parseFloat(amount) > 0) {
         try {
-          console.log('#####');
+          console.log("#####");
           console.log(this.$store.state.permits.filing_permit._id);
-          console.log(this.getComputation(this.$store.state.permits.filing_permit._id));
+          console.log(
+            this.getComputation(this.$store.state.permits.filing_permit._id)
+          );
           computed_amount = eval(
             this.getComputation(this.$store.state.permits.filing_permit._id)
           );
@@ -1381,7 +1398,7 @@ export default {
 
           try {
             if (dt.keyword === "cedula") {
-              dt.fee_type = 'cedula';
+              dt.fee_type = "cedula";
               var taxable_basic = 0,
                 community_basic = 0,
                 community_business_income = 0,

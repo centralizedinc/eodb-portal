@@ -340,6 +340,7 @@ function createOtherPermit(type, application) {
                 occupation: application.details.owner_details.occupation,
                 ctc_no: application.details.owner_details.ctc_no
             },
+            purpose: application.details.police_purpose,
             address_details: application.details.owner_address,
             contact_details: {
                 tel_no: application.details.owner_details.tel_no,
@@ -367,6 +368,7 @@ function createOtherPermit(type, application) {
             application_type: 0,
             barangay_type: "business",
             permit_code: required_doc._id,
+            purpose: ["bp"],
             personal_details: {
                 name: application.details.owner_details.name,
                 birthdate: application.details.owner_details.birthdate,
@@ -379,10 +381,11 @@ function createOtherPermit(type, application) {
             business_address: application.details.business_address,
             business_details: {
                 business_name: application.details.business_details.business_name,
-                business_owner: `${application.details.owner_details.name.first} ${application.details.owner_details.name.last} ${(", " + application.details.owner_details.name.suffix) || ""}`,
+                business_owner: `${application.details.owner_details.name.first} ${application.details.owner_details.name.last}`,
                 business_type: application.details.business_details.business_owner,
                 franchise: application.details.business_details.franchise
-            }
+            },
+            requestor: application.details.requestor
         }
         return BarangayPermitDao.create(application_details);
     }
@@ -395,6 +398,7 @@ function createOtherPermit(type, application) {
                 name: application.details.owner_details.name,
                 birthdate: application.details.owner_details.birthdate,
                 birthplace: application.details.owner_details.birthplace,
+                citizenship: application.details.owner_details.birthplace,
                 icr_no: application.details.owner_details.icr_no,
                 gender: application.details.owner_details.gender,
                 civil_status: application.details.owner_details.civil_status,
