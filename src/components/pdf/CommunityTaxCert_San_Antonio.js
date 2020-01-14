@@ -1825,6 +1825,7 @@ function getContent(details) {
  */
 function checkText(text) {
     if (!text) return " ";
+    else if(typeof text !== 'string') return text;
     return text.toUpperCase();
 }
 
@@ -1833,7 +1834,7 @@ function checkText(text) {
 * @param {Number} amount 
 */
 function formatAmount(amount) {
-    if (!amount || isNaN(amount)) return "0.00";
+    if (!amount || isNaN(amount)) return "₱ 0.00";
     var parts = parseFloat(amount).toFixed(2).toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return `₱ ${parts.join(".")}`;

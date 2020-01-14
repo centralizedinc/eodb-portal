@@ -156,7 +156,8 @@ export default {
   },
   computed: {
     permit_types() {
-      return this.$store.state.permits.permit_types;
+      var sort_by_primary = this.$store.state.permits.permit_types.sort(function(x, y) { return y.primary - x.primary });
+      return sort_by_primary;
     }
   },
   watch: {

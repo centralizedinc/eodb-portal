@@ -431,7 +431,7 @@ export default {
   },
   methods: {
     init() {
-      console.log("form data: " + JSON.stringify(this.form))
+      console.log("form data: " + JSON.stringify(this.form));
       this.$store.dispatch("GET_REGIONS");
       this.$store.dispatch("GET_PROVINCES");
       var data = this.$store.state.user_session.user;
@@ -526,6 +526,7 @@ export default {
       }
       var transaction_no = "",
         reference_no = "";
+      this.transaction_details.payment_breakdown = this.payments_data_source;
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {

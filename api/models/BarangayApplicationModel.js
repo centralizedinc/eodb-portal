@@ -84,19 +84,8 @@ var BarangayApplication = new mongoose.Schema({
     },
     // business details
     business_details: {
-        business_owner_name:{
-            first: {
-                type: String
-            },
-            middle: {
-                type: String
-            },
-            last: {
-                type: String
-            },
-            suffix: {
-                type: String
-            }
+        business_owner: {
+            type: String
         },
         business_name: {
             type: String

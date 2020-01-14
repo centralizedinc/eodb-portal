@@ -13,7 +13,7 @@
         </span>
       </a-form-item>-->
 
-      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+      <!-- <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="checkErrors('business_details.business_owner_name.last') ? 'error': ''"
@@ -48,7 +48,7 @@
             <a-input v-model="form.business_details.business_owner_name.suffix"></a-input>
           </a-form-item>
         </a-col>
-      </a-row>
+      </a-row>-->
       <!-- --------------------------------------------------------- -->
       <a-form-item
         style="font-weight: bold"
@@ -62,6 +62,18 @@
           <i style="color: red">*</i>
         </span>
         <a-input v-model="form.business_details.business_name"></a-input>
+      </a-form-item>
+
+      <a-form-item
+        style="font-weight: bold"
+        :validate-status="checkErrors('business_details.business_owner') ? 'error': ''"
+        :help="checkErrors('business_details.business_owner')"
+      >
+        <span slot="label">
+          Business Owner Name
+          <i style="color: red">*</i>
+        </span>
+        <a-input v-model="form.business_details.business_owner"></a-input>
       </a-form-item>
 
       <a-form-item

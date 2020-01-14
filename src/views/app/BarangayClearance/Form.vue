@@ -247,12 +247,7 @@ export default {
           }
         },
         business_details: {
-          business_owner_name: {
-            first: "",
-            middle: "",
-            last: "",
-            suffix: ""
-          },
+          business_owner: "",
           business_name: "",
           business_type: "",
           franchise: ""
@@ -634,6 +629,7 @@ export default {
       );
       var transaction_no = "",
         reference_no = "";
+        this.transaction_details.payment_breakdown = this.payments_data_source;
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -854,22 +850,16 @@ export default {
         (validate_all || this.current_step === 2) &&
         this.form.purpose.includes("bp")
       ) {
-        // if (!this.form.business_details.business_type) {
-        //   errors.push({
-        //     field: "business_details.business_type",
-        //     error: "Business Type is a required field."
-        //   });
-        // }
-        if (!this.form.business_details.business_owner_name.last) {
+        if (!this.form.business_details.business_type) {
           errors.push({
-            field: "business_details.business_owner_name.last",
-            error: "Business Owner Last Name is a required field."
+            field: "business_details.business_type",
+            error: "Business Type is a required field."
           });
         }
-        if (!this.form.business_details.business_owner_name.first) {
+        if (!this.form.business_details.business_owner) {
           errors.push({
-            field: "business_details.business_owner_name.first",
-            error: "Business Owner First Name is required field"
+            field: "business_details.business_owner",
+            error: "Business Owner Name is required field"
           });
         }
         if (!this.form.business_details.business_name) {
