@@ -50,7 +50,7 @@ export default {
       check_bp: false,
       plainOptions: [
         { label: "Barangay Clearance", value: "pc" },
-        { label: "Business Clearance", value: "bp" }
+        { label: "Barangay Business Clearance", value: "bp" }
       ]
     };
   },

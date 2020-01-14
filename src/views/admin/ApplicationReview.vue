@@ -64,7 +64,7 @@
           <a-textarea
             style="margin-top: 1vh"
             :rows="3"
-            placeholder="Remarks"
+            placeholder="Remarks/Findings"
             v-model="remarks"
             :disabled="rejecting_application || approving_application"
           />
@@ -417,7 +417,7 @@ export default {
           business_owner: details.business_details.business_owner,
           business_address: address[1] || "",
           business_nature: details.business_details.business_type,
-          requestor: details.business_details.requestor,
+          requestor: details.requestor,
           date_created: details.date_created
         };
         console.log("BRGY_BUSINESS_CLEARANCE permit_details :", permit_details);
@@ -440,6 +440,7 @@ export default {
       return this.$upload(permit_details, "POLICECLEARANCE");
     },
     uploadCedula(details, address) {
+      console.log('### update cedula details :', details);
       const permit_details = {
         issued_to: details.issued_to,
         cedula_no: details.cedula_no,
@@ -454,10 +455,10 @@ export default {
         citizenship: details.personal_details.citizenship,
         icr_no: details.personal_details.icr_no,
         birthplace: details.personal_details.birthplace,
-        height: details.height,
-        weight: details.weight,
-        civil_status: details.civil_status,
-        birthdate: details.birthdate,
+        height: details.personal_details.height,
+        weight: details.personal_details.weight,
+        civil_status: details.personal_details.civil_status,
+        birthdate: details.personal_details.birthdate,
         basic_community: details.tax.community.basic,
         taxable_business_income: details.tax.taxable.business_income,
         community_business_income: details.tax.community.business_income,

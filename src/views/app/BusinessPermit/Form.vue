@@ -594,6 +594,7 @@ export default {
             this.fetching_data = false;
           });
       } else {
+        this.fetching_data = true;
         this.form.application_type = 0;
         conditions.push({
           permit_type: this.$store.state.permits.filing_permit._id,
@@ -635,6 +636,7 @@ export default {
             // To check payments needs to be pay
             this.checkSelectedDocs = !this.checkSelectedDocs;
             // this.updateDocsPayment();
+            this.fetching_data = false;
           })
           .catch(err => {
             console.log("GET_FEES_COMPUTATION err :", err);
@@ -1267,7 +1269,7 @@ export default {
           hidden: v.required
         };
       });
-
+      this.form.attachments = [];
       doc_req.forEach(v => {
         // if (v.hidden)
         this.form.attachments.push({
