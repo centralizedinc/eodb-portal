@@ -163,6 +163,9 @@ var BarangayPermitSchema = new mongoose.Schema({
             type: String
         }
     },
+    requestor: {
+        type: String
+    },
     request_for: {
         type: String
     },

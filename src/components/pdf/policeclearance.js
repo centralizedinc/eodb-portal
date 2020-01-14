@@ -561,7 +561,7 @@ function getContent(details) {
                         margin: [0, 0, 0, 0]
                     },
                     {
-                        text: checkText(details.verified_by_first),
+                        text: checkText(details.verified_by),
                         fontSize: 12,
                         alignment: 'left',
                         // right,down,left,up

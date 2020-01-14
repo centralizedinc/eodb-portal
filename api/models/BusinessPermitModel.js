@@ -51,6 +51,9 @@ var BusinessPermitSchema = new mongoose.Schema({
         birthplace: {
             type: String
         },
+        citizenship: {
+            type: String
+        },
         gender: {
             type: String
         },

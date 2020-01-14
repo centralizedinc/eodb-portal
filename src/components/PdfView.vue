@@ -142,8 +142,7 @@ export default {
           validity: "Six Months (6) from the Date of Issuance",
           ctc_no: "2178545655",
           date_created: new Date(),
-          verified_by_first: "Senior Police Officer Cesar Advincula",
-          verified_by_second: "Police Senior Inspector Godfrey Rivera"
+          verified_by: "Senior Police Officer Cesar Advincula"
         };
       } else if (this.keyword.toUpperCase() === "BGYCLEARANCE") {
         this.pdf_details = {
