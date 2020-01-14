@@ -173,13 +173,13 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
           <a-form-item>
             <span slot="label">Height(cm)</span>
-            <a-input v-model="form.personal_details.height"></a-input>
+            <a-input-number v-model="form.personal_details.height"/>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
           <a-form-item>
             <span slot="label">Weight(kg)</span>
-            <a-input v-model="form.personal_details.weight"></a-input>
+            <a-input-number v-model="form.personal_details.weight"/>
           </a-form-item>
         </a-col>
       </a-row>

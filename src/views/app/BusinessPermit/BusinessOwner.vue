@@ -270,7 +270,7 @@
               Height(cm)
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.height" />
+            <a-input-number maxlength="3" style="width:100%" v-model="form.owner_details.height" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
@@ -283,7 +283,7 @@
               Weight(kg)
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
+            <a-input-number maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">

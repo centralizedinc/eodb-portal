@@ -174,7 +174,7 @@
               Height(cm)
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="3" v-model="form.personal_details.height"></a-input>
+            <a-input maxlength="3" v-model="form.personal_details.height"/>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -187,7 +187,7 @@
               <i style="color: red">*</i>
             </span>
 
-            <a-input maxlength="3" v-model="form.personal_details.weight"></a-input>
+            <a-input-number maxlength="3" v-model="form.personal_details.weight"/>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
