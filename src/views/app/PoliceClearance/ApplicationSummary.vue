@@ -184,7 +184,7 @@
               :xs="{span: 4}"
               :md="{span: 10}"
               style="text-transform:uppercase"
-            >{{form.family_background.father_info.name.first == null || form.family_background.father_info.name.first == "" ? "-" : family_background.father_info.name.first}}</a-col>
+            >{{form.family_background.father_info.name.first == null || form.family_background.father_info.name.first == "" ? "-" : form.family_background.father_info.name.first}}</a-col>
           </a-row>
 
           <a-row class="summary-row">
@@ -324,7 +324,7 @@
             <a-col :span="1">:</a-col>
             <a-col :span="1"></a-col>
             <a-col
-              :xs="{span: 4}"
+              :xs="{span: 4}"   
               :md="{span: 10}"
               style="text-transform:uppercase"
             >{{form.family_background.spouse_info.name.suffix == null || form.family_background.spouse_info.name.suffix == "" ? "-" : form.family_background.spouse_info.name.suffix}}</a-col>

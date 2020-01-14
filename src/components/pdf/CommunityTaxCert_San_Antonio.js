@@ -1,13 +1,46 @@
+
+// const form = require("./template/businesspermit_template").template;
+
+// /**
+//  *
+//  * @param {LicenseModel} details
+//  * @returns {Object} document
+//  */
+// function fillup(details) {
+//     console.log("fillup details printer: " + JSON.stringify(details))
+//     var content = getContent(details);
+//     console.log('get content ###### :', content);
+//     return {
+//         background: function (page) {
+//             return [{
+//                 image: "form", 
+//                 width: 400
+
+//             }]
+//         },
+//         content: content,
+//         images: {
+//             form: form
+//         },
+//         pageSize: 'LEGAL'
+//     };
+
+// }
+
+///////////////////////////////////////////////////////////////////////////////
+
+//const form = require("./template/businesspermit_template").template;
+
 const form = require("./template/communitytaxcert_template").template;
 /**
- *
- * @param {LicenseModel} details
- * @returns {Object} document
- */
+ *
+ * @param {LicenseModel} details
+ * @returns {Object} document
+ */
 function fillup(details) {
-    console.log("fillup details printer: " + JSON.stringify(details))
+    console.log("fillup details printer: " + JSON.stringify(details))
     var content = getContent(details);
-    console.log('get content ###### :', content);
+    console.log('get content ###### :', content);
     return {
         background: function (page) {
             return [{
@@ -28,9 +61,9 @@ function fillup(details) {
 //////////////////////////////////////////////////////////////////////////////
 
 /**
- * 
- * @param {Object} details 
- */
+ * 
+ * @param {Object} details 
+ */
 function getContent(details) {
     var content = [
 
@@ -42,12 +75,12 @@ function getContent(details) {
                 body: [
                     [
                         {
-                            text: "BIR FORM 0016 (DECEMBER, 2014) ",
+                            text: "BIR FORM 0016 (DECEMBER, 2014) ",
                             fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [98, 152, 0, 0]
                         }
                     ]
@@ -57,8 +90,7 @@ function getContent(details) {
         },
 
 
-
-        ////////////////////////////////////////////////////////////////////////////// ----- Table 1
+        ////////////////////////////////////////////////////////////////////////////// ----- Table 1
 
         {
             layout: "noBorders",
@@ -74,7 +106,7 @@ function getContent(details) {
                         {
                             table: {
                                 heights: [7],
-                                widths: [170, 40, 90],
+                                widths: [170, 48, 83],
 
                                 body: [
                                     [
@@ -82,12 +114,12 @@ function getContent(details) {
                                         {
 
 
-                                            text: "COMMUNITY TAX CERTIFICATE ",
-                                            fontSize: 7,
+                                            text: "COMMUNITY TAX CERTIFICATE ",
+                                            fontSize: 9,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [8, 0, 0, 0]
 
                                         },
@@ -95,28 +127,27 @@ function getContent(details) {
 
 
                                             text: checkText(details.issued_to),
-                                            fontSize: 6,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: checkText(details.cedula_no),
-                                            fontSize: 6,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ]
                                 ]
                             }
-
 
                         },
                         {
@@ -127,14 +158,13 @@ function getContent(details) {
             }
 
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////// ----- Table 2
+        /////////////////////////////////////////////////////////////////////////////////////////////// ----- Table 2
 
         {
             layout: "noBorders",
 
-
             table: {
-                heights: [5],
+                heights: [8],
                 widths: [90, '*', 50],
                 body: [
                     [
@@ -144,10 +174,9 @@ function getContent(details) {
 
                         {
 
-
                             table: {
-                                heights: [5],
-                                widths: [40, 121, 40, 90],
+                                heights: [8],
+                                widths: [40, 121, 48, 82],
 
                                 body: [
                                     [
@@ -156,23 +185,23 @@ function getContent(details) {
 
 
                                             text: formatDate(details.date_created, { year: "numeric" }),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
 
-                                            text: "SAN ANTONIO QUEZON ",
-                                            fontSize: 5,
+                                            text: "SAN ANTONIO QUEZON ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
@@ -180,22 +209,22 @@ function getContent(details) {
 
 
                                             text: formatDate(details.date_created),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
-                                            text: "TAXPAYER'S COPY ",
-                                            fontSize: 5,
+                                            text: "TAXPAYER'S COPY ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ]
@@ -212,7 +241,7 @@ function getContent(details) {
 
         },
 
-        /////////////////////////////////////////////////////////////////////////////////---------Table 2.B
+        /////////////////////////////////////////////////////////////////////////////////---------Table 2.B
 
         {
             layout: "noBorders",
@@ -220,7 +249,7 @@ function getContent(details) {
 
 
             table: {
-                heights: [3],
+                heights: [8],
                 widths: [140, 121, 40, 90],
 
                 body: [
@@ -229,47 +258,47 @@ function getContent(details) {
                         {
 
 
-                            text: "YEAR ",
-                            fontSize: 4,
+                            text: "YEAR ",
+                            fontSize: 6,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [105, -3, 0, 0]
 
                         },
                         {
 
 
-                            text: "PLACE OF ISSUE ",
-                            fontSize: 4,
+                            text: "PLACE OF ISSUE ",
+                            fontSize: 6,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [2, -3, 0, 0]
 
                         },
                         {
 
 
-                            text: "DATE ISSUE ",
-                            fontSize: 4,
+                            text: "DATE ISSUE ",
+                            fontSize: 6,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
-                            margin: [9, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [7, -3, 0, 0]
 
                         },
                         {
 
-                            text: " ",
-                            fontSize: 5,
+                            text: " ",
+                            fontSize: 6,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [1, 0, 0, 0]
                         }
                     ]
@@ -277,7 +306,7 @@ function getContent(details) {
             }
 
         },
-        ///////////////////////////////////////////////////////////////////////////////////////////////////// -----------------Table 3
+        ///////////////////////////////////////////////////////////////////////////////////////////////////// -----------------Table 3
 
         {
             layout: "noBorders",
@@ -304,22 +333,22 @@ function getContent(details) {
 
                                         {
                                             text: checkText(details.name),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [8, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: checkText(details.tin),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ]
@@ -337,7 +366,7 @@ function getContent(details) {
 
         },
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////------Table 3.B
+        /////////////////////////////////////////////////////////////////////////////////////////////////////------Table 3.B
 
         {
             layout: "noBorders",
@@ -351,23 +380,23 @@ function getContent(details) {
                     [
 
                         {
-                            text: " NAME(SURNAME)                              (FIRST)                                     (MIDDLE)",
-                            fontSize: 4,
+                            text: " NAME(SURNAME)                              (FIRST)                                     (MIDDLE)",
+                            fontSize: 6,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [140, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [120, -3, 0, 0]
 
                         },
                         {
 
-                            text: "TIN NUMBER",
-                            fontSize: 4,
+                            text: "TIN NUMBER",
+                            fontSize: 6,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [8, -3, 0, 0]
                         }
                     ]
@@ -376,8 +405,7 @@ function getContent(details) {
 
         },
 
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////////------Table 4
+        /////////////////////////////////////////////////////////////////////////////////////////////////////------Table 4
 
         {
             layout: "noBorders",
@@ -394,7 +422,6 @@ function getContent(details) {
                         {
 
 
-
                             table: {
                                 heights: [6],
                                 widths: [219, 40, 41],
@@ -404,33 +431,33 @@ function getContent(details) {
 
                                         {
                                             text: checkText(details.address),
-                                            fontSize: 5,
+                                            fontSize: 7,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
-                                            margin: [8, 0, 0, 0]
+                                            // right,down,left,up
+                                            margin: [0, 0, 0, 0]
 
                                         },
                                         {
-                                            ///////////------Male    
-                                            text: checkText(details.gender) === "MALE" ? " X " : " ",
-                                            fontSize: 5,
+                                            ///////////------Male    
+                                            text: checkText(details.gender) === "MALE" ? " X ":" ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
-                                            ///////////-------Female    
-                                            text: checkText(details.gender) === "FEMALE" ? " X " : " ",
-                                            fontSize: 5,
+                                            ///////////-------Female    
+                                            text: checkText(details.gender) === "FEMALE" ? " X ":" ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
 
@@ -449,7 +476,7 @@ function getContent(details) {
 
         },
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////------Table 4.B
+        ////////////////////////////////////////////////////////////////////////////////////////////////////------Table 4.B
         {
             layout: "noBorders",
             table: {
@@ -460,34 +487,34 @@ function getContent(details) {
                     [
 
                         {
-                            text: " ADDRESS ",
-                            fontSize: 4,
+                            text: " ADDRESS ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [200, -3, 0, 0]
 
                         },
                         {
 
-                            text: "SEX:       MALE",
-                            fontSize: 4,
+                            text: "SEX:  MALE",
+                            fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [4, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [2, -3, 0, 0]
                         },
 
                         {
 
                             text: "FEMALE",
-                            fontSize: 4,
+                            fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [4, -3, 0, 0]
                         }
 
@@ -496,7 +523,7 @@ function getContent(details) {
             }
 
         },
-        ////////////////////////////////////////////////////////////////////////////////////////////////////----------Table 5
+        ////////////////////////////////////////////////////////////////////////////////////////////////////----------Table 5
 
         {
             layout: "noBorders",
@@ -521,55 +548,55 @@ function getContent(details) {
 
                                         {
                                             text: checkText(details.citizenship),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [8, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: checkText(details.icr_no),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
 
                                             text: checkText(details.birthplace),
-                                            fontSize: 5,
+                                            fontSize: 7,
                                             bold: true,
                                             characterSpacing: 0,
-                                            alignment: 'center',
-                                            // right,down,left,up
-                                            margin: [1, 0, 0, 0]
+                                            alignment: 'left',
+                                            // right,down,left,up
+                                            margin: [0, 0, 0, 0]
                                         },
 
                                         {
 
                                             text: checkText(details.height),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
 
                                             text: checkText(details.weight),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
 
@@ -589,8 +616,7 @@ function getContent(details) {
         },
 
 
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////------------Table 5.B
+        ///////////////////////////////////////////////////////////////////////////////////////////////////------------Table 5.B
         {
             layout: "noBorders",
             table: {
@@ -601,57 +627,57 @@ function getContent(details) {
                     [
 
                         {
-                            text: " CITIZENSHIP ",
-                            fontSize: 4,
+                            text: " CITIZENSHIP ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [125, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [110, -3, 0, 0]
 
                         },
                         {
 
-                            text: " ICR NO (IF AN ALIEN) ",
-                            fontSize: 4,
+                            text: " ICR NO (IF AN ALIEN) ",
+                            fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
-                            alignment: 'center',
-                            // right,down,left,up
-                            margin: [8, -3, 0, 0]
+                            alignment: 'left',
+                            // right,down,left,up
+                            margin: [2, -3, 0, 0]
                         },
 
                         {
 
-                            text: "PLACE OF BIRTH",
-                            fontSize: 4,
+                            text: "PLACE OF BIRTH",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [5, -3, 0, 0]
                         },
 
                         {
 
-                            text: "        HEIGHT  ",
-                            fontSize: 4,
+                            text: "        HEIGHT  ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [10, -3, 0, 0]
                         },
 
                         {
 
-                            text: "       WEIGHT  ",
-                            fontSize: 4,
+                            text: " WEIGHT  ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
-                            alignment: 'center',
-                            // right,down,left,up
-                            margin: [8, -3, 0, 0]
+                            alignment: 'left',
+                            // right,down,left,up
+                            margin: [10, -3, 0, 0]
                         }
 
                     ]
@@ -660,7 +686,7 @@ function getContent(details) {
 
         },
 
-        //////////////////////////////////////////////////////////////////////////////////////////---Civil Status
+        //////////////////////////////////////////////////////////////////////////////////////////---Civil Status
 
         {
             layout: "noBorders",
@@ -686,100 +712,100 @@ function getContent(details) {
 
                                         {
                                             ///////-----single
-                                            text: checkText(details.civil_status) === "SINGLE" ? " X " : "  ",
-                                            fontSize: 5,
+                                            text: checkText(details.civil_status) === "SINGLE" ? " X ": " ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [8, 0, 0, 0]
 
                                         },
                                         {
 
-                                            text: " 1 ",
+                                            text: " 1 ",
                                             fontSize: 5,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
-                                            /////////------married  
-                                            text: checkText(details.civil_status) === "MARRIED" ? " X " : "  ",
-                                            fontSize: 5,
+                                            /////////------married  
+                                            text: checkText(details.civil_status) === "MARRIED" ? " X ": " ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
 
-                                            text: " 2 ",
+                                            text: " 2 ",
                                             fontSize: 5,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
                                             ////////------widow
-                                            text: checkText(details.civil_status) === "WIDOWED" ? " X " : "  ",
-                                            fontSize: 5,
+                                            text: checkText(details.civil_status) === "WIDOWED" ? " X ": " ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
 
-                                            text: " 3 ",
+                                            text: " 3 ",
                                             fontSize: 5,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
-                                            ///////////----SEPARATED 
-                                            text: checkText(details.civil_status) === "SEPARATED" ? " X " : "  ",
-                                            fontSize: 5,
+                                            ///////////----separated 
+                                            text: checkText(details.civil_status) === "SEPARATED" ? " X ": " ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
-                                            margin: [1, 0, 0, 0]
-                                        },
-
-                                        {
-
-                                            text: " 4  ",
-                                            fontSize: 5,
-                                            bold: true,
-                                            characterSpacing: 0,
-                                            alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         },
 
                                         {
 
-                                            text: checkText(details.birthdate),
+                                            text: " 4  ",
                                             fontSize: 5,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
+                                            margin: [1, 0, 0, 0]
+                                        },
+
+                                        {
+
+                                            text: formatDate(details.birthdate),
+                                            fontSize: 8,
+                                            bold: true,
+                                            characterSpacing: 0,
+                                            alignment: 'center',
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
 
@@ -801,8 +827,7 @@ function getContent(details) {
 
 
 
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////----------Civil Status.B
+        ////////////////////////////////////////////////////////////////////////////////////////////////----------Civil Status.B
         {
             layout: "noBorders",
             table: {
@@ -813,57 +838,57 @@ function getContent(details) {
                     [
 
                         {
-                            text: "CIVIL STATUS: SINGLE ",
-                            fontSize: 4,
+                            text: "CIVIL STATUS: SINGLE ",
+                            fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [99, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [98, -3, 0, 0]
 
                         },
                         {
 
-                            text: " MARRIED ",
-                            fontSize: 4,
+                            text: " MARRIED ",
+                            fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [14, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [4, -3, 0, 0]
                         },
 
                         {
 
-                            text: " WIDOW/ WIDOWER",
-                            fontSize: 4,
+                            text: " WIDOW/ WIDOWER",
+                            fontSize: 7,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [0, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [5, -3, 0, 0]
                         },
 
                         {
 
-                            text: " SEPARATED  ",
-                            fontSize: 4,
+                            text: " DIVORCED  ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
-                            margin: [15, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [5, -3, 0, 0]
                         },
 
                         {
 
-                            text: " DATE OF BIRTH  ",
-                            fontSize: 4,
+                            text: " DATE OF BIRTH  ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'center',
-                            // right,down,left,up
-                            margin: [14, -3, 0, 0]
+                            // right,down,left,up
+                            margin: [2, -3, 0, 0]
                         }
 
                     ]
@@ -873,32 +898,32 @@ function getContent(details) {
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // {
-        //     layout: "noBorders",
-        //     table: {
-        //         heights: [2],
-        //         widths: [318],
+        // {
+        //     layout: "noBorders",
+        //     table: {
+        //         heights: [2],
+        //         widths: [318],
 
-        //         body: [
-        //             [
+        //         body: [
+        //             [
 
-        // {
+        // {
 
 
-        //                     text: " ",
-        //                     fontSize: 1,
-        //                     bold: true,
-        //                     characterSpacing: 0,
-        //                     alignment: 'center',
-        //                     // right,down,left,up
-        //                     margin: [8, 0, 0, 0]
+        //                     text: " ",
+        //                     fontSize: 1,
+        //                     bold: true,
+        //                     characterSpacing: 0,
+        //                     alignment: 'center',
+        //                     // right,down,left,up
+        //                     margin: [8, 0, 0, 0]
 
-        // }
-        // ]
-        // ]
-        // }
+        // }
+        // ]
+        // ]
+        // }
 
-        // },
+        // },
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         {
             layout: "noBorders",
@@ -914,12 +939,12 @@ function getContent(details) {
                         {
 
 
-                            text: "PROFESSION / OCCUPATION / BUSINESS ",
-                            fontSize: 4,
+                            text: "PROFESSION / OCCUPATION / BUSINESS ",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [100, 5, 0, 0]
 
                         }
@@ -930,8 +955,7 @@ function getContent(details) {
 
         },
 
-
-        /////////////////////////////////////////////////////////////////////////////////////////////////-------------MAIN--------
+        /////////////////////////////////////////////////////////////////////////////////////////////////-------------__MAIN___--------
 
         {
             layout: "noBorders",
@@ -957,36 +981,36 @@ function getContent(details) {
                                         {
 
 
-                                            text: "IT OFFICER ",
-                                            fontSize: 5,
+                                            text: "IT OFFICER ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
 
-                                            text: "TAXABLE AMOUNT",
-                                            fontSize: 5,
+                                            text: "TAXABLE AMOUNT",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
-                                            margin: [1, 0, 0, 0]
+                                            // right,down,left,up
+                                            margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
-                                            text: "COMMUNITY TAX DUE ",
-                                            fontSize: 5,
+                                            text: "COMMUNITY TAX DUE ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
-                                            margin: [1, 0, 0, 0]
+                                            // right,down,left,up
+                                            margin: [0, 0, 0, 0]
                                         }
                                     ],
                                     [
@@ -994,35 +1018,35 @@ function getContent(details) {
                                         {
 
 
-                                            text: "A. BASIC COMMINITY TAX (P5.00) VOLUNTARY or EXEMPTED (P1.00) ",
-                                            fontSize: 5,
+                                            text: "A. BASIC COMMINITY TAX (P5.00) VOLUNTARY or EXEMPTED (P1.00) ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
 
-                                            text: " ",
-                                            fontSize: 5,
+                                            text: " ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.basic_community),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ],
@@ -1031,35 +1055,35 @@ function getContent(details) {
                                         {
 
 
-                                            text: "B. ADDITIONAL COMMINITY TAX (tax not to exceed P5,000.00)",
-                                            fontSize: 5,
+                                            text: "B. ADDITIONAL COMMINITY TAX (tax not to exceed P5,000.00)",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
 
-                                            text: " ",
-                                            fontSize: 5,
+                                            text: " ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
-                                            text: "  ",
-                                            fontSize: 5,
+                                            text: "  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ],
@@ -1068,12 +1092,12 @@ function getContent(details) {
                                         {
 
 
-                                            text: "1. GROSS RECEIPTS OR ERNINGS DERIVED FOR BUSINESS DURING THE PRECEDING YEAR (P1.00 for every P1000.00)  ",
-                                            fontSize: 4,
+                                            text: "1. GROSS RECEIPTS OR ERNINGS DERIVED FOR BUSINESS DURING THE PRECEDING YEAR (P1.00 for every P1000.00)  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
@@ -1081,22 +1105,22 @@ function getContent(details) {
 
 
                                             text: formatAmount(details.taxable_business_income),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.community_business_income),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ],
@@ -1105,12 +1129,12 @@ function getContent(details) {
                                         {
 
 
-                                            text: "2. SALARIES OR GROSS RECEIPT OR EARNINGS DERIVED FROM EXERCISE OF PROFESSION OR PURSUIT OF ANY OCCUPATION (P1.00 for every P1000.00)  ",
-                                            fontSize: 4,
+                                            text: "2. SALARIES OR GROSS RECEIPT OR EARNINGS DERIVED FROM EXERCISE OF PROFESSION OR PURSUIT OF ANY OCCUPATION (P1.00 for every P1000.00)  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
@@ -1118,22 +1142,22 @@ function getContent(details) {
 
 
                                             text: formatAmount(details.taxable_profession_income),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.community_profession_income),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ],
@@ -1142,12 +1166,12 @@ function getContent(details) {
                                         {
 
 
-                                            text: "3. INCOME FROM REAL PROPERTY (P1.00 for every P1000.00)  ",
-                                            fontSize: 4,
+                                            text: "3. INCOME FROM REAL PROPERTY (P1.00 for every P1000.00)  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
@@ -1155,22 +1179,22 @@ function getContent(details) {
 
 
                                             text: formatAmount(details.taxable_property_income),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.community_property_income),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ],
@@ -1188,83 +1212,80 @@ function getContent(details) {
 
         },
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////---------Basic Community TAx
-        // {
-        //     //layout: "noBorders",
-        //     table: {
-        //         heights: [6],
-        //         widths: [160,70,70],
+        /////////////////////////////////////////////////////////////////////////////////////////////////---------Basic Community TAx
+        // {
+        //     //layout: "noBorders",
+        //     table: {
+        //         heights: [6],
+        //         widths: [160,70,70],
 
-        //         body: [
+        //         body: [
 
-        //         ]
-        //     }
+        //         ]
+        //     }
 
-        // },
+        // },
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////-------addtional community tax
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////-------addtional community tax
+        // {
+        //     //layout: "noBorders",
+        //     table: {
+        //         heights: [6],
+        //         widths: [160,70,70],
 
-        // {
-        //     //layout: "noBorders",
-        //     table: {
-        //         heights: [6],
-        //         widths: [160,70,70],
+        //         body: [
 
-        //         body: [
+        //         ]
+        //     }
 
-        //         ]
-        //     }
+        // },
 
-        // },
+        ////////////////////////////////////////////////////////////////////////////////////////////////--------gross receipts
 
+        // {
+        //     //layout: "noBorders",
+        //     table: {
+        //         heights: [6],
+        //         widths: [160,70,70],
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////--------gross receipts
+        //         body: [
 
-        // {
-        //     //layout: "noBorders",
-        //     table: {
-        //         heights: [6],
-        //         widths: [160,70,70],
+        //         ]
+        //     }
 
-        //         body: [
+        // },
 
-        //         ]
-        //     }
+        /////////////////////////////////////////////////////////////////////////////////////////////----------salaries or gross
 
-        // },
+        // {
+        //     //layout: "noBorders",
+        //     table: {
+        //         heights: [6],
+        //         widths: [160,70,70],
 
-        /////////////////////////////////////////////////////////////////////////////////////////////----------salaries or gross
+        //         body: [
 
-        // {
-        //     //layout: "noBorders",
-        //     table: {
-        //         heights: [6],
-        //         widths: [160,70,70],
+        //         ]
+        //     }
 
-        //         body: [
+        // },
 
-        //         ]
-        //     }
+        ///////////////////////////////////////////////////////////////////////////////////////////////------INCOME FROM REAL PROPERTY
 
-        // },
+        // {
+        //     //layout: "noBorders",
+        //     table: {
+        //         heights: [6],
+        //         widths: [160,70,70],
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////------INCOME FROM REAL PROPERTY
+        //         body: [
 
-        // {
-        //     //layout: "noBorders",
-        //     table: {
-        //         heights: [6],
-        //         widths: [160,70,70],
+        //         ]
+        //     }
 
-        //         body: [
-
-        //         ]
-        //     }
-
-        // },
+        // },
         /////////////////////////////////////////////////////////////////////////////////////////////
-
 
         {
             layout: "noBorders",
@@ -1278,12 +1299,12 @@ function getContent(details) {
                         {
 
 
-                            text: "TAXPAYER'S SIGNATURE",
-                            fontSize: 4,
+                            text: "TAXPAYER'S SIGNATURE",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [100, 0, 0, 0]
 
                         }
@@ -1293,7 +1314,7 @@ function getContent(details) {
 
         },
 
-        ////////////////////////////////////////////////////////////////////////////////////////////------Signature / total 
+        ////////////////////////////////////////////////////////////////////////////////////////////------Signature / total 
 
         {
             layout: "noBorders",
@@ -1319,35 +1340,35 @@ function getContent(details) {
                                         {
 
 
-                                            text: "  ",
-                                            fontSize: 4,
+                                            text: "  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'left',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
 
-                                            text: "TOTAL ",
-                                            fontSize: 5,
+                                            text: "TOTAL ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.total),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ]
@@ -1378,12 +1399,12 @@ function getContent(details) {
                         {
 
 
-                            text: "MINICIPAL / CITY TREASURER",
-                            fontSize: 4,
+                            text: "MINICIPAL / CITY TREASURER",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [100, 0, 0, 0]
 
                         }
@@ -1392,7 +1413,6 @@ function getContent(details) {
             }
 
         },
-
 
         /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1410,7 +1430,6 @@ function getContent(details) {
 
                         {
 
-
                             table: {
                                 heights: [5],
                                 widths: [160, 70, 70],
@@ -1421,12 +1440,12 @@ function getContent(details) {
                                         {
 
 
-                                            text: "  ",
-                                            fontSize: 4,
+                                            text: "  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
@@ -1434,22 +1453,22 @@ function getContent(details) {
 
 
                                             text: "INTEREST",
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.interest),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ]
@@ -1466,7 +1485,6 @@ function getContent(details) {
             }
 
         },
-
 
         /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1482,12 +1500,12 @@ function getContent(details) {
                         {
 
 
-                            text: "TOTAL AMOUNT PAID IN WORDS",
-                            fontSize: 4,
+                            text: "TOTAL AMOUNT PAID IN WORDS",
+                            fontSize: 8,
                             bold: true,
                             characterSpacing: 0,
                             alignment: 'left',
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [100, 0, 0, 0]
 
                         }
@@ -1496,7 +1514,6 @@ function getContent(details) {
             }
 
         },
-
 
         /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1524,35 +1541,35 @@ function getContent(details) {
                                         {
 
 
-                                            text: "  ",
-                                            fontSize: 4,
+                                            text: "  ",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [0, 0, 0, 0]
 
                                         },
                                         {
 
 
-                                            text: "TOTAL AMOUNT PAID",
-                                            fontSize: 5,
+                                            text: "TOTAL AMOUNT PAID",
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
 
                                         },
                                         {
 
                                             text: formatAmount(details.total_amount_paid),
-                                            fontSize: 5,
+                                            fontSize: 8,
                                             bold: true,
                                             characterSpacing: 0,
                                             alignment: 'center',
-                                            // right,down,left,up
+                                            // right,down,left,up
                                             margin: [1, 0, 0, 0]
                                         }
                                     ]
@@ -1561,7 +1578,6 @@ function getContent(details) {
 
                         },
 
-
                         {
                             text: ""
                         }
@@ -1572,107 +1588,23 @@ function getContent(details) {
         },
 
 
-
-        ////////////////////////////////////////////////////////////////////////////////////////////----------Thank You
-
-        {
-            layout: "noBorders",
-            table: {
-                // widths: [300],
-                heights: [20,],
-                body: [
-                    [{
-                        text: "   ",
-                        fontSize: 9,
-                        Bold: true,
-                        alignment: 'justify',
-                        characterSpacing: [1],
-                        // right,down,left,up
-                        margin: [80, -2, 0, 0]
-                    },
-
-
-                    ]
-
-                ]
-            }
-        },
-        ///////////////////////////////////////////////////////////////////////////////
-
-        {
-            layout: "noBorders",
-            table: {
-                widths: [150, '*', 150],
-                heights: [2],
-                body: [
-                    [
-                        {
-                            text: ""
-                        },
-                        {
-                            text: " Erick M Wagan ",
-                            fontSize: 8,
-                            alignment: 'center',
-                            characterSpacing: [0],
-                            // right,down,left,up
-                            margin: [0, 0, 0, 0]
-                        },
-                        {
-                            text: ""
-                        }
-
-                    ]
-
-                ]
-            }
-        },
-
-        /////////////////////////////////////////////////////////////////////////////
-
-        {
-            layout: "noBorders",
-            table: {
-                widths: [150, '*', 150],
-                heights: [2],
-                body: [
-                    [
-                        {
-                            text: ""
-                        },
-                        {
-                            text: " Minicipal Mayor ",
-                            fontSize: 8,
-                            alignment: 'center',
-                            characterSpacing: [0],
-                            // right,down,left,up
-                            margin: [0, 0, 0, 0]
-                        },
-                        {
-                            text: ""
-                        }
-
-                    ]
-
-                ]
-            }
-        },
-
-
-        /////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////----------Thank You
 
         {
             layout: "noBorders",
             table: {
                 widths: [300],
-                heights: [2],
+                heights: [5,],
                 body: [
                     [{
-                        text: " ",
-                        fontSize: 2,
-
-
+                        text: "   ",
+                        fontSize: 9,
+                        Bold: true,
+                        alignment: 'justify',
+                        characterSpacing: [1],
+                        // right,down,left,up
+                        margin: [80, -2, 0, 0]
                     },
-
 
                     ]
 
@@ -1680,22 +1612,53 @@ function getContent(details) {
             }
         },
         ///////////////////////////////////////////////////////////////////////////////
+
         {
             layout: "noBorders",
             table: {
-                widths: [150, '*', 150],
-                heights: [2,],
+                widths: [150, '*', 170],
+                heights: [2],
                 body: [
                     [
                         {
                             text: ""
                         },
                         {
-                            text: " DISPLAY IN PUBLIC VIEW",
-                            fontSize: 6,
+                            text: " Erick M Wagan ",
+                            fontSize: 8,
                             alignment: 'center',
                             characterSpacing: [0],
-                            // right,down,left,up
+                            // right,down,left,up
+                            margin: [0, 0, 0, 0]
+                        },
+                        // {
+                        //     text: ""
+                        // }
+
+                    ]
+
+                ]
+            }
+        },
+
+        /////////////////////////////////////////////////////////////////////////////
+
+        {
+            layout: "noBorders",
+            table: {
+                widths: [150, '*', 170],
+                heights: [2],
+                body: [
+                    [
+                        {
+                            text: ""
+                        },
+                        {
+                            text: " Minicipal Mayor ",
+                            fontSize: 8,
+                            alignment: 'center',
+                            characterSpacing: [0],
+                            // right,down,left,up
                             margin: [0, 0, 0, 0]
                         },
                         {
@@ -1707,12 +1670,60 @@ function getContent(details) {
                 ]
             }
         },
+
+        /////////////////////////////////////////////////////////////////////////////
+
+        // {
+        //     //layout: "noBorders",
+        //     table: {
+        //         widths: [300],
+        //         heights: [2],
+        //         body: [
+        //             [{
+        //                     text: " ",
+        //                     fontSize: 2,
+
+        //                 },
+
+        //             ]
+
+        //         ]
+        //     }
+        // },
+        ///////////////////////////////////////////////////////////////////////////////
+        // {
+        //     layout: "noBorders",
+        //     table: {
+        //         widths: [150,'*',150],
+        //         heights: [2, ],
+        //         body: [
+        //             [
+        //                 {
+        //                     text: ""
+        //                 },
+        //                 {
+        //                     text: " DISPLAY IN PUBLIC VIEW",
+        //                     fontSize: 6,
+        //                     alignment: 'center',
+        //                     characterSpacing: [0],
+        //                     // right,down,left,up
+        //                     margin: [0, 0, 0, 0]
+        //                 },
+        //                 // {
+        //                 //     text: ""
+        //                 // }
+
+        //             ]
+
+        //         ]
+        //     }
+        // },
         /////////////////////////////////////////////////////////////////////////////////////
 
         {
             layout: "noBorders",
             table: {
-                widths: [150, '*', 150],
+                widths: [130, 230],
                 heights: [2,],
                 body: [
                     [
@@ -1720,16 +1731,16 @@ function getContent(details) {
                             text: ""
                         },
                         {
-                            text: " This electronic permit (ePermit) is computer generated and does not require signature",
+                            text: " This electronic permit (ePermit) is computer generated and does not require signature",
                             fontSize: 6,
-                            alignment: 'center',
+                            alignment: 'left',
                             characterSpacing: [0],
-                            // right,down,left,up
-                            margin: [0, 15, 0, 0]
+                            // right,down,left,up
+                            margin: [0, 8, 0, 0]
                         },
-                        {
-                            text: ""
-                        }
+                        // {
+                        //     text: ""
+                        // }
                     ]
 
                 ]
@@ -1739,7 +1750,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150, '*', 150],
+                widths: [150, '*', 170],
                 heights: [2,],
                 body: [
                     [
@@ -1747,16 +1758,16 @@ function getContent(details) {
                             text: ""
                         },
                         {
-                            text: " Verify authenticity of this document at: ",
+                            text: " Verify authenticity of this document at: ",
                             fontSize: 6,
                             alignment: 'center',
                             characterSpacing: [0],
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [0, 0, 0, 0]
                         },
-                        {
-                            text: ""
-                        }
+                        // {
+                        //     text: ""
+                        // }
 
                     ]
 
@@ -1767,7 +1778,7 @@ function getContent(details) {
         {
             layout: "noBorders",
             table: {
-                widths: [150, '*', 150],
+                widths: [150, '*', 170],
                 heights: [2],
                 body: [
                     [
@@ -1775,11 +1786,11 @@ function getContent(details) {
                             text: ""
                         },
                         {
-                            text: " Thank you for your business ",
+                            text: " Thank you for your business ",
                             fontSize: 6,
                             alignment: 'center',
                             characterSpacing: [0],
-                            // right,down,left,up
+                            // right,down,left,up
                             margin: [0, 0, 0, 0]
                         },
                         {
@@ -1791,7 +1802,6 @@ function getContent(details) {
                 ]
             }
         },
-
 
 
 
@@ -1805,37 +1815,34 @@ function getContent(details) {
 }
 
 
-
 /////////////////////////////////////////////////////////////////////////////////
 
 
 
-
 /**
- * @returns {String}
- * @param {String} text 
- */
+ * @returns {String}
+ * @param {String} text 
+ */
 function checkText(text) {
-    if (!text) return " ";
+    if (!text) return " ";
     return text.toUpperCase();
 }
 
 /**
-* @returns {String}
-* @param {Number} amount 
+* @returns {String}
+* @param {Number} amount 
 */
 function formatAmount(amount) {
-    if (!amount || isNaN(amount)) return "₱ 0.00";
+    if (!amount || isNaN(amount)) return "0.00";
     var parts = parseFloat(amount).toFixed(2).toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return `₱ ${parts.join(".")}`;
 }
 
-
 /**
-* @returns {String}
-* @param {Date} date
-* @param {Object|String} type
+* @returns {String}
+* @param {Date} date
+* @param {Object|String} type
 */
 function formatDate(date, type) {
     var dt = new Date();

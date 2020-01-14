@@ -340,6 +340,7 @@ function createOtherPermit(type, application) {
                 occupation: application.details.owner_details.occupation,
                 ctc_no: application.details.owner_details.ctc_no
             },
+            purpose: application.details.police_purpose,
             address_details: application.details.owner_address,
             contact_details: {
                 tel_no: application.details.owner_details.tel_no,
