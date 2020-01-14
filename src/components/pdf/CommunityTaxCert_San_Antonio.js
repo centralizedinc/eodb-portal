@@ -167,7 +167,7 @@ function getContent(details) {
 
 
         table: {
-            heights: [5],
+            heights: [8],
             widths: [90,'*',50],
             body: [
                 [
@@ -179,8 +179,8 @@ function getContent(details) {
 
 
             table: {
-            heights: [5],
-            widths: [40,121,40,90],
+            heights: [8],
+            widths: [40,121,48,82],
             
             body: [
                 [
@@ -189,7 +189,7 @@ function getContent(details) {
         
                     
                         text: " 2020 ",
-                        fontSize: 5,
+                        fontSize: 8,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'center',
@@ -201,7 +201,7 @@ function getContent(details) {
         
                     
                         text: "SAN ANTONIO QUEZON ",
-                        fontSize: 5,
+                        fontSize: 8,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'center',
@@ -213,7 +213,7 @@ function getContent(details) {
         
                     
         text: "01 09 2020 ",
-        fontSize: 5,
+        fontSize: 8,
         bold: true,
         characterSpacing: 0,
         alignment: 'center',
@@ -224,7 +224,7 @@ function getContent(details) {
     {
         
                         text: "TAXPAYER'S COPY ",
-                        fontSize: 5,
+                        fontSize: 8,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'center',
@@ -253,7 +253,7 @@ function getContent(details) {
         
 
         table: {
-            heights: [3],
+            heights: [8],
             widths: [140,121,40,90],
             
             body: [
@@ -263,7 +263,7 @@ function getContent(details) {
         
                     
                         text: "YEAR ",
-                        fontSize: 4,
+                        fontSize: 6,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'center',
@@ -275,7 +275,7 @@ function getContent(details) {
         
                     
                         text: "PLACE OF ISSUE ",
-                        fontSize: 4,
+                        fontSize: 6,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'center',
@@ -287,18 +287,18 @@ function getContent(details) {
         
                     
         text: "DATE ISSUE ",
-        fontSize: 4,
+        fontSize: 6,
         bold: true,
         characterSpacing: 0,
         alignment: 'center',
         // right,down,left,up
-        margin: [9, -3, 0, 0]
+        margin: [7, -3, 0, 0]
 
 },
     {
         
                         text: " ",
-                        fontSize: 5,
+                        fontSize: 6,
                         bold: true,
                         characterSpacing: 0,
                         alignment: 'left',
@@ -337,7 +337,7 @@ function getContent(details) {
                 
 {
     text: " Godfrey Rivera Jr ",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -348,7 +348,7 @@ function getContent(details) {
 {
         
     text: "111 111 111 1111",
-    fontSize: 5,
+    fontSize: 8,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
@@ -385,18 +385,18 @@ function getContent(details) {
                 
 {
     text: " NAME(SURNAME)                              (FIRST)                                     (MIDDLE)",
-    fontSize: 4,
+    fontSize: 6,
     bold: true,
     characterSpacing: 0,
     alignment: 'left',
     // right,down,left,up
-    margin: [140, -3, 0, 0]
+    margin: [120, -3, 0, 0]
 
 },
 {
         
     text: "TIN NUMBER",
-    fontSize: 4,
+    fontSize: 6,
     bold: true,
     characterSpacing: 0,
     alignment: 'center',
