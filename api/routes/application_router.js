@@ -144,7 +144,8 @@ router.route('/')
                     name: user_name.first,
                     reference_no: result.reference_no,
                     transaction_no: results.payment.transaction_no,
-                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=${data.permit_type}&ref_no=${result.reference_no}`
+                    url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=${data.permit_type}&ref_no=${result.reference_no}`,
+                    permit_type: getPermitType(result.permit_type)
                 }
                 return sendgrid.sendEmail(user_email, "SUCCESSFUL_APPLICATION_CREATION_TEMPLATE", substitutions)
             })
@@ -158,6 +159,14 @@ router.route('/')
                 })
             });
     })
+
+function getPermitType(type) {
+    if (type === "business") return "Business Permit";
+    else if (type === "cedula") return "Community Tax Certificate";
+    else if (type === "barangay") return "Barangay Clearance";
+    else if (type === "police") return "Police Clearance";
+    return "";
+}
 
 router.route('/reference/:reference_no')
     .get((req, res) => {

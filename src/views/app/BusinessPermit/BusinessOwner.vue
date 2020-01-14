@@ -403,6 +403,7 @@
               <span
                 slot="title"
               >Gross Receipts or Earnings derived business durung the preceding year</span>
+              <!-- Use to format number into currency -->
               <a-input-number
                 v-model="form.owner_details.tax.taxable.business_income"
                 @change="computation"

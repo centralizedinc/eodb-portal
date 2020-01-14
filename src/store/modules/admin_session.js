@@ -30,6 +30,7 @@ const mutations = {
         state.for_review = {};
         state.department = {};
         state.checklist = [];
+        state.role = {};
     },
     LOCK_SCREEN(state) {
         state.locked = true;
