@@ -10,7 +10,7 @@ function fillup(details) {
   console.log('get content ###### :', content);
   return {
     content: content,
-    pageSize: 'LEGAL'
+    pageSize: 'A4'
   };
 }
 /**
@@ -23,17 +23,23 @@ function getContent(details) {
       layout: "noBorders",
       table: {
         heights: [10],
-        widths: [300],
+        widths: [100,"*",100],
         body: [
           [
+            {
+              text: ""
+            },
             {
               text: "BAYAN  NG  SAN  ANTONIO",
               fontSize: 12,
               bold: true,
               characterSpacing: 1,
-              alignment: 'left',
+              alignment: 'center',
               // right,down,left,up
-              margin: [80, -2, 0, 0]
+              margin: [0, 0, 0, 0]
+            },
+            {
+              text: ""
             }
           ]
         ]
@@ -44,19 +50,23 @@ function getContent(details) {
     {
       layout: "noBorders",
       table: {
-        widths: [300],
-        heights: [6,],
+        widths: [100,'*',100],
         body: [
-          [{
+          [
+            {
+              text: ""
+            },
+            {
             text: "LALAWIGAN NG QUEZON",
             fontSize: 12,
             characterSpacing: 2,
-            alignment: 'justify',
+            alignment: 'center',
             // right,down,left,up
-            margin: [80, -4, 0, 0]
+            margin: [0, 0, 0, 0]
           },
-
-
+          {
+            text: ""
+          },
           ]
 
         ]
@@ -82,24 +92,28 @@ function getContent(details) {
     },
     //////////////////////////////////////////////////////////////  Electronic receipt
     {
-      //layout: "noBorders",        
+      layout: "noBorders",        
       table: {
-        widths: [115, 176,],
+        widths: [100,115, 176,],
         heights: [7,],
         body: [
-          [{
+          [
+            {
+              text: ""
+            },
+            {
             text: "ELECTRONIC RECEIPT  NO:",
-            fontSize: 9,
+            fontSize: 10,
             alignment: 'justify',
             // right,down,left,up
-            margin: [1, -2, 0, 0]
+            margin: [0, 0, 0, 0]
           },
           {
             text: checkText(details.transaction_no),
             fontSize: 9,
             alignment: 'justify',
             // right,down,left,up
-            margin: [1, -2, 0, 0]
+            margin: [0, 0, 0, 0]
           },
 
 
@@ -112,62 +126,64 @@ function getContent(details) {
 
     ///////////////////////////////////////////////////////////////// Date
     {
-      //layout: "noBorders",        
-      table: {
-        widths: [40, 251,],
-        heights: [6,],
+      layout: "noBorders", 
+      table:{
+        widths: [95, '*'],
         body: [
-          [{
-            text: "DATE:",
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [1, -2, 0, 0]
-          },
-          {
-            text: formatDate(details.date),
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [1, -2, 0, 0]
-          },
-
-
-
+          [
+            {
+              text: ""
+            },
+            {
+              table: {
+                widths: [40, 251,],
+                heights: [6,],
+                body: [
+                  [
+                    {
+                    text: "DATE:",
+                    fontSize: 10,
+                    alignment: 'justify',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+                  {
+                    text: formatDate(details.date),
+                    fontSize: 10,
+                    alignment: 'justify',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+        
+        
+        
+                  ],
+                  [{
+                    text: "PAYOR:",
+                    fontSize: 10,
+                    alignment: 'justify',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+                  {
+                    text: checkText(details.payor),
+                    fontSize: 10,
+                    alignment: 'justify',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+        
+        
+        
+                  ]
+        
+                ]
+              }
+            }
           ]
-
         ]
-      }
-    },
-
-    ////////////////////////////////////////////////////////////////  Payor
-    {
-      //layout: "noBorders",        
-      table: {
-        widths: [40, 251,],
-        heights: [6,],
-        body: [
-          [{
-            text: "PAYOR:",
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [1, -1, 0, 0]
-          },
-          {
-            text: checkText(details.payor),
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [1, -1, 0, 0]
-          },
-
-
-
-          ]
-
-        ]
-      }
+      }       
+      
     },
 
     /////////////////////////////////////////////////////////////// Space
@@ -190,32 +206,42 @@ function getContent(details) {
     },
     ///////////////////////////////////////////////////////////////////////////// Nature of Collection
     {
-      //layout: "noBorders",        
+      layout: "noBorders",        
       table: {
-        widths: [170, 121,],
-        heights: [7,],
+        widths: [95, '*'],
         body: [
-          [{
-            text: "Nature of Collection",
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [40, -2, 0, 0]
-          },
-          {
-            text: "Amount",
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [40, -2, 0, 0]
-          },
-
-
-
+          [
+            {
+              text: ""
+            },
+            {
+              table: {
+                widths: [170, 121],
+                body: [
+                  [
+                    {
+                    text: "Nature of Collection",
+                    fontSize: 10,
+                    alignment: 'center',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+                  {
+                    text: "Amount",
+                    fontSize: 10,
+                    alignment: 'center',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },             
+                  ]
+        
+                ]
+              }
+            }
           ]
-
         ]
       }
+      
     }]
 
 
@@ -223,28 +249,41 @@ function getContent(details) {
 
   details.payment_breakdown.forEach(bd => {
     content.push({
-      //layout: "noBorders",        
-      table: {
-        widths: [170, 121,],
-        heights: [7,],
+      layout: "noBorders",      
+      table:{
+        widths: [95, '*'],
         body: [
-          [{
-            text: checkText(bd.description),
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [1, -2, 0, 0]
-          },
-          {
-            text: formatAmount(bd.amount),
-            fontSize: 9,
-            alignment: 'right',
-            // right,down,left,up
-            margin: [1, -2, 0, 0]
-          }]
-
+          [
+            {
+              text: ""
+            },
+            {
+              table: {
+                widths: [170, 121,],
+                heights: [7,],
+                body: [
+                  [{
+                    text: checkText(bd.description),
+                    fontSize: 10,
+                    alignment: 'center',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+                  {
+                    text: formatAmount(bd.amount),
+                    fontSize: 10,
+                    alignment: 'right',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  }]
+        
+                ]
+              }
+            }
+          ]
         ]
-      }
+      }  
+      
     })
   })
   var total_amount = details.payment_breakdown.map(v => v.amount).reduce((t, c) => parseFloat(t) + parseFloat(c))
@@ -252,33 +291,46 @@ function getContent(details) {
     ////////////////////////////////////////////////////////////////////////////////// Total
     {
 
-      //layout: "noBorders",        
+      layout: "noBorders",   
       table: {
-        widths: [170, 121,],
-        heights: [7,],
-        //color: [grey],
+        widths:[95,'*'],
         body: [
-          [{
-            text: "Total",
-            fontSize: 9,
-            alignment: 'justify',
-            // right,down,left,up
-            margin: [1, -2, 0, 0]
-          },
-          {
-            text: formatAmount(total_amount),
-            fontSize: 9,
-            alignment: 'right',
-            // right,down,left,up
-            margin: [1, -2, 0, 0]
-          },
-
-
-
+          [
+            {
+              text: ""
+            },
+            {
+              table: {
+                widths: [170, 121,],
+                heights: [7,],
+                //color: [grey],
+                body: [
+                  [{
+                    text: "Total",
+                    fontSize: 10,
+                    alignment: 'center',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+                  {
+                    text: formatAmount(total_amount),
+                    fontSize: 10,
+                    alignment: 'right',
+                    // right,down,left,up
+                    margin: [0, 0, 0, 0]
+                  },
+        
+        
+        
+                  ]
+        
+                ]
+              }
+            }
           ]
-
         ]
-      }
+      }     
+      
     },
 
     ///////////////////////////////////////////////////////////////////////////////// Space 2
@@ -305,181 +357,92 @@ function getContent(details) {
 
     {
       layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [2,],
-        body: [
-          [{
-            text: " Thank you for your payment!  ",
-            fontSize: 9,
-            Bold: true,
-            alignment: 'justify',
-            characterSpacing: [1],
-            // right,down,left,up
-            margin: [80, -2, 0, 0]
-          },
-
-
-          ]
-
-        ]
-      }
+     table:{
+       widths: [100,'*',100],
+       body: [
+         [
+           {
+             text: ""
+           },
+           {
+            layout: "noBorders",
+            table: {
+              widths: [300],
+              body: [
+                [{
+                  text: " Thank you for your payment!  ",
+                  fontSize: 12,
+                  Bold: true,
+                  alignment: 'center',
+                  characterSpacing: [1],
+                  // right,down,left,up
+                  // margin: [80, -2, 0, 0]
+                  margin: [0,0,0,0]
+                }
+                ],
+                [{
+                  text: " Here's your auto generated e-Receipt  ",
+                  fontSize: 10,
+                  alignment: 'center',
+                  characterSpacing: [0],
+                  // right,down,left,up
+                  // margin: [100, -2, 0, 0]
+                  margin: [0,0,0,0]
+                }
+                ],
+                [{
+                  text: " "
+                }],
+                [{
+                  text: "[ PRINT BUTTON ]  ",
+                  fontSize: 10,
+                  alignment: 'center',
+                  characterSpacing: [0],
+                  // right,down,left,up
+                  // margin: [120, -2, 0, 0]
+                  margin: [0,0,0,0]
+                }],
+                [{
+                  text: " "
+                }],
+                [{
+                  text: " This is only an electronic copy. You can get your official receipt upon claiming the",
+                  fontSize: 8,
+                  alignment: 'center',
+                  characterSpacing: [0],
+                  // right,down,left,up
+                  // margin: [60, -2, 0, 0]
+                  margin: [0,0,0,0]
+                }],
+                [{
+                  text: " business license plate at the Municipal Hall. ",
+                  fontSize: 8,
+                  alignment: 'center',
+                  characterSpacing: [0],
+                  // right,down,left,up
+                  // margin: [100, -2, 0, 0]
+                  margin: [0,0,0,0]
+                }],
+                [{
+                  text: " Thank you for your business ",
+                  fontSize: 8,
+                  alignment: 'center',
+                  characterSpacing: [0],
+                  // right,down,left,up
+                  // margin: [115, -2, 0, 0]
+                  margin: [0,0,0,0]
+                }]      
+              ]
+            }
+           },
+           {
+             text: ''
+           }
+         ]
+       ]
+     }
+      
     },
-    ///////////////////////////////////////////////////////////////////////////////
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [2,],
-        body: [
-          [{
-            text: " Here's your auto generated e-Receipt  ",
-            fontSize: 6,
-            alignment: 'justify',
-            characterSpacing: [0],
-            // right,down,left,up
-            margin: [100, -2, 0, 0]
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-
-    ///////////////////////////////////////////////////////////////////////////////
-
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [1,],
-        body: [
-          [{
-            text: " ",
-            fontSize: 2,
-
-
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-    ///////////////////////////////////////////////////////////////////////////////
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [2,],
-        body: [
-          [{
-            text: "[ PRINT BUTTON ]  ",
-            fontSize: 6,
-            alignment: 'justify',
-            characterSpacing: [0],
-            // right,down,left,up
-            margin: [120, -2, 0, 0]
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-    /////////////////////////////////////////////////////////////////////////////////////
-
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [1,],
-        body: [
-          [{
-            text: " ",
-            fontSize: 2,
-
-
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [2,],
-        body: [
-          [{
-            text: " This is only an electronic copy. You can get your official receipt upon claiming the",
-            fontSize: 5,
-            alignment: 'justify',
-            characterSpacing: [0],
-            // right,down,left,up
-            margin: [60, -2, 0, 0]
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-    //////////////////////////////////////////////////////////////////////////////////////
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [2,],
-        body: [
-          [{
-            text: " business license plate at the Municipal Hall. ",
-            fontSize: 5,
-            alignment: 'justify',
-            characterSpacing: [0],
-            // right,down,left,up
-            margin: [100, -2, 0, 0]
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-    /////////////////////////////////////////////////////////////////////////////////////
-    {
-      layout: "noBorders",
-      table: {
-        widths: [300],
-        heights: [2,],
-        body: [
-          [{
-            text: " Thank you for your business ",
-            fontSize: 5,
-            alignment: 'justify',
-            characterSpacing: [0],
-            // right,down,left,up
-            margin: [115, -2, 0, 0]
-          },
-
-
-          ]
-
-        ]
-      }
-    },
-
     /////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////-----END-----/////////////////////////////////////

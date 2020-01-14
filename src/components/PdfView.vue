@@ -119,7 +119,7 @@ export default {
           application_type: "RENEWAL",
           mode_of_payment: "QUARTERLY",
           transaction_no: "115498845612848",
-          transactions: [
+          payment_breakdown: [
             {
               description: "Application Fee",
               amount: 1000

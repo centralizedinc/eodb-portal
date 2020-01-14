@@ -106,10 +106,12 @@
                     <div v-for="file in item.files" :key="file">
                       <!-- {{file}} -->
                       <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
+                      <a-card
+                       @click="viewPDF(file.url)">
                       <img
                         v-if="file && file.type && file.type.indexOf('image') > -1"
                         :src="file.url"
-                        style="width: 100%;"
+                        style="width: 50%;"
                       />
                       <pdf
                         v-else-if="file && file.type && file.type==='application/pdf'"
@@ -117,6 +119,7 @@
                         style="cursor:zoom; width: 100%"
                       ></pdf>
                       <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
+                    </a-card>
                     </div>
                   </a-card>
                 </a-tab-pane>
@@ -223,6 +226,10 @@ export default {
     }
   },
   methods: {
+    viewPDF(file){  
+      console.log("view pdf file: " + JSON.stringify(file))
+      window.open(file, '_blank');
+    },
     viewApplication(reference_no, index) {
       this.loading_index = index;
 
