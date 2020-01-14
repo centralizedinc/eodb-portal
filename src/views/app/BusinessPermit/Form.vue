@@ -317,7 +317,11 @@ export default {
           province: "0456",
           city: "045641",
           barangay: "",
-          postal_code: "4324"
+          postal_code: "4324",
+          coordinates: {
+            lat: 0,
+            lng: 0
+          }
         },
         business_details: {
           business_name: "",
@@ -349,6 +353,10 @@ export default {
           city: "045641",
           barangay: "",
           postal_code: "4324",
+          coordinates: {
+            lat: 0,
+            lng: 0
+          },
           is_rented: false,
           rental: "",
           lessor_name: "",
@@ -362,7 +370,11 @@ export default {
             province: "0456",
             city: "045641",
             barangay: "",
-            postal_code: "4324"
+            postal_code: "4324",
+            coordinates: {
+              lat: 0,
+              lng: 0
+            }
           },
           contact_no: "",
           email: ""
@@ -791,7 +803,7 @@ export default {
             url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=${results.application.permit_type}&ref_no=${results.application.reference_no}`,
             receipt_url: result.data.attachment
           };
-          console.log('###payment data :', data);
+          console.log("###payment data :", data);
           return this.$store.dispatch("SEND_PAYMENT_EMAIL_NOTIFICATION", data);
         })
         .then(result => {
@@ -989,12 +1001,11 @@ export default {
           });
         }
 
-        if(this.checkDocsNeeded(['police'])&&
-        !this.form.police_purpose){
+        if (this.checkDocsNeeded(["police"]) && !this.form.police_purpose) {
           errors.push({
             field: "police_required.purpose",
             error: "Police Application Purpose is a required field."
-          })
+          });
         }
 
         if (
@@ -1077,18 +1088,21 @@ export default {
           });
         }
 
-        if ( this.checkDocsNeeded(["cedula"]) &&!this.form.issued_to) {
+        if (this.checkDocsNeeded(["cedula"]) && !this.form.issued_to) {
           errors.push({
             field: "issued_to",
             error: "Cedula Issued To is a required field."
           });
-        }  
-        if (this.checkDocsNeeded(["cedula"]) && !this.form.owner_details.citizenship) {
+        }
+        if (
+          this.checkDocsNeeded(["cedula"]) &&
+          !this.form.owner_details.citizenship
+        ) {
           errors.push({
             field: "cedula.cititenship",
             error: "Citizenship is a required field."
           });
-        }       
+        }
 
         if (
           this.checkDocsNeeded(["cedula", "barangay", "police"]) &&

@@ -240,13 +240,20 @@
           <GmapMap
             id="map"
             ref="map"
-            :center="{ lat: 13.960837, lng: 121.591532 }"
+            :center="form.business_address.coordinates"
             :zoom="16"
             map-type-id="terrain"
             draggable="true"
             style="width: 100%; height: 300px"
             :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
-          ></GmapMap>
+            @click="mapClick"
+          >
+            <GmapMarker
+              :position="form.business_address.coordinates"
+              :animation="marker_animation"
+              @animation_changed="resetAnimation"
+            />
+          </GmapMap>
         </a-col>
       </a-row>
 
@@ -374,24 +381,6 @@
 
       <!-- Others -->
       <a-divider></a-divider>
-      <!-- <a-form-item>
-        <a-checkbox
-          v-model="form.business_details.enjoying_tax_incentive"
-        >Are you enjoying tax incentive from any Government Entity?</a-checkbox>
-      </a-form-item>
-
-      <a-form-item
-        label="Specify the tax incentive from any Government Entity"
-        :label-col="{ span: 5 }"
-        :wrapper-col="{ span: 10 }"
-        class="text-left"
-      >
-        <a-input
-          v-model="form.business_details.specify_entity"
-          placeholder="Please specify the Entity"
-          @change="checkTaxEntity"
-        ></a-input>
-      </a-form-item>-->
 
       <a-form-item>
         <a-checkbox
@@ -461,200 +450,15 @@
             </a-form-item>
           </a-col>
         </a-row>
-        <!-- <a-divider></a-divider>
-        <a-row :gutter="15" style="font-weight: bold;">
-          <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-            <a-row :gutter="5">
-              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-                <a-form-item label="House/Bldg No">
-                  <a-input
-                    v-model="form.business_address.rental_address.bldg_no"
-                    placeholder="House/Bldg No"
-                  ></a-input>
-                </a-form-item>
-              </a-col>
-              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-                <a-form-item label="Unit No">
-                  <a-input
-                    v-model="form.business_address.rental_address.unit_no"
-                    placeholder="Unit No"
-                  ></a-input>
-                </a-form-item>
-              </a-col>
-              <a-col :span="24">
-                <a-form-item label="Building Name">
-                  <a-input
-                    v-model="form.business_address.rental_address.bldg_name"
-                    placeholder="Building Name"
-                  ></a-input>
-                </a-form-item>
-              </a-col>
-              <a-col :span="24">
-                <a-form-item label="Street">
-                  <a-input
-                    v-model="form.business_address.rental_address.street"
-                    placeholder="Street"
-                  ></a-input>
-                </a-form-item>
-              </a-col>
-              <a-col :span="24">
-                <a-form-item label="Subdivision">
-                  <a-input
-                    v-model="form.business_address.rental_address.subdivision"
-                    placeholder="Subdivision"
-                  ></a-input>
-                </a-form-item>
-              </a-col>
-            </a-row>
-          </a-col>
-
-          <a-col :xs="{ span: 24 }" :sm="{ span: 14 }">
-            <GmapMap
-              id="map"
-              ref="map"
-              :center="{ lat: 13.960837, lng: 121.591532 }"
-              :zoom="16"
-              map-type-id="terrain"
-              draggable="true"
-              style="width: 100%; height: 300px"
-              :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
-            ></GmapMap>
-          </a-col>
-        </a-row>
-
-        <a-row style="font-weight: bold; margin-top: 1vh;" :gutter="5">
-          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-            <a-form-item
-              :validate-status="checkErrors('business_address.rental_address.region') ? 'error': ''"
-              :help="checkErrors('business_address.rental_address.region')"
-            >
-              <span slot="label">
-                Region
-                <i style="color: red">*</i>
-              </span>
-              <a-select
-                v-model="form.business_address.rental_address.region"
-                showSearch
-                :disabled="fixed_address"
-                @change="changeRentalRegion"
-                :filterOption="(input, option) => filterReference(input, option, regions, 'regCode', 'regDesc')"
-              >
-                <a-select-option :value="''" :key="''" disabled>Select Region</a-select-option>
-                <a-select-option
-                  v-for="item in regions"
-                  :key="item.regCode"
-                  :value="item.regCode"
-                >{{item.regDesc}}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-            <a-form-item
-              :validate-status="checkErrors('business_address.rental_address.province') ? 'error': ''"
-              :help="checkErrors('business_address.rental_address.province')"
-            >
-              <span slot="label">
-                Province
-                <i style="color: red">*</i>
-              </span>
-              <a-select
-                v-model="form.business_address.rental_address.province"
-                :disabled="fixed_address || !form.business_address.rental_address.region"
-                showSearch
-                @change="changeRentalProvince"
-                :filterOption="(input, option) => filterReference(input, option, rental_provinces, 'provCode', 'provDesc')"
-              >
-                <a-select-option :value="''" disabled>Select Province</a-select-option>
-                <a-select-option
-                  v-for="item in rental_provinces"
-                  :key="item.provCode"
-                  :value="item.provCode"
-                >{{item.provDesc}}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-        </a-row>
-
-        <a-row style="font-weight: bold" :gutter="5">
-          <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
-            <a-form-item
-              :validate-status="checkErrors('business_address.rental_address.city') ? 'error': ''"
-              :help="checkErrors('business_address.rental_address.city')"
-            >
-              <span slot="label">
-                City/Municipality
-                <i style="color: red">*</i>
-              </span>
-              <a-select
-                v-model="form.business_address.rental_address.city"
-                :disabled="fixed_address || !form.business_address.rental_address.province"
-                @change="changeRentalCity"
-                showSearch
-                :filterOption="(input, option) => filterReference(input, option, rental_cities, 'citymunCode', 'citymunDesc')"
-              >
-                <a-select-option :value="''" disabled>Select City/Municipality</a-select-option>
-                <a-select-option
-                  v-for="item in rental_cities"
-                  :key="item.citymunCode"
-                  :value="item.citymunCode"
-                >{{item.citymunDesc}}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-            <a-form-item
-              :validate-status="checkErrors('business_address.rental_address.barangay') ? 'error': ''"
-              :help="checkErrors('business_address.rental_address.barangay')"
-            >
-              <span slot="label">
-                Barangay
-                <i style="color: red">*</i>
-              </span>
-              <a-select
-                v-model="form.business_address.rental_address.barangay"
-                :disabled="!form.business_address.rental_address.city"
-                showSearch
-                :filterOption="(input, option) => filterReference(input, option, rental_barangays, 'brgyCode', 'brgyDesc')"
-              >
-                <a-select-option :value="''" disabled>Select Barangay</a-select-option>
-                <a-select-option
-                  v-for="item in rental_barangays"
-                  :key="item.brgyCode"
-                  :value="item.brgyCode"
-                >{{item.brgyDesc}}</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-          <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
-            <a-form-item
-              :validate-status="checkErrors('business_address.rental_address.postal_code') ? 'error': ''"
-              :help="checkErrors('business_address.rental_address.postal_code')"
-            >
-              <span slot="label">
-                Postal Code
-                <i style="color: red">*</i>
-              </span>
-              <a-input
-                :disabled="fixed_postal"
-                v-model="form.business_address.rental_address.postal_code"
-                placeholder="Postal Code*"
-              ></a-input>
-            </a-form-item>
-          </a-col>
-        </a-row>-->
       </template>
 
       <a-row type="flex" justify="space-between" style="margin-top: 5vh;">
-        <!-- <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 6 }"> -->
         <a-col :span="24">
           <a-button-group>
             <a-button @click="$emit('prev')">Previous</a-button>
             <a-button type="primary" @click="$emit('next')">Next</a-button>
           </a-button-group>
         </a-col>
-        <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
-          <a-button>Save Draft</a-button>
-        </a-col>-->
       </a-row>
     </a-form>
   </a-card>
@@ -668,6 +472,7 @@ export default {
   props: ["form", "step", "errors"],
   data() {
     return {
+      marker_animation: 0,
       show_rented_info: false,
       regions_data,
       provinces_data,
@@ -678,6 +483,9 @@ export default {
     };
   },
   created() {
+    this.$getLocation().then(coordinates => {
+      this.form.business_address.coordinates = coordinates;
+    });
     if (this.fixed_address) {
       this.form.business_address.region = "04";
       // this.changeRegion();
@@ -759,6 +567,17 @@ export default {
     }
   },
   methods: {
+    mapClick(e) {
+      console.log('e :', e);
+      this.form.business_address.coordinates.lat = e.latLng.lat();
+      this.form.business_address.coordinates.lng = e.latLng.lng();
+      this.marker_animation = 4;
+    },
+    resetAnimation(e) {
+      setTimeout(function(params) {
+        this.marker_animation = 0;
+      }, 1000);
+    },
     resetRentedData() {
       if (!this.form.business_details.is_rented) {
         this.form.business_address.rental = "";

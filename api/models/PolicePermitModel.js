@@ -186,6 +186,14 @@ var PolicePermitSchema = new mongoose.Schema({
         },
         postal_code: {
             type: String
+        },
+        coordinates: {
+            lat: {
+                type: String
+            },
+            lng: {
+                type: String
+            }
         }
     },
     contact_details: {

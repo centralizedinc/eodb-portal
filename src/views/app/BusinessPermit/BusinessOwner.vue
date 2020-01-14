@@ -23,13 +23,6 @@
     <a-form class="owner-form">
       <!-- Personal Details -->
       <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
-      <!-- <a-row>
-        <a-col :xs="{ span: 24 }">
-          <a-form-item>
-            <a-checkbox @change="onChange">Is the registrant the business owner</a-checkbox>
-          </a-form-item>
-        </a-col>
-      </a-row>-->
 
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -222,7 +215,11 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police', 'cedula', 'barangay'])">
+        <a-col
+          :xs="{ span: 24 }"
+          :sm="{ span: 24 }"
+          v-if="checkDocsNeeded(['police', 'cedula', 'barangay'])"
+        >
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
             <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
@@ -243,7 +240,7 @@
       <a-row style="font-weight: bold;" :gutter="5">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
-          style="font-weight: bold;"
+            style="font-weight: bold;"
             :validate-status="checkErrors('police_required.purpose') ? 'error': ''"
             :help="checkErrors('police_required.purpose')"
           >
@@ -252,10 +249,10 @@
               <i style="color: red">*</i>
             </span>
             <a-select defaultValue="Business Requirement" v-model="form.police_purpose">
-              <a-select-option 
-              v-for="(item, index) in purpose_items"
-              :key="'P'+index"
-              :value="item.description"
+              <a-select-option
+                v-for="(item, index) in purpose_items"
+                :key="'P'+index"
+                :value="item.description"
               >{{item.description}}</a-select-option>
             </a-select>
           </a-form-item>
@@ -352,19 +349,6 @@
             </a-tooltip>
           </a-form-item>
         </a-col>
-        <!-- <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
-          <a-form-item
-            :validate-status="checkErrors('police_required.occupation') ? 'error': ''"
-            :help="checkErrors('police_required.occupation')"
-          >
-            <span slot="label">
-              Occupation
-              <i style="color: red">*</i>
-            </span>
-
-            <a-input v-model="form.owner_details.occupation"></a-input>
-          </a-form-item>
-        </a-col>-->
       </a-row>
 
       <!-- Cedula Details -->
@@ -374,9 +358,9 @@
         style="font-weight: bold;"
         v-if="checkDocsNeeded(['cedula'])"
       >
-      <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
-          :validate-status="
+            :validate-status="
               checkErrors('issued_to') ? 'error' : ''
             "
             :help="checkErrors('issued_to')"
@@ -388,9 +372,9 @@
             <a-select v-model="form.issued_to">
               <a-select-option value="Individual">Individual</a-select-option>
               <a-select-option value="Corporation">Corporation</a-select-option>
-              </a-select>
+            </a-select>
           </a-form-item>
-        </a-col>  
+        </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="
@@ -402,9 +386,9 @@
               Citizenship
               <i style="color: red">*</i>
             </span>
-           <a-input v-model="form.owner_details.citizenship"></a-input>
+            <a-input v-model="form.owner_details.citizenship"></a-input>
           </a-form-item>
-        </a-col>  
+        </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="
@@ -435,16 +419,6 @@
               style="width: 100%;"
             />
           </a-form-item>
-          <!-- <a-form-item>
-            <span slot="label">Additional Community Tax</span>
-            <a-input-number 
-              v-model="form.tax.taxable.additional" 
-              @change="computation"
-              :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-              :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
-              style="width: 100%;"
-            />
-          </a-form-item>-->
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
@@ -524,13 +498,19 @@
           <GmapMap
             id="map"
             ref="map"
-            :center="{ lat: 13.960837, lng: 121.591532 }"
+            :center="form.owner_address.coordinates"
             :zoom="16"
             map-type-id="terrain"
             draggable="true"
             style="width: 100%; height: 300px"
             :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
-          ></GmapMap>
+            @click="mapClick"
+          >
+            <GmapMarker
+              :position="form.owner_address.coordinates"
+              :animation="marker_animation"
+            />
+          </GmapMap>
         </a-col>
       </a-row>
 
@@ -670,12 +650,13 @@
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
 import moment from "moment";
-import purpose from "../PoliceClearance/police_purpose.json"
+import purpose from "../PoliceClearance/police_purpose.json";
 
 export default {
   props: ["form", "step", "errors", "documents", "computation_formulas"],
   data() {
     return {
+      marker_animation: 0,
       regions_data,
       provinces_data,
       cities: [],
@@ -713,17 +694,26 @@ export default {
     }
   },
   created() {
+    this.$getLocation().then(coordinates => {
+      this.form.owner_address.coordinates = coordinates;
+    });
     this.form.owner_details.name = this.user.name;
     this.form.owner_details.email = this.user.email;
   },
   mounted() {
     var data = [...this.purpose];
-     this.purpose_items = data
+    this.purpose_items = data;
     this.checkRequiredDocs();
 
     this.loadReferences();
   },
   methods: {
+    mapClick(e) {
+      console.log("e :", e);
+      this.form.owner_address.coordinates.lat = e.latLng.lat();
+      this.form.owner_address.coordinates.lng = e.latLng.lng();
+      this.marker_animation = 4;
+    },
     changeRegion() {
       // clear data
       this.form.owner_address.province = "";

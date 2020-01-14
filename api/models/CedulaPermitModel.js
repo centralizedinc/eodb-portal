@@ -118,6 +118,46 @@ var CedulaPermitSchema = new mongoose.Schema({
             type: Number
         }
     },
+    address: {
+        bldg_no: {
+            type: String
+        },
+        unit_no: {
+            type: String
+        },
+        bldg_name: {
+            type: String
+        },
+        street: {
+            type: String
+        },
+        subdivision: {
+            type: String
+        },
+        region: {
+            type: String
+        },
+        province: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        barangay: {
+            type: String
+        },
+        postal_code: {
+            type: String
+        },
+        coordinates: {
+            lat: {
+                type: String
+            },
+            lng: {
+                type: String
+            }
+        }
+    },
     attachments: [{
         doc_type: {
             type: String

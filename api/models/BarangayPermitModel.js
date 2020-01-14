@@ -96,6 +96,14 @@ var BarangayPermitSchema = new mongoose.Schema({
         },
         postal_code: {
             type: String
+        },
+        coordinates: {
+            lat: {
+                type: String
+            },
+            lng: {
+                type: String
+            }
         }
     },
     age: {
@@ -146,6 +154,14 @@ var BarangayPermitSchema = new mongoose.Schema({
         },
         postal_code: {
             type: String
+        },
+        coordinates: {
+            lat: {
+                type: String
+            },
+            lng: {
+                type: String
+            }
         }
     },
 

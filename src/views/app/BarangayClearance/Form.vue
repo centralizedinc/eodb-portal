@@ -236,7 +236,11 @@ export default {
           province: "",
           city: "",
           barangay: "",
-          postal_code: ""
+          postal_code: "",
+          coordinates: {
+            lat: 0,
+            lng: 0
+          }
         },
         personal_details: {
           name: {
@@ -262,7 +266,11 @@ export default {
           province: "",
           city: "",
           barangay: "",
-          postal_code: ""
+          postal_code: "",
+          coordinates: {
+            lat: 0,
+            lng: 0
+          }
         },
         // spouse_name: {
         //   first: "",
@@ -525,7 +533,10 @@ export default {
       var data = this.$store.state.user_session.user;
       this.form.personal_details.name = data.name;
 
-      this.form.requestor = this.user && this.user.name ? `${this.user.name.first} ${this.user.name.last}` : "";
+      this.form.requestor =
+        this.user && this.user.name
+          ? `${this.user.name.first} ${this.user.name.last}`
+          : "";
 
       this.$store
         .dispatch("GET_FEES_COMPUTATION", {
@@ -629,7 +640,7 @@ export default {
       );
       var transaction_no = "",
         reference_no = "";
-        this.transaction_details.payment_breakdown = this.payments_data_source;
+      this.transaction_details.payment_breakdown = this.payments_data_source;
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {

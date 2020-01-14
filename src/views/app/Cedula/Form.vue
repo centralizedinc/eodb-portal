@@ -239,7 +239,7 @@ export default {
           weight: null,
           occupation: ""
         },
-        address:{
+        address: {
           bldg_no: "",
           unit_no: "",
           bldg_name: "",
@@ -249,7 +249,11 @@ export default {
           province: "0456",
           city: "045641",
           barangay: "",
-          postal_code: "4324"
+          postal_code: "4324",
+          coordinates: {
+            lat: 0,
+            lng: 0
+          }
         },
         tax: {
           taxable: {
@@ -671,13 +675,13 @@ export default {
             field: "issued_to",
             error: "Issued To is a required field."
           });
-        }  
+        }
         if (!this.form.personal_details.citizenship) {
           errors.push({
             field: "personal_details.cititenship",
             error: "Citizenship is a required field."
           });
-        }       
+        }
         if (!this.form.personal_details.name.last) {
           console.log("error push last name: ");
           errors.push({
@@ -736,8 +740,8 @@ export default {
 
         if (errors.length) jump_to = 0;
       }
-      if(validate_all || this.current_step === 1){
-         if (!this.form.address.region) {
+      if (validate_all || this.current_step === 1) {
+        if (!this.form.address.region) {
           errors.push({
             field: "address.region",
             error: "Region is a required field."
