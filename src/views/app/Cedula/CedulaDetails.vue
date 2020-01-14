@@ -24,6 +24,39 @@
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
+          :validate-status="
+              checkErrors('issued_to') ? 'error' : ''
+            "
+            :help="checkErrors('issued_to')"
+          >
+            <span slot="label">
+              Issued To
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.issued_to">
+              <a-select-option value="Individual">Individual</a-select-option>
+              <a-select-option value="Corporation">Corporation</a-select-option>
+              </a-select>
+          </a-form-item>
+        </a-col>  
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+          <a-form-item
+            :validate-status="
+              checkErrors('personal_details.cititenship') ? 'error' : ''
+            "
+            :help="checkErrors('personal_details.cititenship')"
+          >
+            <span slot="label">
+              Citizenship
+              <i style="color: red">*</i>
+            </span>
+           <a-input v-model="form.personal_details.citizenship"></a-input>
+          </a-form-item>
+        </a-col>  
+      </a-row>
+      <a-row type="flex" justify="space-around" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+          <a-form-item
             :validate-status="
               checkErrors('personal_details.name.last') ? 'error' : ''
             "

@@ -257,6 +257,8 @@ export default {
         requestor: "",
         application_type: 0,
         permit_type: "business",
+        police_purpose: "",
+        issued_to: "",
         owner_details: {
           name: {
             first: "",
@@ -281,6 +283,7 @@ export default {
           icr_no: "",
           blood_type: "",
           completion: "",
+          citizenship: "",
           educational_attainment: "",
           ctc_no: "",
           tax: {
@@ -986,6 +989,14 @@ export default {
           });
         }
 
+        if(this.checkDocsNeeded(['police'])&&
+        !this.form.police_purpose){
+          errors.push({
+            field: "police_required.purpose",
+            error: "Police Application Purpose is a required field."
+          })
+        }
+
         if (
           this.checkDocsNeeded(["police"]) &&
           !this.form.owner_details.blood_type
@@ -1065,6 +1076,19 @@ export default {
             error: "Weight is a required field."
           });
         }
+
+        if ( this.checkDocsNeeded(["cedula"]) &&!this.form.issued_to) {
+          errors.push({
+            field: "issued_to",
+            error: "Cedula Issued To is a required field."
+          });
+        }  
+        if (this.checkDocsNeeded(["cedula"]) && !this.form.owner_details.citizenship) {
+          errors.push({
+            field: "cedula.cititenship",
+            error: "Citizenship is a required field."
+          });
+        }       
 
         if (
           this.checkDocsNeeded(["cedula", "barangay", "police"]) &&

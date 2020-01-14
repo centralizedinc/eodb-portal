@@ -30,7 +30,13 @@
         <a-row type="flex">
           <!-- desktop -->
           <a-col :xs="{span: 0}" :md="{span: 0}" :lg="{span: 22}" :xl="{span: 22}">
-            <a-drawer :visible="show_summary" @close="show_summary=false" :width="800">
+            <a-drawer
+              :visible="show_summary"
+              @close="show_summary=false"
+              class="mini-drawer"
+              width="100%"
+            >
+              <br />
               <a-tabs>
                 <a-tab-pane key="1">
                   <span slot="tab">
@@ -117,6 +123,8 @@
               </a-tabs>
             </a-drawer>
           </a-col>
+
+          <!-- mobile -->
         </a-row>
 
         <!-- <a-modal :visible="show_summary" :width="1200" @cancel="show_summary=false" :footer="null">
@@ -152,7 +160,9 @@ export default {
       cols: [
         {
           title: "Reference No",
-          dataIndex: "reference_no"
+          dataIndex: "reference_no",
+          fixed: "left",
+          width: 100
         },
         {
           title: "License/Permit Applied",
@@ -172,9 +182,7 @@ export default {
         {
           title: "Action",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" },
-          fixed: "right",
-          width: 100
+          scopedSlots: { customRender: "action" }
         }
       ],
       show_summary: false,
