@@ -321,10 +321,16 @@
               Community Tax Certificate Number
               <i style="color: red">*</i>
             </span>
-            <a-input
-              v-model="form.owner_details.ctc_no"
-              placeholder="Found at the upper right corner. (i.e., CCI2### ########)"
-            ></a-input>
+            <a-tooltip>
+              <span
+                slot="title"
+              >Enter without spaces. Found at the upper right corner (CCI2###########)</span>
+              <a-input
+                v-model="form.owner_details.ctc_no"
+                placeholder="CC•••• ••••••••"
+                maxlength="15"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
@@ -380,22 +386,22 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label">
-              Gross Receipts or Earnings derived business during the preceding
-              year
-            </span>
+            <span slot="label">Gross Receipts or Earnings</span>
 
-            <!-- <a-tooltip placement="bottom">
+            <a-tooltip placement="bottom">
               <template slot="title">
-                <span>business during the preceding year</span>
-            </template>-->
-            <a-input v-model="form.owner_details.tax.taxable.business_income" @change="computation"></a-input>
-            <!-- </a-tooltip> -->
+                <span>Gross Receipts or Earnings derived business during the preceding year</span>
+              </template>
+              <a-input
+                v-model="form.owner_details.tax.taxable.business_income"
+                @change="computation"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item>
-            <span slot="label">Salaries or Gross Receipts or Earnings derived</span>
+            <span slot="label">Salaries/Gross Receipts/Earnings</span>
             <a-tooltip placement="bottom">
               <template slot="title">
                 <span>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <loading-content v-if="fetching_data" />
-    <a-row type="flex" v-else justify="spa">
+    <a-row type="flex" justify="space-between" v-else>
       <!-- Steps -->
-      <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
+      <a-col :xs="{ span: 0 }" :lg="{span: 5}" style="background: white;">
         <!-- <a-affix :offsetTop="60"> -->
         <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
           <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -22,7 +22,7 @@
       <a-col
         style="padding: 10px"
         :xs="{ span: 24 }"
-        :md="{ span: 16 }"
+        :md="{ span: 24 }"
         :lg="{span: 18}"
         class="fill-up-form"
       >
@@ -30,7 +30,7 @@
         <h4>This information will help us assess your application.</h4>
 
         <a-row type="flex" justify="space-between">
-          <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 17}">
+          <a-col :xs="{span: 24}" :md="{span: 24}" :lg="{span: 16}">
             <component
               :is="form_components[current_step]"
               :form="form"

@@ -1,75 +1,86 @@
 <template>
-  <a-drawer placement="left" :closable="false" :width="450" @close="$emit('close')" :visible="show">
-    <a-row type="flex">
-      <!-- options -->
-      <a-col :span="24">
-        <a-card size="small" title="Payment Options"></a-card>
-        <a-tabs @change="navigate">
-          <a-tab-pane key="0">
-            <template slot="tab">
-              <a-tooltip title="Credit Card">
-                <a-icon type="credit-card" style="font-size: 24px"></a-icon>
-              </a-tooltip>
-            </template>
-          </a-tab-pane>
+  <a-row>
+    <a-col :xs="{span: 22}" :md="{span: 22}" :lg="{span: 0}">
+      <a-drawer
+        placement="left"
+        :closable="false"
+        :width="450"
+        @close="$emit('close')"
+        :visible="show"
+      >
+        <a-row type="flex">
+          <!-- options -->
+          <a-col :span="24">
+            <a-card size="small" title="Payment Options"></a-card>
+            <a-tabs @change="navigate">
+              <a-tab-pane key="0">
+                <template slot="tab">
+                  <a-tooltip title="Credit Card">
+                    <a-icon type="credit-card" style="font-size: 24px"></a-icon>
+                  </a-tooltip>
+                </template>
+              </a-tab-pane>
 
-          <a-tab-pane key="1" disabled>
-            <template slot="tab">
-              <a-tooltip title="7-11 (Over the Counter)">
-                <a-icon type="barcode" style="font-size: 24px"></a-icon>
-              </a-tooltip>
-              <a-badge count="soon" />
-            </template>
-            <div align="center">
-              <a-icon
-                type="smile"
-                :style="{ fontSize: '100px', color: '#faad14' }"
-                style="margin-top:80px"
+              <a-tab-pane key="1" disabled>
+                <template slot="tab">
+                  <a-tooltip title="7-11 (Over the Counter)">
+                    <a-icon type="barcode" style="font-size: 24px"></a-icon>
+                  </a-tooltip>
+                  <a-badge count="soon" />
+                </template>
+                <div align="center">
+                  <a-icon
+                    type="smile"
+                    :style="{ fontSize: '100px', color: '#faad14' }"
+                    style="margin-top:80px"
+                  />
+                  <h1 style="margin-top:30px; margin-bottom:50px">
+                    7-11 Payment
+                    <br />service will be available very soon!
+                  </h1>
+                </div>
+              </a-tab-pane>
+            </a-tabs>
+          </a-col>
+
+          <a-col :xs="{span: 17}" :md="{span: 24}">
+            <a-card class="fill-up-form">
+              <component
+                :is="current_option"
+                :details="payment_details"
+                @validCard="v => is_valid_card=v"
+                @validName="v => is_valid_name=v"
+                @validExpiry="v => is_valid_expiry=v"
+                @validCVC="v => is_valid_cvc=v"
               />
-              <h1 style="margin-top:30px; margin-bottom:50px">
-                7-11 Payment
-                <br />service will be available very soon!
-              </h1>
-            </div>
-          </a-tab-pane>
-        </a-tabs>
-      </a-col>
+            </a-card>
+          </a-col>
+        </a-row>
+        <a-col :xs="{span: 17}" :md="{span: 24}">
+          <a-affix :offsetBottom="0" class="payment-total-affix">
+            <a-card :bodyStyle="{ padding: '1vh' }">
+              <h3>
+                <i>
+                  Amount to be paid:
+                  <b>{{formatCurrency(payment_amount)}}</b>
+                </i>
+              </h3>
+              <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
+              <a-button
+                type="primary"
+                block
+                @click="submit"
+                :loading="loading"
+                :disabled="!is_valid_card || !is_valid_name || !is_valid_expiry || !is_valid_cvc"
+              >Submit</a-button>
+            </a-card>
+          </a-affix>
+        </a-col>
+      </a-drawer>
+    </a-col>
 
-      <a-col :span="24">
-        <a-card class="fill-up-form">
-          <component
-            :is="current_option"
-            :details="payment_details"
-            @validCard="v => is_valid_card=v"
-            @validName="v => is_valid_name=v"
-            @validExpiry="v => is_valid_expiry=v"
-            @validCVC="v => is_valid_cvc=v"
-          />
-        </a-card>
-      </a-col>
-
-      <a-col :span="24">
-        <a-affix :offsetBottom="0" class="payment-total-affix">
-          <a-card :bodyStyle="{ padding: '1vh' }">
-            <h3>
-              <i>
-                Amount to be paid:
-                <b>{{formatCurrency(payment_amount)}}</b>
-              </i>
-            </h3>
-            <a-divider style="margin: 1vh 0; background-color: rgba(0, 0, 0, 0.2);" />
-            <a-button
-              type="primary"
-              block
-              @click="submit"
-              :loading="loading"
-              :disabled="!is_valid_card || !is_valid_name || !is_valid_expiry || !is_valid_cvc"
-            >Submit</a-button>
-          </a-card>
-        </a-affix>
-      </a-col>
-    </a-row>
-  </a-drawer>
+    <!-- desktop -->
+  </a-row>
 </template>
 
 <script>

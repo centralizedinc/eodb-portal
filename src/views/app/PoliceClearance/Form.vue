@@ -1,7 +1,7 @@
 <template>
   <a-row type="flex" justify="space-between">
     <!-- Steps -->
-    <a-col :xs="{ span: 0 }" :md="{ span: 7 }" :lg="{span: 5}" style="background: white;">
+    <a-col :xs="{ span: 0 }" :lg="{span: 5}" style="background: white;">
       <!-- <a-affix :offsetTop="60"> -->
       <a-card :bodyStyle="{ padding: '10px', height: '100%' }" style="height: 100%;border: none;">
         <a-steps direction="vertical" :current="current_step" class="form-stepper">
@@ -20,7 +20,7 @@
     <a-col
       style="padding: 10px"
       :xs="{ span: 24 }"
-      :md="{ span: 16 }"
+      :md="{ span: 24 }"
       :lg="{span: 18}"
       class="fill-up-form"
     >

@@ -72,10 +72,13 @@
         style="color: black;font-weight: bold;margin-top: 5vh"
         orientation="left"
       >Part II. Business Details</a-divider>
-      <a-row>
+      <a-row class="summary-row">
         <a-col :span="8">Business Owner Name</a-col>
         <a-col :span="1">:</a-col>
-        <a-col :span="15" style="text-transform: uppercase">{{form.business_details.business_owner_name.last}}, {{form.business_details.business_owner_name.first}} {{form.business_details.business_owner_name.middle}} {{form.business_details.business_owner_name.suffix}}</a-col>
+        <a-col
+          :span="15"
+          style="text-transform: uppercase"
+        >{{form.business_details.business_owner_name.last}}, {{form.business_details.business_owner_name.first}} {{form.business_details.business_owner_name.middle}} {{form.business_details.business_owner_name.suffix}}</a-col>
       </a-row>
       <a-row class="summary-row">
         <a-col :span="8">Business Name</a-col>
@@ -96,7 +99,7 @@
     </template>
 
     <a-row type="flex" justify="space-between" style="margin-top: 5vh;" v-if="!readOnly">
-      <a-col :sm="{ span: 18 }" :md="{ span: 12 }" :xl="{ span: 18 }">
+      <a-col :span="24">
         <a-button-group>
           <a-button @click="$emit('prev')" :disabled="loading">Previous</a-button>
           <a-button type="primary" @click="$emit('payment')" :disabled="loading">Proceed to Payment</a-button>
@@ -158,7 +161,7 @@ export default {
     }
   },
   created() {
-    console.log('this.form :', this.form);
+    console.log("this.form :", this.form);
     this.getBusinessAddress();
     this.getOwnerAddress();
   },
