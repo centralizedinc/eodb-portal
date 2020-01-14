@@ -1,8 +1,5 @@
 <template>
-  <a-card
-    :headStyle="{ border: 'none', color: '#7f7f7f' }"
-    :bodyStyle="{ 'padding-top': 0 }"
-  >
+  <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
     <a-row slot="title">
       <a-col :span="22" style="font-size: 25px;">Document Checklist</a-col>
@@ -15,20 +12,19 @@
             >*</i> is required.)
           </span>
           <a-icon type="info-circle" />
-        </a-tooltip> -->
+        </a-tooltip>-->
       </a-col>
     </a-row>
     <a-form>
       <a-form-item label="Check all the documents you already have">
-        <a-checkbox-group
-          v-model="selected_documents"
-          @change="onDocumentSelect"
-        >
+        <a-checkbox-group v-model="selected_documents" @change="onDocumentSelect">
           <a-row>
             <a-col :span="24" v-for="(item, index) in documents" :key="index">
-              <a-checkbox :value="item.keyword" v-if="!item.hidden">{{
+              <a-checkbox :value="item.keyword" v-if="!item.hidden">
+                {{
                 item.title
-              }}</a-checkbox>
+                }}
+              </a-checkbox>
             </a-col>
           </a-row>
         </a-checkbox-group>
@@ -43,7 +39,7 @@
       </a-col>
       <!-- <a-col :sm="{ span: 6 }" :md="{ span: 12 }" :xl="{ span: 18 }" style="text-align: right;">
         <a-button>Save Draft</a-button>
-      </a-col> -->
+      </a-col>-->
     </a-row>
   </a-card>
 </template>
