@@ -3,81 +3,91 @@
     <h2>Credit Card Payment</h2>
     <span
       style="font-size: 12px; font-weight: bold"
-    >Please use a Visa, MasterCard, or American Express card</span>
+    >Please use Visa, MasterCard, or American Express card</span>
     <a-divider></a-divider>
-    <div class="card-wrapper" style="margin-bottom: 2vh"></div>
-    <a-divider></a-divider>
+    <a-row type="flex" justify="start">
+      <a-col :xs="{span: 1}" :lg="{span: 24}">
+        <div class="card-wrapper" style="margin-bottom: 2vh"></div>
+      </a-col>
+    </a-row>
+    <!-- <a-divider></a-divider> -->
     <form>
       <!-- <a-input type="text" name="number"></a-input> -->
-      <a-form-item
-        :label-col="{ span: 10 }"
-        :wrapper-col="{ span: 14 }"
-        label="Credit Card Number"
-        :validate-status="loading_card ? 'validating' : errors.card ? 'error': success_card ? 'success':''"
-        :help="errors.card"
-        has-feedback
-      >
-        <input
-          placeholder="•••• •••• •••• ••••"
-          type="text"
-          name="number"
-          maxlength="19"
-          class="ant-input"
-          v-model="details.number"
-          @blur="validateCard"
-        />
-      </a-form-item>
-      <a-form-item
-        :label-col="{ span: 10 }"
-        :wrapper-col="{ span: 14 }"
-        label="Cardholder Fullname"
-        :validate-status="errors.name ? 'error':success_card_name ? 'success':''"
-        :help="errors.name"
-        has-feedback
-      >
-        <input
-          placeholder="Enter Fullname"
-          type="text"
-          name="name"
-          class="ant-input"
-          v-model="details.name"
-          @blur="validateName"
-        />
-      </a-form-item>
-      <a-form-item
-        :label-col="{ span: 10 }"
-        :wrapper-col="{ span: 14 }"
-        label="Expiry Date"
-        :validate-status="loading_expiry ? 'validating':errors.expiry ? 'error':success_expiry ? 'success':''"
-        :help="errors.expiry"
-        has-feedback
-      >
-        <input
-          placeholder="••/••"
-          type="text"
-          name="expiry"
-          class="ant-input"
-          v-model="details.expiry"
-          @blur="validateExpiry"
-        />
-      </a-form-item>
-      <a-form-item
-        :label-col="{ span: 10 }"
-        :wrapper-col="{ span: 14 }"
-        label="CVC"
-        :validate-status="loading_cvc ? 'validating':errors.cvc ? 'error':success_cvc ? 'success':''"
-        :help="errors.cvc"
-        has-feedback
-      >
-        <input
-          placeholder="•••"
-          type="text"
-          name="cvc"
-          class="ant-input"
-          v-model="details.cvc"
-          @blur="validateCvc"
-        />
-      </a-form-item>
+      <a-row>
+        <a-col :span="24">
+          <a-form-item
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 24 }"
+            label="Credit Card Number"
+            :validate-status="loading_card ? 'validating' : errors.card ? 'error': success_card ? 'success':''"
+            :help="errors.card"
+            has-feedback
+          >
+            <input
+              placeholder="•••• •••• •••• ••••"
+              type="text"
+              name="number"
+              maxlength="19"
+              class="ant-input"
+              v-model="details.number"
+              @blur="validateCard"
+            />
+          </a-form-item>
+          <a-form-item
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 24 }"
+            label="Cardholder Fullname"
+            :validate-status="errors.name ? 'error':success_card_name ? 'success':''"
+            :help="errors.name"
+            has-feedback
+          >
+            <input
+              placeholder="Enter Fullname"
+              type="text"
+              name="name"
+              class="ant-input"
+              v-model="details.name"
+              @blur="validateName"
+            />
+          </a-form-item>
+          <a-form-item
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 24 }"
+            label="Expiry Date"
+            :validate-status="loading_expiry ? 'validating':errors.expiry ? 'error':success_expiry ? 'success':''"
+            :help="errors.expiry"
+            has-feedback
+          >
+            <input
+              placeholder="••/••"
+              type="text"
+              name="expiry"
+              class="ant-input"
+              v-model="details.expiry"
+              @blur="validateExpiry"
+            />
+          </a-form-item>
+          <a-form-item
+            :label-col="{ span: 24 }"
+            :wrapper-col="{ span: 24 }"
+            label="CVC"
+            :validate-status="loading_cvc ? 'validating':errors.cvc ? 'error':success_cvc ? 'success':''"
+            :help="errors.cvc"
+            has-feedback
+          >
+            <input
+              placeholder="•••"
+              type="text"
+              name="cvc"
+              class="ant-input"
+              v-model="details.cvc"
+              @blur="validateCvc"
+            />
+          </a-form-item>
+          <br />
+          <br />
+        </a-col>
+      </a-row>
     </form>
   </div>
 </template>

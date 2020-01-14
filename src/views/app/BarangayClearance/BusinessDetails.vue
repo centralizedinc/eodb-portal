@@ -1,7 +1,7 @@
 <template>
   <a-card :headStyle="{ border: 'none', color: '#7f7f7f' }" :bodyStyle="{ 'padding-top': 0 }">
     <!-- Title -->
-    <a-row slot="title">
+    <a-row slot="title" type="flex" justify="space-between">
       <a-col :span="22" style="font-size: 25px;">Business Details</a-col>
     </a-row>
     <a-form class="business-form">
@@ -20,7 +20,7 @@
             :help="checkErrors('business_details.business_owner_name.last')"
           >
             <span slot="label">
-             Owner Last Name
+              Owner's Last Name
               <i style="color: red">*</i>
             </span>
             <a-input v-model="form.business_details.business_owner_name.last"></a-input>
@@ -38,7 +38,7 @@
             <a-input v-model="form.business_details.business_owner_name.first"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="{  }" :sm="{ span: 6 }">
+        <a-col :xs="{span: 24  }" :sm="{ span: 6 }">
           <a-form-item label="Middle Name">
             <a-input v-model="form.business_details.business_owner_name.middle"></a-input>
           </a-form-item>

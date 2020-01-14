@@ -143,10 +143,16 @@
               Community Tax Certificate Number
               <i style="color: red">*</i>
             </span>
-            <a-input
-              v-model="form.personal_details.ctc_no"
-              placeholder="Found at the upper right corner. (i.e., CCI2### ########)"
-            ></a-input>
+            <a-tooltip>
+              <span
+                slot="title"
+              >Enter without spaces. Found at the upper right corner (CCI2###########)</span>
+              <a-input
+                v-model="form.personal_details.ctc_no"
+                placeholder="CC•••• ••••••••"
+                maxlength="15"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
       </a-row>
@@ -402,7 +408,7 @@
 <script>
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   props: ["form", "step", "errors"],
@@ -416,8 +422,14 @@ export default {
     };
   },
   computed: {
-    defaultBdayPickerValue(){
-      return moment(new Date(new Date().getFullYear() - 18, new Date().getMonth(), new Date().getDate()))
+    defaultBdayPickerValue() {
+      return moment(
+        new Date(
+          new Date().getFullYear() - 18,
+          new Date().getMonth(),
+          new Date().getDate()
+        )
+      );
     },
     regions() {
       console.log("regions_data: " + JSON.stringify(this.regions_data));
