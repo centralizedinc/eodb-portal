@@ -201,6 +201,7 @@
 
 <script>
 import CedulaDetails from "./CedulaDetails";
+import Address from "./Address";
 import ApplicationSummary from "./ApplicationSummary";
 import Payment from "@/components/payments/Payment.vue";
 
@@ -208,16 +209,18 @@ export default {
   components: {
     Payment,
     CedulaDetails,
-    ApplicationSummary
+    ApplicationSummary,
+    Address
   },
   data() {
     return {
       show_payment: false,
       current_step: 0,
-      form_components: [CedulaDetails, ApplicationSummary],
+      form_components: [CedulaDetails, Address, ApplicationSummary],
       form: {
         application_type: 0,
         permit_type: "cedula",
+        issued_to: "",
         personal_details: {
           name: {
             first: "",
@@ -228,12 +231,25 @@ export default {
           birthdate: "",
           birthplace: "",
           other_country: "",
+          citizenship: "",
           icr_no: null,
           gender: "",
           civil_status: "",
           height: null,
           weight: null,
           occupation: ""
+        },
+        address:{
+          bldg_no: "",
+          unit_no: "",
+          bldg_name: "",
+          street: "",
+          subdivision: "",
+          region: "04",
+          province: "0456",
+          city: "045641",
+          barangay: "",
+          postal_code: "4324"
         },
         tax: {
           taxable: {
@@ -317,6 +333,11 @@ export default {
       steps: [
         {
           title: "Personal Details",
+          description:
+            "An overview of application wherein user can review, edit and modify prior submission."
+        },
+        {
+          title: "Address",
           description:
             "An overview of application wherein user can review, edit and modify prior submission."
         },
@@ -474,7 +495,7 @@ export default {
 
       // if there is no errors
       if (!errors.length) {
-        if (this.current_step === 1) {
+        if (this.current_step === 2) {
           // this.submit();
           this.transaction_details.payment_breakdown = this.payments_data_source;
           this.show_payment = true;
@@ -645,6 +666,18 @@ export default {
         jump_to = 0;
       if (validate_all || this.current_step === 0) {
         console.log("current step 0: " + this.form.personal_details.name.last);
+        if (!this.form.issued_to) {
+          errors.push({
+            field: "issued_to",
+            error: "Issued To is a required field."
+          });
+        }  
+        if (!this.form.personal_details.citizenship) {
+          errors.push({
+            field: "personal_details.cititenship",
+            error: "Citizenship is a required field."
+          });
+        }       
         if (!this.form.personal_details.name.last) {
           console.log("error push last name: ");
           errors.push({
@@ -702,6 +735,39 @@ export default {
         // }
 
         if (errors.length) jump_to = 0;
+      }
+      if(validate_all || this.current_step === 1){
+         if (!this.form.address.region) {
+          errors.push({
+            field: "address.region",
+            error: "Region is a required field."
+          });
+        }
+        if (!this.form.address.province) {
+          errors.push({
+            field: "address.province",
+            error: "Province is a required field."
+          });
+        }
+        if (!this.form.address.barangay) {
+          errors.push({
+            field: "address.barangay",
+            error: "Barangay is a required field."
+          });
+        }
+        if (!this.form.address.city) {
+          errors.push({
+            field: "address.city",
+            error: "City/Municipality is a required field."
+          });
+        }
+        if (!this.form.address.postal_code) {
+          errors.push({
+            field: "address.postal_code",
+            error: "Postal Code is a required field."
+          });
+        }
+        if (errors.length) jump_to = 1;
       }
 
       // if (

@@ -12,6 +12,12 @@
           orientation="left"
         >Part I. Personal Details</a-divider>
         <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
+          <a-row>
+            <a-col :span="12">Application Purpose</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{form.police_purpose}}</a-col>
+          </a-row>
           <a-row class="summary-row">
             <a-col :span="12">Last Name</a-col>
             <a-col :span="1">:</a-col>

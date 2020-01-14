@@ -12,6 +12,18 @@
         >Part I. Personal Details</a-divider>
         <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
           <a-row class="summary-row">
+            <a-col :span="12">Issued To</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{form.issued_to}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
+            <a-col :span="12">Citizenship</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{form.personal_details.citizenship}}</a-col>
+          </a-row>
+          <a-row class="summary-row">
             <a-col :span="12">Last Name</a-col>
             <a-col :span="1">:</a-col>
             <a-col :span="1"></a-col>
@@ -158,6 +170,24 @@
           </a-row>
           <br />
         </a-col>
+        <a-divider
+          style="color: black;font-weight: bold;margin-top: 5vh"
+          orientation="left"
+        >Part II. Address</a-divider>
+        <a-row type="flex" justify="start">
+          <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
+            <a-row class="summary-row">
+              <a-col :xs="{span: 18}" :md="{span: 12}">Address</a-col>
+              <a-col :span="1">:</a-col>
+              <a-col :span="1"></a-col>
+              <a-col :xs="{span: 4}" :md="{span: 10}" style="text-transform:uppercase">
+                {{address}}
+                <!-- {{form.address.region}}{{form.address.province}}
+                {{form.address.city}}{{form.address.barangay}}{{form.address.postal_code}}-->
+              </a-col>
+            </a-row>
+          </a-col>
+        </a-row>
 
         <a-divider></a-divider>
         <a-row type="flex" justify="start">
@@ -195,6 +225,9 @@
   </a-row>
 </template>
 <script>
+import regions_data from "@/assets/references/regions.json";
+import provinces_data from "../../../assets/references/provinces.json";
+
 export default {
   props: ["form", "step", "errors"],
   data() {
@@ -296,7 +329,71 @@ export default {
     this.data[7].community_tax =
       this.data[5].community_tax + this.data[6].community_tax;
     this.form.tax.total_amount_paid = this.data[7].community_tax;
+  },
+   created() {
+    console.log("this.regions_datasss :", regions_data);
+    this.getAddress();
+  },
+  methods: {
+    getRegionByCode(code) {
+      const data = regions_data.find(v => v.regCode === code);
+      return data.regDesc;
+    },
+    getProvinceByCode(code) {
+      const data = provinces_data.find(v => v.provCode === code);
+      return data.provDesc;
+    },
+    getAddress() {
+      const {
+        unit_no,
+        bldg_no,
+        bldg_name,
+        subdivision,
+        street,
+        barangay,
+        province,
+        city,
+        region,
+        postal_code
+      } = this.form.address;
+      var city_desc = "";
+      import(`../../../assets/references/cities/${province}.json`)
+        .then(data => {
+          const cities = data.default;
+          var city_data = cities.find(v => v.citymunCode === city);
+          city_desc = city_data.citymunDesc;
+          return import(`../../../assets/references/barangay/${city}.json`);
+        })
+        .then(data => {
+          const barangays = data.default;
+          console.log("barangay :", barangay);
+          console.log("barangays :", barangays);
+          var brgy_data = barangays.find(
+            v => v.brgyCode.toString() === barangay.toString()
+          );
+          var brgy_desc = brgy_data.brgyDesc;
+          console.log("brgy desc: " + JSON.stringify(brgy_desc));
+          var result_address = "";
+          if (unit_no) result_address += `Unit ${unit_no},`;
+          if (bldg_no) result_address += ` ${bldg_no}`;
+          if (bldg_name) result_address += ` ${bldg_name}`;
+          if (subdivision) result_address += ` ${subdivision}`;
+          if (street) result_address += ` ${street}`;
+          if (barangay) result_address += ` ${brgy_desc}`;
+          if (province) result_address += `${this.getProvinceByCode(province)}`;
+          if (city) result_address += ` ${city_desc}`;
+          if (region) result_address += `, ${this.getRegionByCode(region)}`;
+          if (postal_code) result_address += `, ${postal_code}`;
+
+          this.address = result_address.toUpperCase();
+          console.log("result_address data: " + JSON.stringify(this.address));
+        })
+        .catch(err => {
+          console.log("err :", err);
+        });
+    }
   }
+
 };
 </script>
 <style></style>

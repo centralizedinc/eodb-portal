@@ -222,7 +222,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police', 'cedula', 'barangay'])">
           <a-form-item style="font-weight: bold;" label="Occupation/Profession">
             <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
@@ -241,6 +241,25 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
+          <a-form-item
+          style="font-weight: bold;"
+            :validate-status="checkErrors('police_required.purpose') ? 'error': ''"
+            :help="checkErrors('police_required.purpose')"
+          >
+            <span slot="label">
+              Police Application Purpose
+              <i style="color: red">*</i>
+            </span>
+            <a-select defaultValue="Business Requirement" v-model="form.police_purpose">
+              <a-select-option 
+              v-for="(item, index) in purpose_items"
+              :key="'P'+index"
+              :value="item.description"
+              >{{item.description}}</a-select-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             style="font-weight: bold;"
@@ -349,6 +368,37 @@
         style="font-weight: bold;"
         v-if="checkDocsNeeded(['cedula'])"
       >
+      <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+          <a-form-item
+          :validate-status="
+              checkErrors('issued_to') ? 'error' : ''
+            "
+            :help="checkErrors('issued_to')"
+          >
+            <span slot="label">
+              Cedula Issued To
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.issued_to">
+              <a-select-option value="Individual">Individual</a-select-option>
+              <a-select-option value="Corporation">Corporation</a-select-option>
+              </a-select>
+          </a-form-item>
+        </a-col>  
+        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+          <a-form-item
+            :validate-status="
+              checkErrors('personal_details.cititenship') ? 'error' : ''
+            "
+            :help="checkErrors('personal_details.cititenship')"
+          >
+            <span slot="label">
+              Citizenship
+              <i style="color: red">*</i>
+            </span>
+           <a-input v-model="form.owner_details.citizenship"></a-input>
+          </a-form-item>
+        </a-col>  
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
           <a-form-item
             :validate-status="
@@ -614,6 +664,7 @@
 import regions_data from "../../../assets/references/regions.json";
 import provinces_data from "../../../assets/references/provinces.json";
 import moment from "moment";
+import purpose from "../PoliceClearance/police_purpose.json"
 
 export default {
   props: ["form", "step", "errors", "documents", "computation_formulas"],
@@ -623,7 +674,9 @@ export default {
       provinces_data,
       cities: [],
       barangays: [],
-      required_docs: []
+      required_docs: [],
+      purpose,
+      purpose_items: []
     };
   },
   computed: {
@@ -658,6 +711,8 @@ export default {
     this.form.owner_details.email = this.user.email;
   },
   mounted() {
+    var data = [...this.purpose];
+     this.purpose_items = data
     this.checkRequiredDocs();
 
     this.loadReferences();
