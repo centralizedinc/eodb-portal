@@ -29,6 +29,9 @@ var PaymentModelSchema = new mongoose.Schema({
          * creditcard, onlinebanking, overcounter
          */
     },
+    balance: {
+        type: Number
+    },
     mode_of_payment: {
         type: String
         /**

@@ -5,6 +5,7 @@ var ApplicationSettings = require('../utils/ApplicationSettings');
 
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
+const sendgrid = require('../utils/email.js');
 
 var PaymentDao = require('../dao/PaymentDao');
 
@@ -64,6 +65,25 @@ router.route('/receipt/:transaction_no')
                 res.json(result)
             }).catch((errors) => {
                 res.json({ errors })
+            });
+    })
+
+router.route('/notify/success')
+    .post((req, res) => {
+        var data = req.body;
+        const decoded_data = jwt.decode(req.headers.access_token),
+            user_email = decoded_data.email,
+            user_name = decoded_data.name;
+        data.name = user_name.first;
+        sendgrid.sendEmail(user_email, "PAYMENT_SUCCESSFUL", data)
+            .then((result) => {
+                console.log('payment notification result :', result)
+                res.json(results);
+            }).catch((errors) => {
+                console.log('errors :', errors);
+                res.json({
+                    errors
+                })
             });
     })
 

@@ -506,6 +506,7 @@ export default {
         .map(v => v.amount)
         .reduce((t, c) => parseFloat(t) + parseFloat(c));
       this.transaction_details.total_payable = total;
+      this.updatePaymentMode();
       return total;
     },
     user() {
@@ -715,7 +716,8 @@ export default {
         this.form.attachments
       );
       var transaction_no = "",
-        reference_no = "";
+        reference_no = "",
+        results = {};
       this.$store
         .dispatch("CREATE_APPLICATION", {
           details: {
@@ -732,6 +734,7 @@ export default {
         })
         .then(result => {
           console.log("CREATE_APPLICATION result :", result);
+          results = result;
 
           // Create Payment Receipt
           transaction_no = result.payment.transaction_no;
@@ -766,6 +769,29 @@ export default {
         })
         .then(result => {
           console.log("Payment receipt result :", result);
+          const data = {
+            transaction_no: results.payment.transaction_no,
+            mode_of_payment: this.getPaymentMode(
+              results.payment.mode_of_payment
+            ),
+            transaction_date: this.formatDate(
+              results.payment.date_created,
+              "time",
+              true
+            ),
+            payment_method: this.getPaymentMethod(results.payment.method, {
+              brand: results.payment.payment_details.source.brand,
+              number: `XXXX XXXX XXXX ${results.payment.payment_details.source.last4}`
+            }),
+            amount_paid: this.formatAmount(results.payment.amount_paid),
+            balance: this.formatAmount(results.payment.balance),
+            url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=${results.application.permit_type}&ref_no=${results.application.reference_no}`,
+            receipt_url: result.data.attachment
+          };
+          console.log('###payment data :', data);
+          return this.$store.dispatch("SEND_PAYMENT_EMAIL_NOTIFICATION", data);
+        })
+        .then(result => {
           this.$message.success("Successful Payment.");
           this.$message.success("Your application has been received.");
           this.loading = false;
@@ -775,6 +801,15 @@ export default {
           this.loading = false;
           console.log("CREATE_APPLICATION err :", err);
         });
+    },
+    getPaymentMethod(method, card) {
+      if (!method) return "";
+      else if (method.toLowerCase() === "creditcard")
+        return `${card.brand}(${card.number})`;
+      else if (method.toLowerCase() === "onlinebanking")
+        return "Online Banking";
+      else if (method.toLowerCase() === "overcounter")
+        return "Over the Counter";
     },
     getPayorName(payment) {
       if (payment.method === "creditcard") {

@@ -58,6 +58,12 @@ export default {
                     })
                     return formatter.format(amount)
                 },
+                formatAmount(amount) {
+                    if (!amount || isNaN(amount)) return "₱ 0.00";
+                    var parts = parseFloat(amount).toFixed(2).toString().split(".");
+                    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    return `₱ ${parts.join(".")}`;
+                },
                 getDocketStatus(status) {
                     return ['In-progress', 'Done', 'Rejected'][status]
                 },
