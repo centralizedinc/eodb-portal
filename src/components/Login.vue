@@ -23,7 +23,8 @@
             style="letter-spacing: 1px; color:white; margin-top: 10px; font-size: 16px"
             align="center"
           >
-            Avoid the hassle, <br />apply your business permit here!
+            Avoid the hassle,
+            <br />apply your business permit here!
           </h3>
         </a-col>
         <a-col :span="7"></a-col>
@@ -75,8 +76,7 @@
             class="linkHover"
             style="color: #1890ff; margin-left: 5px; font-size: 14px; hover"
             @click="signup_visible = true"
-            >Create an account</a-button
-          >
+          >Create an account</a-button>
         </a-col>
       </a-row>
       <!-- <a-form>
@@ -132,26 +132,16 @@
       </a-form>-->
       <!-- REGISRATION -->
     </a-card>
-    <a-modal
-      class="modal_login"
-      v-model="signup_visible"
-      title="Create an Account"
-    >
+    <a-modal class="modal_login" v-model="signup_visible" title="Create an Account">
       <template slot="footer">
-        <a-button
-          key="back"
-          @click="handleCancel"
-          :disabled="registration_loading"
-          >Return</a-button
-        >
+        <a-button key="back" @click="handleCancel" :disabled="registration_loading">Return</a-button>
         <a-button
           style="background-color: #1890ff; border-color: #1890ff"
           key="submit"
           type="primary"
           :loading="registration_loading"
           @click="handleOk"
-          >Submit</a-button
-        >
+        >Submit</a-button>
       </template>
       <a-row type="flex" justify="center" :gutter="16">
         <a-col :span="24">
@@ -261,19 +251,13 @@
         </a-col>
         <a-col :span="24">
           <br />
-          <span>
-            By clicking Submit you are agreeing to the Terms and Conditions
-          </span>
+          <span>By clicking Submit you are agreeing to the Terms and Conditions</span>
         </a-col>
       </a-row>
     </a-modal>
 
     <!-- LOGIN -->
-    <a-modal
-      :visible="signin_visible"
-      @cancel="signin_visible = false"
-      :footer="null"
-    >
+    <a-modal :visible="signin_visible" @cancel="signin_visible = false" :footer="null">
       <div slot="title" style="text-align: center; padding-top: 3vh;">
         <h1 style="color: #888;">Login to Continue</h1>
         <h3 style="color: black">Welcome Back!</h3>
@@ -289,10 +273,7 @@
             <a-icon type="user" slot="prefix"></a-icon>
           </a-input>
         </a-form-item>
-        <a-form-item
-          :validate-status="login_err ? 'error' : ''"
-          :help="login_err"
-        >
+        <a-form-item :validate-status="login_err ? 'error' : ''" :help="login_err">
           <a-input
             v-model="login_account.password"
             placeholder="Password"
@@ -302,9 +283,11 @@
           >
             <a-icon type="lock" slot="prefix"></a-icon>
             <a-tooltip slot="suffix">
-              <span slot="title">{{
+              <span slot="title">
+                {{
                 reveal ? "Hide Password" : "Show Password"
-              }}</span>
+                }}
+              </span>
               <a-icon
                 :type="reveal ? 'eye' : 'eye-invisible'"
                 @click="reveal = !reveal"
@@ -314,9 +297,7 @@
           </a-input>
         </a-form-item>
       </a-form>
-      <a-button type="primary" block @click="login" :loading="loading"
-        >LOGIN</a-button
-      >
+      <a-button type="primary" block @click="login" :loading="loading">LOGIN</a-button>
     </a-modal>
   </div>
 </template>

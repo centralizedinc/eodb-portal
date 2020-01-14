@@ -37,7 +37,7 @@
             />
           </a-col>
           <a-col
-            :xs="{span: 6}"
+            :xs="{ }"
             :sm="{span: 6}"
             :md="{span: 2}"
             :lg="{span: 2}"
@@ -50,10 +50,10 @@
                 <a-menu-item key="1" @click="$router.push('/app')">
                   <a-icon type="arrow-left" />Back to Home
                 </a-menu-item>
-                <a-menu-divider />
+                <!-- <a-menu-divider />
                 <a-menu-item key="2">
                   <a-icon type="lock" />Lock Screen
-                </a-menu-item>
+                </a-menu-item>-->
               </a-menu>
               <a-tooltip placement="left">
                 <a-icon type="home" style="color:#ffffff; margin-right:1px"></a-icon>
