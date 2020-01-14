@@ -118,6 +118,14 @@ var BusinessPermitSchema = new mongoose.Schema({
         },
         postal_code: {
             type: String
+        },
+        coordinates: {
+            lat: {
+                type: String
+            },
+            lng: {
+                type: String
+            }
         }
     },
     business_details: {
@@ -238,6 +246,14 @@ var BusinessPermitSchema = new mongoose.Schema({
         postal_code: {
             type: String
         },
+        coordinates: {
+            lat: {
+                type: String
+            },
+            lng: {
+                type: String
+            }
+        },
         is_rented: {
             type: Boolean
         },
@@ -277,6 +293,14 @@ var BusinessPermitSchema = new mongoose.Schema({
             },
             postal_code: {
                 type: String
+            },
+            coordinates: {
+                lat: {
+                    type: String
+                },
+                lng: {
+                    type: String
+                }
             }
         },
         contact_no: {

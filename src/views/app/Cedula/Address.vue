@@ -20,27 +20,27 @@
           <a-row :gutter="5">
             <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
               <a-form-item label="House/Bldg No">
-                <a-input v-model="form.address_details.bldg_no"></a-input>
+                <a-input v-model="form.address.bldg_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
               <a-form-item label="Unit No">
-                <a-input v-model="form.address_details.unit_no"></a-input>
+                <a-input v-model="form.address.unit_no"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Building Name">
-                <a-input v-model="form.address_details.bldg_name"></a-input>
+                <a-input v-model="form.address.bldg_name"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Street">
-                <a-input v-model="form.address_details.street"></a-input>
+                <a-input v-model="form.address.street"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="23">
               <a-form-item label="Subdivision">
-                <a-input v-model="form.address_details.subdivision"></a-input>
+                <a-input v-model="form.address.subdivision"></a-input>
               </a-form-item>
             </a-col>
           </a-row>
@@ -50,7 +50,7 @@
           <GmapMap
             id="map"
             ref="map"
-            :center="form.address_details.coordinates"
+            :center="form.address.coordinates"
             :zoom="16"
             map-type-id="terrain"
             draggable="true"
@@ -59,7 +59,7 @@
             @click="mapClick"
           >
             <GmapMarker
-              :position="form.address_details.coordinates"
+              :position="form.address.coordinates"
               :animation="marker_animation"
               @animation_changed="resetAnimation"
             />
@@ -69,16 +69,15 @@
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
-            :validate-status="checkErrors('address_details.region') ? 'error': ''"
-            :help="checkErrors('address_details.region')"
+            :validate-status="checkErrors('address.region') ? 'error': ''"
+            :help="checkErrors('address.region')"
           >
             <span slot="label">
               Region
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.address_details.region"></a-input> -->
             <a-select
-              v-model="form.address_details.region"
+              v-model="form.address.region"
               showSearch
               disabled
               @change="changeRegion"
@@ -98,16 +97,15 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
-            :validate-status="checkErrors('address_details.province') ? 'error': ''"
-            :help="checkErrors('address_details.province')"
+            :validate-status="checkErrors('address.province') ? 'error': ''"
+            :help="checkErrors('address.province')"
           >
             <span slot="label">
               Province
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.address_details.province"></a-input> -->
             <a-select
-              v-model="form.address_details.province"
+              v-model="form.address.province"
               disabled
               showSearch
               @change="changeProvince"
@@ -135,16 +133,15 @@
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
           <a-form-item
-            :validate-status="checkErrors('address_details.barangay') ? 'error': ''"
-            :help="checkErrors('address_details.barangay')"
+            :validate-status="checkErrors('address.barangay') ? 'error': ''"
+            :help="checkErrors('address.barangay')"
           >
             <span slot="label">
               Barangay
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.address_details.barangay"></a-input> -->
             <a-select
-              v-model="form.address_details.barangay"
+              v-model="form.address.barangay"
               showSearch
               :filterOption="
                 (input, option) =>
@@ -168,16 +165,15 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
-            :validate-status="checkErrors('address_details.city') ? 'error': ''"
-            :help="checkErrors('address_details.city')"
+            :validate-status="checkErrors('address.city') ? 'error': ''"
+            :help="checkErrors('address.city')"
           >
             <span slot="label">
               City / Municipality
               <i style="color: red">*</i>
             </span>
-            <!-- <a-input v-model="form.address_details.city"></a-input> -->
             <a-select
-              v-model="form.address_details.city"
+              v-model="form.address.city"
               disabled
               @change="changeCity"
               showSearch
@@ -203,52 +199,14 @@
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 4 }">
           <a-form-item
-            :validate-status="checkErrors('address_details.postal_code') ? 'error': ''"
-            :help="checkErrors('address_details.postal_code')"
+            :validate-status="checkErrors('address.postal_code') ? 'error': ''"
+            :help="checkErrors('address.postal_code')"
           >
             <span slot="label">
               Postal Code
               <i style="color: red">*</i>
             </span>
-            <a-input disabled v-model="form.address_details.postal_code"></a-input>
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item
-            :validate-status="checkErrors('contact_details.tel_no') ? 'error': ''"
-            :help="checkErrors('contact_details.tel_no')"
-          >
-            <span slot="label">
-              Telephone No.
-              <i style="color: red">*</i>
-            </span>
-            <a-input maxlength="11" v-model="form.contact_details.tel_no"></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
-          <a-form-item
-            :validate-status="checkErrors('contact_details.mobile') ? 'error': ''"
-            :help="checkErrors('contact_details.mobile')"
-          >
-            <span slot="label">
-              Mobile No.
-              <i style="color: red">*</i>
-            </span>
-            <a-input maxlength="11" v-model="form.contact_details.mobile"></a-input>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
-          <a-form-item
-            :validate-status="checkErrors('contact_details.email') ? 'error': ''"
-            :help="checkErrors('contact_details.email')"
-          >
-            <span slot="label">
-              Email Address
-              <i style="color: red">*</i>
-            </span>
-            <a-input style="text-transform: none;" v-model="form.contact_details.email"></a-input>
+            <a-input disabled v-model="form.address.postal_code"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -288,7 +246,7 @@ export default {
       return this.regions_data;
     },
     provinces() {
-      const region_code = this.form.address_details.region;
+      const region_code = this.form.address.region;
       if (!region_code) return [];
 
       const provincesOnRegion = this.provinces_data.filter(
@@ -302,14 +260,14 @@ export default {
   },
   created() {
     this.$getLocation().then(coordinates => {
-      this.form.address_details.coordinates = coordinates;
-    });  
+      this.form.address.coordinates = coordinates;
+    });
   },
   methods: {
     mapClick(e) {
       console.log("e :", e);
-      this.form.address_details.coordinates.lat = e.latLng.lat();
-      this.form.address_details.coordinates.lng = e.latLng.lng();
+      this.form.address.coordinates.lat = e.latLng.lat();
+      this.form.address.coordinates.lng = e.latLng.lng();
       this.marker_animation = 4;
     },
     resetAnimation(e) {
@@ -323,19 +281,19 @@ export default {
     },
     changeRegion() {
       // clear data
-      this.form.address_details.province = "";
-      this.form.address_details.city = "";
-      this.form.address_details.barangay = "";
+      this.form.address.province = "";
+      this.form.address.city = "";
+      this.form.address.barangay = "";
     },
     changeProvince() {
       // clear data first
-      this.form.address_details.city = "";
-      this.form.address_details.barangay = "";
+      this.form.address.city = "";
+      this.form.address.barangay = "";
 
       // call cities
-      if (this.form.address_details.province) {
+      if (this.form.address.province) {
         import(
-          `../../../assets/references/cities/${this.form.address_details.province}.json`
+          `../../../assets/references/cities/${this.form.address.province}.json`
         ).then(data => {
           this.cities = data.default;
         });
@@ -343,12 +301,12 @@ export default {
     },
     changeCity() {
       // clear data first
-      this.form.address_details.barangay = "";
+      this.form.address.barangay = "";
 
       // Call Barangays
-      if (this.form.address_details.city) {
+      if (this.form.address.city) {
         import(
-          `../../../assets/references/barangay/${this.form.address_details.city}.json`
+          `../../../assets/references/barangay/${this.form.address.city}.json`
         ).then(data => {
           this.barangays = data.default;
         });
@@ -357,20 +315,20 @@ export default {
     loadReferences() {
       const { mode, ref_no } = this.$route.query;
       if (this.fixed_address && !mode && !ref_no) {
-        this.form.address_details.region = "04";
+        this.form.address.region = "04";
         // this.changeRegion();
-        this.form.address_details.province = "0456";
+        this.form.address.province = "0456";
         // this.changeProvince();
-        this.form.address_details.city = "045641";
+        this.form.address.city = "045641";
         // this.changeCity();
         import(
-          `../../../assets/references/cities/${this.form.address_details.province}.json`
+          `../../../assets/references/cities/${this.form.address.province}.json`
         )
           .then(data => {
             this.cities = data.default;
             console.log("this.cities :", this.cities);
             return import(
-              `../../../assets/references/barangay/${this.form.address_details.city}.json`
+              `../../../assets/references/barangay/${this.form.address.city}.json`
             );
           })
           .then(data => {
@@ -378,16 +336,16 @@ export default {
             console.log("this.barangays :", this.barangays);
           });
       } else if (mode && ref_no) {
-        if (this.form.address_details.province)
+        if (this.form.address.province)
           import(
-            `../../../assets/references/cities/${this.form.address_details.province}.json`
+            `../../../assets/references/cities/${this.form.address.province}.json`
           )
             .then(data => {
               this.cities = data.default;
               console.log("this.cities :", this.cities);
-              if (this.form.address_details.city)
+              if (this.form.address.city)
                 return import(
-                  `../../../assets/references/barangay/${this.form.address_details.city}.json`
+                  `../../../assets/references/barangay/${this.form.address.city}.json`
                 );
             })
             .then(data => {
@@ -396,7 +354,7 @@ export default {
             });
       }
       if (this.fixed_postal && !mode && !ref_no)
-        this.form.address_details.postal_code = "4324";
+        this.form.address.postal_code = "4324";
     }
   }
 };

@@ -212,6 +212,7 @@ export default {
       form: {
         application_type: 0,
         permit_type: "police",
+        purpose: "",
         personal_details: {
           name: {
             // first: "",
@@ -266,7 +267,12 @@ export default {
             other_country: ""
           }
         },
-        address_details: {},
+        address_details: {
+          coordinates: {
+            lat: 0,
+            lng: 0
+          }
+        },
         contact_details: {},
         request_for: "",
         attachments: [
@@ -644,6 +650,13 @@ export default {
         jump_to = 0;
       if (validate_all || this.current_step === 0) {
         console.log("current step 0: " + this.form.personal_details.name.last);
+
+        if (!this.form.purpose) {
+          errors.push({
+            field: "personal_details.purpose",
+            error: "Application Purpose is a required field."
+          });
+        }
         if (!this.form.personal_details.name.last) {
           console.log("error push last name: ");
           errors.push({

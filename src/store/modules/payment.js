@@ -106,6 +106,9 @@ const actions = {
                     reject(err)
                 });
         })
+    },
+    SEND_PAYMENT_EMAIL_NOTIFICATION(context, data){
+        return new PaymentsAPI(context.rootState.user_session.token).sendEmailNotification(data);
     }
 }
 

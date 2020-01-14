@@ -13,8 +13,6 @@ const BusinessPermitDao = require('../dao/BusinessPermitDao');
 // Utils
 const jwt = require('jsonwebtoken');
 const sendgrid = require('../utils/email.js');
-const constant_helper = require('../utils/constant_helper');
-const ApplicationSettings = require('../utils/ApplicationSettings');
 
 router.route('/')
     .get((req, res) => {
@@ -98,11 +96,12 @@ router.route('/')
                 payment.transaction_details.created_by = created_by;
                 var payment_actions = [],
                     loopCount = payment.mode_of_payment === 'SA' ? 2 :
-                    payment.mode_of_payment === 'Q' ? 4 : 1;
+                        payment.mode_of_payment === 'Q' ? 4 : 1;
                 for (let i = 0; i < loopCount; i++) {
                     if (i === 0) { //paid on first
                         payment.transaction_details.status = 'paid';
                         payment.transaction_details.due_date = new Date();
+                        payment.transaction_details.balance = parseFloat(payment.transaction_details.total_payable) - parseFloat(payment.transaction_details.amount_paid)
                         if (payment.method === 'creditcard') {
                             payment_actions.push(PaymentDao.payUsingCreditCard(payment.card, {
                                 amount: payment.transaction_details.amount_paid,
@@ -115,7 +114,7 @@ router.route('/')
                         var due_date = loopCount === 2 ?
                             new Date(new Date().getFullYear(), new Date().getMonth() + 6, new Date().getDate()) :
                             loopCount === 4 ? new Date(new Date().getFullYear(), new Date().getMonth() + 3, new Date().getDate()) :
-                            new Date();
+                                new Date();
                         unpaid_transaction.due_date = due_date;
                         unpaid_transaction.method = '';
                         unpaid_transaction.due_date = null;

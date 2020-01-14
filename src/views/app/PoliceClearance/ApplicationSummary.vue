@@ -9,6 +9,12 @@
       style="color: black;font-weight: bold;margin-top: 5vh"
       orientation="left"
     >Part I. Personal Details</a-divider>
+    <a-row>
+            <a-col :span="12">Application Purpose</a-col>
+            <a-col :span="1">:</a-col>
+            <a-col :span="1"></a-col>
+            <a-col :span="10" style="text-transform:uppercase">{{form.police_purpose}}</a-col>
+          </a-row>
     <a-row class="summary-row">
       <a-col :span="8">Last Name</a-col>
       <a-col :span="1">:</a-col>
@@ -165,7 +171,7 @@
       <a-col
         :span="15"
         style="text-transform:uppercase"
-      >{{form.family_background.father_info.name.first == null || form.family_background.father_info.name.first == "" ? "-" : family_background.father_info.name.first}}</a-col>
+      >{{form.family_background.father_info.name.first == null || form.family_background.father_info.name.first == "" ? "-" : form.family_background.father_info.name.first}}</a-col>
     </a-row>
 
     <a-row class="summary-row">
@@ -383,15 +389,17 @@ export default {
     };
   },
   created() {
-    console.log("this.regions_datasss :", regions_data);
+    
     this.getAddress();
   },
   methods: {
     getRegionByCode(code) {
+      console.log("getRegionByCode :", regions_data);
       const data = regions_data.find(v => v.regCode === code);
       return data.regDesc;
     },
     getProvinceByCode(code) {
+      console.log("getProvinceByCode :", provinces_data);
       const data = provinces_data.find(v => v.provCode === code);
       return data.provDesc;
     },

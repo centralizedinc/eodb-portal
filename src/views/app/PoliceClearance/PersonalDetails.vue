@@ -24,12 +24,34 @@
       </a-col>
     </a-row>
     <a-form>
+      
       <a-divider style="color: black;font-weight: bold;" orientation="left">Personal Details</a-divider>
       <a-row>
-        <a-col :xs="{ span: 24 }">
+        <a-col :xs="{ span: 24 }">          
           <!-- <a-form-item>
             <a-checkbox @change="onChange">Check this box if the registrant is the applicant</a-checkbox>
           </a-form-item>-->
+        </a-col>
+      </a-row>
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :span="24">
+          <a-form-item
+          :validate-status="checkErrors('personal_details.purpose') ? 'error': ''"
+            :help="checkErrors('personal_details.purpose')"
+          >
+            <span slot="label">
+              Purpose of Application 
+              <i style="color: red">*</i>
+            </span>
+            <a-select v-model="form.purpose">
+              <a-select-option 
+              v-for="(item, index) in purpose_items"
+              :key="'P'+index"
+              :value="item.description"
+              >{{item.description}}</a-select-option>
+            </a-select>
+            
+          </a-form-item>
         </a-col>
       </a-row>
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
@@ -152,7 +174,7 @@
               Height(cm)
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="3" v-model="form.personal_details.height"></a-input>
+            <a-input maxlength="3" v-model="form.personal_details.height"/>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -165,7 +187,7 @@
               <i style="color: red">*</i>
             </span>
 
-            <a-input maxlength="3" v-model="form.personal_details.weight"></a-input>
+            <a-input-number maxlength="3" v-model="form.personal_details.weight"/>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -424,11 +446,20 @@
 </template>
 <script>
 import moment from "moment";
+import purpose from "./police_purpose.json"
 
 export default {
   props: ["form", "step", "errors"],
   data() {
-    return {};
+    return {
+      purpose,
+      purpose_items: []
+    };
+  },
+  mounted(){
+     var data = [...this.purpose];
+     this.purpose_items = data
+     console.log("value of police purpose data : " + JSON.stringify(this.purpose_items))
   },
   computed: {
     defaultBdayPickerValue() {

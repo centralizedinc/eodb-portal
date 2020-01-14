@@ -70,4 +70,12 @@ export default class PaymentsAPI {
     updatePaymentByTransNo(transaction_no, attachment) {
         return axios.post(`/payments/receipt/${transaction_no}`, { attachment })
     }
+
+    /**
+     * @returns {Promise}
+     * @param {Object} data 
+     */
+    sendEmailNotification(data) {
+        return axios.post('/payments/notify/success', data);
+    }
 }
