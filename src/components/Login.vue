@@ -313,7 +313,7 @@
         >
           <a-input @keypress.enter="forgotPassword" v-model="forgot_password_email" :disabled="requesting_forgot_password"></a-input>
         </a-form-item>
-        <a-form-item>
+        <a-form-item extra="*Password Reset will be send to your email.">
           <a-button type="primary" block @click="forgotPassword" :loading="requesting_forgot_password">Submit Request</a-button>
         </a-form-item>
       </a-form>

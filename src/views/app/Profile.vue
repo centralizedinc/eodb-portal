@@ -69,59 +69,46 @@
         >Save Changes</a-button>
       </a-form>
       <a-form v-if="noTitleKey === 'change_password' && user.method !== ''">
-        <a-form-item :validate-status="request_error ? 'error' : '' " :help="request_error">
-          <span slot="label">
-            Current Password
-            <i style="color: red">*</i>
-          </span>
-          <!-- <a-input type="password" v-model="current_password" :disabled="loading_request" /> -->
-          <a-input
-            v-model="current_password"
-            placeholder="Current Password"
-            :type="reveal ? 'text' : 'password'"
-            @keypress.enter="sendRequest"
-            :disabled="loading_request"
-          >
-            <a-icon type="lock" slot="prefix"></a-icon>
-            <a-tooltip slot="suffix">
-              <span slot="title">
-                {{
-                reveal ? "Hide Password" : "Show Password"
-                }}
+        <a-row type="flex" justify="center">
+          <a-col :span="10">
+            <a-form-item :validate-status="request_error ? 'error' : '' " :help="request_error">
+              <span slot="label">
+                Current Password
+                <i style="color: red">*</i>
               </span>
-              <a-icon
-                :type="reveal ? 'eye' : 'eye-invisible'"
-                @click="reveal = !reveal"
-                style="cursor:pointer"
-              />
-            </a-tooltip>
-          </a-input>
-        </a-form-item>
-        <!-- <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <span slot="label">
-            New Password
-            <i style="color: red">*</i>
-          </span>
-          <a-input type="password" v-model="password.new" />
-        </a-form-item>
-        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <span slot="label">
-            Verify Password
-            <i style="color: red">*</i>
-          </span>
-          <a-input type="password" v-model="password.verify" />
-        </a-form-item>
-        <a-button
-          type="primary"
-          style="width:100%; margin-top: 3vh;"
-          @click="save_changes(1)"
-        >Save Changes</a-button>-->
-        <a-button
-          type="primary"
-          style="width:100%; margin-top: 3vh;"
-          @click="sendRequest"
-          :loading="loading_request"
-        >Request Change Password</a-button>
+              <a-input
+                v-model="current_password"
+                placeholder="Current Password"
+                :type="reveal ? 'text' : 'password'"
+                @keypress.enter="sendRequest"
+                :disabled="loading_request"
+              >
+                <a-icon type="lock" slot="prefix"></a-icon>
+                <a-tooltip slot="suffix">
+                  <span slot="title">
+                    {{
+                    reveal ? "Hide Password" : "Show Password"
+                    }}
+                  </span>
+                  <a-icon
+                    :type="reveal ? 'eye' : 'eye-invisible'"
+                    @click="reveal = !reveal"
+                    style="cursor:pointer"
+                  />
+                </a-tooltip>
+              </a-input>
+            </a-form-item>
+            <a-form-item extra="*Password Reset will be send to your email.">
+              <a-button
+                type="primary"
+                block
+                style="float: right; margin-top: 3vh;"
+                @click="sendRequest"
+                :loading="loading_request"
+              >Request Change Password</a-button>
+            </a-form-item>
+          </a-col>
+        </a-row>
       </a-form>
     </a-card>
   </div>
