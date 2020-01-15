@@ -99,40 +99,25 @@
                     <a-icon type="snippets"></a-icon>Attachments
                   </span>
 
-                  <a-row>
-                    <!-- {{app_form}} -->
-                    <!-- <a-card
-                    v-for="item in app_form.attachments"
-                    :key="item.doc_type"
-                    style="margin-top: 2px; text-align: center; width: 20%"
-                    >-->
-
-                    <div v-for="item in app_form.attachments" :key="item.doc_type">
-                      <!-- <div v-for="file in item.files" :key="file"> -->
-                      <!-- {{file}} -->
-                      <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
-                      <!-- <a-card
-                       
-                      style="margin-top: 2px; text-align: center;"
-                      >-->
-                      <a-col :span="6">
-                        <a-card>
+                  <!-- <a-row type="flex" align="top" :gutter="10">
+                      <a-col :span="3"  v-for="item in app_form.attachments" :key="item.doc_type">
+                      
                           <a-tooltip placement="top">
                             <template slot="title">
                               <span>Click to view</span>
                             </template>
                             <a-card
+                            :bodyStyle="{ padding: 10 }"
                               v-for="file in item.files"
                               :key="file"
                               @click="viewPDF(file.url)"
                               style="width: 100%;"
                             >
-                              <!-- {{docType(item.doc_type)}} -->
-                              <h2>{{docType(item.doc_type)}}</h2>
+                            <div slot="title">{{docType(item.doc_type)}} </div>
                               <img
                                 v-if="file && file.type && file.type.indexOf('image') > -1"
                                 :src="file.url"
-                                style="width: 50%;"
+                                style="width: 100%;"
                               />
                               <pdf
                                 v-else-if="file && file.type && file.type==='application/pdf'"
@@ -142,12 +127,77 @@
                               <pdf v-else :src="file" style="cursor:zoom; width: 100%;" ></pdf>
                             </a-card>
                           </a-tooltip>
-                        </a-card>
+                        
                       </a-col>
-                      <!-- </a-card> -->
-                    </div>
-                    <!-- </a-card> -->
-                  </a-row>
+                  </a-row>-->
+
+                  <!-- <a-row
+                    type="flex"
+                    align="top"
+                    :gutter="10"
+                    v-for="item in app_form.attachments"
+                    :key="item.doc_type"
+                  >
+                    <a-col :span="24"><div >{{docType(item.doc_type)}}</div>
+                    </a-col>
+                    <a-col :span="3" v-for="file in item.files" :key="file">
+                      <a-tooltip placement="top">
+                        <template slot="title">
+                          <span>Click to view</span>
+                        </template>
+                        <a-card
+                          :bodyStyle="{ padding: 10 }"
+                          @click="viewPDF(file.url)"
+                          style="width: 100%;"
+                        >
+                          <img
+                            v-if="file && file.type && file.type.indexOf('image') > -1"
+                            :src="file.url"
+                            style="width: 100%;"
+                          />
+                          <pdf
+                            v-else-if="file && file.type && file.type==='application/pdf'"
+                            :src="file.url"
+                            style="cursor:zoom; width: 100%;"
+                          ></pdf>
+                          <pdf v-else :src="file" style="cursor:zoom; width: 100%;"></pdf>
+                        </a-card>
+                      </a-tooltip>
+                    </a-col>
+                    <a-col :span="24"><a-divider /></a-col>
+                  </a-row>-->
+
+                  <a-collapse>
+                    <a-collapse-panel
+                      :header="docType(item.doc_type)"
+                      v-for="item in app_form.attachments"
+                      :key="item.doc_type"
+                    >
+                      <a-row type="flex" align="top" :gutter="10">
+                        <a-col :span="3" v-for="file in item.files" :key="file" style="cursor: zoom-in">
+                          <a-tooltip placement="top" :title="file.url">
+                            <a-card
+                              :bodyStyle="{ padding: 10 }"
+                              @click="viewPDF(file.url)"
+                              style="width: 100%;"
+                            >
+                              <img
+                                v-if="file && file.type && file.type.indexOf('image') > -1"
+                                :src="file.url"
+                                style="width: 100%;"
+                              />
+                              <pdf
+                                v-else-if="file && file.type && file.type==='application/pdf'"
+                                :src="file.url"
+                                style="cursor:zoom; width: 100%;"
+                              ></pdf>
+                              <pdf v-else :src="file" style="cursor:zoom; width: 100%;"></pdf>
+                            </a-card>
+                          </a-tooltip>
+                        </a-col>
+                      </a-row>
+                    </a-collapse-panel>
+                  </a-collapse>
                 </a-tab-pane>
               </a-tabs>
             </a-drawer>
@@ -222,6 +272,10 @@ export default {
   mounted() {
     if (this.$route.query.ref_no)
       this.viewApplication(this.$route.query.ref_no);
+    this.attachmentsSort(this.app_form.attachments);
+  },
+  watch() {
+    app_form();
   },
   computed: {
     dockets() {
@@ -252,18 +306,24 @@ export default {
     }
   },
   methods: {
+    attachmentsSort(data) {
+      console.log("attachments sort data: " + JSON.stringify(data));
+      // data.forEach(docs =>{
+
+      // })
+    },
     docType(file_type) {
       console.log("doc type data: " + JSON.stringify(file_type));
       var test =
         file_type == "dti_sec_cda"
-          ? "DTI"
+          ? "DTI/SEC/CDA"
           : file_type == "police"
-          ? "Police"
+          ? "Police Clearance"
           : file_type == "cedula"
-          ? "Cedula"
+          ? "Community Tax Certificate"
           : file_type == "barangay"
-          ? "Barangay"
-          : "as";
+          ? "Barangay Business Clearance"
+          : "";
       console.log("doc type data test: " + JSON.stringify(test));
       return test;
     },

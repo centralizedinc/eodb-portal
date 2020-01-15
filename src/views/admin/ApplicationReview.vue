@@ -182,14 +182,14 @@ export default {
       console.log("doc type data: " + JSON.stringify(file_type));
       var test =
         file_type == "dti_sec_cda"
-          ? "DTI"
+          ? "DTI/SEC/CDA"
           : file_type == "police"
-          ? "Police"
+          ? "Police Clearance"
           : file_type == "cedula"
-          ? "Cedula"
+          ? "Community Tax Certificate"
           : file_type == "barangay"
-          ? "Barangay"
-          : "as";
+          ? "Barangay Business Clearance"
+          : "";
       console.log("doc type data test: " + JSON.stringify(test));
       return test;
     },
