@@ -39,7 +39,7 @@ router.route('/records')
             var records = results.reduce((items, item) => items.concat(item));
             records.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
             res.json(records);
-        }).catch((err) => {
+        }).catch((errors) => {
             res.json({ errors })
         });
     })

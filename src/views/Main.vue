@@ -45,21 +45,22 @@
             :xxl="{span: 2}"
             style="text-align: left"
           >
-            <a-dropdown>
+            <!-- <a-dropdown>
               <a-menu slot="overlay">
                 <a-menu-item key="1" @click="$router.push('/app')">
                   <a-icon type="arrow-left" />Back to Home
                 </a-menu-item>
-                <!-- <a-menu-divider />
+                <a-menu-divider />
                 <a-menu-item key="2">
                   <a-icon type="lock" />Lock Screen
-                </a-menu-item>-->
+                </a-menu-item>
               </a-menu>
               <a-tooltip placement="left">
                 <a-icon type="home" style="color:#ffffff; margin-right:1px"></a-icon>
                 <a-icon style="fontSize: 8px; margin-left: 5px" type="caret-down" />
               </a-tooltip>
-            </a-dropdown>
+            </a-dropdown>-->
+            <a-icon @click="$router.push('/app')" type="home" />
           </a-col>
 
           <!-- <a-tooltip placement="bottom">

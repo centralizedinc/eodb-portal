@@ -70,7 +70,7 @@
       </a-form>
       <a-form v-if="noTitleKey === 'change_password' && user.method !== ''">
         <a-row type="flex" justify="center">
-          <a-col :span="10">
+          <a-col :span="12">
             <a-form-item :validate-status="request_error ? 'error' : '' " :help="request_error">
               <span slot="label">
                 Current Password
@@ -78,7 +78,7 @@
               </span>
               <a-input
                 v-model="current_password"
-                placeholder="Current Password"
+                placeholder="Input current password"
                 :type="reveal ? 'text' : 'password'"
                 @keypress.enter="sendRequest"
                 :disabled="loading_request"
@@ -98,14 +98,17 @@
                 </a-tooltip>
               </a-input>
             </a-form-item>
-            <a-form-item extra="*Password Reset will be send to your email.">
+            <a-form-item>
               <a-button
                 type="primary"
                 block
                 style="float: right; margin-top: 3vh;"
                 @click="sendRequest"
                 :loading="loading_request"
-              >Request Change Password</a-button>
+              >Request Password Change</a-button>
+              <span style="font-size:10px">
+                <i>*Password reset link will be sent to your registered email</i>
+              </span>
             </a-form-item>
           </a-col>
         </a-row>
