@@ -27,23 +27,37 @@
           <span slot="tab">
             <a-icon type="snippets"></a-icon>Attachments
           </span>
-          <a-card
-            v-for="item in form.attachments"
-            :key="item.doc_type"
-            style="margin-top: 2px; text-align: center"
-          >
-            <div v-for="file in item.files" :key="file">
-              <!-- {{file}} -->
-              <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
-              <img v-if="file.type.indexOf('image') > -1" :src="file.url" style="width: 100%;" />
-              <pdf
-                v-else-if="file.type==='application/pdf'"
-                :src="file.url"
-                style="cursor:zoom; width: 100%"
-              ></pdf>
-              <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
-            </div>
-          </a-card>
+          <a-row type="flex" align="top" :gutter="10">
+            <a-col :span="6" v-for="item in form.attachments" :key="item.doc_type">
+              <a-tooltip placement="top">
+                <template slot="title">
+                  <span>Click to view</span>
+                </template>
+
+                <a-card
+                  :bodyStyle="{ padding: 10 }"
+                  v-for="file in item.files"
+                  :key="file"
+                  @click="viewPDF(file.url)"
+                  style="width: 100%;"
+                  class="attachment-card"
+                >
+                  <div slot="title">{{docType(item.doc_type)}}</div>
+                  <img
+                    v-if="file.type.indexOf('image') > -1"
+                    :src="file.url"
+                    style="width: 100%;"
+                  />
+                  <pdf
+                    v-else-if="file.type==='application/pdf'"
+                    :src="file.url"
+                    style="cursor:zoom; width: 100%"
+                  ></pdf>
+                  <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
+                </a-card>
+              </a-tooltip>
+            </a-col>
+          </a-row>
         </a-tab-pane>
       </a-tabs>
     </a-col>
@@ -163,6 +177,25 @@ export default {
         });
       this.form = this.$store.state.admin_session.for_review;
       console.log("this.form::: ", JSON.stringify(this.form));
+    },
+    docType(file_type) {
+      console.log("doc type data: " + JSON.stringify(file_type));
+      var test =
+        file_type == "dti_sec_cda"
+          ? "DTI"
+          : file_type == "police"
+          ? "Police"
+          : file_type == "cedula"
+          ? "Cedula"
+          : file_type == "barangay"
+          ? "Barangay"
+          : "as";
+      console.log("doc type data test: " + JSON.stringify(test));
+      return test;
+    },
+    viewPDF(file) {
+      console.log("view pdf file: " + JSON.stringify(file));
+      window.open(file, "_blank");
     },
     getProvinceByCode(code) {
       const data = this.provinces_data.find(v => v.provCode === code);
@@ -440,7 +473,7 @@ export default {
       return this.$upload(permit_details, "POLICECLEARANCE");
     },
     uploadCedula(details, address) {
-      console.log('### update cedula details :', details);
+      console.log("### update cedula details :", details);
       const permit_details = {
         issued_to: details.issued_to,
         cedula_no: details.cedula_no,

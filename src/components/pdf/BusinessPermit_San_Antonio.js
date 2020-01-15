@@ -15,7 +15,6 @@ function fillup(details) {
             return [{
                 image: "form",
                 width: 600
-
             }]
         },
         content: content,
@@ -24,7 +23,6 @@ function fillup(details) {
         },
         pageSize: 'A4'
     };
-
 }
 /**
  * 
