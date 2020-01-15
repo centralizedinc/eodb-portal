@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-row type="flex" justify="start">
-      <a-col :xs="{span: 24}" :sm="{span:24}" :md="{span:24}" :lg="{span:24}" :xl="{span:24}">
+      <a-col :span="24">
         <a-table
           :scroll="{ x: 800, y: 300 }"
           :columns="cols"
@@ -189,9 +189,7 @@ export default {
       cols: [
         {
           title: "Reference No",
-          dataIndex: "reference_no",
-          fixed: "left",
-          width: 100
+          dataIndex: "reference_no"
         },
         {
           title: "License/Permit Applied",
@@ -211,7 +209,9 @@ export default {
         {
           title: "Action",
           dataIndex: "action",
-          scopedSlots: { customRender: "action" }
+          scopedSlots: { customRender: "action" },
+          fixed: "right",
+          width: 100
         }
       ],
       show_summary: false,

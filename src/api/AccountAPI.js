@@ -80,4 +80,25 @@ export default class AccountAPI {
     updateProfile(details) {
         return axios.post('accounts/profile', details);
     }
+
+    changePasswordRequest(password) {
+        console.log('password :', password);
+        return axios.post("accounts/resetpassword/request", { password });
+    }
+
+    forgotPasswordRequest(email) {
+        console.log('email :', email);
+        return axios.get(`accounts/resetpassword/request?email=${email}`);
+    }
+
+    checkPasswordRequest(code) {
+        console.log('code :', code);
+        return axios.get(`accounts/resetpassword/${code}`);
+    }
+
+    resetPassword(code, password) {
+        console.log('code :', code);
+        console.log('password :', password);
+        return axios.post(`accounts/resetpassword/${code}`, password);
+    }
 }

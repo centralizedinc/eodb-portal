@@ -11,7 +11,12 @@
         <template slot="permit_type" slot-scope="text">{{getPermitType(text)}}</template>
         <template slot="date_created" slot-scope="text">{{formatDate(text, 'time', true)}}</template>
         <a-row slot="action" slot-scope="text, record">
-          <a-col :span="12" v-if="record.permit_type === 'business'" style="text-align: center;">
+          <!-- (record.permit_type === 'barangay' && record.barangay_type === 'business') -->
+          <a-col
+            :span="12"
+            v-if="record.permit_type === 'business'"
+            style="text-align: center;"
+          >
             <a-popconfirm
               title="Click PROCEED to redirect in Renewal Form."
               okText="Proceed"
@@ -23,7 +28,10 @@
               </a-tooltip>
             </a-popconfirm>
           </a-col>
-          <a-col :span="record.permit_type === 'business' ? 12 : 24" style="text-align: center;">
+          <a-col
+            :span="record.permit_type === 'business' ? 12 : 24"
+            style="text-align: center;"
+          >
             <a-tooltip title="Print">
               <a-icon
                 type="printer"
@@ -106,8 +114,20 @@ export default {
       console.log("permit :", permit);
       this.$store.commit("SET_FILING_PERMIT", permit);
       this.$router.push(
-        `/permits/business?mode=renewal&ref_no=${record.reference_no}`
+        `${permit.path}?mode=renewal&ref_no=${record.reference_no}`
       );
+      // if (record.permit_type === "business") {
+      //   this.$router.push(
+      //     `/permits/business?mode=renewal&ref_no=${record.reference_no}`
+      //   );
+      // } else if (
+      //   record.permit_type === "barangay" &&
+      //   record.barangay_type === "business"
+      // ) {
+      //   this.$router.push(
+      //     `/permits/business?mode=renewal&ref_no=${record.reference_no}`
+      //   );
+      // }
     },
     print(record) {
       window.open(record.epermit_attachment.url);

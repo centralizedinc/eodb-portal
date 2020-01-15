@@ -47,9 +47,9 @@ passport.use('login', new LocalStrategy({
     console.log('password :', password);
     AccountDao.findByEmail(email)
         .then((account_result) => {
-            if (!account_result) return done({
-                message: constant_helper.invalid_auth
-            }, false);
+            console.log('account_result :', account_result);
+            if (!account_result)
+                return null
             else if (account_result.status === 0) return done({
                 message: constant_helper.confirmation_required
             }, false);
@@ -60,10 +60,11 @@ passport.use('login', new LocalStrategy({
             }
         })
         .then((isValid) => {
-            if (!isValid) return done({
-                message: constant_helper.invalid_auth
-            }, false);
-            else {
+            if (!isValid) {
+                return done({
+                    message: constant_helper.invalid_auth
+                }, false);
+            } else {
                 const token = jwt.sign({
                     account_id: result.account._id,
                     email: email,
@@ -77,11 +78,13 @@ passport.use('login', new LocalStrategy({
             }
         })
         .then((modified_account) => {
-            result.account = modified_account;
-            result.account.password = null;
-            result.is_authenticated = true;
             console.timeEnd("login");
-            return done(null, result);
+            if (modified_account) {
+                result.account = modified_account;
+                result.account.password = null;
+                result.is_authenticated = true;
+                return done(null, result);
+            }
         })
         .catch((error) => {
             return done(error)

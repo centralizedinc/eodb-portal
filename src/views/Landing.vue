@@ -13,6 +13,7 @@
     <!-- <div  v-if="$breakpoint.lgAndUp" :style="`${constant_helper.login_background ? `background:url('${constant_helper.login_background}')`: ''}; height:100%;background-repeat: no-repeat;background-size: cover`"> -->
 
     <!-- desktop version -->
+
     <div
       v-if="$breakpoint.lgAndUp"
       :style="
@@ -34,6 +35,7 @@
         <a-col :lg="8" :xl="8" style="margin-top:40vh">
           <title-component data-aos="fade-up" />
         </a-col>
+
         <a-col :lg="8" :xl="8" style="margin-top:12%; margin-bottom: 25px;">
           <login />
         </a-col>
@@ -66,9 +68,9 @@
 
     <!-- buttons -->
     <a-row
-      :gutter="2"
       type="flex"
       align="middle"
+      justify="space-around"
       style="margin-top: 15px; margin-left: 35px;  padding: 2px"
     >
       <a-col :xs="24" :s="12" :md="12" :lg="6">
@@ -84,7 +86,7 @@
           </a-card>
         </a>
       </a-col>
-      <a-col :xs="24" :s="24" :md="12" :lg="6">
+      <a-col :xs="24" :md="12" :lg="6">
         <a href="#cert">
           <a-card
             class="cardButton"
@@ -131,9 +133,10 @@
         </a>
       </a-col>
     </a-row>
+    <a-divider></a-divider>
 
     <!-- ease of doing business -->
-    <a-row :gutter="16" type="flex" align="middle" class="descStyle">
+    <a-row :gutter="16" type="flex" justify="start" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
         <p
           align="center"
@@ -143,7 +146,8 @@
           in San Antonio
         </p>-->
       </a-col>
-      <a-col :span="8" data-aos="fade-right">
+
+      <a-col :xs="{span: 24}" :lg="{span: 8}" data-aos="fade-right">
         <!-- <img
           style="border-radius: 20px"
           width="90%"
@@ -158,8 +162,8 @@
         />
       </a-col>
       <a-col :span="1"></a-col>
-      <a-col :span="14" data-aos="fade-up">
-        <p style="line-height: 220%; font-size: 16px; font-weight: 100">
+      <a-col :xs="{span: 24}" :lg="{span: 14}" data-aos="fade-up">
+        <p style="line-height: 220%; font-size: 16px; font-weight: 100; margin-top: 12px">
           SmartJuan24 is a One Stop Shop eGovernment Service of San Antonio,
           Quezon that expedites the application process for business
           registration, in compliance with the Ease of Doing Business Act under
@@ -174,99 +178,106 @@
         >-->
       </a-col>
     </a-row>
-
     <!-- permits & licenses -->
-    <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="pl">
+    <a-row :gutter="16" type="flex" justify="center" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv">Permits & Licenses</a-divider>
       </a-col>
-      <a-col :span="15" data-aos="fade-up">
-        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
-          In compliance with the Ease of Doing Business Act, registration and
-          application of Permits and Licenses for all the constituents of San
-          Antonio is now available online. Users can now apply for business
-          permits anytime, anywhere. Apply, pay, view, track and manage ALL
-          application in one place through SmartJuan24.
-        </div>
-      </a-col>
-      <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="fade-left">
-        <!-- <a-icon type="file-text" /> -->
+      <a-col :xs="{span: 24}" :lg="{span: 8}" data-aos="fade-right">
         <img
+          style="margin-left: 20px"
           src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/permits.png"
           width="60%"
           alt
         />
       </a-col>
+
+      <a-col :xs="{span: 24}" :lg="{span: 14}" data-aos="fade-up">
+        <p style="line-height: 220%; font-size: 16px; font-weight: 100; margin-top: 12px">
+          In compliance with the Ease of Doing Business Act, registration and
+          application of Permits and Licenses for all the constituents of San
+          Antonio is now available online. Users can now apply for business
+          permits anytime, anywhere. Apply, pay, view, track and manage ALL
+          application in one place through SmartJuan24.
+        </p>
+      </a-col>
     </a-row>
+
     <!-- Certificates -->
-    <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="cert">
+    <a-row :gutter="16" type="flex" justify="center" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv">Civil Registry Forms</a-divider>
       </a-col>
-      <a-col :span="15" data-aos="fade-up">
-        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
-          Request for issuance of certified copies of births, marriages and
-          deaths.
-          <br />
-          <a-badge count="This service will be available soon" />
-        </div>
-      </a-col>
-      <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="fade-left">
+      <a-col :xs="{span: 24}" :lg="{span: 8}" data-aos="fade-left">
         <img
+          style="margin-left: 20px"
           width="60%"
           src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/cert.png"
           alt
         />
       </a-col>
+
+      <a-col :xs="{span: 24}" :lg="{span: 14}" data-aos="fade-up">
+        <p style="line-height: 220%; font-size: 16px; font-weight: 100; margin-top: 12px">
+          Request for issuance of certified copies of births, marriages and
+          deaths.
+          <br />
+          <a-badge count="This service will be available soon" />
+        </p>
+      </a-col>
     </a-row>
-    <!-- real property tax -->
-    <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rpt">
+
+    <!-- RPT -->
+    <a-row :gutter="16" type="flex" justify="center" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv">Real Property Tax</a-divider>
       </a-col>
-      <a-col :span="15" data-aos="fade-up">
-        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
+      <a-col :xs="{span: 24}" :lg="{span: 8}" data-aos="fade-right">
+        <img
+          style="margin-left: 20px"
+          width="60%"
+          src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/rpt.png"
+          alt
+        />
+      </a-col>
+
+      <a-col :xs="{span: 24}" :lg="{span: 14}" data-aos="fade-up">
+        <p style="line-height: 220%; font-size: 16px; font-weight: 100; margin-top: 12px">
           Filing and Payment of Real Property Tax (RPT) will now be easier for
           the people of San Antonio Quezon. Regardless of where you are or just
           being in the comfort of your home, you can now file and pay your real
           property tax obligations online using SmartJuan24.
-        </div>
-      </a-col>
-      <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="fade-left">
-        <img
-          src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/rpt.png"
-          width="60%"
-          alt
-        />
+          <br />
+          <a-badge count="This service will be available soon" />
+        </p>
       </a-col>
     </a-row>
-    <!-- Report Emergency / Calamity -->
-    <a-row :gutter="16" type="flex" align="middle" class="descStyle" id="rec">
+
+    <!-- Report Emergency/Calamity -->
+    <a-row :gutter="16" type="flex" justify="center" class="descStyle">
       <a-col :span="24" data-aos="fade-up">
         <a-divider orientation="left" class="titleDiv">Citizen Report</a-divider>
       </a-col>
-      <a-col :span="15" data-aos="fade-up">
-        <div style="line-height: 220%; font-size: 16px; font-weight: 100">
-          Report crime, emergency, or calamity in San Antonio using SmartJuan24.
-          This alert system tells the Command Center's server about the type of
-          emergency, name and address of establishment, along with other
-          important pieces of information.
-          <a-badge count="This service will be available soon" />
-        </div>
-      </a-col>
-      <a-col :span="1"></a-col>
-      <a-col :span="8" data-aos="fade-left">
-        <!-- <a-icon type="warning" /> -->
+      <a-col :xs="{span: 24}" :lg="{span: 8}" data-aos="fade-left">
         <img
+          style="margin-left: 20px"
           width="60%"
           src="https://eodb-portal.s3-ap-northeast-1.amazonaws.com/images/citizenReport.png"
           alt
         />
       </a-col>
+
+      <a-col :xs="{span: 24}" :lg="{span: 14}" data-aos="fade-up">
+        <p style="line-height: 220%; font-size: 16px; font-weight: 100; margin-top: 12px">
+          Report crime, emergency, or calamity in San Antonio using SmartJuan24.
+          This alert system tells the Command Center's server about the type of
+          emergency, name and address of establishment, along with other
+          important pieces of information.
+          <a-badge count="This service will be available soon" />
+        </p>
+      </a-col>
     </a-row>
+
     <br />
     <br />
     <br />
@@ -364,12 +375,12 @@ export default {
   margin-top: 1em !important;
   margin-bottom: 1em !important;
   font-stretch: ultra-expanded !important;
-  font-size: 12px !important;
+  font-size: 16px !important;
 }
 
 .descStyle {
-  margin-top: 10vh !important;
-  margin-left: 6vw !important;
-  margin-right: 6vw !important;
+  margin-top: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
 }
 </style>

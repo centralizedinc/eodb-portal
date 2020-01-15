@@ -131,6 +131,70 @@ const actions = {
     },
     LOGOUT(context) {
         context.commit('RESET');
+    },
+    CHANGE_PASSWORD_REQUEST(context, password) {
+        return new Promise((resolve, reject) => {
+            new AccountAPI(context.state.token).changePasswordRequest(password)
+                .then((result) => {
+                    console.log('###CHANGE_PASSWORD_REQUEST result.data :', result.data);
+                    if (!result.data.error && result.data.isValid) {
+                        resolve(result.data);
+                    } else {
+                        reject(result.data.error || result.data)
+                    }
+                }).catch((err) => {
+                    console.log('###CHANGE_PASSWORD_REQUEST err :', err);
+                    reject(err)
+                });
+        })
+    },
+    FORGOT_PASSWORD_REQUEST(context, email) {
+        return new Promise((resolve, reject) => {
+            new AccountAPI(null).forgotPasswordRequest(email)
+                .then((result) => {
+                    console.log('###FORGOT_PASSWORD_REQUEST result.data :', result.data);
+                    if (!result.data.error && result.data.isValid) {
+                        resolve(result.data);
+                    } else {
+                        reject(result.data.error || result.data)
+                    }
+                }).catch((err) => {
+                    console.log('###FORGOT_PASSWORD_REQUEST err :', err);
+                    reject(err)
+                });
+        })
+    },
+    CHECK_PASSWORD_RESET(context, code) {
+        return new Promise((resolve, reject) => {
+            new AccountAPI(null).checkPasswordRequest(code)
+                .then((result) => {
+                    console.log('###CHECK_PASSWORD_RESET result.data :', result.data);
+                    if (!result.data.error && result.data.isValid) {
+                        resolve(result.data);
+                    } else {
+                        reject(result.data.error || result.data)
+                    }
+                }).catch((err) => {
+                    console.log('###CHECK_PASSWORD_RESET err :', err);
+                    reject(err)
+                });
+        })
+    },
+    RESET_PASSWORD(context, { code, password }) {
+        return new Promise((resolve, reject) => {
+            new AccountAPI(context.state.token).resetPassword(code, password)
+                .then((result) => {
+                    console.log('###RESET_PASSWORD result.data :', result.data);
+                    if (!result.data.error && result.data.success) {
+                        resolve(result.data);
+                    } else {
+                        reject(result.data.error || result.data)
+                    }
+                }).catch((err) => {
+                    console.log('###RESET_PASSWORD err :', err);
+                    reject(err)
+                });
+        })
     }
 }
 

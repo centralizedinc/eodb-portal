@@ -69,32 +69,46 @@
         >Save Changes</a-button>
       </a-form>
       <a-form v-if="noTitleKey === 'change_password' && user.method !== ''">
-        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <span slot="label">
-            Current Password
-            <i style="color: red">*</i>
-          </span>
-          <a-input type="password" v-model="user.password" />
-        </a-form-item>
-        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <span slot="label">
-            New Password
-            <i style="color: red">*</i>
-          </span>
-          <a-input type="password" v-model="password.new" />
-        </a-form-item>
-        <a-form-item :label-col="{ span: 6 }" :wrapper-col="{ span: 12 }">
-          <span slot="label">
-            Verify Password
-            <i style="color: red">*</i>
-          </span>
-          <a-input type="password" v-model="password.verify" />
-        </a-form-item>
-        <a-button
-          type="primary"
-          style="width:100%; margin-top: 3vh;"
-          @click="save_changes(1)"
-        >Save Changes</a-button>
+        <a-row type="flex" justify="center">
+          <a-col :span="10">
+            <a-form-item :validate-status="request_error ? 'error' : '' " :help="request_error">
+              <span slot="label">
+                Current Password
+                <i style="color: red">*</i>
+              </span>
+              <a-input
+                v-model="current_password"
+                placeholder="Current Password"
+                :type="reveal ? 'text' : 'password'"
+                @keypress.enter="sendRequest"
+                :disabled="loading_request"
+              >
+                <a-icon type="lock" slot="prefix"></a-icon>
+                <a-tooltip slot="suffix">
+                  <span slot="title">
+                    {{
+                    reveal ? "Hide Password" : "Show Password"
+                    }}
+                  </span>
+                  <a-icon
+                    :type="reveal ? 'eye' : 'eye-invisible'"
+                    @click="reveal = !reveal"
+                    style="cursor:pointer"
+                  />
+                </a-tooltip>
+              </a-input>
+            </a-form-item>
+            <a-form-item extra="*Password Reset will be send to your email.">
+              <a-button
+                type="primary"
+                block
+                style="float: right; margin-top: 3vh;"
+                @click="sendRequest"
+                :loading="loading_request"
+              >Request Change Password</a-button>
+            </a-form-item>
+          </a-col>
+        </a-row>
       </a-form>
     </a-card>
   </div>
@@ -103,6 +117,10 @@
 export default {
   data() {
     return {
+      reveal: false,
+      loading_request: false,
+      current_password: "",
+      request_error: "",
       user: {
         name: {
           first: "",
@@ -149,6 +167,28 @@ export default {
         //       "change profile details result data: " + JSON.stringify(result)
         //     );
         //   });
+      }
+    },
+    sendRequest() {
+      this.request_error = "";
+      this.loading_request = true;
+      if (this.current_password) {
+        this.$store
+          .dispatch("CHANGE_PASSWORD_REQUEST", this.current_password)
+          .then(result => {
+            console.log("result :", result);
+            this.$message.success(result.message);
+            this.loading_request = false;
+            this.current_password = "";
+          })
+          .catch(err => {
+            console.log("err :", err);
+            this.request_error = err.message;
+            this.loading_request = false;
+          });
+      } else {
+        this.request_error = "Please input your current password.";
+        this.loading_request = false;
       }
     },
     beforeAvatarUpload(file) {
