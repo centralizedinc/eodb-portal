@@ -344,12 +344,15 @@ export default {
   created() {
     this.init();
   },
+  computed: {
+    offices() {
+      return this.$store.state.dockets.departments;
+    }
+  },
   methods: {
     init() {
       this.loading = true;
-      this.$http.get("/departments").then(results => {
-        this.offices = results.data;
-      });
+      this.$store.dispatch("GET_DEPARTMENTS");
       this.$http.get("/permits").then(results => {
         this.loading = false;
         this.permits = results.data;
@@ -369,28 +372,33 @@ export default {
       this.$notification.error({ message: "Appover Removed!" });
     },
     addRequirement() {
-        //New
+      //New
       if (this.creation_mode === 0) {
         this.permit.requirements.push(this.deepCopy(this.requirement));
         this.requirement = {};
         this.$notification.success({ message: "Requirement Added!" });
       } else if (this.creation_mode === 1) {
-        this.permit.requirements.push(this.deepCopy(this.selection_requirement));
+        this.permit.requirements.push(
+          this.deepCopy(this.selection_requirement)
+        );
         this.selection_requirement = {};
         this.$notification.success({ message: "Requirement Added!" });
       }
     },
-    setPermitRequirement(value){
+    setPermitRequirement(value) {
       const permit = this.permits.find(v => v._id.toString() === value);
-      if(permit) {
+      if (permit) {
         this.selection_requirement = permit;
-        console.log('this.selection_requirement :', this.selection_requirement);
+        console.log("this.selection_requirement :", this.selection_requirement);
       }
     },
     removeRequirement(item) {
-      console.log('item :', item);
-      console.log('this.permit :', this.permit);
-      this.permit.requirements.splice(this.permit.requirements.indexOf(item), 1);
+      console.log("item :", item);
+      console.log("this.permit :", this.permit);
+      this.permit.requirements.splice(
+        this.permit.requirements.indexOf(item),
+        1
+      );
 
       this.$notification.error({ message: "Requirement Removed!" });
     },
@@ -401,8 +409,8 @@ export default {
       this.$notification.success({ message: "Checklist Added!" });
     },
     removeChecklist(item) {
-      console.log('item :', item);
-      console.log('this.permit :', this.permit);
+      console.log("item :", item);
+      console.log("this.permit :", this.permit);
       this.permit.checklists.splice(this.permit.checklists.indexOf(item), 1);
 
       this.$notification.error({ message: "Checklist Removed!" });
@@ -431,7 +439,7 @@ export default {
     },
     submit() {
       this.loading = true;
-      console.log('###this.permit :', this.permit);
+      console.log("###this.permit :", this.permit);
       if (this.edit_mode) {
         this.$http
           .post(`/permits/${this.permit._id}`, this.permit)

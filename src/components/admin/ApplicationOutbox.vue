@@ -72,6 +72,31 @@
         </a-tab-pane>
         <a-tab-pane key="2">
           <span slot="tab">
+            <a-icon type="snippets"></a-icon>Activities
+          </span>
+          <p v-if="!activities || !activities.length" style="text-align: center; font-size: 20px;">
+            <i>No Activity.</i>
+          </p>
+          <a-card
+            v-for="item in activities"
+            :key="item.doc_type"
+            style="margin-top: 2px; text-align: center; border: none;"
+            class="activities-cards"
+          >
+            <span slot="title">
+              <b :style="`color: ${getActionColor(item.action)}`">{{getActionText(item.action)}}</b>
+              by {{getDepartmentTitle(item.department)}}
+              <i>as of {{formatDate(item.date_created, 'time', true)}}</i>
+            </span>
+            <p>
+              <i v-if="item.remarks">{{item.remarks}}</i>
+              <i v-else>No comment.</i>
+            </p>
+            <a-divider style="margin: 5px 0;" />
+          </a-card>
+        </a-tab-pane>
+        <a-tab-pane key="3">
+          <span slot="tab">
             <a-icon type="snippets"></a-icon>Attachments
           </span>
           <a-card
@@ -82,7 +107,11 @@
             <div v-for="file in item.files" :key="file">
               <!-- {{file}} -->
               <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
-              <img v-if="file && file.type && file.type.indexOf('image') > -1" :src="file.url" style="width: 100%;" />
+              <img
+                v-if="file && file.type && file.type.indexOf('image') > -1"
+                :src="file.url"
+                style="width: 100%;"
+              />
               <pdf
                 v-else-if="file && file.type && file.type==='application/pdf'"
                 :src="file.url"
@@ -112,6 +141,7 @@ export default {
   },
   data() {
     return {
+      activities: [],
       search: "",
       visible: false,
       app_form: {},
@@ -157,6 +187,9 @@ export default {
     this.init();
   },
   computed: {
+    departments() {
+      return this.$store.state.dockets.departments;
+    },
     dockets() {
       var dockets = JSON.parse(
         JSON.stringify(this.$store.state.dockets.dockets_outbox)
@@ -173,6 +206,28 @@ export default {
     }
   },
   methods: {
+    getDepartmentTitle(department) {
+      const dept = this.departments.find(v => v._id === department);
+      return dept.description;
+    },
+    getActionColor(action) {
+      if (action === "applied") return "blue";
+      else if (action === "claim") return "blue";
+      else if (action === "approve") return "green";
+      else if (action === "reject") return "red";
+      else if (action === "compliance") return "yellow";
+      else if (action === "done") return "green";
+      else return "white";
+    },
+    getActionText(action) {
+      if (action === "applied") return "Applied";
+      else if (action === "claim") return "Claim";
+      else if (action === "approve") return "Approve";
+      else if (action === "reject") return "Reject";
+      else if (action === "compliance") return "Comply";
+      else if (action === "done") return "Done";
+      else return "";
+    },
     init(refresh) {
       //get records
       this.loading = true;
@@ -186,6 +241,9 @@ export default {
         })
         .then(result => {
           console.log("GET_ADMIN_DEPARTMENT result :", result);
+          return this.$store.dispatch("GET_DEPARTMENTS");
+        })
+        .then(result => {
           this.loading = false;
         })
         .catch(err => {
@@ -214,6 +272,14 @@ export default {
           this.visible = true;
           this.app_form = result.data;
           console.log(JSON.stringify(this.app_form));
+          return this.$store.dispatch(
+            "GET_DOCKET_ACTIVITIES_BY_REF",
+            this.app_form.reference_no
+          );
+        })
+        .then(result => {
+          this.activities = result.data;
+          console.log("this.activities :", this.activities);
         });
     },
     evaluate(record) {
