@@ -52,7 +52,7 @@
           <span slot="tab">
             <a-icon type="snippets"></a-icon>Attachments
           </span>
-          <a-row type="flex" align="top" :gutter="10">
+          <!-- <a-row type="flex" align="top" :gutter="10">
             <a-col :span="6" v-for="item in form.attachments" :key="item.doc_type">
               <a-tooltip placement="top">
                 <template slot="title">
@@ -78,7 +78,41 @@
                 </a-card>
               </a-tooltip>
             </a-col>
-          </a-row>
+          </a-row> -->
+
+
+          <a-collapse>
+                    <a-collapse-panel
+                      :header="docType(item.doc_type)" v-for="item in form.attachments" :key="item.doc_type"
+                    >
+                      <a-row type="flex" align="top" :gutter="10">
+                        <a-col :span="4" v-for="file in item.files"
+                  :key="file" style="cursor: zoom-in">
+                          <a-tooltip placement="top" :title="file.url">
+                            <a-card
+                              :bodyStyle="{ padding: 10 }"
+                              @click="viewPDF(file.url)"
+                              style="width: 100%;"
+                            >
+                              <img
+                                v-if="file && file.type && file.type.indexOf('image') > -1"
+                                :src="file.url"
+                                style="width: 100%;"
+                              />
+                              <pdf
+                                v-else-if="file && file.type && file.type==='application/pdf'"
+                                :src="file.url"
+                                style="cursor:zoom; width: 100%;"
+                              ></pdf>
+                              <pdf v-else :src="file" style="cursor:zoom; width: 100%;"></pdf>
+                            </a-card>
+                          </a-tooltip>
+                        </a-col>
+                      </a-row>
+                    </a-collapse-panel>
+                  </a-collapse>
+
+
         </a-tab-pane>
       </a-tabs>
     </a-col>
