@@ -250,7 +250,6 @@ export default {
       office: {
         admin: false
       },
-      offices: [],
       permits: [],
       permit: {
         approvers: [],

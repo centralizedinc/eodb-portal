@@ -221,9 +221,9 @@ export default {
     },
     getActionText(action) {
       if (action === "applied") return "Applied";
-      else if (action === "claim") return "Claim";
-      else if (action === "approve") return "Approve";
-      else if (action === "reject") return "Reject";
+      else if (action === "claim") return "Claimed";
+      else if (action === "approve") return "Approved";
+      else if (action === "reject") return "Rejected";
       else if (action === "compliance") return "Comply";
       else if (action === "done") return "Done";
       else return "";
