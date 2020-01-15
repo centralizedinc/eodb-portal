@@ -235,7 +235,11 @@
           <a-form-item>
             <span slot="label">Income from Real Property</span>
 
-            <a-input v-model="form.tax.taxable.property_income" @change="computation"></a-input>
+            <a-input-number 
+            v-model="form.tax.taxable.property_income"
+            @change="computation" 
+            :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+            :parser="value => value.replace(/\₱\s?|(,*)/g, '')" style="width: 100%;"></a-input-number >
           </a-form-item>
           <!-- <a-form-item>
             <span slot="label">Additional Community Tax</span>
@@ -252,7 +256,8 @@
               <template slot="title">
                 <span>Gross Receipts or Earnings derived business during the preceding year</span>
               </template>
-              <a-input v-model="form.tax.taxable.business_income" @change="computation"></a-input>
+              <a-input-number  v-model="form.tax.taxable.business_income" @change="computation" :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                :parser="value => value.replace(/\₱\s?|(,*)/g, '')" style="width: 100%;"></a-input-number>
             </a-tooltip>
           </a-form-item>
         </a-col>
@@ -266,7 +271,8 @@
                   profession or pursuit of any occupation
                 </span>
               </template>
-              <a-input v-model="form.tax.taxable.profession_income" @change="computation"></a-input>
+              <a-input-number  v-model="form.tax.taxable.profession_income" @change="computation" :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                :parser="value => value.replace(/\₱\s?|(,*)/g, '')" style="width: 100%;"></a-input-number>
             </a-tooltip>
           </a-form-item>
         </a-col>
