@@ -65,19 +65,19 @@
         >
           <a-dropdown>
             <a-menu slot="overlay">
-              <a-menu-item key="1">
+              <!-- <a-menu-item key="1">
                 <a-icon type="notification" />Notification
               </a-menu-item>
               <a-menu-divider />
               <a-menu-item key="2">
                 <a-icon type="lock" />Lock Screen
-              </a-menu-item>
-              <a-menu-item key="3" @click="logout">
+              </a-menu-item>-->
+              <a-menu-item key="1" @click="logout">
                 <a-icon type="logout" />Logout
               </a-menu-item>
             </a-menu>
             <a-tooltip placement="left">
-              <a-icon type="home" style="color:#ffffff; margin-right:1px"></a-icon>
+              <a-icon type="logout" style="color:#ffffff; margin-right:1px"></a-icon>
               <a-icon style="fontSize: 8px; margin-left: 5px" type="caret-down" />
             </a-tooltip>
           </a-dropdown>
