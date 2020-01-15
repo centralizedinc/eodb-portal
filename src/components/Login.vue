@@ -312,7 +312,12 @@
         <a-col :span="8"></a-col>
       </a-row>
     </a-modal>
-    <a-modal :visible="visible_forgot_password" title="Forgot Password" :footer="null">
+    <a-modal
+      :visible="visible_forgot_password"
+      title="Forgot Password"
+      :footer="null"
+      @cancel="visible_forgot_password=false"
+    >
       <span>Forgotten your password? Enter your registered email address below and we will send you a link to reset your password.</span>
       <br />
       <a-form>

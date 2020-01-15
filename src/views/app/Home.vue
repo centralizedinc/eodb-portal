@@ -56,20 +56,6 @@ export default {
     user_name() {
       return this.$store.state.user_session.user.name.first;
     },
-    // recent() {
-    //   return {};
-    // },
-    // recent_activities(){
-    //   var departments = [];
-    //   this.recent.activities.forEach((activity) => {
-    //     var department = this.departments.find(v => v._id === activity.department);
-    //     departments.push({
-    //       department: department.description,
-    //       status: activity.status,
-    //       icon: ""
-    //     })
-    //   })
-    // },
     departments() {
       return this.$store.state.dockets.departments;
     },
@@ -81,6 +67,7 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch("GET_PERMIT_TYPES")
     this.$store.dispatch("GET_DEPARTMENTS").then(result => {
       return this.$store.dispatch("GET_DOCKET_ACTIVITIES");
     });
