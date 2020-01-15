@@ -435,31 +435,64 @@
             </a-row>
           </a-card>
           <!-- my docs -->
-          <a-card>
-            <a-card
-              @click="view(item.epermit_attachment)"
-              v-for="(item, index) in permits"
-              :key="index"
-              style="margin-top: 2px; text-align: center"
-            >
-              <img
-                v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
-                :src="item.epermit_attachment.url"
-                style="width: 100%;"
-              />
-              <pdf
-                v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
-                :src="item.epermit_attachment.url"
-                style="cursor:zoom; width: 100%"
-              ></pdf>
-              <pdf v-else :src="item.epermit_attachment" style="cursor:zoom; width: auto"></pdf>
-
-              <p
-                style="font-weight:bold;font-size: 10px"
-              >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</p>
-
-              <span>{{getPermitType(item.permit_type)}}</span>
-            </a-card>
+          <a-card :bodyStyle="{ padding: '10px' }">
+            <a-carousel class="attachments-carousel">
+              <div v-for="(v, i) in permits_attachments" :key="i">
+                <a-row type="flex" align="top" :gutter="10">
+                  <a-col :span="12" v-for="(item, index) in v" :key="index" class="attachment-item" @click="openAttachment(item.epermit_attachment.url)">
+                    <img
+                      v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
+                      :src="item.epermit_attachment.url"
+                      style="cursor:zoom; width: 100%"
+                    />
+                    <pdf
+                      v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
+                      :src="item.epermit_attachment.url"
+                      style="cursor:zoom; width: 100%"
+                    ></pdf>
+                    <img
+                      v-else
+                      src="http://www.pngall.com/wp-content/uploads/2018/05/Files-High-Quality-PNG.png"
+                      style="cursor:zoom; width: 100%"
+                    />
+                  </a-col>
+                </a-row>
+              </div>
+            </a-carousel>
+            <!--<a-row :gutter="5" type="flex" align="top">
+              <a-col :span="12" v-for="(item, index) in permits" :key="index">
+                <a-tooltip>
+                  <div slot="title">
+                    <span
+                      style="font-weight:bold;"
+                    >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</span>
+                    <br />
+                    <span>{{getPermitType(item.permit_type)}}</span>
+                  </div>
+                  <a-card
+                    @click="view(item.epermit_attachment)"
+                    :bodyStyle="{ padding: '10px' }"
+                    style="margin-top: 2px; text-align: center"
+                  >
+                    <img
+                      v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
+                      :src="item.epermit_attachment.url"
+                      style="width: 100%;"
+                    />
+                    <pdf
+                      v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
+                      :src="item.epermit_attachment.url"
+                      style="cursor:zoom; width: 100%"
+                    ></pdf>
+                    <img
+                      v-else
+                      src="http://www.pngall.com/wp-content/uploads/2018/05/Files-High-Quality-PNG.png"
+                      style="cursor:zoom; width: 100%"
+                    />
+                  </a-card>
+                </a-tooltip>
+              </a-col>
+            </a-row>-->
           </a-card>
           <!-- </a-affix> -->
           <!-- <a-card>
@@ -609,10 +642,13 @@ export default {
     }
   },
   methods: {
+    openAttachment(url){
+      window.open(url, '_blank')
+    },
     init() {
       this.user = this.$store.state.user_session.user;
+      this.$store.dispatch("GET_PERMITS");
       this.$store.dispatch("GET_BUSINESS_PERMIT");
-      // console.log('USER_DETAILS ::: ', JSON.stringify(this.$store.state.user_session))
     },
     view(link) {
       window.open(link);
@@ -678,6 +714,25 @@ export default {
       }
       return permits;
     },
+    permits_attachments() {
+      const divisor = 4,
+        quotient = Math.ceil(this.permits.length / divisor);
+      var index = 0;
+      var permits_attachments = [];
+      for (let i = 0; i < quotient; i++) {
+        var attachments = [];
+        for (var x = 0; x < divisor; x++) {
+          if (this.permits.length > index)
+            attachments.push(this.permits[index]);
+          else break;
+          index++;
+        }
+        console.log("attachments :", attachments);
+        permits_attachments.push(attachments);
+      }
+      console.log("permits_attachments :", permits_attachments);
+      return permits_attachments;
+    },
     permits() {
       var permits = JSON.parse(
         JSON.stringify(this.$store.state.permits.permits_records)
@@ -691,6 +746,31 @@ export default {
 </script>
 
 <style>
+.attachments-carousel .slick-list {
+  margin-bottom: 3vh;
+}
+
+.attachments-carousel .slick-dots {
+  bottom: 0px;
+}
+
+.attachments-carousel .attachment-item {
+  margin-bottom: 10px;
+  cursor: zoom-in;
+}
+
+.attachments-carousel .attachment-item:hover {
+  border: 1px solid #56caef !important;
+}
+
+.attachments-carousel .slick-dots li button {
+  background: #56caef;
+}
+
+.attachments-carousel .slick-dots li.slick-active button {
+  background: blue !important;
+}
+
 .header {
   background: linear-gradient(to right, #56caef, rgba(60, 108, 180, 1));
 }
