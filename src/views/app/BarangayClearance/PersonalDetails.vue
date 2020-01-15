@@ -208,7 +208,7 @@
                   :help="checkErrors('residential_address.subd')"
                   label="Subdivision"
                 >
-                  <a-input v-model="form.residential_address.subd"></a-input>
+                  <a-input v-model="form.residential_address.subdivision"></a-input>
                 </a-form-item>
               </a-col>
             </a-row>
