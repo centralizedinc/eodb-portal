@@ -236,7 +236,7 @@
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="11" v-model="form.contact_details.mobile"></a-input>
+            <a-input-number maxlength="11" v-model="form.contact_details.mobile" ></a-input-number>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
