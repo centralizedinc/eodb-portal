@@ -298,23 +298,42 @@
         </a-form-item>
       </a-form>
       <a-button type="primary" block @click="login" :loading="loading">LOGIN</a-button>
-      <a-button
-        type="link"
-        @click="visible_forgot_password=true;signin_visible=false;"
-        :disabled="loading"
-      >Forgot Password</a-button>
+      <a-row type="flex" justify="space-around" style="padding-top: 10px">
+        <a-col :span="8"></a-col>
+        <a-col :span="8" style="text-align: center; font-style: italic">
+          <a-button
+            style="font-style: italic; color: #7e7e7e; font-size: 12px"
+            size="small"
+            type="ghost"
+            @click="visible_forgot_password=true;signin_visible=false;"
+            :disabled="loading"
+          >Forgot Password?</a-button>
+        </a-col>
+        <a-col :span="8"></a-col>
+      </a-row>
     </a-modal>
     <a-modal :visible="visible_forgot_password" title="Forgot Password" :footer="null">
+      <span>Forgotten your password? Enter your registered email address below and we will send you a link to reset your password.</span>
+      <br />
       <a-form>
         <a-form-item
           label="Email Address"
           :validate-status="error_forgot_email ? 'error':''"
           :help="error_forgot_email"
         >
-          <a-input @keypress.enter="forgotPassword" v-model="forgot_password_email" :disabled="requesting_forgot_password"></a-input>
+          <a-input
+            @keypress.enter="forgotPassword"
+            v-model="forgot_password_email"
+            :disabled="requesting_forgot_password"
+          ></a-input>
         </a-form-item>
-        <a-form-item extra="*Password Reset will be send to your email.">
-          <a-button type="primary" block @click="forgotPassword" :loading="requesting_forgot_password">Submit Request</a-button>
+        <a-form-item>
+          <a-button
+            type="primary"
+            block
+            @click="forgotPassword"
+            :loading="requesting_forgot_password"
+          >Submit Request</a-button>
         </a-form-item>
       </a-form>
     </a-modal>

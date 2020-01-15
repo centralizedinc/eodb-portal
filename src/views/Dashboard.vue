@@ -63,15 +63,15 @@
           :xxl="{span: 1}"
           style="text-align: left"
         >
-          <a-dropdown>
+          <!-- <a-dropdown>
             <a-menu slot="overlay">
-              <!-- <a-menu-item key="1">
+               <a-menu-item key="1">
                 <a-icon type="notification" />Notification
               </a-menu-item>
               <a-menu-divider />
               <a-menu-item key="2">
                 <a-icon type="lock" />Lock Screen
-              </a-menu-item>-->
+              </a-menu-item>
               <a-menu-item key="1" @click="logout">
                 <a-icon type="logout" />Logout
               </a-menu-item>
@@ -80,7 +80,9 @@
               <a-icon type="logout" style="color:#ffffff; margin-right:1px"></a-icon>
               <a-icon style="fontSize: 8px; margin-left: 5px" type="caret-down" />
             </a-tooltip>
-          </a-dropdown>
+          </a-dropdown>-->
+
+          <a-icon @click="logout" type="logout" />
         </a-col>
         <!-- <a-col :span="1">
             <a-tooltip placement="left">
