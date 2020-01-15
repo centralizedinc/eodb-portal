@@ -98,30 +98,56 @@
                   <span slot="tab">
                     <a-icon type="snippets"></a-icon>Attachments
                   </span>
-                  <a-card
+
+                  <a-row>
+                    <!-- {{app_form}} -->
+                    <!-- <a-card
                     v-for="item in app_form.attachments"
                     :key="item.doc_type"
-                    style="margin-top: 2px; text-align: center"
-                  >
-                    <div v-for="file in item.files" :key="file">
+                    style="margin-top: 2px; text-align: center; width: 20%"
+                    >-->
+
+                    <div v-for="item in app_form.attachments" :key="item.doc_type">
+                      <!-- <div v-for="file in item.files" :key="file"> -->
                       <!-- {{file}} -->
                       <!-- v-if="file.type==='image/png' || file.type==='image/jpg' || file.type==='image/jpeg'" -->
-                      <a-card
-                       @click="viewPDF(file.url)">
-                      <img
-                        v-if="file && file.type && file.type.indexOf('image') > -1"
-                        :src="file.url"
-                        style="width: 50%;"
-                      />
-                      <pdf
-                        v-else-if="file && file.type && file.type==='application/pdf'"
-                        :src="file.url"
-                        style="cursor:zoom; width: 100%"
-                      ></pdf>
-                      <pdf v-else :src="file" style="cursor:zoom; width: 100%"></pdf>
-                    </a-card>
+                      <!-- <a-card
+                       
+                      style="margin-top: 2px; text-align: center;"
+                      >-->
+                      <a-col :span="6">
+                        <a-card>
+                          <a-tooltip placement="top">
+                            <template slot="title">
+                              <span>Click to view</span>
+                            </template>
+                            <a-card
+                              v-for="file in item.files"
+                              :key="file"
+                              @click="viewPDF(file.url)"
+                              style="width: 100%;"
+                            >
+                              <!-- {{docType(item.doc_type)}} -->
+                              <h2>{{docType(item.doc_type)}}</h2>
+                              <img
+                                v-if="file && file.type && file.type.indexOf('image') > -1"
+                                :src="file.url"
+                                style="width: 50%;"
+                              />
+                              <pdf
+                                v-else-if="file && file.type && file.type==='application/pdf'"
+                                :src="file.url"
+                                style="cursor:zoom; width: 100%;"
+                              ></pdf>
+                              <pdf v-else :src="file" style="cursor:zoom; width: 100%;" ></pdf>
+                            </a-card>
+                          </a-tooltip>
+                        </a-card>
+                      </a-col>
+                      <!-- </a-card> -->
                     </div>
-                  </a-card>
+                    <!-- </a-card> -->
+                  </a-row>
                 </a-tab-pane>
               </a-tabs>
             </a-drawer>
@@ -226,9 +252,24 @@ export default {
     }
   },
   methods: {
-    viewPDF(file){  
-      console.log("view pdf file: " + JSON.stringify(file))
-      window.open(file, '_blank');
+    docType(file_type) {
+      console.log("doc type data: " + JSON.stringify(file_type));
+      var test =
+        file_type == "dti_sec_cda"
+          ? "DTI"
+          : file_type == "police"
+          ? "Police"
+          : file_type == "cedula"
+          ? "Cedula"
+          : file_type == "barangay"
+          ? "Barangay"
+          : "as";
+      console.log("doc type data test: " + JSON.stringify(test));
+      return test;
+    },
+    viewPDF(file) {
+      console.log("view pdf file: " + JSON.stringify(file));
+      window.open(file, "_blank");
     },
     viewApplication(reference_no, index) {
       this.loading_index = index;
