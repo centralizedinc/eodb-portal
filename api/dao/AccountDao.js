@@ -91,23 +91,43 @@ class AccountDao {
         return model.findOneAndUpdate(conditions, updated_account).exec()
     }
 
-    static changePassword(id, account){
-        return new Promise((resolve, reject)=>{
+    static changePassword(id, account) {
+        return new Promise((resolve, reject) => {
             model.findById(id).exec()
-            .then(result=>{
-                console.log('updating password: ', JSON.stringify(result))
-                result.updatePassword(account.new_password)
-                console.log('new password: ', JSON.stringify(result))
-                return result.save()
-            })
-            .then(result=>{
-                console.log('saved: ', JSON.stringify(result))
-                resolve(result)
-            })
-            .catch(error=>{
-                console.error('error: ',error)
-                reject(error)
-            })
+                .then(result => {
+                    result.updatePassword(account.new_password)
+                    return this.modifyById(id, { password: result.password });
+                })
+                .then(result => {
+                    resolve(result)
+                })
+                .catch(error => {
+                    console.error('error: ', error)
+                    reject(error)
+                })
+        })
+    }
+
+    /**
+     * @returns {Promise}
+     * @param {String} user_id 
+     * @param {String} password 
+     */
+    static matchPassword(user_id, password) {
+        console.log('Matching password..');
+        return new Promise((resolve, reject) => {
+            model.findById(user_id).exec()
+                .then((user) => {
+                    if (user) return user.isValidPassword(password);
+                })
+                .then((isValid) => {
+                    console.log('###isValid :', isValid);
+                    resolve(isValid)
+                })
+                .catch((err) => {
+                    console.log('err :', err);
+                    reject(err)
+                });
         })
     }
 }

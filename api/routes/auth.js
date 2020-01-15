@@ -71,13 +71,14 @@ router.route('/login')
             console.log("passport login auth user: " + JSON.stringify(user))
             console.log("passport login auth err: " + JSON.stringify(err))
             if (err) {
-                return res.json({
+                res.json({
                     error: err
                 })
+            } else {
+                res.json({
+                    model: user
+                });
             }
-            return res.json({
-                model: user
-            });
         })(req, res, next);
     })
 

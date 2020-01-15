@@ -77,6 +77,11 @@ export default new Router({
       ]
     },
     {
+      path: '/resetpassword/:code',
+      name: "Password Reset",
+      component: () => import('./views/ResetPassword.vue')
+    },
+    {
       path: '/confirmation',
       name: 'Confirmation',
       component: () => import( /* webpackChunkName: "auth" */ './views/Confirmation.vue'),
