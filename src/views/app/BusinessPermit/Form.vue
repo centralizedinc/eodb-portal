@@ -509,11 +509,20 @@ export default {
   computed: {
     required_documents() {
       var docs = [];
+
+      // for (let i = 0; i < this.document_data_source.length; i++) {
+      //   var attachments = this.form.attachments.map(v => v.doc_type);
+      //   if(attachments.includes(this.document_data_source[i].keyword)) {
+      //     this.document_data_source[i].status = 0;
+      //   } else this.document_data_source[i].status = 2;
+      // }
+
       this.form.attachments.forEach(attachment => {
         docs.push(
           this.document_data_source.find(v => v.keyword === attachment.doc_type)
         );
       });
+      console.log('docs :', docs);
       return docs;
     },
     total_payable() {
