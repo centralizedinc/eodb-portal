@@ -168,7 +168,7 @@
               <a-col :span="8">Address</a-col>
               <a-col :span="1">:</a-col>
               <a-col :span="15" style="text-transform:uppercase">
-                {{address}}!
+                {{address}}
                 <!-- {{form.address.region}}{{form.address.province}}
                 {{form.address.city}}{{form.address.barangay}}{{form.address.postal_code}}-->
               </a-col>
@@ -279,7 +279,8 @@ export default {
           dataIndex: "community_tax",
           scopedSlots: { customRender: "community_tax" }
         }
-      ]
+      ],
+      address: ""
     };
   },
   mounted() {
