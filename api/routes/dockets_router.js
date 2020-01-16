@@ -51,6 +51,16 @@ router.route('/activities')
             });
     })
 
+router.route('/activities/:ref_no')
+    .get((req, res) => {
+        DocketsActivityDao.find({ reference_no: req.params.ref_no })
+            .then((results) => {
+                res.json(results)
+            }).catch((errors) => {
+                res.json({ errors })
+            });
+    })
+
 router.route('/inbox')
     .get((req, res) => {
         // const { department } = req.query; 

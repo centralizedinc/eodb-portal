@@ -236,7 +236,13 @@
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="11" v-model="form.contact_details.mobile"></a-input>
+            <!-- <a-input-number 
+            maxlength="11" 
+            v-model="form.contact_details.mobile"
+            :formatter="value => `${value}`.replace(/^([0-9]$)/g, ',')"
+            ></a-input-number>
+             -->
+             <input type="number" class="ant-input" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109 && event.keyCode !== 106 && event.keyCode !== 56 && event.keyCode !== 111 && event.keyCode !== 191 && event.keyCode !== 190"></input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">

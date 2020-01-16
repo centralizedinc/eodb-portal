@@ -441,22 +441,39 @@
             <a-carousel class="attachments-carousel">
               <div v-for="(v, i) in permits_attachments" :key="i">
                 <a-row type="flex" align="top" :gutter="10">
-                  <a-col :span="12" v-for="(item, index) in v" :key="index" class="attachment-item" @click="openAttachment(item.epermit_attachment.url)">
-                    <img
-                      v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
-                      :src="item.epermit_attachment.url"
-                      style="cursor:zoom; width: 100%"
-                    />
-                    <pdf
-                      v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
-                      :src="item.epermit_attachment.url"
-                      style="cursor:zoom; width: 100%"
-                    ></pdf>
-                    <img
-                      v-else
-                      src="http://www.pngall.com/wp-content/uploads/2018/05/Files-High-Quality-PNG.png"
-                      style="cursor:zoom; width: 100%"
-                    />
+                  <a-col
+                    :span="attachments_span"
+                    v-for="(item, index) in v"
+                    :key="index"
+                    class="attachment-item"
+                    @click="openAttachment(item.epermit_attachment.url)"
+                  >
+                    <a-tooltip>
+                      <div slot="title">
+                        <span
+                          style="font-weight:bold;"
+                        >{{item.business_no || item.police_no || item.barangay_no || item.cedula_no }}</span>
+                        <br />
+                        <span>{{getPermitType(item.permit_type)}}</span>
+                      </div>
+                      <div>
+                        <img
+                          v-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type.indexOf('image') > -1"
+                          :src="item.epermit_attachment.url"
+                          style="cursor:zoom; width: 100%"
+                        />
+                        <pdf
+                          v-else-if="item.epermit_attachment && item.epermit_attachment.type && item.epermit_attachment.type==='application/pdf'"
+                          :src="item.epermit_attachment.url"
+                          style="cursor:zoom; width: 100%"
+                        ></pdf>
+                        <img
+                          v-else
+                          src="http://www.pngall.com/wp-content/uploads/2018/05/Files-High-Quality-PNG.png"
+                          style="cursor:zoom; width: 100%"
+                        />
+                      </div>
+                    </a-tooltip>
                   </a-col>
                 </a-row>
               </div>
@@ -632,7 +649,9 @@ export default {
       },
       animation: {},
       selected_menu: [this.$route.fullPath],
-      documents: [{}]
+      documents: [{}],
+      divisor: 1,
+      attachments_span: 24
     };
   },
   created() {
@@ -644,8 +663,8 @@ export default {
     }
   },
   methods: {
-    openAttachment(url){
-      window.open(url, '_blank')
+    openAttachment(url) {
+      window.open(url, "_blank");
     },
     init() {
       this.user = this.$store.state.user_session.user;
@@ -717,22 +736,33 @@ export default {
       return permits;
     },
     permits_attachments() {
-      const divisor = 4,
-        quotient = Math.ceil(this.permits.length / divisor);
+      this.divisor =
+        this.permits.length <= 7
+          ? 1
+          : this.permits.length <= 40
+          ? 4
+          : this.permits.length <= 60
+          ? 6
+          : 9;
+      this.attachments_span =
+        this.permits.length <= 7
+          ? 24
+          : this.permits.length <= 40
+          ? 12
+          : 8
+      const quotient = Math.ceil(this.permits.length / this.divisor);
       var index = 0;
       var permits_attachments = [];
       for (let i = 0; i < quotient; i++) {
         var attachments = [];
-        for (var x = 0; x < divisor; x++) {
+        for (var x = 0; x < this.divisor; x++) {
           if (this.permits.length > index)
             attachments.push(this.permits[index]);
           else break;
           index++;
         }
-        console.log("attachments :", attachments);
         permits_attachments.push(attachments);
       }
-      console.log("permits_attachments :", permits_attachments);
       return permits_attachments;
     },
     permits() {

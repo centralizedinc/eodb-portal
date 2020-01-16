@@ -25,9 +25,34 @@
         </a-tab-pane>
         <a-tab-pane key="2">
           <span slot="tab">
+            <a-icon type="snippets"></a-icon>Activities
+          </span>
+          <p v-if="!activities || !activities.length" style="text-align: center; font-size: 20px;">
+            <i>No Activity.</i>
+          </p>
+          <a-card
+            v-for="item in activities"
+            :key="item.doc_type"
+            style="margin-top: 2px; text-align: center; border: none;"
+            class="activities-cards"
+          >
+            <span slot="title">
+              <b :style="`color: ${getActionColor(item.action)}`">{{getActionText(item.action)}}</b>
+              by {{getDepartmentTitle(item.department)}}
+              <i>as of {{formatDate(item.date_created, 'time', true)}}</i>
+            </span>
+            <p>
+              <i v-if="item.remarks">{{item.remarks}}</i>
+              <i v-else>No comment.</i>
+            </p>
+            <a-divider style="margin: 5px 0;" />
+          </a-card>
+        </a-tab-pane>
+        <a-tab-pane key="3">
+          <span slot="tab">
             <a-icon type="snippets"></a-icon>Attachments
           </span>
-          <a-row type="flex" align="top" :gutter="10">
+          <!-- <a-row type="flex" align="top" :gutter="10">
             <a-col :span="6" v-for="item in form.attachments" :key="item.doc_type">
               <a-tooltip placement="top">
                 <template slot="title">
@@ -43,11 +68,7 @@
                   class="attachment-card"
                 >
                   <div slot="title">{{docType(item.doc_type)}}</div>
-                  <img
-                    v-if="file.type.indexOf('image') > -1"
-                    :src="file.url"
-                    style="width: 100%;"
-                  />
+                  <img v-if="file.type.indexOf('image') > -1" :src="file.url" style="width: 100%;" />
                   <pdf
                     v-else-if="file.type==='application/pdf'"
                     :src="file.url"
@@ -57,7 +78,41 @@
                 </a-card>
               </a-tooltip>
             </a-col>
-          </a-row>
+          </a-row> -->
+
+
+          <a-collapse>
+                    <a-collapse-panel
+                      :header="docType(item.doc_type)" v-for="item in form.attachments" :key="item.doc_type"
+                    >
+                      <a-row type="flex" align="top" :gutter="10">
+                        <a-col :span="4" v-for="file in item.files"
+                  :key="file" style="cursor: zoom-in">
+                          <a-tooltip placement="top" :title="file.url">
+                            <a-card
+                              :bodyStyle="{ padding: 10 }"
+                              @click="viewPDF(file.url)"
+                              style="width: 100%;"
+                            >
+                              <img
+                                v-if="file && file.type && file.type.indexOf('image') > -1"
+                                :src="file.url"
+                                style="width: 100%;"
+                              />
+                              <pdf
+                                v-else-if="file && file.type && file.type==='application/pdf'"
+                                :src="file.url"
+                                style="cursor:zoom; width: 100%;"
+                              ></pdf>
+                              <pdf v-else :src="file" style="cursor:zoom; width: 100%;"></pdf>
+                            </a-card>
+                          </a-tooltip>
+                        </a-col>
+                      </a-row>
+                    </a-collapse-panel>
+                  </a-collapse>
+
+
         </a-tab-pane>
       </a-tabs>
     </a-col>
@@ -132,6 +187,7 @@ export default {
   },
   data() {
     return {
+      activities: [],
       selected_checklist: [],
       provinces_data,
       form: {
@@ -155,6 +211,9 @@ export default {
     department() {
       return this.$store.state.admin_session.department;
     },
+    departments() {
+      return this.$store.state.dockets.departments;
+    },
     checklist() {
       var data = this.$store.state.admin_session.checklist.find(
         v => v.permit_type === this.form.permit_type
@@ -163,11 +222,42 @@ export default {
     }
   },
   methods: {
+    getDepartmentTitle(department) {
+      const dept = this.departments.find(v => v._id === department);
+      return dept.description;
+    },
+    getActionColor(action) {
+      if (action === "applied") return "blue";
+      else if (action === "claim") return "blue";
+      else if (action === "approve") return "green";
+      else if (action === "reject") return "red";
+      else if (action === "compliance") return "yellow";
+      else if (action === "done") return "green";
+      else return "white";
+    },
+    getActionText(action) {
+      if (action === "applied") return "Applied";
+      else if (action === "claim") return "Claimed";
+      else if (action === "approve") return "Approved";
+      else if (action === "reject") return "Rejected";
+      else if (action === "compliance") return "Comply";
+      else if (action === "done") return "Done";
+      else return "";
+    },
     init() {
+      this.form = this.$store.state.admin_session.for_review;
       this.$store
-        .dispatch("GET_CHECKLIST_BY_DEPARTMENT")
+        .dispatch("GET_DOCKET_ACTIVITIES_BY_REF", this.form.reference_no)
+        .then(result => {
+          console.log("result in GET_DOCKET_ACTIVITIES_BY_REF :", result);
+          this.activities = result.data;
+          return this.$store.dispatch("GET_CHECKLIST_BY_DEPARTMENT");
+        })
         .then(results => {
           return this.$store.dispatch("GET_ADMIN_DEPARTMENT");
+        })
+        .then(results => {
+          return this.$store.dispatch("GET_DEPARTMENTS");
         })
         .then(result => {
           this.loading = false;
@@ -175,21 +265,20 @@ export default {
         .catch(err => {
           console.log("checklists err :", err);
         });
-      this.form = this.$store.state.admin_session.for_review;
       console.log("this.form::: ", JSON.stringify(this.form));
     },
     docType(file_type) {
       console.log("doc type data: " + JSON.stringify(file_type));
       var test =
         file_type == "dti_sec_cda"
-          ? "DTI"
+          ? "DTI/SEC/CDA"
           : file_type == "police"
-          ? "Police"
+          ? "Police Clearance"
           : file_type == "cedula"
-          ? "Cedula"
+          ? "Community Tax Certificate"
           : file_type == "barangay"
-          ? "Barangay"
-          : "as";
+          ? "Barangay Business Clearance"
+          : "";
       console.log("doc type data test: " + JSON.stringify(test));
       return test;
     },

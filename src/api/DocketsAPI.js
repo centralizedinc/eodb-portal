@@ -66,11 +66,20 @@ export default class DocketsAPI {
     /**
      * @returns {Promise}
      */
-    getDocketActivities(){
+    getDocketActivities() {
         return axios.get('dockets/activities');
     }
 
-    getChecklistByDepartment(){
+    /**
+     * @returns {Promise}
+     * @param {String} reference_no
+     */
+    getDocketActivitiesByRef(reference_no) {
+        console.log('get docket activities by reference_no :', reference_no);
+        return axios.get(`dockets/activities/${reference_no}`);
+    }
+
+    getChecklistByDepartment() {
         return axios.get('permits/checklist/department')
     }
 }

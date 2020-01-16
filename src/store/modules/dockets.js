@@ -151,37 +151,40 @@ const actions = {
     GET_DEPARTMENTS(context, refresh) {
         console.log('is refresh :', refresh);
         return new Promise((resolve, reject) => {
-            if(refresh || !context.state.departments || !context.state.departments.length) {
+            if (refresh || !context.state.departments || !context.state.departments.length) {
                 new DepartmentAPI(context.rootState.user_session.token).getDepartments()
-                .then((result) => {
-                    console.log('GET_DEPARTMENTS result.data :', result.data);
-                    if(!result.data.errors){
-                        context.commit('SET_DEPARTMENTS', result.data);
-                        resolve(result.data);
-                    } else reject(result.data.errors);
-                }).catch((err) => {
-                    console.log('GET_DEPARTMENTS err :', err);
-                    reject(err)
-                });
+                    .then((result) => {
+                        console.log('GET_DEPARTMENTS result.data :', result.data);
+                        if (!result.data.errors) {
+                            context.commit('SET_DEPARTMENTS', result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors);
+                    }).catch((err) => {
+                        console.log('GET_DEPARTMENTS err :', err);
+                        reject(err)
+                    });
             } else resolve(context.state.departments);
         })
     },
     GET_DOCKET_ACTIVITIES(context, refresh) {
         return new Promise((resolve, reject) => {
-            if(refresh || !context.state.docket_activities || !context.state.docket_activities.length) {
+            if (refresh || !context.state.docket_activities || !context.state.docket_activities.length) {
                 new DocketsAPI(context.rootState.user_session.token).getDocketActivities()
-                .then((result) => {
-                    console.log('GET_DOCKET_ACTIVITIES result.data :', result.data);
-                    if(!result.data.errors){
-                        context.commit('SET_DOCKET_ACTIVITIES', result.data);
-                        resolve(result.data);
-                    } else reject(result.data.errors);
-                }).catch((err) => {
-                    console.log('GET_DOCKET_ACTIVITIES err :', err);
-                    reject(err)
-                });
+                    .then((result) => {
+                        console.log('GET_DOCKET_ACTIVITIES result.data :', result.data);
+                        if (!result.data.errors) {
+                            context.commit('SET_DOCKET_ACTIVITIES', result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors);
+                    }).catch((err) => {
+                        console.log('GET_DOCKET_ACTIVITIES err :', err);
+                        reject(err)
+                    });
             } else resolve(context.state.docket_activities);
         })
+    },
+    GET_DOCKET_ACTIVITIES_BY_REF(context, reference_no) {
+        return new DocketsAPI(context.rootState.user_session.token).getDocketActivitiesByRef(reference_no)
     }
 }
 
