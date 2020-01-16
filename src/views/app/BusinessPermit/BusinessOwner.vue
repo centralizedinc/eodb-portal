@@ -220,7 +220,12 @@
           :sm="{ span: 24 }"
           v-if="checkDocsNeeded(['police', 'cedula', 'barangay'])"
         >
-          <a-form-item style="font-weight: bold;" label="Occupation/Profession">
+          <a-form-item
+            :validate-status="checkErrors('police_required.occupation') ? 'error': ''"
+            :help="checkErrors('police_required.occupation')"
+            style="font-weight: bold;"
+            label="Occupation/Profession"
+          >
             <a-input v-model="form.owner_details.occupation" />
           </a-form-item>
         </a-col>
@@ -506,10 +511,7 @@
             :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
             @click="mapClick"
           >
-            <GmapMarker
-              :position="form.owner_address.coordinates"
-              :animation="marker_animation"
-            />
+            <GmapMarker :position="form.owner_address.coordinates" :animation="marker_animation" />
           </GmapMap>
         </a-col>
       </a-row>
