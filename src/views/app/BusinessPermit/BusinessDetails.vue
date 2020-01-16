@@ -65,7 +65,6 @@
             <i style="color: red">*</i>
           </span>
           <a-input-number
-            max="999999999999"
             v-model="form.business_details.capital_investment"
             @change="$emit('updateCapital', form.business_details.capital_investment)"
             :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"

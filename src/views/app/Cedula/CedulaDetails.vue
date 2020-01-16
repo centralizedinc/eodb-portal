@@ -108,13 +108,16 @@
               Birthday
               <i style="color: red">*</i>
             </span>
-            <a-date-picker
-              style="width: 100%;"
-              v-model="form.personal_details.birthdate"
-              :disabledDate="v => disableDateInBirthdate(v, true)"
-              :defaultPickerValue="defaultBdayPickerValue"
-              :showToday="false"
-            ></a-date-picker>
+            <a-tooltip>
+              <span slot="title">YYYY-MM-DD</span>
+              <a-date-picker
+                style="width: 100%;"
+                v-model="form.personal_details.birthdate"
+                :disabledDate="v => disableDateInBirthdate(v, true)"
+                :defaultPickerValue="defaultBdayPickerValue"
+                :showToday="false"
+              ></a-date-picker>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -188,7 +191,14 @@
         <a-col :xs="{ span: 24 }" :lg="{ span: 5 }">
           <a-form-item>
             <span slot="label">Weight(kg)</span>
-            <a-input-number v-model="form.personal_details.weight" />
+            <input
+              type="text"
+              name="number"
+              onkeydown="return event.keyCode !== 69"
+              maxlength="3"
+              class="ant-input"
+              v-model="form.personal_details.weight"
+            />
           </a-form-item>
         </a-col>
       </a-row>
@@ -211,6 +221,7 @@
               <i>(if any)</i>
             </span>
             <input
+              onkeydown="return event.keyCode !== 69"
               type="text"
               name="number"
               class="ant-input"
@@ -244,7 +255,13 @@
           <a-form-item>
             <span slot="label">Income from Real Property</span>
 
-            <a-input v-model="form.tax.taxable.property_income" @change="computation"></a-input>
+            <a-input-number
+              style="width: 100%"
+              :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+              :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
+              v-model="form.tax.taxable.property_income"
+              @change="computation"
+            ></a-input-number>
           </a-form-item>
           <!-- <a-form-item>
             <span slot="label">Additional Community Tax</span>
@@ -261,7 +278,13 @@
               <template slot="title">
                 <span>Gross Receipts or Earnings derived business during the preceding year</span>
               </template>
-              <a-input v-model="form.tax.taxable.business_income" @change="computation"></a-input>
+              <a-input-number
+                style="width: 100%"
+                v-model="form.tax.taxable.business_income"
+                @change="computation"
+                :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
+              ></a-input-number>
             </a-tooltip>
           </a-form-item>
         </a-col>
@@ -275,7 +298,13 @@
                   profession or pursuit of any occupation
                 </span>
               </template>
-              <a-input v-model="form.tax.taxable.profession_income" @change="computation"></a-input>
+              <a-input-number
+                style="width: 100%"
+                v-model="form.tax.taxable.profession_income"
+                @change="computation"
+                :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+                :parser="value => value.replace(/\₱\s?|(,*)/g, '')"
+              ></a-input-number>
             </a-tooltip>
           </a-form-item>
         </a-col>
