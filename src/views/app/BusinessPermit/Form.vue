@@ -1099,7 +1099,7 @@ export default {
           !this.form.owner_details.citizenship
         ) {
           errors.push({
-            field: "cedula.cititenship",
+            field: "cedula.citizenship",
             error: "Citizenship is a required field."
           });
         }

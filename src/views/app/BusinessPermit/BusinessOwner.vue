@@ -378,9 +378,9 @@
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
           <a-form-item
             :validate-status="
-              checkErrors('personal_details.cititenship') ? 'error' : ''
+              checkErrors('cedula.citizenship') ? 'error' : ''
             "
-            :help="checkErrors('personal_details.cititenship')"
+            :help="checkErrors('cedula.citizenship')"
           >
             <span slot="label">
               Citizenship
