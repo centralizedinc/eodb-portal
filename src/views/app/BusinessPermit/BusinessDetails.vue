@@ -216,12 +216,12 @@
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-row :gutter="5">
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 16 }">
               <a-form-item label="House/Bldg No">
                 <a-input v-model="form.business_address.bldg_no" placeholder="House/Bldg No"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
               <a-form-item label="Unit No">
                 <a-input v-model="form.business_address.unit_no" placeholder="Unit No"></a-input>
               </a-form-item>

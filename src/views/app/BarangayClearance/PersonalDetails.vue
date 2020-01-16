@@ -166,7 +166,7 @@
         <a-row :gutter="15" style="font-weight: bold;">
           <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
             <a-row :gutter="5">
-              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+              <a-col :xs="{ span: 24 }" :sm="{ span: 16 }">
                 <a-form-item
                   :validate-status="checkErrors('residential_address.bldg_no') ? 'error': ''"
                   :help="checkErrors('residential_address.bldg_no')"
@@ -175,7 +175,7 @@
                   <a-input v-model="form.residential_address.bldg_no"></a-input>
                 </a-form-item>
               </a-col>
-              <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+              <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
                 <a-form-item
                   :validate-status="checkErrors('residential_address.unit_no') ? 'error': ''"
                   :help="checkErrors('residential_address.unit_no')"

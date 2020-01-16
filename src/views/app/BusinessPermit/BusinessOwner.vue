@@ -248,7 +248,7 @@
       </a-row>
 
       <a-row style="font-weight: bold;" :gutter="5">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             style="font-weight: bold;"
             :validate-status="checkErrors('police_required.purpose') ? 'error': ''"
@@ -293,12 +293,8 @@
             <a-input-number maxlength="3" style="width:100%" v-model="form.owner_details.weight" />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['cedula'])">
-          <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
-            <a-input v-model="form.owner_details.icr_no" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
+
+        <a-col :xs="{ span: 24 }" :sm="{ span: 8 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.complexion') ? 'error': ''"
             :help="checkErrors('personal_details.complexion')"
@@ -317,8 +313,9 @@
           </a-form-item>
         </a-col>
       </a-row>
+
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['police'])">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }" v-if="checkDocsNeeded(['police'])">
           <a-form-item
             :validate-status="checkErrors('police_required.educational_attainment') ? 'error': ''"
             :help="checkErrors('police_required.educational_attainment')"
@@ -338,6 +335,13 @@
             </a-select>
           </a-form-item>
         </a-col>
+
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }" v-if="checkDocsNeeded(['cedula'])">
+          <a-form-item style="font-weight: bold;" label="ICR No(if Alien)">
+            <a-input v-model="form.owner_details.icr_no" />
+          </a-form-item>
+        </a-col>
+
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }" v-if="checkDocsNeeded(['police', 'barangay'])">
           <a-form-item
             :validate-status="checkErrors('brgy_police_required.ctc_no') ? 'error': ''"
@@ -368,7 +372,7 @@
         style="font-weight: bold;"
         v-if="checkDocsNeeded(['cedula'])"
       >
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
             :validate-status="
               checkErrors('issued_to') ? 'error' : ''
@@ -385,7 +389,8 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
             :validate-status="
               checkErrors('personal_details.cititenship') ? 'error' : ''
@@ -475,12 +480,12 @@
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-row :gutter="5">
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 16 }">
               <a-form-item label="House/Bldg No">
                 <a-input v-model="form.owner_address.bldg_no"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
               <a-form-item label="Unit No">
                 <a-input v-model="form.owner_address.unit_no"></a-input>
               </a-form-item>
