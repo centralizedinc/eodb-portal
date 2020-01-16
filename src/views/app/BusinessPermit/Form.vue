@@ -396,7 +396,7 @@ export default {
           width: 50
         },
         {
-          title: "",
+          title: "Action",
           dataIndex: "action",
           scopedSlots: { customRender: "action" }
         }

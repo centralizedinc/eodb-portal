@@ -6,8 +6,8 @@
     >Please use Visa, MasterCard, or American Express card</span>
     <a-divider></a-divider>
     <a-row type="flex" justify="start">
-      <a-col :xs="{span: 1}" :lg="{span: 24}">
-        <div class="card-wrapper" style="margin-bottom: 2vh"></div>
+      <a-col :span="24">
+        <div class="card-wrapper" style="margin-bottom: 2vh" width="10%"></div>
       </a-col>
     </a-row>
     <!-- <a-divider></a-divider> -->
