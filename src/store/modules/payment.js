@@ -11,6 +11,7 @@ function initialState() {
             total:'4,350.00'
        },
        payments: [],
+       record_payments: [],
        fees_computations: []
     }
 }
@@ -23,6 +24,9 @@ const mutations = {
     },
     SET_PAYMENTS(state, payload) {
         state.payments = payload;
+    },
+    SET_RECORD_PAYMENTS(state, payload) {
+        state.record_payments = payload;
     },
     SET_COMPUTATIONS(state, payload) {
         state.fees_computations = payload;
@@ -109,6 +113,23 @@ const actions = {
     },
     SEND_PAYMENT_EMAIL_NOTIFICATION(context, data){
         return new PaymentsAPI(context.rootState.user_session.token).sendEmailNotification(data);
+    },
+    GET_ALL_PAYMENTS(context, refresh) {
+        return new Promise((resolve, reject) => {
+            if(refresh || !context.state.record_payments || !context.state.record_payments.length) {
+                new PaymentsAPI(context.rootState.user_session.token).getAllPayments()
+                    .then((result) => {
+                        console.log('GET_ALL_PAYMENTS result :', result);
+                        if(!result.data.errors) {
+                            context.commit("SET_RECORD_PAYMENTS", result.data);
+                            resolve(result.data);
+                        } else reject(result.data.errors)
+                    }).catch((err) => {
+                        console.log('GET_ALL_PAYMENTS err :', err);
+                        reject(err);
+                    });
+            } else resolve(context.state.record_payments)
+        })
     }
 }
 

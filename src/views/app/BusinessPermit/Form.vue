@@ -531,7 +531,7 @@ export default {
   methods: {
     updateCedulaPayment() {
       const index = this.payments_data_source.findIndex(
-        v => v.fee_type === "cedula"
+        v => v.is_cedula
       );
       console.log("this.form.owner_details.tax :", this.form.owner_details.tax);
       if (index > -1) {
@@ -798,8 +798,8 @@ export default {
               brand: results.payment.payment_details.source.brand,
               number: `XXXX XXXX XXXX ${results.payment.payment_details.source.last4}`
             }),
-            amount_paid: this.formatAmount(results.payment.amount_paid),
-            balance: this.formatAmount(results.payment.balance),
+            amount_paid: this.formatCurrency(results.payment.amount_paid),
+            balance: this.formatCurrency(results.payment.balance),
             url: `${process.env.VUE_APP_HOME_URL}app/tracker?type=${results.application.permit_type}&ref_no=${results.application.reference_no}`,
             receipt_url: result.data.attachment
           };
@@ -1443,11 +1443,11 @@ export default {
         console.log("dt :", dt);
         var is_included = values ? values.includes(dt.keyword) : false;
         if (is_included) {
-          var amount = 0;
+          var amount = 0, is_cedula = false;
 
           try {
             if (dt.keyword === "cedula") {
-              dt.fee_type = "cedula";
+              is_cedula = true;
               var taxable_basic = 0,
                 community_basic = 0,
                 community_business_income = 0,
@@ -1480,6 +1480,7 @@ export default {
           payments.push({
             description: dt.name,
             fee_type: dt.fee_type,
+            is_cedula,
             amount
           });
         }
