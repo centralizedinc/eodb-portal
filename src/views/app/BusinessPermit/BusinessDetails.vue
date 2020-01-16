@@ -65,6 +65,7 @@
             <i style="color: red">*</i>
           </span>
           <a-input-number
+            max="999999999999"
             v-model="form.business_details.capital_investment"
             @change="$emit('updateCapital', form.business_details.capital_investment)"
             :formatter="value => `₱ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
@@ -138,8 +139,17 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item label="CTC No.">
-            <a-input v-model="form.business_details.ctc_no"></a-input>
+          <a-form-item label="Community Tax Certificate Number">
+            <a-tooltip>
+              <span
+                slot="title"
+              >Enter without spaces. Found at the upper right corner (CCI2###########)</span>
+              <a-input
+                v-model="form.business_details.ctc_no"
+                placeholder="CC•••• ••••••••"
+                maxlength="15"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
       </a-row>
@@ -568,7 +578,7 @@ export default {
   },
   methods: {
     mapClick(e) {
-      console.log('e :', e);
+      console.log("e :", e);
       this.form.business_address.coordinates.lat = e.latLng.lat();
       this.form.business_address.coordinates.lng = e.latLng.lng();
       this.marker_animation = 4;

@@ -21,10 +21,10 @@
           </a-form-item>
         </a-col>
       </a-row>-->
-      <a-row type="flex" justify="space-around" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+      <a-row type="flex" justify="space-between" style="font-weight: bold;">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item
-          :validate-status="
+            :validate-status="
               checkErrors('issued_to') ? 'error' : ''
             "
             :help="checkErrors('issued_to')"
@@ -36,10 +36,10 @@
             <a-select v-model="form.issued_to">
               <a-select-option value="Individual">Individual</a-select-option>
               <a-select-option value="Corporation">Corporation</a-select-option>
-              </a-select>
+            </a-select>
           </a-form-item>
-        </a-col>  
-        <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
+        </a-col>
+        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
           <a-form-item
             :validate-status="
               checkErrors('personal_details.cititenship') ? 'error' : ''
@@ -50,9 +50,9 @@
               Citizenship
               <i style="color: red">*</i>
             </span>
-           <a-input v-model="form.personal_details.citizenship"></a-input>
+            <a-input v-model="form.personal_details.citizenship"></a-input>
           </a-form-item>
-        </a-col>  
+        </a-col>
       </a-row>
       <a-row type="flex" justify="space-around" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">
@@ -141,8 +141,9 @@
           </a-form-item>
         </a-col>
       </a-row>
+
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
+        <a-col :xs="{ span: 24 }" :lg="{ span: 6 }">
           <a-form-item
             :validate-status="
               checkErrors('personal_details.gender') ? 'error' : ''
@@ -159,7 +160,8 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 6 }">
+
+        <a-col :xs="{ span: 24 }" :lg="{ span: 6 }">
           <a-form-item>
             <span slot="label">Civil Status</span>
             <a-select v-model="form.personal_details.civil_status">
@@ -170,22 +172,29 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
+        <a-col :xs="{ span: 24 }" :lg="{ span: 5 }">
           <a-form-item>
             <span slot="label">Height(cm)</span>
-            <a-input-number v-model="form.personal_details.height"/>
+            <input
+              type="text"
+              name="number"
+              onkeydown="return event.keyCode !== 69"
+              maxlength="3"
+              class="ant-input"
+              v-model="form.personal_details.height"
+            />
           </a-form-item>
         </a-col>
-        <a-col :xs="{ span: 24 }" :sm="{ span: 5 }">
+        <a-col :xs="{ span: 24 }" :lg="{ span: 5 }">
           <a-form-item>
             <span slot="label">Weight(kg)</span>
-            <a-input-number v-model="form.personal_details.weight"/>
+            <a-input-number v-model="form.personal_details.weight" />
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row type="flex" justify="space-between" style="font-weight: bold;">
-        <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+        <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
           <a-form-item>
             <span slot="label">
               Occupation

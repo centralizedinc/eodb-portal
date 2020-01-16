@@ -1,10 +1,10 @@
 <template>
   <a-row>
-    <a-col :xs="{span: 22}" :md="{span: 22}" :lg="{span: 0}">
+    <a-col :span="24">
       <a-drawer
         placement="left"
         :closable="false"
-        :width="450"
+        width="85%"
         @close="$emit('close')"
         :visible="show"
       >
@@ -43,7 +43,7 @@
             </a-tabs>
           </a-col>
 
-          <a-col :xs="{span: 17}" :md="{span: 24}">
+          <a-col :span="24">
             <a-card class="fill-up-form">
               <component
                 :is="current_option"
@@ -56,7 +56,7 @@
             </a-card>
           </a-col>
         </a-row>
-        <a-col :xs="{span: 17}" :md="{span: 24}">
+        <a-col :span="24">
           <a-affix :offsetBottom="0" class="payment-total-affix">
             <a-card :bodyStyle="{ padding: '1vh' }">
               <h3>

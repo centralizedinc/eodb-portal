@@ -71,13 +71,17 @@
               Date of Birth
               <i style="color: red">*</i>
             </span>
-            <a-date-picker
-              style="width: 100%;"
-              v-model="form.owner_details.birthdate"
-              :disabledDate="v => disableDateInBirthdate(v, true)"
-              :defaultPickerValue="defaultBdayPickerValue"
-              :showToday="false"
-            ></a-date-picker>
+            <a-tooltip>
+              <span slot="title">YYYY-MM-DD</span>
+
+              <a-date-picker
+                style="width: 100%;"
+                v-model="form.owner_details.birthdate"
+                :disabledDate="v => disableDateInBirthdate(v, true)"
+                :defaultPickerValue="defaultBdayPickerValue"
+                :showToday="false"
+              ></a-date-picker>
+            </a-tooltip>
           </a-form-item>
         </a-col>
 
@@ -171,12 +175,15 @@
               Tel No
               <i style="color: red">*</i>
             </span>
-            <a-input
-              v-model="form.owner_details.telno"
-              placeholder="Area code + 8-digit number (i.e. 046xxxxxxxx)"
-              maxlength="11"
-              style="width:100%"
-            ></a-input>
+            <a-tooltip>
+              <span slot="title">Enter area code + 8-digit number without spaces</span>
+              <a-input
+                v-model="form.owner_details.telno"
+                placeholder="042 •••• ••••"
+                maxlength="11"
+                style="width:100%"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
@@ -188,12 +195,15 @@
               Mobile No
               <i style="color: red">*</i>
             </span>
-            <a-input
-              v-model="form.owner_details.mobile"
-              placeholder="11-digit mobile number (i.e. 09xxxxxxxxx"
-              maxlength="11"
-              style="width:100%"
-            ></a-input>
+            <a-tooltip>
+              <span slot="title">Enter 11-digit mobile number without spaces</span>
+              <a-input
+                v-model="form.owner_details.mobile"
+                placeholder="09•• •••••••"
+                maxlength="11"
+                style="width:100%"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 24 }">
@@ -506,10 +516,7 @@
             :options="{ mapTypeControl: false, scaleControl: false, streetViewControl: false, rotateControl: false }"
             @click="mapClick"
           >
-            <GmapMarker
-              :position="form.owner_address.coordinates"
-              :animation="marker_animation"
-            />
+            <GmapMarker :position="form.owner_address.coordinates" :animation="marker_animation" />
           </GmapMap>
         </a-col>
       </a-row>
