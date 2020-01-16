@@ -19,7 +19,7 @@
                   style="border: 1px solid #FFFFFF"
                   shape="square"
                   :size="64"
-                  src="http://lorempixel.com/200/200/people/"
+                  :src="avatar"
                 ></a-avatar>
               </a-col>
               <a-col :span="14">
@@ -180,7 +180,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      avatar
+    };
   },
   created() {
     this.init();
@@ -201,6 +203,7 @@ export default {
     getFullName() {
       var admin = this.$store.state.admin_session.admin;
       if (admin.name) {
+        this.avatar = admin.avatar
         return `${admin.name.last}, ${admin.name.first} ${
           admin.name.middle ? admin.name.middle.substring(0, 1) + "." : ""
         }`;

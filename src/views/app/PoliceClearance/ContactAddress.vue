@@ -18,12 +18,12 @@
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 13 }">
           <a-row :gutter="5">
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 16 }">
               <a-form-item label="House/Bldg No">
                 <a-input v-model="form.address_details.bldg_no"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
               <a-form-item label="Unit No">
                 <a-input v-model="form.address_details.unit_no"></a-input>
               </a-form-item>
@@ -224,7 +224,8 @@
               Telephone No.
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="11" v-model="form.contact_details.tel_no"></a-input>
+            <!-- <a-input maxlength="11" v-model="form.contact_details.tel_no"></a-input> -->
+            <input type="number" min="0" class="ant-input" max-length="11" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109 && event.keyCode !== 106 && event.keyCode !== 56 && event.keyCode !== 111 && event.keyCode !== 191 && event.keyCode !== 190"></input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -236,7 +237,13 @@
               Mobile No.
               <i style="color: red">*</i>
             </span>
-            <a-input-number maxlength="11" v-model="form.contact_details.mobile" ></a-input-number>
+            <!-- <a-input-number 
+            maxlength="11" 
+            v-model="form.contact_details.mobile"
+            :formatter="value => `${value}`.replace(/^([0-9]$)/g, ',')"
+            ></a-input-number>
+             -->
+             <input type="number" class="ant-input" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109 && event.keyCode !== 106 && event.keyCode !== 56 && event.keyCode !== 111 && event.keyCode !== 191 && event.keyCode !== 190"/>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">

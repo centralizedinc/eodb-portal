@@ -2,6 +2,7 @@ import AccountAPI from "../../api/AccountAPI"
 import DepartmentAPI from '../../api/DepartmentAPI';
 import RoleAPI from '../../api/RolesAPI';
 import DocketsAPI from "../../api/DocketsAPI";
+import UploadAPI from "../../api/UploadAPI";
 
 function initialState() {
     return {
@@ -53,6 +54,29 @@ const mutations = {
 }
 
 const actions = {
+    UPDATE_ADMIN_PROFILE(context, {file, details}){
+        return new Promise((resolve, reject) => {
+            new UploadAPI(context.state.token)
+                .uploadAvatar(file)
+                .then((result) => {
+                    console.log('UPDATE_ADMIN_PROFILE avatar result :', result);
+                    if (result && result.data) {
+                        details.avatar = result.data.location
+                    }
+                    return new AccountAPI(context.state.token).updateProfileAdmin(details)
+                })
+                .then((result) => {
+                    console.log('UPDATE_ADMIN_PROFILE result :', result);
+                    if (!result.data.errors) {
+                        // context.commit('UPDATE_USER', result.data);
+                        resolve(result.data)
+                    } else reject(result.data.errors);
+                }).catch((err) => {
+                    console.log('UPDATE_ADMIN_PROFILE err :', err);
+                    reject(err);
+                });
+        })     
+    },
     GET_ADMIN_DEPARTMENT(context, refresh) {
         return new Promise((resolve, reject) => {
             if (refresh || !context.state.department || !Object.keys(context.state.department).length) {

@@ -138,8 +138,17 @@
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
-          <a-form-item label="CTC No.">
-            <a-input v-model="form.business_details.ctc_no"></a-input>
+          <a-form-item label="Community Tax Certificate Number">
+            <a-tooltip>
+              <span
+                slot="title"
+              >Enter without spaces. Found at the upper right corner (CCI2###########)</span>
+              <a-input
+                v-model="form.business_details.ctc_no"
+                placeholder="CC•••• ••••••••"
+                maxlength="15"
+              ></a-input>
+            </a-tooltip>
           </a-form-item>
         </a-col>
       </a-row>
@@ -207,12 +216,12 @@
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 10 }">
           <a-row :gutter="5">
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 16 }">
               <a-form-item label="House/Bldg No">
                 <a-input v-model="form.business_address.bldg_no" placeholder="House/Bldg No"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
               <a-form-item label="Unit No">
                 <a-input v-model="form.business_address.unit_no" placeholder="Unit No"></a-input>
               </a-form-item>
@@ -568,7 +577,7 @@ export default {
   },
   methods: {
     mapClick(e) {
-      console.log('e :', e);
+      console.log("e :", e);
       this.form.business_address.coordinates.lat = e.latLng.lat();
       this.form.business_address.coordinates.lng = e.latLng.lng();
       this.marker_animation = 4;

@@ -18,12 +18,12 @@
       <a-row :gutter="15" style="font-weight: bold;">
         <a-col :xs="{ span: 24 }" :sm="{ span: 13 }">
           <a-row :gutter="5">
-            <a-col :xs="{ span: 24 }" :sm="{ span: 12 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 16 }">
               <a-form-item label="House/Bldg No">
                 <a-input v-model="form.address.bldg_no"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xs="{ span: 24 }" :sm="{ span: 11 }">
+            <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
               <a-form-item label="Unit No">
                 <a-input v-model="form.address.unit_no"></a-input>
               </a-form-item>
