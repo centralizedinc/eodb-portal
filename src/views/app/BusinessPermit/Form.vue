@@ -114,7 +114,7 @@
                           :beforeUpload="file => attachFile(record.keyword, file)"
                           style="cursor: pointer; color: blue; font-weight: bold;"
                         >
-                          <a-icon type="upload" />
+                          <a-icon type="upload" style="color: blue;" />
                         </a-upload>
                       </a-col>
                     </a-row>

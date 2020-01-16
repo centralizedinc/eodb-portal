@@ -761,10 +761,8 @@ export default {
           else break;
           index++;
         }
-        console.log("attachments :", attachments);
         permits_attachments.push(attachments);
       }
-      console.log("permits_attachments :", permits_attachments);
       return permits_attachments;
     },
     permits() {

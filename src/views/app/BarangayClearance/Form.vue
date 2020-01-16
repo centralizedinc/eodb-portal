@@ -105,9 +105,9 @@
                         :multiple="true"
                         :showUploadList="false"
                         :beforeUpload="file => attachFile(record.keyword, file)"
-                        style="cursor: pointer; color: blue; font-weight: bold;"
+                        style="cursor: pointer; font-weight: bold;"
                       >
-                        <a-icon type="upload" />
+                        <a-icon type="upload" style="color: blue;" />
                       </a-upload>
                     </a-col>
                   </a-row>
@@ -231,7 +231,7 @@ export default {
           unit_no: "",
           bldg_name: "",
           street: "",
-          subd: "",
+          subdivision: "",
           region: "",
           province: "",
           city: "",

@@ -79,7 +79,7 @@ var BarangayPermitSchema = new mongoose.Schema({
         street: {
             type: String
         },
-        subd: {
+        subdivision: {
             type: String
         },
         region: {
