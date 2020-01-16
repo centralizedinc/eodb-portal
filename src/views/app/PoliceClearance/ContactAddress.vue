@@ -224,7 +224,8 @@
               Telephone No.
               <i style="color: red">*</i>
             </span>
-            <a-input maxlength="11" v-model="form.contact_details.tel_no"></a-input>
+            <!-- <a-input maxlength="11" v-model="form.contact_details.tel_no"></a-input> -->
+            <input type="number" min="0" class="ant-input" max-length="11" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109 && event.keyCode !== 106 && event.keyCode !== 56 && event.keyCode !== 111 && event.keyCode !== 191 && event.keyCode !== 190"></input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 8 }">
@@ -242,7 +243,7 @@
             :formatter="value => `${value}`.replace(/^([0-9]$)/g, ',')"
             ></a-input-number>
              -->
-             <input type="number" class="ant-input" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109 && event.keyCode !== 106 && event.keyCode !== 56 && event.keyCode !== 111 && event.keyCode !== 191 && event.keyCode !== 190"></input>
+             <input maxlength="11"  type="number" min="0" class="ant-input" onkeydown="return event.keyCode !== 69 && event.keyCode !== 189 && event.keyCode !== 109 && event.keyCode !== 106 && event.keyCode !== 56 && event.keyCode !== 111 && event.keyCode !== 191 && event.keyCode !== 190"></input>
           </a-form-item>
         </a-col>
         <a-col :xs="{ span: 24 }" :sm="{ span: 7 }">

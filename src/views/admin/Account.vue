@@ -15,13 +15,18 @@
                   :beforeUpload="beforeAvatarUpload"
                   @change="showAvatar=true"
                 >
-                  <img v-if="avatar" :src="avatar" alt="Avatar" />
+                  <!-- <img v-if="admin.avatar" :src="admin.avatar" alt="Avatar" /> -->
                   <a-avatar
-                    v-else
+                    v-if="admin.avatar"
                     shape="square"
                     :size="86"
-                    src="http://lorempixel.com/200/200/people/"
-                  >--></a-avatar>
+                    :src="admin.avatar"
+                  ></a-avatar>
+                  
+                    <!-- src="http://lorempixel.com/200/200/people/" -->
+                  <div v-else style="font-size: 35px">
+                    <a-icon :type="loading_avatar ? 'loading' : 'plus'"></a-icon>
+                  </div>
                 </a-upload>
               </a-col>
               <a-col :span="14">
@@ -148,6 +153,7 @@ export default {
   methods: {
     init() {
       this.admin = this.deepCopy(this.$store.state.admin_session.admin);
+      console.log("admin details: " + JSON.stringify(this.admin))
       //get offices
       this.$http.get("/departments").then(results => {
         this.offices = results.data;
@@ -187,32 +193,53 @@ export default {
     },
     save() {
       var _self = this;
+      var file = null;
       this.$confirm({
         title:
           "You are about to save the changes on your profile. Do you wish to continue?",
         content:
           "Click OK will save the changes and log you out of the system.",
         onOk() {
-          _self.$http
-            .post(`/admins/${_self.admin._id}`, _self.admin)
-            .then(result => {
-              _self.$notification.success({
+          console.log("save on ok self admin: " + JSON.stringify(_self.uploaded_avatar))
+         if (_self.uploaded_avatar) {
+        file = new FormData();
+        file.append("avatar", _self.uploaded_avatar, _self.uploaded_avatar.name);
+      }         
+      _self.$store
+      .dispatch("UPDATE_ADMIN_PROFILE", { file, details: _self.admin })
+      .then(result => {
+          console.log("UPDATE_PROFILE :", result);
+          _self.$notification.success({
                 message: "Success!",
                 description: "Your account has been updated"
               });
-              _self.$store.commit("ADMIN_LOGOUT");
-              _self.$router.push("/admin");
-            })
-            .catch(error => {
-              _self.$notification.error({
-                message: "Error!",
-                description:
-                  "There was a problem updating the account. Please try again."
-              });
-            });
+          // this.$message.success("Successfully update your profile.");
+          // this.allow_details_update = false;
+          // this.loading_submit_details = false;
+          window.location.reload();
+        })
+      // _self.$http.post('/upload/avatar', file).then(result =>{
+      //   return _self.$http.post(`/admins/${_self.admin._id}`, _self.admin)
+      // }).then(result => {
+      //         _self.$notification.success({
+      //           message: "Success!",
+      //           description: "Your account has been updated"
+      //         });
+      //         _self.$store.commit("ADMIN_LOGOUT");
+      //         _self.$router.push("/admin");
+      //       })
+            // .catch(error => {
+            //   _self.$notification.error({
+            //     message: "Error!",
+            //     description:
+            //       "There was a problem updating the account. Please try again."
+            //   });
+            // });
         },
         onCancel() {}
       });
+
+      
     },
     computed: {
       avatar() {

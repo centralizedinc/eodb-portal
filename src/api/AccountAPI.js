@@ -101,4 +101,9 @@ export default class AccountAPI {
         console.log('password :', password);
         return axios.post(`accounts/resetpassword/${code}`, password);
     }
+
+    // Admin
+    updateProfileAdmin(details) {
+        return axios.post(`admins/${details._id}`, details);
+    }
 }
