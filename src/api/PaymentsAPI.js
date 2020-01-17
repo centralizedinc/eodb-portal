@@ -78,4 +78,11 @@ export default class PaymentsAPI {
     sendEmailNotification(data) {
         return axios.post('/payments/notify/success', data);
     }
+
+    /**
+     * @returns {Promise}
+     */
+    getAllPayments() {
+        return axios.get('/payments')
+    }
 }

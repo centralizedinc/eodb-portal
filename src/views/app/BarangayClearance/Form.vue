@@ -516,6 +516,7 @@ export default {
       var index = this.form.attachments.findIndex(
         v => v.doc_type === "dti_sec_cda"
       );
+      const i = this.document_data_source.findIndex(v => v.keyword === 'dti_sec_cda')
       console.log("index :", index);
       console.log("test :", !this.form.purpose.includes("bp") && index > -1);
       if (this.form.purpose.includes("bp") && index === -1) {
@@ -524,6 +525,7 @@ export default {
           files: []
         });
       } else if (!this.form.purpose.includes("bp") && index > -1) {
+        this.document_data_source[i].status = 0;
         this.form.attachments.splice(index, 1);
       }
     },

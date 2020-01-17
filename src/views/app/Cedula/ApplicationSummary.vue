@@ -159,17 +159,19 @@
       style="color: black;font-weight: bold;margin-top: 5vh"
       orientation="left"
     >Part II. Address</a-divider>
-
-    <a-row class="summary-row">
-      <a-col :span="8">Address</a-col>
-      <a-col :span="1">:</a-col>
-      <a-col :span="15" style="text-transform:uppercase">
-        {{address}}!
-        <!-- {{form.address.region}}{{form.address.province}}
-        {{form.address.city}}{{form.address.barangay}}{{form.address.postal_code}}-->
+    <a-row type="flex" justify="start">
+      <a-col :xs="{span: 12}" :md="{span:20}" :xl="{span:20}">
+        <a-row class="summary-row">
+          <a-col :span="8">Address</a-col>
+          <a-col :span="1">:</a-col>
+          <a-col :span="15" style="text-transform:uppercase">
+            {{address}}
+            <!-- {{form.address.region}}{{form.address.province}}
+            {{form.address.city}}{{form.address.barangay}}{{form.address.postal_code}}-->
+          </a-col>
+        </a-row>
       </a-col>
     </a-row>
-
     <a-divider></a-divider>
     <a-row type="flex" justify="start">
       <a-col :xs="{span: 24}" :sm="{span:24}" :md="{span:24}" :lg="{span:24}" :xl="{span:24}">
@@ -273,7 +275,8 @@ export default {
           dataIndex: "community_tax",
           scopedSlots: { customRender: "community_tax" }
         }
-      ]
+      ],
+      address: ""
     };
   },
   mounted() {

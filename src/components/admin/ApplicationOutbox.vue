@@ -48,26 +48,25 @@
           <span slot="tab">
             <a-icon type="file-search"></a-icon>Details
           </span>
-          {{app_form.permit_type}}
           <application-summary
             :form="app_form"
-            v-if="app_form.permit_type=='business'"
+            v-if="app_form.permit_type==='business'"
             :read-only="true"
           />
           <application-summary-brgy
             :form="app_form"
             :read-only="true"
-            v-if="app_form.permit_type=='barangay'"
+            v-if="app_form.permit_type==='barangay'"
           ></application-summary-brgy>
           <application-summary-police
             :form="app_form"
             :read-only="true"
-            v-if="app_form.permit_type=='police'"
+            v-if="app_form.permit_type==='police'"
           ></application-summary-police>
           <application-summary-cedula
             :form="app_form"
             :read-only="true"
-            v-if="app_form.permit_type=='cedula'"
+            v-if="app_form.permit_type==='cedula'"
           ></application-summary-cedula>
         </a-tab-pane>
         <a-tab-pane key="2">
@@ -127,10 +126,10 @@
 </template>
 
 <script>
-import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary";
-import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary";
-import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary";
-import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary";
+import ApplicationSummary from "@/views/app/BusinessPermit/ApplicationSummary.vue";
+import ApplicationSummaryBrgy from "@/views/app/BarangayClearance/ApplicationSummary.vue";
+import ApplicationSummaryPolice from "@/views/app/PoliceClearance/ApplicationSummary.vue";
+import ApplicationSummaryCedula from "@/views/app/Cedula/ApplicationSummary.vue";
 
 export default {
   components: {
@@ -144,7 +143,14 @@ export default {
       activities: [],
       search: "",
       visible: false,
-      app_form: {},
+      app_form: {
+        owner_details: {
+          name: {}
+        },
+        owner_address: {},
+        business_details: {},
+        business_address: {}
+      },
       cols: [
         {
           title: "REFERENCE NO",
@@ -269,9 +275,7 @@ export default {
       this.$http
         .get(`/dockets/applications/${record.permit}/${record.reference_no}`)
         .then(result => {
-          this.visible = true;
-          this.app_form = result.data;
-          console.log(JSON.stringify(this.app_form));
+          this.app_form = result.data.details;
           return this.$store.dispatch(
             "GET_DOCKET_ACTIVITIES_BY_REF",
             this.app_form.reference_no
@@ -279,7 +283,7 @@ export default {
         })
         .then(result => {
           this.activities = result.data;
-          console.log("this.activities :", this.activities);
+          this.visible = true;
         });
     },
     evaluate(record) {

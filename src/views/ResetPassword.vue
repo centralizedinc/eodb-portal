@@ -141,6 +141,7 @@ export default {
       .dispatch("CHECK_PASSWORD_RESET", this.$route.params.code)
       .then(result => {
         console.log("result :", result);
+        this.$store.dispatch("LOGOUT");
       })
       .catch(err => {
         this.$message.error(err.message);

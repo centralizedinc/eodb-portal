@@ -65,7 +65,7 @@ var PaymentModelSchema = new mongoose.Schema({
         fee_type: {
             type: String
             /**
-             * application_fees, local_taxes
+             * application_fee, convenience_fee, local_taxes
              */
         },
         amount: {
