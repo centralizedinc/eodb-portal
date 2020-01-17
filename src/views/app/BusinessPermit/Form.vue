@@ -93,7 +93,7 @@
                       <a-icon
                         v-else-if="text===1"
                         type="loading"
-                        style="color: green; font-weight: bold;"
+                        style="color: blue; font-weight: bold;"
                       />
                       <a-icon v-else type="exception" style="color: red; font-weight: bold;" />
                     </div>
@@ -106,6 +106,9 @@
                           type="delete"
                           @click="removeAttachment(record.keyword)"
                         />
+                      </a-col>
+                      <a-col :span="24" v-else-if="record.status===1">
+                        <a-icon type="loading" style="color: blue; font-weight: bold;" />
                       </a-col>
                       <a-col v-else :span="24">
                         <a-upload
@@ -510,19 +513,25 @@ export default {
     required_documents() {
       var docs = [];
 
-      // for (let i = 0; i < this.document_data_source.length; i++) {
-      //   var attachments = this.form.attachments.map(v => v.doc_type);
-      //   if(attachments.includes(this.document_data_source[i].keyword)) {
-      //     this.document_data_source[i].status = 0;
-      //   } else this.document_data_source[i].status = 2;
-      // }
+      // To update status in displayed document
+      for (let i = 0; i < this.document_data_source.length; i++) {
+        var attachment_index = this.form.attachments.findIndex(
+          v => v.doc_type === this.document_data_source[i].keyword
+        );
+        if (
+          attachment_index > -1 &&
+          this.form.attachments[attachment_index].files &&
+          this.form.attachments[attachment_index].files.length
+        )
+          this.document_data_source[i].status = 2;
+        else this.document_data_source[i].status = 0;
+      }
 
       this.form.attachments.forEach(attachment => {
         docs.push(
           this.document_data_source.find(v => v.keyword === attachment.doc_type)
         );
       });
-      console.log('docs :', docs);
       return docs;
     },
     total_payable() {
@@ -539,9 +548,7 @@ export default {
   },
   methods: {
     updateCedulaPayment() {
-      const index = this.payments_data_source.findIndex(
-        v => v.is_cedula
-      );
+      const index = this.payments_data_source.findIndex(v => v.is_cedula);
       console.log("this.form.owner_details.tax :", this.form.owner_details.tax);
       if (index > -1) {
         this.payments_data_source[
@@ -677,7 +684,7 @@ export default {
       console.log("this.form :", this.form);
 
       var { errors, jump_to } = this.validation(validate_all);
-       window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
       // var errors = [],
       //   jump_to = 0;
 
@@ -1453,7 +1460,8 @@ export default {
         console.log("dt :", dt);
         var is_included = values ? values.includes(dt.keyword) : false;
         if (is_included) {
-          var amount = 0, is_cedula = false;
+          var amount = 0,
+            is_cedula = false;
 
           try {
             if (dt.keyword === "cedula") {

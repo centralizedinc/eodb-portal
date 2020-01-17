@@ -86,7 +86,7 @@
                     <a-icon
                       v-else-if="text === 1"
                       type="loading"
-                      style="color: green; font-weight: bold;"
+                      style="color: blue; font-weight: bold;"
                     />
                     <a-icon v-else type="exception" style="color: red; font-weight: bold;" />
                   </div>
@@ -99,6 +99,9 @@
                         type="delete"
                         @click="removeAttachment(record.keyword)"
                       />
+                    </a-col>
+                    <a-col :span="24" v-else-if="record.status===1">
+                      <a-icon type="loading" style="color: blue; font-weight: bold;" />
                     </a-col>
                     <a-col v-else :span="24">
                       <a-upload
@@ -516,7 +519,9 @@ export default {
       var index = this.form.attachments.findIndex(
         v => v.doc_type === "dti_sec_cda"
       );
-      const i = this.document_data_source.findIndex(v => v.keyword === 'dti_sec_cda')
+      const i = this.document_data_source.findIndex(
+        v => v.keyword === "dti_sec_cda"
+      );
       console.log("index :", index);
       console.log("test :", !this.form.purpose.includes("bp") && index > -1);
       if (this.form.purpose.includes("bp") && index === -1) {
