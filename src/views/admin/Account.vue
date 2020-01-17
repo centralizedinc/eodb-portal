@@ -216,7 +216,10 @@ export default {
           // this.$message.success("Successfully update your profile.");
           // this.allow_details_update = false;
           // this.loading_submit_details = false;
-          window.location.reload();
+          _self.$store.commit("ADMIN_LOGOUT");
+              _self.$router.push("/admin");
+          // _self.$router.push('/admin/app');
+          // window.location.reload();
         })
       // _self.$http.post('/upload/avatar', file).then(result =>{
       //   return _self.$http.post(`/admins/${_self.admin._id}`, _self.admin)
