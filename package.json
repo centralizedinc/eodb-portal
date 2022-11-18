@@ -65,7 +65,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-pwa": "^3.11.0",
-    "@vue/cli-service": "^4.1.1",
+    "@vue/cli-service": "^5.0.8",
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "string-replace-loader": "^2.2.0",
